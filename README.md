@@ -1,7 +1,15 @@
 # CPH Guest Information Guide
 
 송도 센트럴파크호텔 프론트의 QR 기반 다국어 안내 프로그램입니다.
-현재 **STEP 06: 로컬 관리자 프로그램**까지 구현했습니다. 관리자에서 시설 등록·수정·삭제·공개 설정, 4개 국어·영어 문구·호텔 정보 편집, JSON 입출력과 검증을 사용할 수 있습니다. 기존 Guest 4개 국어 안내와 Staff 검색·상세·영어 문구 복사를 유지합니다. 시설은 가상 데이터이며 호텔 정보는 비어 있으므로 실제 고객 안내에 사용하지 않습니다. 실제 운영 정보 입력·조사·배포는 진행하지 않았습니다.
+현재 **STEP 07-A: 승인 호텔 원고 반영**까지 완료했습니다. 사용자 승인 엑셀의 호텔 안내 34개 항목을 4개 언어로 반영하고 긴 규정을 문단으로 표시합니다. 체크인 15:00·체크아웃 12:00·확인일 2026-10-15이며 H33 비대면 체크아웃은 공개 보류입니다. 기존 Staff/Guest 및 로컬 관리자 기능을 유지합니다.
+
+- 호텔 안내 데이터: 사용자 승인 원고 반영. 재번역·새 호텔 정책 생성 없음.
+- 주변 시설 데이터: **가상 6개 그대로**, 실제 안내에 사용 금지.
+- dataStatus: 시설·호텔 모두 **demo 유지**.
+- 운영 배포: **미실시**. 실제 고객 공개: **금지**.
+- 미완성: 호텔 description 4개 언어, H33 문자 수신번호 공개 승인. 번역기 2곳 대조는 미실시입니다.
+
+원본 정보·35개 ID 매핑표·H33 보류 원고·검증 결과는 [STEP 07-A 호텔 데이터 기록](docs/step07a-hotel-data.md)에 있습니다.
 
 ## 실행
 
@@ -33,13 +41,16 @@ npm run admin:dev
 
 ```bash
 npm run validate
+npm run validate:hotel-copy
 npm run test
 npm run lint
 npm run build
 npm run preview -- --host 0.0.0.0
 ```
 
-STEP 06 (2026-10-15): 위 4개 명령과 `admin:build` PASS, **166개 자동 테스트** 통과(기존 131 + 신규 35, 실패·스킵 0). `test:admin-ui`, `test:ui`, `test:staff-ui`, `test:guest-ui`도 실제 Chromium에서 PASS입니다. 관리자 390·768·1280·1440px, Guest/경로 6개 폭, Staff 업무 4개 폭을 확인했습니다. 가상 production Fixture로 실제 Vite 산출물을 만들어 비공개 고유 문자열 34개와 관리자 코드·HTML·에셋이 없는지 검사했습니다. 두 원본 JSON은 demo 상태로 유지하고 운영 명령은 예상 종료 코드 1로 차단됩니다. 사용법·제한·브라우저 재실행 명령은 [관리자 사용 안내](docs/admin-manager.md)에 있습니다.
+STEP 07-A (2026-10-15): `validate`, `validate:hotel-copy`, `test`, `lint`, `build`, `admin:build` PASS. 기존 166개 + 신규 54개 = **220개 테스트**, 실패·스킵 0. 엑셀 원본을 다시 읽어 140개 추출 셀·136개 반영 셀을 직접 대조했습니다. `test:hotel-ui`와 기존 Guest/Staff/Admin/경로 브라우저 검사 모두 PASS입니다. 390px 영어 조식·한국어 체크인·중국어 객실·일본어 반려동물 정책 캡처도 실제 승인 데이터를 사용합니다. 운영 명령은 예상 종료 코드 1로 차단되고, 이전 `dist-production/`을 검증 전에 정리합니다. 상세 결과와 미검증 범위는 [STEP 07-A 기록](docs/step07a-hotel-data.md)에 있습니다.
+
+아래는 STEP 06 당시 결과입니다. 위 기본 4개 명령과 `admin:build` PASS, **166개 자동 테스트** 통과(기존 131 + 신규 35, 실패·스킵 0). `test:admin-ui`, `test:ui`, `test:staff-ui`, `test:guest-ui`도 실제 Chromium에서 PASS입니다. 관리자 390·768·1280·1440px, Guest/경로 6개 폭, Staff 업무 4개 폭을 확인했습니다. 가상 production Fixture로 실제 Vite 산출물을 만들어 비공개 고유 문자열 34개와 관리자 코드·HTML·에셋이 없는지 검사했습니다. 두 원본 JSON은 demo 상태로 유지하고 운영 명령은 예상 종료 코드 1로 차단됩니다. 사용법·당시 결과는 [관리자 사용 안내](docs/admin-manager.md)에 있습니다.
 
 아래는 STEP 05 당시 결과입니다. 위 4개 검증 명령 PASS, 기존 91개와 신규 40개 자동 테스트 **131개** 통과(실패·스킵 0개). 실제 headless Chromium으로 Guest의 4개 언어를 320·375·390·430·768·1280px에서 확인했습니다. 기존 `test:ui`, `test:staff-ui`와 신규 `test:guest-ui`도 PASS입니다. 호텔/시설 오류 분리, 언어·상세 선택 유지, 키보드·터치 영역, 가로 넘침, favicon과 외부 요청을 검증했습니다. demo 운영 배포 차단은 유지합니다. 자세한 구조·당시 결과는 [고객용 가이드](docs/guest-guide.md)에 있습니다.
 
@@ -62,6 +73,8 @@ npm run build:production
 시설·호텔 데이터가 모두 `production`이고 공개 시설·호텔의 필수 안내와 확인일을 충족해야 성공합니다. 운영 확인일은 미래 날짜를 허용하지 않습니다. 현재 demo 파일로는 종료 코드 1로 차단됩니다. 배포 빌드 출력은 개발 빌드와 분리된 `dist-production/`입니다. 자세한 필수 조건은 [데이터 명세](docs/data-model.md)에 있습니다.
 
 STEP 06부터 운영 빌드는 원본 검증 → 공개 시설만 선별 → 운영 검증 → 임시 스냅샷 → Vite 빌드로 연결됩니다. 원본 전체 JSON을 덮어쓰지 않으며 비공개 시설은 운영 번들에 들어가지 않습니다. 공개 빌드의 관리자 모듈 의존성도 검사합니다. `dist/` 개발 빌드는 기존 전체 demo JSON을 포함할 수 있으므로 고객 배포에 사용하지 않습니다.
+
+STEP 07-A에서 운영 명령의 첫 단계에 고정 `dist-production/` 정리를 추가했습니다. 사전 검증·타입 검사·빌드 실패 전에 오래된 출력을 제거하며 체크아웃·원본 데이터 경로는 정리 대상으로 허용하지 않습니다.
 
 STEP 02 보완 검증: `validate`, `test`, `lint`, `build` PASS, 테스트 56개 통과(실패·스킵 0개). demo 상태의 `validate:production`, `build:production`은 예상대로 종료 코드 1로 차단됐고 배포 출력은 생성되지 않았습니다. 이 문단은 STEP 02 당시 결과입니다. STEP 03의 브라우저 결과는 UI 문서에서 확인할 수 있으며 실제 호스팅 배포는 수행하지 않았습니다.
 
@@ -98,7 +111,7 @@ src/
   data/facilities.json              # 가상 시설 6개를 포함하는 공통 데이터
   data/facilities.schema.json       # JSON Schema (draft-07)
   data/validateFacilityDataset.ts   # 스키마·날짜·중복 ID 검증
-  data/hotel.json                  # 4개 언어의 빈 호텔 기본 정보
+  data/hotel.json                  # 사용자 승인 호텔 원고, demo 유지
   data/hotel.schema.json           # 호텔 JSON Schema
   data/validateHotelDataset.ts     # 호텔 정보 검증
   data/validateProductionData.ts   # 고객 배포용 운영 필수 조건 검증
@@ -115,7 +128,7 @@ src/
   index.css                        # 공통 스타일 진입점
 ```
 
-시설 데이터와 UI를 분리했습니다. Staff와 Guest는 동일한 `facilityDataset` 객체를 사용합니다. `src/data/index.ts`의 기존 export를 유지하면서 객체 생성은 시설·호텔 모듈로 분리했습니다. UI는 각 모듈을 독립적으로 불러오므로 호텔 오류가 정상 시설 안내와 Staff를 차단하지 않습니다. JSON·스키마·타입은 변경하지 않았습니다. 모든 시설은 가상 데이터이며 호텔 기본 정보는 빈 데이터입니다. 실제 호텔 정보는 없습니다. 기존 시설 JSON의 새 필드가 누락된 경우 원본을 변경하지 않고 기본값으로 보완합니다.
+시설 데이터와 UI를 분리했습니다. Staff와 Guest는 동일한 `facilityDataset` 객체를 사용합니다. `src/data/index.ts`의 기존 export를 유지하면서 객체 생성은 시설·호텔 모듈로 분리했습니다. UI는 각 모듈을 독립적으로 불러오므로 호텔 오류가 정상 시설 안내와 Staff를 차단하지 않습니다. 기존 스키마·타입·시설 JSON은 유지하고 호텔 JSON에만 승인 원고를 반영했습니다. 호텔 description은 빈 문자열이며 H33은 제외했습니다. 기존 시설 JSON의 새 필드가 누락된 경우 원본을 변경하지 않고 기본값으로 보완합니다.
 
 Guest는 4개 언어 시설명·키워드를 검색하며, Staff는 기존 한·영 시설명·키워드·주소 검색을 유지합니다. Guest 화면의 시설 정보는 선택 언어의 값만 사용하고, 누락된 정보를 다른 언어로 대체하지 않습니다. 언어 상태는 앱 내 이동·시설 선택 동안 유지하며 전체 새로고침 시 영어로 초기화합니다. 개인정보나 언어 설정을 브라우저 저장소에 기록하지 않습니다.
 
@@ -147,6 +160,6 @@ vite.admin.config.ts / tsconfig.admin.json
 
 ## 다음 단계 제안 (검수 후 진행)
 
-STEP 06 검수 후 STEP 07에서 담당자가 실제 호텔·시설 정보와 번역을 조사·확인·입력할 수 있습니다. 코드·스키마 PASS는 실제 정보 정확성의 보증이 아닙니다. STEP 07 조사·입력, QR 발급, 실제 배포는 이번 작업에서 진행하지 않았습니다.
+STEP 07-A 검수 후 STEP 07-B에서 실제 주변 시설의 승인 정보를 준비·입력할 수 있습니다. 호텔 description과 H33 수신번호·공개 승인은 별도 보완이 필요합니다. 코드·원고 일치 PASS를 번역기 검증·정보 정확성 보증으로 확대하지 않습니다. 주변 시설 조사/입력, QR 발급, 실제 배포는 이번 작업에서 진행하지 않았습니다.
 
 STEP 03에서 고객 화면의 직원용 메뉴를 숨겼습니다. `/staff`에는 직접 접속할 수 있으며 메뉴 숨김은 인증 기능이 아닙니다. 직원용 화면에도 비밀 정보나 개인정보를 저장하지 않습니다.

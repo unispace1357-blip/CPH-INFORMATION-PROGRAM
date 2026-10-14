@@ -1,0 +1,675 @@
+{
+  "sourceFile": "CPH_STEP07A_4languages_translation_review_POLICY_CONFIRMED_DRAFT.xlsx",
+  "sourceSha256": "9f76d4a932298548d2ab997fc1a5adebce6ce66b1dfb1b86a463b5df05116261",
+  "sourceSheets": [
+    "00_사용안내",
+    "01_4개국어_초안",
+    "02_번역기2중대조",
+    "03_hotelJSON_매핑",
+    "04_운영확인"
+  ],
+  "copySheet": "01_4개국어_초안",
+  "languageColumns": {
+    "ko": "D",
+    "en": "E",
+    "zh-CN": "F",
+    "ja": "G"
+  },
+  "userApprovalDate": "2026-10-15",
+  "translatorComparisonRows": 105,
+  "translatorResultsRecorded": 0,
+  "recognizedIds": [
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "H07",
+    "H08",
+    "H09",
+    "H10",
+    "H11",
+    "H12",
+    "H13",
+    "H14",
+    "H15",
+    "H16",
+    "H17",
+    "H18",
+    "H19",
+    "H20",
+    "H21",
+    "H22",
+    "H23",
+    "H24",
+    "H25",
+    "H26",
+    "H27",
+    "H28",
+    "H29",
+    "H30",
+    "H31",
+    "H32",
+    "H33",
+    "H34",
+    "H35"
+  ],
+  "mapping": {
+    "name": [
+      "H01"
+    ],
+    "address": [
+      "H02"
+    ],
+    "checkIn": [
+      "H04",
+      "H05"
+    ],
+    "checkOut": [
+      "H06",
+      "H30",
+      "H31",
+      "H32"
+    ],
+    "breakfast": [
+      "H07",
+      "H08",
+      "H09",
+      "H10",
+      "H11",
+      "H12"
+    ],
+    "parking": [
+      "H13"
+    ],
+    "roomUsage": [
+      "H14",
+      "H15",
+      "H16",
+      "H17",
+      "H18",
+      "H19",
+      "H20",
+      "H21",
+      "H22",
+      "H24",
+      "H25"
+    ],
+    "notes": [
+      "H03",
+      "H23",
+      "H26",
+      "H27",
+      "H28",
+      "H29",
+      "H34",
+      "H35"
+    ]
+  },
+  "excludedIds": [
+    "H33"
+  ],
+  "records": [
+    {
+      "id": "H01",
+      "worksheetRow": 2,
+      "translations": {
+        "ko": "송도센트럴파크호텔",
+        "en": "Songdo Central Park Hotel",
+        "zh-CN": "松岛中央公园酒店",
+        "ja": "松島セントラルパークホテル"
+      },
+      "sha256": {
+        "ko": "6db70242b36e0d30ebdc3f8710cfa67e2912e336cfa5737d33260a7522897a6c",
+        "en": "85da286c0496fb5c836c63cb5686a8b837680a46644b9b154d21bb6aca46f1be",
+        "zh-CN": "a461b5583d6b6746bcaec0eb4a7f7a994e6876a595e4f59a4cf731df440c8a26",
+        "ja": "ad0475055426d57c65cb3004ee787266ec6e0a22366af3b083da996a599d248d"
+      }
+    },
+    {
+      "id": "H02",
+      "worksheetRow": 3,
+      "translations": {
+        "ko": "인천광역시 연수구 테크노파크로 193 (송도동 38)",
+        "en": "193, Technopark-ro, Yeonsu-gu, Incheon, South Korea (Songdo-dong 38)",
+        "zh-CN": "韩国仁川广域市延寿区 Technopark-ro 193（松岛洞 38）",
+        "ja": "韓国 仁川広域市 延寿区 Technopark-ro 193（松島洞 38）"
+      },
+      "sha256": {
+        "ko": "65ddc506d660e3d7763b89cffb0389fceaacfece84cf8640f7f4d157933f2b0e",
+        "en": "385c69b0f50e8942e126f76906b773b61a3037631722c2024ac21a672689c398",
+        "zh-CN": "6e786797fddc9f3e501dbac041217ea0468363b6868c37a5d4b704240c172c08",
+        "ja": "35c8d9bbcfb9c5ad52f60fc9712f80508a60c4eb55293dd2df6f03f35cb22e65"
+      }
+    },
+    {
+      "id": "H03",
+      "worksheetRow": 4,
+      "translations": {
+        "ko": "호텔 대표전화: 032-310-5000",
+        "en": "Hotel telephone: +82-32-310-5000",
+        "zh-CN": "酒店电话：+82-32-310-5000",
+        "ja": "ホテル代表電話：+82-32-310-5000"
+      },
+      "sha256": {
+        "ko": "0ecf42876b2f3d844b699258bc4388b05a63b6ab66ce27267b54604e2d2329ec",
+        "en": "491fbe70d8d3470c250da27a2f5678e74d5e124f4f272e1e6c629078913b61e8",
+        "zh-CN": "8fdb950197bd72308bfdc16701276d1ea9f0dad68a8ab1e4a3fa51bfafd47026",
+        "ja": "d31e7fbc6bf768f99fe3c617d73c40dc36af6528e5d548ec117470f44d6aef63"
+      }
+    },
+    {
+      "id": "H04",
+      "worksheetRow": 5,
+      "translations": {
+        "ko": "체크인은 오후 3시부터 가능합니다.",
+        "en": "Check-in is available from 3:00 PM.",
+        "zh-CN": "入住时间为下午3:00起。",
+        "ja": "チェックインは午後3時からです。"
+      },
+      "sha256": {
+        "ko": "0f3795ea68060884f6de0da98dec3825636fb6bc919887d9c12dc86a29db9f8f",
+        "en": "97fb451763313b9d72884cab0bbb823d914f687c603c122be317a566b63736e8",
+        "zh-CN": "61dc515e10a798f6dd0c85f90a8e5bdb07f54d9457a64e58f52330efcfc338c0",
+        "ja": "8c694a7c1cfd78092118a05c7956807550c37d99b68af564d0267a25b33a954b"
+      }
+    },
+    {
+      "id": "H05",
+      "worksheetRow": 6,
+      "translations": {
+        "ko": "체크인 시 별도의 신분증 제출이나 보증금 납부를 요구하지 않습니다.",
+        "en": "No separate ID submission or security deposit is required at check-in.",
+        "zh-CN": "办理入住时，无需另外提交身份证件或支付押金。",
+        "ja": "チェックイン時に別途身分証明書を提出したり、デポジットを支払ったりする必要はありません。"
+      },
+      "sha256": {
+        "ko": "b5930247e6d9769ddd6da5544d261511c2103a5e8fb31c4622a669735c54735a",
+        "en": "300cef39f6a8ba61d437113b343028eec31f8b16db45a219cdd3056683bbceda",
+        "zh-CN": "c0df51897a2a8a88908a4f0ef8365a929209e3a668ab9f905e889c839f48651a",
+        "ja": "cbe705d6368ae60e9cc1516d9f75379ade26c3edc074a47af93bf9fd8eae366c"
+      }
+    },
+    {
+      "id": "H06",
+      "worksheetRow": 7,
+      "translations": {
+        "ko": "체크아웃은 정오 12시까지입니다.",
+        "en": "Check-out is by 12:00 PM (noon).",
+        "zh-CN": "退房时间为中午12:00之前。",
+        "ja": "チェックアウトは正午12時までです。"
+      },
+      "sha256": {
+        "ko": "92b6aebd771e8e66390e614d1f75dae993bdc80e4aafa30ceb643e60bd6ed875",
+        "en": "76fe4552401726597933d270cceff1a2a888a506febff1aa2ce7210a666cadbd",
+        "zh-CN": "cf0958e7f85ecf200f8d7b3a5998b20f65681a93a65e313ff081863345a2beb6",
+        "ja": "00e4c87c3b1fbe70fe66891459cb7d3bacfaeb3c0b5ecac45675956a148a7378"
+      }
+    },
+    {
+      "id": "H07",
+      "worksheetRow": 8,
+      "translations": {
+        "ko": "조식은 호텔 1층 하이웨이브 레스토랑에서 제공됩니다.",
+        "en": "Breakfast is served at the High Wave Restaurant on the first floor.",
+        "zh-CN": "早餐在酒店一楼的 High Wave 餐厅供应。",
+        "ja": "朝食はホテル1階のハイウェーブレストランで提供しています。"
+      },
+      "sha256": {
+        "ko": "683608931bfed1d8196117426a8ddf04854b705897cd39b19739e15cfec88b68",
+        "en": "8f7d7c0b8cdf54b3b66c1ffcd2ec2b22c113d3ea55d83c577664341ace1ddf8c",
+        "zh-CN": "f7a842f94be4713058f886fcf5b010b20053f71ca543e6a3e8d8257764170753",
+        "ja": "0f7b68d633cbd66faddae437575df6c14ccb096b160e26fcd1254981a2bc71e8"
+      }
+    },
+    {
+      "id": "H08",
+      "worksheetRow": 9,
+      "translations": {
+        "ko": "조식 운영시간은 오전 6시 30분부터 오전 10시까지입니다.",
+        "en": "Breakfast is served from 6:30 AM to 10:00 AM.",
+        "zh-CN": "早餐供应时间为上午6:30至10:00。",
+        "ja": "朝食の提供時間は午前6時30分から10時までです。"
+      },
+      "sha256": {
+        "ko": "6f0e09bc1c0bcd0a20ef3368770984a6de1a06c9a2407f2a9080890d0786c532",
+        "en": "2beb752e4aa4e7dde3b218a3dde5f687c1df9d7bdce0bb8fb8a0ebc887d3a2b4",
+        "zh-CN": "399a5e720246c36bb345c52fbd98304199ad330239d4975f57e25404ec807a80",
+        "ja": "e93b36ce9d43ff4dbb699fd7ab2af8e119f9a0a6f7ef955292e6bc09704dc389"
+      }
+    },
+    {
+      "id": "H09",
+      "worksheetRow": 10,
+      "translations": {
+        "ko": "조식 마지막 입장시간은 오전 9시 30분입니다.",
+        "en": "The last admission for breakfast is at 9:30 AM.",
+        "zh-CN": "早餐最晚入场时间为上午9:30。",
+        "ja": "朝食の最終入場は午前9時30分です。"
+      },
+      "sha256": {
+        "ko": "34afaae5a39601e2313c7ec7f708f6c19e7a2def7828915dcde038d99e5262e8",
+        "en": "632f4be6d93c709b0e0d055678db28b0451000e40e02995c5d0440e37f272ead",
+        "zh-CN": "f5a97380d4b97e08a8f8e1d5ef1e3eecf41ab0e55f62490181a06a8c5c616cc0",
+        "ja": "1979d415af26683199fb7d0aa30d52ac3b09ced310cf79ef37ddbf1da8efe261"
+      }
+    },
+    {
+      "id": "H10",
+      "worksheetRow": 11,
+      "translations": {
+        "ko": "조식 성인 요금은 1인 32,000원입니다.",
+        "en": "Breakfast costs KRW 32,000 per adult.",
+        "zh-CN": "成人早餐费用为每人32,000韩元。",
+        "ja": "朝食の大人料金は1名32,000ウォンです。"
+      },
+      "sha256": {
+        "ko": "30990620acc945fb1bc736daba48a3263cb0b1002c59fe4dd25a67b2038f6cc2",
+        "en": "34cf9c7d47ff108c457bd18b68f583b498449b7c0005f3e1ba1e7280862fca38",
+        "zh-CN": "b22365b87585082ca10fce45d64791b8e4a43e021cac7d34f475e57232357a44",
+        "ja": "e314887a283dbd86660efb8da17d3f559f19dfbc490827e689b20895d746a796"
+      }
+    },
+    {
+      "id": "H11",
+      "worksheetRow": 12,
+      "translations": {
+        "ko": "조식 요금은 5~8세 어린이 1인 19,000원입니다.",
+        "en": "Breakfast costs KRW 19,000 per child aged 5–8.",
+        "zh-CN": "5至8岁儿童的早餐费用为每人19,000韩元。",
+        "ja": "5～8歳のお子様の朝食料金は1名19,000ウォンです。"
+      },
+      "sha256": {
+        "ko": "df589df7468a02ed2dbd3d1633a56e4316a1d2fd2873b6a1aca30f9c9746e04a",
+        "en": "13cb4aa96a81412332c498a1e22d2efd765054f66989999f2f8bc8beb1d642a8",
+        "zh-CN": "d329c099ebf7a66d46948ec2afd1128b488bd4628be284db19a50b56c6760540",
+        "ja": "e3b7602714fef6145c0045db8849ee6843d6064d4d299b6fe34f67c2dbb531e1"
+      }
+    },
+    {
+      "id": "H12",
+      "worksheetRow": 13,
+      "translations": {
+        "ko": "조식 이용 시 현장에서 객실 번호를 확인합니다.",
+        "en": "Your room number will be checked when you arrive for breakfast.",
+        "zh-CN": "用早餐时，现场会核对您的房间号。",
+        "ja": "朝食をご利用の際は、会場で客室番号を確認いたします。"
+      },
+      "sha256": {
+        "ko": "74c04bd96f9925ee5f28e4d99703b65f7a46287e29123290993ae2c6952b5e8d",
+        "en": "3dd5968ae5c709fbb895a35039c7a8af230df4474c639b5b4877796fd7286777",
+        "zh-CN": "71bc126799e7394dcbd893fd78c1f341b19228e6f4d21ec1198bb3757de0382d",
+        "ja": "42ffdc009264b75dae70d641ae0db917a500e002b60e88dead83a4a20b8ee2cc"
+      }
+    },
+    {
+      "id": "H13",
+      "worksheetRow": 14,
+      "translations": {
+        "ko": "주차는 무료이며, 별도 차량 등록 없이 출입차할 수 있습니다.",
+        "en": "Parking is complimentary. Vehicle registration is not required for entry or exit.",
+        "zh-CN": "酒店提供免费停车服务，车辆进出无需另行登记。",
+        "ja": "駐車場は無料で、入出庫の際に車両登録は不要です。"
+      },
+      "sha256": {
+        "ko": "eb9b1ced8d0259ce104329432bedc2e50957dacabe31d3814e6c3e74c4231db4",
+        "en": "1954aee0c2c18696de5197162bc83fa19b14c6c39e949eb01699bd39a4cbb6ab",
+        "zh-CN": "077098c1d1923022042f9fc2188e80045a9f52fb56525399eaec91aeb879bc77",
+        "ja": "cca26e5c80e853c8c234f2a43736db443a2052b86fa7349eb978971076446bee"
+      }
+    },
+    {
+      "id": "H14",
+      "worksheetRow": 15,
+      "translations": {
+        "ko": "객실 Wi-Fi 이름은 CPH_층수이며, 비밀번호 없이 이용할 수 있습니다.",
+        "en": "The guest Wi-Fi network is named CPH_ followed by your floor number. No password is required.",
+        "zh-CN": "客房 Wi-Fi 名称为 CPH_ 加上所在楼层数字，无需密码。",
+        "ja": "客室のWi-Fi名は「CPH_」の後に宿泊階の数字が付きます。パスワードは不要です。"
+      },
+      "sha256": {
+        "ko": "710b4d6923b2a86d605a5e2d884e60fcbd1dc236d30ecb0616f5b2743efdcbe0",
+        "en": "07d891aefb2bae8fbb2003c841930dfaa930338bef39cfa2f03a1e832fa4cf44",
+        "zh-CN": "b2cdbcb6de21e2a906f9682d3ff9f77cb48fa62317647333222dfbc7d8268994",
+        "ja": "2ffd70776aa89c7816063fa84b832c1fd42f571b63aa50893a00a952055b33c6"
+      }
+    },
+    {
+      "id": "H15",
+      "worksheetRow": 16,
+      "translations": {
+        "ko": "전자레인지는 6층, 10층, 16층에 있습니다.",
+        "en": "Microwave ovens are available on floors 6, 10, and 16.",
+        "zh-CN": "6楼、10楼和16楼设有微波炉。",
+        "ja": "電子レンジは6階、10階、16階にあります。"
+      },
+      "sha256": {
+        "ko": "d797220db3644c0580433ed583d73eff8605f3bae2679821cd9d6e46fe731270",
+        "en": "ddc8e2cf2b3099cd1cc3da28f255a15c04102b45624e795f158e8a6fc5cc2b22",
+        "zh-CN": "156843d58b744ed264a3e01515f80f4cb88bb0540c44750e0580376fc6b3ea25",
+        "ja": "2037fe30a5a224bdc4d6b0cce976275cbfd1bc750f1d59b4992b82b34e68bd9b"
+      }
+    },
+    {
+      "id": "H16",
+      "worksheetRow": 17,
+      "translations": {
+        "ko": "호텔 내부에 편의점은 없습니다. 호텔 정문에서 오른쪽 방향 옆 건물에 CU 편의점이 있습니다.",
+        "en": "There is no convenience store inside the hotel. A CU convenience store is in the adjacent building to the right of the main entrance.",
+        "zh-CN": "酒店内没有便利店。酒店正门右侧相邻建筑内设有 CU 便利店。",
+        "ja": "ホテル館内にコンビニはありません。正面玄関を出て右側の隣の建物にCUがあります。"
+      },
+      "sha256": {
+        "ko": "88355a8e9058bac39f2f01683c6c01d2bfd0b6a14fae12dca0ac5982d3d40991",
+        "en": "f8baaac5b1256845d290b3432d2e0c98f387eb4fe02c48a2a8e91c6604d5cbb0",
+        "zh-CN": "ef13e2339749fe49a1437b075f3b8fc74c2bb21b615580e9442d2f7806e19547",
+        "ja": "dc6e6e1b3b4c634a936840fcdc11906bb6dbac5ed40717ce9cf75150a7068689"
+      }
+    },
+    {
+      "id": "H17",
+      "worksheetRow": 18,
+      "translations": {
+        "ko": "냉방은 화장실 입구 왼쪽 벽면의 흰색 패널 또는 에어컨 리모컨으로 조절할 수 있습니다.",
+        "en": "You can adjust the air conditioning using the white wall panel to the left of the bathroom entrance or the air-conditioner remote control.",
+        "zh-CN": "可使用浴室入口左侧墙上的白色控制面板或空调遥控器调节空调。",
+        "ja": "エアコンは浴室入口の左側の壁にある白いパネル、またはエアコンのリモコンで調節できます。"
+      },
+      "sha256": {
+        "ko": "7904ead52242ef3e7a262389cb27dc1072c170c3fc64ee197793c8027b4f39cf",
+        "en": "3b1c1e5fb7eee62fdf1aff6c69bd845f3df3581a741fefec4487328779bf229d",
+        "zh-CN": "280726d3c57a5028caebcf33f8238a0f70fb87be0747ff499adfe2fd9fca8b08",
+        "ja": "1ba391c007492e90af424fac9297c3128cb7e3dcb1cb1592c94dcf9e7409a718"
+      }
+    },
+    {
+      "id": "H18",
+      "worksheetRow": 19,
+      "translations": {
+        "ko": "일회용 칫솔·치약·면도기는 무료로 제공되지 않습니다. 구매는 프론트에 문의해 주세요.",
+        "en": "Disposable toothbrushes, toothpaste, and razors are not provided free of charge. Please ask the front desk if you wish to purchase them.",
+        "zh-CN": "一次性牙刷、牙膏和剃须刀不免费提供。如需购买，请咨询前台。",
+        "ja": "使い捨て歯ブラシ・歯磨き粉・カミソリは無料では提供しておりません。購入をご希望の場合はフロントへお問い合わせください。"
+      },
+      "sha256": {
+        "ko": "b706c1e009b022ac09d71e9137691da374cbd327510dd48dc319b05095397ad5",
+        "en": "d08b8e24e18295d367c79dc03863ffb79c290950394acbe4531e4594a6cee648",
+        "zh-CN": "3b556da2558e4c27175641ed93064caf8d5c469c4427fe964a401ea7cb6f530e",
+        "ja": "25af0eeceeb9a5420b280fc411a5a5ae5a92aaca44c9ac4015b716eaf038901c"
+      }
+    },
+    {
+      "id": "H19",
+      "worksheetRow": 20,
+      "translations": {
+        "ko": "외부 음식 배달 주문은 원칙적으로 제한됩니다. 주문하는 경우 호텔 정문 밖에서 직접 수령해 주세요.",
+        "en": "Orders from external food delivery services are generally restricted. If you place an order, please collect it outside the hotel's main entrance.",
+        "zh-CN": "原则上限制外卖配送。如需点外卖，请在酒店正门外自行领取。",
+        "ja": "外部のフードデリバリーの注文は原則として制限されています。注文された場合は、ホテル正面玄関の外でお受け取りください。"
+      },
+      "sha256": {
+        "ko": "d651cd09789ae36b51e244a13a59cc35c104e7196fd2ad22558eb26c04e44a9b",
+        "en": "c14e525ee553e810cde989fc82883b4947efa31056372c691d566950a19d43c8",
+        "zh-CN": "2d66816db2c7a6dd1d43f5c713a7312cf18a86887919d293d578479b4693f98c",
+        "ja": "9b9504ae0fed886fcef1d9a966bff2fd509ed25f4bbaa71c594478166e3af6f4"
+      }
+    },
+    {
+      "id": "H20",
+      "worksheetRow": 21,
+      "translations": {
+        "ko": "보안상 배달 기사는 호텔에 출입할 수 없으며, 배달 음식 분실에 대해 호텔은 책임지지 않습니다.",
+        "en": "For security reasons, delivery personnel are not permitted to enter the hotel. The hotel is not responsible for lost food deliveries.",
+        "zh-CN": "出于安全考虑，外卖配送员不得进入酒店。酒店不对丢失的外卖餐食承担责任。",
+        "ja": "保安上の理由により、配達員はホテル館内に入れません。配達された食品の紛失について、ホテルは責任を負いかねます。"
+      },
+      "sha256": {
+        "ko": "18f11002b660f50ea00187753ffb3c40897fc4bbb9e5f69e0b02c2ad3978f457",
+        "en": "640449407a187b78c777e2e93f72a24688d98f24d3821cf7a1eb5ae30a89ec66",
+        "zh-CN": "63136e3960677ccb846050a08c5f4b72aecc7e58743768c3ded4877a34870209",
+        "ja": "201ece6114e0e510194cf2e08d442eb86d2665c4485d9624094ae123209fc8ca"
+      }
+    },
+    {
+      "id": "H21",
+      "worksheetRow": 22,
+      "translations": {
+        "ko": "소방시설 점검 중에는 경종·사이렌·비상방송이 작동할 수 있습니다.",
+        "en": "Fire alarms, sirens, or emergency announcements may sound during fire safety inspections.",
+        "zh-CN": "消防设施检查期间，警铃、警报器或紧急广播可能会响起。",
+        "ja": "消防設備の点検中は、警報ベル・サイレン・非常放送が作動する場合があります。"
+      },
+      "sha256": {
+        "ko": "9b0f2fb19a7ce0b85da514059de3808c75474247eb26b0090cc16d9bb19b3e60",
+        "en": "9655e53b2a29beff26862964fcf0e5424e4a7bda0c72ed2aaf30f4b13f615fc7",
+        "zh-CN": "17b5dc0a266c46df5be7abad576e96ee8d6842707595439bc96cfcbbb364a952",
+        "ja": "ec79cc21e21b35e0f0ddb85301cb57d2b7590d379e03f5103ddb05c54c94274d"
+      }
+    },
+    {
+      "id": "H22",
+      "worksheetRow": 23,
+      "translations": {
+        "ko": "객실·비상구·복도 등 호텔 건물 내에서는 금연입니다. 흡연으로 화재 감지기가 작동할 수 있습니다.",
+        "en": "Smoking is prohibited inside the hotel, including guest rooms, emergency exits, and corridors. Smoke may trigger the fire detectors.",
+        "zh-CN": "酒店室内全面禁烟，包括客房、紧急出口和走廊。吸烟可能触发烟雾探测器。",
+        "ja": "客室・非常口・廊下など、ホテル館内は禁煙です。喫煙により火災感知器が作動する場合があります。"
+      },
+      "sha256": {
+        "ko": "63dc7bad050152e270cac229aef45bf4716bb72aeb640597ed2da53daad79aba",
+        "en": "b80b3d0b730b51e994f1f86c3f62ead15987c82f231e4ad4172a301db7f1c3f7",
+        "zh-CN": "6a6dfcde215ec279bb45b30117b4f93051bddcfd0a3a8723db0d0490cdd4ddde",
+        "ja": "e9eb6293bfa6c5926d9ada29c5d49834e87ed98eee749444aa5b01bcf175ce4e"
+      }
+    },
+    {
+      "id": "H23",
+      "worksheetRow": 24,
+      "translations": {
+        "ko": "객실 내 흡연 시 담배 냄새로 인한 청소비 200,000원이 별도 안내 없이 청구될 수 있습니다.",
+        "en": "Smoking in a guest room may result in a KRW 200,000 cleaning fee due to tobacco odors, without additional notice.",
+        "zh-CN": "在客房内吸烟可能因烟味产生200,000韩元的清洁费，且可能不另行通知。",
+        "ja": "客室内で喫煙された場合、たばこの臭いによる清掃費200,000ウォンを別途通知なく請求する場合があります。"
+      },
+      "sha256": {
+        "ko": "f286532a6940dde894ccad76c9796ff462df796124f92d198b2271a35c77aa90",
+        "en": "d23383c295c9dca35c0558a90400048949c9a796049c16a16a5cc364f385567c",
+        "zh-CN": "27ca86d9476bb8f3bfefa1c21115e2001f5318fea512c89f13b2b3685d982e79",
+        "ja": "9c08782f7f7a91accc1fd6c3fbfa93aeea3a836c40e7d2404cd156bca83c685f"
+      }
+    },
+    {
+      "id": "H24",
+      "worksheetRow": 25,
+      "translations": {
+        "ko": "객실 내 고성방가 등 다른 투숙객에게 불편을 주는 행위는 삼가 주세요.",
+        "en": "Please refrain from loud noise or other behavior that disturbs other guests.",
+        "zh-CN": "请勿在客房内大声喧哗或做出影响其他住客的行为。",
+        "ja": "客室内での大声や、ほかのお客様のご迷惑となる行為はお控えください。"
+      },
+      "sha256": {
+        "ko": "d6a4bb145dade5e9de5803ff0184ebe1a77ab5a13cb1f27de5ea84efbc34d6f4",
+        "en": "815f27db482da25f7919f1ec5a10983dfb8868d0e9e5ce3e7b406d1817d11c46",
+        "zh-CN": "3773a453776909586d728044b5cacbac7f280942db2dcd03877d0d74a3b55fe2",
+        "ja": "2658a37c4929cbbf728f5ab07c30780213e7c00b8971a5de13a7b54671fb0dc1"
+      }
+    },
+    {
+      "id": "H25",
+      "worksheetRow": 26,
+      "translations": {
+        "ko": "객실 비품의 외부 반출은 금지됩니다. 객실 슬리퍼는 객실 안에서만 착용해 주세요.",
+        "en": "Please do not remove room amenities or equipment from the hotel. In-room slippers must be worn inside your guest room only.",
+        "zh-CN": "请勿将客房备品带出酒店。客房拖鞋仅限在房间内穿着。",
+        "ja": "客室の備品をホテルの外へ持ち出すことは禁止されています。客室用スリッパは客室内でのみご使用ください。"
+      },
+      "sha256": {
+        "ko": "abcec6e2698ed6b7a860ac3456bdaaf489034d51cace5aac49e656ab655be4b7",
+        "en": "53c48e3e25ad38d7b32e990e20819b348bd52f786a3121f654b8194ab2fe0b43",
+        "zh-CN": "720500497032a6a216b1034795316be662e572c5242bdee95b9a7cf504133211",
+        "ja": "0644ddf0294ef7873adc2240e9af423351f67d58ac062046c29d1f76f97d7d9e"
+      }
+    },
+    {
+      "id": "H26",
+      "worksheetRow": 27,
+      "translations": {
+        "ko": "투숙 중 비품이 파손되면 동일 제품 가격에 해당하는 금액을 변상해야 합니다.",
+        "en": "If room equipment or amenities are damaged during your stay, you will be required to pay the equivalent replacement cost.",
+        "zh-CN": "入住期间如损坏客房备品，须按同等商品的价格进行赔偿。",
+        "ja": "ご滞在中に備品を破損された場合は、同等品の価格相当額をご負担いただきます。"
+      },
+      "sha256": {
+        "ko": "3c6a2316e3a364a6d884b60783d0b2d08df00ae5c41095886104bce4c1b03b61",
+        "en": "12f9c1b667f3e0b265d135522e873577c005f1bdc3b1160347f44339d0217ecf",
+        "zh-CN": "14349cf240df4f79f38b5292d4fcdb87f2e181e7d8764d981b5630e7be224652",
+        "ja": "b9750d26b43bad066f56a9053c31125d0f365cdf345e20f9c21d01db635fc678"
+      }
+    },
+    {
+      "id": "H27",
+      "worksheetRow": 28,
+      "translations": {
+        "ko": "반려동물 동반 후 침구가 대변 또는 소변으로 오염되면 청소비 50,000원이 추가로 발생할 수 있습니다.",
+        "en": "If a pet soils the bedding with feces or urine, an additional cleaning fee of KRW 50,000 may apply.",
+        "zh-CN": "携带宠物入住后，如宠物排泄物弄脏床上用品，可能加收50,000韩元清洁费。",
+        "ja": "ペット同伴で寝具が排泄物（大便・尿）により汚れた場合、清掃費50,000ウォンが追加で発生する場合があります。"
+      },
+      "sha256": {
+        "ko": "0d4c7bd610283d87d68c823cfb32ddbb25c7c4fc9c61e83ea1b1df6ea5c7b3d4",
+        "en": "6755a186368a2c49d08ad6cdb1c6988cae108933c050f5bd3d71ab9fa637a072",
+        "zh-CN": "49174503507707a0e5ed2ad93a58d20c9d1606eece4507f256d7d016aa3ddde3",
+        "ja": "8b28f2d19b660ba42bb7179c91413a2a81c2000e1da6feddf4fdb3a3a3a5b91c"
+      }
+    },
+    {
+      "id": "H28",
+      "worksheetRow": 29,
+      "translations": {
+        "ko": "반려동물로 인해 가구가 손상되면 해당 가구 품목별 금액이 청구될 수 있습니다.",
+        "en": "If furniture is damaged by a pet, charges may apply according to the damaged item.",
+        "zh-CN": "如宠物损坏家具，可能按受损家具的具体项目收取费用。",
+        "ja": "ペットによって家具が破損した場合、該当する家具の品目に応じた費用を請求する場合があります。"
+      },
+      "sha256": {
+        "ko": "2d3f1584d302035278d48e6fbbcafd83d27b2bcb677d978ba5ef07c3b6aa57c2",
+        "en": "dc942e70647e2162be95dbe767e7b44e9804b4638b832bda744758b7b0330391",
+        "zh-CN": "af7f0587ae27cac6f9022fce8f5b4012ae844748459d77e24a5e65959f04d202",
+        "ja": "433abce8b323d05fe2996aaa5fd7ab7b58503d1a3a423ce792e58a9b3897c28d"
+      }
+    },
+    {
+      "id": "H29",
+      "worksheetRow": 30,
+      "translations": {
+        "ko": "프론트에 반려동물 동반 사실을 신고하지 않은 경우 기존 추가 비용 외에 22,000원이 추가 청구될 수 있습니다.",
+        "en": "If you stay with a pet without informing the front desk, an additional KRW 22,000 may be charged on top of any other applicable fees.",
+        "zh-CN": "如携带宠物入住却未向前台申报，除其他适用费用外，还可能加收22,000韩元。",
+        "ja": "ペット同伴であることをフロントに申告されなかった場合、ほかの追加料金とは別に22,000ウォンを請求する場合があります。"
+      },
+      "sha256": {
+        "ko": "d91c462eb4e1fa50f8010b83e1368449f53b998aee72b3c6213725ed1f56f4ad",
+        "en": "407956ddd549cd5d40e162893bc42d3232a64d0fc8d62c1eceb8c009d5c14fd2",
+        "zh-CN": "3c9c2a9f68c26ecc023f67263156046501f2279c6abcc0ac30d2e7bf2adcc2a8",
+        "ja": "531e71aab006b53f68d0b525e8d4108b3de9f4698277c2bf7c680323a199979b"
+      }
+    },
+    {
+      "id": "H30",
+      "worksheetRow": 31,
+      "translations": {
+        "ko": "퇴실 시 객실 키를 프론트에 반납해 주세요.",
+        "en": "Please return your room key cards to the front desk when checking out.",
+        "zh-CN": "退房时请将房卡归还前台。",
+        "ja": "チェックアウトの際は、客室のカードキーをフロントへご返却ください。"
+      },
+      "sha256": {
+        "ko": "2cd4d7f61aadd166bcd575328b062304e00818fc2cd5e6199d99c46b0edd6135",
+        "en": "ebafffc9df35c98f488518dc48820fac781c76feea6074e1174ecae4114a9c2c",
+        "zh-CN": "492afdf45f5bd0d12973437f50b0415cd433b66191c7d421a345f27bbaf4871c",
+        "ja": "5aee3b28704d2711793093525bc78eaf2b769ea3f361ecb4a34ebb948f44d695"
+      }
+    },
+    {
+      "id": "H31",
+      "worksheetRow": 32,
+      "translations": {
+        "ko": "객실 키 분실 시 키 1개당 11,000원의 분실료가 청구될 수 있습니다.",
+        "en": "If a room key card is lost, a replacement fee of KRW 11,000 per card may apply.",
+        "zh-CN": "如遗失房卡，可能按每张11,000韩元收取补办费用。",
+        "ja": "カードキーを紛失された場合、1枚につき11,000ウォンの紛失料を請求する場合があります。"
+      },
+      "sha256": {
+        "ko": "86de4aa21f7c172f0016e90ec3ef14f2edea1b9c0763140253fc7fd7af6483ba",
+        "en": "c5a14879f21823f3f3ae8d45f4af99528c16bd5e585b4fa89121fa124fd0f278",
+        "zh-CN": "8da3b84be9e9009e78a3f46753f8509deecb0a1f24584a985d4dfc81c58e2b3d",
+        "ja": "40279c5f8140b8ff39ab620bf985512309ef03c0f0d9e3646e2233757335e44a"
+      }
+    },
+    {
+      "id": "H32",
+      "worksheetRow": 33,
+      "translations": {
+        "ko": "체크아웃 시간을 초과하면 시간당 11,000원이 부과되며, 오후 5시 이후에는 1박 요금이 부과됩니다.",
+        "en": "Late check-out is charged at KRW 11,000 per hour. For check-out after 5:00 PM, a full night's room charge applies.",
+        "zh-CN": "延迟退房按每小时11,000韩元收费。下午5:00之后退房，将收取一晚房费。",
+        "ja": "チェックアウト時間を過ぎた場合は1時間につき11,000ウォン、午後5時以降のチェックアウトには1泊分の宿泊料金がかかります。"
+      },
+      "sha256": {
+        "ko": "d704c2d228e7cdb008e98afff300ab1d3b4920a1f615ce9944abe29d7b56f7f5",
+        "en": "7c529cf62c499006a9d7fc2560aba55fddad54b1b9a1795db4a9bfbdd2c34277",
+        "zh-CN": "bf9f16b853c515823707ea8c4f2df4cf711f9e928a44bc0add1744aeb4674f9d",
+        "ja": "7a399591166c2fcc1afe220425d724d5fae0c4b14b45ad84b93de2da61850801"
+      }
+    },
+    {
+      "id": "H33",
+      "worksheetRow": 34,
+      "translations": {
+        "ko": "프론트를 거치지 않는 퇴실은 객실 키 2개를 테이블에 놓고 객실 번호와 퇴실 사실을 지정된 연락처로 문자 발송해야 합니다.",
+        "en": "For check-out without visiting the front desk, leave both room key cards on the table and text your room number and check-out notice to the designated hotel contact.",
+        "zh-CN": "无需前往前台办理退房时，请将两张房卡放在桌上，并向酒店指定号码发送房号及退房短信。",
+        "ja": "フロントに立ち寄らずチェックアウトする場合は、カードキー2枚をテーブルに置き、客室番号と退室の旨をホテル指定の連絡先へSMSでお送りください。"
+      },
+      "sha256": {
+        "ko": "95ce7f574336633d61652929e1cd266cc3e698e3e1f497ff2a9fd06ec056d13d",
+        "en": "8d3b2e4475772ba38fde18afda1d6b213c11e126e6cb48368a4592761e06c7e0",
+        "zh-CN": "d9adc5b3b0f315cedabe3e79e644a3dc1f1f6fdc17fb2a56c3b278afd65f4f63",
+        "ja": "ad4cce07b6fb40db7cc5b71fbb9164381fb9b1c4a2a53862d81a77f4ee5739b0"
+      }
+    },
+    {
+      "id": "H34",
+      "worksheetRow": 35,
+      "translations": {
+        "ko": "반려동물 동반 투숙은 지정된 반려동물 전용 객실에서만 가능합니다. 일반 객실에서는 반려동물과 함께 투숙할 수 없습니다. 전용 객실 예약 및 이용 조건은 프론트에 문의해 주세요.",
+        "en": "Pets are allowed only in designated pet-friendly rooms. Pets are not permitted in standard guest rooms. Please contact the front desk for reservations and conditions for pet-friendly rooms.",
+        "zh-CN": "仅限指定的宠物友好型客房允许携带宠物入住。普通客房不允许携带宠物。有关宠物友好型客房的预订及入住条件，请咨询前台。",
+        "ja": "ペット同伴でのご宿泊は、指定のペット同伴専用客室に限ります。一般客室へのペットの同伴はできません。専用客室のご予約やご利用条件については、フロントにお問い合わせください。"
+      },
+      "sha256": {
+        "ko": "c2c4e06da17dd1abcda39076cafedf9be1a1d9c0607cc2dd20d80e2ca91e0b04",
+        "en": "f9d0e9e47f249b783dcff239d4c1e4983e5a99318e31ae6a1f028688c6251695",
+        "zh-CN": "7eec5b1b9b129f39b0061a8d9080ad64f1d89c9740d7700c21e6e144299a73f7",
+        "ja": "5fab11610d7fc8b183210afab5128aea26b15758308161429aa6381363e2edf8"
+      }
+    },
+    {
+      "id": "H35",
+      "worksheetRow": 36,
+      "translations": {
+        "ko": "반려동물과 함께 투숙하시는 경우 프론트에 동반 사실을 반드시 알려 주세요.",
+        "en": "If you are staying with a pet, please inform the front desk.",
+        "zh-CN": "如携带宠物入住，请务必告知前台。",
+        "ja": "ペット同伴でご宿泊の際は、必ずフロントへお申し出ください。"
+      },
+      "sha256": {
+        "ko": "f8e5d0aea70575d420351f92aff0b2f88feef5f123be13966d38ac36dd11105f",
+        "en": "d3c08496f9a86b2a5f848ac99bdd73e42b68c36d0a27b4c93089e7ec280081aa",
+        "zh-CN": "4f215c25d1b6f8c4dff74c2beb9006eb55827ed6b0601f37651fb49382bc67be",
+        "ja": "545ba2fc13506e012065fae817524bfe52de70106dcb781457b03ce16a527ace"
+      }
+    }
+  ]
+}

@@ -141,5 +141,7 @@ main { flex: 1; padding-block: var(--space-8) var(--space-10); }
 .guest-detail-panel .detail-facts > div, .guest-topic-detail .detail-facts > div { display: grid; grid-template-columns: 1fr; }
 .guest-topic-detail p, .guest-topic-detail dd, .guest-detail-panel p, .guest-detail-panel dd, .app-shell--guest .site-footer p { overflow-wrap: anywhere; white-space: pre-wrap; }
 .guest-topic-detail .hotel-topic-text { margin-bottom: var(--space-4); }
+.hotel-copy-paragraphs { display: grid; gap: var(--space-4); min-width: 0; }
+.hotel-copy-paragraphs p { line-height: 1.8; margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
 .guest-detail-panel .section-heading .button, .guest-topic-detail .section-heading .button { max-width: 100%; }
 @media (min-width: 768px) { .guest-result-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } .guest-topic-detail .detail-facts > div, .guest-detail-panel .detail-facts > div { grid-template-columns: 150px minmax(0, 1fr); } }

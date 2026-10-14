@@ -10,3 +10,8 @@ export function hotelHasInformation(hotel: HotelDataset, language: GuideLanguage
 export function hotelTopicText(hotel: HotelDataset, category: HotelCategory, language: GuideLanguage): string {
   return localizedValue(hotel.translations[language][category], language)
 }
+
+/** Blank lines separate approved items; a single newline inside an item stays intact. */
+export function hotelParagraphs(text: string): string[] {
+  return text.split(/\r?\n[\t ]*\r?\n(?:\r?\n)*/).filter(paragraph => paragraph.length > 0)
+}

@@ -3,6 +3,7 @@ import { tmpdir } from 'node:os'
 import { resolve, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { preparePublicDeployment } from '../src/data/preparePublicDeployment.ts'
+import { cleanProductionOutput, PRODUCTION_OUTPUT } from './clean-production.ts'
 
 const root = fileURLToPath(new URL('../', import.meta.url))
 
@@ -19,12 +20,13 @@ export async function assertNoAdminAssets(directory: string): Promise<void> {
 
 /** Cross-platform build. Generated snapshots live in a temporary directory, never src/data. */
 export async function buildProduction(options: { facilitiesFile?: string; hotelFile?: string; outDir?: string } = {}): Promise<void> {
+  const outDir = resolve(options.outDir ?? PRODUCTION_OUTPUT)
+  await cleanProductionOutput(outDir)
   const facilities = JSON.parse(await readFile(options.facilitiesFile ?? resolve(root, 'src/data/facilities.json'), 'utf8'))
   const hotel = JSON.parse(await readFile(options.hotelFile ?? resolve(root, 'src/data/hotel.json'), 'utf8'))
   const prepared = preparePublicDeployment(facilities, hotel)
   const directory = await mkdtemp(join(tmpdir(), 'cph-public-snapshot-'))
   const previous = process.env.CPH_PUBLIC_DATA_DIR
-  const outDir = options.outDir ?? resolve(root, 'dist-production')
   try {
     await writeFile(join(directory, 'facilities.json'), JSON.stringify(prepared.facilities), 'utf8')
     await writeFile(join(directory, 'hotel.json'), JSON.stringify(prepared.hotel), 'utf8')

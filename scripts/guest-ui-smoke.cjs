@@ -7,6 +7,7 @@ const baseURL = process.env.CPH_UI_BASE_URL || 'http://127.0.0.1:5174';
 const origin = new URL(baseURL).origin;
 const artifactDir = process.env.CPH_UI_ARTIFACT_DIR || '/tmp/cph-step05-qa';
 const source = JSON.parse(fs.readFileSync(path.join(__dirname, '../src/data/facilities.json'), 'utf8'));
+const sourceHotel = JSON.parse(fs.readFileSync(path.join(__dirname, '../src/data/hotel.json'), 'utf8'));
 const publicRecords = source.facilities.filter(item => item.isPublished);
 const labels = { en: 'English', ko: '한국어', 'zh-CN': '简体中文', ja: '日本語' };
 const results = [], errors = [], requests = [];
@@ -50,10 +51,28 @@ async function assertUi(page, language, expectedCount) {
   assert.equal(await page.locator('.site-footer .footer-title').innerText(), m.ui.footerTitle);
   assert.equal(await page.locator('.site-footer p').last().innerText(), m.ui.footerDescription);
   assert.ok(await page.getByText(m.ui.demoTitle, { exact: true }).isVisible());
-  assert.ok(await page.getByText(m.ui.hotelEmptyTitle, { exact: true }).isVisible());
+  const hotelHasText = sourceHotel.checkInTime !== null || sourceHotel.checkOutTime !== null || Object.values(sourceHotel.translations[language]).some(value => value.trim());
+  if (hotelHasText) assert.equal(await page.getByText(m.ui.hotelEmptyTitle, { exact: true }).count(), 0);
+  else assert.ok(await page.getByText(m.ui.hotelEmptyTitle, { exact: true }).isVisible());
   assert.equal(await page.locator('a[href^="/staff"]').count(), 0);
   assert.deepEqual(await page.locator('#nearby-facilities .category-card').allTextContents(), Object.values(m.categories));
   assert.deepEqual(await page.locator('.hotel-category-grid .category-card').allTextContents(), Object.values(m.hotelCategories));
+  await layout(page);
+}
+
+async function assertHotelTopic(page, language, topic) {
+  const m = MESSAGES[language];
+  await page.locator(`#guest-hotel-${topic}`).click();
+  await page.locator('#guest-hotel-detail h3').filter({ hasText: m.hotelCategories[topic] }).waitFor();
+  const approved = sourceHotel.translations[language][topic];
+  assert.deepEqual(await page.locator('.hotel-topic-text p').allTextContents(), approved.trim() ? approved.split('\n\n') : [m.ui.informationUnavailable]);
+  const notes = sourceHotel.translations[language].notes;
+  assert.deepEqual(await page.locator('#guest-hotel-detail .detail-facts > div:last-child dd p').allTextContents(), notes.trim() ? notes.split('\n\n') : [m.ui.informationUnavailable]);
+  if (topic === 'checkIn' || topic === 'checkOut') {
+    const expected = sourceHotel[topic === 'checkIn' ? 'checkInTime' : 'checkOutTime'] ?? m.ui.timeUnavailable;
+    assert.equal(await page.locator('#guest-hotel-detail .detail-facts > div:first-child dd').innerText(), expected);
+  }
+  assert.equal(await page.locator('#guest-hotel-detail .verification-date').innerText(), guestVerificationDate(sourceHotel.lastVerifiedAt, language));
   await layout(page);
 }
 
@@ -74,6 +93,7 @@ async function assertUi(page, language, expectedCount) {
       for (const language of ['en', 'ko', 'zh-CN', 'ja', 'en']) {
         await chooseLanguage(page, language);
         await assertUi(page, language, publicRecords.length);
+        for (const topic of ['checkIn', 'checkOut', 'breakfast', 'parking', 'roomUsage']) await assertHotelTopic(page, language, topic);
         const record = publicRecords[0];
         assert.ok(await page.getByRole('article', { name: record.translations[language].name, exact: true }).isVisible());
         if (width === 390) {
@@ -85,8 +105,7 @@ async function assertUi(page, language, expectedCount) {
       for (const topic of ['checkIn', 'checkOut', 'breakfast', 'parking', 'roomUsage']) {
         await page.locator(`#guest-hotel-${topic}`).click();
         await page.locator('#guest-hotel-detail h3').filter({ hasText: MESSAGES.en.hotelCategories[topic] }).waitFor();
-        assert.ok(await page.locator('#guest-hotel-detail').getByText(MESSAGES.en.ui.informationUnavailable, { exact: true }).first().isVisible());
-        if (topic === 'checkIn' || topic === 'checkOut') assert.ok(await page.locator('#guest-hotel-detail').getByText(MESSAGES.en.ui.timeUnavailable, { exact: true }).isVisible());
+        await assertHotelTopic(page, 'en', topic);
       }
       await chooseLanguage(page, 'ja');
       assert.equal(await page.locator('.hotel-category-grid button[aria-pressed="true"]').innerText(), MESSAGES.ja.hotelCategories.roomUsage);
@@ -170,6 +189,15 @@ async function assertUi(page, language, expectedCount) {
     });
     await fixtureCase('empty public facility dataset localizes', { facilities: { schemaVersion: 1, dataStatus: 'demo', facilities: [] } }, async page => {
       for (const language of ['en', 'ko', 'zh-CN', 'ja']) { await chooseLanguage(page, language); await page.getByRole('heading', { name: MESSAGES[language].ui.noFacilitiesTitle, exact: true }).waitFor(); }
+    });
+    await fixtureCase('empty hotel still localizes unknown information/times without inventing values', { hotel: emptyGuestHotel() }, async page => {
+      await page.locator('.hotel-category-grid button:not([disabled])').first().waitFor();
+      for (const language of ['en', 'ko', 'zh-CN', 'ja']) {
+        await chooseLanguage(page, language); await page.getByText(MESSAGES[language].ui.hotelEmptyTitle, { exact: true }).waitFor();
+        await page.locator('#guest-hotel-checkIn').click();
+        assert.deepEqual(await page.locator('.hotel-topic-text p').allTextContents(), [MESSAGES[language].ui.informationUnavailable]);
+        assert.equal(await page.locator('#guest-hotel-detail .detail-facts > div:first-child dd').innerText(), MESSAGES[language].ui.timeUnavailable);
+      }
     });
     const qaFacilities = guestFacilityDataset(), qaHotel = emptyGuestHotel();
     for (const language of ['en', 'ko', 'zh-CN', 'ja']) {

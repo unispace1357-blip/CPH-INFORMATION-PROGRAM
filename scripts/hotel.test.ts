@@ -4,9 +4,10 @@ import rawHotel from '../src/data/hotel.json' with { type: 'json' }
 import schema from '../src/data/hotel.schema.json' with { type: 'json' }
 import { GUIDE_LANGUAGES } from '../src/types/guide.ts'
 import { parseHotelDataset } from '../src/data/validateHotelDataset.ts'
+import { emptyGuestHotel } from './guest-test-fixtures.ts'
 
 test('empty demo hotel information validates in all four languages', () => {
-  const hotel = parseHotelDataset(rawHotel)
+  const hotel = parseHotelDataset(emptyGuestHotel())
   assert.equal(hotel.dataStatus, 'demo')
   assert.equal(hotel.lastVerifiedAt, null)
   assert.equal(hotel.checkInTime, null)

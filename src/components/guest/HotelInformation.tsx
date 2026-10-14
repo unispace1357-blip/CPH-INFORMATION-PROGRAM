@@ -11,6 +11,7 @@ import { InformationNotice } from '../ui/InformationNotice'
 import { LoadingState } from '../ui/LoadingState'
 import { Button } from '../ui/Button'
 import type { IconName } from '../ui/Icon'
+import { HotelParagraphs } from './HotelParagraphs'
 
 const topics: { code: HotelCategory; icon: IconName }[] = [
   { code: 'checkIn', icon: 'checkIn' }, { code: 'checkOut', icon: 'checkOut' },
@@ -31,13 +32,13 @@ export function HotelInformation({ state, language, selected, onSelect, onClose 
       <div className="guest-category-grid hotel-category-grid" role="group" aria-label={m.ui.hotelTopicsLabel}>{topics.map(topic => <CategoryCard key={topic.code} id={`guest-hotel-${topic.code}`} label={m.hotelCategories[topic.code]} icon={topic.icon} selected={selected === topic.code} disabled={!hotel} onClick={() => onSelect(topic.code)} aria-controls="guest-hotel-detail" />)}</div>
       <div id="guest-hotel-detail">{hotel && selected ? <div className="panel guest-topic-detail">
         <div className="section-heading"><h3 ref={heading} tabIndex={-1}>{m.hotelCategories[selected]}</h3><Button variant="secondary" onClick={onClose}>{m.ui.closeDetails}</Button></div>
-        <p className="hotel-topic-text">{hotelTopicText(hotel, selected, language)}</p>
+        <div className="hotel-topic-text"><HotelParagraphs text={hotelTopicText(hotel, selected, language)} /></div>
         <dl className="detail-facts">
           {(selected === 'checkIn' || selected === 'checkOut') && <div><dt>{selected === 'checkIn' ? m.ui.checkInTimeLabel : m.ui.checkOutTimeLabel}</dt><dd>{localizedValue(selected === 'checkIn' ? hotel.checkInTime : hotel.checkOutTime, language, 'timeUnavailable')}</dd></div>}
           <div><dt>{m.ui.hotelName}</dt><dd>{localizedValue(hotel.translations[language].name, language)}</dd></div>
           <div><dt>{m.ui.description}</dt><dd>{localizedValue(hotel.translations[language].description, language)}</dd></div>
           <div><dt>{m.ui.address}</dt><dd>{localizedValue(hotel.translations[language].address, language)}</dd></div>
-          <div><dt>{m.ui.notes}</dt><dd>{localizedValue(hotel.translations[language].notes, language)}</dd></div>
+          <div><dt>{m.ui.notes}</dt><dd><HotelParagraphs text={localizedValue(hotel.translations[language].notes, language)} /></dd></div>
         </dl>
         <p className="verification-date">{guestVerificationDate(hotel.lastVerifiedAt, language)}</p>
         <p className="field-hint">{m.ui.verificationNotice}</p>
