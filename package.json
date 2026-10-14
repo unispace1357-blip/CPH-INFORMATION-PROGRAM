@@ -5,11 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run validate:data && tsc -b && vite build",
+    "build": "npm run validate && tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "validate:data": "node scripts/validate-data.ts",
-    "test:data": "tsc -p tsconfig.data.json && node --test scripts/facilities.test.ts"
+    "validate:data": "npm run validate",
+    "test:data": "npm run test",
+    "validate": "node scripts/validate-data.ts",
+    "test": "tsc -p tsconfig.data.json && node --test scripts/*.test.ts",
+    "validate:production": "node scripts/validate-production.ts",
+    "build:production": "npm run validate:production && tsc -b && vite build --outDir dist-production --emptyOutDir"
   },
   "dependencies": {
     "ajv": "^8.20.0",

@@ -1,14 +1,13 @@
+import type { DatasetStatus, GuideLanguage, LocalizedText } from './guide.ts'
+
+export type { GuideLanguage } from './guide.ts'
+
 /** Keep this contract aligned with src/data/facilities.schema.json. */
-export type GuideLanguage = 'ko' | 'en' | 'zh-CN' | 'ja'
-export type FacilityCategory =
-  | 'hotel'
-  | 'dining'
-  | 'cafe'
-  | 'convenience'
-  | 'pharmacy'
-  | 'shopping'
-  | 'attraction'
-  | 'transportation'
+export const FACILITY_CATEGORIES = [
+  'hotel', 'dining', 'cafe', 'convenience', 'pharmacy',
+  'shopping', 'attraction', 'transportation', 'sauna_spa', 'atm',
+] as const
+export type FacilityCategory = (typeof FACILITY_CATEGORIES)[number]
 
 export interface FacilityTranslation {
   name: string
@@ -27,12 +26,15 @@ export interface Facility {
   /** YYYY-MM-DD; null means the information has not been verified. */
   lastVerifiedAt: string | null
   translations: Record<GuideLanguage, FacilityTranslation>
-  keywords: Record<'ko' | 'en', string[]>
+  /** Shared across languages; null means unknown, never an invented estimate. */
+  walkingMinutes: number | null
+  closedDays: LocalizedText
+  keywords: Record<GuideLanguage, string[]>
   englishPhrases: string[]
 }
 
 export interface FacilityDataset {
   schemaVersion: 1
-  dataStatus: 'demo' | 'production'
+  dataStatus: DatasetStatus
   facilities: Facility[]
 }

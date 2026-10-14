@@ -96,7 +96,9 @@
             "pharmacy",
             "shopping",
             "attraction",
-            "transportation"
+            "transportation",
+            "sauna_spa",
+            "atm"
           ]
         },
         "isPublished": {
@@ -150,6 +152,26 @@
             },
             "en": {
               "$ref": "#/definitions/keywords"
+            },
+            "zh-CN": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "uniqueItems": true,
+              "default": []
+            },
+            "ja": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "\\S"
+              },
+              "uniqueItems": true,
+              "default": []
             }
           }
         },
@@ -161,6 +183,44 @@
             "pattern": "\\S"
           },
           "uniqueItems": true
+        },
+        "walkingMinutes": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "default": null
+        },
+        "closedDays": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ko",
+            "en",
+            "zh-CN",
+            "ja"
+          ],
+          "properties": {
+            "ko": {
+              "type": "string"
+            },
+            "en": {
+              "type": "string"
+            },
+            "zh-CN": {
+              "type": "string"
+            },
+            "ja": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "ko": "",
+            "en": "",
+            "zh-CN": "",
+            "ja": ""
+          }
         }
       }
     }

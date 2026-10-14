@@ -1,0 +1,120 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CPH Hotel Dataset",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "dataStatus",
+    "lastVerifiedAt",
+    "checkInTime",
+    "checkOutTime",
+    "translations"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "dataStatus": {
+      "enum": [
+        "demo",
+        "production"
+      ]
+    },
+    "lastVerifiedAt": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "date"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "checkInTime": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^(?:[01]\\d|2[0-3]):[0-5]\\d$"
+    },
+    "checkOutTime": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^(?:[01]\\d|2[0-3]):[0-5]\\d$"
+    },
+    "translations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ko",
+        "en",
+        "zh-CN",
+        "ja"
+      ],
+      "properties": {
+        "ko": {
+          "$ref": "#/definitions/translation"
+        },
+        "en": {
+          "$ref": "#/definitions/translation"
+        },
+        "zh-CN": {
+          "$ref": "#/definitions/translation"
+        },
+        "ja": {
+          "$ref": "#/definitions/translation"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "translation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "description",
+        "address",
+        "checkIn",
+        "checkOut",
+        "breakfast",
+        "parking",
+        "roomUsage",
+        "notes"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "checkIn": {
+          "type": "string"
+        },
+        "checkOut": {
+          "type": "string"
+        },
+        "breakfast": {
+          "type": "string"
+        },
+        "parking": {
+          "type": "string"
+        },
+        "roomUsage": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -51,11 +51,24 @@
           "Fictional Guide Hotel",
           "fictional",
           "test"
+        ],
+        "zh-CN": [
+          "虚构指南酒店"
+        ],
+        "ja": [
+          "架空ガイドホテル"
         ]
       },
       "englishPhrases": [
         "This is a fictional facility used only for testing."
-      ]
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      }
     },
     {
       "id": "demo-cafe-001",
@@ -106,11 +119,24 @@
           "Fictional Walk Cafe",
           "fictional",
           "test"
+        ],
+        "zh-CN": [
+          "虚构散步咖啡馆"
+        ],
+        "ja": [
+          "架空散歩カフェ"
         ]
       },
       "englishPhrases": [
         "This is a fictional facility used only for testing."
-      ]
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      }
     },
     {
       "id": "demo-pharmacy-001",
@@ -161,11 +187,24 @@
           "Fictional Guide Pharmacy",
           "fictional",
           "test"
+        ],
+        "zh-CN": [
+          "虚构指南药店"
+        ],
+        "ja": [
+          "架空ガイド薬局"
         ]
       },
       "englishPhrases": [
         "This is a fictional facility used only for testing."
-      ]
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      }
     },
     {
       "id": "demo-convenience-001",
@@ -216,11 +255,152 @@
           "Fictional Guide Convenience Store",
           "fictional",
           "test"
+        ],
+        "zh-CN": [
+          "虚构指南便利店"
+        ],
+        "ja": [
+          "架空ガイドコンビニ"
         ]
       },
       "englishPhrases": [
         "This is a fictional facility used only for testing."
-      ]
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      }
+    },
+    {
+      "id": "demo-sauna-spa-001",
+      "category": "sauna_spa",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "가상 안내사우나",
+          "description": "데이터 구조 검증용 가상 시설입니다. 실제 장소가 아닙니다.",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "실제 운영 안내에 사용하지 마세요."
+        },
+        "en": {
+          "name": "Fictional Guide Sauna",
+          "description": "Fictional facility for data validation. This is not a real place.",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "Do not use this information for guest service."
+        },
+        "zh-CN": {
+          "name": "虚构指南桑拿",
+          "description": "用于数据验证的虚构设施，并非真实地点。",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "请勿用于实际宾客服务。"
+        },
+        "ja": {
+          "name": "架空ガイドサウナ",
+          "description": "データ検証用の架空施設です。実在する場所ではありません。",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "実際のお客様のご案内には使用しないでください。"
+        }
+      },
+      "keywords": {
+        "ko": [
+          "가상 안내사우나"
+        ],
+        "en": [
+          "Fictional Guide Sauna"
+        ],
+        "zh-CN": [
+          "虚构指南桑拿"
+        ],
+        "ja": [
+          "架空ガイドサウナ"
+        ]
+      },
+      "englishPhrases": [
+        "This is a fictional facility used only for testing."
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      }
+    },
+    {
+      "id": "demo-atm-001",
+      "category": "atm",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "가상 안내ATM",
+          "description": "데이터 구조 검증용 가상 시설입니다. 실제 장소가 아닙니다.",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "실제 운영 안내에 사용하지 마세요."
+        },
+        "en": {
+          "name": "Fictional Guide ATM",
+          "description": "Fictional facility for data validation. This is not a real place.",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "Do not use this information for guest service."
+        },
+        "zh-CN": {
+          "name": "虚构指南ATM",
+          "description": "用于数据验证的虚构设施，并非真实地点。",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "请勿用于实际宾客服务。"
+        },
+        "ja": {
+          "name": "架空ガイドATM",
+          "description": "データ検証用の架空施設です。実在する場所ではありません。",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "実際のお客様のご案内には使用しないでください。"
+        }
+      },
+      "keywords": {
+        "ko": [
+          "가상 안내ATM"
+        ],
+        "en": [
+          "Fictional Guide ATM"
+        ],
+        "zh-CN": [
+          "虚构指南ATM"
+        ],
+        "ja": [
+          "架空ガイドATM"
+        ]
+      },
+      "englishPhrases": [
+        "This is a fictional facility used only for testing."
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      }
     }
   ]
 }

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "dataStatus": "demo",
+  "lastVerifiedAt": null,
+  "checkInTime": null,
+  "checkOutTime": null,
+  "translations": {
+    "ko": {
+      "name": "",
+      "description": "",
+      "address": "",
+      "checkIn": "",
+      "checkOut": "",
+      "breakfast": "",
+      "parking": "",
+      "roomUsage": "",
+      "notes": ""
+    },
+    "en": {
+      "name": "",
+      "description": "",
+      "address": "",
+      "checkIn": "",
+      "checkOut": "",
+      "breakfast": "",
+      "parking": "",
+      "roomUsage": "",
+      "notes": ""
+    },
+    "zh-CN": {
+      "name": "",
+      "description": "",
+      "address": "",
+      "checkIn": "",
+      "checkOut": "",
+      "breakfast": "",
+      "parking": "",
+      "roomUsage": "",
+      "notes": ""
+    },
+    "ja": {
+      "name": "",
+      "description": "",
+      "address": "",
+      "checkIn": "",
+      "checkOut": "",
+      "breakfast": "",
+      "parking": "",
+      "roomUsage": "",
+      "notes": ""
+    }
+  }
+}

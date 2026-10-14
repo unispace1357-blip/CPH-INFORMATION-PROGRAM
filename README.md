@@ -22,15 +22,27 @@ npm run dev -- --host 0.0.0.0
 ## 검증 및 빌드
 
 ```bash
-npm run validate:data
-npm run test:data
+npm run validate
+npm run test
 npm run lint
 npm run build
 npm run preview -- --host 0.0.0.0
 ```
 
-`validate:data`는 공통 JSON을 로컬에서 검증하고, `test:data`는 데이터 코드·테스트의 엄격한 타입 검사와 데이터 검증 테스트를 실행합니다. Node.js 24의 TypeScript 실행을 사용합니다.
-`build`는 JSON 검증, 애플리케이션 TypeScript 검사와 정적 파일 빌드를 실행하며 결과는 `dist/`에 생성됩니다.
+`validate`는 시설·호텔 JSON을 로컬에서 검증하고, `test`는 데이터 코드·테스트의 엄격한 타입 검사와 자동 테스트를 실행합니다. Node.js 24의 TypeScript 실행을 사용합니다. 기존 `validate:data`, `test:data`도 별칭으로 유지합니다.
+`build`는 개발용 JSON 검증, 앱 TypeScript 검사와 정적 파일 빌드를 실행하며 결과는 `dist/`에 생성됩니다. 개발 빌드에서는 demo 데이터를 허용합니다.
+
+고객 배포용 빌드는 별도 명령을 사용합니다.
+
+```bash
+npm run validate:production
+npm run build:production
+```
+
+시설·호텔 데이터가 모두 `production`이고 공개 시설·호텔의 필수 안내와 확인일을 충족해야 성공합니다. 운영 확인일은 미래 날짜를 허용하지 않습니다. 현재 demo 파일로는 종료 코드 1로 차단됩니다. 배포 빌드 출력은 개발 빌드와 분리된 `dist-production/`입니다. 자세한 필수 조건은 [데이터 명세](docs/data-model.md)에 있습니다.
+
+STEP 02 보완 검증: `validate`, `test`, `lint`, `build` PASS, 테스트 56개 통과(실패·스킵 0개). demo 상태의 `validate:production`, `build:production`은 예상대로 종료 코드 1로 차단됐고 배포 출력은 생성되지 않았습니다. 이번 보완의 브라우저·실제 호스팅 배포는 미검증입니다.
+
 STEP 01 재검수 (2026-10-13):
 
 | 검사 | 결과 |
@@ -55,18 +67,24 @@ src/
   pages/guest/GuestPage.tsx          # 고객용 시작 화면
   pages/staff/StaffPage.tsx          # 직원용 시작 화면
   pages/NotFoundPage.tsx            # 잘못된 주소 안내
-  data/facilities.json              # 가상 시설 4개를 포함하는 공통 데이터
+  data/facilities.json              # 가상 시설 6개를 포함하는 공통 데이터
   data/facilities.schema.json       # JSON Schema (draft-07)
   data/validateFacilityDataset.ts   # 스키마·날짜·중복 ID 검증
+  data/hotel.json                  # 4개 언어의 빈 호텔 기본 정보
+  data/hotel.schema.json           # 호텔 JSON Schema
+  data/validateHotelDataset.ts     # 호텔 정보 검증
+  data/validateProductionData.ts   # 고객 배포용 운영 필수 조건 검증
   data/index.ts                    # Staff/Guest의 향후 공통 진입점
-  types/facility.ts                # 공통 TypeScript 타입
+  types/guide.ts                   # 공통 언어·데이터 상태 타입
+  types/facility.ts                # 시설 타입
+  types/hotel.ts                   # 호텔 기본 정보 타입
   styles/global.css                # 모바일 우선 공통 스타일
   App.tsx                          # React Router 라우트
   main.tsx                         # React 진입점
   index.css                        # 공통 스타일 진입점
 ```
 
-시설 데이터와 UI를 분리했습니다. 후속 단계의 Staff/Guest 기능은 `src/data/index.ts`를 통해 동일한 JSON을 사용합니다. 현재 화면에는 데이터를 연결하지 않았습니다. 모든 시설은 가상 데이터이며 실제 호텔 정보는 없습니다.
+시설 데이터와 UI를 분리했습니다. 후속 단계의 Staff/Guest 기능은 `src/data/index.ts`를 통해 동일한 JSON을 사용합니다. 현재 화면에는 데이터를 연결하지 않았습니다. 모든 시설은 가상 데이터이며 호텔 기본 정보는 빈 데이터입니다. 실제 호텔 정보는 없습니다. 기존 시설 JSON의 새 필드가 누락된 경우 원본을 변경하지 않고 기본값으로 보완합니다.
 
 데이터 필드와 관리 규칙은 [데이터 명세](docs/data-model.md)에 있습니다.
 
@@ -76,7 +94,7 @@ src/
 - 고객 개인정보를 수집하지 않으며 공개 코드·JSON에 비밀 정보를 저장하지 않습니다.
 - Staff 경로는 공개 화면입니다. 경로 이름은 접근 제어 기능이 아닙니다.
 - Admin은 이후 로컬 전용으로 분리합니다. 현재 관리자 화면은 없습니다.
-- 무료 정적 호스팅을 지원합니다. 향후 Cloudflare Pages 빌드 명령은 `npm run build`, 출력 경로는 `dist`입니다.
+- 무료 정적 호스팅을 지원합니다. 향후 고객용 Cloudflare Pages 빌드 명령은 `npm run build:production`, 출력 경로는 `dist-production`입니다.
 - BrowserRouter를 사용합니다. 직접 접속·새로고침을 위해 호스팅에서 SPA fallback이 필요합니다. Cloudflare Pages는 최상위 `404.html`이 없으면 기본 SPA fallback을 지원합니다. 실제 배포는 아직 하지 않았습니다.
 - QR 생성 및 연결은 실제 배포 주소가 확정된 후 진행합니다.
 
