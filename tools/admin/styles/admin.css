@@ -1,0 +1,42 @@
+.admin-shell { min-height: 100dvh; }
+.admin-header { display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 24px; padding: 24px 32px; background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
+.admin-header h1 { font-size: clamp(1.4rem, 3vw, 2rem); }
+.admin-header p { color: var(--color-text-secondary); }
+.admin-status { display: grid; gap: 4px; font-size: .85rem; padding: 12px 16px; background: var(--color-subtle); border: 1px solid var(--color-border); border-radius: var(--radius-small); }
+.admin-workspace { display: grid; grid-template-columns: 200px minmax(0, 1fr); max-width: 1800px; margin: auto; }
+.admin-navigation { display: grid; align-content: start; gap: 12px; padding: 24px 16px; }
+.admin-navigation p { font-size: .8rem; color: var(--color-text-secondary); overflow-wrap: anywhere; }
+.admin-navigation .button { justify-content: flex-start; }
+.admin-main { min-width: 0; padding: 24px; display: grid; align-content: start; gap: 20px; }
+.admin-workspace-lock { border: 0; padding: 0; margin: 0; min-width: 0; }
+.admin-facility-workspace { display: grid; grid-template-columns: minmax(260px, .75fr) minmax(0, 1.25fr); gap: 20px; align-items: start; }
+.admin-facility-list, .admin-editor-panel { min-width: 0; }
+.admin-records { list-style: none; padding: 0; display: grid; gap: 12px; }
+.admin-records li { border: 1px solid var(--color-border); border-radius: var(--radius-medium); padding: 16px; overflow-wrap: anywhere; }
+.admin-records .is-selected { border-color: var(--color-primary); background: var(--color-subtle); }
+.admin-records p { font-size: .85rem; }
+.admin-id { word-break: break-all; color: var(--color-text-secondary); }
+.admin-field { display: grid; gap: 6px; min-width: 0; margin-block: 12px; }
+.admin-field label, .admin-editor legend, .admin-list-editor legend { font-weight: 650; font-size: .9rem; }
+.admin-field input, .admin-field textarea, .admin-field select { width: 100%; min-width: 0; min-height: 44px; padding: 10px 12px; border: 1px solid var(--color-text-secondary); border-radius: var(--radius-small); color: var(--color-text); background: var(--color-surface); }
+.admin-field input[readonly] { background: var(--color-background); }
+.admin-field textarea { resize: vertical; overflow-wrap: anywhere; }
+.admin-field input[type=file] { font-size: .85rem; }
+.admin-field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.admin-editor > fieldset, .admin-list-editor { min-width: 0; border: 1px solid var(--color-border); border-radius: var(--radius-medium); padding: 16px; margin-block: 20px; }
+.admin-checkbox { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; cursor: pointer; }
+.admin-checkbox input { width: 20px; height: 20px; accent-color: var(--color-primary); }
+.admin-language-tabs, .admin-editor-actions, .admin-list-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.admin-language-heading { margin-block: 16px 8px; }
+.admin-list-row { border-bottom: 1px solid var(--color-border); padding-bottom: 16px; margin-bottom: 16px; min-width: 0; }
+.admin-feedback { overflow-wrap: anywhere; border-left: 3px solid var(--color-primary); padding-left: 12px; font-size: .9rem; }
+.admin-validation { border: 1px solid var(--color-border); border-left: 4px solid var(--color-focus); border-radius: var(--radius-small); padding: 16px; margin-block: 16px; background: var(--color-warning-background); overflow-wrap: anywhere; }
+.admin-validation--pass { border-left-color: var(--color-primary); background: var(--color-subtle); }
+.admin-validation pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: .8rem; }
+.admin-validation summary { cursor: pointer; min-height: 44px; display: flex; align-items: center; text-decoration: underline; }
+.admin-validation ul { padding-left: 20px; }
+.admin-json-page h3 { margin-top: 24px; }
+.admin-json-page p { margin-block: 12px; }
+.admin-footer { padding: 20px 32px; border-top: 1px solid var(--color-border); font-size: .8rem; color: var(--color-text-secondary); }
+@media (max-width: 1099px) { .admin-workspace { grid-template-columns: 1fr; } .admin-navigation { grid-template-columns: repeat(4, minmax(0, 1fr)); } .admin-navigation p { grid-column: 1/-1; } .admin-facility-workspace { grid-template-columns: 1fr; } }
+@media (max-width: 599px) { .admin-header { padding: 20px 16px; } .admin-main { padding: 16px; } .admin-navigation { grid-template-columns: repeat(2, minmax(0, 1fr)); } .admin-field-grid { grid-template-columns: 1fr; } .admin-status { width: 100%; } }
