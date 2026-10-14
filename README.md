@@ -1,7 +1,7 @@
 # CPH Guest Information Guide
 
 송도 센트럴파크호텔 프론트의 QR 기반 다국어 안내 프로그램입니다.
-현재 **STEP 04: 직원용 검색·상세·영어 응대 문구 복사**까지 구현했습니다. Staff에서 공개 시설 JSON을 한·영으로 검색하고 카테고리를 적용해 상세 안내와 등록된 영어 문구를 확인·복사할 수 있습니다. 현재는 가상 데이터이며 실제 고객 안내에 사용하지 않습니다. Guest의 STEP 03 기본 화면과 비활성 컨트롤은 유지합니다.
+현재 **STEP 05: 고객용 4개 국어 안내**까지 구현했습니다. Guest에서 영어(기본)·한국어·중국어 간체·일본어로 호텔 정보 조회, 시설 검색·카테고리 필터·상세 조회를 사용할 수 있습니다. Staff의 한·영 검색·상세·영어 문구 복사는 유지합니다. 시설은 가상 데이터이며 호텔 정보는 비어 있으므로 실제 고객 안내에 사용하지 않습니다. 관리자와 실제 배포는 구현하지 않았습니다.
 
 ## 실행
 
@@ -13,7 +13,7 @@ npm run dev -- --host 0.0.0.0
 ```
 
 기본 개발 포트는 5173입니다. `/`는 `/guest`로 이동합니다.
-- `/guest`: 고객용 기본 화면
+- `/guest`: 고객용 4개 국어 호텔·주변 시설 안내
 - `/staff`: 직원용 검색·상세·English Guide
 - 그 외 주소: 페이지 없음 화면
 
@@ -29,7 +29,9 @@ npm run build
 npm run preview -- --host 0.0.0.0
 ```
 
-STEP 04: 위 4개 검증 명령 PASS, 기존 56개와 신규 35개 자동 테스트 **91개** 통과. 직원용 검색·선택·복사는 실제 Chromium 320·390·768·1280px에서 확인했습니다. demo 운영 배포 차단도 유지됩니다. 자세한 규칙과 결과는 [직원용 가이드](docs/staff-guide.md)에 있습니다.
+STEP 05 (2026-10-15): 위 4개 검증 명령 PASS, 기존 91개와 신규 40개 자동 테스트 **131개** 통과(실패·스킵 0개). 실제 headless Chromium으로 Guest의 4개 언어를 320·375·390·430·768·1280px에서 확인했습니다. 기존 `test:ui`, `test:staff-ui`와 신규 `test:guest-ui`도 PASS입니다. 호텔/시설 오류 분리, 언어·상세 선택 유지, 키보드·터치 영역, 가로 넘침, favicon과 외부 요청을 검증했습니다. demo 운영 배포 차단은 유지합니다. 자세한 구조·검증·미검증 항목과 브라우저 명령은 [고객용 가이드](docs/guest-guide.md)에 있습니다.
+
+아래는 STEP 04 당시 결과입니다. 위 4개 검증 명령 PASS, 기존 56개와 신규 35개 자동 테스트 **91개** 통과. 직원용 검색·선택·복사는 실제 Chromium 320·390·768·1280px에서 확인했습니다. 자세한 직원용 규칙과 당시 결과는 [직원용 가이드](docs/staff-guide.md)에 있습니다.
 
 아래는 STEP 03 당시 검증 결과입니다. STEP 03: 위 4개 검증 명령 PASS, 기존 테스트 56개 통과. 실제 Chromium으로 320·375·390·430·768·1280px 화면과 경로·키보드·비활성 상태를 확인했습니다. favicon SVG/ICO는 HTTP 200이며 브라우저 콘솔 오류·외부 리소스 요청이 없었습니다.
 
@@ -72,9 +74,11 @@ src/
   components/layout/GuideLayout.tsx  # audience별 전용 헤더·내비게이션·푸터
   components/ui/                    # 공통 UI 컴포넌트 10개와 로컬 Icon
   components/staff/                 # 검색 결과·상세·English Guide
+  components/guest/                 # 호텔 안내·시설 결과·고객용 상세
+  i18n/                            # 4개 언어 UI 사전·표시 함수·언어 Context
   services/                        # 검색·표시·데이터 로딩·클립보드
   config/uiCategories.ts            # 원본 코드의 Staff/Guest 표시 이름
-  pages/guest/GuestPage.tsx          # 고객용 시작 화면
+  pages/guest/GuestPage.tsx          # 고객용 언어·검색·필터·선택 상태
   pages/staff/StaffPage.tsx          # 직원용 시작 화면
   pages/NotFoundPage.tsx            # 잘못된 주소 안내
   data/facilities.json              # 가상 시설 6개를 포함하는 공통 데이터
@@ -84,7 +88,9 @@ src/
   data/hotel.schema.json           # 호텔 JSON Schema
   data/validateHotelDataset.ts     # 호텔 정보 검증
   data/validateProductionData.ts   # 고객 배포용 운영 필수 조건 검증
-  data/index.ts                    # Staff/Guest의 향후 공통 진입점
+  data/facilityDataset.ts          # 공통 시설 JSON 검증·객체 생성
+  data/hotelDataset.ts             # 호텔 JSON 검증·객체 생성
+  data/index.ts                    # 두 공통 객체의 기존 공개 인터페이스
   types/guide.ts                   # 공통 언어·데이터 상태 타입
   types/facility.ts                # 시설 타입
   types/hotel.ts                   # 호텔 기본 정보 타입
@@ -95,7 +101,9 @@ src/
   index.css                        # 공통 스타일 진입점
 ```
 
-시설 데이터와 UI를 분리했습니다. Staff는 `src/data/index.ts`의 검증된 JSON을 사용합니다. Guest의 데이터 연결은 다음 단계에서 진행합니다. 모든 시설은 가상 데이터이며 호텔 기본 정보는 빈 데이터입니다. 실제 호텔 정보는 없습니다. 기존 시설 JSON의 새 필드가 누락된 경우 원본을 변경하지 않고 기본값으로 보완합니다.
+시설 데이터와 UI를 분리했습니다. Staff와 Guest는 동일한 `facilityDataset` 객체를 사용합니다. `src/data/index.ts`의 기존 export를 유지하면서 객체 생성은 시설·호텔 모듈로 분리했습니다. UI는 각 모듈을 독립적으로 불러오므로 호텔 오류가 정상 시설 안내와 Staff를 차단하지 않습니다. JSON·스키마·타입은 변경하지 않았습니다. 모든 시설은 가상 데이터이며 호텔 기본 정보는 빈 데이터입니다. 실제 호텔 정보는 없습니다. 기존 시설 JSON의 새 필드가 누락된 경우 원본을 변경하지 않고 기본값으로 보완합니다.
+
+Guest는 4개 언어 시설명·키워드를 검색하며, Staff는 기존 한·영 시설명·키워드·주소 검색을 유지합니다. Guest 화면의 시설 정보는 선택 언어의 값만 사용하고, 누락된 정보를 다른 언어로 대체하지 않습니다. 언어 상태는 앱 내 이동·시설 선택 동안 유지하며 전체 새로고침 시 영어로 초기화합니다. 개인정보나 언어 설정을 브라우저 저장소에 기록하지 않습니다.
 
 데이터 필드와 관리 규칙은 [데이터 명세](docs/data-model.md)에 있습니다.
 
@@ -111,6 +119,6 @@ src/
 
 ## 다음 단계 제안 (검수 후 진행)
 
-STEP 04 검수 후 STEP 05에서 고객용 4개 국어 전환·검색·상세를 진행합니다. 관리자 기능은 STEP 06 범위이며 이번 단계에서는 구현하지 않았습니다.
+STEP 05 검수 후 STEP 06에서 로컬 전용 관리자 도구와 JSON 불러오기·내보내기·검증·공개 상태 관리 등을 진행할 수 있습니다. 데이터 관리, 비공개 데이터 게시 제외 절차와 실제 번역·운영 정보 검수 기준을 먼저 확인합니다. 이번 단계에서는 STEP 06 기능이나 실제 배포를 구현하지 않았습니다.
 
 STEP 03에서 고객 화면의 직원용 메뉴를 숨겼습니다. `/staff`에는 직접 접속할 수 있으며 메뉴 숨김은 인증 기능이 아닙니다. 직원용 화면에도 비밀 정보나 개인정보를 저장하지 않습니다.

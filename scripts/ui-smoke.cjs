@@ -51,16 +51,17 @@ async function checkLayout(page, label, expectDisabled = true) {
       results.push(`PASS ${width}px / redirects to /guest`);
       for (const route of ['/guest', '/staff', '/review-missing-page']) {
         assert.equal((await page.goto(baseURL + route)).status(), 200);
-        const title = route === '/guest' ? 'Welcome to your stay.' : route === '/staff' ? '직원용 안내' : '페이지를 찾을 수 없습니다';
+        const title = route === '/guest' ? 'Welcome to your stay.' : route === '/staff' ? '직원용 안내' : 'Page not found';
         await page.getByRole('heading', { level: 1, name: title, exact: true }).waitFor();
         await page.reload();
         await page.getByRole('heading', { level: 1, name: title, exact: true }).waitFor();
         if (route === '/staff') await page.locator('.staff-category-grid button:not([disabled])').first().waitFor();
-        await checkLayout(page, `${width}px ${route}`, route !== '/staff');
+        if (route === '/guest') { await page.locator('.hotel-category-grid button:not([disabled])').first().waitFor(); await page.locator('.guest-search-panel input:not([disabled])').waitFor(); }
+        await checkLayout(page, `${width}px ${route}`, route === '/review-missing-page');
         if (route === '/guest') {
           assert.equal(await page.locator('html').getAttribute('lang'), 'en');
           assert.equal(await page.locator('a[href^="/staff"]').count(), 0);
-          if (width === 320) assert.ok(!requests.some(url => /\/src\/data\//.test(new URL(url).pathname)), 'Initial Guest loaded facility data');
+          assert.ok(await page.getByRole('searchbox').isEditable());
           assert.equal(await page.locator('.language-options button').count(), 4);
           assert.equal(await page.locator('.language-options button[aria-pressed="true"]').innerText(), 'English');
           assert.ok(await page.getByText('Development preview', { exact: true }).isVisible());
@@ -103,7 +104,7 @@ async function checkLayout(page, label, expectDisabled = true) {
           await page.waitForURL('**/staff');
           await page.getByRole('heading', { name: title }).waitFor();
         } else {
-          await page.getByRole('link', { name: '고객용 안내로 이동' }).click();
+          await page.getByRole('link', { name: 'Return to Guest Guide' }).click();
           await page.waitForURL('**/guest');
           await page.getByRole('heading', { name: 'Welcome to your stay.' }).waitFor();
         }
@@ -121,8 +122,8 @@ async function checkLayout(page, label, expectDisabled = true) {
     }
     assert.deepEqual(errors, [], 'Browser JavaScript, console or HTTP errors');
     assert.ok(requests.every(url => new URL(url).origin === origin), 'Remote resource requested');
-    assert.ok(requests.some(url => /\/src\/data\/index/.test(new URL(url).pathname)), 'Staff shared data was not loaded');
-    results.push('PASS zero JavaScript/console/HTTP errors; no remote resource/API requests; Staff shared data loaded; Guest remains a preview');
+    assert.ok(requests.some(url => /\/src\/data\/facilityDataset/.test(new URL(url).pathname)), 'Staff shared data was not loaded');
+    results.push('PASS zero JavaScript/console/HTTP errors; no remote resource/API requests; shared canonical data loaded; active Guest guide and Staff preserved');
     fs.writeFileSync(path.join(artifactDir, 'results.txt'), results.join('\n') + '\n');
     console.log(results.join('\n'));
   } finally {

@@ -128,3 +128,18 @@ main { flex: 1; padding-block: var(--space-8) var(--space-10); }
 .copy-status { min-height: 1.5em; font-size: .825rem; margin-top: var(--space-3); color: var(--color-primary); }
 .copy-status--failed { color: var(--color-text); font-weight: 600; }
 @media (min-width: 1000px) { .staff-detail-content .detail-facts > div { grid-template-columns: 104px minmax(0, 1fr); gap: var(--space-3); } }
+
+/* STEP 05 Guest interaction; original Staff layout tokens and rules are retained. */
+.guest-language-toolbar { position: sticky; top: 0; z-index: 2; background: var(--color-background); padding-top: var(--space-2); }
+.guest-language-toolbar .language-selector { padding-bottom: var(--space-3); }
+.hotel-category-grid { margin-top: var(--space-4); }
+.guest-topic-detail { margin-top: var(--space-4); }
+.guest-topic-detail h3, .guest-detail-panel h2 { scroll-margin-top: 150px; overflow-wrap: anywhere; }
+.guest-topic-detail .section-heading, .guest-detail-panel .section-heading { align-items: flex-start; }
+.guest-topic-detail .section-heading h3, .guest-detail-panel .section-heading h2 { flex: 1; min-width: 0; }
+.guest-result-list { display: grid; gap: var(--space-4); }
+.guest-detail-panel .detail-facts > div, .guest-topic-detail .detail-facts > div { display: grid; grid-template-columns: 1fr; }
+.guest-topic-detail p, .guest-topic-detail dd, .guest-detail-panel p, .guest-detail-panel dd, .app-shell--guest .site-footer p { overflow-wrap: anywhere; white-space: pre-wrap; }
+.guest-topic-detail .hotel-topic-text { margin-bottom: var(--space-4); }
+.guest-detail-panel .section-heading .button, .guest-topic-detail .section-heading .button { max-width: 100%; }
+@media (min-width: 768px) { .guest-result-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } .guest-topic-detail .detail-facts > div, .guest-detail-panel .detail-facts > div { grid-template-columns: 150px minmax(0, 1fr); } }

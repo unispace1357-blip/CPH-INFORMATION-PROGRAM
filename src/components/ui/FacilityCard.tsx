@@ -9,6 +9,7 @@ interface FacilityCardProps {
   selected?: boolean
   walkingText?: string
   detailControls?: string
+  detailButtonId?: string
   openingHours?: string
   walkingMinutes?: number | null
   hoursLabel?: string
@@ -20,7 +21,7 @@ interface FacilityCardProps {
   onDetails?: () => void
 }
 
-export function FacilityCard({ name, categoryLabel, englishName, selected = false, walkingText, detailControls, openingHours, walkingMinutes, hoursLabel = 'Opening hours', walkingLabel = 'Walking time', minuteUnit = 'min', unknownLabel = 'Not connected', detailLabel = 'View details', disabled = true, onDetails }: FacilityCardProps) {
+export function FacilityCard({ name, categoryLabel, englishName, selected = false, walkingText, detailControls, detailButtonId, openingHours, walkingMinutes, hoursLabel = 'Opening hours', walkingLabel = 'Walking time', minuteUnit = 'min', unknownLabel = 'Not connected', detailLabel = 'View details', disabled = true, onDetails }: FacilityCardProps) {
   const titleId = useId()
   return (
     <article className={`facility-card ${selected ? 'is-selected' : ''}`} aria-labelledby={titleId}>
@@ -29,7 +30,7 @@ export function FacilityCard({ name, categoryLabel, englishName, selected = fals
         <div><dt>{hoursLabel}</dt><dd>{openingHours || unknownLabel}</dd></div>
         <div><dt>{walkingLabel}</dt><dd>{walkingText ?? (walkingMinutes == null ? unknownLabel : `${walkingMinutes} ${minuteUnit}`)}</dd></div>
       </dl>
-      <Button variant="secondary" aria-pressed={selected} aria-controls={detailControls} disabled={disabled || !onDetails} onClick={onDetails} icon={<Icon name="arrow" size={18} />}>{detailLabel}</Button>
+      <Button id={detailButtonId} variant="secondary" aria-pressed={selected} aria-controls={detailControls} disabled={disabled || !onDetails} onClick={onDetails} icon={<Icon name="arrow" size={18} />}>{detailLabel}</Button>
     </article>
   )
 }

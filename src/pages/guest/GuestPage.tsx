@@ -1,41 +1,83 @@
+import { useEffect, useMemo, useState } from 'react'
+import type { FacilityDataset } from '../../types/facility'
+import type { HotelDataset } from '../../types/hotel'
+import type { HotelCategory } from '../../i18n/types'
+import { MESSAGES } from '../../i18n/messages'
+import { message } from '../../i18n/formatters'
+import { useGuestLanguage } from '../../i18n/guestLanguageContext'
+import { loadGuestFacilities, loadGuestHotel } from '../../services/loadGuestData'
+import type { GuestDataState } from '../../services/loadGuestData'
+import { searchGuestFacilities } from '../../services/guestFacilitySearch'
+import { resolveSelectedFacility } from '../../services/facilitySearch'
+import type { StaffCategoryFilter } from '../../services/facilitySearch'
 import { PageHeader } from '../../components/ui/PageHeader'
 import { SearchInput } from '../../components/ui/SearchInput'
 import { CategoryCard } from '../../components/ui/CategoryCard'
 import { LanguageSelector } from '../../components/ui/LanguageSelector'
-import { EmptyState } from '../../components/ui/EmptyState'
 import { InformationNotice } from '../../components/ui/InformationNotice'
+import { LoadingState } from '../../components/ui/LoadingState'
+import { Button } from '../../components/ui/Button'
+import { HotelInformation } from '../../components/guest/HotelInformation'
+import { GuestFacilityResults } from '../../components/guest/GuestFacilityResults'
+import { GuestFacilityDetail } from '../../components/guest/GuestFacilityDetail'
 import { UI_CATEGORIES } from '../../config/uiCategories'
-import type { IconName } from '../../components/ui/Icon'
-
-const hotelSections = [
-  { label: 'Check-in', icon: 'checkIn' },
-  { label: 'Check-out', icon: 'checkOut' },
-  { label: 'Breakfast', icon: 'breakfast' },
-  { label: 'Parking', icon: 'parking' },
-  { label: 'Room information', icon: 'bed' },
-] as const satisfies readonly { label: string; icon: IconName }[]
 
 export function GuestPage() {
+  const { language, setLanguage } = useGuestLanguage()
+  const m = MESSAGES[language]
+  const [facilities, setFacilities] = useState<GuestDataState<FacilityDataset>>({ status: 'loading' })
+  const [hotel, setHotel] = useState<GuestDataState<HotelDataset>>({ status: 'loading' })
+  const [hotelTopic, setHotelTopic] = useState<HotelCategory | null>(null)
+  const [query, setQuery] = useState('')
+  const [category, setCategory] = useState<StaffCategoryFilter>('all')
+  const [selectedId, setSelectedId] = useState<string | null>(null)
+  useEffect(() => {
+    let active = true
+    void loadGuestFacilities().then(dataset => { if (active) setFacilities({ status: 'ready', dataset }) }).catch(() => { if (active) setFacilities({ status: 'error' }) })
+    void loadGuestHotel().then(dataset => { if (active) setHotel({ status: 'ready', dataset }) }).catch(() => { if (active) setHotel({ status: 'error' }) })
+    return () => { active = false }
+  }, [])
+  const dataset = facilities.status === 'ready' ? facilities.dataset : null
+  const results = useMemo(() => searchGuestFacilities(dataset?.facilities ?? [], query, category, language), [dataset, query, category, language])
+  const selected = resolveSelectedFacility(results, selectedId)
+  const isDemo = dataset?.dataStatus === 'demo' || (hotel.status === 'ready' && hotel.dataset.dataStatus === 'demo')
+
+  function updateFilters(nextQuery: string, nextCategory: StaffCategoryFilter) {
+    setQuery(nextQuery); setCategory(nextCategory)
+    const next = searchGuestFacilities(dataset?.facilities ?? [], nextQuery, nextCategory, language)
+    setSelectedId(current => resolveSelectedFacility(next, current)?.id ?? null)
+  }
+  function closeFacility() {
+    const id = selectedId
+    setSelectedId(null)
+    if (id) document.getElementById(`guest-result-${id}`)?.focus()
+  }
+  function closeHotel() {
+    const topic = hotelTopic
+    setHotelTopic(null)
+    if (topic) document.getElementById(`guest-hotel-${topic}`)?.focus()
+  }
+
   return (
     <div className="guest-page">
-      <LanguageSelector value="en" disabled />
-      <PageHeader eyebrow="YOUR HOTEL & NEIGHBORHOOD GUIDE" title="Welcome to your stay." description="A simple place to find hotel information and explore nearby facilities." />
-      <InformationNotice title="Development preview">Search, category browsing and language switching are not available yet. No operational information is displayed.</InformationNotice>
-      <section className="guest-section" id="hotel-information" aria-labelledby="hotel-information-title">
-        <div className="section-heading"><h2 id="hotel-information-title">Hotel information</h2><span className="status-label">Coming soon</span></div>
-        <p className="section-description" id="hotel-category-hint">Essential information for your stay. These categories are not available yet.</p>
-        <div className="guest-category-grid hotel-category-grid" role="group" aria-label="Hotel information preview">{hotelSections.map(section => <CategoryCard key={section.label} label={section.label} icon={section.icon} disabled aria-describedby="hotel-category-hint" />)}</div>
-      </section>
+      <div className="guest-language-toolbar"><LanguageSelector value={language} onChange={setLanguage} disabled={false} label={m.ui.languageLabel} hint={m.ui.languageHint} /></div>
+      <PageHeader eyebrow={m.ui.eyebrow} title={m.ui.welcomeTitle} description={m.ui.welcomeDescription} />
+      {isDemo && <InformationNotice title={m.ui.demoTitle} tone="warning">{m.ui.demoWarning}</InformationNotice>}
+      {!isDemo && dataset && hotel.status === 'ready' && <InformationNotice title={m.ui.productionNoticeTitle}>{m.ui.productionNotice}</InformationNotice>}
+      <HotelInformation state={hotel} language={language} selected={hotelTopic} onSelect={setHotelTopic} onClose={closeHotel} />
       <section className="guest-section" id="nearby-facilities" aria-labelledby="nearby-facilities-title">
-        <div className="section-heading"><h2 id="nearby-facilities-title">Around the hotel</h2><span className="status-label">Coming soon</span></div>
-        <p className="section-description" id="nearby-category-hint">Browse by category once the guide is ready.</p>
-        <div className="guest-category-grid" role="group" aria-label="Nearby facility categories preview">{UI_CATEGORIES.map(category => <CategoryCard key={category.code} label={category.guestLabel} icon={category.icon} disabled aria-describedby="nearby-category-hint" />)}</div>
+        <div className="section-heading"><h2 id="nearby-facilities-title">{m.ui.nearbyTitle}</h2><Button variant={category === 'all' ? 'primary' : 'secondary'} aria-pressed={category === 'all'} disabled={!dataset} onClick={() => updateFilters(query, 'all')}>{m.ui.allFacilities}</Button></div>
+        <div className="guest-category-grid" role="group" aria-label={m.ui.facilityCategoriesLabel}>{UI_CATEGORIES.map(item => <CategoryCard key={item.code} label={m.categories[item.code]} icon={item.icon} selected={category === item.code} disabled={!dataset} onClick={() => updateFilters(query, category === item.code ? 'all' : item.code)} aria-controls="guest-facility-results" />)}</div>
       </section>
       <section className="panel guest-search-panel" id="guest-search" aria-labelledby="guest-search-title">
-        <h2 id="guest-search-title">Find a facility</h2>
-        <SearchInput label="Facility name or keyword" placeholder="Facility or keyword" value="" disabled hint="Search is not available in this development preview." />
-        <EmptyState title="The facility guide is being prepared" description="Hotel and nearby facility information will appear here when it has been confirmed." icon="search" />
+        <div className="section-heading"><h2 id="guest-search-title">{m.ui.searchTitle}</h2><Button variant="quiet" disabled={!query} onClick={() => updateFilters('', category)}>{m.ui.clearSearch}</Button></div>
+        <SearchInput label={m.ui.searchLabel} placeholder={m.ui.searchPlaceholder} value={query} onChange={event => updateFilters(event.target.value, category)} disabled={!dataset} hint={m.ui.searchHint} />
       </section>
+      <section className="guest-section" id="guest-facility-results" aria-labelledby="guest-results-title">
+        <div className="section-heading"><h2 id="guest-results-title">{m.ui.resultsTitle}</h2><p className="status-label" role="status" aria-live="polite">{dataset ? message(language, 'resultCount', { count: results.length }) : facilities.status === 'error' ? m.ui.informationUnavailable : m.ui.loadingFacilities}</p></div>
+        {facilities.status === 'loading' ? <LoadingState label={m.ui.loadingFacilities} /> : facilities.status === 'error' ? <div role="alert"><InformationNotice title={m.ui.facilityDataErrorTitle} tone="warning"><p>{m.ui.dataErrorDescription}</p><Button variant="secondary" onClick={() => window.location.reload()}>{m.ui.refresh}</Button></InformationNotice></div> : <GuestFacilityResults results={results} publicCount={facilities.dataset.facilities.filter(item => item.isPublished).length} language={language} selectedId={selected?.id ?? null} onSelect={setSelectedId} />}
+      </section>
+      <div id="guest-facility-detail"><GuestFacilityDetail facility={selected} language={language} onClose={closeFacility} /></div>
     </div>
   )
 }

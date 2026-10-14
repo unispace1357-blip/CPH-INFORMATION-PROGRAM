@@ -15,7 +15,8 @@
     "validate:production": "node scripts/validate-production.ts",
     "build:production": "npm run validate:production && tsc -b && vite build --outDir dist-production --emptyOutDir",
     "test:ui": "node scripts/ui-smoke.cjs",
-    "test:staff-ui": "node scripts/staff-ui-smoke.cjs"
+    "test:staff-ui": "node scripts/staff-ui-smoke.cjs",
+    "test:guest-ui": "node scripts/guest-ui-smoke.cjs"
   },
   "dependencies": {
     "ajv": "^8.20.0",
