@@ -1,36 +1,72 @@
+import { useEffect, useMemo, useRef, useState } from 'react'
+import type { FacilityDataset } from '../../types/facility'
 import { PageHeader } from '../../components/ui/PageHeader'
 import { SearchInput } from '../../components/ui/SearchInput'
 import { CategoryCard } from '../../components/ui/CategoryCard'
-import { EmptyState } from '../../components/ui/EmptyState'
 import { InformationNotice } from '../../components/ui/InformationNotice'
+import { LoadingState } from '../../components/ui/LoadingState'
 import { Button } from '../../components/ui/Button'
 import { Icon } from '../../components/ui/Icon'
+import { StaffSearchResults } from '../../components/staff/StaffSearchResults'
+import { StaffFacilityDetail } from '../../components/staff/StaffFacilityDetail'
 import { UI_CATEGORIES } from '../../config/uiCategories'
+import { loadStaffDataset } from '../../services/loadStaffDataset'
+import { searchFacilities, resolveSelectedFacility } from '../../services/facilitySearch'
+import type { StaffCategoryFilter } from '../../services/facilitySearch'
+
+type DataState = { status: 'loading' } | { status: 'error' } | { status: 'ready'; dataset: FacilityDataset }
 
 export function StaffPage() {
+  const [dataState, setDataState] = useState<DataState>({ status: 'loading' })
+  const [query, setQuery] = useState('')
+  const [category, setCategory] = useState<StaffCategoryFilter>('all')
+  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const detailHeading = useRef<HTMLHeadingElement>(null)
+  useEffect(() => {
+    let active = true
+    void loadStaffDataset().then(dataset => { if (active) setDataState({ status: 'ready', dataset }) }).catch(() => { if (active) setDataState({ status: 'error' }) })
+    return () => { active = false }
+  }, [])
+  const dataset = dataState.status === 'ready' ? dataState.dataset : null
+  const results = useMemo(() => searchFacilities(dataset?.facilities ?? [], query, category), [dataset, query, category])
+  const selected = resolveSelectedFacility(results, selectedId)
+  useEffect(() => {
+    if (selectedId && window.matchMedia('(max-width: 999px)').matches) {
+      detailHeading.current?.focus({ preventScroll: true })
+      detailHeading.current?.scrollIntoView({ block: 'start', behavior: 'instant' })
+    }
+  }, [selectedId])
+
+  function updateFilters(nextQuery: string, nextCategory: StaffCategoryFilter) {
+    setQuery(nextQuery)
+    setCategory(nextCategory)
+    const nextResults = searchFacilities(dataset?.facilities ?? [], nextQuery, nextCategory)
+    setSelectedId(current => resolveSelectedFacility(nextResults, current)?.id ?? null)
+  }
+
   return (
     <div className="staff-page">
-      <PageHeader eyebrow="FRONT DESK CONCIERGE" title="직원용 안내" description="호텔 및 주변 시설 안내를 한곳에서 확인하는 프론트 업무 공간입니다." />
-      <InformationNotice title="개발용 화면 · 기능 준비 중">검색, 카테고리 필터, 상세 정보와 영어 문구 복사는 아직 사용할 수 없습니다. 실제 시설 정보는 표시하지 않습니다.</InformationNotice>
+      <PageHeader eyebrow="FRONT DESK CONCIERGE" title="직원용 안내" description="시설을 검색하고 상세 안내와 등록된 영어 응대 문구를 확인하세요." />
+      {dataset?.dataStatus === 'demo' && <InformationNotice title="개발용 가상 데이터 · 실제 시설 정보가 아닙니다" tone="warning">현재 시설 {dataset.facilities.length}개는 구조 검증용 가상 정보입니다. 실제 호텔 주변 시설이나 고객 응대용 운영 정보로 사용하지 마세요.</InformationNotice>}
+      {dataset?.dataStatus === 'production' && <InformationNotice title="안내 정보 확인">정보 확인일과 미확인 항목을 확인하고, 방문 전 영업시간 등 변동 사항을 확인해 주세요.</InformationNotice>}
+      {dataState.status === 'error' && <div role="alert"><InformationNotice title="시설 데이터를 불러오지 못했습니다" tone="warning"><p>등록 파일과 데이터 검증 결과를 확인한 뒤 새로고침해 주세요. 시설 정보는 표시하지 않습니다.</p><Button variant="secondary" onClick={() => window.location.reload()}>새로고침</Button></InformationNotice></div>}
       <section className="panel search-panel" aria-labelledby="staff-search-title">
-        <h2 id="staff-search-title">시설 찾기</h2>
-        <SearchInput label="시설명 또는 키워드" placeholder="시설명 또는 키워드" value="" disabled hint="검색 기능은 개발 중입니다. 사우나, 카페, ATM 등의 키워드로 찾을 수 있도록 준비합니다." />
-        <div className="section-heading"><h3>카테고리</h3><span className="status-label">필터 준비 중</span></div>
-        <div className="staff-category-grid" role="group" aria-label="시설 카테고리 미리보기" aria-describedby="staff-category-hint">
-          <CategoryCard label="전체" icon="grid" selected compact disabled aria-describedby="staff-category-hint" />
-          {UI_CATEGORIES.map(category => <CategoryCard key={category.code} label={category.staffLabel} icon={category.icon} compact disabled aria-describedby="staff-category-hint" />)}
+        <div className="section-heading"><h2 id="staff-search-title">시설 찾기</h2><Button variant="quiet" disabled={!query} onClick={() => updateFilters('', category)}>검색어 지우기</Button></div>
+        <SearchInput label="시설명 또는 키워드" placeholder="시설명 또는 키워드" value={query} onChange={event => updateFilters(event.target.value, category)} disabled={!dataset} hint="한국어·영어 시설명, 검색 키워드와 주소를 검색합니다." />
+        <div className="section-heading"><h3>카테고리</h3><span className="status-label">검색어와 함께 적용</span></div>
+        <div className="staff-category-grid" role="group" aria-label="시설 카테고리">
+          <CategoryCard label="전체" icon="grid" selected={category === 'all'} compact disabled={!dataset} onClick={() => updateFilters(query, 'all')} />
+          {UI_CATEGORIES.map(item => <CategoryCard key={item.code} label={item.staffLabel} icon={item.icon} selected={category === item.code} compact disabled={!dataset} onClick={() => updateFilters(query, item.code)} />)}
         </div>
-        <p className="field-hint" id="staff-category-hint">카테고리 선택과 필터링은 아직 연결되지 않았습니다.</p>
       </section>
       <div className="staff-workspace">
         <section className="panel results-panel" aria-labelledby="staff-results-title">
-          <div className="section-heading"><h2 id="staff-results-title">시설 검색 결과</h2><span className="status-label">준비 중</span></div>
-          <EmptyState title="시설 검색 기능은 개발 중입니다" description="검색 기능이 준비되면 이 영역에서 시설 목록을 확인할 수 있습니다." icon="search" />
+          <div className="section-heading"><h2 id="staff-results-title">시설 검색 결과</h2><p className="status-label" role="status" aria-live="polite" aria-atomic="true">{dataset ? `검색 결과 ${results.length}개` : dataState.status === 'error' ? '검색 불가' : '데이터 확인 중'}</p></div>
+          {dataState.status === 'loading' ? <LoadingState label="시설 정보를 확인하고 있습니다…" /> : dataState.status === 'error' ? <p className="field-hint">데이터 오류로 검색 결과를 표시할 수 없습니다.</p> : <StaffSearchResults results={results} publicFacilityCount={dataState.dataset.facilities.filter(item => item.isPublished).length} selectedId={selected?.id ?? null} onSelect={setSelectedId} />}
         </section>
-        <section className="panel details-panel" aria-labelledby="staff-details-title">
+        <section id="staff-facility-detail" className="panel details-panel" aria-labelledby="staff-details-title">
           <div className="section-heading"><h2 id="staff-details-title">시설 상세 정보</h2><Icon name="info" size={20} /></div>
-          <EmptyState title="시설 정보 연결 전" description="시설 선택 후 상세 안내를 표시할 영역입니다. 현재는 운영 정보를 제공하지 않습니다." icon="hotel" />
-          <div className="english-guide" aria-labelledby="english-guide-title"><div className="section-heading"><h3 id="english-guide-title" lang="en">English Guide</h3><Button variant="secondary" disabled icon={<Icon name="copy" size={16} />}>복사 · 준비 중</Button></div><p className="phrase-placeholder">영어 응대 문구가 표시될 영역입니다.</p><p className="field-hint">영어 문구와 복사 기능은 아직 연결되지 않았습니다.</p></div>
+          <StaffFacilityDetail facility={selected} headingRef={detailHeading} />
         </section>
       </div>
     </div>

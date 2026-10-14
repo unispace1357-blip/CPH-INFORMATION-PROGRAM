@@ -21,15 +21,16 @@ function contrast(a, b) {
   return (values[0] + 0.05) / (values[1] + 0.05);
 }
 
-async function checkLayout(page, label) {
+async function checkLayout(page, label, expectDisabled = true) {
   assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${label}: horizontal overflow`);
   const clipped = await page.locator('h1, h2, h3, p, label, button').evaluateAll(elements => elements.filter(el => el.clientWidth > 0 && el.scrollWidth > el.clientWidth + 1).map(el => el.textContent));
   assert.deepEqual(clipped, [], `${label}: clipped labels/text`);
   const sizes = await page.locator('button, input[type="search"], nav a, .button').evaluateAll(elements => elements.map(el => ({ label: el.textContent || el.getAttribute('aria-label'), width: el.getBoundingClientRect().width, height: el.getBoundingClientRect().height })));
   assert.ok(sizes.every(size => size.width >= 44 && size.height >= 44), `${label}: target smaller than 44px: ${JSON.stringify(sizes.filter(size => size.width < 44 || size.height < 44))}`);
-  const buttons = await page.getByRole('button').all();
-  for (const button of buttons) assert.ok(await button.isDisabled(), `${label}: unfinished button is enabled`);
-  for (const input of await page.getByRole('searchbox').all()) assert.ok(await input.isDisabled());
+  if (expectDisabled) {
+    for (const button of await page.getByRole('button').all()) assert.ok(await button.isDisabled(), `${label}: unfinished button is enabled`);
+    for (const input of await page.getByRole('searchbox').all()) assert.ok(await input.isDisabled());
+  }
 }
 
 (async () => {
@@ -54,10 +55,12 @@ async function checkLayout(page, label) {
         await page.getByRole('heading', { level: 1, name: title, exact: true }).waitFor();
         await page.reload();
         await page.getByRole('heading', { level: 1, name: title, exact: true }).waitFor();
-        await checkLayout(page, `${width}px ${route}`);
+        if (route === '/staff') await page.locator('.staff-category-grid button:not([disabled])').first().waitFor();
+        await checkLayout(page, `${width}px ${route}`, route !== '/staff');
         if (route === '/guest') {
           assert.equal(await page.locator('html').getAttribute('lang'), 'en');
           assert.equal(await page.locator('a[href^="/staff"]').count(), 0);
+          if (width === 320) assert.ok(!requests.some(url => /\/src\/data\//.test(new URL(url).pathname)), 'Initial Guest loaded facility data');
           assert.equal(await page.locator('.language-options button').count(), 4);
           assert.equal(await page.locator('.language-options button[aria-pressed="true"]').innerText(), 'English');
           assert.ok(await page.getByText('Development preview', { exact: true }).isVisible());
@@ -89,7 +92,7 @@ async function checkLayout(page, label) {
           assert.equal(await page.locator('html').getAttribute('lang'), 'ko');
           assert.equal(await page.locator('.staff-category-grid button').count(), 11);
           assert.equal(await page.locator('.staff-category-grid button[aria-pressed="true"]').innerText(), '전체');
-          assert.ok(await page.getByRole('button', { name: '복사 · 준비 중' }).isDisabled());
+          assert.ok(await page.getByRole('button', { name: '복사', exact: true }).isDisabled());
           const columns = await page.locator('.staff-workspace').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length);
           assert.equal(columns, width >= 1000 ? 2 : 1);
           if (width === 1280) await page.screenshot({ path: path.join(artifactDir, 'staff-1280.png'), fullPage: true });
@@ -118,8 +121,8 @@ async function checkLayout(page, label) {
     }
     assert.deepEqual(errors, [], 'Browser JavaScript, console or HTTP errors');
     assert.ok(requests.every(url => new URL(url).origin === origin), 'Remote resource requested');
-    assert.ok(!requests.some(url => /\/src\/data\//.test(new URL(url).pathname)), 'Facility/hotel data was connected');
-    results.push('PASS zero JavaScript/console/HTTP errors; no remote resource/API requests; facility/hotel data not connected');
+    assert.ok(requests.some(url => /\/src\/data\/index/.test(new URL(url).pathname)), 'Staff shared data was not loaded');
+    results.push('PASS zero JavaScript/console/HTTP errors; no remote resource/API requests; Staff shared data loaded; Guest remains a preview');
     fs.writeFileSync(path.join(artifactDir, 'results.txt'), results.join('\n') + '\n');
     console.log(results.join('\n'));
   } finally {
