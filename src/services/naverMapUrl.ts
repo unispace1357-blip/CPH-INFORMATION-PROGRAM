@@ -1,6 +1,17 @@
 const allowedHosts = new Set(['map.naver.com', 'm.map.naver.com'])
 const routeModes = new Set(['walk', 'car', 'transit', 'bike', 'bicycle'])
 
+function routePoint(part: string | undefined): boolean {
+  if (!part) return false
+  const fields = part.split(',')
+  // Keep the original numeric coordinate forms, including optional location labels.
+  if (/^-?\d+(?:\.\d+)?,-?\d+(?:\.\d+)?(?:,.*)?$/.test(part) && fields.slice(0, 2).every(coordinate => Number.isFinite(Number(coordinate)))) return true
+  // Shared PLACE_POI routes use encoded alphanumeric position identifiers, not decimal coordinates.
+  if (fields.length < 5 || fields.at(-1) !== 'PLACE_POI' || !/^[1-9]\d*$/.test(fields.at(-2) ?? '')) return false
+  const name = fields.slice(2, -2).join(',')
+  return fields.slice(0, 2).every(position => /^[A-Za-z0-9]+$/.test(position)) && !!name.trim() && !/[\u0000-\u001f\u007f\\/]/.test(name)
+}
+
 /** Syntax and destination policy only. Staff must verify the actual hotel-to-facility route. */
 export function naverMapUrlError(value: unknown): string | null {
   if (value === null || value === undefined) return null
@@ -15,9 +26,9 @@ export function naverMapUrlError(value: unknown): string | null {
   }
   if (url.hostname === 'map.naver.com') {
     let parts: string[]
-    try { parts = url.pathname.split('/').filter(Boolean).map(part => decodeURIComponent(part)) } catch { return 'URL의 경로 인코딩이 올바르지 않습니다.' }
-    const point = (part: string | undefined) => !!part && /^-?\d+(?:\.\d+)?,-?\d+(?:\.\d+)?(?:,.*)?$/.test(part) && part.split(',').slice(0, 2).every(coordinate => Number.isFinite(Number(coordinate)))
-    if (parts.length === 6 && ['p', 'v5'].includes(parts[0]!) && parts[1] === 'directions' && point(parts[2]) && point(parts[3]) && routeModes.has(parts[5]!)) return null
+    try { parts = url.pathname.split('/').slice(1).map(part => decodeURIComponent(part)) } catch { return 'URL의 경로 인코딩이 올바르지 않습니다.' }
+    if (parts.at(-1) === '') parts.pop() // Allow a trailing slash without discarding missing route points.
+    if (parts.length === 6 && ['p', 'v5'].includes(parts[0]!) && parts[1] === 'directions' && routePoint(parts[2]) && routePoint(parts[3]) && routeModes.has(parts[5]!)) return null
   } else if (url.pathname === '/route.nhn') {
     const params = new Map([...url.searchParams].map(([key, val]) => [key.toLowerCase(), val]))
     if (['sx', 'sy', 'ex', 'ey'].every(key => { const coordinate = params.get(key); return !!coordinate && /^-?\d+(?:\.\d+)?$/.test(coordinate) && Number.isFinite(Number(coordinate)) })) return null

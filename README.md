@@ -41,6 +41,8 @@ npm run admin:dev
 
 ## 검증 및 빌드
 
+실제 네이버 공유 URL 호환성 보완 (2026-10-15): 영문·숫자 위치 식별값의 PLACE_POI와 한국어 원문/인코딩 이름을 지원하며 기존 숫자 좌표·차단 정책을 유지합니다. 관련 단위 76개와 집중 Staff/Guest/Admin 지도 QA PASS, 최종 필수 명령 6개 각 1회 PASS, 전체 **296개 테스트** 통과(기존 268 + 신규 28, 실패/스킵 0). 실제 네이버 연결은 환경 프록시의 터널 거부로 미검증입니다. [보완 내용·검증 범위](docs/step07b-map-link-foundation.md)를 참고하세요. 실제 시설·URL은 원본 JSON에 등록하지 않았습니다.
+
 STEP 07-B-1 (2026-10-15): 아래 필수 검증·호텔 원고 대조·고객/관리자 빌드 모두 PASS, 기존 220개 + 신규 48개 = **268개 테스트** 통과(실패·스킵 0). `test:map-ui`, `test:guest-ui`, `test:staff-ui`, `test:admin-ui`도 실제 Chromium에서 PASS입니다. 지도 팝업은 가상 경로 Fixture와 로컬 응답으로 확인했으며 실제 네이버 경로·인쇄·기기 앱 연결은 미검증입니다. 실제 JSON에는 지도 URL을 쓰지 않았고 두 운영 명령은 예상 종료 코드 1로 차단됩니다. 상세 결과는 [STEP 07-B-1 기록](docs/step07b-map-link-foundation.md)에 있습니다.
 
 ```bash

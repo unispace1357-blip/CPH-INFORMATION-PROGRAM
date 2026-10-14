@@ -31,7 +31,7 @@ Staff와 Guest는 공통 타입과 같은 JSON을 사용하도록 준비했습�
 | translations | 4개 언어의 시설 안내 객체 |
 | keywords | 4개 언어별 검색 키워드 배열 |
 | englishPhrases | 직원 응대용 영어 문구 배열 |
-| naverMapUrl | 선택 string 또는 null. 생략/null은 미등록. URI 형식 + 공유 파서의 HTTPS·공식 호스트·설정된 경로·민감 값 검사 |
+| naverMapUrl | 선택 string 또는 null. 생략/null은 미등록. 공유 naver-map-directions 형식: 한국어 원문/인코딩 URL·숫자 좌표/PLACE_POI 지원, HTTPS·공식 호스트·설정된 경로·민감 값 검사 |
 
 카테고리는 기존 8개를 유지하고 2개를 추가했습니다.
 

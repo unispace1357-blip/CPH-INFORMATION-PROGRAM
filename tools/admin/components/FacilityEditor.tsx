@@ -26,7 +26,7 @@ export function FacilityEditor({ draft, originalId, language, onLanguage, onChan
       <TextField label="네이버 지도 길찾기 URL" value={draft.naverMapUrl} onChange={naverMapUrl => onChange({ ...draft, naverMapUrl })} hint="호텔에서 해당 시설까지 길찾기를 설정한 네이버 지도 URL을 입력하세요. 아직 확인하지 않았다면 비워 두세요. 단축 URL은 최종 주소를 확인한 후 입력하세요." />
       {draft.naverMapUrl && naverMapUrlError(draft.naverMapUrl) && <p className="field-hint" role="status">{naverMapUrlError(draft.naverMapUrl)}</p>}
       <NaverDirectionsLink url={draft.naverMapUrl} label="등록 링크 확인" unavailable={draft.naverMapUrl ? '유효하지 않은 링크 · 저장 및 열기 불가' : '미등록'} newTabNotice="네이버 지도가 새 탭에서 열립니다. 실제 경로를 확인한 후 저장하세요." />
-      <p className="field-hint">등록 전 확인: 출발지 송도센트럴파크호텔 · 도착지 실제 시설 · 도보 또는 승인된 이동수단 · 정상 경로 열림 · 다른 장소/지점이 아님. 개인정보·인증 정보를 넣지 마세요. 실제 URL은 STEP 07-B-2에서 입력합니다.</p>
+      <p className="field-hint">URL 형식 검사는 실제 출발지·도착지를 자동 확인하지 않습니다. 담당자가 네이버 지도에서 직접 확인하세요. 등록 전 확인: 출발지 송도센트럴파크호텔 · 도착지 실제 시설 · 도보 또는 승인된 이동수단 · 정상 경로 열림 · 다른 장소/지점이 아님. 개인정보·인증 정보를 넣지 마세요. 실제 URL은 STEP 07-B-2에서 입력합니다.</p>
     </fieldset>
     <fieldset><legend>4개 국어 정보</legend><LanguageTabs language={language} onChange={onLanguage} /><h3 className="admin-language-heading">현재 편집 언어: {LANGUAGE_NAMES[language]}</h3>
       <p className="field-hint">자동 번역하지 않습니다. 기존 스키마상 시설명은 4개 언어 모두 필요하며, 다른 안내는 미확인이면 비워 둘 수 있습니다.</p>

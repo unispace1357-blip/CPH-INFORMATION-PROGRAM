@@ -7,6 +7,8 @@ import { naverMapUrlError } from '../services/naverMapUrl.ts'
 // Defaults upgrade older STEP 02 files without modifying the caller's data.
 const ajv = new Ajv({ allErrors: true, strict: true, useDefaults: true })
 addFormats(ajv)
+// The browser URL parser supports Unicode place names; RFC URI-only validation rejects them.
+ajv.addFormat('naver-map-directions', { type: 'string', validate: value => naverMapUrlError(value) === null })
 const validate = ajv.compile<FacilityDataset>(schema)
 
 /** Local validation only: no network requests or data persistence. */

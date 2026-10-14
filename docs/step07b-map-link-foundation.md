@@ -16,7 +16,7 @@ Facility의 선택 필드입니다. 기존 schemaVersion 1을 유지합니다. �
 
 ## URL 검증 정책
 
-JSON Schema는 선택 string/null과 URI 형식을 검사합니다. 공유 parseFacilityDataset에서 src/services/naverMapUrl.ts의 추가 검사를 수행합니다. 로딩·Admin 저장/가져오기/내보내기·공개 시설 선별·운영 검증 모두 같은 정책을 사용하며 UI도 무효 값을 링크로 만들지 않습니다.
+JSON Schema는 선택 string/null과 프로젝트의 naver-map-directions 형식을 검사합니다. 공유 parseFacilityDataset의 Ajv에 src/services/naverMapUrl.ts의 검증 함수를 등록합니다. 일반 RFC URI 검사에서 거부되던 한국어 원문 URL과 퍼센트 인코딩 URL 모두 지원하며 원본 문자열은 바꾸지 않습니다. 다른 스키마 도구를 사용하면 이 사용자 정의 형식도 등록해야 합니다. 로딩·Admin 저장/가져오기/내보내기·공개 시설 선별·운영 검증 모두 같은 정책을 사용하며 UI도 무효 값을 링크로 만들지 않습니다.
 
 - URL 파서의 protocol/hostname으로 HTTPS 및 정확한 map.naver.com 또는 m.map.naver.com만 허용합니다. 사용자 이름/비밀번호·비표준 포트는 거부합니다.
 - HTTP·외부/위장 도메인·javascript/data/file·naver.me 단축 주소·공백·백슬래시·잘못된 인코딩은 거부합니다.
@@ -25,7 +25,7 @@ JSON Schema는 선택 string/null과 URI 형식을 검사합니다. 공유 parse
 
 | 호스트 | 지원 형식과 조건 |
 | --- | --- |
-| map.naver.com | /p/directions 또는 /v5/directions 뒤에 출발 좌표·도착 좌표·경유 구간·이동수단의 4개 구간. 출발/도착 '-'는 불허. 좌표 인코딩 지원. walk/car/transit/bike/bicycle 허용 |
+| map.naver.com | /p/directions 또는 /v5/directions 뒤에 출발 위치·도착 위치·경유 구간·이동수단의 4개 구간. 기존 숫자 좌표와 영문·숫자 위치 식별값의 PLACE_POI 지원. 출발/도착 '-' 또는 빈 구간은 불허. walk/car/transit/bike/bicycle 허용 |
 | m.map.naver.com | /route.nhn, sX/sY/eX/eY가 모두 숫자로 설정된 경로 주소 |
 
 주소 형식·대상 도메인의 검사이며 실제 출발지가 호텔인지·도착지가 정확한 지점인지·현재 경로가 정상 제공되는지를 자동 검증하지 않습니다. 다른 경로 형식을 받으면 검증을 우회하거나 URL을 조립하지 말고 최종 주소를 확인하고 지원 형식을 검토하세요.
@@ -69,7 +69,7 @@ target=_blank, rel=noopener noreferrer를 적용합니다. 보이는 새 탭 안
 
 Staff/Guest UI_CATEGORIES의 ATM 카테고리 버튼을 제외했습니다. FACILITY_CATEGORY_OPTIONS에는 10개 코드를 유지해 관리자와 기존 레코드 표시 이름에 사용합니다. 타입·Schema·다국어 사전의 atm도 유지합니다. 가상 ATM 레코드를 삭제하지 않았으며 기존 전체/키워드 검색 결과 정책을 유지합니다. 이번 변경은 카테고리 버튼 표시 정책입니다. 호텔 내부 ATM의 층·시간·위치를 임의로 작성하지 않았습니다.
 
-## 검증 결과 (2026-10-15)
+## 최초 STEP 07-B-1 검증 결과 (2026-10-15)
 
 변경 기능 관련 테스트부터 실행하고 완료 시 통합 검수를 진행했습니다. 기존 220개 + 신규 48개 = **268개**, 실패·스킵 0입니다. 새 테스트는 공식 경로 형식·생략/null 호환·위험/위장/미설정/단축/민감 값 거부·Admin 등록/수정/삭제/Import/Export·공개/비공개 정책·ATM 호환·4개 언어 문구·STEP 07-A 원고 일치를 검사합니다.
 
@@ -112,6 +112,25 @@ npm run test:map-ui
 ```
 
 ## STEP 07-B-2 후속 작업과 남은 항목
+
+### 실제 공유 URL 호환성 보완 (2026-10-15)
+
+사용자가 제공한 송도센트럴파크호텔→인천항연안여객터미널 경로의 `3z3nAD,2AEFuH,송도센트럴파크호텔,19398065,PLACE_POI`와 같은 위치 형식을 지원했습니다. 영문·숫자 위치 식별값 두 개, 비어 있지 않은 장소명, 양의 숫자 POI ID, 정확한 PLACE_POI 표기를 검사합니다. 한국어 원문/인코딩 이름, 도보/대중교통, 기존 숫자 좌표와 혼합 경로를 지원합니다. 모든 공식 네이버 주소를 허용하는 방식으로 완화하지 않았습니다. 관리자에는 실제 출발지·도착지를 자동 확인하지 않는다는 안내를 명시했습니다.
+
+관련 단위 테스트 76개 PASS(기존 지도 48 + 신규 호환성 28). 최종 명령 validate, validate:hotel-copy, test, lint, build, admin:build를 각각 한 번 실행해 모두 PASS를 확인했습니다. 기존 268개 유지 + 신규 28개 = **296개**, 실패/스킵 0입니다.
+
+집중 브라우저 검사에서 Staff/Guest/Admin 390·1280px, 한국어 원문 대중교통과 인코딩된 도보 URL의 활성 링크·원본 저장/내보내기/재불러오기·4개 언어·새 탭·rel/opener·검색/선택 유지가 통과했습니다. 24개 로컬 차단 팝업으로 동작을 확인했습니다. 실제 관리자 입력→네이버 링크 열기도 시도했지만 환경 프록시에서 터널 연결이 거부됐습니다(연결 검사 403 Forbidden, Chromium net::ERR_TUNNEL_CONNECTION_FAILED). 실제 서비스 연결·경로 정확성·인쇄는 **미검증**이며 코드 형식/화면 검증과 구분합니다.
+
+집중 QA는 앱 밖 Playwright 경로를 사용해 실행합니다. `CPH_NAVER_LIVE_QA=1`은 실제 네이버 접속을 시도하는 선택 옵션이며, 연결 실패는 미검증으로 별도 기록합니다.
+
+```bash
+NODE_PATH=/tmp/cph-browser-check/node_modules \
+CPH_NAVER_LIVE_QA=1 \
+CPH_UI_ARTIFACT_DIR=/workspace/exports/step07b-naver-compat \
+node scripts/naver-place-ui-smoke.cjs
+```
+
+사용자 경로는 scripts/naver-place-fixture.ts의 QA 자료이며 실제 facilities.json에 등록하지 않았습니다. 호텔/시설 원본 JSON·공항버스·ATM 정책·운영 빌드 보호는 유지합니다.
 
 **운영 배포 미실시·실제 고객 공개 금지**입니다. 가상 시설 6개·demo·실제 URL 미등록 상태이며 STEP 07-B-1 검수 후 별도 지시를 받아 다음을 진행할 수 있습니다.
 

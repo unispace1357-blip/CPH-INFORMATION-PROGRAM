@@ -194,8 +194,8 @@
         },
         "naverMapUrl": {
           "type": ["string", "null"],
-          "format": "uri",
-          "description": "Optional public HTTPS Naver directions URL. Shared parser additionally checks hostname, route format and sensitive parameters."
+          "format": "naver-map-directions",
+          "description": "Optional public HTTPS Naver directions URL, including native/encoded Unicode place names. Register the shared naver-map-directions format from naverMapUrl.ts."
         },
         "closedDays": {
           "type": "object",
