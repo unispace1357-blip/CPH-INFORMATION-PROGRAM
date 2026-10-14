@@ -1,1 +1,226 @@
-[]
+{
+  "schemaVersion": 1,
+  "dataStatus": "demo",
+  "facilities": [
+    {
+      "id": "demo-hotel-001",
+      "category": "hotel",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "가상 안내호텔",
+          "description": "데이터 구조 검증용 가상 시설입니다. 실제 장소가 아닙니다.",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "실제 운영 안내에 사용하지 마세요."
+        },
+        "en": {
+          "name": "Fictional Guide Hotel",
+          "description": "Fictional facility for data validation. This is not a real place.",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "Do not use this information for guest service."
+        },
+        "zh-CN": {
+          "name": "虚构指南酒店",
+          "description": "用于数据验证的虚构设施，并非真实地点。",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "请勿用于实际宾客服务。"
+        },
+        "ja": {
+          "name": "架空ガイドホテル",
+          "description": "データ検証用の架空施設です。実在する場所ではありません。",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "実際のお客様のご案内には使用しないでください。"
+        }
+      },
+      "keywords": {
+        "ko": [
+          "가상 안내호텔",
+          "가상",
+          "테스트"
+        ],
+        "en": [
+          "Fictional Guide Hotel",
+          "fictional",
+          "test"
+        ]
+      },
+      "englishPhrases": [
+        "This is a fictional facility used only for testing."
+      ]
+    },
+    {
+      "id": "demo-cafe-001",
+      "category": "cafe",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "가상 산책카페",
+          "description": "데이터 구조 검증용 가상 시설입니다. 실제 장소가 아닙니다.",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "실제 운영 안내에 사용하지 마세요."
+        },
+        "en": {
+          "name": "Fictional Walk Cafe",
+          "description": "Fictional facility for data validation. This is not a real place.",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "Do not use this information for guest service."
+        },
+        "zh-CN": {
+          "name": "虚构散步咖啡馆",
+          "description": "用于数据验证的虚构设施，并非真实地点。",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "请勿用于实际宾客服务。"
+        },
+        "ja": {
+          "name": "架空散歩カフェ",
+          "description": "データ検証用の架空施設です。実在する場所ではありません。",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "実際のお客様のご案内には使用しないでください。"
+        }
+      },
+      "keywords": {
+        "ko": [
+          "가상 산책카페",
+          "가상",
+          "테스트"
+        ],
+        "en": [
+          "Fictional Walk Cafe",
+          "fictional",
+          "test"
+        ]
+      },
+      "englishPhrases": [
+        "This is a fictional facility used only for testing."
+      ]
+    },
+    {
+      "id": "demo-pharmacy-001",
+      "category": "pharmacy",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "가상 안내약국",
+          "description": "데이터 구조 검증용 가상 시설입니다. 실제 장소가 아닙니다.",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "실제 운영 안내에 사용하지 마세요."
+        },
+        "en": {
+          "name": "Fictional Guide Pharmacy",
+          "description": "Fictional facility for data validation. This is not a real place.",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "Do not use this information for guest service."
+        },
+        "zh-CN": {
+          "name": "虚构指南药店",
+          "description": "用于数据验证的虚构设施，并非真实地点。",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "请勿用于实际宾客服务。"
+        },
+        "ja": {
+          "name": "架空ガイド薬局",
+          "description": "データ検証用の架空施設です。実在する場所ではありません。",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "実際のお客様のご案内には使用しないでください。"
+        }
+      },
+      "keywords": {
+        "ko": [
+          "가상 안내약국",
+          "가상",
+          "테스트"
+        ],
+        "en": [
+          "Fictional Guide Pharmacy",
+          "fictional",
+          "test"
+        ]
+      },
+      "englishPhrases": [
+        "This is a fictional facility used only for testing."
+      ]
+    },
+    {
+      "id": "demo-convenience-001",
+      "category": "convenience",
+      "isPublished": false,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "가상 안내편의점",
+          "description": "데이터 구조 검증용 가상 시설입니다. 실제 장소가 아닙니다.",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "실제 운영 안내에 사용하지 마세요."
+        },
+        "en": {
+          "name": "Fictional Guide Convenience Store",
+          "description": "Fictional facility for data validation. This is not a real place.",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "Do not use this information for guest service."
+        },
+        "zh-CN": {
+          "name": "虚构指南便利店",
+          "description": "用于数据验证的虚构设施，并非真实地点。",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "请勿用于实际宾客服务。"
+        },
+        "ja": {
+          "name": "架空ガイドコンビニ",
+          "description": "データ検証用の架空施設です。実在する場所ではありません。",
+          "address": "",
+          "openingHours": "",
+          "directions": "",
+          "notes": "実際のお客様のご案内には使用しないでください。"
+        }
+      },
+      "keywords": {
+        "ko": [
+          "가상 안내편의점",
+          "가상",
+          "테스트"
+        ],
+        "en": [
+          "Fictional Guide Convenience Store",
+          "fictional",
+          "test"
+        ]
+      },
+      "englishPhrases": [
+        "This is a fictional facility used only for testing."
+      ]
+    }
+  ]
+}
