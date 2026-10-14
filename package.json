@@ -19,6 +19,7 @@
     "test:staff-ui": "node scripts/staff-ui-smoke.cjs",
     "test:guest-ui": "node scripts/guest-ui-smoke.cjs",
     "test:hotel-ui": "node scripts/step07a-ui-smoke.cjs",
+    "test:map-ui": "node scripts/step07b-map-ui-smoke.cjs",
     "admin:dev": "vite --config vite.admin.config.ts",
     "admin:build": "tsc -p tsconfig.admin.json && vite build --config vite.admin.config.ts",
     "test:admin-ui": "node scripts/admin-ui-smoke.cjs"

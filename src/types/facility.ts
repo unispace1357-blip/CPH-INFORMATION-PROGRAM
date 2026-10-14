@@ -31,6 +31,8 @@ export interface Facility {
   closedDays: LocalizedText
   keywords: Record<GuideLanguage, string[]>
   englishPhrases: string[]
+  /** Staff-verified public Naver directions URL; omitted/null means unregistered. */
+  naverMapUrl?: string | null
 }
 
 export interface FacilityDataset {

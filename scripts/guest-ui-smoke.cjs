@@ -55,7 +55,7 @@ async function assertUi(page, language, expectedCount) {
   if (hotelHasText) assert.equal(await page.getByText(m.ui.hotelEmptyTitle, { exact: true }).count(), 0);
   else assert.ok(await page.getByText(m.ui.hotelEmptyTitle, { exact: true }).isVisible());
   assert.equal(await page.locator('a[href^="/staff"]').count(), 0);
-  assert.deepEqual(await page.locator('#nearby-facilities .category-card').allTextContents(), Object.values(m.categories));
+  assert.deepEqual(await page.locator('#nearby-facilities .category-card').allTextContents(), Object.entries(m.categories).filter(([code]) => code !== 'atm').map(([, label]) => label));
   assert.deepEqual(await page.locator('.hotel-category-grid .category-card').allTextContents(), Object.values(m.hotelCategories));
   await layout(page);
 }

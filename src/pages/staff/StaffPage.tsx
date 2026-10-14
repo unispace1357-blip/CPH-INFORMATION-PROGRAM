@@ -9,6 +9,7 @@ import { Button } from '../../components/ui/Button'
 import { Icon } from '../../components/ui/Icon'
 import { StaffSearchResults } from '../../components/staff/StaffSearchResults'
 import { StaffFacilityDetail } from '../../components/staff/StaffFacilityDetail'
+import { PendingTransitNotice } from '../../components/ui/PendingTransitNotice'
 import { UI_CATEGORIES } from '../../config/uiCategories'
 import { loadStaffDataset } from '../../services/loadStaffDataset'
 import { searchFacilities, resolveSelectedFacility } from '../../services/facilitySearch'
@@ -62,6 +63,7 @@ export function StaffPage() {
       <div className="staff-workspace">
         <section className="panel results-panel" aria-labelledby="staff-results-title">
           <div className="section-heading"><h2 id="staff-results-title">시설 검색 결과</h2><p className="status-label" role="status" aria-live="polite" aria-atomic="true">{dataset ? `검색 결과 ${results.length}개` : dataState.status === 'error' ? '검색 불가' : '데이터 확인 중'}</p></div>
+          {category === 'transportation' && <PendingTransitNotice title="인천공항 리무진버스 — 안내 준비 중" description="호텔 공식 안내 자료를 준비 중입니다. 노선·시간표·승차 위치·요금은 아직 제공하지 않습니다." directionsLabel="네이버 지도 길찾기" detailsLabel="상세 안내 준비 중" />}
           {dataState.status === 'loading' ? <LoadingState label="시설 정보를 확인하고 있습니다…" /> : dataState.status === 'error' ? <p className="field-hint">데이터 오류로 검색 결과를 표시할 수 없습니다.</p> : <StaffSearchResults results={results} publicFacilityCount={dataState.dataset.facilities.filter(item => item.isPublished).length} selectedId={selected?.id ?? null} onSelect={setSelectedId} />}
         </section>
         <section id="staff-facility-detail" className="panel details-panel" aria-labelledby="staff-details-title">

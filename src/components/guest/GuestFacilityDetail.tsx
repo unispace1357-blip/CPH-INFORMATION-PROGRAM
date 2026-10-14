@@ -4,6 +4,7 @@ import type { GuideLanguage } from '../../types/guide'
 import { MESSAGES } from '../../i18n/messages'
 import { guestVerificationDate, guestWalkingTime, localizedValue } from '../../i18n/formatters'
 import { Button } from '../ui/Button'
+import { NaverDirectionsLink } from '../ui/NaverDirectionsLink'
 
 export function GuestFacilityDetail({ facility, language, onClose }: { facility: Facility | null; language: GuideLanguage; onClose: () => void }) {
   const heading = useRef<HTMLHeadingElement>(null)
@@ -25,6 +26,7 @@ export function GuestFacilityDetail({ facility, language, onClose }: { facility:
       <div className="section-heading"><h2 id="guest-detail-title" ref={heading} tabIndex={-1}>{text.name}</h2><Button variant="secondary" onClick={onClose}>{m.ui.closeDetails}</Button></div>
       <p className="eyebrow">{m.categories[facility.category]}</p><p className="detail-description">{localizedValue(text.description, language)}</p>
       <dl className="detail-facts">{facts.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+      <NaverDirectionsLink url={facility.naverMapUrl} label={m.ui.naverMapDirections} unavailable={m.ui.naverMapUnavailable} newTabNotice={m.ui.naverMapNewTab} />
       <p className="verification-date">{guestVerificationDate(facility.lastVerifiedAt, language)}</p>
       <p className="field-hint">{m.ui.verificationNotice}</p>
     </section>

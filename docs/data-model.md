@@ -1,5 +1,7 @@
 # STEP 02 시설·호텔 데이터 명세
 
+STEP 07-B-1에서 선택 필드 naverMapUrl을 추가했습니다. 기존 호텔 승인 원고·가상 시설 6개와 schemaVersion 1을 유지합니다. URL 검증·지도 링크·ATM 표시 정책·공항버스 준비 상태의 현행 내용은 [STEP 07-B-1 기록](step07b-map-link-foundation.md)을 참고하세요. 아래의 빈 호텔·미연결 화면·초기 게시 절차는 STEP 02 당시 기록이며 호텔 JSON은 STEP 07-A에서 승인 원고로 채워졌습니다.
+
 이 문서는 STEP 02 데이터 계약과 당시 기록을 유지합니다. 이후 Staff/Guest가 같은 JSON에 연결됐으며 STEP 06 로컬 관리자도 기존 타입·스키마·검증기를 재사용합니다. 운영 빌드는 전체 원본을 검증한 뒤 공개 시설만 스냅샷으로 만들어 번들에 사용합니다. 비공개 시설의 실제 산출물 제외, 관리자 분리와 수동 반영 절차는 [관리자 사용 안내](admin-manager.md)를 참고하세요. 개발 빌드와 공개 GitHub의 원본에는 전체 데이터가 있으므로 비밀 정보는 저장하지 않습니다.
 
 Staff와 Guest는 공통 타입과 같은 JSON을 사용하도록 준비했습니다. 주변 시설은 `facilities.json`, 호텔 기본 안내는 `hotel.json`에서 별도로 관리합니다. 현재 데이터 계층만 구현했으며 화면에는 아직 연결하지 않았습니다. 검증은 Ajv와 ajv-formats로 로컬에서 수행하며 외부 API, 서버 DB, 고객 개인정보를 사용하지 않습니다.
@@ -29,6 +31,7 @@ Staff와 Guest는 공통 타입과 같은 JSON을 사용하도록 준비했습�
 | translations | 4개 언어의 시설 안내 객체 |
 | keywords | 4개 언어별 검색 키워드 배열 |
 | englishPhrases | 직원 응대용 영어 문구 배열 |
+| naverMapUrl | 선택 string 또는 null. 생략/null은 미등록. URI 형식 + 공유 파서의 HTTPS·공식 호스트·설정된 경로·민감 값 검사 |
 
 카테고리는 기존 8개를 유지하고 2개를 추가했습니다.
 
@@ -44,6 +47,8 @@ Staff와 Guest는 공통 타입과 같은 JSON을 사용하도록 준비했습�
 | transportation | 교통 |
 | sauna_spa | 사우나·스파 |
 | atm | ATM |
+
+STEP 07-B-1에서 Staff/Guest 카테고리 버튼은 ATM을 제외합니다. 데이터 코드·관리자 선택/필터·기존 레코드는 유지하며 카테고리 버튼 표시 정책과 데이터 호환성을 분리합니다.
 
 각 `translations` 객체는 `name`, `description`, `address`, `openingHours`, `directions`, `notes`를 포함합니다. 모든 키가 필요합니다. 이름은 공백뿐인 문자열을 허용하지 않으며 개발 데이터의 나머지 문자열은 비어 있어도 됩니다. 키워드·응대 문구 배열은 비어 있어도 됩니다.
 

@@ -20,6 +20,7 @@ import { Button } from '../../components/ui/Button'
 import { HotelInformation } from '../../components/guest/HotelInformation'
 import { GuestFacilityResults } from '../../components/guest/GuestFacilityResults'
 import { GuestFacilityDetail } from '../../components/guest/GuestFacilityDetail'
+import { PendingTransitNotice } from '../../components/ui/PendingTransitNotice'
 import { UI_CATEGORIES } from '../../config/uiCategories'
 
 export function GuestPage() {
@@ -75,6 +76,7 @@ export function GuestPage() {
       </section>
       <section className="guest-section" id="guest-facility-results" aria-labelledby="guest-results-title">
         <div className="section-heading"><h2 id="guest-results-title">{m.ui.resultsTitle}</h2><p className="status-label" role="status" aria-live="polite">{dataset ? message(language, 'resultCount', { count: results.length }) : facilities.status === 'error' ? m.ui.informationUnavailable : m.ui.loadingFacilities}</p></div>
+        {category === 'transportation' && <PendingTransitNotice title={m.ui.airportBusPending} description={m.ui.airportBusPendingDescription} directionsLabel={m.ui.naverMapDirections} detailsLabel={m.ui.pendingDetails} />}
         {facilities.status === 'loading' ? <LoadingState label={m.ui.loadingFacilities} /> : facilities.status === 'error' ? <div role="alert"><InformationNotice title={m.ui.facilityDataErrorTitle} tone="warning"><p>{m.ui.dataErrorDescription}</p><Button variant="secondary" onClick={() => window.location.reload()}>{m.ui.refresh}</Button></InformationNotice></div> : <GuestFacilityResults results={results} publicCount={facilities.dataset.facilities.filter(item => item.isPublished).length} language={language} selectedId={selected?.id ?? null} onSelect={setSelectedId} />}
       </section>
       <div id="guest-facility-detail"><GuestFacilityDetail facility={selected} language={language} onClose={closeFacility} /></div>

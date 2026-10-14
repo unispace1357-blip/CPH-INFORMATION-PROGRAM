@@ -74,7 +74,13 @@ export const MESSAGES = {
       "hotelName": "Hotel name",
       "categoryLabel": "Category",
       "hotelTopicsLabel": "Hotel information topics",
-      "facilityCategoriesLabel": "Facility categories"
+      "facilityCategoriesLabel": "Facility categories",
+      "naverMapDirections": "Directions on Naver Map",
+      "naverMapUnavailable": "Directions link not registered",
+      "naverMapNewTab": "Opens Naver Map in a new tab. The map language may differ from this guide.",
+      "airportBusPending": "Incheon Airport Limousine Bus — Information Coming Soon",
+      "airportBusPendingDescription": "The hotel's official guide is being prepared. Routes, timetables, boarding locations and fares are not available yet.",
+      "pendingDetails": "Details coming soon"
     },
     "categories": {
       "hotel": "Hotel facilities",
@@ -167,7 +173,13 @@ export const MESSAGES = {
       "hotelName": "호텔명",
       "categoryLabel": "카테고리",
       "hotelTopicsLabel": "호텔 기본 정보 항목",
-      "facilityCategoriesLabel": "시설 카테고리"
+      "facilityCategoriesLabel": "시설 카테고리",
+      "naverMapDirections": "네이버 지도 길찾기",
+      "naverMapUnavailable": "길찾기 링크 미등록",
+      "naverMapNewTab": "네이버 지도가 새 탭에서 열립니다. 지도 언어는 이 안내 화면과 다를 수 있습니다.",
+      "airportBusPending": "인천공항 리무진버스 — 안내 준비 중",
+      "airportBusPendingDescription": "호텔 공식 안내 자료를 준비 중입니다. 노선·시간표·승차 위치·요금은 아직 제공하지 않습니다.",
+      "pendingDetails": "상세 안내 준비 중"
     },
     "categories": {
       "hotel": "호텔 관련 시설",
@@ -260,7 +272,13 @@ export const MESSAGES = {
       "hotelName": "酒店名称",
       "categoryLabel": "类别",
       "hotelTopicsLabel": "酒店信息项目",
-      "facilityCategoriesLabel": "设施类别"
+      "facilityCategoriesLabel": "设施类别",
+      "naverMapDirections": "使用 Naver 地图查看路线",
+      "naverMapUnavailable": "路线链接尚未登记",
+      "naverMapNewTab": "将在新标签页中打开 Naver 地图。地图语言可能与本指南不同。",
+      "airportBusPending": "仁川机场豪华巴士 — 信息准备中",
+      "airportBusPendingDescription": "酒店官方指南正在准备中。暂不提供路线、时刻表、上车地点及票价信息。",
+      "pendingDetails": "详情准备中"
     },
     "categories": {
       "hotel": "酒店设施",
@@ -353,7 +371,13 @@ export const MESSAGES = {
       "hotelName": "ホテル名",
       "categoryLabel": "カテゴリー",
       "hotelTopicsLabel": "ホテルの案内項目",
-      "facilityCategoriesLabel": "施設カテゴリー"
+      "facilityCategoriesLabel": "施設カテゴリー",
+      "naverMapDirections": "NAVERマップで経路を見る",
+      "naverMapUnavailable": "経路リンク未登録",
+      "naverMapNewTab": "NAVERマップが新しいタブで開きます。地図の言語はこのガイドと異なる場合があります。",
+      "airportBusPending": "仁川空港リムジンバス — ご案内準備中",
+      "airportBusPendingDescription": "ホテルの公式案内を準備中です。路線・時刻表・乗り場・運賃はまだご案内していません。",
+      "pendingDetails": "詳細ご案内準備中"
     },
     "categories": {
       "hotel": "ホテル関連施設",

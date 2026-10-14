@@ -7,7 +7,7 @@ import rawHotel from '../../src/data/hotel.json' with { type: 'json' }
 import { parseHotelDataset } from '../../src/data/validateHotelDataset'
 import { validateProductionData } from '../../src/data/validateProductionData'
 import { preparePublicDeployment } from '../../src/data/preparePublicDeployment'
-import { UI_CATEGORIES } from '../../src/config/uiCategories'
+import { FACILITY_CATEGORY_OPTIONS } from '../../src/config/uiCategories'
 import { Button } from '../../src/components/ui/Button'
 import { InformationNotice } from '../../src/components/ui/InformationNotice'
 import { FacilityEditor } from './components/FacilityEditor'
@@ -21,7 +21,7 @@ import type { FacilityDraft, ValidationResult } from './services/workspace'
 type Menu = 'facilities' | 'hotel' | 'validation' | 'json'
 type Editor = { kind: 'facility'; draft: FacilityDraft; originalId: string | null; baseline: string } | { kind: 'hotel'; draft: HotelDataset; baseline: string }
 const menus: { key: Menu; label: string }[] = [{ key: 'facilities', label: '시설 관리' }, { key: 'hotel', label: '호텔 기본 정보' }, { key: 'validation', label: '데이터 검증' }, { key: 'json', label: '가져오기 / 내보내기' }]
-const categoryLabel = (category: FacilityCategory) => UI_CATEGORIES.find(item => item.code === category)?.staffLabel ?? category
+const categoryLabel = (category: FacilityCategory) => FACILITY_CATEGORY_OPTIONS.find(item => item.code === category)?.staffLabel ?? category
 
 function initialData() {
   let facilities: FacilityDataset | null = null, hotel: HotelDataset | null = null
@@ -169,7 +169,7 @@ export function AdminApp() {
         {issue && <div role="alert"><ValidationPanel title="작업 오류 · 내용을 확인해 주세요" result={issue} /></div>}
         <fieldset className="admin-workspace-lock" disabled={importing}>
         {menu === 'facilities' && <div className="admin-facility-workspace"><section className="panel admin-facility-list"><div className="section-heading"><h2>전체 시설 목록</h2><Button disabled={!facilities} onClick={() => openFacility(null)}>신규 시설 추가</Button></div>
-          <TextField label="시설명 검색" value={query} onChange={setQuery} /><div className="admin-field-grid"><div className="admin-field"><label htmlFor="admin-category-filter">카테고리 필터</label><select id="admin-category-filter" value={category} onChange={event => setCategory(event.target.value as typeof category)}><option value="all">전체</option>{UI_CATEGORIES.map(item => <option value={item.code} key={item.code}>{item.staffLabel}</option>)}</select></div><div className="admin-field"><label htmlFor="admin-published-filter">공개 상태 필터</label><select id="admin-published-filter" value={published} onChange={event => setPublished(event.target.value as typeof published)}><option value="all">전체</option><option value="public">공개</option><option value="private">비공개</option></select></div></div>
+          <TextField label="시설명 검색" value={query} onChange={setQuery} /><div className="admin-field-grid"><div className="admin-field"><label htmlFor="admin-category-filter">카테고리 필터</label><select id="admin-category-filter" value={category} onChange={event => setCategory(event.target.value as typeof category)}><option value="all">전체</option>{FACILITY_CATEGORY_OPTIONS.map(item => <option value={item.code} key={item.code}>{item.staffLabel}</option>)}</select></div><div className="admin-field"><label htmlFor="admin-published-filter">공개 상태 필터</label><select id="admin-published-filter" value={published} onChange={event => setPublished(event.target.value as typeof published)}><option value="all">전체</option><option value="public">공개</option><option value="private">비공개</option></select></div></div>
           <p className="field-hint" role="status">목록 {list.length}개 / 전체 {facilities?.facilities.length ?? 0}개 · 비공개 포함</p><ul className="admin-records">{list.map(facility => <li key={facility.id} className={editor?.kind === 'facility' && editor.originalId === facility.id ? 'is-selected' : ''}><h3>{facility.translations.ko.name}</h3><p lang="en">{facility.translations.en.name}</p><p className="admin-id">ID: {facility.id}</p><p>{categoryLabel(facility.category)} · {facility.isPublished ? '공개' : '비공개'} · {facility.lastVerifiedAt ?? '확인 전'}</p><p className="field-hint">개발 검증: {inspect(() => parseAdminFacilities({ schemaVersion: 1, dataStatus: facilities!.dataStatus, facilities: [facility] })).valid ? 'PASS' : 'FAIL'}</p><div className="admin-list-actions"><Button variant="secondary" aria-label={`편집 ${facility.id}`} aria-pressed={editor?.kind === 'facility' && editor.originalId === facility.id} onClick={() => openFacility(facility)}>편집</Button><Button variant="quiet" aria-label={`삭제 ${facility.id}`} onClick={() => removeFacility(facility)}>삭제</Button></div></li>)}</ul>{list.length === 0 && <p>표시할 시설이 없습니다. 필터를 확인하거나 JSON을 불러오세요.</p>}</section>
           <section className="panel admin-editor-panel">{editor?.kind === 'facility' ? <FacilityEditor draft={editor.draft} originalId={editor.originalId} language={language} onLanguage={setLanguage} onChange={draft => setEditor({ ...editor, draft })} onSave={saveEditor} onCancel={cancelEditor} /> : <><h2>시설 정보 편집</h2><p>목록에서 시설을 선택하거나 신규 시설을 추가하세요.</p></>}</section>
         </div>}

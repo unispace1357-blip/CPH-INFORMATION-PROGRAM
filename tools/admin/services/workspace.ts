@@ -10,12 +10,12 @@ import { normalizeSearchTerm } from '../../../src/services/facilitySearch.ts'
 
 export const MAX_JSON_BYTES = 2 * 1024 * 1024
 export const LANGUAGE_NAMES: Record<GuideLanguage, string> = { ko: '한국어', en: 'English', 'zh-CN': '简体中文', ja: '日本語' }
-export type FacilityDraft = Omit<Facility, 'walkingMinutes'> & { walkingMinutes: string }
+export type FacilityDraft = Omit<Facility, 'walkingMinutes' | 'naverMapUrl'> & { walkingMinutes: string; naverMapUrl: string }
 
 /** Blank local editor only. It cannot be exported as a valid facility until the schema passes. */
 export function newFacilityDraft(): FacilityDraft {
   return {
-    id: '', category: 'hotel', isPublished: false, lastVerifiedAt: null, walkingMinutes: '',
+    id: '', category: 'hotel', isPublished: false, lastVerifiedAt: null, walkingMinutes: '', naverMapUrl: '',
     closedDays: { ko: '', en: '', 'zh-CN': '', ja: '' },
     translations: Object.fromEntries(GUIDE_LANGUAGES.map(language => [language, { name: '', description: '', address: '', openingHours: '', directions: '', notes: '' }])) as Facility['translations'],
     keywords: { ko: [], en: [], 'zh-CN': [], ja: [] }, englishPhrases: [],
@@ -23,7 +23,7 @@ export function newFacilityDraft(): FacilityDraft {
 }
 
 export function facilityToDraft(facility: Facility): FacilityDraft {
-  return { ...structuredClone(facility), walkingMinutes: facility.walkingMinutes === null ? '' : String(facility.walkingMinutes) }
+  return { ...structuredClone(facility), walkingMinutes: facility.walkingMinutes === null ? '' : String(facility.walkingMinutes), naverMapUrl: facility.naverMapUrl ?? '' }
 }
 
 export function draftToFacility(draft: FacilityDraft): Facility {
@@ -31,7 +31,7 @@ export function draftToFacility(draft: FacilityDraft): Facility {
   if (minutes && (!/^(?:\d+(?:\.\d*)?|\.\d+)$/.test(minutes) || !Number.isFinite(Number(minutes)))) {
     throw new Error('도보시간은 0 이상의 유한한 숫자여야 합니다. 미확인이면 비워 주세요.')
   }
-  return { ...structuredClone(draft), walkingMinutes: minutes === '' ? null : Number(minutes) }
+  return { ...structuredClone(draft), walkingMinutes: minutes === '' ? null : Number(minutes), naverMapUrl: draft.naverMapUrl === '' ? null : draft.naverMapUrl }
 }
 
 /** Additional editor policy; structural validation stays in the existing shared parser. */
@@ -100,6 +100,7 @@ const fieldNames: Record<string, string> = {
   lastVerifiedAt: '마지막 확인일', walkingMinutes: '도보시간', checkInTime: '체크인 시간', checkOutTime: '체크아웃 시간',
   checkIn: '체크인 안내', checkOut: '체크아웃 안내', breakfast: '조식 안내', parking: '주차 안내', roomUsage: '객실 이용 안내',
   dataStatus: '데이터 상태', schemaVersion: '데이터 버전', isPublished: '공개 상태', translations: '언어별 안내',
+  naverMapUrl: '네이버 지도 길찾기 URL',
 }
 
 export function explainError(error: unknown, facilities?: FacilityDataset | null): ValidationResult {

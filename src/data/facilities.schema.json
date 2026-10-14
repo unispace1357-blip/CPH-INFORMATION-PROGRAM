@@ -192,6 +192,11 @@
           "minimum": 0,
           "default": null
         },
+        "naverMapUrl": {
+          "type": ["string", "null"],
+          "format": "uri",
+          "description": "Optional public HTTPS Naver directions URL. Shared parser additionally checks hostname, route format and sensitive parameters."
+        },
         "closedDays": {
           "type": "object",
           "additionalProperties": false,

@@ -72,7 +72,13 @@ export const UI_MESSAGE_KEYS = [
   "hotelName",
   "categoryLabel",
   "hotelTopicsLabel",
-  "facilityCategoriesLabel"
+  "facilityCategoriesLabel",
+  "naverMapDirections",
+  "naverMapUnavailable",
+  "naverMapNewTab",
+  "airportBusPending",
+  "airportBusPendingDescription",
+  "pendingDetails"
 ] as const
 export type UiMessageKey = (typeof UI_MESSAGE_KEYS)[number]
 export type HotelCategory = 'checkIn' | 'checkOut' | 'breakfast' | 'parking' | 'roomUsage'
