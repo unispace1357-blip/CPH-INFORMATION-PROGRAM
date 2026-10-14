@@ -13,7 +13,8 @@
     "validate": "node scripts/validate-data.ts",
     "test": "tsc -p tsconfig.data.json && node --test scripts/*.test.ts",
     "validate:production": "node scripts/validate-production.ts",
-    "build:production": "npm run validate:production && tsc -b && vite build --outDir dist-production --emptyOutDir"
+    "build:production": "npm run validate:production && tsc -b && vite build --outDir dist-production --emptyOutDir",
+    "test:ui": "node scripts/ui-smoke.cjs"
   },
   "dependencies": {
     "ajv": "^8.20.0",
