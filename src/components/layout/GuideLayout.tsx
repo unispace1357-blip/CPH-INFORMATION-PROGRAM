@@ -34,8 +34,8 @@ export function GuideLayout({ audience = 'guest' }: { audience?: 'guest' | 'staf
       <header className="site-header">
         <PageContainer variant={audience} className="site-header-inner">
           <Link className="brand" to={isStaff ? '/staff' : '/guest'} aria-label={isStaff ? 'CPH 직원용 안내 홈' : m.homeLabel}>
-            <span className="brand-mark" aria-hidden="true">CPH</span>
-            <span className="brand-copy"><span className="brand-name">{isStaff ? 'CPH Information Guide' : 'SONGDO CENTRAL PARK HOTEL'}</span><span className="brand-caption">{isStaff ? 'STAFF GUIDE · 프론트 안내' : m.brandCaption}</span></span>
+            <img className="brand-logo" src={`${import.meta.env.BASE_URL}hotel-logo.webp`} width="214" height="166" alt="The Central Park Hotel Songdo" />
+            <span className="brand-copy"><span className="brand-name">{isStaff ? 'Information Guide' : 'SONGDO CENTRAL PARK HOTEL'}</span><span className="brand-caption">{isStaff ? 'FRONT DESK · 직원용 안내' : m.brandCaption}</span></span>
           </Link>
           {isStaff ? <nav aria-label="직원용 내비게이션"><Link className="header-link" to="/guest">고객 화면 미리보기<Icon name="arrow" size={17} /></Link></nav> : <nav className="guest-navigation" aria-label={m.navigationLabel}>{isIndex ? <><a href="#hotel-information" onClick={scrollToSection}>{m.navHotel}</a><a href="#nearby-facilities" onClick={scrollToSection}>{m.navNearby}</a><a href="#guest-search" onClick={scrollToSection}>{m.navSearch}</a></> : <Link to="/guest">{m.brandCaption}</Link>}</nav>}
         </PageContainer>

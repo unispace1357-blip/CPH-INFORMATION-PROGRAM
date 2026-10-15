@@ -1,16 +1,16 @@
-/* Temporary design tokens; confirm the hotel's brand guide before operation. */
+/* Visual palette sampled from the provided Central Park Hotel logo; data status is independent. */
 :root {
-  --color-primary: #214D47;
-  --color-primary-hover: #183C37;
-  --color-background: #F5F7F6;
+  --color-primary: #294C7C;
+  --color-primary-hover: #1D3A63;
+  --color-background: #F4F7FB;
   --color-surface: #FFFFFF;
-  --color-text: #183C3B;
-  --color-text-secondary: #536C67;
-  --color-border: #D7E2DF;
-  --color-focus: #B56B21;
-  --color-tint: #E9F1ED;
-  --color-subtle: #F0F5F2;
-  --color-warning-background: #FFF6E9;
+  --color-text: #20334E;
+  --color-text-secondary: #536780;
+  --color-border: #D6E0EC;
+  --color-focus: #B97D27;
+  --color-tint: #E8F0FB;
+  --color-subtle: #F1F5FA;
+  --color-warning-background: #FFF8EE;
   --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --space-1: 4px;
   --space-2: 8px;
@@ -23,5 +23,5 @@
   --radius-small: 8px;
   --radius-medium: 12px;
   --radius-large: 18px;
-  --shadow-panel: 0 4px 18px #183C3B05;
+  --shadow-panel: 0 6px 22px rgb(35 65 105 / 7%);
 }

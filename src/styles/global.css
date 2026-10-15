@@ -17,19 +17,21 @@ h3 { font-size: 1rem; line-height: 1.5; font-weight: 650; }
 .page-container { width: 100%; margin-inline: auto; padding-inline: var(--space-4); }
 .page-container--guest { max-width: 1000px; }
 .page-container--staff { max-width: 1440px; }
-.site-header { background: var(--color-surface); border-bottom: 1px solid var(--color-border); }
-.site-header-inner { display: flex; flex-direction: column; gap: var(--space-4); padding-block: var(--space-5); }
-.brand { display: flex; gap: var(--space-3); align-items: center; text-decoration: none; min-width: 0; }
-.brand-mark { display: grid; place-items: center; width: 48px; height: 48px; border-radius: var(--radius-medium); background: var(--color-primary); color: var(--color-surface); font-size: .9rem; font-weight: 750; flex-shrink: 0; letter-spacing: .03em; }
-.brand-copy { display: flex; flex-direction: column; min-width: 0; }
-.brand-name { font-size: .8rem; letter-spacing: .075em; font-weight: 700; overflow-wrap: anywhere; }
-.brand-caption { font-size: .8rem; color: var(--color-text-secondary); }
-.app-shell--staff .brand-name { font-size: 1rem; letter-spacing: -.01em; }
-.header-link, .guest-navigation a { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); padding: var(--space-2) var(--space-3); border-radius: var(--radius-small); text-decoration: none; font-size: .875rem; }
-.header-link { border: 1px solid var(--color-border); }
-.header-link:hover, .guest-navigation a:hover { background: var(--color-tint); }
-.guest-navigation { display: flex; gap: var(--space-2); border-top: 1px solid var(--color-border); padding-top: var(--space-2); }
+.site-header { background: linear-gradient(112deg, #344D72 0%, #436391 52%, #5578AB 100%); border-bottom: 1px solid #334B70; color: #FFFFFF; }
+.site-header-inner { display: flex; flex-direction: column; gap: var(--space-3); padding-block: var(--space-3); }
+.brand { display: flex; gap: var(--space-4); align-items: center; text-decoration: none; min-width: 0; color: #FFFFFF; }
+.brand-logo { display: block; width: 162px; height: auto; aspect-ratio: 214 / 166; object-fit: contain; border-radius: 7px; box-shadow: 0 0 0 1px rgb(255 255 255 / 22%); flex-shrink: 0; }
+.brand-copy { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.brand-name { font-size: .875rem; letter-spacing: .04em; font-weight: 700; color: #FFFFFF; overflow-wrap: anywhere; }
+.brand-caption { font-size: .8rem; color: #DFE8F7; }
+.app-shell--staff .brand-name { font-size: 1.06rem; letter-spacing: 0; }
+.site-header .brand:focus-visible, .site-header a:focus-visible { outline-color: #FFFFFF; }
+.header-link, .guest-navigation a { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2); padding: var(--space-2) var(--space-3); border-radius: var(--radius-small); text-decoration: none; font-size: .875rem; color: #FFFFFF; }
+.header-link { border: 1px solid rgb(255 255 255 / 32%); background: rgb(255 255 255 / 7%); }
+.header-link:hover, .guest-navigation a:hover { background: rgb(255 255 255 / 17%); }
+.guest-navigation { display: flex; gap: var(--space-2); border-top: 1px solid rgb(255 255 255 / 25%); padding-top: var(--space-2); }
 .guest-navigation a { flex: 1; }
+@media (max-width: 599px) { .brand-logo { width: 128px; } .brand { gap: var(--space-3); } .app-shell--staff .brand-name { font-size: .94rem; } }
 main { flex: 1; padding-block: var(--space-8) var(--space-10); }
 .page-header { display: flex; flex-direction: column; gap: var(--space-4); }
 .eyebrow { font-size: .7rem; font-weight: 700; letter-spacing: .13em; color: var(--color-text-secondary); margin-bottom: var(--space-3); }
@@ -123,7 +125,7 @@ main { flex: 1; padding-block: var(--space-8) var(--space-10); }
 .verification-date { margin-top: var(--space-4); font-size: .875rem; font-weight: 600; }
 .staff-detail-content .english-guide { margin-top: var(--space-5); }
 .english-phrases { padding: 0; margin: 0; list-style: none; display: grid; gap: var(--space-4); }
-.english-phrases li { padding: var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-small); }
+.english-phrases li { padding: var(--space-4); border: 1px solid var(--color-border); border-radius: var(--radius-small); background: #FBFCFF; }
 .english-phrase-text { font-size: .95rem; white-space: pre-wrap; user-select: text; margin-bottom: var(--space-3); }
 .english-phrase-label { margin: 0 0 var(--space-3); font-size: .9rem; }
 .english-phrase-meaning { color: var(--color-text-secondary); white-space: pre-wrap; overflow-wrap: anywhere; }
