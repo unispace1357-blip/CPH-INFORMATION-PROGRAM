@@ -56,10 +56,10 @@ jobs:
           node-version: '24'
           cache: npm
       - run: npm ci
-      - run: npm run desktop:package
+      - run: npm run desktop:package -- --directory-only
       - uses: actions/upload-artifact@v4
         with:
           name: CPH-Front-Desk-Public-Test-win-x64
-          path: release/CPH-Front-Desk-Public-Test-win-x64.zip
+          path: release/CPH-Front-Desk-Public-Test-win-x64/
           if-no-files-found: error
           retention-days: 30

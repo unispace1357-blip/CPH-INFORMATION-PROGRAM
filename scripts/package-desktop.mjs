@@ -31,13 +31,18 @@ try {
   await rm(join(output, 'resources', 'default_app.asar'), { force: true })
   if (platform === 'win32') {
     await rename(join(output, 'electron.exe'), join(output, 'CPH-Front-Desk.exe'))
-    const zip = output + '.zip'
-    await rm(zip, { force: true })
-    if (process.platform === 'win32') {
-      execFileSync('powershell.exe', ['-NoProfile', '-NonInteractive', '-Command', "Compress-Archive -Path (Join-Path $env:CPH_DESKTOP_OUTPUT '*') -DestinationPath $env:CPH_DESKTOP_ZIP -CompressionLevel Optimal"], { stdio: 'inherit', env: { ...process.env, CPH_DESKTOP_OUTPUT: output, CPH_DESKTOP_ZIP: zip } })
+    if (process.argv.includes('--directory-only')) {
+      // upload-artifact creates the single downloadable ZIP directly from this folder.
+      console.log(`PASS: Windows portable EXE/runtime prepared for artifact ZIP: ${output}`)
     } else {
-      execFileSync('zip', ['-q', '-r', zip, '.'], { cwd: output, stdio: 'inherit' })
+      const zip = output + '.zip'
+      await rm(zip, { force: true })
+      if (process.platform === 'win32') {
+        execFileSync('powershell.exe', ['-NoProfile', '-NonInteractive', '-Command', "Compress-Archive -Path (Join-Path $env:CPH_DESKTOP_OUTPUT '*') -DestinationPath $env:CPH_DESKTOP_ZIP -CompressionLevel Optimal"], { stdio: 'inherit', env: { ...process.env, CPH_DESKTOP_OUTPUT: output, CPH_DESKTOP_ZIP: zip } })
+      } else {
+        execFileSync('zip', ['-q', '-r', zip, '.'], { cwd: output, stdio: 'inherit' })
+      }
+      console.log(`PASS: Windows 10/11 x64 portable ZIP (Electron ${version}) created: ${zip}`)
     }
-    console.log(`PASS: Windows 10/11 x64 portable ZIP (Electron ${version}) created: ${zip}`)
   } else console.log(`Linux-only runtime QA package: ${output}`)
 } finally { await rm(temporary, { recursive: true, force: true }) }
