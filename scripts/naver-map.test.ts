@@ -61,10 +61,12 @@ for (const [name, url] of invalidUrls) test(`rejects ${name} at import and at th
 })
 
 test('existing schemaVersion 1 JSON without map field validates and exports with the field still omitted', () => {
-  const before = structuredClone(rawFacilities), data = importFacilities(JSON.stringify(rawFacilities))
+  const legacy = parseFacilityDataset(rawFacilities)
+  for (const facility of legacy.facilities) delete facility.naverMapUrl
+  const before = structuredClone(legacy), data = importFacilities(JSON.stringify(legacy))
   assert.deepEqual(data, before); assert.deepEqual(JSON.parse(exportFacilities(data)), before)
   assert.ok(data.facilities.every(item => !Object.hasOwn(item, 'naverMapUrl')))
-  assert.deepEqual(rawFacilities, before)
+  assert.deepEqual(legacy, before)
 })
 test('null is valid and unregistered while editor new/legacy defaults are blank', () => {
   const data = parseFacilityDataset(rawFacilities); data.facilities[0]!.naverMapUrl = null

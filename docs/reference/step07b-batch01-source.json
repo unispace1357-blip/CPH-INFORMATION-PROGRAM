@@ -1,0 +1,189 @@
+{
+  "sourceFile": "1212.xlsx",
+  "sourceSha256": "90c817d2d2dba4c0384105c0730aeef144b664c9e794f45c3d58e5d71a043731",
+  "sourceSheets": [
+    "01_시설후보_24개",
+    "02_검증원칙"
+  ],
+  "sourceSheet": "01_시설후보_24개",
+  "sourceHeader": {
+    "A2": "기준점: 송도센트럴파크호텔 정문 (테크노파크로 193) · 조사일: 2026-10-15 · 네이버 지도 직접 확인 X · 실제 도보시간 미산정",
+    "A4": "주의: 여기에 기재된 매장은 정식 고객 안내 승인 전 조사 후보입니다. 영업시간 참고값과 거리 추정값을 고객용 JSON에 그대로 복사하지 마세요."
+  },
+  "curatedOn": "2026-10-16",
+  "sourceSurveyDate": "2026-10-15",
+  "facilityVerificationDate": null,
+  "translationStatus": "draft-awaiting-user-review",
+  "officialForeignNamesConfirmed": false,
+  "externalTranslatorChecksPerformed": false,
+  "baselineCommit": "5c8b6f761078b6171f5555c87be937861c53d786",
+  "baselineDemoIds": [
+    "demo-hotel-001",
+    "demo-cafe-001",
+    "demo-pharmacy-001",
+    "demo-convenience-001",
+    "demo-sauna-spa-001",
+    "demo-atm-001"
+  ],
+  "baselineDemoArraySha256": "a3d33e44a39259e27eaae28b669df51bbd27ab2168b385a3900088c2ce39b49f",
+  "records": [
+    {
+      "sourceId": "C01",
+      "jsonId": "cu-songdo-senseuri",
+      "category": "convenience",
+      "worksheetRow": 7,
+      "cells": {
+        "A7": "C01",
+        "B7": "편의점",
+        "C7": "CU 송도센쓰리점",
+        "D7": "인천 연수구 인천타워대로180번길 11 A동 1층 109호",
+        "E7": "호텔 현장 추천·동일 건물군",
+        "F7": "매장·주소 강함",
+        "G7": "24시간 (제3자 표기, 재확인)",
+        "H7": null,
+        "I7": "운영시간·출입구·호텔 도보경로 확인",
+        "J7": "https://www.114.co.kr/life/localBillStore/detail/739571",
+        "K7": "https://place.udanax.org/place.php?id=885225&placeName=CU+%EC%86%A1%EB%8F%84%EC%84%BC%EC%93%B0%EB%A6%AC%EC%A0%90"
+      },
+      "koreanFieldCells": {
+        "name": "C7",
+        "description": "B7",
+        "address": "D7",
+        "openingHours": "G7",
+        "notes": "I7"
+      },
+      "foreignTimeTokens": [],
+      "reviewStatus": "private-draft-awaiting-user-review"
+    },
+    {
+      "sourceId": "C04",
+      "jsonId": "blue-ocean-sauna-songdo",
+      "category": "sauna_spa",
+      "worksheetRow": 10,
+      "cells": {
+        "A10": "C04",
+        "B10": "사우나",
+        "C10": "블루오션",
+        "D10": "인천 연수구 컨벤시아대로 81 드림시티 6층 601호",
+        "E10": "호텔 프론트 안내 중",
+        "F10": "주소·업종 강함, 운영 미확정",
+        "G10": "24시간 연중 무휴",
+        "H10": null,
+        "I10": "입장료·찜질방 이용·운영시간·호텔 도보 확인",
+        "J10": "https://haessa.kr/places/b485efd9-b42f-53bd-b554-cc6d305227bc",
+        "K10": "https://localmap.co.kr/web/splus/kmap/view.php?gugun=3520000&keylink=3520000-202-2006-00002&keyname=%EB%B8%94%EB%A3%A8%EC%98%A4%EC%85%98&keyno=358&sigun=6280000"
+      },
+      "koreanFieldCells": {
+        "name": "C10",
+        "description": "B10",
+        "address": "D10",
+        "openingHours": "G10",
+        "notes": "I10"
+      },
+      "foreignTimeTokens": [],
+      "reviewStatus": "private-draft-awaiting-user-review"
+    },
+    {
+      "sourceId": "C03",
+      "jsonId": "malt-house-incheon-songdo",
+      "category": "dining",
+      "worksheetRow": 9,
+      "cells": {
+        "A9": "C03",
+        "B9": "음식점·양식",
+        "C9": "더몰트하우스 인천송도점",
+        "D9": "인천 연수구 인천타워대로180번길 11 A동 3층 305호",
+        "E9": "CU와 같은 건물",
+        "F9": "최근 지점·주소 강함",
+        "G9": "10:00~23:00(브레이크 타임 15~17시) 라스트 오더 22:00",
+        "H9": null,
+        "I9": "메뉴·가격·엘리베이터·영업시간 확인",
+        "J9": "https://www.jobkorea.co.kr/Recruit/GI_Read/50006463",
+        "K9": null
+      },
+      "koreanFieldCells": {
+        "name": "C9",
+        "description": "B9",
+        "address": "D9",
+        "openingHours": "G9",
+        "notes": "I9"
+      },
+      "foreignTimeTokens": [
+        "10:00",
+        "23:00",
+        "15:00",
+        "17:00",
+        "22:00"
+      ],
+      "reviewStatus": "private-draft-awaiting-user-review"
+    },
+    {
+      "sourceId": "C02",
+      "jsonId": "compose-coffee-incheon-songdo-central-park",
+      "category": "cafe",
+      "worksheetRow": 8,
+      "cells": {
+        "A8": "C02",
+        "B8": "카페",
+        "C8": "컴포즈커피 인천송도센트럴파크점",
+        "D8": "인천 연수구 인천타워대로180번길 11 A동 1층 112호",
+        "E8": "CU와 같은 건물",
+        "F8": "최근 지점·주소 강함",
+        "G8": "08:00~22:00 (일요일 21:00 월,화 20:00 마감)",
+        "H8": null,
+        "I8": "호텔 기준 도보·현재 영업시간 확인",
+        "J8": "https://www.alba.co.kr/job/Detail?adid=147429508&listmenucd=UNIVST",
+        "K8": "https://www.diningcode.com/profile.php?rid=8bvLtyYfKbLS"
+      },
+      "koreanFieldCells": {
+        "name": "C8",
+        "description": "B8",
+        "address": "D8",
+        "openingHours": "G8",
+        "notes": "I8"
+      },
+      "foreignTimeTokens": [
+        "08:00",
+        "22:00",
+        "21:00",
+        "20:00"
+      ],
+      "reviewStatus": "private-draft-awaiting-user-review"
+    },
+    {
+      "sourceId": "C16",
+      "jsonId": "chaeum-pharmacy-songdo",
+      "category": "pharmacy",
+      "worksheetRow": 22,
+      "cells": {
+        "A22": "C16",
+        "B22": "약국",
+        "C22": "채움약국",
+        "D22": "인천 연수구 인천타워대로197번길 16 2층 240호",
+        "E22": null,
+        "F22": "업체 검색 위치 확인",
+        "G22": "9:00~19:30(13:00~14:00 휴계시간) 토요일은 9:00~14:00",
+        "H22": null,
+        "I22": "정확한 영업시간·전화·도보 확인",
+        "J22": "https://www.google.com/search?q=%EC%84%BC%ED%8A%B8%EB%9F%B4%EC%9B%90%EC%95%BD%EA%B5%AD+%EC%84%BC%ED%8A%B8%EB%9F%B4%EB%A1%9C232",
+        "K22": null
+      },
+      "koreanFieldCells": {
+        "name": "C22",
+        "description": "B22",
+        "address": "D22",
+        "openingHours": "G22",
+        "notes": "I22"
+      },
+      "foreignTimeTokens": [
+        "09:00",
+        "19:30",
+        "13:00",
+        "14:00",
+        "09:00",
+        "14:00"
+      ],
+      "reviewStatus": "private-draft-awaiting-user-review"
+    }
+  ]
+}

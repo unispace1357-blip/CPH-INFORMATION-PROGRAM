@@ -9,6 +9,7 @@ const artifactDir = process.env.CPH_UI_ARTIFACT_DIR || '/tmp/cph-step06-admin-qa
 const results = [], errors = [], requests = [];
 const sourceFiles = ['facilities.json', 'hotel.json'].map(name => path.join(__dirname, '../src/data', name));
 const original = sourceFiles.map(file => fs.readFileSync(file));
+const sourceRecordCount = JSON.parse(original[0].toString('utf8')).facilities.length;
 const names = { ko: 'Fictional UI QA <b>한글</b>', en: 'Fictional UI QA English', 'zh-CN': '虚构 UI QA 中文', ja: '架空 UI QA 日本語' };
 const languages = { ko: '한국어', en: 'English', 'zh-CN': '简体中文', ja: '日本語' };
 
@@ -58,7 +59,7 @@ async function capture(page, name) {
   try {
     assert.equal((await page.goto(baseURL)).status(), 200);
     await page.getByRole('heading', { name: 'CPH ADMIN MANAGER', exact: true }).waitFor();
-    await records(page, 6); await layout(page);
+    await records(page, sourceRecordCount); await layout(page);
     assert.ok(await page.getByText('운영 배포 준비 미완료', { exact: true }).isVisible());
     await capture(page, 'admin-main-1280.png');
     await page.keyboard.press('Tab');
@@ -189,7 +190,7 @@ async function capture(page, name) {
     const dialog = await beforeUnload; assert.equal(dialog.type(), 'beforeunload'); await dialog.dismiss(); await refresh;
     assert.equal(await page.getByLabel('참고 사항', { exact: true }).inputValue(), 'Fictional beforeunload QA');
     const discard = page.waitForEvent('dialog'), reload = page.reload(); const accepted = await discard; assert.equal(accepted.type(), 'beforeunload'); await accepted.accept(); await reload;
-    await records(page, 6); assert.ok(await page.getByText('운영 배포 준비 미완료', { exact: true }).isVisible());
+    await records(page, sourceRecordCount); assert.ok(await page.getByText('운영 배포 준비 미완료', { exact: true }).isVisible());
     results.push('PASS 390/768/1280/1440px layout; actual Chromium beforeunload cancel retains editor, accepted reload returns source demo (memory only)');
     for (let i = 0; i < sourceFiles.length; i++) assert.deepEqual(fs.readFileSync(sourceFiles[i]), original[i]);
     assert.deepEqual(errors, [], 'JS/console/HTTP errors');

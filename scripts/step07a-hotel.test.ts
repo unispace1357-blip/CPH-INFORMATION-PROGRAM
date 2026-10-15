@@ -45,7 +45,7 @@ for (const language of GUIDE_LANGUAGES) {
 }
 
 test('approved common fields and unchanged JSON schema remain valid; both source datasets stay demo', () => {
-  assert.equal(hotel.schemaVersion, 1); assert.equal(hotel.dataStatus, 'demo'); assert.equal(facilities.dataStatus, 'demo'); assert.equal(facilities.facilities.length, 6)
+  assert.equal(hotel.schemaVersion, 1); assert.equal(hotel.dataStatus, 'demo'); assert.equal(facilities.dataStatus, 'demo'); assert.equal(facilities.facilities.filter(item => item.id.startsWith('demo-')).length, 6)
   assert.equal(hotel.lastVerifiedAt, '2026-10-15'); assert.equal(hotel.checkInTime, '15:00'); assert.equal(hotel.checkOutTime, '12:00')
   assert.deepEqual(parseHotelDataset(hotel), hotel); assert.deepEqual(verifyApprovedHotel(hotel), [])
 })

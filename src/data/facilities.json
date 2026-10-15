@@ -401,6 +401,281 @@
         "zh-CN": "",
         "ja": ""
       }
+    },
+    {
+      "id": "cu-songdo-senseuri",
+      "category": "convenience",
+      "isPublished": false,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "CU 송도센쓰리점",
+          "description": "편의점",
+          "address": "인천 연수구 인천타워대로180번길 11 A동 1층 109호",
+          "openingHours": "24시간 (제3자 표기, 재확인)",
+          "directions": "",
+          "notes": "운영시간·출입구·호텔 도보경로 확인"
+        },
+        "en": {
+          "name": "CU 송도센쓰리점 (convenience store)",
+          "description": "Convenience store.",
+          "address": "인천타워대로180번길 11, Building A, 1F, Unit 109, Yeonsu-gu, Incheon",
+          "openingHours": "24 hours (third-party listing; recheck required)",
+          "directions": "",
+          "notes": "Further checks: opening hours, entrance and walking route from the hotel."
+        },
+        "zh-CN": {
+          "name": "CU 송도센쓰리점（便利店）",
+          "description": "便利店。",
+          "address": "仁川广域市延寿区 인천타워대로180번길 11，A栋1层109号室",
+          "openingHours": "24小时营业（第三方标注，需再次确认）",
+          "directions": "",
+          "notes": "待确认：营业时间、入口及从酒店出发的步行路线。"
+        },
+        "ja": {
+          "name": "CU 송도센쓰리점（コンビニ）",
+          "description": "コンビニエンスストア。",
+          "address": "仁川広域市延寿区 인천타워대로180번길 11、A棟1階109号室",
+          "openingHours": "24時間営業（第三者の表記、再確認が必要）",
+          "directions": "",
+          "notes": "要確認：営業時間、入口、ホテルからの徒歩経路。"
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "blue-ocean-sauna-songdo",
+      "category": "sauna_spa",
+      "isPublished": false,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "블루오션",
+          "description": "사우나",
+          "address": "인천 연수구 컨벤시아대로 81 드림시티 6층 601호",
+          "openingHours": "24시간 연중 무휴",
+          "directions": "",
+          "notes": "입장료·찜질방 이용·운영시간·호텔 도보 확인"
+        },
+        "en": {
+          "name": "블루오션 (sauna)",
+          "description": "Sauna.",
+          "address": "컨벤시아대로 81, 드림시티, 6F, Unit 601, Yeonsu-gu, Incheon",
+          "openingHours": "24 hours, open year-round",
+          "directions": "",
+          "notes": "Further checks: admission fees, jjimjilbang use, opening hours and walking route from the hotel."
+        },
+        "zh-CN": {
+          "name": "블루오션（桑拿）",
+          "description": "桑拿设施。",
+          "address": "仁川广域市延寿区 컨벤시아대로 81，드림시티 6层601号室",
+          "openingHours": "24小时营业，全年无休",
+          "directions": "",
+          "notes": "待确认：入场费、汗蒸房使用情况、营业时间及从酒店出发的步行路线。"
+        },
+        "ja": {
+          "name": "블루오션（サウナ）",
+          "description": "サウナ施設。",
+          "address": "仁川広域市延寿区 컨벤시아대로 81、드림시티 6階601号室",
+          "openingHours": "24時間営業・年中無休",
+          "directions": "",
+          "notes": "要確認：入場料、チムジルバンの利用、営業時間、ホテルからの徒歩経路。"
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "연중 무휴",
+        "en": "Open year-round",
+        "zh-CN": "全年无休",
+        "ja": "年中無休"
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "malt-house-incheon-songdo",
+      "category": "dining",
+      "isPublished": false,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "더몰트하우스 인천송도점",
+          "description": "음식점·양식",
+          "address": "인천 연수구 인천타워대로180번길 11 A동 3층 305호",
+          "openingHours": "10:00~23:00(브레이크 타임 15~17시) 라스트 오더 22:00",
+          "directions": "",
+          "notes": "메뉴·가격·엘리베이터·영업시간 확인"
+        },
+        "en": {
+          "name": "더몰트하우스 인천송도점 (Western restaurant)",
+          "description": "Western restaurant.",
+          "address": "인천타워대로180번길 11, Building A, 3F, Unit 305, Yeonsu-gu, Incheon",
+          "openingHours": "10:00–23:00 (break 15:00–17:00); last order 22:00",
+          "directions": "",
+          "notes": "Further checks: menu, prices, elevator access and opening hours."
+        },
+        "zh-CN": {
+          "name": "더몰트하우스 인천송도점（西餐厅）",
+          "description": "西餐厅。",
+          "address": "仁川广域市延寿区 인천타워대로180번길 11，A栋3层305号室",
+          "openingHours": "10:00–23:00（休息时间15:00–17:00）；最后点单22:00",
+          "directions": "",
+          "notes": "待确认：菜单、价格、电梯通行及营业时间。"
+        },
+        "ja": {
+          "name": "더몰트하우스 인천송도점（洋食店）",
+          "description": "洋食店。",
+          "address": "仁川広域市延寿区 인천타워대로180번길 11、A棟3階305号室",
+          "openingHours": "10:00–23:00（休憩15:00–17:00）、ラストオーダー22:00",
+          "directions": "",
+          "notes": "要確認：メニュー、料金、エレベーター利用、営業時間。"
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "compose-coffee-incheon-songdo-central-park",
+      "category": "cafe",
+      "isPublished": false,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "컴포즈커피 인천송도센트럴파크점",
+          "description": "카페",
+          "address": "인천 연수구 인천타워대로180번길 11 A동 1층 112호",
+          "openingHours": "08:00~22:00 (일요일 21:00 월,화 20:00 마감)",
+          "directions": "",
+          "notes": "호텔 기준 도보·현재 영업시간 확인"
+        },
+        "en": {
+          "name": "컴포즈커피 인천송도센트럴파크점 (cafe)",
+          "description": "Cafe.",
+          "address": "인천타워대로180번길 11, Building A, 1F, Unit 112, Yeonsu-gu, Incheon",
+          "openingHours": "08:00–22:00 (Sunday: closes at 21:00; Monday and Tuesday: closes at 20:00)",
+          "directions": "",
+          "notes": "Further checks: walking route from the hotel and current opening hours."
+        },
+        "zh-CN": {
+          "name": "컴포즈커피 인천송도센트럴파크점（咖啡馆）",
+          "description": "咖啡馆。",
+          "address": "仁川广域市延寿区 인천타워대로180번길 11，A栋1层112号室",
+          "openingHours": "08:00–22:00（周日21:00关门，周一、周二20:00关门）",
+          "directions": "",
+          "notes": "待确认：从酒店出发的步行路线及当前营业时间。"
+        },
+        "ja": {
+          "name": "컴포즈커피 인천송도센트럴파크점（カフェ）",
+          "description": "カフェ。",
+          "address": "仁川広域市延寿区 인천타워대로180번길 11、A棟1階112号室",
+          "openingHours": "08:00–22:00（日曜は21:00、月曜・火曜は20:00閉店）",
+          "directions": "",
+          "notes": "要確認：ホテルからの徒歩経路、現在の営業時間。"
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "chaeum-pharmacy-songdo",
+      "category": "pharmacy",
+      "isPublished": false,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "채움약국",
+          "description": "약국",
+          "address": "인천 연수구 인천타워대로197번길 16 2층 240호",
+          "openingHours": "9:00~19:30(13:00~14:00 휴계시간) 토요일은 9:00~14:00",
+          "directions": "",
+          "notes": "정확한 영업시간·전화·도보 확인"
+        },
+        "en": {
+          "name": "채움약국 (pharmacy)",
+          "description": "Pharmacy.",
+          "address": "인천타워대로197번길 16, 2F, Unit 240, Yeonsu-gu, Incheon",
+          "openingHours": "09:00–19:30 (break 13:00–14:00); Saturday 09:00–14:00",
+          "directions": "",
+          "notes": "Further checks: exact opening hours, telephone number and walking route from the hotel."
+        },
+        "zh-CN": {
+          "name": "채움약국（药店）",
+          "description": "药店。",
+          "address": "仁川广域市延寿区 인천타워대로197번길 16，2层240号室",
+          "openingHours": "09:00–19:30（休息时间13:00–14:00）；周六09:00–14:00",
+          "directions": "",
+          "notes": "待确认：准确营业时间、电话号码及从酒店出发的步行路线。"
+        },
+        "ja": {
+          "name": "채움약국（薬局）",
+          "description": "薬局。",
+          "address": "仁川広域市延寿区 인천타워대로197번길 16、2階240号室",
+          "openingHours": "09:00–19:30（休憩13:00–14:00）、土曜09:00–14:00",
+          "directions": "",
+          "notes": "要確認：正確な営業時間、電話番号、ホテルからの徒歩経路。"
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
     }
   ]
 }

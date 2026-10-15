@@ -11,7 +11,8 @@ const fresh = () => structuredClone(rawData)
 test('demo fixtures validate and include four languages and both visibility states', () => {
   const data = parseFacilityDataset(fresh())
   assert.equal(data.dataStatus, 'demo')
-  assert.equal(data.facilities.length, 6)
+  assert.equal(data.facilities.length, 11)
+  assert.equal(data.facilities.filter(facility => facility.id.startsWith('demo-')).length, 6)
   assert.ok(data.facilities.some(f => f.isPublished))
   assert.ok(data.facilities.some(f => !f.isPublished))
   for (const facility of data.facilities) {
