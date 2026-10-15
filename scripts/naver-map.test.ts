@@ -72,7 +72,7 @@ test('null is valid and unregistered while editor new/legacy defaults are blank'
   const data = parseFacilityDataset(rawFacilities); data.facilities[0]!.naverMapUrl = null
   assert.equal(importFacilities(exportFacilities(data)).facilities[0]!.naverMapUrl, null)
   assert.equal(validatedNaverMapUrl(null), null); assert.equal(validatedNaverMapUrl(undefined), null)
-  assert.equal(newFacilityDraft().naverMapUrl, ''); assert.equal(facilityToDraft(parseFacilityDataset(rawFacilities).facilities[0]!).naverMapUrl, '')
+  assert.equal(newFacilityDraft().naverMapUrl, ''); assert.equal(facilityToDraft(data.facilities[0]!).naverMapUrl, '')
 })
 test('Admin register, edit, delete, import/export preserves other fields and visibility', () => {
   const initial = parseFacilityDataset(rawFacilities), draft = facilityToDraft(initial.facilities[0]!)

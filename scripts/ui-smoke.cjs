@@ -96,7 +96,10 @@ async function mapPopup(page, link, url) {
       await staff.waitForFunction(expected => navigator.clipboard.readText().then(text => text === expected), item.englishPhrases[0]);
       await staff.getByRole('button', { name: '전체 문구 복사', exact: true }).click();
       await staff.waitForFunction(expected => navigator.clipboard.readText().then(text => text === expected), item.englishPhrases.join('\n'));
-      assert.ok(await staff.locator('.naver-map-disabled').isDisabled());
+      if (item.naverMapUrl) {
+        assert.ok(await staff.locator('.naver-map-link').isVisible());
+        assert.equal(await staff.locator('.naver-map-link').getAttribute('href'), item.naverMapUrl);
+      } else assert.ok(await staff.locator('.naver-map-disabled').isDisabled());
       await layout(staff);
     }
     await staff.getByRole('searchbox').fill('');
@@ -126,7 +129,10 @@ async function mapPopup(page, link, url) {
         assert.equal(await guest.locator('.detail-facts dd').nth(0).innerText(), item.translations[language].address);
         assert.equal(await guest.locator('.detail-facts dd').nth(1).innerText(), item.translations[language].openingHours || m.ui.informationUnavailable);
         if (item.translations[language].directions) assert.equal(await guest.locator('.detail-facts dd').nth(4).innerText(), item.translations[language].directions);
-        assert.ok(await guest.locator('.naver-map-disabled').isDisabled());
+        if (item.naverMapUrl) {
+          assert.ok(await guest.locator('.naver-map-link').isVisible());
+          assert.equal(await guest.locator('.naver-map-link').getAttribute('href'), item.naverMapUrl);
+        } else assert.ok(await guest.locator('.naver-map-disabled').isDisabled());
         await layout(guest);
         await guest.getByRole('button', { name: m.ui.closeDetails, exact: true }).click();
         await guest.getByRole('searchbox').fill('');
