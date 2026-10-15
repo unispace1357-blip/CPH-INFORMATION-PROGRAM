@@ -23,8 +23,8 @@ for (const [label, url] of accepted) test(`compatibility: ${label} validates and
   const saved = saveFacility(original, draft, draft.id), imported = importFacilities(exportFacilities(saved))
   assert.equal(imported.facilities[0]!.naverMapUrl, url)
   assert.equal(facilityToDraft(imported.facilities[0]!).naverMapUrl, url)
-  const { naverMapUrl: unused, ...unchanged } = imported.facilities[0]!; void unused
-  assert.deepEqual(unchanged, original.facilities[0]); assert.deepEqual(original, before)
+  assert.deepEqual(imported.facilities[0], { ...original.facilities[0], naverMapUrl: url })
+  assert.deepEqual(original, before)
 })
 const start = '3z3nAD,2AEFuH,송도센트럴파크호텔,19398065,PLACE_POI'
 const end = '3z1K4q,2AHkeJ,인천항연안여객터미널,1113352648,PLACE_POI'

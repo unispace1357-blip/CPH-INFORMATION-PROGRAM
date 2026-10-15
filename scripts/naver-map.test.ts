@@ -85,8 +85,8 @@ test('Admin register, edit, delete, import/export preserves other fields and vis
   assert.equal(changed.facilities[0]!.naverMapUrl, validUrls[3])
   edited.naverMapUrl = ''; const removed = saveFacility(changed, edited, edited.id)
   assert.equal(removed.facilities[0]!.naverMapUrl, null)
-  const { naverMapUrl: unused, ...rest } = removed.facilities[0]!; void unused
-  assert.deepEqual(rest, initial.facilities[0]); assert.deepEqual(initial, rawFacilities)
+  assert.deepEqual(removed.facilities[0], { ...initial.facilities[0], naverMapUrl: null })
+  assert.deepEqual(initial, rawFacilities)
 })
 test('Admin rejects invalid draft without changing saved workspace', () => {
   const data = parseFacilityDataset(rawFacilities), before = structuredClone(data), draft = facilityToDraft(data.facilities[0]!)
@@ -94,7 +94,8 @@ test('Admin rejects invalid draft without changing saved workspace', () => {
   assert.throws(() => saveFacility(data, draft, draft.id), /naverMapUrl/); assert.deepEqual(data, before)
 })
 test('private map URLs stay out of Staff/Guest results and public JSON', () => {
-  const data = parseFacilityDataset(rawFacilities), hidden = data.facilities.find(item => !item.isPublished)!
+  const data = parseFacilityDataset(rawFacilities), hidden = data.facilities[0]!
+  hidden.isPublished = false // Independent hidden test case; preview data need not contain a private record.
   hidden.naverMapUrl = QA_NAVER_ROUTE
   assert.ok(!searchFacilities(data.facilities).some(item => item.id === hidden.id))
   for (const language of GUIDE_LANGUAGES) assert.ok(!searchGuestFacilities(data.facilities, '', 'all', language).some(item => item.id === hidden.id))

@@ -22,8 +22,8 @@ test('approved reference records all 35 IDs, 34 unique applied IDs, source hash 
   assert.equal(reference.translatorComparisonRows, 105); assert.equal(reference.translatorResultsRecorded, 0)
 })
 
-for (const record of reference.records) {
-  test(`${record.id} approved original is recognized in all 4 languages and applied once to its final field or held`, () => {
+test('all 35 approved IDs appear once in their assigned field in every language, except held H33', () => {
+  for (const record of reference.records) {
     for (const language of GUIDE_LANGUAGES) {
       const text = record.translations[language]
       assert.ok(text.length > 0)
@@ -35,8 +35,8 @@ for (const record of reference.records) {
         assert.equal(hotel.translations[language][field as keyof typeof APPROVED_MAPPING].split('\n\n').filter(item => item === text).length, 1)
       }
     }
-  })
-}
+  }
+})
 for (const language of GUIDE_LANGUAGES) {
   test(`${language} complete hotel fields match approved cells exactly, retaining empty description`, () => {
     for (const [field, ids] of Object.entries(APPROVED_MAPPING)) assert.equal(hotel.translations[language][field as keyof typeof APPROVED_MAPPING], ids.map(id => reference.records.find(record => record.id === id)!.translations[language]).join('\n\n'))
@@ -45,7 +45,7 @@ for (const language of GUIDE_LANGUAGES) {
 }
 
 test('approved common fields and unchanged JSON schema remain valid; both source datasets stay demo', () => {
-  assert.equal(hotel.schemaVersion, 1); assert.equal(hotel.dataStatus, 'demo'); assert.equal(facilities.dataStatus, 'demo'); assert.equal(facilities.facilities.filter(item => item.id.startsWith('demo-')).length, 6)
+  assert.equal(hotel.schemaVersion, 1); assert.equal(hotel.dataStatus, 'demo'); assert.equal(facilities.dataStatus, 'demo')
   assert.equal(hotel.lastVerifiedAt, '2026-10-15'); assert.equal(hotel.checkInTime, '15:00'); assert.equal(hotel.checkOutTime, '12:00')
   assert.deepEqual(parseHotelDataset(hotel), hotel); assert.deepEqual(verifyApprovedHotel(hotel), [])
 })

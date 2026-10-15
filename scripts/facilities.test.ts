@@ -5,20 +5,84 @@ import schema from '../src/data/facilities.schema.json' with { type: 'json' }
 import { parseFacilityDataset } from '../src/data/validateFacilityDataset.ts'
 import { FACILITY_CATEGORIES } from '../src/types/facility.ts'
 import type { GuideLanguage } from '../src/types/facility.ts'
+import { searchFacilities } from '../src/services/facilitySearch.ts'
+import { searchGuestFacilities } from '../src/services/guestFacilitySearch.ts'
+import { importFacilities, exportFacilities, facilityToDraft, saveFacility } from '../tools/admin/services/workspace.ts'
 
 const fresh = () => structuredClone(rawData)
 
-test('demo fixtures validate and include four languages and both visibility states', () => {
+test('local preview contains exactly five real facilities, four languages and no fictional records', () => {
   const data = parseFacilityDataset(fresh())
+  assert.equal(data.schemaVersion, 1)
   assert.equal(data.dataStatus, 'demo')
-  assert.equal(data.facilities.length, 11)
-  assert.equal(data.facilities.filter(facility => facility.id.startsWith('demo-')).length, 6)
-  assert.ok(data.facilities.some(f => f.isPublished))
-  assert.ok(data.facilities.some(f => !f.isPublished))
-  for (const facility of data.facilities) {
-    assert.deepEqual(Object.keys(facility.translations), ['ko', 'en', 'zh-CN', 'ja'])
+  assert.deepEqual(data.facilities.map(f => [f.id, f.category, f.translations.ko.name]), [
+    ['cu-songdo-senseuri', 'convenience', 'CU 송도센쓰리점'],
+    ['blue-ocean-sauna-songdo', 'sauna_spa', '블루오션'],
+    ['malt-house-incheon-songdo', 'dining', '더몰트하우스 인천송도점'],
+    ['compose-coffee-incheon-songdo-central-park', 'cafe', '컴포즈커피 인천송도센트럴파크점'],
+    ['chaeum-pharmacy-songdo', 'pharmacy', '채움약국'],
+  ])
+  const numbers = (text: string) => text.match(/\d+/g) ?? []
+  const addressNumbers = [['180', '11', '1', '109'], ['81', '6', '601'], ['180', '11', '3', '305'], ['180', '11', '1', '112'], ['197', '16', '2', '240']]
+  data.facilities.forEach((facility, index) => {
+    assert.equal(facility.isPublished, true)
     assert.equal(facility.lastVerifiedAt, null)
+    assert.equal(facility.walkingMinutes, null)
+    assert.equal(facility.naverMapUrl, null)
+    assert.deepEqual(Object.keys(facility.translations), ['ko', 'en', 'zh-CN', 'ja'])
+    for (const text of Object.values(facility.translations)) {
+      assert.ok(text.name.includes(facility.translations.ko.name))
+      assert.deepEqual(numbers(text.address), addressNumbers[index])
+      assert.ok(text.description.trim() && text.openingHours.trim())
+      assert.equal(text.notes, '') // Internal verification checklists do not belong in guest copy.
+      assert.equal(text.directions, '')
+    }
+    assert.equal(facility.englishPhrases.length, 2)
+    assert.ok(facility.englishPhrases[0]!.includes(facility.translations.en.address))
+    assert.ok(facility.englishPhrases[1]!.includes(facility.translations.en.openingHours))
+    for (const language of Object.keys(facility.closedDays) as GuideLanguage[]) {
+      assert.equal(Boolean(facility.closedDays[language]), facility.category === 'sauna_spa')
+    }
+  })
+  assert.doesNotMatch(JSON.stringify(data), /demo-|가상|fictional|제3자|third-party|第三方|第三者|휴계시간|Further checks|待确认|要確認/)
+})
+
+test('confirmed hours retain breaks, last order and day-specific closing in every language', () => {
+  const data = parseFacilityDataset(fresh())
+  const expectedTimes = [[], [], ['10:00','23:00','15:00','17:00','22:00'], ['08:00','22:00','21:00','20:00'], ['09:00','19:30','13:00','14:00','09:00','14:00']]
+  data.facilities.forEach((facility, index) => {
+    for (const [language, text] of Object.entries(facility.translations)) {
+      // Korean source is normalized only in this assertion; stored wording remains faithful.
+      const hours = text.openingHours.replace(/(?<!\d)9:00/g, '09:00').replace('15~17시', '15:00~17:00')
+      assert.deepEqual(hours.match(/\d{2}:\d{2}/g) ?? [], expectedTimes[index], `${facility.id}/${language}`)
+      if (index < 2) assert.match(hours, /24/)
+    }
+  })
+  const [cu, blue, malt, cafe, pharmacy] = data.facilities
+  assert.equal(cu!.translations.ko.openingHours, '24시간')
+  assert.equal(blue!.translations.ko.openingHours, '24시간 연중 무휴')
+  assert.equal(malt!.translations.ko.openingHours, '10:00~23:00(브레이크 타임 15~17시) 라스트 오더 22:00')
+  assert.equal(cafe!.translations.ko.openingHours, '08:00~22:00 (일요일 21:00 월,화 20:00 마감)')
+  assert.equal(pharmacy!.translations.ko.openingHours, '9:00~19:30(13:00~14:00 휴게시간) 토요일은 9:00~14:00')
+})
+
+test('real preview records are searchable, retain admin edits on export/import and still respect hiding', () => {
+  const data = parseFacilityDataset(fresh()), before = structuredClone(data)
+  assert.deepEqual(importFacilities(exportFacilities(data)), data)
+  for (const facility of data.facilities) {
+    assert.deepEqual(searchFacilities(data.facilities, facility.translations.ko.name).map(f => f.id), [facility.id])
+    for (const language of ['ko', 'en', 'zh-CN', 'ja'] as const) {
+      assert.deepEqual(searchGuestFacilities(data.facilities, facility.translations[language].name, facility.category, language).map(f => f.id), [facility.id])
+    }
+    const draft = facilityToDraft(facility)
+    draft.translations.ko.openingHours += '\n[QA edit]'
+    draft.isPublished = false
+    const edited = importFacilities(exportFacilities(saveFacility(data, draft, facility.id)))
+    assert.equal(edited.facilities.find(f => f.id === facility.id)!.translations.ko.openingHours, draft.translations.ko.openingHours)
+    assert.ok(!searchFacilities(edited.facilities).some(f => f.id === facility.id))
+    for (const language of ['ko', 'en', 'zh-CN', 'ja'] as const) assert.ok(!searchGuestFacilities(edited.facilities, '', 'all', language).some(f => f.id === facility.id))
   }
+  assert.deepEqual(data, before)
 })
 
 test('an empty dataset remains valid', () => {
@@ -127,7 +191,7 @@ test('all four keyword arrays are preserved and validated', () => {
   const data = parseFacilityDataset(fresh())
   assert.deepEqual(Object.keys(data.facilities[0]!.keywords), ['ko', 'en', 'zh-CN', 'ja'])
   for (const language of ['zh-CN', 'ja'] as const) {
-    const invalid = fresh()
+    const invalid = parseFacilityDataset(fresh())
     invalid.facilities[0]!.keywords[language] = ['  ']
     assert.throws(() => parseFacilityDataset(invalid), /Invalid facility dataset/)
   }

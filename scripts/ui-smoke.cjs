@@ -1,132 +1,199 @@
-/* Optional browser QA. Playwright is provided by the QA environment, not the application. */
+/* Optional focused MVP QA; Playwright lives outside app dependencies. No live map requests. */
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const { chromium } = require('playwright');
-
-const baseURL = process.env.CPH_UI_BASE_URL || 'http://127.0.0.1:5174';
-const artifactDir = process.env.CPH_UI_ARTIFACT_DIR || '/tmp/cph-step03-qa';
-const origin = new URL(baseURL).origin;
-const widths = [320, 375, 390, 430, 768, 1280];
-const results = [];
-const errors = [];
-const requests = [];
-
-function contrast(a, b) {
-  const luminance = hex => {
-    const rgb = hex.trim().replace('#', '').match(/../g).map(value => parseInt(value, 16) / 255).map(value => value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4);
-    return rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722;
-  };
-  const values = [luminance(a), luminance(b)].sort((x, y) => y - x);
-  return (values[0] + 0.05) / (values[1] + 0.05);
+const baseURL = process.env.CPH_UI_BASE_URL || 'http://127.0.0.1:5173';
+const adminURL = process.env.CPH_ADMIN_BASE_URL || 'http://127.0.0.1:5190';
+const artifactDir = process.env.CPH_UI_ARTIFACT_DIR || '/tmp/cph-mvp-qa';
+const files = ['facilities.json', 'hotel.json'].map(name => path.join(__dirname, '../src/data', name));
+const original = files.map(file => fs.readFileSync(file));
+const data = JSON.parse(original[0]);
+const languages = { en: 'English', ko: '한국어', 'zh-CN': '简体中文', ja: '日本語' };
+const results = [], errors = [], requests = [], interceptedMaps = [];
+const englishQueries = ['convenience store', 'sauna', 'Western restaurant', 'cafe', 'pharmacy'];
+async function count(page, selector, expected) {
+  await page.waitForFunction(({ selector, expected }) => document.querySelectorAll(selector).length === expected, { selector, expected });
 }
-
-async function checkLayout(page, label, expectDisabled = true) {
-  assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${label}: horizontal overflow`);
-  const clipped = await page.locator('h1, h2, h3, p, label, button').evaluateAll(elements => elements.filter(el => el.clientWidth > 0 && el.scrollWidth > el.clientWidth + 1).map(el => el.textContent));
-  assert.deepEqual(clipped, [], `${label}: clipped labels/text`);
-  const sizes = await page.locator('button, input[type="search"], nav a, .button').evaluateAll(elements => elements.map(el => ({ label: el.textContent || el.getAttribute('aria-label'), width: el.getBoundingClientRect().width, height: el.getBoundingClientRect().height })));
-  assert.ok(sizes.every(size => size.width >= 44 && size.height >= 44), `${label}: target smaller than 44px: ${JSON.stringify(sizes.filter(size => size.width < 44 || size.height < 44))}`);
-  if (expectDisabled) {
-    for (const button of await page.getByRole('button').all()) assert.ok(await button.isDisabled(), `${label}: unfinished button is enabled`);
-    for (const input of await page.getByRole('searchbox').all()) assert.ok(await input.isDisabled());
-  }
+async function layout(page) {
+  assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'horizontal overflow');
 }
-
+async function download(page) {
+  const pending = page.waitForEvent('download');
+  await page.getByRole('button', { name: '전체 시설 JSON 다운로드', exact: true }).click();
+  const file = await pending;
+  assert.equal(await file.failure(), null);
+  return JSON.parse(fs.readFileSync(await file.path(), 'utf8'));
+}
+async function upload(page, candidate) {
+  const pending = page.waitForEvent('dialog');
+  const uploading = page.getByLabel('시설 JSON 불러오기', { exact: true }).setInputFiles({ name: 'facilities.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(candidate)) });
+  const dialog = await pending;
+  assert.equal(dialog.type(), 'confirm');
+  await dialog.accept();
+  await uploading;
+}
+async function mapPopup(page, link, url) {
+  assert.equal(await link.getAttribute('href'), url);
+  assert.equal(await link.getAttribute('target'), '_blank');
+  assert.deepEqual((await link.getAttribute('rel')).split(' ').sort(), ['noopener', 'noreferrer']);
+  const pending = page.waitForEvent('popup');
+  await link.click();
+  const popup = await pending;
+  await popup.waitForLoadState('domcontentloaded');
+  assert.equal(popup.url(), new URL(url).href);
+  assert.equal(await popup.evaluate(() => window.opener === null), true);
+  await popup.close();
+}
 (async () => {
-  fs.mkdirSync(artifactDir, { recursive: true });
+  const { MESSAGES } = await import('../src/i18n/messages.ts');
+  const { USER_NAVER_PLACE_ROUTE } = await import('./naver-place-fixture.ts');
+  assert.equal(data.facilities.length, 5);
   const browser = await chromium.launch({ executablePath: process.env.CPH_CHROMIUM_PATH || '/usr/bin/chromium', headless: true, args: ['--no-sandbox'] });
+  const context = await browser.newContext({ viewport: { width: 1280, height: 900 }, acceptDownloads: true, reducedMotion: 'reduce' });
+  await context.route(url => url.hostname === 'map.naver.com', route => {
+    interceptedMaps.push(route.request().url());
+    return route.fulfill({ contentType: 'text/html', body: '<title>Local QA interception</title><p>No live route checked.</p>' });
+  });
+  await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: new URL(baseURL).origin });
+  context.on('request', request => requests.push(request.url()));
+  context.on('page', page => {
+    page.on('pageerror', error => errors.push(error.message));
+    page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
+    page.on('response', response => { if (response.status() >= 400) errors.push(`HTTP ${response.status()} ${response.url()}`); });
+  });
   try {
-    for (const width of widths) {
-      const context = await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
-      const page = await context.newPage();
-      page.on('pageerror', error => errors.push(error.message));
-      page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
-      page.on('request', request => requests.push(request.url()));
-      page.on('response', response => { if (response.status() >= 400) errors.push(`HTTP ${response.status()}: ${response.url()}`); });
-
-      assert.equal((await page.goto(`${baseURL}/`)).status(), 200);
-      await page.waitForURL('**/guest');
-      await page.getByRole('heading', { level: 1, name: 'Welcome to your stay.' }).waitFor();
-      results.push(`PASS ${width}px / redirects to /guest`);
-      for (const route of ['/guest', '/staff', '/review-missing-page']) {
-        assert.equal((await page.goto(baseURL + route)).status(), 200);
-        const title = route === '/guest' ? 'Welcome to your stay.' : route === '/staff' ? '직원용 안내' : 'Page not found';
-        await page.getByRole('heading', { level: 1, name: title, exact: true }).waitFor();
-        await page.reload();
-        await page.getByRole('heading', { level: 1, name: title, exact: true }).waitFor();
-        if (route === '/staff') await page.locator('.staff-category-grid button:not([disabled])').first().waitFor();
-        if (route === '/guest') { await page.locator('.hotel-category-grid button:not([disabled])').first().waitFor(); await page.locator('.guest-search-panel input:not([disabled])').waitFor(); }
-        await checkLayout(page, `${width}px ${route}`, route === '/review-missing-page');
-        if (route === '/guest') {
-          assert.equal(await page.locator('html').getAttribute('lang'), 'en');
-          assert.equal(await page.locator('a[href^="/staff"]').count(), 0);
-          assert.ok(await page.getByRole('searchbox').isEditable());
-          assert.equal(await page.locator('.language-options button').count(), 4);
-          assert.equal(await page.locator('.language-options button[aria-pressed="true"]').innerText(), 'English');
-          assert.ok(await page.getByText('Development preview', { exact: true }).isVisible());
-          const columns = await page.locator('.guest-category-grid').first().evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length);
-          assert.equal(columns, width < 600 ? 2 : width < 1000 ? 3 : 4);
-          if (width === 390) {
-            const tokens = await page.evaluate(() => Object.fromEntries(['text', 'text-secondary', 'surface', 'background', 'subtle', 'primary', 'focus'].map(key => [key, getComputedStyle(document.documentElement).getPropertyValue(`--color-${key}`).trim()])));
-            for (const [foreground, background] of [['text', 'surface'], ['text-secondary', 'surface'], ['text-secondary', 'background'], ['text-secondary', 'subtle'], ['surface', 'primary']]) {
-              assert.ok(contrast(tokens[foreground], tokens[background]) >= 4.5, `Insufficient text contrast: ${foreground}/${background}`);
-            }
-            assert.ok(contrast(tokens.focus, tokens.surface) >= 3);
-            results.push('PASS primary/secondary text token contrast >= 4.5:1 and focus-on-surface contrast >= 3:1');
-            await page.screenshot({ path: path.join(artifactDir, 'guest-390.png'), fullPage: true });
-          }
-          await page.keyboard.press('Tab');
-          assert.equal(await page.evaluate(() => document.activeElement.textContent), 'Skip to content');
-          assert.equal(await page.locator('.skip-link').evaluate(el => getComputedStyle(el).outlineWidth), '3px');
-          await page.keyboard.press('Enter');
-          assert.equal(await page.evaluate(() => document.activeElement.id), 'main-content');
-          await page.goto(`${baseURL}/guest`);
-          await page.getByRole('heading', { name: title, exact: true }).waitFor();
-          await page.keyboard.press('Tab');
-          await page.keyboard.press('Tab');
-          await page.keyboard.press('Tab');
-          assert.equal(await page.evaluate(() => document.activeElement.getAttribute('href')), '#hotel-information');
-          await page.keyboard.press('Enter');
-          assert.equal(new URL(page.url()).hash, '#hotel-information');
-        } else if (route === '/staff') {
-          assert.equal(await page.locator('html').getAttribute('lang'), 'ko');
-          assert.equal(await page.locator('.staff-category-grid button').count(), 11);
-          assert.equal(await page.locator('.staff-category-grid button[aria-pressed="true"]').innerText(), '전체');
-          assert.ok(await page.getByRole('button', { name: '복사', exact: true }).isDisabled());
-          const columns = await page.locator('.staff-workspace').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length);
-          assert.equal(columns, width >= 1000 ? 2 : 1);
-          if (width === 1280) await page.screenshot({ path: path.join(artifactDir, 'staff-1280.png'), fullPage: true });
-          await page.getByRole('link', { name: '고객 화면 미리보기' }).click();
-          await page.waitForURL('**/guest');
-          await page.getByRole('heading', { name: 'Welcome to your stay.' }).waitFor();
-          await page.goBack();
-          await page.waitForURL('**/staff');
-          await page.getByRole('heading', { name: title }).waitFor();
-        } else {
-          await page.getByRole('link', { name: 'Return to Guest Guide' }).click();
-          await page.waitForURL('**/guest');
-          await page.getByRole('heading', { name: 'Welcome to your stay.' }).waitFor();
-        }
-        results.push(`PASS ${width}px ${route}: load/reload, no clipping/overflow, target sizes, disabled state and navigation`);
+    fs.mkdirSync(artifactDir, { recursive: true });
+    const staff = await context.newPage();
+    await staff.goto(`${baseURL}/staff`);
+    await count(staff, '.facility-card', 5);
+    assert.deepEqual(await staff.locator('.facility-card h3').allTextContents(), data.facilities.map(f => f.translations.ko.name));
+    assert.ok(await staff.getByText('프론트 테스트용 미리보기', { exact: true }).isVisible());
+    assert.equal(await staff.locator('.staff-category-grid').getByRole('button', { name: 'ATM', exact: true }).count(), 0);
+    for (const [index, item] of data.facilities.entries()) {
+      for (const query of [item.translations.ko.name, englishQueries[index]]) {
+        await staff.getByRole('searchbox').fill(query);
+        await count(staff, '.facility-card', 1);
+        assert.equal(await staff.locator('.facility-card h3').innerText(), item.translations.ko.name);
       }
-      const svg = await context.request.get(`${baseURL}/favicon.svg`);
-      assert.equal(svg.status(), 200);
-      assert.match(await svg.text(), /<svg[\s>]/);
-      const ico = await context.request.get(`${baseURL}/favicon.ico`);
-      assert.equal(ico.status(), 200);
-      assert.equal((await ico.body()).readUInt16LE(2), 1);
-      assert.equal((await ico.body()).readUInt16LE(4), 1);
-      results.push(`PASS ${width}px local SVG/ICO favicon HTTP 200`);
-      await context.close();
+      await staff.locator('.facility-card button').click();
+      await staff.locator('#staff-detail-title').waitFor();
+      assert.equal(await staff.locator('#staff-detail-title').innerText(), item.translations.ko.name);
+      assert.equal(await staff.locator('.detail-facts dd').nth(0).innerText(), item.translations.ko.address);
+      assert.equal(await staff.locator('.detail-facts dd').nth(1).innerText(), item.translations.ko.openingHours);
+      assert.deepEqual(await staff.locator('.english-phrase-text').allTextContents(), item.englishPhrases);
+      await staff.getByRole('button', { name: '영어 문구 1 복사', exact: true }).click();
+      await staff.waitForFunction(expected => navigator.clipboard.readText().then(text => text === expected), item.englishPhrases[0]);
+      await staff.getByRole('button', { name: '전체 문구 복사', exact: true }).click();
+      await staff.waitForFunction(expected => navigator.clipboard.readText().then(text => text === expected), item.englishPhrases.join('\n'));
+      assert.ok(await staff.locator('.naver-map-disabled').isDisabled());
+      await layout(staff);
     }
-    assert.deepEqual(errors, [], 'Browser JavaScript, console or HTTP errors');
-    assert.ok(requests.every(url => new URL(url).origin === origin), 'Remote resource requested');
-    assert.ok(requests.some(url => /\/src\/data\/facilityDataset/.test(new URL(url).pathname)), 'Staff shared data was not loaded');
-    results.push('PASS zero JavaScript/console/HTTP errors; no remote resource/API requests; shared canonical data loaded; active Guest guide and Staff preserved');
+    await staff.getByRole('searchbox').fill('');
+    await count(staff, '.facility-card', 5);
+    await staff.screenshot({ path: path.join(artifactDir, 'staff-desktop.png'), fullPage: true });
+    results.push('PASS Staff 1280px: five real facilities, Korean/English searches, addresses/hours, individual/full real clipboard copy, missing maps disabled, no ATM category');
+
+    const guest = await context.newPage();
+    await guest.setViewportSize({ width: 390, height: 844 });
+    await guest.goto(`${baseURL}/`);
+    await guest.waitForURL('**/guest');
+    await count(guest, '.facility-card', 5);
+    assert.equal(await guest.locator('a[href^="/staff"]').count(), 0);
+    assert.ok((await guest.request.get(`${baseURL}/favicon.svg`)).ok());
+    for (const [language, label] of Object.entries(languages)) {
+      const m = MESSAGES[language];
+      await guest.locator('.language-options').getByRole('button', { name: label, exact: true }).click();
+      assert.equal(await guest.locator('html').getAttribute('lang'), language);
+      assert.deepEqual(await guest.locator('.facility-card h3').allTextContents(), data.facilities.map(f => f.translations[language].name));
+      for (const item of data.facilities) {
+        await guest.locator('.guest-category-grid').getByRole('button', { name: m.categories[item.category], exact: true }).click();
+        await guest.getByRole('searchbox').fill(item.translations[language].name);
+        await count(guest, '.facility-card', 1);
+        await guest.locator('.facility-card button').click();
+        assert.equal(await guest.locator('#guest-detail-title').innerText(), item.translations[language].name);
+        assert.equal(await guest.locator('.detail-facts dd').nth(0).innerText(), item.translations[language].address);
+        assert.equal(await guest.locator('.detail-facts dd').nth(1).innerText(), item.translations[language].openingHours);
+        assert.ok(await guest.locator('.naver-map-disabled').isDisabled());
+        await layout(guest);
+        await guest.getByRole('button', { name: m.ui.closeDetails, exact: true }).click();
+        await guest.getByRole('searchbox').fill('');
+        await guest.getByRole('button', { name: m.ui.allFacilities, exact: true }).click();
+        await count(guest, '.facility-card', 5);
+      }
+      await guest.locator('.guest-category-grid').getByRole('button', { name: m.categories.transportation, exact: true }).click();
+      await count(guest, '.facility-card', 0);
+      assert.ok(await guest.getByText(m.ui.airportBusPending, { exact: true }).isVisible());
+      await count(guest, '.pending-transit-notice button', 2);
+      assert.equal(await guest.locator('.pending-transit-notice a').count(), 0);
+      for (const button of await guest.locator('.pending-transit-notice button').all()) assert.ok(await button.isDisabled());
+      await guest.getByRole('button', { name: m.ui.allFacilities, exact: true }).click();
+      await count(guest, '.facility-card', 5);
+    }
+    await guest.screenshot({ path: path.join(artifactDir, 'guest-mobile.png'), fullPage: true });
+    results.push('PASS Guest 390px: all five real facilities in four languages, category+search+detail, no fictional records/staff menu, no horizontal overflow, airport bus pending, maps unavailable');
+
+    const admin = await context.newPage();
+    await admin.goto(adminURL);
+    await count(admin, '.admin-records li', 5);
+    for (const item of data.facilities) {
+      await admin.getByLabel('시설명 검색', { exact: true }).fill(item.translations.ko.name);
+      await count(admin, '.admin-records li', 1);
+      await admin.getByRole('button', { name: `편집 ${item.id}`, exact: true }).click();
+      assert.ok(await admin.getByLabel('공개 시설로 표시', { exact: true }).isChecked());
+      for (const label of ['네이버 지도 길찾기 URL', '마지막 확인일', '예상 도보시간 (분)']) assert.equal(await admin.getByLabel(label, { exact: true }).inputValue(), '');
+      for (const [language, label] of Object.entries(languages)) {
+        await admin.getByRole('group', { name: '편집 언어', exact: true }).getByRole('button', { name: label, exact: true }).click();
+        for (const [label, field] of [['시설명','name'],['시설 설명','description'],['주소','address'],['영업시간','openingHours'],['이동 안내','directions'],['참고 사항','notes']]) assert.equal(await admin.getByLabel(label, { exact: true }).inputValue(), item.translations[language][field]);
+        assert.equal(await admin.getByLabel('휴무일', { exact: true }).inputValue(), item.closedDays[language]);
+      }
+    }
+    await admin.getByLabel('시설명 검색', { exact: true }).fill('');
+    const item = data.facilities[0];
+    await admin.getByRole('button', { name: `편집 ${item.id}`, exact: true }).click();
+    await admin.getByRole('group', { name: '편집 언어', exact: true }).getByRole('button', { name: '한국어', exact: true }).click();
+    const edited = structuredClone(data);
+    edited.facilities[0].translations.ko.openingHours += '\n[temporary QA edit]';
+    // Transient browser-memory compatibility/security case; never register this route in source data.
+    edited.facilities[0].naverMapUrl = USER_NAVER_PLACE_ROUTE;
+    await admin.getByLabel('영업시간', { exact: true }).fill(edited.facilities[0].translations.ko.openingHours);
+    await admin.getByLabel('네이버 지도 길찾기 URL', { exact: true }).fill(USER_NAVER_PLACE_ROUTE);
+    await admin.getByRole('button', { name: '편집 내용 저장', exact: true }).click();
+    await mapPopup(admin, admin.getByRole('link', { name: '등록 링크 확인', exact: true }), USER_NAVER_PLACE_ROUTE);
+    await admin.getByRole('button', { name: '가져오기 / 내보내기', exact: true }).click();
+    assert.deepEqual(await download(admin), edited);
+    await upload(admin, edited);
+    assert.deepEqual(await download(admin), edited);
+    await admin.getByRole('button', { name: '시설 관리', exact: true }).click();
+    await admin.getByRole('button', { name: `편집 ${item.id}`, exact: true }).click();
+    assert.equal(await admin.getByLabel('영업시간', { exact: true }).inputValue(), edited.facilities[0].translations.ko.openingHours);
+    await admin.getByRole('button', { name: '가져오기 / 내보내기', exact: true }).click();
+    await upload(admin, data);
+    assert.deepEqual(await download(admin), data);
+    await admin.getByRole('button', { name: '데이터 검증', exact: true }).click();
+    assert.ok(await admin.getByRole('heading', { name: '시설 개발 데이터 검증 · PASS', exact: true }).isVisible());
+    assert.ok(await admin.getByRole('heading', { name: '현재 운영 배포 검증 · FAIL', exact: true }).isVisible());
+    results.push('PASS Admin: five records, four-language values/visibility/unknown fields, edit/save/download/reimport retains change, original restored, demo deployment blocked');
+
+    // Preserve shared-link security coverage without repeating old per-STEP browser suites.
+    const fixture = structuredClone(data);
+    fixture.facilities[0].naverMapUrl = USER_NAVER_PLACE_ROUTE;
+    await context.route(url => url.pathname === '/src/data/facilities.json', route => route.fulfill({ contentType: 'application/javascript', body: `export default ${JSON.stringify(fixture)};` }));
+    const mapPage = await context.newPage();
+    for (const audience of ['staff', 'guest']) {
+      await mapPage.goto(`${baseURL}/${audience}`);
+      await count(mapPage, '.facility-card', 5);
+      await mapPage.locator('.facility-card button').first().click();
+      await mapPopup(mapPage, mapPage.locator('.naver-map-link'), USER_NAVER_PLACE_ROUTE);
+    }
+    assert.equal(interceptedMaps.length, 3);
+    results.push('PASS Admin/Staff/Guest PLACE_POI links: original URL preserved, new tab with noopener/noreferrer and null opener. Three navigations intercepted locally; live Naver service NOT verified.');
+    assert.deepEqual(errors, []);
+    const origins = [new URL(baseURL).origin, new URL(adminURL).origin];
+    assert.ok(requests.every(url => origins.includes(new URL(url).origin) || interceptedMaps.includes(url)), 'unexpected external request');
+    files.forEach((file, index) => assert.deepEqual(fs.readFileSync(file), original[index]));
+    results.push('PASS zero JavaScript/console/HTTP errors or unhandled external requests; QA did not modify source JSON. Live maps/devices/other browsers not tested.');
     fs.writeFileSync(path.join(artifactDir, 'results.txt'), results.join('\n') + '\n');
     console.log(results.join('\n'));
-  } finally {
-    await browser.close();
-  }
+  } finally { await context.close(); await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

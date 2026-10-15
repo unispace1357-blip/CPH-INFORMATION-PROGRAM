@@ -31,7 +31,7 @@ export function GuideLayout({ audience = 'guest' }: { audience?: 'guest' | 'staf
       </header>
       <main id="main-content" tabIndex={-1}><PageContainer variant={audience}><Outlet /></PageContainer></main>
       <footer className="site-footer"><PageContainer variant={audience}>
-        {isStaff ? <><p className="footer-title">CPH Guest Information Guide · 직원용</p><p>안내 정보는 실제 사용 전 호텔 담당자의 확인이 필요합니다.</p><p>가상 데이터는 실제 고객 안내에 사용하지 마세요. 미확인 항목은 담당자 확인이 필요합니다.</p></> : <><p className="footer-title">{m.footerTitle}</p><p>{m.footerDescription}</p></>}
+        {isStaff ? <><p className="footer-title">CPH Guest Information Guide · 직원용</p><p>안내 정보는 실제 사용 전 호텔 담당자의 확인이 필요합니다.</p><p>프론트 테스트용 미리보기입니다. 미확인 항목은 담당자 확인이 필요합니다.</p></> : <><p className="footer-title">{m.footerTitle}</p><p>{m.footerDescription}</p></>}
       </PageContainer></footer>
     </div>
   )

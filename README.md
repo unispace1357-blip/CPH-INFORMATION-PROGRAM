@@ -1,53 +1,38 @@
 # CPH Guest Information Guide
 
-송도 센트럴파크호텔 프론트의 QR 기반 다국어 안내 프로그램입니다.
-현재 **STEP 07-B-2 / Batch 01: 실제 시설 5개 비공개 초안 등록**까지 진행했습니다. 사용자 수정 1212.xlsx를 기준으로 한국어 원문과 4개 언어 안내 초안을 입력했습니다. 5개 모두 isPublished false, 확인일·도보시간·지도 URL은 null이며 사용자 검수 대기입니다. 기존 가상 6개와 데이터/기능 구조를 보존했습니다. [시설·출처·번역 초안·미확인 사항](docs/step07b2-batch01-data.md)을 참고하세요.
-
-STEP 07-B-1의 지도 URL 검증·관리자 편집·Staff/Guest 링크·공항버스 준비 상태·ATM 표시 정책을 유지합니다. 이번 배치에서는 거리순 정렬을 포함한 추가 기능을 개발하지 않았습니다.
-
-STEP 07-A의 사용자 승인 호텔 안내 34개 항목·4개 언어와 문단 표시를 유지합니다. 체크인 15:00·체크아웃 12:00·확인일 2026-10-15이며 H33 비대면 체크아웃은 공개 보류입니다. 기존 Staff/Guest 및 로컬 관리자 기능을 유지합니다.
-
-- 호텔 안내 데이터: 사용자 승인 원고 반영. 재번역·새 호텔 정책 생성 없음.
-- 주변 시설 데이터: **가상 6개 보존 + 실제 비공개 초안 5개**. 공개 검색에는 기존 가상 5개만 표시되며 실제 안내에 사용 금지.
-- dataStatus: 시설·호텔 모두 **demo 유지**.
-- 운영 배포: **미실시**. 실제 고객 공개: **금지**.
-- 미완성: 호텔 description 4개 언어, H33 문자 수신번호 공개 승인. 번역기 2곳 대조는 미실시입니다.
-
-원본 정보·35개 ID 매핑표·H33 보류 원고·검증 결과는 [STEP 07-A 호텔 데이터 기록](docs/step07a-hotel-data.md)에 있습니다.
+송도 센트럴파크호텔 프론트에서 로컬로 시험 사용하는 시설 안내 MVP입니다. React·TypeScript·Vite·React Router·CSS·JSON을 사용하며 서버 DB·외부 API·원격 폰트·고객 개인정보 수집은 없습니다.
 
 ## 실행
 
-Node.js 24 LTS와 npm을 사용합니다. 저장소 루트에서 실행하세요.
+Node.js 24 LTS에서 실행합니다.
 
 ```bash
 npm ci
-npm run dev -- --host 0.0.0.0
-```
-
-기본 개발 포트는 5173입니다. `/`는 `/guest`로 이동합니다.
-- `/guest`: 고객용 4개 국어 호텔·주변 시설 안내
-- `/staff`: 직원용 검색·상세·English Guide
-- 그 외 주소: 페이지 없음 화면
-
-쓰기 제한이 있는 클라우드 환경에서는 `npm --cache /tmp/cph-npm-cache ci`를 사용할 수 있습니다.
-
-## 로컬 관리자 실행
-
-```bash
+npm run dev
+# 별도 터미널: 로컬 관리자
 npm run admin:dev
 ```
 
-담당자 PC에서 실행하면 기본 `127.0.0.1:5190`에서 관리자 화면을 사용할 수 있습니다. 공개 앱의 `/admin` 라우트는 없습니다. 관리자와 공개 앱은 진입점·빌드 경로·개발 캐시가 분리돼 있습니다. 관리자 로컬 빌드 검사는 `npm run admin:build`이며 출력 `dist-admin/`은 공개 배포하지 않습니다.
+개발 서버가 출력하는 주소의 `/staff`, `/guest`를 여세요. `/`는 `/guest`로 이동하고 없는 경로는 404 안내를 표시합니다. 관리자는 localhost에서만 실행합니다.
 
-시설을 선택하거나 추가한 뒤 언어별 정보를 입력하고 **편집 내용 저장**을 누르세요. 이 저장은 현재 브라우저 작업 데이터만 변경합니다. 가져오기/내보내기에서 전체 시설·호텔 JSON을 내려받고, PC에 파일이 저장된 것을 확인한 뒤 **파일 저장 확인** 버튼을 누릅니다. 다운로드 요청만으로 변경사항 경고를 해제하지 않습니다. 원본 JSON·GitHub·사이트에는 자동 반영되지 않습니다. 자세한 사용법은 [관리자 사용 안내](docs/admin-manager.md)에 있습니다.
+## 현재 사용 범위
 
-## 검증 및 빌드
+- Staff: 한·영 시설 검색, 카테고리, 주소·영업시간·상세 확인, 영어 안내 개별/전체 복사.
+- Guest: 모바일 화면, 한국어·영어·중국어 간체·일본어 선택, 카테고리·시설 검색·상세, 승인된 호텔 기본 안내.
+- Admin: 시설·호텔 JSON 편집, 메모리 저장, 파일 다운로드·다시 불러오기, 개발/운영 검증.
+- 실제 주변 시설 5개: CU 송도센쓰리점, 블루오션(사우나), 더몰트하우스 인천송도점, 컴포즈커피 인천송도센트럴파크점, 채움약국. 가상 시설은 앱 데이터에서 제거했습니다.
 
-STEP 07-B-2 Batch 01 (2026-10-16): 필수 명령 validate, validate:hotel-copy, test, lint, build, admin:build 모두 PASS. 기존 296개 + 신규 25개 = **321개 테스트** 통과(실패·스킵 0). 관련 단위 173개와 실제 관리자/공개 제외 집중 QA를 통과했습니다. 전체 브라우저 QA는 이번 배치에서 재실행하지 않았습니다. [배치 검증·초안·출처 기록](docs/step07b2-batch01-data.md)을 참고하세요.
+실제 시설은 **로컬 미리보기에서 표시**하도록 `isPublished: true`이며, 시설·호텔 모두 **demo**입니다. 시설 외국어는 사용자 검수 전 초안입니다. 도보시간·시설별 확인일·실제 길찾기 URL은 미확인 상태로 유지합니다. 지도 버튼은 등록된 유효 URL이 있을 때만 활성화됩니다. 공항버스는 안내 준비 중으로 비활성이며 외부 ATM 추천은 없습니다.
 
-실제 네이버 공유 URL 호환성 보완 (2026-10-15): 영문·숫자 위치 식별값의 PLACE_POI와 한국어 원문/인코딩 이름을 지원하며 기존 숫자 좌표·차단 정책을 유지합니다. 관련 단위 76개와 집중 Staff/Guest/Admin 지도 QA PASS, 최종 필수 명령 6개 각 1회 PASS, 전체 **296개 테스트** 통과(기존 268 + 신규 28, 실패/스킵 0). 실제 네이버 연결은 환경 프록시의 터널 거부로 미검증입니다. [보완 내용·검증 범위](docs/step07b-map-link-foundation.md)를 참고하세요. 실제 시설·URL은 원본 JSON에 등록하지 않았습니다.
+운영 사이트·Cloudflare·QR 배포는 하지 않습니다. `npm run build`의 `dist/`는 개발 확인용입니다. `npm run build:production`은 DEMO를 차단하고 운영 조건을 만족할 때만 `dist-production/`을 만듭니다. 공개 여부는 인증 기능이 아니며 공개 GitHub·JSON에 비밀 정보나 개인정보를 넣지 않습니다.
 
-STEP 07-B-1 (2026-10-15): 아래 필수 검증·호텔 원고 대조·고객/관리자 빌드 모두 PASS, 기존 220개 + 신규 48개 = **268개 테스트** 통과(실패·스킵 0). `test:map-ui`, `test:guest-ui`, `test:staff-ui`, `test:admin-ui`도 실제 Chromium에서 PASS입니다. 지도 팝업은 가상 경로 Fixture와 로컬 응답으로 확인했으며 실제 네이버 경로·인쇄·기기 앱 연결은 미검증입니다. 실제 JSON에는 지도 URL을 쓰지 않았고 두 운영 명령은 예상 종료 코드 1로 차단됩니다. 상세 결과는 [STEP 07-B-1 기록](docs/step07b-map-link-foundation.md)에 있습니다.
+## 구조
+
+`src/data/`에 시설·호텔 JSON과 스키마, `src/types/`에 공통 계약, `src/services/`에 검색·표시·복사·지도 검증, `src/i18n/`에 고객 UI 문구가 있습니다. Staff/Guest는 같은 시설 JSON을 읽고 관리자는 `tools/admin/`의 별도 진입점을 사용합니다.
+
+`src/components/ui/`의 버튼·검색창·카테고리·시설 카드·안내·언어 선택 등을 공유합니다. 색상·간격은 `src/styles/tokens.css`에 있으며 외부 CDN 대신 로컬 SVG·시스템 폰트를 사용합니다. Guest는 모바일 2열, 600px부터 3열, 1000px부터 4열 카테고리이며 Staff 결과/상세는 1000px부터 2열입니다. 고객 화면에는 직원 메뉴가 없습니다.
+
+## 검증
 
 ```bash
 npm run validate
@@ -55,121 +40,22 @@ npm run validate:hotel-copy
 npm run test
 npm run lint
 npm run build
-npm run preview -- --host 0.0.0.0
-```
-
-STEP 07-A (2026-10-15): `validate`, `validate:hotel-copy`, `test`, `lint`, `build`, `admin:build` PASS. 기존 166개 + 신규 54개 = **220개 테스트**, 실패·스킵 0. 엑셀 원본을 다시 읽어 140개 추출 셀·136개 반영 셀을 직접 대조했습니다. `test:hotel-ui`와 기존 Guest/Staff/Admin/경로 브라우저 검사 모두 PASS입니다. 390px 영어 조식·한국어 체크인·중국어 객실·일본어 반려동물 정책 캡처도 실제 승인 데이터를 사용합니다. 운영 명령은 예상 종료 코드 1로 차단되고, 이전 `dist-production/`을 검증 전에 정리합니다. 상세 결과와 미검증 범위는 [STEP 07-A 기록](docs/step07a-hotel-data.md)에 있습니다.
-
-아래는 STEP 06 당시 결과입니다. 위 기본 4개 명령과 `admin:build` PASS, **166개 자동 테스트** 통과(기존 131 + 신규 35, 실패·스킵 0). `test:admin-ui`, `test:ui`, `test:staff-ui`, `test:guest-ui`도 실제 Chromium에서 PASS입니다. 관리자 390·768·1280·1440px, Guest/경로 6개 폭, Staff 업무 4개 폭을 확인했습니다. 가상 production Fixture로 실제 Vite 산출물을 만들어 비공개 고유 문자열 34개와 관리자 코드·HTML·에셋이 없는지 검사했습니다. 두 원본 JSON은 demo 상태로 유지하고 운영 명령은 예상 종료 코드 1로 차단됩니다. 사용법·당시 결과는 [관리자 사용 안내](docs/admin-manager.md)에 있습니다.
-
-아래는 STEP 05 당시 결과입니다. 위 4개 검증 명령 PASS, 기존 91개와 신규 40개 자동 테스트 **131개** 통과(실패·스킵 0개). 실제 headless Chromium으로 Guest의 4개 언어를 320·375·390·430·768·1280px에서 확인했습니다. 기존 `test:ui`, `test:staff-ui`와 신규 `test:guest-ui`도 PASS입니다. 호텔/시설 오류 분리, 언어·상세 선택 유지, 키보드·터치 영역, 가로 넘침, favicon과 외부 요청을 검증했습니다. demo 운영 배포 차단은 유지합니다. 자세한 구조·당시 결과는 [고객용 가이드](docs/guest-guide.md)에 있습니다.
-
-아래는 STEP 04 당시 결과입니다. 위 4개 검증 명령 PASS, 기존 56개와 신규 35개 자동 테스트 **91개** 통과. 직원용 검색·선택·복사는 실제 Chromium 320·390·768·1280px에서 확인했습니다. 자세한 직원용 규칙과 당시 결과는 [직원용 가이드](docs/staff-guide.md)에 있습니다.
-
-아래는 STEP 03 당시 검증 결과입니다. STEP 03: 위 4개 검증 명령 PASS, 기존 테스트 56개 통과. 실제 Chromium으로 320·375·390·430·768·1280px 화면과 경로·키보드·비활성 상태를 확인했습니다. favicon SVG/ICO는 HTTP 200이며 브라우저 콘솔 오류·외부 리소스 요청이 없었습니다.
-
-UI 구조, 공통 컴포넌트, 반응형 기준과 선택적인 `npm run test:ui` 실행 방법은 [STEP 03 UI 문서](docs/ui-system.md)에 있습니다.
-
-`validate`는 시설·호텔 JSON을 로컬에서 검증하고, `test`는 데이터 코드·테스트의 엄격한 타입 검사와 자동 테스트를 실행합니다. Node.js 24의 TypeScript 실행을 사용합니다. 기존 `validate:data`, `test:data`도 별칭으로 유지합니다.
-`build`는 개발용 JSON 검증, 앱 TypeScript 검사와 정적 파일 빌드를 실행하며 결과는 `dist/`에 생성됩니다. 개발 빌드에서는 demo 데이터를 허용합니다.
-
-고객 배포용 빌드는 별도 명령을 사용합니다.
-
-```bash
-npm run validate:production
+npm run admin:build
+# 현재 데이터에서 실패해야 정상: DEMO 운영 배포 차단
 npm run build:production
 ```
 
-시설·호텔 데이터가 모두 `production`이고 공개 시설·호텔의 필수 안내와 확인일을 충족해야 성공합니다. 운영 확인일은 미래 날짜를 허용하지 않습니다. 현재 demo 파일로는 종료 코드 1로 차단됩니다. 배포 빌드 출력은 개발 빌드와 분리된 `dist-production/`입니다. 자세한 필수 조건은 [데이터 명세](docs/data-model.md)에 있습니다.
+보안·데이터 무결성·승인 호텔 원고/H33 보류·비공개 번들 제외·운영 배포 차단 테스트는 유지합니다. 반복되던 단계별 브라우저 검사는 `npm run test:ui` 하나로 통합했습니다. 별도 QA 환경의 Playwright·Chromium과 실행 중인 앱/관리자 서버가 필요하며 앱 의존성에는 추가하지 않았습니다.
 
-STEP 06부터 운영 빌드는 원본 검증 → 공개 시설만 선별 → 운영 검증 → 임시 스냅샷 → Vite 빌드로 연결됩니다. 원본 전체 JSON을 덮어쓰지 않으며 비공개 시설은 운영 번들에 들어가지 않습니다. 공개 빌드의 관리자 모듈 의존성도 검사합니다. `dist/` 개발 빌드는 기존 전체 demo JSON을 포함할 수 있으므로 고객 배포에 사용하지 않습니다.
-
-STEP 07-A에서 운영 명령의 첫 단계에 고정 `dist-production/` 정리를 추가했습니다. 사전 검증·타입 검사·빌드 실패 전에 오래된 출력을 제거하며 체크아웃·원본 데이터 경로는 정리 대상으로 허용하지 않습니다.
-
-STEP 02 보완 검증: `validate`, `test`, `lint`, `build` PASS, 테스트 56개 통과(실패·스킵 0개). demo 상태의 `validate:production`, `build:production`은 예상대로 종료 코드 1로 차단됐고 배포 출력은 생성되지 않았습니다. 이 문단은 STEP 02 당시 결과입니다. STEP 03의 브라우저 결과는 UI 문서에서 확인할 수 있으며 실제 호스팅 배포는 수행하지 않았습니다.
-
-STEP 01 재검수 (2026-10-13):
-
-| 검사 | 결과 |
-| --- | --- |
-| `npm ci --cache /tmp/cph-npm-cache` | PASS (종료 코드 0, 잠금 파일 변경 없음) |
-| `npm run lint` | PASS (종료 코드 0) |
-| `npm run build` | PASS (종료 코드 0, TypeScript 검사 포함) |
-| 개발 서버 및 `/guest`, `/staff`, 없는 경로 | PASS (HTTP 200, 각 화면의 제목 확인) |
-| `.env`, `.env.*` 제외 / `.env.example` 예외 | PASS (`git check-ignore` 확인) |
-| 실제 Chromium 154 브라우저 검증 | PASS (아래 범위) |
-| 브라우저 콘솔의 리소스 오류 없음 | FAIL (`/favicon.ico` 404 발생) |
-
-실제 headless Chromium에서 1280px·390px·320px 너비로 직접 접속, 새로고침, 메뉴 클릭, 활성 메뉴, 뒤로/앞으로 이동, 없는 경로에서 고객 화면으로 복귀, `/`에서 `/guest`로 이동을 확인했습니다. 가로 넘침과 JavaScript 실행 예외는 없었으며 데스크톱·390px 화면 캡처도 확인했습니다. 없는 경로는 SPA 특성상 HTTP 200으로 로드된 뒤 앱 내부에서 404 안내 화면을 표시합니다.
-
-위 STEP 01 당시의 favicon 404는 STEP 03에서 로컬 SVG/ICO를 추가하여 해결했습니다. Cloudflare 배포, 실제 휴대전화, Safari·Firefox는 미검증입니다. STEP 01 당시에는 자동화 테스트 스위트가 없었습니다. STEP 02에서는 데이터 검증 테스트를 추가했습니다.
-
-## 폴더 구조
-
-```text
-src/
-  components/layout/GuideLayout.tsx  # audience별 전용 헤더·내비게이션·푸터
-  components/ui/                    # 공통 UI 컴포넌트 10개와 로컬 Icon
-  components/staff/                 # 검색 결과·상세·English Guide
-  components/guest/                 # 호텔 안내·시설 결과·고객용 상세
-  i18n/                            # 4개 언어 UI 사전·표시 함수·언어 Context
-  services/                        # 검색·표시·데이터 로딩·클립보드
-  config/uiCategories.ts            # 원본 코드의 Staff/Guest 표시 이름
-  pages/guest/GuestPage.tsx          # 고객용 언어·검색·필터·선택 상태
-  pages/staff/StaffPage.tsx          # 직원용 시작 화면
-  pages/NotFoundPage.tsx            # 잘못된 주소 안내
-  data/facilities.json              # 가상 시설 6개를 포함하는 공통 데이터
-  data/facilities.schema.json       # JSON Schema (draft-07)
-  data/validateFacilityDataset.ts   # 스키마·날짜·중복 ID 검증
-  data/hotel.json                  # 사용자 승인 호텔 원고, demo 유지
-  data/hotel.schema.json           # 호텔 JSON Schema
-  data/validateHotelDataset.ts     # 호텔 정보 검증
-  data/validateProductionData.ts   # 고객 배포용 운영 필수 조건 검증
-  data/facilityDataset.ts          # 공통 시설 JSON 검증·객체 생성
-  data/hotelDataset.ts             # 호텔 JSON 검증·객체 생성
-  data/index.ts                    # 두 공통 객체의 기존 공개 인터페이스
-  types/guide.ts                   # 공통 언어·데이터 상태 타입
-  types/facility.ts                # 시설 타입
-  types/hotel.ts                   # 호텔 기본 정보 타입
-  styles/tokens.css                # 색상·폰트·간격·모서리 토큰
-  styles/global.css                # 모바일 우선 공통 스타일
-  App.tsx                          # React Router 라우트
-  main.tsx                         # React 진입점
-  index.css                        # 공통 스타일 진입점
+```bash
+NODE_PATH=/tmp/cph-browser-check/node_modules \
+CPH_UI_BASE_URL=http://127.0.0.1:5173 \
+CPH_ADMIN_BASE_URL=http://127.0.0.1:5190 \
+npm run test:ui
 ```
 
-시설 데이터와 UI를 분리했습니다. Staff와 Guest는 동일한 `facilityDataset` 객체를 사용합니다. `src/data/index.ts`의 기존 export를 유지하면서 객체 생성은 시설·호텔 모듈로 분리했습니다. UI는 각 모듈을 독립적으로 불러오므로 호텔 오류가 정상 시설 안내와 Staff를 차단하지 않습니다. 기존 스키마·타입·시설 JSON은 유지하고 호텔 JSON에만 승인 원고를 반영했습니다. 호텔 description은 빈 문자열이며 H33은 제외했습니다. 기존 시설 JSON의 새 필드가 누락된 경우 원본을 변경하지 않고 기본값으로 보완합니다.
+이 검사는 실제 시설 검색·카테고리·4개 언어·주소/시간·실제 클립보드·관리자 편집/파일 왕복을 확인합니다. 실물 모바일·Safari/Firefox·실제 네이버 경로 연결·현장 정보 정확성·시설 번역 감수는 별도 확인 대상입니다. 과거 단계별 결과는 Git 히스토리에 있습니다.
 
-Guest는 4개 언어 시설명·키워드를 검색하며, Staff는 기존 한·영 시설명·키워드·주소 검색을 유지합니다. Guest 화면의 시설 정보는 선택 언어의 값만 사용하고, 누락된 정보를 다른 언어로 대체하지 않습니다. 언어 상태는 앱 내 이동·시설 선택 동안 유지하며 전체 새로고침 시 영어로 초기화합니다. 개인정보나 언어 설정을 브라우저 저장소에 기록하지 않습니다.
-
-데이터 필드와 관리 규칙은 [데이터 명세](docs/data-model.md)에 있습니다.
-
-관리자·게시 준비 파일:
-
-```text
-tools/admin/
-  index.html / main.tsx / AdminApp.tsx # 공개 앱과 독립된 로컬 진입점
-  components/                        # 시설·호텔 편집, 필드·목록·검증 표시
-  services/                          # 메모리 작업·검증·JSON 다운로드
-  styles/admin.css                   # 공통 디자인을 사용하는 PC 레이아웃
-src/data/createPublicDataset.ts      # 검증 후 공개 시설 선별
-src/data/preparePublicDeployment.ts  # 운영 스냅샷 검증
-scripts/build-production.ts          # OS 전용 셸 명령 없는 운영 빌드
-vite.admin.config.ts / tsconfig.admin.json
-```
-
-## 운영 및 배포 원칙
-
-- 백엔드, 서버 DB, 외부 API, 실시간 지도·번역 API를 사용하지 않습니다.
-- 고객 개인정보를 수집하지 않으며 공개 코드·JSON에 비밀 정보를 저장하지 않습니다.
-- Staff 경로는 공개 화면입니다. 경로 이름은 접근 제어 기능이 아닙니다.
-- Admin은 로컬 전용 독립 진입점입니다. 공개 앱의 라우트·메뉴·번들에 포함하지 않습니다.
-- 무료 정적 호스팅을 지원합니다. 향후 고객용 Cloudflare Pages 빌드 명령은 `npm run build:production`, 출력 경로는 `dist-production`입니다.
-- BrowserRouter를 사용합니다. 직접 접속·새로고침을 위해 호스팅에서 SPA fallback이 필요합니다. Cloudflare Pages는 최상위 `404.html`이 없으면 기본 SPA fallback을 지원합니다. 실제 배포는 아직 하지 않았습니다.
-- QR 생성 및 연결은 실제 배포 주소가 확정된 후 진행합니다.
-
-## 다음 단계 제안 (검수 후 진행)
-
-STEP 07-B-1 검수 후 별도 지시를 받아 STEP 07-B-2에서 승인 실제 시설과 담당자가 검증한 최종 네이버 경로 URL을 입력할 수 있습니다. 공항버스 공식 안내문도 별도 확인이 필요합니다. 호텔 description과 H33 수신번호·공개 승인은 계속 보완 사항입니다. 코드·원고 일치 PASS를 번역기 검증·정보 정확성 보증으로 확대하지 않습니다. 주변 시설 조사/입력, QR 발급, 실제 배포는 이번 작업에서 진행하지 않았습니다.
-
-STEP 03에서 고객 화면의 직원용 메뉴를 숨겼습니다. `/staff`에는 직접 접속할 수 있으며 메뉴 숨김은 인증 기능이 아닙니다. 직원용 화면에도 비밀 정보나 개인정보를 저장하지 않습니다.
+- [데이터 계약·출처·미확인 항목](docs/data-model.md)
+- [관리자 저장·파일 반영 절차](docs/admin-manager.md)
+- [승인 호텔 원고·H33 보류 기준](docs/step07a-hotel-data.md)
