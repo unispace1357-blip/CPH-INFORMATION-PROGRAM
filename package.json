@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "npm run validate && tsc -b && vite build",
+    "build:public-test": "npm run validate && npm run validate:hotel-copy && tsc -b && node scripts/build-public-test.ts",
+    "desktop:package": "npm run validate && npm run validate:hotel-copy && tsc -b && node scripts/package-desktop.mjs",
     "lint": "oxlint",
     "preview": "vite preview",
     "validate": "node scripts/validate-data.ts",
@@ -25,10 +27,12 @@
     "react-router-dom": "^7.18.4"
   },
   "devDependencies": {
+    "@electron/get": "5.1.0",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
+    "extract-zip": "2.0.1",
     "oxlint": "^1.81.0",
     "typescript": "~6.0.2",
     "vite": "^8.3.0"

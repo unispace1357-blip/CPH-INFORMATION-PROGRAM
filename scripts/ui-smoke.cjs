@@ -4,6 +4,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { chromium } = require('playwright');
 const baseURL = process.env.CPH_UI_BASE_URL || 'http://127.0.0.1:5173';
+const publicTest = process.env.CPH_UI_PUBLIC_TEST === '1';
+const routeURL = route => `${baseURL}${publicTest ? '/#' : ''}${route}`;
 const adminURL = process.env.CPH_ADMIN_BASE_URL || 'http://127.0.0.1:5190';
 const artifactDir = process.env.CPH_UI_ARTIFACT_DIR || '/tmp/cph-mvp-qa';
 const files = ['facilities.json', 'hotel.json'].map(name => path.join(__dirname, '../src/data', name));
@@ -68,10 +70,19 @@ async function mapPopup(page, link, url) {
   try {
     fs.mkdirSync(artifactDir, { recursive: true });
     const staff = await context.newPage();
-    await staff.goto(`${baseURL}/staff`);
+    if (publicTest) {
+      await staff.goto(`${baseURL}/`);
+      await staff.waitForURL('**/#/staff');
+      await staff.reload();
+      await count(staff, '.facility-card', visible.length);
+      await staff.goto(routeURL('/not-a-route'));
+      await staff.getByText('404', { exact: true }).waitFor();
+      await staff.goto(`${baseURL}/staff/`);
+      await staff.waitForURL('**/#/staff');
+    } else await staff.goto(routeURL('/staff'));
     await count(staff, '.facility-card', visible.length);
     assert.deepEqual(await staff.locator('.facility-card h3').allTextContents(), ordered.map(f => f.translations.ko.name));
-    assert.ok(await staff.getByText('프론트 테스트용 미리보기', { exact: true }).isVisible());
+    assert.ok(await staff.getByText(publicTest ? '공개 테스트 버전 · 미검수 DEMO' : '프론트 테스트용 미리보기', { exact: true }).isVisible());
     assert.equal(await staff.locator('.staff-category-grid').getByRole('button', { name: 'ATM', exact: true }).count(), 0);
     for (const item of visible) {
       await staff.locator('.staff-category-grid').getByRole('button', { name: '전체', exact: true }).click();
@@ -115,12 +126,24 @@ async function mapPopup(page, link, url) {
 
     const guest = await context.newPage();
     await guest.setViewportSize({ width: 390, height: 844 });
-    await guest.goto(`${baseURL}/`);
+    await guest.goto(publicTest ? `${baseURL}/guest/` : `${baseURL}/`);
     await guest.waitForURL('**/guest');
     await count(guest, '.facility-card', visible.length);
     assert.equal(await guest.locator('a[href^="/staff"]').count(), 0);
     assert.equal(await guest.locator('.english-guide').count(), 0);
     assert.ok((await guest.request.get(`${baseURL}/favicon.svg`)).ok());
+    if (publicTest) {
+      await guest.reload();
+      await count(guest, '.facility-card', visible.length);
+      for (const link of await guest.locator('.guest-navigation a').all()) {
+        await link.click();
+        assert.equal(new URL(guest.url()).hash, '#/guest');
+      }
+      await guest.getByRole('link', { name: MESSAGES.en.ui.skipContent, exact: true }).focus();
+      await guest.keyboard.press('Enter');
+      assert.equal(new URL(guest.url()).hash, '#/guest');
+      assert.equal(await guest.locator('#main-content').evaluate(node => node === document.activeElement), true);
+    }
     for (const [language, label] of Object.entries(languages)) {
       const m = MESSAGES[language];
       await guest.locator('.language-options').getByRole('button', { name: label, exact: true }).click();
@@ -231,18 +254,19 @@ async function mapPopup(page, link, url) {
     await context.route(url => url.pathname === '/src/data/facilities.json', route => route.fulfill({ contentType: 'application/javascript', body: `export default ${JSON.stringify(fixture)};` }));
     const mapPage = await context.newPage();
     for (const audience of ['staff', 'guest']) {
-      await mapPage.goto(`${baseURL}/${audience}`);
+      await mapPage.goto(routeURL(`/${audience}`));
       await count(mapPage, '.facility-card', visible.length);
       await mapPage.getByRole('searchbox').fill(data.facilities[0].translations.ko.name);
       await count(mapPage, '.facility-card', 1);
       await mapPage.locator('.facility-card button').click();
       if (audience === 'staff') {
-        assert.deepEqual(await mapPage.locator('.english-phrase-text').allTextContents(), fixture.facilities[0].englishPhrases);
-        assert.deepEqual(await mapPage.locator('.english-phrase-meaning').allTextContents(), fixture.facilities[0].englishPhraseMeanings);
+        const expected = publicTest ? data.facilities[0] : fixture.facilities[0];
+        assert.deepEqual(await mapPage.locator('.english-phrase-text').allTextContents(), expected.englishPhrases);
+        assert.deepEqual(await mapPage.locator('.english-phrase-meaning').allTextContents(), expected.englishPhraseMeanings);
         await mapPage.getByRole('button', { name: '전체 문구 복사', exact: true }).click();
-        await mapPage.waitForFunction(expected => navigator.clipboard.readText().then(text => text === expected), fixture.facilities[0].englishPhrases.join('\n'));
+        await mapPage.waitForFunction(expected => navigator.clipboard.readText().then(text => text === expected), expected.englishPhrases.join('\n'));
       } else assert.equal(await mapPage.locator('.english-guide').count(), 0);
-      await mapPopup(mapPage, mapPage.locator('.naver-map-link'), USER_NAVER_PLACE_ROUTE);
+      await mapPopup(mapPage, mapPage.locator('.naver-map-link'), publicTest ? data.facilities[0].naverMapUrl : USER_NAVER_PLACE_ROUTE);
     }
     assert.equal(interceptedMaps.length, 3);
     results.push('PASS Admin/Staff/Guest PLACE_POI links: original URL preserved, new tab with noopener/noreferrer and null opener. Three navigations intercepted locally; live Naver service NOT verified.');

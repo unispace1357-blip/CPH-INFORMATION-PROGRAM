@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url'
 import { createPublicDataset } from '../src/data/createPublicDataset.ts'
 import { preparePublicDeployment } from '../src/data/preparePublicDeployment.ts'
 import { buildProduction, assertNoAdminAssets } from './build-production.ts'
+import { buildPublicTest } from './build-public-test.ts'
 import { adminFacilities, adminHotel, publicationFixtures } from './admin-test-fixtures.ts'
 
 test('public snapshots exclude private fields without changing full data', () => {
@@ -70,4 +71,35 @@ test('resolved admin config has a separate root/cache and loopback binding for c
   assert.equal(adminConfig.server.host, '127.0.0.1')
   // Vite resolves publicDir:false to an empty path; it must not copy the public site's assets.
   assert.equal(adminConfig.publicDir, '')
+})
+
+test('explicit DEMO test build supports subpaths, excludes private/admin data, preserves source and never replaces production gating', { timeout: 60000 }, async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cph-demo-build-test-'))
+  const fixture = publicationFixtures()
+  fixture.facilities.dataStatus = 'demo'; fixture.hotel.dataStatus = 'demo'
+  const facilitiesFile = join(directory, 'facilities.json'), hotelFile = join(directory, 'hotel.json'), outDir = join(directory, 'output')
+  const originalFacilities = await readFile(new URL('../src/data/facilities.json', import.meta.url)), originalHotel = await readFile(new URL('../src/data/hotel.json', import.meta.url))
+  async function outputText(path: string): Promise<string> {
+    const entries = await readdir(path, { withFileTypes: true })
+    return (await Promise.all(entries.map(async entry => entry.isDirectory() ? outputText(join(path, entry.name)) : /\.(js|html|css|json)$/.test(entry.name) ? readFile(join(path, entry.name), 'utf8') : ''))).join('\n')
+  }
+  try {
+    await writeFile(facilitiesFile, JSON.stringify(fixture.facilities)); await writeFile(hotelFile, JSON.stringify(fixture.hotel))
+    await buildPublicTest({ facilitiesFile, hotelFile, outDir, base: '/CPH-INFORMATION-PROGRAM/' })
+    const text = await outputText(outDir)
+    for (const token of fixture.privateTokens) assert.equal(text.includes(token), false, token)
+    assert.ok(text.includes('CPH_PUBLIC_QA_')); assert.ok(text.includes('공개 테스트 버전'))
+    assert.match(await readFile(join(outDir, 'index.html'), 'utf8'), /\/CPH-INFORMATION-PROGRAM\/assets\//)
+    assert.match(await readFile(join(outDir, 'staff/index.html'), 'utf8'), /#\/staff/)
+    assert.match(await readFile(join(outDir, 'guest/index.html'), 'utf8'), /#\/guest/)
+    assert.match(await readFile(join(outDir, '404.html'), 'utf8'), /location.replace/)
+    await assertNoAdminAssets(outDir)
+    assert.throws(() => preparePublicDeployment(fixture.facilities, fixture.hotel), /dataStatus/)
+    assert.deepEqual(await readFile(new URL('../src/data/facilities.json', import.meta.url)), originalFacilities)
+    assert.deepEqual(await readFile(new URL('../src/data/hotel.json', import.meta.url)), originalHotel)
+    fixture.facilities.dataStatus = 'production'
+    await writeFile(facilitiesFile, JSON.stringify(fixture.facilities))
+    await assert.rejects(() => buildPublicTest({ facilitiesFile, hotelFile, outDir }), /remain demo/)
+    await assert.rejects(() => readdir(outDir), { code: 'ENOENT' })
+  } finally { await rm(directory, { recursive: true, force: true }) }
 })

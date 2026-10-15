@@ -11,6 +11,8 @@ node_modules
 dist
 dist-production
 dist-admin
+dist-public-test
+release
 dist-ssr
 *.local
 

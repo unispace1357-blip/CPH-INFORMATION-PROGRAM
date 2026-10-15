@@ -4,11 +4,22 @@ import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { defineConfig, normalizePath } from 'vite'
 import { preparePublicDeployment } from './src/data/preparePublicDeployment.ts'
+import { createPublicDataset } from './src/data/createPublicDataset.ts'
+import { parseHotelDataset } from './src/data/validateHotelDataset.ts'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const root = fileURLToPath(new URL('.', import.meta.url))
   const snapshots = new Map<string, string>()
+  if (mode === 'public-test') {
+    const directory = process.env.CPH_PUBLIC_TEST_DATA_DIR
+    if (!directory) throw new Error('Public test build requires a validated DEMO snapshot. Use npm run build:public-test.')
+    const facilities = createPublicDataset(JSON.parse(readFileSync(resolve(directory, 'facilities.json'), 'utf8')))
+    const hotel = parseHotelDataset(JSON.parse(readFileSync(resolve(directory, 'hotel.json'), 'utf8')))
+    if (facilities.dataStatus !== 'demo' || hotel.dataStatus !== 'demo') throw new Error('Public test builds require both datasets to remain demo.')
+    snapshots.set(normalizePath(resolve(root, 'src/data/facilities.json')), JSON.stringify(facilities))
+    snapshots.set(normalizePath(resolve(root, 'src/data/hotel.json')), JSON.stringify(hotel))
+  }
   if (mode === 'customer-production') {
     const directory = process.env.CPH_PUBLIC_DATA_DIR
     if (!directory) throw new Error('Customer build requires a validated public snapshot. Use npm run build:production.')
