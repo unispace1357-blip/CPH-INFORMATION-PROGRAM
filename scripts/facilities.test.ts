@@ -31,8 +31,7 @@ test('local preview contains all 23 real facilities, four languages and no ficti
     assert.equal(facility.isPublished, true)
     assert.equal(facility.lastVerifiedAt, null)
     assert.equal(facility.walkingMinutes, facility.id === 'central-park-station-exit-3' ? 5 : null)
-    if (['cu-songdo-senseuri', 'incheon-port-hangdong-7ga'].includes(facility.id)) assert.equal(typeof facility.naverMapUrl, 'string')
-    else assert.equal(facility.naverMapUrl, null)
+    assert.equal(typeof facility.naverMapUrl, 'string')
     assert.deepEqual(Object.keys(facility.translations), ['ko', 'en', 'zh-CN', 'ja'])
     for (const text of Object.values(facility.translations)) {
       assert.ok(text.name.includes(facility.translations.ko.name))

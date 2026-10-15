@@ -116,7 +116,7 @@
         "zh-CN": "全年无休",
         "ja": "年中無休"
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3Ufq,2AEQEg,%EB%B8%94%EB%A3%A8%EC%98%A4%EC%85%98%20%EC%82%AC%EC%9A%B0%EB%82%98,16522628,PLACE_POI/-/walk?c=14.00,0,0,0,dh"
     },
     {
       "id": "malt-house-incheon-songdo",
@@ -174,7 +174,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3qEb,2AECId,%EB%8D%94%EB%AA%B0%ED%8A%B8%ED%95%98%EC%9A%B0%EC%8A%A4%20%EC%86%A1%EB%8F%84%EC%A0%90,1966171451,PLACE_POI/-/walk?c=17.00,0,0,0,dh"
     },
     {
       "id": "compose-coffee-incheon-songdo-central-park",
@@ -232,7 +232,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3qAn,2AED32,%EC%BB%B4%ED%8F%AC%EC%A6%88%EC%BB%A4%ED%94%BC%20%EC%9D%B8%EC%B2%9C%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%EC%A0%90,1766497066,PLACE_POI/-/walk?c=17.00,0,0,0,dh"
     },
     {
       "id": "chaeum-pharmacy-songdo",
@@ -290,7 +290,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3hGv,2AEBdK,%EC%B1%84%EC%9B%80%EC%95%BD%EA%B5%AD,1118119314,PLACE_POI/-/walk?c=17.00,0,0,0,dh"
     },
     {
       "id": "hanyang-songdo-hanok-village",
@@ -348,7 +348,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3r09,2AEG3u,%ED%95%9C%EC%96%91%20%ED%95%9C%EC%98%A5%EB%A7%88%EC%9D%84%EC%A0%90,36465910,PLACE_POI/-/walk?c=17.00,0,0,0,dh"
     },
     {
       "id": "gyeongbokgung-hanok-village",
@@ -406,7 +406,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3qUD,2AEFTz,%EA%B2%BD%EB%B3%B5%EA%B6%81%20%ED%95%9C%EC%98%A5%EB%A7%88%EC%9D%84%EC%A0%90,36105134,PLACE_POI/-/walk?c=17.00,0,0,0,dh"
     },
     {
       "id": "paljinhyang-hanok-village",
@@ -464,7 +464,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3sqH,2AEEZl,%ED%8C%94%EC%A7%84%ED%96%A5%20%ED%95%9C%EC%98%A5%EB%A7%88%EC%9D%84%EC%A0%90,1668101724,PLACE_POI/-/walk?c=17.00,0,0,0,dh"
     },
     {
       "id": "hollys-incheon-hanok-village",
@@ -522,7 +522,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3rdN,2AEGrt,%ED%95%A0%EB%A6%AC%EC%8A%A4%20%EC%9D%B8%EC%B2%9C%ED%95%9C%EC%98%A5%EB%A7%88%EC%9D%84%EC%A0%90,36253498,PLACE_POI/-/walk?c=17.00,0,0,0,dh"
     },
     {
       "id": "songhaeon-songdo",
@@ -580,7 +580,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3hHj,2AEBf5,%EC%86%A1%EB%8F%84%ED%95%B4%EC%88%98%EC%98%A8%EC%B2%9C%20%EC%86%A1%ED%95%B4%EC%98%A8,1138534676,PLACE_POI/-/walk?c=17.00,0,0,0,dh"
     },
     {
       "id": "songjjujip-main",
@@ -638,7 +638,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3BDj,2AELSG,%EC%86%A1%EC%AD%88%EC%A7%91%20%EB%B3%B8%EC%A0%90,20451473,PLACE_POI/-/walk?c=15.00,0,0,0,dh"
     },
     {
       "id": "otto-gimbap-songdo",
@@ -696,7 +696,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3HFx,2AEIJL,%EC%98%A4%ED%86%A0%EA%B9%80%EB%B0%A5%20%EC%9D%B8%EC%B2%9C%EC%86%A1%EB%8F%84%EC%A0%90,1496347338,PLACE_POI/-/walk?c=15.00,0,0,0,dh"
     },
     {
       "id": "burgeroom181-songdo",
@@ -754,7 +754,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3CtG,2AELkQ,%EB%B2%84%EA%B1%B0%EB%A3%B8181%20%EC%86%A1%EB%8F%84%EB%B3%B8%EC%A0%90,33244070,PLACE_POI/-/walk?c=15.00,0,0,0,dh"
     },
     {
       "id": "moms-touch-songdo-central-park",
@@ -812,7 +812,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3BIj,2AELNf,%EB%A7%98%EC%8A%A4%ED%84%B0%EC%B9%98%20%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%EC%A0%90,1739466700,PLACE_POI/-/walk?c=15.00,0,0,0,dh"
     },
     {
       "id": "burger-king-incheon-songdo-central-park",
@@ -870,7 +870,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3whd,2AEOJ3,%EB%B2%84%EA%B1%B0%ED%82%B9%20%EC%9D%B8%EC%B2%9C%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%EC%A0%90,34565454,PLACE_POI/-/walk?c=15.00,0,0,0,dh"
     },
     {
       "id": "incheon-port-hangdong-7ga",
@@ -986,7 +986,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3xNh,2AEPWG,%EC%8A%A4%ED%83%80%EB%B2%85%EC%8A%A4%20%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%EC%A0%90,33021671,PLACE_POI/-/walk?c=15.00,0,0,0,dh"
     },
     {
       "id": "playground-brewery-taproom-songdo",
@@ -1044,7 +1044,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3RTY,2AEUcq,%ED%94%8C%EB%A0%88%EC%9D%B4%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C%20%EB%B8%8C%EB%A3%A8%EC%96%B4%EB%A6%AC%20%ED%83%AD%EB%A3%B8%20%EC%86%A1%EB%8F%84,137449520,PLACE_POI/-/walk?c=14.00,0,0,0,dh"
     },
     {
       "id": "geumbyeol-beer-songdo-lotte-mall",
@@ -1102,7 +1102,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3Dar,2AEq3J,%EA%B8%88%EB%B3%84%EB%A7%A5%EC%A3%BC%20%EC%86%A1%EB%8F%84%EB%A1%AF%EB%8D%B0%EB%AA%B0%EC%A0%90,1289345202,PLACE_POI/-/walk?c=15.00,0,0,0,dh"
     },
     {
       "id": "central-park-station-exit-3",
@@ -1160,7 +1160,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3gJ1,2AEMGZ,%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%EC%97%AD(%EC%9E%AC%EC%99%B8%EB%8F%99%ED%8F%AC%EC%B2%AD%2C%ED%8F%AC%EC%8A%A4%EC%BD%94%EC%9D%B4%EC%95%A4%EC%94%A8)3%EB%B2%88%EC%B6%9C%EA%B5%AC,21403643,PLACE_POI/-/walk?c=16.00,0,0,0,dh"
     },
     {
       "id": "lotte-mart-songdo",
@@ -1218,7 +1218,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3CwL,2AEzbI,%EB%A1%AF%EB%8D%B0%EB%A7%88%ED%8A%B8%20%EC%86%A1%EB%8F%84%EC%A0%90,33703899,PLACE_POI/-/walk?c=15.00,0,0,0,dh"
     },
     {
       "id": "songdo-central-park",
@@ -1276,7 +1276,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3vpR,2AEHfp,%EC%86%A1%EB%8F%84%20%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC,20118926,PLACE_POI/-/walk?c=16.00,0,0,0,dh"
     },
     {
       "id": "byeol-onnuri-pharmacy-songdo",
@@ -1334,7 +1334,7 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": null
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3zPN,2AElJf,%EB%B3%84%EC%98%A8%EB%88%84%EB%A6%AC%EC%95%BD%EA%B5%AD,1841858743,PLACE_POI/-/walk?c=15.00,0,0,0,dh"
     }
   ]
 }
