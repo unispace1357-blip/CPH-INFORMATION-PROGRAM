@@ -184,6 +184,11 @@
           },
           "uniqueItems": true
         },
+        "englishPhraseMeanings": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Optional staff Korean meanings in the same order as englishPhrases."
+        },
         "walkingMinutes": {
           "type": [
             "number",

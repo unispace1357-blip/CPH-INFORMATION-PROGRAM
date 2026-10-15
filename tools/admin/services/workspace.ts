@@ -96,7 +96,7 @@ export interface ValidationResult { valid: boolean; messages: string[]; technica
 
 const fieldNames: Record<string, string> = {
   name: '시설/호텔명', description: '설명', address: '주소', openingHours: '영업시간', directions: '이동 안내', notes: '참고 사항',
-  closedDays: '휴무일', keywords: '검색 키워드', englishPhrases: '영어 응대 문구', id: '시설 ID', category: '카테고리',
+  closedDays: '휴무일', keywords: '검색 키워드', englishPhrases: '영어 응대 문구', englishPhraseMeanings: '영어 문구의 한국어 뜻', id: '시설 ID', category: '카테고리',
   lastVerifiedAt: '마지막 확인일', walkingMinutes: '도보시간', checkInTime: '체크인 시간', checkOutTime: '체크아웃 시간',
   checkIn: '체크인 안내', checkOut: '체크아웃 안내', breakfast: '조식 안내', parking: '주차 안내', roomUsage: '객실 이용 안내',
   dataStatus: '데이터 상태', schemaVersion: '데이터 버전', isPublished: '공개 상태', translations: '언어별 안내',

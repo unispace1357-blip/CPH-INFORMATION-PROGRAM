@@ -29,7 +29,7 @@ export function StaffFacilityDetail({ facility, headingRef }: { facility: Facili
       <section className="english-directions" aria-labelledby="english-directions-title"><h4 id="english-directions-title" lang="en">Directions in English</h4><p lang={en.directions.trim() ? 'en' : 'ko'}>{confirmedText(en.directions, '영어 이동 안내 미확인')}</p></section>
       <p className="verification-date">{formatVerificationDate(facility.lastVerifiedAt)}</p>
       <p className="field-hint">확인일은 현재 영업 상태를 보장하지 않습니다. 방문 전 변동 사항을 확인해 주세요.</p>
-      <EnglishGuidePanel key={facility.id} phrases={facility.englishPhrases} />
+      <EnglishGuidePanel key={facility.id} phrases={facility.englishPhrases} meanings={facility.englishPhraseMeanings} />
     </div>
   )
 }

@@ -31,6 +31,8 @@ export interface Facility {
   closedDays: LocalizedText
   keywords: Record<GuideLanguage, string[]>
   englishPhrases: string[]
+  /** Staff-only Korean meanings aligned by index; omitted for legacy English-only records. */
+  englishPhraseMeanings?: string[]
   /** Staff-verified public Naver directions URL; omitted/null means unregistered. */
   naverMapUrl?: string | null
 }

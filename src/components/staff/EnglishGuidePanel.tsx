@@ -5,7 +5,7 @@ import { copyText, joinEnglishPhrases } from '../../services/clipboard'
 
 interface CopyState { target: number | 'all'; status: 'pending' | 'success' | 'failed' }
 
-export function EnglishGuidePanel({ phrases }: { phrases: readonly string[] }) {
+export function EnglishGuidePanel({ phrases, meanings = [] }: { phrases: readonly string[]; meanings?: readonly string[] }) {
   const [copyState, setCopyState] = useState<CopyState | null>(null)
   const mounted = useRef(true)
   useEffect(() => { mounted.current = true; return () => { mounted.current = false } }, [])
@@ -26,7 +26,13 @@ export function EnglishGuidePanel({ phrases }: { phrases: readonly string[] }) {
       <div className="section-heading"><h3 id="english-guide-title" lang="en">English Guide</h3>
         {phrases.length !== 1 && <Button variant="secondary" disabled={!phrases.length || pending} onClick={() => void copy('all')} icon={<Icon name="copy" size={16} />}>{phrases.length ? '전체 문구 복사' : '복사'}</Button>}
       </div>
-      {!phrases.length ? <p className="phrase-placeholder">영어 안내 문구가 아직 등록되지 않았습니다.</p> : <ol className="english-phrases">{phrases.map((phrase, index) => <li key={index}><p className="english-phrase-text" lang="en">{phrase}</p><Button variant="secondary" disabled={pending} onClick={() => void copy(index)} aria-label={`영어 문구 ${index + 1} 복사`} icon={<Icon name="copy" size={16} />}>{copyState?.target === index && copyState.status === 'success' ? '복사 완료' : '복사'}</Button></li>)}</ol>}
+      <p className="field-hint">복사 버튼은 영어 문장만 복사합니다.</p>
+      {!phrases.length ? <p className="phrase-placeholder">영어 안내 문구가 아직 등록되지 않았습니다.</p> : <ol className="english-phrases">{phrases.map((phrase, index) => <li key={index}>
+        <h4 className="english-phrase-label">{index === 0 ? '기본 안내' : index === 1 ? '상세 안내' : `추가 안내 ${index - 1}`}</h4>
+        <p className="english-phrase-text" lang="en">{phrase}</p>
+        <p className="english-phrase-meaning" lang="ko">{meanings[index]?.trim() ? meanings[index] : '한국어 뜻 미등록'}</p>
+        <Button variant="secondary" disabled={pending} onClick={() => void copy(index)} aria-label={`영어 문구 ${index + 1} 복사`} icon={<Icon name="copy" size={16} />}>{copyState?.target === index && copyState.status === 'success' ? '복사 완료' : '복사'}</Button>
+      </li>)}</ol>}
       <p className={`copy-status ${copyState?.status === 'failed' ? 'copy-status--failed' : ''}`} role="status" aria-live="polite" aria-atomic="true">{announcement}</p>
     </section>
   )

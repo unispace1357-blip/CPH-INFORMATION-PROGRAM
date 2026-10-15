@@ -34,7 +34,7 @@ export function FacilityEditor({ draft, originalId, language, onLanguage, onChan
       <TextField label="휴무일" language={language} value={draft.closedDays[language]} multiline onChange={value => onChange({ ...draft, closedDays: { ...draft.closedDays, [language]: value } })} />
       <StringListEditor key={language} label="검색 키워드" items={draft.keywords[language]} onChange={items => onChange({ ...draft, keywords: { ...draft.keywords, [language]: items } })} />
     </fieldset>
-    <StringListEditor label="영어 응대 문구" items={draft.englishPhrases} multiline onChange={englishPhrases => onChange({ ...draft, englishPhrases })} />
+    <StringListEditor label="영어 응대 문구" items={draft.englishPhrases} meanings={draft.englishPhraseMeanings ?? draft.englishPhrases.map(() => '')} itemLabels={['기본 안내', '상세 안내']} multiline onChange={(englishPhrases, englishPhraseMeanings) => onChange({ ...draft, englishPhrases, englishPhraseMeanings })} />
     <div className="admin-editor-actions"><Button type="submit">편집 내용 저장</Button><Button variant="secondary" onClick={onCancel}>편집 취소</Button></div><p className="field-hint">저장은 현재 브라우저 작업 데이터에만 반영됩니다. JSON 다운로드 후 파일을 직접 확인하세요.</p>
   </form>
 }

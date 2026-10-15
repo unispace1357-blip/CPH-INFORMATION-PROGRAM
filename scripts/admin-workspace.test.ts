@@ -71,12 +71,19 @@ test('keyword add/edit/delete survives export; blanks and normalized duplicates 
   draft.keywords.en = []; assert.deepEqual(saveFacility(dataset, draft, draft.id).facilities[0]!.keywords.en, [])
   for (const invalid of [[''], ['  '], ['SPA', ' spa '], ['é', 'e\u0301']]) { draft.keywords.en = invalid; assert.throws(() => saveFacility(dataset, draft, draft.id)); assert.deepEqual(draft.keywords.en, invalid) }
 })
-test('English phrase edits, additions, deletion and ordering round-trip for Staff without generated text', () => {
+test('English phrases and Korean meanings edit and round-trip together while legacy records stay valid', () => {
   const dataset = adminFacilities(), draft = facilityToDraft(dataset.facilities[0]!)
+  assert.equal(importFacilities(exportFacilities(dataset)).facilities[0]!.englishPhraseMeanings, undefined)
   draft.englishPhrases = ['Fictional first.', 'Fictional second.', 'Fictional third.']
+  draft.englishPhraseMeanings = ['첫 안내', '두 번째 안내', '세 번째 안내']
   draft.englishPhrases = moveListItem(draft.englishPhrases, 2, -1); draft.englishPhrases[0] = 'Fictional edited.'; draft.englishPhrases.splice(1, 1)
+  draft.englishPhraseMeanings = moveListItem(draft.englishPhraseMeanings, 2, -1); draft.englishPhraseMeanings[0] = '수정된 안내'; draft.englishPhraseMeanings.splice(1, 1)
   const result = importFacilities(exportFacilities(saveFacility(dataset, draft, draft.id)))
   assert.deepEqual(result.facilities[0]!.englishPhrases, ['Fictional edited.', 'Fictional second.'])
+  assert.deepEqual(result.facilities[0]!.englishPhraseMeanings, ['수정된 안내', '두 번째 안내'])
+  assert.equal(dataset.facilities[0]!.englishPhraseMeanings, undefined)
+  draft.englishPhraseMeanings = ['짝이 없는 뜻']
+  assert.throws(() => saveFacility(dataset, draft, draft.id), /englishPhraseMeanings/)
   assert.deepEqual(moveListItem(['one'], 0, -1), ['one'])
 })
 test('zero, null and fractional walking inputs survive while malformed/negative/nonfinite inputs retain draft', () => {

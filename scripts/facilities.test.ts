@@ -44,8 +44,9 @@ test('local preview contains all 23 real facilities, four languages and no ficti
       assert.deepEqual(numbers(text.directions).sort(), numbers(facility.translations.ko.directions).sort())
     }
     assert.equal(facility.englishPhrases.length, 2)
-    assert.ok(facility.englishPhrases[0]!.includes(facility.translations.en.address))
-    assert.ok(facility.englishPhrases[1]!.includes(facility.translations.en.directions || facility.translations.en.openingHours))
+    assert.ok(facility.englishPhrases.every(text => text.trim()))
+    assert.equal(facility.englishPhraseMeanings?.length, 2)
+    assert.ok(facility.englishPhraseMeanings!.every(text => text.trim()))
     for (const language of Object.keys(facility.closedDays) as GuideLanguage[]) {
       assert.equal(Boolean(facility.closedDays[language]), facility.id === 'blue-ocean-sauna-songdo')
     }
@@ -87,7 +88,8 @@ test('confirmed hours retain breaks, last order and day-specific closing in ever
     }
     assert.doesNotMatch(text.directions, /7|도보|walking|on foot|步行|徒歩/)
   }
-  assert.equal(port.englishPhrases[1], port.translations.en.directions)
+  assert.match(port.englishPhrases[0]!, /Incheon Port Coastal Passenger Terminal/)
+  assert.match(port.englishPhrases[1]!, /Incheon Startup Park.*16-1.*Yeonan Apartments.*36.*14.*Yeonan Passenger Terminal.*about an hour.*traffic and schedules/)
   assert.equal(port.walkingMinutes, null)
   const park = data.facilities.find(f => f.id === 'songdo-central-park')!
   assert.equal(park.translations.ko.name, '송도 센트럴파크')
@@ -195,6 +197,7 @@ test('legacy fields are normalized without modifying the input', () => {
   const legacy = JSON.parse(JSON.stringify(rawData)) as Record<string, any>
   for (const facility of legacy.facilities) {
     delete facility.walkingMinutes
+    delete facility.englishPhraseMeanings
     delete facility.closedDays
     delete facility.keywords['zh-CN']
     delete facility.keywords.ja
@@ -204,9 +207,15 @@ test('legacy fields are normalized without modifying the input', () => {
   assert.deepEqual(legacy, before)
   for (const facility of data.facilities) {
     assert.equal(facility.walkingMinutes, null)
+    assert.equal(facility.englishPhraseMeanings, undefined)
     assert.deepEqual(facility.closedDays, { ko: '', en: '', 'zh-CN': '', ja: '' })
     assert.deepEqual(facility.keywords['zh-CN'], [])
     assert.deepEqual(facility.keywords.ja, [])
+  }
+  for (const invalid of [null, 'not an array', [123, '뜻'], ['unpaired meaning']]) {
+    const malformed: Record<string, any> = fresh()
+    malformed.facilities[0].englishPhraseMeanings = invalid
+    assert.throws(() => parseFacilityDataset(malformed), /Invalid facility dataset.*englishPhraseMeanings/)
   }
 })
 

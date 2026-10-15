@@ -92,8 +92,13 @@ async function mapPopup(page, link, url) {
         assert.equal(await staff.locator('.english-directions p').innerText(), item.translations.en.directions);
       }
       assert.deepEqual(await staff.locator('.english-phrase-text').allTextContents(), item.englishPhrases);
-      await staff.getByRole('button', { name: '영어 문구 1 복사', exact: true }).click();
-      await staff.waitForFunction(expected => navigator.clipboard.readText().then(text => text === expected), item.englishPhrases[0]);
+      assert.deepEqual(await staff.locator('.english-phrase-label').allTextContents(), ['기본 안내', '상세 안내']);
+      assert.deepEqual(await staff.locator('.english-phrase-meaning').allTextContents(), item.englishPhraseMeanings);
+      assert.deepEqual(await staff.locator('.english-phrases li').first().locator('p').allTextContents(), [item.englishPhrases[0], item.englishPhraseMeanings[0]]);
+      for (const [index, phrase] of item.englishPhrases.entries()) {
+        await staff.getByRole('button', { name: `영어 문구 ${index + 1} 복사`, exact: true }).click();
+        await staff.waitForFunction(expected => navigator.clipboard.readText().then(text => text === expected), phrase);
+      }
       await staff.getByRole('button', { name: '전체 문구 복사', exact: true }).click();
       await staff.waitForFunction(expected => navigator.clipboard.readText().then(text => text === expected), item.englishPhrases.join('\n'));
       if (item.naverMapUrl) {
@@ -106,7 +111,7 @@ async function mapPopup(page, link, url) {
     await staff.locator('.staff-category-grid').getByRole('button', { name: '전체', exact: true }).click();
     await count(staff, '.facility-card', visible.length);
     await staff.screenshot({ path: path.join(artifactDir, 'staff-desktop.png'), fullPage: true });
-    results.push('PASS Staff 1280px: all 23 real facilities, Korean/English searches and categories, addresses/hours, individual/full real clipboard copy, missing maps disabled, no ATM category');
+    results.push('PASS Staff 1280px: 23 basic/detail English scripts with Korean meanings in order, individual/full clipboard contains only English, facility search and original information retained');
 
     const guest = await context.newPage();
     await guest.setViewportSize({ width: 390, height: 844 });
@@ -114,6 +119,7 @@ async function mapPopup(page, link, url) {
     await guest.waitForURL('**/guest');
     await count(guest, '.facility-card', visible.length);
     assert.equal(await guest.locator('a[href^="/staff"]').count(), 0);
+    assert.equal(await guest.locator('.english-guide').count(), 0);
     assert.ok((await guest.request.get(`${baseURL}/favicon.svg`)).ok());
     for (const [language, label] of Object.entries(languages)) {
       const m = MESSAGES[language];
@@ -158,6 +164,10 @@ async function mapPopup(page, link, url) {
       await admin.getByLabel('시설명 검색', { exact: true }).fill(item.translations.ko.name);
       await count(admin, '.admin-records li', 1);
       await admin.getByRole('button', { name: `편집 ${item.id}`, exact: true }).click();
+      for (const [index, title] of ['기본 안내', '상세 안내'].entries()) {
+        assert.equal(await admin.getByLabel(`${title} 영어`, { exact: true }).inputValue(), item.englishPhrases[index]);
+        assert.equal(await admin.getByLabel(`${title} 한국어 뜻`, { exact: true }).inputValue(), item.englishPhraseMeanings[index]);
+      }
       assert.equal(await admin.getByLabel('공개 시설로 표시', { exact: true }).isChecked(), item.isPublished);
       for (const [label, value] of [['네이버 지도 길찾기 URL', item.naverMapUrl ?? ''], ['마지막 확인일', item.lastVerifiedAt ?? ''], ['예상 도보시간 (분)', item.walkingMinutes == null ? '' : String(item.walkingMinutes)]]) assert.equal(await admin.getByLabel(label, { exact: true }).inputValue(), value);
       for (const [language, label] of Object.entries(languages)) {
@@ -169,8 +179,24 @@ async function mapPopup(page, link, url) {
     await admin.getByLabel('시설명 검색', { exact: true }).fill('');
     const item = data.facilities[0];
     await admin.getByRole('button', { name: `편집 ${item.id}`, exact: true }).click();
+    await admin.getByRole('button', { name: '영어 응대 문구 1 아래로', exact: true }).click();
+    assert.equal(await admin.getByLabel('기본 안내 영어', { exact: true }).inputValue(), item.englishPhrases[1]);
+    assert.equal(await admin.getByLabel('기본 안내 한국어 뜻', { exact: true }).inputValue(), item.englishPhraseMeanings[1]);
+    await admin.getByRole('button', { name: '영어 응대 문구 2 위로', exact: true }).click();
+    await admin.getByRole('button', { name: '영어 응대 문구 추가', exact: true }).click();
+    await admin.getByLabel('영어 응대 문구 3 영어', { exact: true }).fill('Temporary additional English.');
+    await admin.getByLabel('영어 응대 문구 3 한국어 뜻', { exact: true }).fill('임시 추가 해석');
+    await admin.getByRole('button', { name: '영어 응대 문구 3 삭제', exact: true }).click();
+    assert.equal(await admin.getByLabel('상세 안내 영어', { exact: true }).inputValue(), item.englishPhrases[1]);
+    assert.equal(await admin.getByLabel('상세 안내 한국어 뜻', { exact: true }).inputValue(), item.englishPhraseMeanings[1]);
     await admin.getByRole('group', { name: '편집 언어', exact: true }).getByRole('button', { name: '한국어', exact: true }).click();
     const edited = structuredClone(data);
+    edited.facilities[0].englishPhrases = ['Temporary basic English.', 'Temporary detailed English.'];
+    edited.facilities[0].englishPhraseMeanings = ['임시 기본 해석', '임시 상세 해석'];
+    for (const [index, title] of ['기본 안내', '상세 안내'].entries()) {
+      await admin.getByLabel(`${title} 영어`, { exact: true }).fill(edited.facilities[0].englishPhrases[index]);
+      await admin.getByLabel(`${title} 한국어 뜻`, { exact: true }).fill(edited.facilities[0].englishPhraseMeanings[index]);
+    }
     edited.facilities[0].translations.ko.openingHours += '\n[temporary QA edit]';
     // Transient browser-memory compatibility/security case; never register this route in source data.
     edited.facilities[0].naverMapUrl = USER_NAVER_PLACE_ROUTE;
@@ -185,6 +211,10 @@ async function mapPopup(page, link, url) {
     await admin.getByRole('button', { name: '시설 관리', exact: true }).click();
     await admin.getByRole('button', { name: `편집 ${item.id}`, exact: true }).click();
     assert.equal(await admin.getByLabel('영업시간', { exact: true }).inputValue(), edited.facilities[0].translations.ko.openingHours);
+    for (const [index, title] of ['기본 안내', '상세 안내'].entries()) {
+      assert.equal(await admin.getByLabel(`${title} 영어`, { exact: true }).inputValue(), edited.facilities[0].englishPhrases[index]);
+      assert.equal(await admin.getByLabel(`${title} 한국어 뜻`, { exact: true }).inputValue(), edited.facilities[0].englishPhraseMeanings[index]);
+    }
     await admin.getByRole('button', { name: '가져오기 / 내보내기', exact: true }).click();
     await upload(admin, data);
     assert.deepEqual(await download(admin), data);
@@ -195,6 +225,8 @@ async function mapPopup(page, link, url) {
 
     // Preserve shared-link security coverage without repeating old per-STEP browser suites.
     const fixture = structuredClone(data);
+    fixture.facilities[0].englishPhrases = edited.facilities[0].englishPhrases;
+    fixture.facilities[0].englishPhraseMeanings = edited.facilities[0].englishPhraseMeanings;
     fixture.facilities[0].naverMapUrl = USER_NAVER_PLACE_ROUTE;
     await context.route(url => url.pathname === '/src/data/facilities.json', route => route.fulfill({ contentType: 'application/javascript', body: `export default ${JSON.stringify(fixture)};` }));
     const mapPage = await context.newPage();
@@ -204,6 +236,12 @@ async function mapPopup(page, link, url) {
       await mapPage.getByRole('searchbox').fill(data.facilities[0].translations.ko.name);
       await count(mapPage, '.facility-card', 1);
       await mapPage.locator('.facility-card button').click();
+      if (audience === 'staff') {
+        assert.deepEqual(await mapPage.locator('.english-phrase-text').allTextContents(), fixture.facilities[0].englishPhrases);
+        assert.deepEqual(await mapPage.locator('.english-phrase-meaning').allTextContents(), fixture.facilities[0].englishPhraseMeanings);
+        await mapPage.getByRole('button', { name: '전체 문구 복사', exact: true }).click();
+        await mapPage.waitForFunction(expected => navigator.clipboard.readText().then(text => text === expected), fixture.facilities[0].englishPhrases.join('\n'));
+      } else assert.equal(await mapPage.locator('.english-guide').count(), 0);
       await mapPopup(mapPage, mapPage.locator('.naver-map-link'), USER_NAVER_PLACE_ROUTE);
     }
     assert.equal(interceptedMaps.length, 3);

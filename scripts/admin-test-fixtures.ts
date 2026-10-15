@@ -32,6 +32,7 @@ export function publicationFixtures() {
     privateTokens.push(privateItem.closedDays[language], ...privateItem.keywords[language])
   }
   privateItem.englishPhrases = ['CPH_PRIVATE_PROBE_phrase_7FE06']; privateTokens.push(...privateItem.englishPhrases)
+  privateItem.englishPhraseMeanings = ['CPH_PRIVATE_PROBE_meaning_7FE06']; privateTokens.push(...privateItem.englishPhraseMeanings)
   hotel.lastVerifiedAt = '2024-02-29'; hotel.checkInTime = '01:23'; hotel.checkOutTime = '04:56'
   for (const language of GUIDE_LANGUAGES) for (const key of Object.keys(hotel.translations[language]) as (keyof typeof hotel.translations.ko)[]) hotel.translations[language][key] = `CPH_HOTEL_QA_${language}_${key} Fictional only`
   return { facilities, hotel, privateTokens }

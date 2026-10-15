@@ -48,8 +48,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "CU 송도센쓰리점: Convenience store. Address: 인천타워대로180번길 11, Building A, 1F, Unit 109, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 24 hours."
+        "There's a CU convenience store near the hotel. It's open 24 hours.",
+        "It's on the first floor of Building A, in unit 109. Let me show you the walking route on the map."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -58,7 +58,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3qiH,2AEDpP,CU%20%EC%86%A1%EB%8F%84%EC%84%BC%EC%93%B0%EB%A6%AC%EC%A0%90,1911618052,PLACE_POI/-/walk?c=19.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3qiH,2AEDpP,CU%20%EC%86%A1%EB%8F%84%EC%84%BC%EC%93%B0%EB%A6%AC%EC%A0%90,1911618052,PLACE_POI/-/walk?c=19.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "호텔 근처에 CU 편의점이 있습니다. 24시간 운영합니다.",
+        "A동 1층 109호에 있습니다. 지도에서 걸어가는 길을 보여드릴게요."
+      ]
     },
     {
       "id": "blue-ocean-sauna-songdo",
@@ -106,8 +110,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "블루오션: Sauna. Address: 컨벤시아대로 81, 드림시티, 6F, Unit 601, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 24 hours, open year-round."
+        "Blue Ocean is a sauna. It's listed as open 24 hours.",
+        "It's in the Dream City building, on the sixth floor, unit 601. The address is 81 Convensia-daero. Let me show you the walking route."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -116,7 +120,11 @@
         "zh-CN": "全年无休",
         "ja": "年中無休"
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3Ufq,2AEQEg,%EB%B8%94%EB%A3%A8%EC%98%A4%EC%85%98%20%EC%82%AC%EC%9A%B0%EB%82%98,16522628,PLACE_POI/-/walk?c=14.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3Ufq,2AEQEg,%EB%B8%94%EB%A3%A8%EC%98%A4%EC%85%98%20%EC%82%AC%EC%9A%B0%EB%82%98,16522628,PLACE_POI/-/walk?c=14.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "블루오션은 사우나입니다. 등록된 정보상 24시간 운영합니다.",
+        "드림시티 건물 6층 601호에 있습니다. 주소는 컨벤시아대로 81입니다. 도보 경로를 보여드릴게요."
+      ]
     },
     {
       "id": "malt-house-incheon-songdo",
@@ -164,8 +172,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "더몰트하우스 인천송도점: Western restaurant. Address: 인천타워대로180번길 11, Building A, 3F, Unit 305, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 10:00–23:00 (break 15:00–17:00); last order 22:00."
+        "The Malt House is a Western-style restaurant. I can show you where it is.",
+        "It's on the third floor of Building A, in unit 305. There's a break from 3 to 5 p.m., and last orders are at 10 p.m. I'll show you the route."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -174,7 +182,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3qEb,2AECId,%EB%8D%94%EB%AA%B0%ED%8A%B8%ED%95%98%EC%9A%B0%EC%8A%A4%20%EC%86%A1%EB%8F%84%EC%A0%90,1966171451,PLACE_POI/-/walk?c=17.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3qEb,2AECId,%EB%8D%94%EB%AA%B0%ED%8A%B8%ED%95%98%EC%9A%B0%EC%8A%A4%20%EC%86%A1%EB%8F%84%EC%A0%90,1966171451,PLACE_POI/-/walk?c=17.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "더몰트하우스는 양식 레스토랑입니다. 위치를 안내해 드릴게요.",
+        "A동 3층 305호에 있습니다. 오후 3시부터 5시까지 브레이크타임이며, 마지막 주문은 오후 10시입니다. 길을 보여드릴게요."
+      ]
     },
     {
       "id": "compose-coffee-incheon-songdo-central-park",
@@ -222,8 +234,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "컴포즈커피 인천송도센트럴파크점: Cafe. Address: 인천타워대로180번길 11, Building A, 1F, Unit 112, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 08:00–22:00 (Sunday: closes at 21:00; Monday and Tuesday: closes at 20:00)."
+        "There's a Compose Coffee in the area. Let me show you where it is.",
+        "It's on the first floor of Building A, in unit 112. Closing times vary by day, so please check before you go. Here's the walking route."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -232,7 +244,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3qAn,2AED32,%EC%BB%B4%ED%8F%AC%EC%A6%88%EC%BB%A4%ED%94%BC%20%EC%9D%B8%EC%B2%9C%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%EC%A0%90,1766497066,PLACE_POI/-/walk?c=17.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3qAn,2AED32,%EC%BB%B4%ED%8F%AC%EC%A6%88%EC%BB%A4%ED%94%BC%20%EC%9D%B8%EC%B2%9C%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%EC%A0%90,1766497066,PLACE_POI/-/walk?c=17.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "이 주변에 컴포즈커피가 있습니다. 위치를 안내해 드릴게요.",
+        "A동 1층 112호에 있습니다. 요일마다 마감 시간이 다르므로 방문 전에 확인해 주세요. 여기 도보 경로가 있습니다."
+      ]
     },
     {
       "id": "chaeum-pharmacy-songdo",
@@ -280,8 +296,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "채움약국: Pharmacy. Address: 인천타워대로197번길 16, 2F, Unit 240, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 09:00–19:30 (break 13:00–14:00); Saturday 09:00–14:00."
+        "Chaeum Pharmacy is in the area. I can show you the way.",
+        "It's on the second floor, in unit 240. There's a break from 1 to 2 p.m., and it closes at 2 p.m. on Saturdays. Let me show you the route."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -290,7 +306,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3hGv,2AEBdK,%EC%B1%84%EC%9B%80%EC%95%BD%EA%B5%AD,1118119314,PLACE_POI/-/walk?c=17.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3hGv,2AEBdK,%EC%B1%84%EC%9B%80%EC%95%BD%EA%B5%AD,1118119314,PLACE_POI/-/walk?c=17.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "이 주변에 채움약국이 있습니다. 가는 길을 안내해 드릴게요.",
+        "2층 240호에 있습니다. 오후 1시부터 2시까지 휴게시간이며, 토요일에는 오후 2시에 문을 닫습니다. 길을 보여드릴게요."
+      ]
     },
     {
       "id": "hanyang-songdo-hanok-village",
@@ -338,8 +358,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "The address of 한양 송도한옥마을점 is 테크노파크로 180, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 11:30–22:00; weekday break 15:00–17:00."
+        "Hanyang is a Korean restaurant in Songdo Hanok Village.",
+        "It's at 180 Technopark-ro, in the Hanok Village area. On weekdays, there's a break from 3 to 5 p.m. Let me show you the walking route."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -348,7 +368,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3r09,2AEG3u,%ED%95%9C%EC%96%91%20%ED%95%9C%EC%98%A5%EB%A7%88%EC%9D%84%EC%A0%90,36465910,PLACE_POI/-/walk?c=17.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3r09,2AEG3u,%ED%95%9C%EC%96%91%20%ED%95%9C%EC%98%A5%EB%A7%88%EC%9D%84%EC%A0%90,36465910,PLACE_POI/-/walk?c=17.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "한양은 송도 한옥마을에 있는 한식당입니다.",
+        "한옥마을 지역의 테크노파크로 180에 있습니다. 평일에는 오후 3시부터 5시까지 브레이크타임이 있습니다. 도보 경로를 보여드릴게요."
+      ]
     },
     {
       "id": "gyeongbokgung-hanok-village",
@@ -396,8 +420,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "The address of 경복궁 한옥마을점 is 테크노파크로 180, Building 가, Floors 1–2, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 11:30–22:00 (last order 21:30)."
+        "Gyeongbokgung is a Korean restaurant in Songdo Hanok Village.",
+        "It's in Building Ga, on the first and second floors, at 180 Technopark-ro. Last orders are at 9:30 p.m. Let me show you the route."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -406,7 +430,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3qUD,2AEFTz,%EA%B2%BD%EB%B3%B5%EA%B6%81%20%ED%95%9C%EC%98%A5%EB%A7%88%EC%9D%84%EC%A0%90,36105134,PLACE_POI/-/walk?c=17.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3qUD,2AEFTz,%EA%B2%BD%EB%B3%B5%EA%B6%81%20%ED%95%9C%EC%98%A5%EB%A7%88%EC%9D%84%EC%A0%90,36105134,PLACE_POI/-/walk?c=17.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "경복궁은 송도 한옥마을에 있는 한식당입니다.",
+        "테크노파크로 180 가동 1~2층에 있습니다. 마지막 주문은 오후 9시 30분입니다. 길을 보여드릴게요."
+      ]
     },
     {
       "id": "paljinhyang-hanok-village",
@@ -454,8 +482,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "The address of 팔진향 한옥마을점 is 테크노파크로 180, Building 나, 2F, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 11:30–22:00 (break 15:00–17:00; last order 21:30)."
+        "Paljinhyang is a Chinese restaurant in Songdo Hanok Village.",
+        "It's on the second floor of Building Na, at 180 Technopark-ro. There's a break from 3 to 5 p.m. Let me show you the walking route."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -464,7 +492,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3sqH,2AEEZl,%ED%8C%94%EC%A7%84%ED%96%A5%20%ED%95%9C%EC%98%A5%EB%A7%88%EC%9D%84%EC%A0%90,1668101724,PLACE_POI/-/walk?c=17.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3sqH,2AEEZl,%ED%8C%94%EC%A7%84%ED%96%A5%20%ED%95%9C%EC%98%A5%EB%A7%88%EC%9D%84%EC%A0%90,1668101724,PLACE_POI/-/walk?c=17.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "팔진향은 송도 한옥마을에 있는 중식당입니다.",
+        "테크노파크로 180 나동 2층에 있습니다. 오후 3시부터 5시까지 브레이크타임이 있습니다. 도보 경로를 보여드릴게요."
+      ]
     },
     {
       "id": "hollys-incheon-hanok-village",
@@ -512,8 +544,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "The address of 할리스 인천한옥마을점 is 테크노파크로 180, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 09:00–22:30."
+        "Hollys is a coffee shop in Songdo Hanok Village.",
+        "It's at 180 Technopark-ro, in the Hanok Village area. It's listed as open until 10:30 p.m. Let me show you how to get there."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -522,7 +554,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3rdN,2AEGrt,%ED%95%A0%EB%A6%AC%EC%8A%A4%20%EC%9D%B8%EC%B2%9C%ED%95%9C%EC%98%A5%EB%A7%88%EC%9D%84%EC%A0%90,36253498,PLACE_POI/-/walk?c=17.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3rdN,2AEGrt,%ED%95%A0%EB%A6%AC%EC%8A%A4%20%EC%9D%B8%EC%B2%9C%ED%95%9C%EC%98%A5%EB%A7%88%EC%9D%84%EC%A0%90,36253498,PLACE_POI/-/walk?c=17.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "할리스는 송도 한옥마을에 있는 카페입니다.",
+        "한옥마을 지역의 테크노파크로 180에 있습니다. 등록된 정보상 오후 10시 30분까지 운영합니다. 가는 길을 보여드릴게요."
+      ]
     },
     {
       "id": "songhaeon-songdo",
@@ -570,8 +606,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "The address of 송해온 is 인천타워대로197번길 16, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 06:00–22:00."
+        "Songhaeon is a sauna and hot spring facility in Songdo.",
+        "It's at 16 Incheon Tower-daero 197beon-gil. The listed hours are from 6 a.m. to 10 p.m. Let me show you the walking route."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -580,7 +616,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3hHj,2AEBf5,%EC%86%A1%EB%8F%84%ED%95%B4%EC%88%98%EC%98%A8%EC%B2%9C%20%EC%86%A1%ED%95%B4%EC%98%A8,1138534676,PLACE_POI/-/walk?c=17.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3hHj,2AEBf5,%EC%86%A1%EB%8F%84%ED%95%B4%EC%88%98%EC%98%A8%EC%B2%9C%20%EC%86%A1%ED%95%B4%EC%98%A8,1138534676,PLACE_POI/-/walk?c=17.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "송해온은 송도에 있는 사우나 및 온천 시설입니다.",
+        "인천타워대로197번길 16에 있습니다. 등록된 운영시간은 오전 6시부터 오후 10시까지입니다. 도보 경로를 보여드릴게요."
+      ]
     },
     {
       "id": "songjjujip-main",
@@ -628,8 +668,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "The address of 송쭈집 본점 is 센트럴로 160, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 11:00–21:50 (break 15:00–16:30); last orders 14:00 and 20:50."
+        "Songjjujip is a Korean restaurant. Let me show you where it is.",
+        "It's at 160 Central-ro. There's a break from 3 to 4:30 p.m. Last orders are at 2 p.m. for lunch and 8:50 p.m. for dinner. I'll show you the route."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -638,7 +678,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3BDj,2AELSG,%EC%86%A1%EC%AD%88%EC%A7%91%20%EB%B3%B8%EC%A0%90,20451473,PLACE_POI/-/walk?c=15.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3BDj,2AELSG,%EC%86%A1%EC%AD%88%EC%A7%91%20%EB%B3%B8%EC%A0%90,20451473,PLACE_POI/-/walk?c=15.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "송쭈집은 한식당입니다. 위치를 안내해 드릴게요.",
+        "센트럴로 160에 있습니다. 오후 3시부터 4시 30분까지 브레이크타임이며, 마지막 주문은 점심 오후 2시, 저녁 오후 8시 50분입니다. 길을 보여드릴게요."
+      ]
     },
     {
       "id": "otto-gimbap-songdo",
@@ -686,8 +730,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "The address of 오토김밥 is 센트럴로 160, Building 103, Building C, Units 243–246, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 10:00–19:00 (break 14:00–16:00)."
+        "Otto Gimbap serves gimbap, or Korean rice rolls.",
+        "It's at 160 Central-ro, in Building C, units 243 to 246. There's a break from 2 to 4 p.m. Let me show you the walking route."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -696,7 +740,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3HFx,2AEIJL,%EC%98%A4%ED%86%A0%EA%B9%80%EB%B0%A5%20%EC%9D%B8%EC%B2%9C%EC%86%A1%EB%8F%84%EC%A0%90,1496347338,PLACE_POI/-/walk?c=15.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3HFx,2AEIJL,%EC%98%A4%ED%86%A0%EA%B9%80%EB%B0%A5%20%EC%9D%B8%EC%B2%9C%EC%86%A1%EB%8F%84%EC%A0%90,1496347338,PLACE_POI/-/walk?c=15.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "오토김밥은 한국식 김밥을 판매하는 곳입니다.",
+        "센트럴로 160 C동 243~246호에 있습니다. 오후 2시부터 4시까지 브레이크타임입니다. 도보 경로를 보여드릴게요."
+      ]
     },
     {
       "id": "burgeroom181-songdo",
@@ -744,8 +792,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "The address of 버거룸181 is 센트럴로 160, Building A, 2F, Units 228–230, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 11:00–21:30 (break 15:00–17:00); last order 21:00."
+        "Burger Room 181 is a burger restaurant in Songdo.",
+        "It's on the second floor of Building A, in units 228 to 230, at 160 Central-ro. Last orders are at 9 p.m. Let me show you the route."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -754,7 +802,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3CtG,2AELkQ,%EB%B2%84%EA%B1%B0%EB%A3%B8181%20%EC%86%A1%EB%8F%84%EB%B3%B8%EC%A0%90,33244070,PLACE_POI/-/walk?c=15.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3CtG,2AELkQ,%EB%B2%84%EA%B1%B0%EB%A3%B8181%20%EC%86%A1%EB%8F%84%EB%B3%B8%EC%A0%90,33244070,PLACE_POI/-/walk?c=15.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "버거룸181은 송도에 있는 햄버거 전문점입니다.",
+        "센트럴로 160 A동 2층 228~230호에 있습니다. 마지막 주문은 오후 9시입니다. 길을 보여드릴게요."
+      ]
     },
     {
       "id": "moms-touch-songdo-central-park",
@@ -802,8 +854,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "The address of 맘스터치 송도센트럴파크점 is 센트럴로 160, Retail Building 1, Unit 126, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 08:30–22:00 (last order 21:50)."
+        "There's a Mom's Touch fast-food restaurant in Songdo.",
+        "It's at 160 Central-ro, in Retail Building 1, unit 126. Last orders are at 9:50 p.m. I can show you the walking route."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -812,7 +864,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3BIj,2AELNf,%EB%A7%98%EC%8A%A4%ED%84%B0%EC%B9%98%20%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%EC%A0%90,1739466700,PLACE_POI/-/walk?c=15.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3BIj,2AELNf,%EB%A7%98%EC%8A%A4%ED%84%B0%EC%B9%98%20%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%EC%A0%90,1739466700,PLACE_POI/-/walk?c=15.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "송도에 맘스터치 패스트푸드점이 있습니다.",
+        "센트럴로 160 판매시설동 1의 126호에 있습니다. 마지막 주문은 오후 9시 50분입니다. 도보 경로를 보여드릴게요."
+      ]
     },
     {
       "id": "burger-king-incheon-songdo-central-park",
@@ -860,8 +916,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "The address of 버거킹 인천송도센트럴파크점 is 센트럴로 194, Building B, 1F, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 10:00–23:00."
+        "There's a Burger King in the Central Park area.",
+        "It's on the first floor of Building B, at 194 Central-ro. It's listed as open until 11 p.m. Let me show you the walking route."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -870,7 +926,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3whd,2AEOJ3,%EB%B2%84%EA%B1%B0%ED%82%B9%20%EC%9D%B8%EC%B2%9C%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%EC%A0%90,34565454,PLACE_POI/-/walk?c=15.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3whd,2AEOJ3,%EB%B2%84%EA%B1%B0%ED%82%B9%20%EC%9D%B8%EC%B2%9C%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%EC%A0%90,34565454,PLACE_POI/-/walk?c=15.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "센트럴파크 주변에 버거킹이 있습니다.",
+        "센트럴로 194 B동 1층에 있습니다. 등록된 정보상 오후 11시까지 운영합니다. 도보 경로를 보여드릴게요."
+      ]
     },
     {
       "id": "incheon-port-hangdong-7ga",
@@ -918,8 +978,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "The address of 인천항 is 항동7가 88, Jung-gu, Incheon.",
-        "This is a reference route to the Incheon Port Coastal Passenger Terminal. From the hotel, go to the 인천스타트업파크 bus stop and take bus 16-1. At 연안아파트, transfer to bus 36 or 14, then get off at the 연안여객터미널 bus stop. The total journey takes about 1 hour and may vary depending on departure time and traffic conditions."
+        "Are you going to the Incheon Port Coastal Passenger Terminal? I can show you a bus route.",
+        "Go to the Incheon Startup Park bus stop and take bus 16-1. At Yeonan Apartments, change to bus 36 or 14. Get off at Yeonan Passenger Terminal. The trip takes about an hour, depending on traffic and schedules."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -928,7 +988,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z1K4q,2AHkeJ,%EC%9D%B8%EC%B2%9C%ED%95%AD%EC%97%B0%EC%95%88%EC%97%AC%EA%B0%9D%ED%84%B0%EB%AF%B8%EB%84%90,1113352648,PLACE_POI/-/transit?c=12.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z1K4q,2AHkeJ,%EC%9D%B8%EC%B2%9C%ED%95%AD%EC%97%B0%EC%95%88%EC%97%AC%EA%B0%9D%ED%84%B0%EB%AF%B8%EB%84%90,1113352648,PLACE_POI/-/transit?c=12.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "인천항 연안여객터미널로 가시나요? 버스 경로를 안내해 드릴게요.",
+        "인천스타트업파크 버스 정류장에서 16-1번을 타세요. 연안아파트에서 36번이나 14번으로 갈아타고 연안여객터미널 정류장에서 내리시면 됩니다. 교통상황과 버스 시간에 따라 약 1시간 걸립니다."
+      ]
     },
     {
       "id": "starbucks-songdo-central-park",
@@ -976,8 +1040,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "The address of 스타벅스 송도센트럴파크점 is 센트럴로 194, Building A, Units 101–103, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 07:00–22:00 (delivery 10:00–21:30)."
+        "There's a Starbucks in the Central Park area.",
+        "It's in Building A, units 101 to 103, at 194 Central-ro. The listed hours are from 7 a.m. to 10 p.m. I'll show you the walking route."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -986,7 +1050,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3xNh,2AEPWG,%EC%8A%A4%ED%83%80%EB%B2%85%EC%8A%A4%20%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%EC%A0%90,33021671,PLACE_POI/-/walk?c=15.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3xNh,2AEPWG,%EC%8A%A4%ED%83%80%EB%B2%85%EC%8A%A4%20%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%EC%A0%90,33021671,PLACE_POI/-/walk?c=15.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "센트럴파크 주변에 스타벅스가 있습니다.",
+        "센트럴로 194 A동 101~103호에 있습니다. 등록된 운영시간은 오전 7시부터 오후 10시까지입니다. 도보 경로를 보여드릴게요."
+      ]
     },
     {
       "id": "playground-brewery-taproom-songdo",
@@ -1034,8 +1102,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "The address of 플레이그라운드 브루어리 탭룸 송도 is 컨벤시아대로 80, 현대힐스테이트, Building 401, Unit 139, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 15:00–00:00 (last order 23:00)."
+        "Playground Brewery Taproom is a place for craft beer in Songdo.",
+        "It's at 80 Convensia-daero, in the Hyundai Hillstate complex, Building 401, unit 139. Last orders are at 11 p.m. I can show you the route."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -1044,7 +1112,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3RTY,2AEUcq,%ED%94%8C%EB%A0%88%EC%9D%B4%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C%20%EB%B8%8C%EB%A3%A8%EC%96%B4%EB%A6%AC%20%ED%83%AD%EB%A3%B8%20%EC%86%A1%EB%8F%84,137449520,PLACE_POI/-/walk?c=14.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3RTY,2AEUcq,%ED%94%8C%EB%A0%88%EC%9D%B4%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C%20%EB%B8%8C%EB%A3%A8%EC%96%B4%EB%A6%AC%20%ED%83%AD%EB%A3%B8%20%EC%86%A1%EB%8F%84,137449520,PLACE_POI/-/walk?c=14.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "플레이그라운드 브루어리 탭룸은 송도에서 수제맥주를 즐길 수 있는 곳입니다.",
+        "컨벤시아대로 80 현대힐스테이트 401동 139호에 있습니다. 마지막 주문은 오후 11시입니다. 길을 보여드릴게요."
+      ]
     },
     {
       "id": "geumbyeol-beer-songdo-lotte-mall",
@@ -1092,8 +1164,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "The address of 금별맥주 송도롯데몰점 is 하모니로 144, 지웰푸르지오시티, Units A101–102, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 16:30–02:00 the following day (Friday and Saturday: until 04:30 the following day)."
+        "Geumbyeol Beer is a pub in Songdo.",
+        "It's at 144 Harmony-ro, in units A101 and A102. It's listed as staying open later on Fridays and Saturdays. Let me show you the walking route."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -1102,7 +1174,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3Dar,2AEq3J,%EA%B8%88%EB%B3%84%EB%A7%A5%EC%A3%BC%20%EC%86%A1%EB%8F%84%EB%A1%AF%EB%8D%B0%EB%AA%B0%EC%A0%90,1289345202,PLACE_POI/-/walk?c=15.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3Dar,2AEq3J,%EA%B8%88%EB%B3%84%EB%A7%A5%EC%A3%BC%20%EC%86%A1%EB%8F%84%EB%A1%AF%EB%8D%B0%EB%AA%B0%EC%A0%90,1289345202,PLACE_POI/-/walk?c=15.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "금별맥주는 송도에 있는 술집입니다.",
+        "하모니로 144의 A101호와 A102호에 있습니다. 등록된 정보상 금요일과 토요일에는 더 늦게까지 운영합니다. 도보 경로를 보여드릴게요."
+      ]
     },
     {
       "id": "central-park-station-exit-3",
@@ -1150,8 +1226,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "The address of 센트럴파크역 3번 출구 is 센트럴파크역, Incheon Subway Line 1.",
-        "The hotel lists an estimated walk of about 5 minutes to 센트럴파크역 Exit 3."
+        "Central Park Station Exit 3 is about a five-minute walk from the hotel.",
+        "It's an entrance to Incheon Subway Line 1. Make sure you use Exit 3. I'll show you the walking route to that exit on the map."
       ],
       "walkingMinutes": 5,
       "closedDays": {
@@ -1160,7 +1236,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3gJ1,2AEMGZ,%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%EC%97%AD(%EC%9E%AC%EC%99%B8%EB%8F%99%ED%8F%AC%EC%B2%AD%2C%ED%8F%AC%EC%8A%A4%EC%BD%94%EC%9D%B4%EC%95%A4%EC%94%A8)3%EB%B2%88%EC%B6%9C%EA%B5%AC,21403643,PLACE_POI/-/walk?c=16.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3gJ1,2AEMGZ,%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%EC%97%AD(%EC%9E%AC%EC%99%B8%EB%8F%99%ED%8F%AC%EC%B2%AD%2C%ED%8F%AC%EC%8A%A4%EC%BD%94%EC%9D%B4%EC%95%A4%EC%94%A8)3%EB%B2%88%EC%B6%9C%EA%B5%AC,21403643,PLACE_POI/-/walk?c=16.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "센트럴파크역 3번 출구는 호텔에서 걸어서 약 5분 거리입니다.",
+        "인천지하철 1호선으로 들어가는 출입구입니다. 3번 출구를 이용하시면 됩니다. 지도에서 그 출구까지의 도보 경로를 보여드릴게요."
+      ]
     },
     {
       "id": "lotte-mart-songdo",
@@ -1208,8 +1288,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "The address of 롯데마트 송도점 is 컨벤시아대로 177, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 10:00–23:00."
+        "Lotte Mart is a supermarket for groceries and everyday items.",
+        "It's at 177 Convensia-daero. It's listed as open from 10 a.m. to 11 p.m. Let me show you the walking route from the hotel."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -1218,7 +1298,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3CwL,2AEzbI,%EB%A1%AF%EB%8D%B0%EB%A7%88%ED%8A%B8%20%EC%86%A1%EB%8F%84%EC%A0%90,33703899,PLACE_POI/-/walk?c=15.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3CwL,2AEzbI,%EB%A1%AF%EB%8D%B0%EB%A7%88%ED%8A%B8%20%EC%86%A1%EB%8F%84%EC%A0%90,33703899,PLACE_POI/-/walk?c=15.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "롯데마트는 식료품과 생활용품을 살 수 있는 대형마트입니다.",
+        "컨벤시아대로 177에 있습니다. 등록된 운영시간은 오전 10시부터 오후 11시까지입니다. 호텔에서 가는 도보 경로를 보여드릴게요."
+      ]
     },
     {
       "id": "songdo-central-park",
@@ -1266,8 +1350,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "The address of 송도 센트럴파크 is Around 컨벤시아대로 160, Yeonsu-gu, Incheon.",
-        "Listed opening hours: Park walks available; activity facilities are separate."
+        "Songdo Central Park is a large park that's good for a walk.",
+        "The park covers a large area around 160 Convensia-daero. The map points to the park in general, not a specific entrance. I can help you check the route."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -1276,7 +1360,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3vpR,2AEHfp,%EC%86%A1%EB%8F%84%20%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC,20118926,PLACE_POI/-/walk?c=16.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3vpR,2AEHfp,%EC%86%A1%EB%8F%84%20%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC,20118926,PLACE_POI/-/walk?c=16.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "송도 센트럴파크는 산책하기 좋은 넓은 공원입니다.",
+        "공원은 컨벤시아대로 160 일대에 넓게 펼쳐져 있습니다. 지도는 특정 입구가 아니라 공원 전체 위치를 가리킵니다. 경로를 함께 확인해 드릴게요."
+      ]
     },
     {
       "id": "byeol-onnuri-pharmacy-songdo",
@@ -1324,8 +1412,8 @@
         "ja": []
       },
       "englishPhrases": [
-        "The address of 별온누리약국 is 하모니로 158, 송도타임스페이스, Building A, Units 110–112, Yeonsu-gu, Incheon.",
-        "Listed opening hours: 08:30–01:00 the following day; 24-hour vending machine available."
+        "Byeol Onnuri Pharmacy stays open late.",
+        "It's in Building A of Songdo Timespace, units 110 to 112, at 158 Harmony-ro. The pharmacy is listed as open until 1 a.m. There's also a separate 24-hour vending machine. Here's the route."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -1334,7 +1422,11 @@
         "zh-CN": "",
         "ja": ""
       },
-      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3zPN,2AElJf,%EB%B3%84%EC%98%A8%EB%88%84%EB%A6%AC%EC%95%BD%EA%B5%AD,1841858743,PLACE_POI/-/walk?c=15.00,0,0,0,dh"
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3zPN,2AElJf,%EB%B3%84%EC%98%A8%EB%88%84%EB%A6%AC%EC%95%BD%EA%B5%AD,1841858743,PLACE_POI/-/walk?c=15.00,0,0,0,dh",
+      "englishPhraseMeanings": [
+        "별온누리약국은 늦은 시간까지 운영합니다.",
+        "하모니로 158 송도타임스페이스 A동 110~112호에 있습니다. 약국은 새벽 1시까지 운영하는 것으로 등록되어 있으며, 별도로 24시간 자판기도 있습니다. 여기 길 안내가 있습니다."
+      ]
     }
   ]
 }
