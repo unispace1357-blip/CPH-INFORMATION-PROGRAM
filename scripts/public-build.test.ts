@@ -88,7 +88,7 @@ test('explicit DEMO test build supports subpaths, excludes private/admin data, p
     await buildPublicTest({ facilitiesFile, hotelFile, outDir, base: '/CPH-INFORMATION-PROGRAM/' })
     const text = await outputText(outDir)
     for (const token of fixture.privateTokens) assert.equal(text.includes(token), false, token)
-    assert.ok(text.includes('CPH_PUBLIC_QA_')); assert.ok(text.includes('공개 테스트 버전'))
+    assert.ok(text.includes('CPH_PUBLIC_QA_')); assert.ok(text.includes('Information is being collected and verified.')); assert.ok(text.includes('© 2026 Antonio.'))
     assert.match(await readFile(join(outDir, 'index.html'), 'utf8'), /\/CPH-INFORMATION-PROGRAM\/assets\//)
     assert.match(await readFile(join(outDir, 'staff/index.html'), 'utf8'), /#\/staff/)
     assert.match(await readFile(join(outDir, 'guest/index.html'), 'utf8'), /#\/guest/)

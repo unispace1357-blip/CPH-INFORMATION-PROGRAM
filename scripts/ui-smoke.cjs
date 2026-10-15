@@ -82,7 +82,7 @@ async function mapPopup(page, link, url) {
     } else await staff.goto(routeURL('/staff'));
     await count(staff, '.facility-card', visible.length);
     assert.deepEqual(await staff.locator('.facility-card h3').allTextContents(), ordered.map(f => f.translations.ko.name));
-    assert.ok(await staff.getByText(publicTest ? '공개 테스트 버전 · 미검수 DEMO' : '프론트 테스트용 미리보기', { exact: true }).isVisible());
+    assert.ok(await staff.getByText(publicTest ? 'Information is being collected and verified.' : '프론트 테스트용 미리보기', { exact: true }).isVisible());
     assert.equal(await staff.locator('.staff-category-grid').getByRole('button', { name: 'ATM', exact: true }).count(), 0);
     for (const item of visible) {
       await staff.locator('.staff-category-grid').getByRole('button', { name: '전체', exact: true }).click();
