@@ -29,7 +29,7 @@ for (const [label, query, expected] of cases) {
   test(`staff search: ${label}`, () => assert.deepEqual(ids(query), expected))
 }
 
-test('Staff/Guest walking order is stable, keeps unknown times last and never mutates source', () => {
+test('Staff/Guest retain source order with mixed walking times, queries and category filters', () => {
   const fixtures = searchFixtures()
   const before = structuredClone(fixtures)
   for (const query of ['', ' \t\n']) assert.deepEqual(searchFacilities(fixtures, query).map(item => item.id), ['qa-alpha', 'qa-beta', 'qa-gamma'])
@@ -42,9 +42,9 @@ test('Staff/Guest walking order is stable, keeps unknown times last and never mu
   ]
   const snapshot = structuredClone(known)
   for (const search of [searchFacilities, searchGuestFacilities]) {
-    assert.deepEqual(search(known).map(f => f.id), ['zero', 'equal-a', 'equal-b', 'qa-alpha', 'qa-beta', 'qa-gamma'])
-    for (const [query, category] of [['청록', 'all'], ['', 'sauna_spa']] as const) {
-      assert.deepEqual(search(known, query, category).map(f => f.id), ['zero', 'equal-a', 'equal-b', 'qa-alpha'])
+    assert.deepEqual(search(known).map(f => f.id), ['qa-alpha', 'qa-beta', 'qa-gamma', 'equal-a', 'zero', 'equal-b'])
+    for (const [query, category] of [['청록', 'all'], ['', 'sauna_spa'], ['청록', 'sauna_spa']] as const) {
+      assert.deepEqual(search(known, query, category).map(f => f.id), ['qa-alpha', 'equal-a', 'zero', 'equal-b'])
     }
   }
   assert.deepEqual(known, snapshot)

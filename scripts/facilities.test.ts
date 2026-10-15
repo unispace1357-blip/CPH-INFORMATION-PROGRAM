@@ -67,8 +67,27 @@ test('confirmed hours retain breaks, last order and day-specific closing in ever
   const port = data.facilities.find(f => f.id === 'incheon-port-hangdong-7ga')!
   assert.equal(port.translations.ko.name, '인천항')
   assert.equal(port.translations.ko.address, '인천광역시 중구 항동7가 88')
-  assert.doesNotMatch(Object.values(port.translations).flatMap(text => Object.values(text)).join(' '), /터미널|terminal|ターミナル|客运码头|여객|walking/i)
-  assert.match(port.translations.ko.directions, /16-1.*연안아파트.*36번.*14번.*약 7분.*약 1시간/)
+  const routeChecks = {
+    ko: [/인천항 연안여객터미널 기준 참고 경로/, /약 1시간/, /출발 시각/, /교통 상황/],
+    en: [/reference route to the Incheon Port Coastal Passenger Terminal/, /about 1 hour/, /departure time/, /traffic conditions/],
+    'zh-CN': [/仁川港沿岸客运码头的参考路线/, /约1小时/, /出发时刻/, /交通状况/],
+    ja: [/仁川港沿岸旅客ターミナルまでの参考経路/, /約1時間/, /出発時刻/, /交通状況/],
+  }
+  for (const language of ['ko', 'en', 'zh-CN', 'ja'] as const) {
+    const text = port.translations[language]
+    // Terminal scope belongs only to the reference route; keep the facility identity unchanged.
+    assert.doesNotMatch([text.name, text.description, text.address, text.notes].join(' '), /터미널|terminal|ターミナル|客运码头|여객/i)
+    for (const pattern of routeChecks[language]) assert.match(text.directions, pattern)
+    assert.deepEqual(text.directions.match(/\d+/g), ['16', '1', '36', '14', '1'])
+    let cursor = 0
+    for (const stop of ['인천스타트업파크', '16-1', '연안아파트', '36', '14', '연안여객터미널']) {
+      const position = text.directions.indexOf(stop, cursor)
+      assert.ok(position >= cursor, `${language}: missing or misplaced route step ${stop}`)
+      cursor = position + stop.length
+    }
+    assert.doesNotMatch(text.directions, /7|도보|walking|on foot|步行|徒歩/)
+  }
+  assert.equal(port.englishPhrases[1], port.translations.en.directions)
   assert.equal(port.walkingMinutes, null)
   const park = data.facilities.find(f => f.id === 'songdo-central-park')!
   assert.equal(park.translations.ko.name, '송도 센트럴파크')
@@ -87,6 +106,15 @@ test('confirmed hours retain breaks, last order and day-specific closing in ever
 
 test('real preview records are searchable, retain admin edits on export/import and still respect hiding', () => {
   const data = parseFacilityDataset(fresh()), before = structuredClone(data)
+  const sourceIds = data.facilities.map(f => f.id)
+  assert.ok(sourceIds.indexOf('cu-songdo-senseuri') < sourceIds.indexOf('central-park-station-exit-3'))
+  for (const search of [searchFacilities, searchGuestFacilities]) {
+    assert.deepEqual(search(data.facilities).map(f => f.id), sourceIds)
+    assert.deepEqual(search(data.facilities, '', 'transportation').map(f => f.id), ['incheon-port-hangdong-7ga', 'central-park-station-exit-3'])
+  }
+  for (const language of ['ko', 'en', 'zh-CN', 'ja'] as const) {
+    assert.deepEqual(searchGuestFacilities(data.facilities, '', 'all', language).map(f => f.id), sourceIds)
+  }
   assert.deepEqual(importFacilities(exportFacilities(data)), data)
   for (const facility of data.facilities) {
     assert.deepEqual(searchFacilities(data.facilities, facility.translations.ko.name).map(f => f.id), [facility.id])

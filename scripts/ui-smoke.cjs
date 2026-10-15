@@ -12,7 +12,7 @@ const data = JSON.parse(original[0]);
 const languages = { en: 'English', ko: '한국어', 'zh-CN': '简体中文', ja: '日本語' };
 const results = [], errors = [], requests = [], interceptedMaps = [];
 const visible = data.facilities.filter(item => item.isPublished);
-const ordered = [...visible].sort((a, b) => (a.walkingMinutes ?? Infinity) - (b.walkingMinutes ?? Infinity));
+const ordered = visible;
 async function count(page, selector, expected) {
   await page.waitForFunction(({ selector, expected }) => document.querySelectorAll(selector).length === expected, { selector, expected });
 }

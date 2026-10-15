@@ -6,15 +6,10 @@ export function normalizeSearchTerm(value: string): string {
   return value.normalize('NFC').trim().toLowerCase()
 }
 
-/** Stable order: confirmed walking times first; ties/unknown times keep source order. */
-export function orderByWalkingMinutes(facilities: readonly Facility[]): Facility[] {
-  return [...facilities].sort((a, b) => a.walkingMinutes === b.walkingMinutes ? 0 : (a.walkingMinutes ?? Infinity) - (b.walkingMinutes ?? Infinity))
-}
-
-/** Local literal substring matching; input is untouched. */
+/** Keep source order until sufficient walking data is verified; input is untouched. */
 export function searchFacilities(facilities: readonly Facility[], query = '', category: StaffCategoryFilter = 'all'): Facility[] {
   const term = normalizeSearchTerm(query)
-  return orderByWalkingMinutes(facilities.filter(facility => {
+  return facilities.filter(facility => {
     if (!facility.isPublished || (category !== 'all' && facility.category !== category)) return false
     if (!term) return true
     const fields = [
@@ -23,7 +18,7 @@ export function searchFacilities(facilities: readonly Facility[], query = '', ca
       facility.translations.ko.address, facility.translations.en.address,
     ]
     return fields.some(field => normalizeSearchTerm(field).includes(term))
-  }))
+  })
 }
 
 export function resolveSelectedFacility(results: readonly Facility[], selectedId: string | null): Facility | null {

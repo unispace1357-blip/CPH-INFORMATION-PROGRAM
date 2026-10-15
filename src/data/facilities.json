@@ -883,7 +883,7 @@
           "description": "항구",
           "address": "인천광역시 중구 항동7가 88",
           "openingHours": "",
-          "directions": "호텔에서 16-1번 버스 이용 → 연안아파트에서 36번 또는 14번 버스로 환승 → 이후 약 7분 이동. 전체 약 1시간 소요.",
+          "directions": "인천항 연안여객터미널 기준 참고 경로입니다. 호텔에서 인천스타트업파크 버스 정류장으로 이동한 뒤 16-1번 버스를 이용하세요. 연안아파트에서 36번 또는 14번 버스로 환승하여 연안여객터미널 정류장에서 하차합니다. 전체 이동시간은 약 1시간이며 출발 시각과 교통 상황에 따라 달라질 수 있습니다.",
           "notes": ""
         },
         "en": {
@@ -891,7 +891,7 @@
           "description": "Port.",
           "address": "항동7가 88, Jung-gu, Incheon",
           "openingHours": "",
-          "directions": "Take bus 16-1 from the hotel, get off at 연안아파트 and transfer to bus 36 or 14, then ride for about 7 more minutes. The full journey takes about 1 hour.",
+          "directions": "This is a reference route to the Incheon Port Coastal Passenger Terminal. From the hotel, go to the 인천스타트업파크 bus stop and take bus 16-1. At 연안아파트, transfer to bus 36 or 14, then get off at the 연안여객터미널 bus stop. The total journey takes about 1 hour and may vary depending on departure time and traffic conditions.",
           "notes": ""
         },
         "zh-CN": {
@@ -899,7 +899,7 @@
           "description": "港口。",
           "address": "仁川广域市中区 항동7가 88",
           "openingHours": "",
-          "directions": "从酒店乘坐16-1路公交车，在연안아파트站下车后换乘36路或14路，再乘坐约7分钟。全程约1小时。",
+          "directions": "以下为前往仁川港沿岸客运码头的参考路线。从酒店前往인천스타트업파크公交站，乘坐16-1路公交车。在연안아파트站换乘36路或14路公交车，在연안여객터미널站下车。全程约1小时，具体时间会因出发时刻和交通状况而变化。",
           "notes": ""
         },
         "ja": {
@@ -907,7 +907,7 @@
           "description": "港。",
           "address": "仁川広域市中区 항동7가 88",
           "openingHours": "",
-          "directions": "ホテルから16-1番バスに乗り、연안아파트で下車して36番または14番バスに乗り換え、その後約7分乗車します。全行程は約1時間です。",
+          "directions": "仁川港沿岸旅客ターミナルまでの参考経路です。ホテルから인천스타트업파크バス停へ移動し、16-1番バスに乗車してください。연안아파트で36番または14番バスに乗り換え、연안여객터미널バス停で下車します。全行程は約1時間で、出発時刻や交通状況により変わります。",
           "notes": ""
         }
       },
@@ -919,7 +919,7 @@
       },
       "englishPhrases": [
         "The address of 인천항 is 항동7가 88, Jung-gu, Incheon.",
-        "Take bus 16-1 from the hotel, get off at 연안아파트 and transfer to bus 36 or 14, then ride for about 7 more minutes. The full journey takes about 1 hour."
+        "This is a reference route to the Incheon Port Coastal Passenger Terminal. From the hotel, go to the 인천스타트업파크 bus stop and take bus 16-1. At 연안아파트, transfer to bus 36 or 14, then get off at the 연안여객터미널 bus stop. The total journey takes about 1 hour and may vary depending on departure time and traffic conditions."
       ],
       "walkingMinutes": null,
       "closedDays": {
