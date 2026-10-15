@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { FACILITY_CATEGORIES } from '../src/types/facility.ts'
 import { searchFacilities, resolveSelectedFacility } from '../src/services/facilitySearch.ts'
+import { searchGuestFacilities } from '../src/services/guestFacilitySearch.ts'
 import { loadStaffDataset } from '../src/services/loadStaffDataset.ts'
 import { searchFixtures } from './staff-test-fixtures.ts'
 
@@ -28,11 +29,25 @@ for (const [label, query, expected] of cases) {
   test(`staff search: ${label}`, () => assert.deepEqual(ids(query), expected))
 }
 
-test('empty/whitespace search returns public records in stable source order without mutation', () => {
+test('Staff/Guest walking order is stable, keeps unknown times last and never mutates source', () => {
   const fixtures = searchFixtures()
   const before = structuredClone(fixtures)
   for (const query of ['', ' \t\n']) assert.deepEqual(searchFacilities(fixtures, query).map(item => item.id), ['qa-alpha', 'qa-beta', 'qa-gamma'])
   assert.deepEqual(fixtures, before)
+  const known = [
+    ...fixtures,
+    { ...structuredClone(fixtures[0]!), id: 'equal-a', walkingMinutes: 5 },
+    { ...structuredClone(fixtures[0]!), id: 'zero', walkingMinutes: 0 },
+    { ...structuredClone(fixtures[0]!), id: 'equal-b', walkingMinutes: 5 },
+  ]
+  const snapshot = structuredClone(known)
+  for (const search of [searchFacilities, searchGuestFacilities]) {
+    assert.deepEqual(search(known).map(f => f.id), ['zero', 'equal-a', 'equal-b', 'qa-alpha', 'qa-beta', 'qa-gamma'])
+    for (const [query, category] of [['청록', 'all'], ['', 'sauna_spa']] as const) {
+      assert.deepEqual(search(known, query, category).map(f => f.id), ['zero', 'equal-a', 'equal-b', 'qa-alpha'])
+    }
+  }
+  assert.deepEqual(known, snapshot)
 })
 
 test('equivalent decomposed Korean Unicode matches after NFC normalization', () => {

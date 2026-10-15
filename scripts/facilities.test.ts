@@ -11,53 +11,72 @@ import { importFacilities, exportFacilities, facilityToDraft, saveFacility } fro
 
 const fresh = () => structuredClone(rawData)
 
-test('local preview contains exactly five real facilities, four languages and no fictional records', () => {
+test('local preview contains all 23 real facilities, four languages and no fictional records', () => {
   const data = parseFacilityDataset(fresh())
   assert.equal(data.schemaVersion, 1)
   assert.equal(data.dataStatus, 'demo')
-  assert.deepEqual(data.facilities.map(f => [f.id, f.category, f.translations.ko.name]), [
+  assert.equal(data.facilities.length, 23)
+  assert.equal(new Set(data.facilities.map(f => f.id)).size, 23)
+  assert.deepEqual(data.facilities.slice(0, 5).map(f => [f.id, f.category, f.translations.ko.name]), [
     ['cu-songdo-senseuri', 'convenience', 'CU 송도센쓰리점'],
     ['blue-ocean-sauna-songdo', 'sauna_spa', '블루오션'],
     ['malt-house-incheon-songdo', 'dining', '더몰트하우스 인천송도점'],
     ['compose-coffee-incheon-songdo-central-park', 'cafe', '컴포즈커피 인천송도센트럴파크점'],
     ['chaeum-pharmacy-songdo', 'pharmacy', '채움약국'],
   ])
+  assert.deepEqual(data.facilities.slice(5).map(f => f.id), ['hanyang-songdo-hanok-village', 'gyeongbokgung-hanok-village', 'paljinhyang-hanok-village', 'hollys-incheon-hanok-village', 'songhaeon-songdo', 'songjjujip-main', 'otto-gimbap-songdo', 'burgeroom181-songdo', 'moms-touch-songdo-central-park', 'burger-king-incheon-songdo-central-park', 'incheon-port-hangdong-7ga', 'starbucks-songdo-central-park', 'playground-brewery-taproom-songdo', 'geumbyeol-beer-songdo-lotte-mall', 'central-park-station-exit-3', 'lotte-mart-songdo', 'songdo-central-park', 'byeol-onnuri-pharmacy-songdo'])
   const numbers = (text: string) => text.match(/\d+/g) ?? []
   const addressNumbers = [['180', '11', '1', '109'], ['81', '6', '601'], ['180', '11', '3', '305'], ['180', '11', '1', '112'], ['197', '16', '2', '240']]
   data.facilities.forEach((facility, index) => {
     assert.equal(facility.isPublished, true)
     assert.equal(facility.lastVerifiedAt, null)
-    assert.equal(facility.walkingMinutes, null)
+    assert.equal(facility.walkingMinutes, facility.id === 'central-park-station-exit-3' ? 5 : null)
     assert.equal(facility.naverMapUrl, null)
     assert.deepEqual(Object.keys(facility.translations), ['ko', 'en', 'zh-CN', 'ja'])
     for (const text of Object.values(facility.translations)) {
       assert.ok(text.name.includes(facility.translations.ko.name))
-      assert.deepEqual(numbers(text.address), addressNumbers[index])
-      assert.ok(text.description.trim() && text.openingHours.trim())
+      assert.deepEqual(numbers(text.address), numbers(facility.translations.ko.address))
+      if (index < 5) assert.deepEqual(numbers(text.address), addressNumbers[index])
+      assert.ok(text.description.trim())
+      assert.equal(Boolean(text.openingHours.trim()), facility.id !== 'incheon-port-hangdong-7ga')
       assert.equal(text.notes, '') // Internal verification checklists do not belong in guest copy.
-      assert.equal(text.directions, '')
+      assert.equal(Boolean(text.directions), ['incheon-port-hangdong-7ga', 'central-park-station-exit-3'].includes(facility.id))
+      assert.deepEqual(numbers(text.directions).sort(), numbers(facility.translations.ko.directions).sort())
     }
     assert.equal(facility.englishPhrases.length, 2)
     assert.ok(facility.englishPhrases[0]!.includes(facility.translations.en.address))
-    assert.ok(facility.englishPhrases[1]!.includes(facility.translations.en.openingHours))
+    assert.ok(facility.englishPhrases[1]!.includes(facility.translations.en.directions || facility.translations.en.openingHours))
     for (const language of Object.keys(facility.closedDays) as GuideLanguage[]) {
-      assert.equal(Boolean(facility.closedDays[language]), facility.category === 'sauna_spa')
+      assert.equal(Boolean(facility.closedDays[language]), facility.id === 'blue-ocean-sauna-songdo')
     }
   })
-  assert.doesNotMatch(JSON.stringify(data), /demo-|가상|fictional|제3자|third-party|第三方|第三者|휴계시간|Further checks|待确认|要確認/)
+  assert.doesNotMatch(JSON.stringify(data), /demo-|가상|fictional|제3자|third-party|第三方|第三者|휴계시간|Further checks|待确认|要確認|다시 조사할 것|공항버스|센트럴원약국|하늘약국/)
 })
 
 test('confirmed hours retain breaks, last order and day-specific closing in every language', () => {
   const data = parseFacilityDataset(fresh())
-  const expectedTimes = [[], [], ['10:00','23:00','15:00','17:00','22:00'], ['08:00','22:00','21:00','20:00'], ['09:00','19:30','13:00','14:00','09:00','14:00']]
-  data.facilities.forEach((facility, index) => {
+  const normalizedHours = (text: string) => text.replace(/(?<!\d)9:00/g, '09:00').replace('15~17시', '15:00~17:00')
+  for (const facility of data.facilities) {
+    const original = normalizedHours(facility.translations.ko.openingHours)
     for (const [language, text] of Object.entries(facility.translations)) {
-      // Korean source is normalized only in this assertion; stored wording remains faithful.
-      const hours = text.openingHours.replace(/(?<!\d)9:00/g, '09:00').replace('15~17시', '15:00~17:00')
-      assert.deepEqual(hours.match(/\d{2}:\d{2}/g) ?? [], expectedTimes[index], `${facility.id}/${language}`)
-      if (index < 2) assert.match(hours, /24/)
+      const hours = normalizedHours(text.openingHours)
+      assert.deepEqual(hours.match(/\d{2}:\d{2}/g) ?? [], original.match(/\d{2}:\d{2}/g) ?? [], `${facility.id}/${language}`)
+      assert.deepEqual(hours.match(/\d+/g) ?? [], original.match(/\d+/g) ?? [], `${facility.id}/${language} numbers`)
     }
-  })
+  }
+  const port = data.facilities.find(f => f.id === 'incheon-port-hangdong-7ga')!
+  assert.equal(port.translations.ko.name, '인천항')
+  assert.equal(port.translations.ko.address, '인천광역시 중구 항동7가 88')
+  assert.doesNotMatch(Object.values(port.translations).flatMap(text => Object.values(text)).join(' '), /터미널|terminal|ターミナル|客运码头|여객|walking/i)
+  assert.match(port.translations.ko.directions, /16-1.*연안아파트.*36번.*14번.*약 7분.*약 1시간/)
+  assert.equal(port.walkingMinutes, null)
+  const park = data.facilities.find(f => f.id === 'songdo-central-park')!
+  assert.equal(park.translations.ko.name, '송도 센트럴파크')
+  assert.equal(park.translations.ko.address, '인천 연수구 컨벤시아대로 160 일원')
+  assert.equal(park.walkingMinutes, null)
+  assert.equal(park.translations.ko.directions, '')
+  assert.equal(data.facilities.find(f => f.id === 'playground-brewery-taproom-songdo')!.translations.ko.openingHours, '15:00~00:00 (라스트 오더 23:00)')
+  assert.equal(data.facilities.find(f => f.id === 'byeol-onnuri-pharmacy-songdo')!.translations.ko.openingHours, '08:30~다음날 01:00; 24시간 자판기 보유')
   const [cu, blue, malt, cafe, pharmacy] = data.facilities
   assert.equal(cu!.translations.ko.openingHours, '24시간')
   assert.equal(blue!.translations.ko.openingHours, '24시간 연중 무휴')

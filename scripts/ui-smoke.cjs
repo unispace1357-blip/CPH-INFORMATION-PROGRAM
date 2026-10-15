@@ -11,7 +11,8 @@ const original = files.map(file => fs.readFileSync(file));
 const data = JSON.parse(original[0]);
 const languages = { en: 'English', ko: '한국어', 'zh-CN': '简体中文', ja: '日本語' };
 const results = [], errors = [], requests = [], interceptedMaps = [];
-const englishQueries = ['convenience store', 'sauna', 'Western restaurant', 'cafe', 'pharmacy'];
+const visible = data.facilities.filter(item => item.isPublished);
+const ordered = [...visible].sort((a, b) => (a.walkingMinutes ?? Infinity) - (b.walkingMinutes ?? Infinity));
 async function count(page, selector, expected) {
   await page.waitForFunction(({ selector, expected }) => document.querySelectorAll(selector).length === expected, { selector, expected });
 }
@@ -47,8 +48,10 @@ async function mapPopup(page, link, url) {
 }
 (async () => {
   const { MESSAGES } = await import('../src/i18n/messages.ts');
+  const { FACILITY_CATEGORY_OPTIONS } = await import('../src/config/uiCategories.ts');
   const { USER_NAVER_PLACE_ROUTE } = await import('./naver-place-fixture.ts');
-  assert.equal(data.facilities.length, 5);
+  assert.equal(data.facilities.length, 23);
+  assert.equal(visible.length, 23);
   const browser = await chromium.launch({ executablePath: process.env.CPH_CHROMIUM_PATH || '/usr/bin/chromium', headless: true, args: ['--no-sandbox'] });
   const context = await browser.newContext({ viewport: { width: 1280, height: 900 }, acceptDownloads: true, reducedMotion: 'reduce' });
   await context.route(url => url.hostname === 'map.naver.com', route => {
@@ -66,21 +69,28 @@ async function mapPopup(page, link, url) {
     fs.mkdirSync(artifactDir, { recursive: true });
     const staff = await context.newPage();
     await staff.goto(`${baseURL}/staff`);
-    await count(staff, '.facility-card', 5);
-    assert.deepEqual(await staff.locator('.facility-card h3').allTextContents(), data.facilities.map(f => f.translations.ko.name));
+    await count(staff, '.facility-card', visible.length);
+    assert.deepEqual(await staff.locator('.facility-card h3').allTextContents(), ordered.map(f => f.translations.ko.name));
     assert.ok(await staff.getByText('프론트 테스트용 미리보기', { exact: true }).isVisible());
     assert.equal(await staff.locator('.staff-category-grid').getByRole('button', { name: 'ATM', exact: true }).count(), 0);
-    for (const [index, item] of data.facilities.entries()) {
-      for (const query of [item.translations.ko.name, englishQueries[index]]) {
+    for (const item of visible) {
+      await staff.locator('.staff-category-grid').getByRole('button', { name: '전체', exact: true }).click();
+      for (const query of [item.translations.ko.name, item.translations.en.name]) {
         await staff.getByRole('searchbox').fill(query);
         await count(staff, '.facility-card', 1);
         assert.equal(await staff.locator('.facility-card h3').innerText(), item.translations.ko.name);
       }
+      await staff.locator('.staff-category-grid').getByRole('button', { name: FACILITY_CATEGORY_OPTIONS.find(category => category.code === item.category).staffLabel, exact: true }).click();
+      await count(staff, '.facility-card', 1);
       await staff.locator('.facility-card button').click();
       await staff.locator('#staff-detail-title').waitFor();
       assert.equal(await staff.locator('#staff-detail-title').innerText(), item.translations.ko.name);
       assert.equal(await staff.locator('.detail-facts dd').nth(0).innerText(), item.translations.ko.address);
-      assert.equal(await staff.locator('.detail-facts dd').nth(1).innerText(), item.translations.ko.openingHours);
+      assert.equal(await staff.locator('.detail-facts dd').nth(1).innerText(), item.translations.ko.openingHours || '영업시간 미확인');
+      if (item.translations.ko.directions) {
+        assert.equal(await staff.locator('.detail-facts dd').nth(4).innerText(), item.translations.ko.directions);
+        assert.equal(await staff.locator('.english-directions p').innerText(), item.translations.en.directions);
+      }
       assert.deepEqual(await staff.locator('.english-phrase-text').allTextContents(), item.englishPhrases);
       await staff.getByRole('button', { name: '영어 문구 1 복사', exact: true }).click();
       await staff.waitForFunction(expected => navigator.clipboard.readText().then(text => text === expected), item.englishPhrases[0]);
@@ -90,58 +100,60 @@ async function mapPopup(page, link, url) {
       await layout(staff);
     }
     await staff.getByRole('searchbox').fill('');
-    await count(staff, '.facility-card', 5);
+    await staff.locator('.staff-category-grid').getByRole('button', { name: '전체', exact: true }).click();
+    await count(staff, '.facility-card', visible.length);
     await staff.screenshot({ path: path.join(artifactDir, 'staff-desktop.png'), fullPage: true });
-    results.push('PASS Staff 1280px: five real facilities, Korean/English searches, addresses/hours, individual/full real clipboard copy, missing maps disabled, no ATM category');
+    results.push('PASS Staff 1280px: all 23 real facilities, Korean/English searches and categories, addresses/hours, individual/full real clipboard copy, missing maps disabled, no ATM category');
 
     const guest = await context.newPage();
     await guest.setViewportSize({ width: 390, height: 844 });
     await guest.goto(`${baseURL}/`);
     await guest.waitForURL('**/guest');
-    await count(guest, '.facility-card', 5);
+    await count(guest, '.facility-card', visible.length);
     assert.equal(await guest.locator('a[href^="/staff"]').count(), 0);
     assert.ok((await guest.request.get(`${baseURL}/favicon.svg`)).ok());
     for (const [language, label] of Object.entries(languages)) {
       const m = MESSAGES[language];
       await guest.locator('.language-options').getByRole('button', { name: label, exact: true }).click();
       assert.equal(await guest.locator('html').getAttribute('lang'), language);
-      assert.deepEqual(await guest.locator('.facility-card h3').allTextContents(), data.facilities.map(f => f.translations[language].name));
-      for (const item of data.facilities) {
+      assert.deepEqual(await guest.locator('.facility-card h3').allTextContents(), ordered.map(f => f.translations[language].name));
+      for (const item of visible) {
         await guest.locator('.guest-category-grid').getByRole('button', { name: m.categories[item.category], exact: true }).click();
         await guest.getByRole('searchbox').fill(item.translations[language].name);
         await count(guest, '.facility-card', 1);
         await guest.locator('.facility-card button').click();
         assert.equal(await guest.locator('#guest-detail-title').innerText(), item.translations[language].name);
         assert.equal(await guest.locator('.detail-facts dd').nth(0).innerText(), item.translations[language].address);
-        assert.equal(await guest.locator('.detail-facts dd').nth(1).innerText(), item.translations[language].openingHours);
+        assert.equal(await guest.locator('.detail-facts dd').nth(1).innerText(), item.translations[language].openingHours || m.ui.informationUnavailable);
+        if (item.translations[language].directions) assert.equal(await guest.locator('.detail-facts dd').nth(4).innerText(), item.translations[language].directions);
         assert.ok(await guest.locator('.naver-map-disabled').isDisabled());
         await layout(guest);
         await guest.getByRole('button', { name: m.ui.closeDetails, exact: true }).click();
         await guest.getByRole('searchbox').fill('');
         await guest.getByRole('button', { name: m.ui.allFacilities, exact: true }).click();
-        await count(guest, '.facility-card', 5);
+        await count(guest, '.facility-card', visible.length);
       }
       await guest.locator('.guest-category-grid').getByRole('button', { name: m.categories.transportation, exact: true }).click();
-      await count(guest, '.facility-card', 0);
+      await count(guest, '.facility-card', visible.filter(item => item.category === 'transportation').length);
       assert.ok(await guest.getByText(m.ui.airportBusPending, { exact: true }).isVisible());
       await count(guest, '.pending-transit-notice button', 2);
       assert.equal(await guest.locator('.pending-transit-notice a').count(), 0);
       for (const button of await guest.locator('.pending-transit-notice button').all()) assert.ok(await button.isDisabled());
       await guest.getByRole('button', { name: m.ui.allFacilities, exact: true }).click();
-      await count(guest, '.facility-card', 5);
+      await count(guest, '.facility-card', visible.length);
     }
     await guest.screenshot({ path: path.join(artifactDir, 'guest-mobile.png'), fullPage: true });
-    results.push('PASS Guest 390px: all five real facilities in four languages, category+search+detail, no fictional records/staff menu, no horizontal overflow, airport bus pending, maps unavailable');
+    results.push('PASS Guest 390px: all 23 real facilities in four languages, category+search+detail, no fictional records/staff menu, no horizontal overflow, airport bus pending, maps unavailable');
 
     const admin = await context.newPage();
     await admin.goto(adminURL);
-    await count(admin, '.admin-records li', 5);
+    await count(admin, '.admin-records li', data.facilities.length);
     for (const item of data.facilities) {
       await admin.getByLabel('시설명 검색', { exact: true }).fill(item.translations.ko.name);
       await count(admin, '.admin-records li', 1);
       await admin.getByRole('button', { name: `편집 ${item.id}`, exact: true }).click();
-      assert.ok(await admin.getByLabel('공개 시설로 표시', { exact: true }).isChecked());
-      for (const label of ['네이버 지도 길찾기 URL', '마지막 확인일', '예상 도보시간 (분)']) assert.equal(await admin.getByLabel(label, { exact: true }).inputValue(), '');
+      assert.equal(await admin.getByLabel('공개 시설로 표시', { exact: true }).isChecked(), item.isPublished);
+      for (const [label, value] of [['네이버 지도 길찾기 URL', item.naverMapUrl ?? ''], ['마지막 확인일', item.lastVerifiedAt ?? ''], ['예상 도보시간 (분)', item.walkingMinutes == null ? '' : String(item.walkingMinutes)]]) assert.equal(await admin.getByLabel(label, { exact: true }).inputValue(), value);
       for (const [language, label] of Object.entries(languages)) {
         await admin.getByRole('group', { name: '편집 언어', exact: true }).getByRole('button', { name: label, exact: true }).click();
         for (const [label, field] of [['시설명','name'],['시설 설명','description'],['주소','address'],['영업시간','openingHours'],['이동 안내','directions'],['참고 사항','notes']]) assert.equal(await admin.getByLabel(label, { exact: true }).inputValue(), item.translations[language][field]);
@@ -173,7 +185,7 @@ async function mapPopup(page, link, url) {
     await admin.getByRole('button', { name: '데이터 검증', exact: true }).click();
     assert.ok(await admin.getByRole('heading', { name: '시설 개발 데이터 검증 · PASS', exact: true }).isVisible());
     assert.ok(await admin.getByRole('heading', { name: '현재 운영 배포 검증 · FAIL', exact: true }).isVisible());
-    results.push('PASS Admin: five records, four-language values/visibility/unknown fields, edit/save/download/reimport retains change, original restored, demo deployment blocked');
+    results.push('PASS Admin: all 23 records, four-language values/visibility/unknown fields, edit/save/download/reimport retains change, original restored, demo deployment blocked');
 
     // Preserve shared-link security coverage without repeating old per-STEP browser suites.
     const fixture = structuredClone(data);
@@ -182,8 +194,10 @@ async function mapPopup(page, link, url) {
     const mapPage = await context.newPage();
     for (const audience of ['staff', 'guest']) {
       await mapPage.goto(`${baseURL}/${audience}`);
-      await count(mapPage, '.facility-card', 5);
-      await mapPage.locator('.facility-card button').first().click();
+      await count(mapPage, '.facility-card', visible.length);
+      await mapPage.getByRole('searchbox').fill(data.facilities[0].translations.ko.name);
+      await count(mapPage, '.facility-card', 1);
+      await mapPage.locator('.facility-card button').click();
       await mapPopup(mapPage, mapPage.locator('.naver-map-link'), USER_NAVER_PLACE_ROUTE);
     }
     assert.equal(interceptedMaps.length, 3);

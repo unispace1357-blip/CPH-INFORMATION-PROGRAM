@@ -291,6 +291,1050 @@
         "ja": ""
       },
       "naverMapUrl": null
+    },
+    {
+      "id": "hanyang-songdo-hanok-village",
+      "category": "dining",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "한양 송도한옥마을점",
+          "description": "음식점·한식",
+          "address": "인천 연수구 테크노파크로 180",
+          "openingHours": "11:30~22:00 / 주중 휴식 15:00~17:00",
+          "directions": "",
+          "notes": ""
+        },
+        "en": {
+          "name": "한양 송도한옥마을점 (korean restaurant)",
+          "description": "Korean restaurant.",
+          "address": "테크노파크로 180, Yeonsu-gu, Incheon",
+          "openingHours": "11:30–22:00; weekday break 15:00–17:00",
+          "directions": "",
+          "notes": ""
+        },
+        "zh-CN": {
+          "name": "한양 송도한옥마을점（韩餐厅）",
+          "description": "韩餐厅。",
+          "address": "仁川广域市延寿区 테크노파크로 180",
+          "openingHours": "11:30–22:00；周一至周五休息时间15:00–17:00",
+          "directions": "",
+          "notes": ""
+        },
+        "ja": {
+          "name": "한양 송도한옥마을점（韓国料理店）",
+          "description": "韓国料理店。",
+          "address": "仁川広域市延寿区 테크노파크로 180",
+          "openingHours": "11:30–22:00、平日の休憩15:00–17:00",
+          "directions": "",
+          "notes": ""
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [
+        "The address of 한양 송도한옥마을점 is 테크노파크로 180, Yeonsu-gu, Incheon.",
+        "Listed opening hours: 11:30–22:00; weekday break 15:00–17:00."
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "gyeongbokgung-hanok-village",
+      "category": "dining",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "경복궁 한옥마을점",
+          "description": "음식점·한식",
+          "address": "인천 연수구 테크노파크로 180 가동 1~2층",
+          "openingHours": "11:30~22:00 (21:30 라스트 오더)",
+          "directions": "",
+          "notes": ""
+        },
+        "en": {
+          "name": "경복궁 한옥마을점 (korean restaurant)",
+          "description": "Korean restaurant.",
+          "address": "테크노파크로 180, Building 가, Floors 1–2, Yeonsu-gu, Incheon",
+          "openingHours": "11:30–22:00 (last order 21:30)",
+          "directions": "",
+          "notes": ""
+        },
+        "zh-CN": {
+          "name": "경복궁 한옥마을점（韩餐厅）",
+          "description": "韩餐厅。",
+          "address": "仁川广域市延寿区 테크노파크로 180，가栋1–2层",
+          "openingHours": "11:30–22:00（最后点单21:30）",
+          "directions": "",
+          "notes": ""
+        },
+        "ja": {
+          "name": "경복궁 한옥마을점（韓国料理店）",
+          "description": "韓国料理店。",
+          "address": "仁川広域市延寿区 테크노파크로 180、가棟1–2階",
+          "openingHours": "11:30–22:00（ラストオーダー21:30）",
+          "directions": "",
+          "notes": ""
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [
+        "The address of 경복궁 한옥마을점 is 테크노파크로 180, Building 가, Floors 1–2, Yeonsu-gu, Incheon.",
+        "Listed opening hours: 11:30–22:00 (last order 21:30)."
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "paljinhyang-hanok-village",
+      "category": "dining",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "팔진향 한옥마을점",
+          "description": "음식점·중식",
+          "address": "인천 연수구 테크노파크로 180 나동 2층",
+          "openingHours": "11:30~22:00 (15:00~17:00 브레이크 타임 21:30 라스트 오더)",
+          "directions": "",
+          "notes": ""
+        },
+        "en": {
+          "name": "팔진향 한옥마을점 (chinese restaurant)",
+          "description": "Chinese restaurant.",
+          "address": "테크노파크로 180, Building 나, 2F, Yeonsu-gu, Incheon",
+          "openingHours": "11:30–22:00 (break 15:00–17:00; last order 21:30)",
+          "directions": "",
+          "notes": ""
+        },
+        "zh-CN": {
+          "name": "팔진향 한옥마을점（中餐厅）",
+          "description": "中餐厅。",
+          "address": "仁川广域市延寿区 테크노파크로 180，나栋2层",
+          "openingHours": "11:30–22:00（休息时间15:00–17:00；最后点单21:30）",
+          "directions": "",
+          "notes": ""
+        },
+        "ja": {
+          "name": "팔진향 한옥마을점（中華料理店）",
+          "description": "中華料理店。",
+          "address": "仁川広域市延寿区 테크노파크로 180、나棟2階",
+          "openingHours": "11:30–22:00（休憩15:00–17:00、ラストオーダー21:30）",
+          "directions": "",
+          "notes": ""
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [
+        "The address of 팔진향 한옥마을점 is 테크노파크로 180, Building 나, 2F, Yeonsu-gu, Incheon.",
+        "Listed opening hours: 11:30–22:00 (break 15:00–17:00; last order 21:30)."
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "hollys-incheon-hanok-village",
+      "category": "cafe",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "할리스 인천한옥마을점",
+          "description": "카페",
+          "address": "인천 연수구 테크노파크로 180",
+          "openingHours": "09:00~22:30",
+          "directions": "",
+          "notes": ""
+        },
+        "en": {
+          "name": "할리스 인천한옥마을점 (cafe)",
+          "description": "Cafe.",
+          "address": "테크노파크로 180, Yeonsu-gu, Incheon",
+          "openingHours": "09:00–22:30",
+          "directions": "",
+          "notes": ""
+        },
+        "zh-CN": {
+          "name": "할리스 인천한옥마을점（咖啡馆）",
+          "description": "咖啡馆。",
+          "address": "仁川广域市延寿区 테크노파크로 180",
+          "openingHours": "09:00–22:30",
+          "directions": "",
+          "notes": ""
+        },
+        "ja": {
+          "name": "할리스 인천한옥마을점（カフェ）",
+          "description": "カフェ。",
+          "address": "仁川広域市延寿区 테크노파크로 180",
+          "openingHours": "09:00–22:30",
+          "directions": "",
+          "notes": ""
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [
+        "The address of 할리스 인천한옥마을점 is 테크노파크로 180, Yeonsu-gu, Incheon.",
+        "Listed opening hours: 09:00–22:30."
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "songhaeon-songdo",
+      "category": "sauna_spa",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "송해온",
+          "description": "사우나",
+          "address": "인천 연수구 인천타워대로197번길 16",
+          "openingHours": "06:00~22:00",
+          "directions": "",
+          "notes": ""
+        },
+        "en": {
+          "name": "송해온 (sauna)",
+          "description": "Sauna.",
+          "address": "인천타워대로197번길 16, Yeonsu-gu, Incheon",
+          "openingHours": "06:00–22:00",
+          "directions": "",
+          "notes": ""
+        },
+        "zh-CN": {
+          "name": "송해온（桑拿）",
+          "description": "桑拿。",
+          "address": "仁川广域市延寿区 인천타워대로197번길 16",
+          "openingHours": "06:00–22:00",
+          "directions": "",
+          "notes": ""
+        },
+        "ja": {
+          "name": "송해온（サウナ）",
+          "description": "サウナ。",
+          "address": "仁川広域市延寿区 인천타워대로197번길 16",
+          "openingHours": "06:00–22:00",
+          "directions": "",
+          "notes": ""
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [
+        "The address of 송해온 is 인천타워대로197번길 16, Yeonsu-gu, Incheon.",
+        "Listed opening hours: 06:00–22:00."
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "songjjujip-main",
+      "category": "dining",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "송쭈집 본점",
+          "description": "음식점·한식",
+          "address": "인천 연수구 센트럴로 160",
+          "openingHours": "11:00~21:50 (15:00~16:30 브레이크 타임) 14:00, 20:50 라스트 오더",
+          "directions": "",
+          "notes": ""
+        },
+        "en": {
+          "name": "송쭈집 본점 (korean restaurant)",
+          "description": "Korean restaurant.",
+          "address": "센트럴로 160, Yeonsu-gu, Incheon",
+          "openingHours": "11:00–21:50 (break 15:00–16:30); last orders 14:00 and 20:50",
+          "directions": "",
+          "notes": ""
+        },
+        "zh-CN": {
+          "name": "송쭈집 본점（韩餐厅）",
+          "description": "韩餐厅。",
+          "address": "仁川广域市延寿区 센트럴로 160",
+          "openingHours": "11:00–21:50（休息时间15:00–16:30）；最后点单14:00、20:50",
+          "directions": "",
+          "notes": ""
+        },
+        "ja": {
+          "name": "송쭈집 본점（韓国料理店）",
+          "description": "韓国料理店。",
+          "address": "仁川広域市延寿区 센트럴로 160",
+          "openingHours": "11:00–21:50（休憩15:00–16:30）、ラストオーダー14:00・20:50",
+          "directions": "",
+          "notes": ""
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [
+        "The address of 송쭈집 본점 is 센트럴로 160, Yeonsu-gu, Incheon.",
+        "Listed opening hours: 11:00–21:50 (break 15:00–16:30); last orders 14:00 and 20:50."
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "otto-gimbap-songdo",
+      "category": "dining",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "오토김밥",
+          "description": "음식점·간편식",
+          "address": "인천 연수구 센트럴로 160 103동 C동 243~246호",
+          "openingHours": "10:00~19:00 (14:00~16:00 브레이크 타임)",
+          "directions": "",
+          "notes": ""
+        },
+        "en": {
+          "name": "오토김밥 (gimbap restaurant)",
+          "description": "Gimbap restaurant.",
+          "address": "센트럴로 160, Building 103, Building C, Units 243–246, Yeonsu-gu, Incheon",
+          "openingHours": "10:00–19:00 (break 14:00–16:00)",
+          "directions": "",
+          "notes": ""
+        },
+        "zh-CN": {
+          "name": "오토김밥（紫菜包饭店）",
+          "description": "紫菜包饭店。",
+          "address": "仁川广域市延寿区 센트럴로 160，103栋C栋243–246号室",
+          "openingHours": "10:00–19:00（休息时间14:00–16:00）",
+          "directions": "",
+          "notes": ""
+        },
+        "ja": {
+          "name": "오토김밥（キンパ店）",
+          "description": "キンパ店。",
+          "address": "仁川広域市延寿区 센트럴로 160、103棟C棟243–246号室",
+          "openingHours": "10:00–19:00（休憩14:00–16:00）",
+          "directions": "",
+          "notes": ""
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [
+        "The address of 오토김밥 is 센트럴로 160, Building 103, Building C, Units 243–246, Yeonsu-gu, Incheon.",
+        "Listed opening hours: 10:00–19:00 (break 14:00–16:00)."
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "burgeroom181-songdo",
+      "category": "dining",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "버거룸181",
+          "description": "패스트푸드·수제버거",
+          "address": "인천 연수구 센트럴로 160 A동 2층 228~230호",
+          "openingHours": "11:00~21:30 (15:00~17:00 브레이크 타임) 21:00 라스트오더",
+          "directions": "",
+          "notes": ""
+        },
+        "en": {
+          "name": "버거룸181 (burger restaurant)",
+          "description": "Burger restaurant.",
+          "address": "센트럴로 160, Building A, 2F, Units 228–230, Yeonsu-gu, Incheon",
+          "openingHours": "11:00–21:30 (break 15:00–17:00); last order 21:00",
+          "directions": "",
+          "notes": ""
+        },
+        "zh-CN": {
+          "name": "버거룸181（汉堡店）",
+          "description": "汉堡店。",
+          "address": "仁川广域市延寿区 센트럴로 160，A栋2层228–230号室",
+          "openingHours": "11:00–21:30（休息时间15:00–17:00）；最后点单21:00",
+          "directions": "",
+          "notes": ""
+        },
+        "ja": {
+          "name": "버거룸181（ハンバーガー店）",
+          "description": "ハンバーガー店。",
+          "address": "仁川広域市延寿区 센트럴로 160、A棟2階228–230号室",
+          "openingHours": "11:00–21:30（休憩15:00–17:00）、ラストオーダー21:00",
+          "directions": "",
+          "notes": ""
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [
+        "The address of 버거룸181 is 센트럴로 160, Building A, 2F, Units 228–230, Yeonsu-gu, Incheon.",
+        "Listed opening hours: 11:00–21:30 (break 15:00–17:00); last order 21:00."
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "moms-touch-songdo-central-park",
+      "category": "dining",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "맘스터치 송도센트럴파크점",
+          "description": "패스트푸드",
+          "address": "인천 연수구 센트럴로 160 판매시설동1 126호",
+          "openingHours": "08:30~22:00 (21:50 라스트 오더)",
+          "directions": "",
+          "notes": ""
+        },
+        "en": {
+          "name": "맘스터치 송도센트럴파크점 (fast food restaurant)",
+          "description": "Fast food restaurant.",
+          "address": "센트럴로 160, Retail Building 1, Unit 126, Yeonsu-gu, Incheon",
+          "openingHours": "08:30–22:00 (last order 21:50)",
+          "directions": "",
+          "notes": ""
+        },
+        "zh-CN": {
+          "name": "맘스터치 송도센트럴파크점（快餐店）",
+          "description": "快餐店。",
+          "address": "仁川广域市延寿区 센트럴로 160，商业设施栋1，126号室",
+          "openingHours": "08:30–22:00（最后点单21:50）",
+          "directions": "",
+          "notes": ""
+        },
+        "ja": {
+          "name": "맘스터치 송도센트럴파크점（ファストフード店）",
+          "description": "ファストフード店。",
+          "address": "仁川広域市延寿区 센트럴로 160、販売施設棟1、126号室",
+          "openingHours": "08:30–22:00（ラストオーダー21:50）",
+          "directions": "",
+          "notes": ""
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [
+        "The address of 맘스터치 송도센트럴파크점 is 센트럴로 160, Retail Building 1, Unit 126, Yeonsu-gu, Incheon.",
+        "Listed opening hours: 08:30–22:00 (last order 21:50)."
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "burger-king-incheon-songdo-central-park",
+      "category": "dining",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "버거킹 인천송도센트럴파크점",
+          "description": "패스트푸드",
+          "address": "인천 연수구 센트럴로 194 B동 1층",
+          "openingHours": "10:00~23:00",
+          "directions": "",
+          "notes": ""
+        },
+        "en": {
+          "name": "버거킹 인천송도센트럴파크점 (fast food restaurant)",
+          "description": "Fast food restaurant.",
+          "address": "센트럴로 194, Building B, 1F, Yeonsu-gu, Incheon",
+          "openingHours": "10:00–23:00",
+          "directions": "",
+          "notes": ""
+        },
+        "zh-CN": {
+          "name": "버거킹 인천송도센트럴파크점（快餐店）",
+          "description": "快餐店。",
+          "address": "仁川广域市延寿区 센트럴로 194，B栋1层",
+          "openingHours": "10:00–23:00",
+          "directions": "",
+          "notes": ""
+        },
+        "ja": {
+          "name": "버거킹 인천송도센트럴파크점（ファストフード店）",
+          "description": "ファストフード店。",
+          "address": "仁川広域市延寿区 센트럴로 194、B棟1階",
+          "openingHours": "10:00–23:00",
+          "directions": "",
+          "notes": ""
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [
+        "The address of 버거킹 인천송도센트럴파크점 is 센트럴로 194, Building B, 1F, Yeonsu-gu, Incheon.",
+        "Listed opening hours: 10:00–23:00."
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "incheon-port-hangdong-7ga",
+      "category": "transportation",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "인천항",
+          "description": "항구",
+          "address": "인천광역시 중구 항동7가 88",
+          "openingHours": "",
+          "directions": "호텔에서 16-1번 버스 이용 → 연안아파트에서 36번 또는 14번 버스로 환승 → 이후 약 7분 이동. 전체 약 1시간 소요.",
+          "notes": ""
+        },
+        "en": {
+          "name": "인천항 (port)",
+          "description": "Port.",
+          "address": "항동7가 88, Jung-gu, Incheon",
+          "openingHours": "",
+          "directions": "Take bus 16-1 from the hotel, get off at 연안아파트 and transfer to bus 36 or 14, then ride for about 7 more minutes. The full journey takes about 1 hour.",
+          "notes": ""
+        },
+        "zh-CN": {
+          "name": "인천항（港口）",
+          "description": "港口。",
+          "address": "仁川广域市中区 항동7가 88",
+          "openingHours": "",
+          "directions": "从酒店乘坐16-1路公交车，在연안아파트站下车后换乘36路或14路，再乘坐约7分钟。全程约1小时。",
+          "notes": ""
+        },
+        "ja": {
+          "name": "인천항（港）",
+          "description": "港。",
+          "address": "仁川広域市中区 항동7가 88",
+          "openingHours": "",
+          "directions": "ホテルから16-1番バスに乗り、연안아파트で下車して36番または14番バスに乗り換え、その後約7分乗車します。全行程は約1時間です。",
+          "notes": ""
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [
+        "The address of 인천항 is 항동7가 88, Jung-gu, Incheon.",
+        "Take bus 16-1 from the hotel, get off at 연안아파트 and transfer to bus 36 or 14, then ride for about 7 more minutes. The full journey takes about 1 hour."
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "starbucks-songdo-central-park",
+      "category": "cafe",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "스타벅스 송도센트럴파크점",
+          "description": "카페",
+          "address": "인천 연수구 센트럴로 194 A동 101~103호",
+          "openingHours": "07:00~22:00 (배달: 10:00~21:30)",
+          "directions": "",
+          "notes": ""
+        },
+        "en": {
+          "name": "스타벅스 송도센트럴파크점 (cafe)",
+          "description": "Cafe.",
+          "address": "센트럴로 194, Building A, Units 101–103, Yeonsu-gu, Incheon",
+          "openingHours": "07:00–22:00 (delivery 10:00–21:30)",
+          "directions": "",
+          "notes": ""
+        },
+        "zh-CN": {
+          "name": "스타벅스 송도센트럴파크점（咖啡馆）",
+          "description": "咖啡馆。",
+          "address": "仁川广域市延寿区 센트럴로 194，A栋101–103号室",
+          "openingHours": "07:00–22:00（配送10:00–21:30）",
+          "directions": "",
+          "notes": ""
+        },
+        "ja": {
+          "name": "스타벅스 송도센트럴파크점（カフェ）",
+          "description": "カフェ。",
+          "address": "仁川広域市延寿区 센트럴로 194、A棟101–103号室",
+          "openingHours": "07:00–22:00（デリバリー10:00–21:30）",
+          "directions": "",
+          "notes": ""
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [
+        "The address of 스타벅스 송도센트럴파크점 is 센트럴로 194, Building A, Units 101–103, Yeonsu-gu, Incheon.",
+        "Listed opening hours: 07:00–22:00 (delivery 10:00–21:30)."
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "playground-brewery-taproom-songdo",
+      "category": "dining",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "플레이그라운드 브루어리 탭룸 송도",
+          "description": "주점·수제맥주",
+          "address": "인천 연수구 컨벤시아대로 80 현대힐스테이트 401동 139호",
+          "openingHours": "15:00~00:00 (라스트 오더 23:00)",
+          "directions": "",
+          "notes": ""
+        },
+        "en": {
+          "name": "플레이그라운드 브루어리 탭룸 송도 (pub and craft beer)",
+          "description": "Pub and craft beer.",
+          "address": "컨벤시아대로 80, 현대힐스테이트, Building 401, Unit 139, Yeonsu-gu, Incheon",
+          "openingHours": "15:00–00:00 (last order 23:00)",
+          "directions": "",
+          "notes": ""
+        },
+        "zh-CN": {
+          "name": "플레이그라운드 브루어리 탭룸 송도（酒吧与精酿啤酒）",
+          "description": "酒吧与精酿啤酒。",
+          "address": "仁川广域市延寿区 컨벤시아대로 80，현대힐스테이트 401栋139号室",
+          "openingHours": "15:00–00:00（最后点单23:00）",
+          "directions": "",
+          "notes": ""
+        },
+        "ja": {
+          "name": "플레이그라운드 브루어리 탭룸 송도（パブ・クラフトビール）",
+          "description": "パブ・クラフトビール。",
+          "address": "仁川広域市延寿区 컨벤시아대로 80、현대힐스테이트 401棟139号室",
+          "openingHours": "15:00–00:00（ラストオーダー23:00）",
+          "directions": "",
+          "notes": ""
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [
+        "The address of 플레이그라운드 브루어리 탭룸 송도 is 컨벤시아대로 80, 현대힐스테이트, Building 401, Unit 139, Yeonsu-gu, Incheon.",
+        "Listed opening hours: 15:00–00:00 (last order 23:00)."
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "geumbyeol-beer-songdo-lotte-mall",
+      "category": "dining",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "금별맥주 송도롯데몰점",
+          "description": "주점·맥주",
+          "address": "인천 연수구 하모니로 144 지웰푸르지오시티 A101~102호",
+          "openingHours": "16:30~다음날 02:00 (금·토요일은 다음날 04:30까지)",
+          "directions": "",
+          "notes": ""
+        },
+        "en": {
+          "name": "금별맥주 송도롯데몰점 (pub and beer)",
+          "description": "Pub and beer.",
+          "address": "하모니로 144, 지웰푸르지오시티, Units A101–102, Yeonsu-gu, Incheon",
+          "openingHours": "16:30–02:00 the following day (Friday and Saturday: until 04:30 the following day)",
+          "directions": "",
+          "notes": ""
+        },
+        "zh-CN": {
+          "name": "금별맥주 송도롯데몰점（酒吧与啤酒）",
+          "description": "酒吧与啤酒。",
+          "address": "仁川广域市延寿区 하모니로 144，지웰푸르지오시티 A101–102号室",
+          "openingHours": "16:30–次日02:00（周五、周六至次日04:30）",
+          "directions": "",
+          "notes": ""
+        },
+        "ja": {
+          "name": "금별맥주 송도롯데몰점（パブ・ビール）",
+          "description": "パブ・ビール。",
+          "address": "仁川広域市延寿区 하모니로 144、지웰푸르지오시티 A101–102号室",
+          "openingHours": "16:30–翌日02:00（金曜・土曜は翌日04:30まで）",
+          "directions": "",
+          "notes": ""
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [
+        "The address of 금별맥주 송도롯데몰점 is 하모니로 144, 지웰푸르지오시티, Units A101–102, Yeonsu-gu, Incheon.",
+        "Listed opening hours: 16:30–02:00 the following day (Friday and Saturday: until 04:30 the following day)."
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "central-park-station-exit-3",
+      "category": "transportation",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "센트럴파크역 3번 출구",
+          "description": "교통·지하철",
+          "address": "인천 1호선 센트럴파크역",
+          "openingHours": "해당 없음",
+          "directions": "호텔 공식 안내 기준 센트럴파크역 3번 출구까지 도보 약 5분입니다.",
+          "notes": ""
+        },
+        "en": {
+          "name": "센트럴파크역 3번 출구 (subway station exit)",
+          "description": "Subway station exit.",
+          "address": "센트럴파크역, Incheon Subway Line 1",
+          "openingHours": "Not applicable",
+          "directions": "The hotel lists an estimated walk of about 5 minutes to 센트럴파크역 Exit 3.",
+          "notes": ""
+        },
+        "zh-CN": {
+          "name": "센트럴파크역 3번 출구（地铁站出口）",
+          "description": "地铁站出口。",
+          "address": "仁川地铁1号线 센트럴파크역",
+          "openingHours": "不适用",
+          "directions": "酒店官方指引标注：步行至센트럴파크역3号出口约5分钟。",
+          "notes": ""
+        },
+        "ja": {
+          "name": "센트럴파크역 3번 출구（地下鉄駅出口）",
+          "description": "地下鉄駅出口。",
+          "address": "仁川地下鉄1号線 센트럴파크역",
+          "openingHours": "該当なし",
+          "directions": "ホテル公式案内では、센트럴파크역3番出口まで徒歩約5分です。",
+          "notes": ""
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [
+        "The address of 센트럴파크역 3번 출구 is 센트럴파크역, Incheon Subway Line 1.",
+        "The hotel lists an estimated walk of about 5 minutes to 센트럴파크역 Exit 3."
+      ],
+      "walkingMinutes": 5,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "lotte-mart-songdo",
+      "category": "shopping",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "롯데마트 송도점",
+          "description": "쇼핑·생필품",
+          "address": "인천 연수구 컨벤시아대로 177",
+          "openingHours": "10:00~23:00",
+          "directions": "",
+          "notes": ""
+        },
+        "en": {
+          "name": "롯데마트 송도점 (supermarket and daily necessities)",
+          "description": "Supermarket and daily necessities.",
+          "address": "컨벤시아대로 177, Yeonsu-gu, Incheon",
+          "openingHours": "10:00–23:00",
+          "directions": "",
+          "notes": ""
+        },
+        "zh-CN": {
+          "name": "롯데마트 송도점（超市与日用品）",
+          "description": "超市与日用品。",
+          "address": "仁川广域市延寿区 컨벤시아대로 177",
+          "openingHours": "10:00–23:00",
+          "directions": "",
+          "notes": ""
+        },
+        "ja": {
+          "name": "롯데마트 송도점（スーパーマーケット・日用品）",
+          "description": "スーパーマーケット・日用品。",
+          "address": "仁川広域市延寿区 컨벤시아대로 177",
+          "openingHours": "10:00–23:00",
+          "directions": "",
+          "notes": ""
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [
+        "The address of 롯데마트 송도점 is 컨벤시아대로 177, Yeonsu-gu, Incheon.",
+        "Listed opening hours: 10:00–23:00."
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "songdo-central-park",
+      "category": "attraction",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "송도 센트럴파크",
+          "description": "관광·산책",
+          "address": "인천 연수구 컨벤시아대로 160 일원",
+          "openingHours": "공원 산책 이용 가능; 체험시설은 별도",
+          "directions": "",
+          "notes": ""
+        },
+        "en": {
+          "name": "송도 센트럴파크 (park and walking)",
+          "description": "Park and walking.",
+          "address": "Around 컨벤시아대로 160, Yeonsu-gu, Incheon",
+          "openingHours": "Park walks available; activity facilities are separate",
+          "directions": "",
+          "notes": ""
+        },
+        "zh-CN": {
+          "name": "송도 센트럴파크（公园与散步）",
+          "description": "公园与散步。",
+          "address": "仁川广域市延寿区 컨벤시아대로 160一带",
+          "openingHours": "可在公园散步；体验设施另行安排",
+          "directions": "",
+          "notes": ""
+        },
+        "ja": {
+          "name": "송도 센트럴파크（公園・散策）",
+          "description": "公園・散策。",
+          "address": "仁川広域市延寿区 컨벤시아대로 160一帯",
+          "openingHours": "公園の散策が可能です。体験施設は別です。",
+          "directions": "",
+          "notes": ""
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [
+        "The address of 송도 센트럴파크 is Around 컨벤시아대로 160, Yeonsu-gu, Incheon.",
+        "Listed opening hours: Park walks available; activity facilities are separate."
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
+    },
+    {
+      "id": "byeol-onnuri-pharmacy-songdo",
+      "category": "pharmacy",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "별온누리약국",
+          "description": "약국·야간 대안",
+          "address": "인천 연수구 하모니로 158 송도타임스페이스 A동 110~112호",
+          "openingHours": "08:30~다음날 01:00; 24시간 자판기 보유",
+          "directions": "",
+          "notes": ""
+        },
+        "en": {
+          "name": "별온누리약국 (pharmacy and late-night option)",
+          "description": "Pharmacy and late-night option.",
+          "address": "하모니로 158, 송도타임스페이스, Building A, Units 110–112, Yeonsu-gu, Incheon",
+          "openingHours": "08:30–01:00 the following day; 24-hour vending machine available",
+          "directions": "",
+          "notes": ""
+        },
+        "zh-CN": {
+          "name": "별온누리약국（药店与夜间选择）",
+          "description": "药店与夜间选择。",
+          "address": "仁川广域市延寿区 하모니로 158，송도타임스페이스 A栋110–112号室",
+          "openingHours": "08:30–次日01:00；设有24小时自动售货机",
+          "directions": "",
+          "notes": ""
+        },
+        "ja": {
+          "name": "별온누리약국（薬局・夜間の選択肢）",
+          "description": "薬局・夜間の選択肢。",
+          "address": "仁川広域市延寿区 하모니로 158、송도타임스페이스 A棟110–112号室",
+          "openingHours": "08:30–翌日01:00、24時間利用可能な自動販売機あり",
+          "directions": "",
+          "notes": ""
+        }
+      },
+      "keywords": {
+        "ko": [],
+        "en": [],
+        "zh-CN": [],
+        "ja": []
+      },
+      "englishPhrases": [
+        "The address of 별온누리약국 is 하모니로 158, 송도타임스페이스, Building A, Units 110–112, Yeonsu-gu, Incheon.",
+        "Listed opening hours: 08:30–01:00 the following day; 24-hour vending machine available."
+      ],
+      "walkingMinutes": null,
+      "closedDays": {
+        "ko": "",
+        "en": "",
+        "zh-CN": "",
+        "ja": ""
+      },
+      "naverMapUrl": null
     }
   ]
 }
