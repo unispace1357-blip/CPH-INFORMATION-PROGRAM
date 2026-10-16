@@ -1,0 +1,964 @@
+{
+  "schemaVersion": 1,
+  "dataStatus": "demo",
+  "scripts": [
+    {
+      "id": "check-in-time",
+      "category": "check-in-out",
+      "title": "체크인 시간",
+      "keywords": [
+        "체크인",
+        "입실",
+        "check in",
+        "check-in",
+        "3시"
+      ],
+      "question": {
+        "en": "What time is check-in?",
+        "ko": "체크인은 몇 시인가요?"
+      },
+      "quickAnswer": {
+        "en": "Check-in starts at 3 PM.",
+        "ko": "체크인은 오후 3시부터 가능합니다."
+      },
+      "details": {
+        "en": "You can check in from 3 PM. Please come to the front desk when you arrive.",
+        "ko": "오후 3시부터 체크인하실 수 있습니다. 도착하시면 프론트 데스크로 와 주세요."
+      },
+      "staffChecks": [
+        "얼리 체크인 가능 여부는 별도 확인",
+        "오후 3시 이전 입실을 보장하지 않기"
+      ],
+      "sourceType": "hotel-data",
+      "sourceSection": "checkIn",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "check-in-deposit-id",
+      "category": "check-in-out",
+      "title": "체크인 보증금 및 신분증",
+      "keywords": [
+        "보증금",
+        "신분증",
+        "디파짓",
+        "deposit",
+        "id",
+        "passport"
+      ],
+      "question": {
+        "en": "Do I need to pay a deposit?",
+        "ko": "보증금을 내야 하나요?"
+      },
+      "quickAnswer": {
+        "en": "No deposit is required at check-in.",
+        "ko": "체크인 시 보증금은 필요하지 않습니다."
+      },
+      "details": {
+        "en": "Our hotel information does not require a separate ID submission. Let me confirm the check-in procedure for you.",
+        "ko": "호텔 안내에는 별도의 신분증 제출이 필요하지 않은 것으로 등록되어 있습니다. 체크인 절차를 확인해 드리겠습니다."
+      },
+      "staffChecks": [
+        "별도 신분증 제출과 현장 신원 확인은 다른 절차",
+        "신원 확인이 필요 없다고 단정하지 말고 현재 운영 절차 확인"
+      ],
+      "sourceType": "hotel-data",
+      "sourceSection": "checkIn",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "check-out-time",
+      "category": "check-in-out",
+      "title": "체크아웃 시간",
+      "keywords": [
+        "체크아웃",
+        "퇴실",
+        "check out",
+        "check-out",
+        "12시"
+      ],
+      "question": {
+        "en": "What time is check-out?",
+        "ko": "체크아웃은 몇 시인가요?"
+      },
+      "quickAnswer": {
+        "en": "Check-out is at 12 noon.",
+        "ko": "체크아웃은 정오 12시입니다."
+      },
+      "details": {
+        "en": "Please check out by 12 noon and return your room key to the front desk.",
+        "ko": "정오 12시까지 체크아웃하시고 객실 키를 프론트에 반납해 주세요."
+      },
+      "staffChecks": [],
+      "sourceType": "hotel-data",
+      "sourceSection": "checkOut",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "room-key-return-loss",
+      "category": "check-in-out",
+      "title": "객실 키 반납 및 분실",
+      "keywords": [
+        "객실키",
+        "카드키",
+        "분실",
+        "room key",
+        "lost key",
+        "key card"
+      ],
+      "question": {
+        "en": "Do I need to return my room key?",
+        "ko": "객실 키를 반납해야 하나요?"
+      },
+      "quickAnswer": {
+        "en": "Yes, please return your room key to the front desk.",
+        "ko": "네. 객실 키를 프론트 데스크에 반납해 주세요."
+      },
+      "details": {
+        "en": "If you lose your room key, there may be a replacement fee of 11,000 won per key.",
+        "ko": "객실 키를 분실하시면 키 1개당 11,000원의 분실료가 발생할 수 있습니다."
+      },
+      "staffChecks": [
+        "객실 키 분실료 등록 기준: 키 1개당 11,000원",
+        "분실 처리 절차와 실제 청구 여부 확인"
+      ],
+      "sourceType": "hotel-data",
+      "sourceSection": "checkOut",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "late-check-out",
+      "category": "check-in-out",
+      "title": "레이트 체크아웃",
+      "keywords": [
+        "레이트 체크아웃",
+        "연장",
+        "늦게",
+        "late checkout",
+        "late check-out",
+        "extension"
+      ],
+      "question": {
+        "en": "Can I check out late?",
+        "ko": "체크아웃을 늦게 할 수 있나요?"
+      },
+      "quickAnswer": {
+        "en": "Let me check if late check-out is available.",
+        "ko": "레이트 체크아웃이 가능한지 확인해 드리겠습니다."
+      },
+      "details": {
+        "en": "The late check-out fee is 11,000 won per hour. If you stay past 5 PM, one night's room rate will apply.",
+        "ko": "레이트 체크아웃 요금은 시간당 11,000원입니다. 오후 5시를 넘기면 1박 요금이 적용됩니다."
+      },
+      "staffChecks": [
+        "객실 상황에 따른 연장 가능 여부 확인",
+        "등록 요금: 시간당 11,000원, 오후 5시 초과 시 1박 요금",
+        "가능 여부와 요금은 최종 확인 후 확정 안내"
+      ],
+      "sourceType": "hotel-data",
+      "sourceSection": "checkOut",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "breakfast-location",
+      "category": "breakfast",
+      "title": "조식 장소",
+      "keywords": [
+        "조식",
+        "식당",
+        "하이웨이브",
+        "breakfast",
+        "restaurant",
+        "high wave"
+      ],
+      "question": {
+        "en": "Where is breakfast served?",
+        "ko": "조식은 어디에서 먹나요?"
+      },
+      "quickAnswer": {
+        "en": "Breakfast is served at the High Wave restaurant on the first floor.",
+        "ko": "조식은 1층 하이웨이브 레스토랑에서 제공됩니다."
+      },
+      "details": {
+        "en": "Please go to the High Wave restaurant on the first floor. The restaurant will check your room number.",
+        "ko": "1층 하이웨이브 레스토랑으로 가시면 됩니다. 레스토랑에서 객실 번호를 확인합니다."
+      },
+      "staffChecks": [],
+      "sourceType": "hotel-data",
+      "sourceSection": "breakfast",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "breakfast-hours",
+      "category": "breakfast",
+      "title": "조식 운영시간",
+      "keywords": [
+        "조식",
+        "운영시간",
+        "아침",
+        "breakfast time",
+        "breakfast hours",
+        "6시30분"
+      ],
+      "question": {
+        "en": "What time is breakfast?",
+        "ko": "조식은 몇 시부터인가요?"
+      },
+      "quickAnswer": {
+        "en": "Breakfast is from 6:30 AM to 10 AM.",
+        "ko": "조식은 오전 6시 30분부터 오전 10시까지입니다."
+      },
+      "details": {
+        "en": "Breakfast starts at 6:30 AM and ends at 10 AM. The last entry is at 9:30 AM.",
+        "ko": "조식은 오전 6시 30분에 시작해 10시에 끝납니다. 마지막 입장은 오전 9시 30분입니다."
+      },
+      "staffChecks": [],
+      "sourceType": "hotel-data",
+      "sourceSection": "breakfast",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "breakfast-last-entry",
+      "category": "breakfast",
+      "title": "조식 마지막 입장시간",
+      "keywords": [
+        "조식",
+        "마지막 입장",
+        "입장 마감",
+        "last entry",
+        "last admission",
+        "9시30분"
+      ],
+      "question": {
+        "en": "What time is the last entry for breakfast?",
+        "ko": "조식은 몇 시까지 입장할 수 있나요?"
+      },
+      "quickAnswer": {
+        "en": "The last entry is at 9:30 AM.",
+        "ko": "마지막 입장은 오전 9시 30분입니다."
+      },
+      "details": {
+        "en": "Breakfast ends at 10 AM, but please arrive before 9:30 AM.",
+        "ko": "조식은 오전 10시에 끝나지만 오전 9시 30분 전에 도착해 주세요."
+      },
+      "staffChecks": [],
+      "sourceType": "hotel-data",
+      "sourceSection": "breakfast",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "breakfast-adult-price",
+      "category": "breakfast",
+      "title": "성인 조식 요금",
+      "keywords": [
+        "조식요금",
+        "성인",
+        "가격",
+        "breakfast price",
+        "adult breakfast",
+        "32000"
+      ],
+      "question": {
+        "en": "How much is breakfast?",
+        "ko": "조식은 얼마인가요?"
+      },
+      "quickAnswer": {
+        "en": "Breakfast is 32,000 won per adult.",
+        "ko": "성인 조식은 1인당 32,000원입니다."
+      },
+      "staffChecks": [
+        "등록 요금: 성인 1인 32,000원",
+        "현행 요금과 구매·결제 가능 여부 확인"
+      ],
+      "sourceType": "hotel-data",
+      "sourceSection": "breakfast",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "breakfast-child-price",
+      "category": "breakfast",
+      "title": "어린이 조식 요금",
+      "keywords": [
+        "조식요금",
+        "어린이",
+        "아동",
+        "child breakfast",
+        "kids breakfast",
+        "19000"
+      ],
+      "question": {
+        "en": "How much is breakfast for children?",
+        "ko": "어린이 조식은 얼마인가요?"
+      },
+      "quickAnswer": {
+        "en": "It's 19,000 won for children aged five to eight.",
+        "ko": "5세부터 8세 어린이는 19,000원입니다."
+      },
+      "details": {
+        "en": "For other ages, please let me check the price for you.",
+        "ko": "다른 연령의 요금은 확인해 드리겠습니다."
+      },
+      "staffChecks": [
+        "등록 기준: 5~8세 어린이 1인 19,000원",
+        "그 외 연령 요금과 나이 산정 기준은 별도 확인",
+        "확인되지 않은 연령대 요금을 임의 안내하지 않기"
+      ],
+      "sourceType": "hotel-data",
+      "sourceSection": "breakfast",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "room-wifi",
+      "category": "room-usage",
+      "title": "Wi-Fi 연결 방법",
+      "keywords": [
+        "와이파이",
+        "인터넷",
+        "비밀번호",
+        "wifi",
+        "wi-fi",
+        "password",
+        "internet",
+        "cph"
+      ],
+      "question": {
+        "en": "How can I connect to the Wi-Fi?",
+        "ko": "와이파이는 어떻게 연결하나요?"
+      },
+      "quickAnswer": {
+        "en": "The Wi-Fi name is CPH, an underscore, and your floor number. No password is needed.",
+        "ko": "와이파이 이름은 CPH, 밑줄, 그리고 투숙 층수입니다. 비밀번호는 필요하지 않습니다."
+      },
+      "details": {
+        "en": "Open your Wi-Fi settings and look for a network named CPH followed by an underscore and your floor number.",
+        "ko": "와이파이 설정을 열고 CPH 뒤에 밑줄과 투숙 층수가 붙은 네트워크를 찾아 주세요."
+      },
+      "staffChecks": [
+        "네트워크 이름: CPH_층수",
+        "고객의 실제 투숙 층수에 맞춰 안내"
+      ],
+      "sourceType": "hotel-data",
+      "sourceSection": "roomUsage",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "microwave-location",
+      "category": "room-usage",
+      "title": "전자레인지 위치",
+      "keywords": [
+        "전자레인지",
+        "microwave",
+        "6층",
+        "10층",
+        "16층"
+      ],
+      "question": {
+        "en": "Where can I find a microwave?",
+        "ko": "전자레인지는 어디에 있나요?"
+      },
+      "quickAnswer": {
+        "en": "There are microwaves on the 6th, 10th, and 16th floors.",
+        "ko": "전자레인지는 6층, 10층, 16층에 있습니다."
+      },
+      "staffChecks": [],
+      "sourceType": "hotel-data",
+      "sourceSection": "roomUsage",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "air-conditioning-controls",
+      "category": "room-usage",
+      "title": "에어컨 조절 방법",
+      "keywords": [
+        "에어컨",
+        "온도",
+        "냉방",
+        "리모컨",
+        "air conditioner",
+        "ac",
+        "remote",
+        "temperature"
+      ],
+      "question": {
+        "en": "How do I control the air conditioner?",
+        "ko": "에어컨은 어떻게 조절하나요?"
+      },
+      "quickAnswer": {
+        "en": "You can use the white wall panel near the bathroom or the air conditioner remote.",
+        "ko": "화장실 근처의 흰색 벽면 패널이나 에어컨 리모컨으로 조절하실 수 있습니다."
+      },
+      "details": {
+        "en": "The white control panel is on the wall to the left of the bathroom entrance.",
+        "ko": "흰색 조절 패널은 화장실 입구 왼쪽 벽에 있습니다."
+      },
+      "staffChecks": [
+        "현재 안내 내용은 냉방 조절 기준",
+        "난방 작동 방식까지 동일하다고 단정하지 않기"
+      ],
+      "sourceType": "hotel-data",
+      "sourceSection": "roomUsage",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "disposable-amenities",
+      "category": "room-usage",
+      "title": "칫솔·치약·면도기",
+      "keywords": [
+        "칫솔",
+        "치약",
+        "면도기",
+        "일회용품",
+        "toothbrush",
+        "toothpaste",
+        "razor",
+        "amenities"
+      ],
+      "question": {
+        "en": "Do you provide toothbrushes or razors?",
+        "ko": "칫솔이나 면도기를 제공하나요?"
+      },
+      "quickAnswer": {
+        "en": "I'm sorry, but these items are not provided for free.",
+        "ko": "죄송하지만 해당 물품은 무료로 제공되지 않습니다."
+      },
+      "details": {
+        "en": "If you'd like to buy a toothbrush, toothpaste, or a razor, please ask at the front desk.",
+        "ko": "칫솔, 치약, 면도기 구매를 원하시면 프론트에 문의해 주세요."
+      },
+      "staffChecks": [
+        "현재 구매 가능한 품목과 재고 확인",
+        "재고 확인 전에 구매 가능 여부를 보장하지 않기"
+      ],
+      "sourceType": "hotel-data",
+      "sourceSection": "roomUsage",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "nearby-convenience-store",
+      "category": "room-usage",
+      "title": "가까운 편의점",
+      "keywords": [
+        "편의점",
+        "씨유",
+        "cu",
+        "convenience store",
+        "store",
+        "shop"
+      ],
+      "question": {
+        "en": "Is there a convenience store nearby?",
+        "ko": "근처에 편의점이 있나요?"
+      },
+      "quickAnswer": {
+        "en": "Yes. There's a CU convenience store just outside the hotel, on the right.",
+        "ko": "네. 호텔 밖 오른쪽에 CU 편의점이 있습니다."
+      },
+      "details": {
+        "en": "Go out through the main entrance and turn right. The CU store is in the next building.",
+        "ko": "정문으로 나가 오른쪽으로 가시면 됩니다. CU 편의점은 바로 옆 건물에 있습니다."
+      },
+      "staffChecks": [
+        "호텔 건물 내부에는 편의점 없음",
+        "기존 CU 길찾기 링크 활용 가능",
+        "등록 도보시간 약 2분은 네이버 지도 참고치"
+      ],
+      "sourceType": "hotel-data",
+      "sourceSection": "roomUsage",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "guest-room-noise",
+      "category": "room-usage",
+      "title": "객실 소음 안내",
+      "keywords": [
+        "소음",
+        "고성방가",
+        "조용",
+        "noise",
+        "loud",
+        "quiet"
+      ],
+      "question": {
+        "en": "Are there any rules about noise?",
+        "ko": "소음 관련 규정이 있나요?"
+      },
+      "quickAnswer": {
+        "en": "Please keep the noise down so other guests can rest.",
+        "ko": "다른 투숙객이 쉴 수 있도록 소음을 줄여 주세요."
+      },
+      "details": {
+        "en": "Please avoid loud music and shouting, especially when other guests are resting.",
+        "ko": "다른 투숙객이 휴식하는 동안 큰 음악 소리나 고성방가는 삼가 주세요."
+      },
+      "staffChecks": [],
+      "sourceType": "hotel-data",
+      "sourceSection": "roomUsage",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "room-slippers-items",
+      "category": "room-usage",
+      "title": "객실 슬리퍼 및 비품",
+      "keywords": [
+        "슬리퍼",
+        "비품",
+        "반출",
+        "slippers",
+        "room items",
+        "take home"
+      ],
+      "question": {
+        "en": "Can I take the slippers home?",
+        "ko": "슬리퍼를 가져가도 되나요?"
+      },
+      "quickAnswer": {
+        "en": "I'm sorry, but the slippers are for use inside the room only.",
+        "ko": "죄송하지만 슬리퍼는 객실 안에서만 사용하실 수 있습니다."
+      },
+      "details": {
+        "en": "Please don't take the slippers or other room items outside the hotel.",
+        "ko": "슬리퍼나 다른 객실 비품을 호텔 밖으로 가져가지 말아 주세요."
+      },
+      "staffChecks": [],
+      "sourceType": "hotel-data",
+      "sourceSection": "roomUsage",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "indoor-smoking-policy",
+      "category": "hotel-policy",
+      "title": "객실 및 실내 금연",
+      "keywords": [
+        "금연",
+        "객실 흡연",
+        "흡연금지",
+        "no smoking",
+        "smoke in room",
+        "cleaning fee"
+      ],
+      "question": {
+        "en": "Can I smoke in my room?",
+        "ko": "객실에서 흡연할 수 있나요?"
+      },
+      "quickAnswer": {
+        "en": "I'm sorry, but smoking is not allowed inside the hotel.",
+        "ko": "죄송하지만 호텔 내부에서는 흡연이 금지되어 있습니다."
+      },
+      "details": {
+        "en": "Smoking is not allowed in guest rooms or indoor areas. A cleaning fee of 200,000 won may apply if you smoke in your room.",
+        "ko": "객실 및 호텔 실내에서는 흡연이 금지되어 있습니다. 객실에서 흡연하시면 200,000원의 청소비가 발생할 수 있습니다."
+      },
+      "staffChecks": [
+        "객실 흡연 청소비 등록 기준: 200,000원",
+        "실제 청구 판단 및 처리 절차는 내부 기준 확인",
+        "흡연 장소 문의 시 흡연 장소 스크립트 연결"
+      ],
+      "sourceType": "hotel-data",
+      "sourceSection": "notes",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "smoking-area",
+      "category": "hotel-policy",
+      "title": "흡연 장소 안내",
+      "keywords": [
+        "흡연장",
+        "흡연",
+        "담배",
+        "재떨이",
+        "은색 통",
+        "smoking area",
+        "smoke",
+        "ashtray",
+        "silver bin"
+      ],
+      "question": {
+        "en": "Where is the smoking area?",
+        "ko": "흡연 장소는 어디인가요?"
+      },
+      "quickAnswer": {
+        "en": "The smoking area is outside, to the left of the main entrance.",
+        "ko": "흡연 장소는 정문 밖 왼쪽에 있습니다."
+      },
+      "details": {
+        "en": "Go out through the main entrance and turn left. You'll see a silver ashtray bin there.",
+        "ko": "정문으로 나가 왼쪽으로 가시면 은색 재떨이 통이 보입니다."
+      },
+      "staffChecks": [
+        "위치: 호텔 정문 밖 왼쪽",
+        "식별물: 은색 재떨이 통",
+        "재떨이 또는 흡연 장소 변경 여부를 운영 중 확인"
+      ],
+      "sourceType": "user-provided",
+      "sourceSection": null,
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "food-delivery",
+      "category": "hotel-policy",
+      "title": "음식 배달 이용",
+      "keywords": [
+        "배달",
+        "배달음식",
+        "배달앱",
+        "food delivery",
+        "delivery",
+        "takeout"
+      ],
+      "question": {
+        "en": "Can I order food delivery?",
+        "ko": "음식 배달을 주문할 수 있나요?"
+      },
+      "quickAnswer": {
+        "en": "Food delivery is generally restricted. If you order food, please pick it up outside the main entrance.",
+        "ko": "음식 배달은 원칙적으로 제한됩니다. 주문하시면 정문 밖에서 직접 수령해 주세요."
+      },
+      "details": {
+        "en": "Delivery drivers cannot enter the hotel. You need to meet the driver outside and collect the food yourself.",
+        "ko": "배달 기사는 호텔 내부로 들어올 수 없습니다. 호텔 밖에서 직접 만나 음식을 수령하셔야 합니다."
+      },
+      "staffChecks": [
+        "원칙적 제한과 현장 처리 방식 구분",
+        "음식 배달 분실 관련 호텔 규정은 관련 문의 시 별도 안내"
+      ],
+      "sourceType": "hotel-data",
+      "sourceSection": "roomUsage",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "delivery-driver-access",
+      "category": "hotel-policy",
+      "title": "배달 기사 객실 출입",
+      "keywords": [
+        "배달기사",
+        "객실배달",
+        "문앞배달",
+        "delivery driver",
+        "delivery to room",
+        "room delivery"
+      ],
+      "question": {
+        "en": "Can the delivery driver come to my room?",
+        "ko": "배달 기사가 객실로 올 수 있나요?"
+      },
+      "quickAnswer": {
+        "en": "I'm sorry, but delivery drivers cannot enter the hotel.",
+        "ko": "죄송하지만 배달 기사는 호텔 내부로 들어올 수 없습니다."
+      },
+      "details": {
+        "en": "For security reasons, please meet the driver outside the main entrance.",
+        "ko": "보안상의 이유로 정문 밖에서 배달 기사를 직접 만나 주세요."
+      },
+      "staffChecks": [],
+      "sourceType": "hotel-data",
+      "sourceSection": "roomUsage",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "fire-alarm-safety",
+      "category": "hotel-policy",
+      "title": "화재경보 및 소방시설 점검",
+      "keywords": [
+        "화재",
+        "경보",
+        "경종",
+        "소방 점검",
+        "fire alarm",
+        "alarm",
+        "inspection",
+        "evacuation"
+      ],
+      "question": {
+        "en": "Why is the fire alarm going off?",
+        "ko": "화재경보기가 왜 울리나요?"
+      },
+      "quickAnswer": {
+        "en": "Please follow the safety instructions. I'll check what's happening.",
+        "ko": "안전 안내에 따라 주세요. 무슨 상황인지 확인해 드리겠습니다."
+      },
+      "details": {
+        "en": "An alarm may sound during a fire safety inspection. However, please follow all safety announcements and instructions from hotel staff.",
+        "ko": "소방시설 점검 중 경보음이 울릴 수도 있습니다. 하지만 반드시 안전 방송과 호텔 직원의 안내에 따라 주세요."
+      },
+      "staffChecks": [
+        "경보 원인을 확인하기 전 '소방 점검'이라고 단정하지 않기",
+        "호텔 비상 대응 및 대피 절차가 최우선",
+        "상황에 따라 즉각적인 대피 안내 필요"
+      ],
+      "sourceType": "hotel-data",
+      "sourceSection": "roomUsage",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "pet-friendly-rooms",
+      "category": "hotel-policy",
+      "title": "반려동물 동반 객실",
+      "keywords": [
+        "반려동물",
+        "애견",
+        "펫룸",
+        "강아지",
+        "pet",
+        "pet friendly",
+        "dog",
+        "cat"
+      ],
+      "question": {
+        "en": "Can I stay with my pet?",
+        "ko": "반려동물과 함께 투숙할 수 있나요?"
+      },
+      "quickAnswer": {
+        "en": "Pets are allowed only in designated pet-friendly rooms.",
+        "ko": "반려동물은 지정된 반려동물 전용 객실에서만 동반할 수 있습니다."
+      },
+      "details": {
+        "en": "Pets are not allowed in regular rooms. Let me check if a pet-friendly room is available.",
+        "ko": "일반 객실에는 반려동물을 동반할 수 없습니다. 반려동물 전용 객실 이용이 가능한지 확인해 드리겠습니다."
+      },
+      "staffChecks": [
+        "전용 객실 이용 가능 여부와 예약 조건 확인",
+        "반려동물 종류·크기 등 적용 조건 확인 필요",
+        "전용 객실이 있다고 해서 입실을 보장하지 않기"
+      ],
+      "sourceType": "hotel-data",
+      "sourceSection": "notes",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "pet-declaration",
+      "category": "hotel-policy",
+      "title": "반려동물 동반 신고",
+      "keywords": [
+        "반려동물 신고",
+        "미신고",
+        "반려동물 추가요금",
+        "pet registration",
+        "declare pet",
+        "pet fee"
+      ],
+      "question": {
+        "en": "Do I need to tell the hotel about my pet?",
+        "ko": "반려동물 동반 사실을 알려야 하나요?"
+      },
+      "quickAnswer": {
+        "en": "Yes. Please let the front desk know if you bring a pet.",
+        "ko": "네. 반려동물을 동반하시면 프론트에 알려 주세요."
+      },
+      "details": {
+        "en": "If you don't report your pet, an additional fee of 22,000 won may apply.",
+        "ko": "반려동물 동반 사실을 신고하지 않으시면 22,000원의 추가 요금이 발생할 수 있습니다."
+      },
+      "staffChecks": [
+        "미신고 시 등록된 추가 비용: 22,000원",
+        "반려동물 객실 기본 이용 요금과 혼동 금지",
+        "기타 적용 비용은 별도 확인"
+      ],
+      "sourceType": "hotel-data",
+      "sourceSection": "notes",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "pet-cleaning-damage",
+      "category": "hotel-policy",
+      "title": "반려동물 관련 청소비·파손",
+      "keywords": [
+        "반려동물 청소",
+        "침구 오염",
+        "가구 파손",
+        "pet cleaning",
+        "damage",
+        "bedding",
+        "50000"
+      ],
+      "question": {
+        "en": "Is there an extra cleaning fee for pets?",
+        "ko": "반려동물 관련 추가 청소비가 있나요?"
+      },
+      "quickAnswer": {
+        "en": "An extra cleaning fee may apply if your pet soils the bedding.",
+        "ko": "반려동물로 인해 침구가 오염되면 추가 청소비가 발생할 수 있습니다."
+      },
+      "details": {
+        "en": "If your pet soils the bedding with urine or feces, a cleaning fee of 50,000 won may apply. Damage to furniture may also result in extra charges.",
+        "ko": "반려동물의 소변이나 대변으로 침구가 오염되면 50,000원의 청소비가 발생할 수 있습니다. 가구 파손 시에도 추가 요금이 발생할 수 있습니다."
+      },
+      "staffChecks": [
+        "침구 오염 시 등록 청소비: 50,000원",
+        "가구 파손은 품목별 비용 확인",
+        "실제 청구 여부는 객실 상태와 내부 기준에 따라 확인"
+      ],
+      "sourceType": "hotel-data",
+      "sourceSection": "notes",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "parking-fee",
+      "category": "hotel-facilities",
+      "title": "주차 요금",
+      "keywords": [
+        "주차",
+        "무료주차",
+        "주차비",
+        "parking",
+        "free parking",
+        "parking fee"
+      ],
+      "question": {
+        "en": "Is parking free?",
+        "ko": "주차는 무료인가요?"
+      },
+      "quickAnswer": {
+        "en": "Yes, parking is free.",
+        "ko": "네. 주차는 무료입니다."
+      },
+      "details": {
+        "en": "You don't need to pay for parking or register your car.",
+        "ko": "주차 요금을 내거나 차량을 별도로 등록할 필요가 없습니다."
+      },
+      "staffChecks": [],
+      "sourceType": "hotel-data",
+      "sourceSection": "parking",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "vehicle-registration",
+      "category": "hotel-facilities",
+      "title": "차량 등록",
+      "keywords": [
+        "차량등록",
+        "차 번호",
+        "주차등록",
+        "car registration",
+        "license plate",
+        "parking registration"
+      ],
+      "question": {
+        "en": "Do I need to register my car?",
+        "ko": "차량을 등록해야 하나요?"
+      },
+      "quickAnswer": {
+        "en": "No, you don't need to register your car.",
+        "ko": "아니요. 차량을 별도로 등록하실 필요는 없습니다."
+      },
+      "staffChecks": [],
+      "sourceType": "hotel-data",
+      "sourceSection": "parking",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "hotel-address",
+      "category": "hotel-facilities",
+      "title": "호텔 주소",
+      "keywords": [
+        "주소",
+        "테크노파크로",
+        "위치",
+        "address",
+        "hotel location",
+        "technopark"
+      ],
+      "question": {
+        "en": "What's the hotel's address?",
+        "ko": "호텔 주소가 어떻게 되나요?"
+      },
+      "quickAnswer": {
+        "en": "The address is 193, Technopark-ro, Yeonsu-gu, Incheon.",
+        "ko": "호텔 주소는 인천광역시 연수구 테크노파크로 193입니다."
+      },
+      "details": {
+        "en": "Our hotel is The Central Park Hotel Songdo, in Incheon, South Korea.",
+        "ko": "저희 호텔은 대한민국 인천에 있는 송도센트럴파크호텔입니다."
+      },
+      "staffChecks": [],
+      "sourceType": "hotel-data",
+      "sourceSection": "address",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "hotel-phone",
+      "category": "hotel-facilities",
+      "title": "호텔 대표전화",
+      "keywords": [
+        "전화",
+        "대표번호",
+        "연락처",
+        "phone number",
+        "contact",
+        "telephone"
+      ],
+      "question": {
+        "en": "What's the hotel's phone number?",
+        "ko": "호텔 전화번호가 어떻게 되나요?"
+      },
+      "quickAnswer": {
+        "en": "Our phone number is 032-310-5000.",
+        "ko": "호텔 전화번호는 032-310-5000입니다."
+      },
+      "staffChecks": [],
+      "sourceType": "hotel-data",
+      "sourceSection": "notes",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "room-item-damage",
+      "category": "hotel-facilities",
+      "title": "객실 비품 파손",
+      "keywords": [
+        "파손",
+        "변상",
+        "물품파손",
+        "damage",
+        "broken item",
+        "replacement cost"
+      ],
+      "question": {
+        "en": "What if I damage something in the room?",
+        "ko": "객실 비품을 파손하면 어떻게 되나요?"
+      },
+      "quickAnswer": {
+        "en": "If you damage something in the room, you may need to pay for it.",
+        "ko": "객실 비품을 파손하시면 비용을 부담하셔야 할 수 있습니다."
+      },
+      "details": {
+        "en": "If a room item is damaged during your stay, you may be charged the cost of replacing it.",
+        "ko": "투숙 중 객실 비품이 파손되면 동일 제품의 교체 비용이 청구될 수 있습니다."
+      },
+      "staffChecks": [
+        "파손된 품목의 실제 교체 비용 확인",
+        "직원 임의로 배상 금액을 확정하지 않기"
+      ],
+      "sourceType": "hotel-data",
+      "sourceSection": "notes",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    }
+  ]
+}
