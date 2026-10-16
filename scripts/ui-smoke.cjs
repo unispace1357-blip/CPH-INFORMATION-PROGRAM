@@ -82,6 +82,9 @@ async function mapPopup(page, link, url) {
     } else await staff.goto(routeURL('/staff'));
     await count(staff, '.facility-card', visible.length);
     assert.deepEqual(await staff.locator('.facility-card h3').allTextContents(), ordered.map(f => f.translations.ko.name));
+    assert.equal(await staff.locator('.staff-intro').count(), 1);
+    assert.equal(await staff.locator('.staff-release-details').count(), 1);
+    assert.equal(await staff.locator('.staff-category-grid .category-card').count(), 1 + 9);
     assert.ok(await staff.getByText(publicTest ? 'Information is being collected and verified.' : '프론트 테스트용 미리보기', { exact: true }).isVisible());
     assert.equal(await staff.locator('.staff-category-grid').getByRole('button', { name: 'ATM', exact: true }).count(), 0);
     for (const item of visible) {
@@ -103,6 +106,8 @@ async function mapPopup(page, link, url) {
         assert.equal(await staff.locator('.english-directions p').innerText(), item.translations.en.directions);
       }
       assert.deepEqual(await staff.locator('.english-phrase-text').allTextContents(), item.englishPhrases);
+      assert.ok(await staff.locator('.english-guide').evaluate(el => !!el.compareDocumentPosition(document.querySelector('.staff-facility-metadata')) && (el.compareDocumentPosition(document.querySelector('.staff-facility-metadata')) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0), 'English guidance must appear before secondary facility metadata');
+      assert.ok(await staff.locator('.staff-walking-summary').isVisible());
       assert.ok(await staff.locator('.english-phrase-text').first().evaluate(node => parseFloat(getComputedStyle(node).fontSize) >= 17), 'English scripts must remain legible at 17px or larger');
       assert.ok(await staff.locator('.english-phrase-meaning').first().evaluate(node => parseFloat(getComputedStyle(node).fontSize) >= 15), 'Korean script meanings must remain legible at 15px or larger');
       assert.deepEqual(await staff.locator('.english-phrase-label').allTextContents(), ['기본 안내', '상세 안내']);
