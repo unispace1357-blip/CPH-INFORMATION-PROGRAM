@@ -176,7 +176,7 @@ async function mapPopup(page, link, url) {
     assert.equal(await staff.locator('.staff-intro').count(), 1);
     assert.equal(await staff.locator('.staff-release-details').count(), publicTest ? 1 : 0);
     assert.equal(await staff.locator('#staff-facilities-panel .staff-category-grid .category-card').count(), 1 + 9);
-    assert.ok(await staff.getByText(publicTest ? 'Information is being collected and verified.' : '프론트 테스트용 미리보기', { exact: true }).isVisible());
+    assert.ok(await staff.getByText(publicTest ? '호텔 업무 영어 응대 안내' : '프론트 테스트용 미리보기', { exact: true }).isVisible());
     assert.equal(await staff.locator('#staff-facilities-panel .staff-category-grid').getByRole('button', { name: 'ATM', exact: true }).count(), 0);
     for (const item of visible) {
       await staff.locator('#staff-facilities-panel .staff-category-grid').getByRole('button', { name: '전체', exact: true }).click();

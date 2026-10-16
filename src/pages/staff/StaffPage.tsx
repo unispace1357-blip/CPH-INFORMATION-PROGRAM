@@ -62,23 +62,23 @@ export function StaffPage() {
   return (
     <div className="staff-page">
       <section className="staff-intro" aria-label="프론트 안내 대시보드">
-        <PageHeader eyebrow="THE CENTRAL PARK HOTEL · FRONT DESK CONCIERGE" title="직원용 안내" description="호텔 업무에 맞는 영어 응대를 찾고, 주변 시설 안내도 함께 확인하세요."
+        <PageHeader eyebrow="THE CENTRAL PARK HOTEL · FRONT DESK CONCIERGE" title="직원용 안내" description="호텔 업무별 영어 문장과 한국어 뜻을 확인하세요."
           actions={<div className="staff-intro-stats" aria-label="직원 안내 기능">
             <span className="staff-stat"><Icon name="globe" size={21} /><span>호텔 업무 응대</span></span>
             <span className="staff-stat staff-stat--count"><strong>{dataset ? dataset.facilities.filter(item => item.isPublished).length : '—'}</strong><span>주변 시설</span></span>
             <span className="staff-stat"><Icon name="copy" size={21} /><span>영어만 복사</span></span>
           </div>} />
       </section>
-      {dataset?.dataStatus === 'demo' && <div className="staff-release-notice"><InformationNotice title={import.meta.env.MODE === 'public-test' ? 'Information is being collected and verified.' : '프론트 테스트용 미리보기'} tone="warning">
+      {dataset?.dataStatus === 'demo' && <div className="staff-release-notice"><InformationNotice title={import.meta.env.MODE === 'public-test' ? '호텔 업무 영어 응대 안내' : '프론트 테스트용 미리보기'} tone="warning">
         {import.meta.env.MODE === 'public-test' ? <>
-          <p>주변 시설과 영어 안내 정보를 수집·검증 중입니다. 방문 전 최신 정보를 확인해 주세요.</p>
+          <p>필요한 영어 문장을 검색·복사하세요. 검수 전 문구는 사용 전 확인해 주세요.</p>
           <details className="staff-release-details">
             <summary>업데이트 계획 및 저작권 안내</summary>
             <p>현재 주변 시설 정보와 영어 안내 문구를 수집·검증하며 프로그램을 개선하고 있습니다. 아직 초기 단계이지만, 지속적인 업데이트를 통해 실제 프론트 업무에 도움이 되는 완성도 높은 프로그램으로 발전시키겠습니다.</p>
             <p>수록된 안내 정보는 변경될 수 있으므로 이용 전 확인해 주세요.</p>
             <p>© 2026 Antonio. All rights reserved. 본 프로그램의 저작권은 Antonio에게 있으며, 사전 허가 없는 복제·재배포 및 도용을 금합니다.</p>
           </details>
-        </> : <>실제 주변 시설 {dataset.facilities.length}개를 검색하고 고객과 함께 확인할 수 있습니다. 외국어 안내는 검수 전 초안이며, 미확인 항목은 담당자에게 확인해 주세요. 정식 운영 배포는 차단되어 있습니다.</>}
+        </> : <>호텔 업무 영어 문장은 검수 전 초안입니다. 사용 전 확인해 주세요. 정식 운영 배포는 차단되어 있습니다.</>}
       </InformationNotice></div>}
       {dataset?.dataStatus === 'production' && <InformationNotice title="안내 정보 확인">정보 확인일과 미확인 항목을 확인하고, 방문 전 영업시간 등 변동 사항을 확인해 주세요.</InformationNotice>}
       <div className="staff-guide-tabs" role="tablist" aria-label="직원 안내 업무" onKeyDown={handleTabKey}>
