@@ -129,6 +129,15 @@ async function mapPopup(page, link, url) {
     await guest.goto(publicTest ? `${baseURL}/guest/` : `${baseURL}/`);
     await guest.waitForURL('**/guest');
     await count(guest, '.facility-card', visible.length);
+    for (const width of [320, 390]) {
+      await guest.setViewportSize({ width, height: 844 });
+      for (const link of await guest.locator('.guest-navigation a').all()) {
+        assert.equal(await link.evaluate(node => getComputedStyle(node).whiteSpace), 'nowrap', 'guest navigation must keep labels on one line');
+        assert.ok(await link.evaluate(node => node.scrollWidth <= node.clientWidth), 'guest navigation labels must fit');
+      }
+      await layout(guest);
+    }
+    await guest.setViewportSize({ width: 390, height: 844 });
     assert.equal(await guest.locator('a[href^="/staff"]').count(), 0);
     assert.equal(await guest.locator('.english-guide').count(), 0);
     assert.ok((await guest.request.get(`${baseURL}/favicon.svg`)).ok());
