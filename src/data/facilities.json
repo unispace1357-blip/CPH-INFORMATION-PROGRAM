@@ -51,7 +51,7 @@
         "There's a CU convenience store near the hotel. It's open 24 hours.",
         "It's on the first floor of Building A, in unit 109. Let me show you the walking route on the map."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 2,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -113,7 +113,7 @@
         "Blue Ocean is a sauna. It's listed as open 24 hours.",
         "It's in the Dream City building, on the sixth floor, unit 601. The address is 81 Convensia-daero. Let me show you the walking route."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 25,
       "closedDays": {
         "ko": "연중 무휴",
         "en": "Open year-round",
@@ -175,7 +175,7 @@
         "The Malt House is a Western-style restaurant. I can show you where it is.",
         "It's on the third floor of Building A, in unit 305. There's a break from 3 to 5 p.m., and last orders are at 10 p.m. I'll show you the route."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 3,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -237,7 +237,7 @@
         "There's a Compose Coffee in the area. Let me show you where it is.",
         "It's on the first floor of Building A, in unit 112. Closing times vary by day, so please check before you go. Here's the walking route."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 2,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -299,7 +299,7 @@
         "Chaeum Pharmacy is in the area. I can show you the way.",
         "It's on the second floor, in unit 240. There's a break from 1 to 2 p.m., and it closes at 2 p.m. on Saturdays. Let me show you the route."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 4,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -361,7 +361,7 @@
         "Hanyang is a Korean restaurant in Songdo Hanok Village.",
         "It's at 180 Technopark-ro, in the Hanok Village area. On weekdays, there's a break from 3 to 5 p.m. Let me show you the walking route."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 3,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -423,7 +423,7 @@
         "Gyeongbokgung is a Korean restaurant in Songdo Hanok Village.",
         "It's in Building Ga, on the first and second floors, at 180 Technopark-ro. Last orders are at 9:30 p.m. Let me show you the route."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 3,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -485,7 +485,7 @@
         "Paljinhyang is a Chinese restaurant in Songdo Hanok Village.",
         "It's on the second floor of Building Na, at 180 Technopark-ro. There's a break from 3 to 5 p.m. Let me show you the walking route."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 3,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -547,7 +547,7 @@
         "Hollys is a coffee shop in Songdo Hanok Village.",
         "It's at 180 Technopark-ro, in the Hanok Village area. It's listed as open until 10:30 p.m. Let me show you how to get there."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 3,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -609,7 +609,7 @@
         "Songhaeon is a sauna and hot spring facility in Songdo.",
         "It's at 16 Incheon Tower-daero 197beon-gil. The listed hours are from 6 a.m. to 10 p.m. Let me show you the walking route."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 4,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -671,7 +671,7 @@
         "Songjjujip is a Korean restaurant. Let me show you where it is.",
         "It's at 160 Central-ro. There's a break from 3 to 4:30 p.m. Last orders are at 2 p.m. for lunch and 8:50 p.m. for dinner. I'll show you the route."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 14,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -733,7 +733,7 @@
         "Otto Gimbap serves gimbap, or Korean rice rolls.",
         "It's at 160 Central-ro, in Building C, units 243 to 246. There's a break from 2 to 4 p.m. Let me show you the walking route."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 15,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -795,7 +795,7 @@
         "Burger Room 181 is a burger restaurant in Songdo.",
         "It's on the second floor of Building A, in units 228 to 230, at 160 Central-ro. Last orders are at 9 p.m. Let me show you the route."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 14,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -857,7 +857,7 @@
         "There's a Mom's Touch fast-food restaurant in Songdo.",
         "It's at 160 Central-ro, in Retail Building 1, unit 126. Last orders are at 9:50 p.m. I can show you the walking route."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 14,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -919,7 +919,7 @@
         "There's a Burger King in the Central Park area.",
         "It's on the first floor of Building B, at 194 Central-ro. It's listed as open until 11 p.m. Let me show you the walking route."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 14,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -1043,7 +1043,7 @@
         "There's a Starbucks in the Central Park area.",
         "It's in Building A, units 101 to 103, at 194 Central-ro. The listed hours are from 7 a.m. to 10 p.m. I'll show you the walking route."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 14,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -1105,7 +1105,7 @@
         "Playground Brewery Taproom is a place for craft beer in Songdo.",
         "It's at 80 Convensia-daero, in the Hyundai Hillstate complex, Building 401, unit 139. Last orders are at 11 p.m. I can show you the route."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 26,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -1167,7 +1167,7 @@
         "Geumbyeol Beer is a pub in Songdo.",
         "It's at 144 Harmony-ro, in units A101 and A102. It's listed as staying open later on Fridays and Saturdays. Let me show you the walking route."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 19,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -1191,7 +1191,7 @@
           "description": "교통·지하철",
           "address": "인천 1호선 센트럴파크역",
           "openingHours": "해당 없음",
-          "directions": "호텔 공식 안내 기준 센트럴파크역 3번 출구까지 도보 약 5분입니다.",
+          "directions": "호텔 공식 안내에는 센트럴파크역 3번 출구까지 도보 약 5분으로 표기되어 있습니다. 네이버 지도 도보 경로 기준 예상 시간은 약 7분입니다.",
           "notes": ""
         },
         "en": {
@@ -1199,7 +1199,7 @@
           "description": "Subway station exit.",
           "address": "센트럴파크역, Incheon Subway Line 1",
           "openingHours": "Not applicable",
-          "directions": "The hotel lists an estimated walk of about 5 minutes to 센트럴파크역 Exit 3.",
+          "directions": "The hotel guide lists about 5 minutes on foot to 센트럴파크역 Exit 3. Naver Maps estimates about 7 minutes for the walking route.",
           "notes": ""
         },
         "zh-CN": {
@@ -1207,7 +1207,7 @@
           "description": "地铁站出口。",
           "address": "仁川地铁1号线 센트럴파크역",
           "openingHours": "不适用",
-          "directions": "酒店官方指引标注：步行至센트럴파크역3号出口约5分钟。",
+          "directions": "酒店官方指引标注步行至센트럴파크역3号出口约5分钟，NAVER地图步行路线估计约7分钟。",
           "notes": ""
         },
         "ja": {
@@ -1215,7 +1215,7 @@
           "description": "地下鉄駅出口。",
           "address": "仁川地下鉄1号線 센트럴파크역",
           "openingHours": "該当なし",
-          "directions": "ホテル公式案内では、센트럴파크역3番出口まで徒歩約5分です。",
+          "directions": "ホテル公式案内では센트럴파크역3番出口まで徒歩約5分ですが、NAVERマップの徒歩ルートでは約7分です。",
           "notes": ""
         }
       },
@@ -1226,10 +1226,10 @@
         "ja": []
       },
       "englishPhrases": [
-        "Central Park Station Exit 3 is about a five-minute walk from the hotel.",
+        "Naver Maps estimates about a seven-minute walk to Central Park Station Exit 3.",
         "It's an entrance to Incheon Subway Line 1. Make sure you use Exit 3. I'll show you the walking route to that exit on the map."
       ],
-      "walkingMinutes": 5,
+      "walkingMinutes": 7,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -1238,7 +1238,7 @@
       },
       "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3gJ1,2AEMGZ,%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%EC%97%AD(%EC%9E%AC%EC%99%B8%EB%8F%99%ED%8F%AC%EC%B2%AD%2C%ED%8F%AC%EC%8A%A4%EC%BD%94%EC%9D%B4%EC%95%A4%EC%94%A8)3%EB%B2%88%EC%B6%9C%EA%B5%AC,21403643,PLACE_POI/-/walk?c=16.00,0,0,0,dh",
       "englishPhraseMeanings": [
-        "센트럴파크역 3번 출구는 호텔에서 걸어서 약 5분 거리입니다.",
+        "네이버 지도 기준 센트럴파크역 3번 출구까지 걸어서 약 7분입니다.",
         "인천지하철 1호선으로 들어가는 출입구입니다. 3번 출구를 이용하시면 됩니다. 지도에서 그 출구까지의 도보 경로를 보여드릴게요."
       ]
     },
@@ -1291,7 +1291,7 @@
         "Lotte Mart is a supermarket for groceries and everyday items.",
         "It's at 177 Convensia-daero. It's listed as open from 10 a.m. to 11 p.m. Let me show you the walking route from the hotel."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 11,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -1353,7 +1353,7 @@
         "Songdo Central Park is a large park that's good for a walk.",
         "The park covers a large area around 160 Convensia-daero. The map points to the park in general, not a specific entrance. I can help you check the route."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 6,
       "closedDays": {
         "ko": "",
         "en": "",
@@ -1415,7 +1415,7 @@
         "Byeol Onnuri Pharmacy stays open late.",
         "It's in Building A of Songdo Timespace, units 110 to 112, at 158 Harmony-ro. The pharmacy is listed as open until 1 a.m. There's also a separate 24-hour vending machine. Here's the route."
       ],
-      "walkingMinutes": null,
+      "walkingMinutes": 17,
       "closedDays": {
         "ko": "",
         "en": "",
