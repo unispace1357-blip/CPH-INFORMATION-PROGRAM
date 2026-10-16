@@ -65,7 +65,7 @@ export function StaffPage() {
             <p>© 2026 Antonio. All rights reserved. 본 프로그램의 저작권은 Antonio에게 있으며, 사전 허가 없는 복제·재배포 및 도용을 금합니다.</p>
           </details>
         </> : <>실제 주변 시설 {dataset.facilities.length}개를 검색하고 고객과 함께 확인할 수 있습니다. 외국어 안내는 검수 전 초안이며, 미확인 항목은 담당자에게 확인해 주세요. 정식 운영 배포는 차단되어 있습니다.</>}
-      </InformationNotice></div>
+      </InformationNotice></div>}
       {dataset?.dataStatus === 'production' && <InformationNotice title="안내 정보 확인">정보 확인일과 미확인 항목을 확인하고, 방문 전 영업시간 등 변동 사항을 확인해 주세요.</InformationNotice>}
       {dataState.status === 'error' && <div role="alert"><InformationNotice title="시설 데이터를 불러오지 못했습니다" tone="warning"><p>등록 파일과 데이터 검증 결과를 확인한 뒤 새로고침해 주세요. 시설 정보는 표시하지 않습니다.</p><Button variant="secondary" onClick={() => window.location.reload()}>새로고침</Button></InformationNotice></div>}
       <section className="panel search-panel" aria-labelledby="staff-search-title">
