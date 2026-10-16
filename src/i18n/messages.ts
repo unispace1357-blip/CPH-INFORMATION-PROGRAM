@@ -361,7 +361,7 @@ export const MESSAGES = {
       "loadingHotel": "ホテル情報を読み込み中…",
       "loadingFacilities": "施設情報を読み込み中…",
       "demoTitle": "施設ご利用案内",
-      "demoWarning": "周辺施設の情報とご案内は随時更新しています。お出かけ前に営業時間や利用状況をご確認ください。,"
+      "demoWarning": "周辺施設の情報とご案内は随時更新しています。お出かけ前に営業時間や利用状況をご確認ください。",
       "productionNoticeTitle": "情報をご確認ください",
       "productionNotice": "登録情報は変更される場合があります。ご利用前にご確認ください。",
       "notFoundTitle": "ページが見つかりません",
