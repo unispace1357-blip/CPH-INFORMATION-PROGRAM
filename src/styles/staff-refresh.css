@@ -258,7 +258,7 @@
 .app-shell--staff .staff-detail-content .english-phrases li:nth-child(2) { border-left-color: #c9a06b; }
 .app-shell--staff .staff-detail-content .english-phrase-label { margin-bottom: 7px; color: #3a5b84; font-size: .94rem; }
 .app-shell--staff .staff-detail-content .english-phrase-text { font-size: 1.12rem; line-height: 1.73; font-weight: 550; margin-bottom: 11px; }
-.app-shell--staff .staff-detail-content .english-phrase-meaning { padding-top: 10px; border-top: 1px solid #edf1f6; color: #596f88; font-size: .93rem; }
+.app-shell--staff .staff-detail-content .english-phrase-meaning { padding-top: 10px; border-top: 1px solid #edf1f6; color: #596f88; font-size: .95rem; }
 .app-shell--staff .staff-detail-content .english-phrases .button--secondary { border-color: #cbd9e9; color: #31588a; min-height: 39px; }
 .app-shell--staff .staff-facility-metadata { margin-top: 24px; padding-top: 18px; border-top: 1px solid #dce6f1; }
 .app-shell--staff .staff-facility-metadata > h4 { margin: 0; color: #355780; font-size: .98rem; }
@@ -285,4 +285,49 @@
 @media (prefers-reduced-motion: no-preference) {
   .app-shell--staff .staff-result-list .facility-card,
   .app-shell--staff .staff-category-grid .category-card { transition: background-color .18s ease, border-color .18s ease, box-shadow .18s ease; }
+}
+
+/* V2 hotel replies share the staff palette and existing search/detail panels. */
+.app-shell--staff .staff-guide-tabs { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; padding: 6px; border: 1px solid var(--staff-stroke); border-radius: 14px; background: #eaf0f8; }
+.app-shell--staff .staff-guide-tab { min-height: 48px; padding: 12px; white-space: normal; overflow-wrap: anywhere; }
+.app-shell--staff .staff-guide-tab[aria-selected="false"] { color: #405d83; }
+.app-shell--staff .staff-guide-tab[aria-selected="true"] { box-shadow: 0 3px 10px rgb(35 76 130 / 15%); }
+.app-shell--staff .staff-tab-panel, .app-shell--staff .frontdesk-guide { display: grid; min-width: 0; gap: 18px; }
+.app-shell--staff .staff-tab-panel[hidden] { display: none; }
+.app-shell--staff .frontdesk-workspace > section { min-width: 0; }
+.app-shell--staff .frontdesk-script-list { list-style: none; display: grid; gap: 10px; padding: 0; margin: 0; }
+.app-shell--staff .frontdesk-script-card { display: grid; gap: 7px; width: 100%; min-height: 44px; padding: 16px; border: 1px solid var(--staff-stroke); border-left: 3px solid transparent; border-radius: 12px; background: #fff; text-align: left; color: var(--color-text); cursor: pointer; }
+.app-shell--staff .frontdesk-script-card:hover { background: #f7faff; border-color: #adc3df; }
+.app-shell--staff .frontdesk-script-card[aria-pressed="true"] { background: #eef5fd; border-color: #9eb9d8; border-left-color: var(--staff-navy); }
+.app-shell--staff .frontdesk-card-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px 10px; font-size: .78rem; color: #526d91; }
+.app-shell--staff .frontdesk-review-badge { display: inline-block; flex-shrink: 0; padding: 4px 8px; border: 1px solid #ddc8a6; border-radius: 6px; background: #fff8ed; color: #78521d; font-size: .76rem; line-height: 1.5; font-weight: 650; }
+.app-shell--staff .frontdesk-review-badge--approved { color: #285d46; background: #edf8f1; border-color: #b7d7c5; }
+.app-shell--staff .frontdesk-script-title { font-size: 1.05rem; font-weight: 700; color: #24456e; }
+.app-shell--staff .frontdesk-script-question { font-size: .9rem; line-height: 1.6; color: var(--color-text-secondary); }
+.app-shell--staff .frontdesk-script-detail > .section-heading { flex-wrap: wrap; align-items: start; gap: 10px; }
+.app-shell--staff .frontdesk-script-detail p, .app-shell--staff .frontdesk-script-detail li, .app-shell--staff .frontdesk-script-card { overflow-wrap: anywhere; }
+.app-shell--staff .frontdesk-script-detail p { white-space: pre-wrap; }
+.app-shell--staff #frontdesk-detail-title { scroll-margin-top: 24px; }
+.app-shell--staff .frontdesk-question { margin-bottom: 18px; color: #536780; line-height: 1.7; }
+.app-shell--staff .frontdesk-question h4 { font-size: .88rem; margin-bottom: 6px; color: #405d83; }
+.app-shell--staff .frontdesk-question p + p { margin-top: 4px; }
+.app-shell--staff .frontdesk-quick-answer { padding: 22px; border: 1px solid #c6d7ec; border-left: 4px solid var(--staff-navy); border-radius: 12px; background: linear-gradient(120deg, #eef5ff, #fff); }
+.app-shell--staff .frontdesk-quick-answer h4 { font-size: 1.05rem; color: #284c79; margin-bottom: 12px; }
+.app-shell--staff .frontdesk-answer-en { font-size: 1.08rem; line-height: 1.75; color: #203f68; margin-bottom: 12px; user-select: text; }
+.app-shell--staff .frontdesk-quick-answer .frontdesk-answer-en { font-size: clamp(1.18rem, 2vw, 1.45rem); font-weight: 650; }
+.app-shell--staff .frontdesk-answer-ko { font-size: .95rem; line-height: 1.75; color: #536780; margin-bottom: 16px; }
+.app-shell--staff .frontdesk-disclosure { margin-top: 14px; border: 1px solid var(--staff-stroke); border-radius: 10px; background: #fff; }
+.app-shell--staff .frontdesk-disclosure summary { cursor: pointer; min-height: 48px; padding: 14px 16px; font-weight: 650; color: #365981; }
+.app-shell--staff .frontdesk-disclosure summary:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; border-radius: 8px; }
+.app-shell--staff .frontdesk-disclosure-content { padding: 0 16px 16px; }
+.app-shell--staff .frontdesk-disclosure-content ul { padding-left: 20px; line-height: 1.8; }
+.app-shell--staff .frontdesk-staff-checks { background: #fbfaf7; border-color: #e5dccb; }
+.app-shell--staff .frontdesk-staff-checks .field-hint { margin: 0 0 10px; }
+@media (min-width: 1000px) {
+  .app-shell--staff .frontdesk-script-list { max-height: 660px; overflow-y: auto; padding: 4px; scroll-padding-block: 8px; }
+}
+@media (max-width: 599px) {
+  .app-shell--staff .staff-guide-tab { padding-inline: 8px; font-size: .88rem; }
+  .app-shell--staff .frontdesk-quick-answer { padding: 16px; }
+  .app-shell--staff .frontdesk-guide .section-heading { flex-wrap: wrap; gap: 10px; }
 }

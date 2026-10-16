@@ -7,6 +7,8 @@ import originalFacilities from '../src/data/facilities.json' with { type: 'json'
 import { parseFrontdeskScriptDataset } from '../src/data/validateFrontdeskScriptDataset.ts'
 import { frontdeskScriptDataset } from '../src/data/frontdeskScriptDataset.ts'
 import { FRONTDESK_SCRIPT_CATEGORIES, FRONTDESK_SOURCE_SECTIONS } from '../src/types/frontdeskScript.ts'
+import { searchFrontdeskScripts } from '../src/services/frontdeskScriptSearch.ts'
+import { loadFrontdeskScripts } from '../src/services/loadFrontdeskScripts.ts'
 
 const fresh = () => structuredClone(raw)
 const expectedCounts = [5, 5, 7, 8, 5]
@@ -149,4 +151,41 @@ test('production cannot accidentally publish a script still marked draft', () =>
     script.lastVerifiedAt = '2026-10-16'
   }
   assert.doesNotThrow(() => parseFrontdeskScriptDataset(data))
+})
+
+test('staff search matches bilingual keywords, titles and customer questions literally without searching internal reminders', () => {
+  const scripts = frontdeskScriptDataset.scripts, before = structuredClone(scripts)
+  const cases: [string, string][] = [
+    ['체크인 시간', 'check-in-time'],
+    ['  MICROWAVE  ', 'microwave-location'],
+    ['재떨이', 'smoking-area'],
+    [scripts[0]!.question.en, 'check-in-time'],
+    [scripts[0]!.question.ko, 'check-in-time'],
+    ['와이파이'.normalize('NFD'), 'room-wifi'],
+  ]
+  for (const [query, id] of cases) assert.ok(searchFrontdeskScripts(scripts, query).some(script => script.id === id), query)
+  assert.deepEqual(searchFrontdeskScripts(scripts, '.*[not-a-regex]'), [])
+  const fixture = structuredClone(scripts[0]!)
+  fixture.staffChecks = ['STAFF_ONLY_SEARCH_SENTINEL']
+  fixture.details = { en: 'DETAIL_ONLY_SEARCH_SENTINEL', ko: '상세 문구 검색 제외 확인' }
+  for (const query of ['STAFF_ONLY_SEARCH_SENTINEL', 'DETAIL_ONLY_SEARCH_SENTINEL']) assert.deepEqual(searchFrontdeskScripts([fixture], query), [])
+  assert.deepEqual(scripts, before)
+  assert.deepEqual(searchFrontdeskScripts(scripts).map(script => script.id), scripts.map(script => script.id))
+  assert.ok(searchFrontdeskScripts(scripts).every(script => script.reviewStatus === 'draft'))
+  assert.deepEqual(searchFrontdeskScripts([], '조식'), [])
+})
+
+test('five staff categories combine with search using AND and retain source order', () => {
+  const scripts = frontdeskScriptDataset.scripts
+  for (const category of FRONTDESK_SCRIPT_CATEGORIES) {
+    assert.deepEqual(searchFrontdeskScripts(scripts, '', category), scripts.filter(script => script.category === category))
+  }
+  assert.deepEqual(searchFrontdeskScripts(scripts, 'MICROWAVE', 'breakfast'), [])
+  assert.deepEqual(searchFrontdeskScripts(scripts, 'MICROWAVE', 'room-usage').map(script => script.id), ['microwave-location'])
+  assert.deepEqual(searchFrontdeskScripts(scripts, 'MICROWAVE', 'all').map(script => script.id), ['microwave-location'])
+})
+
+test('Staff lazy loader reuses the validated dataset and propagates invalid-data failures without substitutes', async () => {
+  assert.strictEqual(await loadFrontdeskScripts(), frontdeskScriptDataset)
+  await assert.rejects(() => loadFrontdeskScripts(async () => { throw new Error('Invalid frontdesk scripts') }), /Invalid frontdesk scripts/)
 })

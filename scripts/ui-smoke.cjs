@@ -8,9 +8,10 @@ const publicTest = process.env.CPH_UI_PUBLIC_TEST === '1';
 const routeURL = route => `${baseURL}${publicTest ? '/#' : ''}${route}`;
 const adminURL = process.env.CPH_ADMIN_BASE_URL || 'http://127.0.0.1:5190';
 const artifactDir = process.env.CPH_UI_ARTIFACT_DIR || '/tmp/cph-mvp-qa';
-const files = ['facilities.json', 'hotel.json'].map(name => path.join(__dirname, '../src/data', name));
+const files = ['facilities.json', 'hotel.json', 'frontdesk-scripts.json'].map(name => path.join(__dirname, '../src/data', name));
 const original = files.map(file => fs.readFileSync(file));
 const data = JSON.parse(original[0]);
+const frontdesk = JSON.parse(original[2]).scripts;
 const languages = { en: 'English', ko: '한국어', 'zh-CN': '简体中文', ja: '日本語' };
 const results = [], errors = [], requests = [], interceptedMaps = [];
 const visible = data.facilities.filter(item => item.isPublished);
@@ -80,21 +81,111 @@ async function mapPopup(page, link, url) {
       await staff.goto(`${baseURL}/staff/`);
       await staff.waitForURL('**/#/staff');
     } else await staff.goto(routeURL('/staff'));
+    const hotel = staff.locator('#staff-hotel-panel');
+    const hotelTab = staff.getByRole('tab', { name: '호텔 업무 영어 응대', exact: true });
+    const facilitiesTab = staff.getByRole('tab', { name: '주변 시설 안내', exact: true });
+    assert.equal(await hotelTab.getAttribute('aria-selected'), 'true');
+    assert.ok(await hotel.isVisible());
+    assert.ok(await staff.locator('#staff-facilities-panel').isHidden());
+    await count(staff, '.frontdesk-script-card', 30);
+    assert.deepEqual(await hotel.locator('.frontdesk-script-title').allTextContents(), frontdesk.map(item => item.title));
+    assert.equal(await hotel.locator('.frontdesk-script-card .frontdesk-review-badge').filter({ hasText: '검수 전 · draft' }).count(), 30);
+    const scriptSearch = hotel.getByRole('searchbox');
+    for (const query of [frontdesk[0].title, frontdesk[0].question.en, frontdesk[0].question.ko]) {
+      await scriptSearch.fill(query);
+      await count(staff, '.frontdesk-script-card', 1);
+      assert.equal(await hotel.locator('.frontdesk-script-title').innerText(), frontdesk[0].title);
+    }
+    await scriptSearch.fill('  MICROWAVE  ');
+    await count(staff, '.frontdesk-script-card', 1);
+    assert.equal(await hotel.locator('#frontdesk-detail-title').innerText(), frontdesk.find(item => item.id === 'microwave-location').title);
+    assert.equal(await hotel.locator('.frontdesk-disclosure').count(), 0, 'Absent details/checks must not render empty disclosures');
+    const scriptCategories = { 'check-in-out': '체크인·체크아웃', breakfast: '조식', 'room-usage': '객실 이용', 'hotel-policy': '호텔 정책', 'hotel-facilities': '호텔 시설' };
+    const categoryButtons = hotel.getByRole('group', { name: '호텔 업무 카테고리', exact: true });
+    assert.equal(await categoryButtons.getByRole('button').count(), 6);
+    await categoryButtons.getByRole('button', { name: '조식', exact: true }).click();
+    await count(staff, '.frontdesk-script-card', 0);
+    assert.equal(await hotel.locator('.frontdesk-quick-answer').count(), 0, 'Excluded replies must not remain visible');
+    await scriptSearch.fill('');
+    for (const [code, label] of Object.entries(scriptCategories)) {
+      await categoryButtons.getByRole('button', { name: label, exact: true }).click();
+      assert.deepEqual(await hotel.locator('.frontdesk-script-title').allTextContents(), frontdesk.filter(item => item.category === code).map(item => item.title));
+    }
+    await categoryButtons.getByRole('button', { name: '전체', exact: true }).click();
+    await scriptSearch.fill('등록되지않은질문-zzz');
+    await count(staff, '.frontdesk-script-card', 0);
+    assert.equal(await hotel.locator('.frontdesk-quick-answer').count(), 0);
+    await scriptSearch.fill('');
+    await count(staff, '.frontdesk-script-card', 30);
+    for (const [index, item] of frontdesk.entries()) {
+      await hotel.locator('.frontdesk-script-card').nth(index).click();
+      assert.equal(await hotel.locator('#frontdesk-detail-title').innerText(), item.title);
+      assert.deepEqual(await hotel.locator('.frontdesk-question p').allTextContents(), [item.question.en, item.question.ko]);
+      assert.equal(await hotel.locator('.frontdesk-quick-answer .frontdesk-answer-en').innerText(), item.quickAnswer.en);
+      assert.equal(await hotel.locator('.frontdesk-quick-answer .frontdesk-answer-ko').innerText(), item.quickAnswer.ko);
+      assert.equal(await hotel.locator('.frontdesk-details').count(), item.details ? 1 : 0);
+      if (item.details) {
+        assert.equal(await hotel.locator('.frontdesk-details').getAttribute('open'), null);
+        await hotel.locator('.frontdesk-details summary').click();
+        assert.equal(await hotel.locator('.frontdesk-details .frontdesk-answer-en').innerText(), item.details.en);
+        assert.equal(await hotel.locator('.frontdesk-details .frontdesk-answer-ko').innerText(), item.details.ko);
+        await hotel.getByRole('button', { name: '상세 설명 영어 복사', exact: true }).click();
+        await staff.waitForFunction(expected => navigator.clipboard.readText().then(text => text === expected), item.details.en);
+      }
+      assert.equal(await hotel.locator('.frontdesk-staff-checks').count(), item.staffChecks.length ? 1 : 0);
+      if (item.staffChecks.length) {
+        assert.equal(await hotel.locator('.frontdesk-staff-checks').getAttribute('open'), null);
+        await hotel.locator('.frontdesk-staff-checks summary').click();
+        assert.deepEqual(await hotel.locator('.frontdesk-staff-checks li').allTextContents(), item.staffChecks);
+        assert.equal(await hotel.locator('.frontdesk-staff-checks button').count(), 0);
+      }
+      await hotel.getByRole('button', { name: '즉시 응대 영어 복사', exact: true }).click();
+      await staff.waitForFunction(expected => navigator.clipboard.readText().then(text => text === expected), item.quickAnswer.en);
+    }
+    await scriptSearch.fill('fire-alarm-safety');
+    // Search uses registered words/questions rather than technical IDs.
+    await count(staff, '.frontdesk-script-card', 0);
+    await scriptSearch.fill(frontdesk.find(item => item.id === 'fire-alarm-safety').title);
+    await count(staff, '.frontdesk-script-card', 1);
+    for (const width of [320, 390, 768, 1280]) {
+      await staff.setViewportSize({ width, height: 900 });
+      await hotel.locator('.frontdesk-script-card').click();
+      if (width < 1000) await staff.waitForFunction(() => document.getElementById('frontdesk-detail-title') === document.activeElement);
+      await layout(staff);
+      const listBox = await hotel.locator('.results-panel').boundingBox(), detailBox = await hotel.locator('.details-panel').boundingBox();
+      assert.ok(width >= 1000 ? detailBox.x > listBox.x : detailBox.y >= listBox.y + listBox.height - 1, 'Reply workspace must switch from columns to a stack');
+      assert.ok(await hotel.locator('.frontdesk-quick-answer .frontdesk-answer-en').evaluate(node => parseFloat(getComputedStyle(node).fontSize) >= 18));
+      await staff.screenshot({ path: path.join(artifactDir, `hotel-replies-${width}.png`), fullPage: true });
+    }
+    await staff.setViewportSize({ width: 1280, height: 900 });
+    await hotelTab.focus();
+    await staff.keyboard.press('ArrowRight');
+    assert.equal(await facilitiesTab.getAttribute('aria-selected'), 'true');
+    assert.ok(await hotel.isHidden());
+    await staff.keyboard.press('ArrowLeft');
+    assert.equal(await hotelTab.getAttribute('aria-selected'), 'true');
+    assert.equal(await scriptSearch.inputValue(), frontdesk.find(item => item.id === 'fire-alarm-safety').title);
+    await staff.keyboard.press('End');
+    assert.equal(await facilitiesTab.getAttribute('aria-selected'), 'true');
+    await staff.keyboard.press('Home');
+    assert.equal(await hotelTab.getAttribute('aria-selected'), 'true');
+    await facilitiesTab.click();
+    results.push('PASS Hotel replies: default tab, all 30 draft scripts, Korean/English title+question+keyword search, five AND filters, conditional collapsed details/checks, exact English clipboard, keyboard tabs, 320/390/768/1280 layouts; original JSON unchanged');
     await count(staff, '.facility-card', visible.length);
     assert.deepEqual(await staff.locator('.facility-card h3').allTextContents(), ordered.map(f => f.translations.ko.name));
     assert.equal(await staff.locator('.staff-intro').count(), 1);
-    assert.equal(await staff.locator('.staff-release-details').count(), 1);
-    assert.equal(await staff.locator('.staff-category-grid .category-card').count(), 1 + 9);
+    assert.equal(await staff.locator('.staff-release-details').count(), publicTest ? 1 : 0);
+    assert.equal(await staff.locator('#staff-facilities-panel .staff-category-grid .category-card').count(), 1 + 9);
     assert.ok(await staff.getByText(publicTest ? 'Information is being collected and verified.' : '프론트 테스트용 미리보기', { exact: true }).isVisible());
-    assert.equal(await staff.locator('.staff-category-grid').getByRole('button', { name: 'ATM', exact: true }).count(), 0);
+    assert.equal(await staff.locator('#staff-facilities-panel .staff-category-grid').getByRole('button', { name: 'ATM', exact: true }).count(), 0);
     for (const item of visible) {
-      await staff.locator('.staff-category-grid').getByRole('button', { name: '전체', exact: true }).click();
+      await staff.locator('#staff-facilities-panel .staff-category-grid').getByRole('button', { name: '전체', exact: true }).click();
       for (const query of [item.translations.ko.name, item.translations.en.name]) {
         await staff.getByRole('searchbox').fill(query);
         await count(staff, '.facility-card', 1);
         assert.equal(await staff.locator('.facility-card h3').innerText(), item.translations.ko.name);
       }
-      await staff.locator('.staff-category-grid').getByRole('button', { name: FACILITY_CATEGORY_OPTIONS.find(category => category.code === item.category).staffLabel, exact: true }).click();
+      await staff.locator('#staff-facilities-panel .staff-category-grid').getByRole('button', { name: FACILITY_CATEGORY_OPTIONS.find(category => category.code === item.category).staffLabel, exact: true }).click();
       await count(staff, '.facility-card', 1);
       await staff.locator('.facility-card button').click();
       await staff.locator('#staff-detail-title').waitFor();
@@ -126,12 +217,14 @@ async function mapPopup(page, link, url) {
       await layout(staff);
     }
     await staff.getByRole('searchbox').fill('');
-    await staff.locator('.staff-category-grid').getByRole('button', { name: '전체', exact: true }).click();
+    await staff.locator('#staff-facilities-panel .staff-category-grid').getByRole('button', { name: '전체', exact: true }).click();
     await count(staff, '.facility-card', visible.length);
     await staff.screenshot({ path: path.join(artifactDir, 'staff-desktop.png'), fullPage: true });
     results.push('PASS Staff 1280px: 23 basic/detail English scripts with Korean meanings in order, individual/full clipboard contains only English, facility search and original information retained');
 
     const guest = await context.newPage();
+    const guestRequests = [];
+    guest.on('request', request => guestRequests.push(request.url()));
     await guest.setViewportSize({ width: 390, height: 844 });
     await guest.goto(publicTest ? `${baseURL}/guest/` : `${baseURL}/`);
     await guest.waitForURL('**/guest');
@@ -148,6 +241,8 @@ async function mapPopup(page, link, url) {
     await guest.setViewportSize({ width: 390, height: 844 });
     assert.equal(await guest.locator('a[href^="/staff"]').count(), 0);
     assert.equal(await guest.locator('.english-guide').count(), 0);
+    assert.equal(await guest.locator('.frontdesk-guide, .frontdesk-staff-checks').count(), 0);
+    assert.ok(!guestRequests.some(url => /frontdeskScriptDataset|frontdesk-scripts\.json/.test(url)), 'Guest must not load the staff script dataset');
     assert.ok((await guest.request.get(`${baseURL}/favicon.svg`)).ok());
     if (publicTest) {
       await guest.reload();
@@ -195,7 +290,7 @@ async function mapPopup(page, link, url) {
       await count(guest, '.facility-card', visible.length);
     }
     await guest.screenshot({ path: path.join(artifactDir, 'guest-mobile.png'), fullPage: true });
-    results.push('PASS Guest 390px: all 23 real facilities in four languages, category+search+detail, no fictional records/staff menu, no horizontal overflow, airport bus pending, maps unavailable');
+    results.push('PASS Guest 320/390px: all 23 facilities in four languages, category+search+detail and registered map links retained, no staff script UI/dataset request, no horizontal overflow, airport bus pending');
 
     const admin = await context.newPage();
     await admin.goto(adminURL);
@@ -272,6 +367,7 @@ async function mapPopup(page, link, url) {
     const mapPage = await context.newPage();
     for (const audience of ['staff', 'guest']) {
       await mapPage.goto(routeURL(`/${audience}`));
+      if (audience === 'staff') await mapPage.getByRole('tab', { name: '주변 시설 안내', exact: true }).click();
       await count(mapPage, '.facility-card', visible.length);
       await mapPage.getByRole('searchbox').fill(data.facilities[0].translations.ko.name);
       await count(mapPage, '.facility-card', 1);
