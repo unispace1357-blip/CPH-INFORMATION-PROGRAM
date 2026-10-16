@@ -103,6 +103,8 @@ async function mapPopup(page, link, url) {
         assert.equal(await staff.locator('.english-directions p').innerText(), item.translations.en.directions);
       }
       assert.deepEqual(await staff.locator('.english-phrase-text').allTextContents(), item.englishPhrases);
+      assert.ok(await staff.locator('.english-phrase-text').first().evaluate(node => parseFloat(getComputedStyle(node).fontSize) >= 17), 'English scripts must remain legible at 17px or larger');
+      assert.ok(await staff.locator('.english-phrase-meaning').first().evaluate(node => parseFloat(getComputedStyle(node).fontSize) >= 15), 'Korean script meanings must remain legible at 15px or larger');
       assert.deepEqual(await staff.locator('.english-phrase-label').allTextContents(), ['기본 안내', '상세 안내']);
       assert.deepEqual(await staff.locator('.english-phrase-meaning').allTextContents(), item.englishPhraseMeanings);
       assert.deepEqual(await staff.locator('.english-phrases li').first().locator('p').allTextContents(), [item.englishPhrases[0], item.englishPhraseMeanings[0]]);
@@ -133,6 +135,7 @@ async function mapPopup(page, link, url) {
       await guest.setViewportSize({ width, height: 844 });
       for (const link of await guest.locator('.guest-navigation a').all()) {
         assert.equal(await link.evaluate(node => getComputedStyle(node).whiteSpace), 'nowrap', 'guest navigation must keep labels on one line');
+        assert.ok(await link.evaluate(node => parseFloat(getComputedStyle(node).fontSize) >= 15), 'guest navigation text must be at least 15px');
         assert.ok(await link.evaluate(node => node.scrollWidth <= node.clientWidth), 'guest navigation labels must fit');
       }
       await layout(guest);
