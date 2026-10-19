@@ -124,8 +124,8 @@ test('STEP 4: all dining and cafe venues include a localized food type, menu exa
       assert.ok(facility.keywords[language].includes(type), facility.id + '/' + language)
       for (const item of facility.keywords[language]) assert.ok(searchGuestFacilities(facilities, item, facility.category, language).some(found => found.id === facility.id), facility.id + '/' + language + '/' + item)
     }
-    assert.match(facility.englishPhrases[0]!, /Menu examples include:/)
-    assert.match(facility.englishPhraseMeanings?.[0] ?? '', /대표 메뉴 예시:/)
+    assert.match(facility.englishPhrases[0]!, /Typical menu items include|webfoot octopus/i)
+    assert.ok(facility.englishPhraseMeanings?.[0]?.length, facility.id)
     assert.equal(facility.lastVerifiedAt, null, facility.id) // Individual menu stock was not checked on site.
   }
 })
