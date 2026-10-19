@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import type { GuideLanguage } from '../../types/guide'
-import { AIRPORT_6777_STAFF_ENGLISH, AIRPORT_LIMOUSINE_6777, LOCAL_GUIDE_COPY, SONGDO_TOURISM_SPOTS } from '../../data/localGuide'
+import { AIRPORT_6777_STAFF_ENGLISH, AIRPORT_LIMOUSINE_6777, LOCAL_GUIDE_COPY } from '../../data/localGuide'
 import { copyText } from '../../services/clipboard'
 import { InformationNotice } from './InformationNotice'
+import { TourismSchematicMap } from './TourismSchematicMap'
 import { Button } from './Button'
 
 /** From the hotel's paper guide; never presents scheduled departures as live arrival times. */
@@ -43,9 +44,7 @@ export function SongdoTourismGuide({ language }: { language: GuideLanguage }) {
   return <section className="panel local-guide tourism-guide" aria-labelledby="songdo-tourism-title">
     <h3 id="songdo-tourism-title">{copy.tourismTitle}</h3>
     <p>{copy.tourismIntro}</p>
-    <ul className="local-guide-spot-list">{SONGDO_TOURISM_SPOTS.map(spot => <li key={spot.id}>
-      <strong>{spot.name[language]}</strong><span>{spot.note[language]}</span>
-    </li>)}</ul>
+    <TourismSchematicMap language={language} />
     <InformationNotice title={copy.disclaimerTitle} tone="warning">{copy.tourismCaution}</InformationNotice>
   </section>
 }
