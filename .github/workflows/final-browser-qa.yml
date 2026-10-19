@@ -2,7 +2,9 @@ name: Final real-browser QA (no deployment)
 
 on:
   push:
-    branches: [feature/guest-guide-search-menu-20261019, feature/songdo-tourism-6777-20261019, feature/original-songdo-tourist-schematic-20261019, feature/licensed-tourism-photo-cards-20261019]
+    branches: [feature/guest-guide-search-menu-20261019, feature/songdo-tourism-6777-20261019, feature/original-songdo-tourist-schematic-20261019, feature/licensed-tourism-photo-cards-20261019, feature/tourism-photo-framing-six-spots-20261020]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
