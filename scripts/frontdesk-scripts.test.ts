@@ -57,7 +57,7 @@ test('user-provided smoking area is distinctly sourced; existing hotel and facil
   assert.match(smoking.quickAnswer.en, /outside.*left of the main entrance/i)
   assert.match(smoking.details!.en, /silver ashtray bin/)
   assert.match(smoking.details!.ko, /은색 재떨이 통/)
-  assert.deepEqual(data.scripts.filter(script => script.sourceType === 'user-provided').map(script => script.id), ['smoking-area', 'food-delivery', 'delivery-driver-access'])
+  assert.deepEqual(data.scripts.filter(script => script.sourceType === 'user-provided').map(script => script.id), ['smoking-area', 'food-delivery', 'delivery-driver-access', 'airport-limousine-6777'])
   for (const script of data.scripts.filter(item => item.sourceType === 'hotel-data')) {
     assert.ok(script.sourceSection)
     assert.ok(Object.hasOwn(originalHotel.translations.ko, script.sourceSection), script.id)
