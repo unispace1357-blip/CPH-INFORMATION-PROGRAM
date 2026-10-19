@@ -65,6 +65,7 @@ npm run test:ui
 이 검사는 실제 시설 검색·카테고리·4개 언어·주소/시간·실제 클립보드·관리자 편집/파일 왕복을 확인합니다. 실물 모바일·Safari/Firefox·실제 네이버 경로 연결·현장 정보 정확성·시설 번역 감수는 별도 확인 대상입니다. 과거 단계별 결과는 Git 히스토리에 있습니다.
 
 - [STEP 3 신규 시설 검수 및 호텔 직원 지도 링크 체크리스트](docs/step03-facility-verification.md)
+- [STEP 4 음식점·카페 메뉴 자료 및 검색 검수](docs/step04-menu-verification.md)
 - [데이터 계약·출처·미확인 항목](docs/data-model.md)
 - [관리자 저장·파일 반영 절차](docs/admin-manager.md)
 - [승인 호텔 원고·H33 보류 기준](docs/step07a-hotel-data.md)
