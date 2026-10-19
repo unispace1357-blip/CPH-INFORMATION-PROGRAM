@@ -28,3 +28,13 @@ jobs:
       - run: npm run lint
       - run: npm run build
       - run: npm run admin:build
+      - name: Build non-deploying public test artifact
+        run: npm run build:public-test
+      - name: Confirm unfinished DEMO cannot build for production
+        run: |
+          if npm run build:production; then
+            echo 'ERROR: DEMO unexpectedly passed production gate'
+            exit 1
+          fi
+          test ! -d dist-production
+          echo 'PASS: Production release is intentionally blocked'
