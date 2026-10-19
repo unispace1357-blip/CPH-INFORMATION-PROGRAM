@@ -57,7 +57,12 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await hotel.getByRole('button', { name: '즉시 응대 영어 복사' }).click();
     await staff.waitForFunction(t => navigator.clipboard.readText().then(x => x === t), delivery.quickAnswer.en);
     assert.ok((await hotel.locator('.frontdesk-quick-answer').innerText()).includes('(')); // inline phonetics
-    log('Staff: 31 scripts, smoking priority, 2 parking replies, delivery and untouched English clipboard');
+    await scriptSearch.fill('6777');
+    await waitCards(staff, 1, '.frontdesk-script-card');
+    assert.ok((await hotel.locator('.frontdesk-quick-answer').innerText()).includes('6777'));
+    await scriptSearch.fill('');
+    await waitCards(staff, 31, '.frontdesk-script-card');
+    log('Staff: 31 scripts, smoking priority, parking, delivery, airport bus and untouched English clipboard');
 
     await staff.getByRole('tab', { name: '주변 시설 안내' }).click();
     await waitCards(staff, 26);
@@ -118,6 +123,15 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
       log('Guest: ' + language + ' 26 localized facility names, all 14 menus, search, detail and close');
     }
     await guest.locator('.language-options').getByRole('button', { name: '한국어', exact: true }).click();
+    await guest.locator('.guest-category-grid').getByRole('button', { name: '교통', exact: true }).click();
+    assert.equal(await guest.locator('.airport-bus-guide .local-guide-departures time').count(), 12);
+    assert.ok((await guest.locator('.airport-bus-guide').innerText()).includes('운행정보 변경 가능'));
+    await guest.locator('.guest-category-grid').getByRole('button', { name: '관광', exact: true }).click();
+    assert.equal(await guest.locator('.tourism-guide .local-guide-spot-list li').count(), 6);
+    assert.equal(await guest.locator('.airport-bus-guide').count(), 0);
+    await guest.locator('.guest-category-grid').getByRole('button', { name: '관광', exact: true }).click();
+    await waitCards(guest, 26);
+    log('Guest: tourism landmarks and 6777 route, twelve departures and schedule-change warning');
     const hotelCategories = guest.locator('#hotel-information .hotel-category-grid');
     await hotelCategories.getByRole('button', { name: '조식' }).click();
     assert.equal(await guest.locator('#guest-hotel-detail dt').filter({ hasText: '참고' }).count(), 0, 'Unrelated policy notes should not be repeated on breakfast');
