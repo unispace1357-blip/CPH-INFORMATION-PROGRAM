@@ -1,0 +1,90 @@
+name: Recover public Pages deployment (web only)
+
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/pages-recovery.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cph-pages-web-recovery-20261020
+  cancel-in-progress: true
+
+jobs:
+  web-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run validate:hotel-copy
+      - run: npm run test
+      - run: npm run lint
+      - name: Build validated public DEMO, not production
+        env:
+          CPH_TEST_BASE_PATH: /${{ github.event.repository.name }}/
+        run: npm run build:public-test
+      - name: Verify six optimized photos and no admin bundle
+        run: |
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict'
+          import { statSync } from 'node:fs'
+          for (const id of ['central-park', 'tri-bowl', 'g-tower', 'hanok-village', 'haedoji-park', 'michuhol-park']) {
+            const size = statSync('dist-public-test/tourism-photos/' + id + '.webp').size
+            assert.ok(size >= 5000 && size <= 350000, id + ' photo size check failed')
+          }
+          console.log('All 6 licensed photos included in public demo build')
+          JS
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist-public-test
+
+  deploy-pages:
+    needs: web-build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - name: Deploy validated public test DEMO
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Verify site, JS/CSS, route entries and six photo assets
+        env:
+          CPH_PAGES_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          node --input-type=module <<'JS'
+          import assert from 'node:assert/strict'
+          const base = new URL(process.env.CPH_PAGES_URL)
+          async function check(path) {
+            const url = new URL(path, base)
+            const response = await fetch(url, { signal: AbortSignal.timeout(20000) })
+            assert.equal(response.status, 200, 'Public Pages HTTP error: ' + url)
+            return response
+          }
+          const html = await (await check('')).text()
+          const assets = [...html.matchAll(/(?:src|href)="([^"]+\.(?:js|css|svg|ico))"/g)].map(match => match[1])
+          assert.ok(assets.some(asset => asset.endsWith('.js')))
+          for (const asset of assets) await check(asset)
+          for (const route of ['staff', 'guest']) {
+            const text = await (await check(route + '/')).text()
+            assert.ok(text.includes('#/' + route))
+          }
+          for (const id of ['central-park', 'tri-bowl', 'g-tower', 'hanok-village', 'haedoji-park', 'michuhol-park']) {
+            const resp = await check('tourism-photos/' + id + '.webp')
+            assert.ok((resp.headers.get('content-type') || '').includes('image/'), id + ' unexpected MIME type')
+          }
+          console.log('PASS public Pages + staff/guest routes + all six optimized tourism photos', base.href)
+          JS
