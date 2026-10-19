@@ -9,7 +9,7 @@
       "lastVerifiedAt": null,
       "translations": {
         "ko": {
-          "name": "씨유(CU) 송도센쓰리점",
+          "name": "CU 송도센쓰리점",
           "description": "편의점",
           "address": "인천 연수구 인천타워대로180번길 11 A동 1층 109호",
           "openingHours": "24시간",
@@ -17,7 +17,7 @@
           "notes": ""
         },
         "en": {
-          "name": "씨유(CU) 송도센쓰리점 (convenience store)",
+          "name": "CU 송도센쓰리점 (convenience store)",
           "description": "Convenience store.",
           "address": "인천타워대로180번길 11, Building A, 1F, Unit 109, Yeonsu-gu, Incheon",
           "openingHours": "24 hours",
@@ -25,7 +25,7 @@
           "notes": ""
         },
         "zh-CN": {
-          "name": "씨유(CU) 송도센쓰리점（便利店）",
+          "name": "CU 송도센쓰리점（便利店）",
           "description": "便利店。",
           "address": "仁川广域市延寿区 인천타워대로180번길 11，A栋1层109号室",
           "openingHours": "24小时营业",
@@ -33,7 +33,7 @@
           "notes": ""
         },
         "ja": {
-          "name": "씨유(CU) 송도센쓰리점（コンビニ）",
+          "name": "CU 송도센쓰리점（コンビニ）",
           "description": "コンビニエンスストア。",
           "address": "仁川広域市延寿区 인천타워대로180번길 11、A棟1階109号室",
           "openingHours": "24時間営業",
@@ -1848,7 +1848,7 @@
           "name": "현대프리미엄아울렛 송도점",
           "description": "쇼핑·아울렛 · 의류, 패션, 식당가",
           "address": "인천광역시 연수구 송도국제대로 123",
-          "openingHours": "10:30~20:00 (요일·휴점일에 따라 변동 가능)",
+          "openingHours": "10:30~20:00 (식당가 10:30~21:00, 휴점·연장영업일 변동 가능)",
           "directions": "",
           "notes": ""
         },
@@ -1856,7 +1856,7 @@
           "name": "현대프리미엄아울렛 송도점 (Hyundai Premium Outlet)",
           "description": "Outlet shopping · Fashion, lifestyle and dining",
           "address": "인천광역시 연수구 송도국제대로 123",
-          "openingHours": "10:30–20:00 (may vary by day or closing dates)",
+          "openingHours": "10:30–20:00 (dining 10:30–21:00; closing and extended-hour days may vary)",
           "directions": "",
           "notes": ""
         },
@@ -1864,7 +1864,7 @@
           "name": "현대프리미엄아울렛 송도점 (现代名牌奥特莱斯)",
           "description": "奥特莱斯购物 · 服饰、生活用品、餐饮",
           "address": "인천광역시 연수구 송도국제대로 123",
-          "openingHours": "10:30–20:00（按营业日可能调整）",
+          "openingHours": "10:30–20:00（餐饮区 10:30–21:00；休息日或延长营业日可能变动）",
           "directions": "",
           "notes": ""
         },
@@ -1872,7 +1872,7 @@
           "name": "현대프리미엄아울렛 송도점 (現代プレミアムアウトレット)",
           "description": "アウトレット・ショッピング · ファッション、生活雑貨、飲食店",
           "address": "인천광역시 연수구 송도국제대로 123",
-          "openingHours": "10:30–20:00（営業日によって変更あり）",
+          "openingHours": "10:30–20:00（レストラン街 10:30–21:00、休館日や営業時間延長日は変動あり）",
           "directions": "",
           "notes": ""
         }
@@ -1926,7 +1926,7 @@
           "name": "G타워 IFEZ 홍보관 전망대",
           "description": "관광·전망대 · G타워 33층 전망·전시",
           "address": "인천광역시 연수구 아트센터대로 175, G타워 33층",
-          "openingHours": "화~금 10:00~21:00 / 주말·공휴일 13:00~21:00 (월 휴관)",
+          "openingHours": "화~금 10:00~21:00 / 토·일·일부 공휴일 13:00~21:00 (입장 마감 20:30)",
           "directions": "",
           "notes": ""
         },
@@ -1934,7 +1934,7 @@
           "name": "G타워 IFEZ 홍보관 전망대 (G-Tower IFEZ Observatory)",
           "description": "Attraction · 33rd-floor observation deck and exhibition",
           "address": "인천광역시 연수구 아트센터대로 175, G타워 33층",
-          "openingHours": "Tue–Fri 10:00–21:00 / Weekends & holidays 13:00–21:00 (closed Mondays)",
+          "openingHours": "Tue–Fri 10:00–21:00 / Sat, Sun & some holidays 13:00–21:00 (last entry 20:30)",
           "directions": "",
           "notes": ""
         },
@@ -1942,7 +1942,7 @@
           "name": "G타워 IFEZ 홍보관 전망대 (G塔观景台)",
           "description": "观光·展望台 · 33楼观景和展览",
           "address": "인천광역시 연수구 아트센터대로 175, G타워 33층",
-          "openingHours": "周二至周五 10:00–21:00 / 周末及节假日 13:00–21:00（周一休馆）",
+          "openingHours": "周二至周五 10:00–21:00 / 周末及部分节假日 13:00–21:00（最晚入场 20:30）",
           "directions": "",
           "notes": ""
         },
@@ -1950,7 +1950,7 @@
           "name": "G타워 IFEZ 홍보관 전망대 (Gタワー展望台)",
           "description": "観光・展望台 · 33階の展望と展示",
           "address": "인천광역시 연수구 아트센터대로 175, G타워 33층",
-          "openingHours": "火～金 10:00–21:00 / 週末・祝日 13:00–21:00（月曜休館）",
+          "openingHours": "火～金 10:00–21:00 / 土・日・一部祝日 13:00–21:00（最終入場 20:30）",
           "directions": "",
           "notes": ""
         }
@@ -1985,10 +1985,10 @@
       ],
       "walkingMinutes": null,
       "closedDays": {
-        "ko": "",
-        "en": "",
-        "zh-CN": "",
-        "ja": ""
+        "ko": "월요일, 일부 국경일 및 설·추석 연휴, 임시 휴관일",
+        "en": "Mondays, designated national holidays, Lunar New Year/Chuseok periods and temporary closures",
+        "zh-CN": "周一、部分法定节日、春节及中秋假期、临时闭馆日",
+        "ja": "月曜日、一部の祝日、旧正月・秋夕の連休、臨時休館日"
       },
       "naverMapUrl": null,
       "englishPhraseMeanings": [
@@ -2004,33 +2004,33 @@
       "translations": {
         "ko": {
           "name": "송도 센트럴파크 수상택시",
-          "description": "관광·수상 체험 · 센트럴파크 보트하우스의 수상택시 (운항 여부·요금 현장 확인)",
-          "address": "인천광역시 연수구 컨벤시아대로 160 일원 (송도 센트럴파크 보트하우스)",
-          "openingHours": "운항시간·요금 현장 확인",
+          "description": "관광·수상택시 · 웨스트보트하우스에서 탑승 (이스트보트하우스의 문보트 등과 다른 승선 장소)",
+          "address": "인천광역시 연수구 인천타워대로 253-34 (웨스트보트하우스)",
+          "openingHours": "계절·날씨에 따라 운항 변동 (운영사 문의)",
           "directions": "",
           "notes": ""
         },
         "en": {
           "name": "송도 센트럴파크 수상택시 (Songdo Central Park water taxi)",
-          "description": "Water activity · Water taxi at the Central Park boathouse (check schedule and prices)",
-          "address": "인천광역시 연수구 컨벤시아대로 160 일원 (송도 센트럴파크 보트하우스)",
-          "openingHours": "Check service hours and fares on site",
+          "description": "Sightseeing water taxi · Board at West Boathouse (not the East Boathouse boat rentals)",
+          "address": "인천광역시 연수구 인천타워대로 253-34 (웨스트보트하우스)",
+          "openingHours": "Service changes with the season and weather (confirm with the operator)",
           "directions": "",
           "notes": ""
         },
         "zh-CN": {
           "name": "송도 센트럴파크 수상택시 (松岛中央公园水上出租车)",
-          "description": "水上观光 · 中央公园船屋水上出租车（请确认运行及费用）",
-          "address": "인천광역시 연수구 컨벤시아대로 160 일원 (송도 센트럴파크 보트하우스)",
-          "openingHours": "运营时间及费用请现场确认",
+          "description": "观光水上出租车 · 请在西船屋上船（与东船屋的租赁小船不同）",
+          "address": "인천광역시 연수구 인천타워대로 253-34 (웨스트보트하우스)",
+          "openingHours": "根据季节和天气调整运营（请向运营方确认）",
           "directions": "",
           "notes": ""
         },
         "ja": {
           "name": "송도 센트럴파크 수상택시 (松島セントラルパーク水上タクシー)",
-          "description": "水上観光 · セントラルパークのボートハウスで水上タクシー（運航と料金は現地でご確認ください）",
-          "address": "인천광역시 연수구 컨벤시아대로 160 일원 (송도 센트럴파크 보트하우스)",
-          "openingHours": "運航時間・料金は現地で確認",
+          "description": "観光水上タクシー · ウェストボートハウスから乗船（イーストボートハウスの貸しボートとは別）",
+          "address": "인천광역시 연수구 인천타워대로 253-34 (웨스트보트하우스)",
+          "openingHours": "季節や天候により運航が変動（運営会社に要確認）",
           "directions": "",
           "notes": ""
         }
@@ -2044,13 +2044,18 @@
           "선착장",
           "수상레저",
           "센트럴파크",
-          "관광"
+          "관광",
+          "웨스트보트하우스",
+          "서쪽 보트하우스",
+          "수상택시선착장"
         ],
         "en": [
           "water taxi",
           "boat",
           "boathouse",
-          "water activity"
+          "water activity",
+          "West Boathouse",
+          "water taxi terminal"
         ],
         "zh-CN": [
           "水上出租车",
@@ -2062,8 +2067,8 @@
         ]
       },
       "englishPhrases": [
-        "You can take a water taxi at the Songdo Central Park boathouse.",
-        "Operating times and fares may change, so please check with the boathouse before you go."
+        "The Songdo Central Park water taxi boards at the West Boathouse, not the East Boathouse.",
+        "The boarding point is at 253-34 Incheon Tower-daero. The schedule and fares may change, so please check with the operator before visiting."
       ],
       "walkingMinutes": null,
       "closedDays": {
@@ -2074,8 +2079,8 @@
       },
       "naverMapUrl": null,
       "englishPhraseMeanings": [
-        "송도 센트럴파크 보트하우스에서 수상택시를 이용할 수 있습니다.",
-        "운항시간과 요금은 변동될 수 있으니 방문 전에 확인해 주세요."
+        "송도 센트럴파크 수상택시는 이스트가 아닌 웨스트보트하우스에서 탑승합니다.",
+        "승선 장소는 인천타워대로 253-34입니다. 운항시간과 요금은 변동될 수 있으니 방문 전 운영사에 확인해 주세요."
       ]
     }
   ]
