@@ -130,11 +130,37 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     assert.equal(await guest.locator('.tourism-guide .tourism-map-location').count(), 6);
     assert.equal(await guest.locator('.tourism-guide .tourism-map-pin').count(), 6);
     assert.equal(await guest.locator('.tourism-guide [data-map-kind="original-schematic"]').count(), 1);
+    // Photos appear only for the first three sightseeing spots, retaining the map's numbered pins.
+    const photoSource = guest.locator('.tourism-photo-caption a');
+    assert.equal(await guest.locator('.tourism-photo').getAttribute('data-photo-spot-id'), 'central-park');
+    assert.ok((await photoSource.getAttribute('href')).includes('pst_sn=667087'));
+    for (const [name, id, photoId, date] of [
+      ['G타워', 'g-tower', '664965', '2015-04-01'],
+      ['트라이볼', 'tri-bowl', '249272', '2009-08-06'],
+      ['송도 센트럴파크', 'central-park', '667087', '2024-09-23'],
+    ]) {
+      await guest.locator('.tourism-map-location').filter({ hasText: name }).click();
+      assert.equal(await guest.locator('.tourism-photo').getAttribute('data-photo-spot-id'), id);
+      assert.ok((await photoSource.getAttribute('href')).includes('pst_sn=' + photoId));
+      assert.ok((await guest.locator('.tourism-photo-caption').innerText()).includes(date));
+      assert.ok((await guest.locator('.tourism-photo-caption').innerText()).includes('공공누리 제1유형'));
+      // If remote image hosting fails, its credited source remains available.
+      await guest.locator('.tourism-photo-media').scrollIntoViewIfNeeded();
+      await guest.waitForFunction(() => {
+        const image = document.querySelector('.tourism-photo-media img');
+        return (image && image.complete) || document.querySelector('.tourism-photo-unavailable');
+      }, null, { timeout: 20000 });
+      const loaded = await guest.locator('.tourism-photo-media img').evaluate(img => img.complete && img.naturalWidth > 0).catch(() => false);
+      assert.ok(loaded, 'Original IFEZ photo must actually load in Chromium for ' + id);
+    }
     await guest.locator('.tourism-map-location').filter({ hasText: 'G타워' }).click();
     assert.match((await guest.locator('.tourism-map-detail').innerText()), /33층/);
-    assert.ok((await guest.locator('.tourism-map-detail a').getAttribute('href')).includes('/p/directions/'));
+    assert.ok((await guest.locator('.tourism-map-external-link').getAttribute('href')).includes('/p/directions/'));
     await guest.locator('.tourism-map-location').filter({ hasText: '트라이볼' }).click();
-    assert.ok((await guest.locator('.tourism-map-detail a').getAttribute('href')).includes('/p/search/'));
+    assert.ok((await guest.locator('.tourism-map-external-link').getAttribute('href')).includes('/p/search/'));
+    await guest.locator('.tourism-map-location').filter({ hasText: '송도 한옥마을' }).click();
+    assert.equal(await guest.locator('.tourism-photo').count(), 0, 'Other spots do not show unrelated photos');
+    await guest.locator('.tourism-map-location').filter({ hasText: '트라이볼' }).click();
     assert.ok((await guest.locator('.tourism-map-credit').innerText()).includes('OpenStreetMap'));
     // Regression: markers 1/2/3 must be separate at narrow, mobile and desktop widths.
     // The language selector must not float over the map after scrolling into view.

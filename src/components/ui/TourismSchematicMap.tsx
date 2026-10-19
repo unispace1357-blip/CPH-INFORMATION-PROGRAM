@@ -3,13 +3,17 @@ import type { GuideLanguage } from '../../types/guide'
 import { SONGDO_TOURISM_SPOTS } from '../../data/localGuide'
 import rawFacilities from '../../data/facilities.json'
 import { HOTEL_MAP_POINT, SONGDO_MAP_POINTS, TOURISM_MAP_UI, approximateMapPosition } from '../../data/tourismMap'
+import { TOURISM_PHOTOS, TOURISM_PHOTO_UI } from '../../data/tourismPhotos'
 
 /** Custom SVG illustration + geographic reference markers; no copied map imagery, tiles or router. */
 export function TourismSchematicMap({ language }: { language: GuideLanguage }) {
   const [selectedId, setSelectedId] = useState('central-park')
+  const [failedPhotoId, setFailedPhotoId] = useState<string | null>(null)
   const ui = TOURISM_MAP_UI[language]
   const selected = SONGDO_MAP_POINTS.find(point => point.id === selectedId) ?? SONGDO_MAP_POINTS[0]!
   const selectedName = SONGDO_TOURISM_SPOTS.find(spot => spot.id === selected.id)?.name[language] ?? selected.id
+  const photo = TOURISM_PHOTOS[selected.id]
+  const photoUi = TOURISM_PHOTO_UI[language]
   const linkedFacility = selected.linkedFacilityId
     ? rawFacilities.facilities.find(facility => facility.id === selected.linkedFacilityId)
     : undefined
@@ -70,6 +74,28 @@ export function TourismSchematicMap({ language }: { language: GuideLanguage }) {
     <div className="tourism-map-detail" role="region" aria-live="polite" aria-label={ui.selectedLabel}>
       <p className="tourism-map-selected-kicker">{ui.selectedLabel}</p>
       <h5>{selectedName}</h5>
+      {photo && <figure className="tourism-photo" data-photo-spot-id={selected.id}>
+        <div className="tourism-photo-media">
+          {failedPhotoId === selected.id
+            ? <p className="tourism-photo-unavailable">{photoUi.photoUnavailable}</p>
+            : <img
+                key={selected.id}
+                src={photo.imageUrl}
+                alt={photo.alt[language]}
+                loading="lazy"
+                decoding="async"
+                referrerPolicy="no-referrer"
+                onError={() => setFailedPhotoId(selected.id)}
+              />}
+        </div>
+        <figcaption className="tourism-photo-caption">
+          <a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" aria-label={`${photoUi.photoLabel}: ${selectedName} — ${photoUi.sourceLabel}`}>
+            {photoUi.sourceLabel}
+          </a>
+          <span> · {photo.photographedOn}</span>
+          <span className="tourism-photo-historic">{photoUi.historicNotice}</span>
+        </figcaption>
+      </figure>}
       <p>{selected.detail[language]}</p>
       <a className="tourism-map-external-link" href={selectedUrl} target="_blank" rel="noopener noreferrer">
         {verifiedRoute ? ui.directionsLink : ui.searchLink} <span aria-hidden="true">↗</span>

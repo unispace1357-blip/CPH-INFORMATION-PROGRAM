@@ -2,6 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { SONGDO_TOURISM_SPOTS } from '../src/data/localGuide.ts'
 import { HOTEL_MAP_POINT, SONGDO_MAP_POINTS, TOURISM_MAP_UI, approximateMapPosition } from '../src/data/tourismMap.ts'
+import { TOURISM_PHOTOS, TOURISM_PHOTO_UI } from '../src/data/tourismPhotos.ts'
 import rawFacilities from '../src/data/facilities.json' with { type: 'json' }
 import { GUIDE_LANGUAGES } from '../src/types/guide.ts'
 
@@ -50,5 +51,26 @@ test('Only previously verified facility direction URLs can be reused', () => {
   }
   for (const p of SONGDO_MAP_POINTS.filter(p => !p.linkedFacilityId)) {
     assert.ok(!p.naverSearch.includes('https://'))
+  }
+})
+
+test('Three publicly licensed IFEZ landmark photos include exact sources and accessible credits', () => {
+  const ids = Object.keys(TOURISM_PHOTOS)
+  assert.deepEqual(ids, ['central-park', 'tri-bowl', 'g-tower'])
+  for (const [id, photo] of Object.entries(TOURISM_PHOTOS)) {
+    assert.ok(SONGDO_MAP_POINTS.some(point => point.id === id), id)
+    assert.match(photo.imageUrl, /^https:\/\/www\.ifez\.go\.kr\/other\/attach\/process\.file\.do\?TP=img&key=[A-Z0-9]+&sn=\d+$/)
+    assert.match(photo.sourceUrl, /^https:\/\/www\.ifez\.go\.kr\/promote\/pst\/view\.do\?pst_id=scene_photo&pst_sn=\d+$/)
+    assert.match(photo.photographedOn, /^\d{4}-\d{2}-\d{2}$/)
+    for (const lang of GUIDE_LANGUAGES) assert.ok(photo.alt[lang].length >= 15, id + '/' + lang)
+  }
+  assert.equal(TOURISM_PHOTOS['central-park']?.photographedOn, '2024-09-23')
+  assert.equal(TOURISM_PHOTOS['tri-bowl']?.photographedOn, '2009-08-06')
+  assert.equal(TOURISM_PHOTOS['g-tower']?.photographedOn, '2015-04-01')
+  for (const lang of GUIDE_LANGUAGES) {
+    const ui = TOURISM_PHOTO_UI[lang]
+    assert.ok(ui.sourceLabel.includes('IFEZ') && ui.sourceLabel.length >= 25, lang)
+    assert.ok(ui.photoUnavailable.length >= 12)
+    assert.ok(ui.historicNotice.length >= 14)
   }
 })
