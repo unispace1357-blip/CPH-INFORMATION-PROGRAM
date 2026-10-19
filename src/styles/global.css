@@ -162,3 +162,6 @@ main { flex: 1; padding-block: var(--space-8) var(--space-10); }
 
 /* STEP 4: food type and representative items stay visible before opening restaurant details. */
 .facility-menu-summary { margin: var(--space-2) 0 var(--space-3); font-size: .875rem; line-height: 1.55; color: var(--color-text-secondary, #475569); overflow-wrap: anywhere; }
+
+/* STEP 5: quiet phonetic annotation; staff-only components opt into this class. */
+.staff-reading-hint { color: #476b93; font-size: .87em; font-weight: 600; white-space: nowrap; }
