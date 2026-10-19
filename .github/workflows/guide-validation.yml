@@ -1,0 +1,30 @@
+name: Guide change validation
+
+on:
+  push:
+    branches:
+      - feature/guest-guide-search-menu-20261019
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate data, tests, lint and builds
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run validate
+      - run: npm run validate:hotel-copy
+      - run: npm run test
+      - run: npm run lint
+      - run: npm run build
+      - run: npm run admin:build
