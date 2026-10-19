@@ -1847,7 +1847,7 @@
           "name": "금별맥주 송도롯데몰점",
           "description": "맥주·호프·요리주점 · 주요 메뉴 예시: 맥주, 핫크리스피치킨, 불고기 피자, 트러플 감자채전",
           "address": "인천 연수구 하모니로 144 지웰푸르지오시티 A101~102호",
-          "openingHours": "16:30~다음날 02:00 (금·토요일은 다음날 04:30까지)",
+          "openingHours": "영업시간 자료 상충 — 방문 전 매장 확인 필요",
           "directions": "",
           "notes": ""
         },
@@ -1855,7 +1855,7 @@
           "name": "Geumbyeol Beer Songdo Lotte Mall (금별맥주 송도롯데몰점)",
           "description": "Beer pub & bar food · Menu examples: beer, crispy fried chicken, bulgogi pizza, truffle potato pancake",
           "address": "Harmony-ro 144, 지웰푸르지오시티, Units A101–102, Yeonsu-gu, Incheon",
-          "openingHours": "16:30–02:00 the following day (Friday and Saturday: until 04:30 the following day)",
+          "openingHours": "Conflicting hours listed online — confirm with the venue before visiting",
           "directions": "",
           "notes": ""
         },
@@ -1863,7 +1863,7 @@
           "name": "금별맥주 송도롯데몰점（酒吧与啤酒）",
           "description": "啤酒酒吧·下酒菜 · 菜品示例：啤酒、香脆炸鸡、烤肉披萨、松露土豆煎饼",
           "address": "仁川广域市延寿区 Harmony-ro 144，지웰푸르지오시티 A101–102号室",
-          "openingHours": "16:30–次日02:00（周五、周六至次日04:30）",
+          "openingHours": "网上营业时间信息不一致，前往前请向店铺确认",
           "directions": "",
           "notes": ""
         },
@@ -1871,7 +1871,7 @@
           "name": "금별맥주 송도롯데몰점（パブ・ビール）",
           "description": "ビアパブ・おつまみ · メニュー例：ビール、クリスピーチキン、プルコギピザ、トリュフポテトチヂミ",
           "address": "仁川広域市延寿区 Harmony-ro 144、지웰푸르지오시티 A101–102号室",
-          "openingHours": "16:30–翌日02:00（金曜・土曜は翌日04:30まで）",
+          "openingHours": "営業時間の情報が一致していないため、来店前に店舗へご確認ください",
           "directions": "",
           "notes": ""
         }
@@ -1941,7 +1941,7 @@
       },
       "englishPhrases": [
         "Geumbyeol Beer is a pub in Songdo. Typical menu items include beer, crispy fried chicken and bulgogi pizza; availability may vary.",
-        "It's at 144 Harmony-ro, in units A101 and A102. It's listed as staying open later on Fridays and Saturdays. Let me show you the walking route."
+        "The pub is at 144 Harmony-ro, units A101–A102. Please confirm today's opening hours with the venue; published schedules differ."
       ],
       "walkingMinutes": 19,
       "closedDays": {
@@ -1953,7 +1953,7 @@
       "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3Dar,2AEq3J,%EA%B8%88%EB%B3%84%EB%A7%A5%EC%A3%BC%20%EC%86%A1%EB%8F%84%EB%A1%AF%EB%8D%B0%EB%AA%B0%EC%A0%90,1289345202,PLACE_POI/-/walk?c=15.00,0,0,0,dh",
       "englishPhraseMeanings": [
         "금별맥주는 송도에 있는 술집입니다. 안내된 메뉴는 매장 상황에 따라 달라질 수 있습니다.",
-        "하모니로 144의 A101호와 A102호에 있습니다. 등록된 정보상 금요일과 토요일에는 더 늦게까지 운영합니다. 도보 경로를 보여드릴게요."
+        "하모니로 144 A101~A102호에 있습니다. 등록된 영업시간 자료가 서로 달라 당일 영업시간은 매장에 확인해야 합니다."
       ]
     },
     {
