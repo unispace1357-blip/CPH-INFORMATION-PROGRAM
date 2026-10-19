@@ -38,14 +38,51 @@ export const TOURISM_PHOTOS: Readonly<Record<string, TourismPhoto>> = {
     },
   },
   'g-tower': {
-    imageUrl: 'https://www.ifez.go.kr/other/attach/process.file.do?TP=img&key=BDB6955ECD28406&sn=79214',
+    // File 3875: the G-Tower fills the middle of the original 3:2 shot, unlike old 3882 (mostly sky).
+    imageUrl: 'https://www.ifez.go.kr/other/attach/process.file.do?TP=img&key=BDB6955ECD28406&sn=79213',
     sourceUrl: 'https://www.ifez.go.kr/promote/pst/view.do?pst_id=scene_photo&pst_sn=664965',
     photographedOn: '2015-04-01',
     alt: {
-      ko: '송도 센트럴파크 수로 옆 G타워 건물과 주변 도시 풍경',
-      en: 'G-Tower beside Songdo Central Park canal and surrounding city skyline',
-      'zh-CN': '松岛中央公园水道旁的 G 塔及周边城市景观',
-      ja: '松島セントラルパークの水路沿いのGタワーと街並み',
+      ko: 'G타워 건물 전체와 송도 센트럴파크를 한눈에 담은 전경',
+      en: 'Full G-Tower building in the center of a Songdo Central Park cityscape',
+      'zh-CN': 'G塔建筑位于画面中央的松岛中央公园全景',
+      ja: 'Gタワーの建物全体が中央に写る松島セントラルパークの眺め',
+    },
+  },
+  'hanok-village': {
+    // File 0316: hanok rooflines with city buildings; selected from a visually inspected official photo.
+    imageUrl: 'https://www.ifez.go.kr/other/attach/process.file.do?TP=img&key=82F891E36E940DF&sn=79153',
+    sourceUrl: 'https://www.ifez.go.kr/promote/pst/view.do?pst_id=scene_photo&pst_sn=664955',
+    photographedOn: '2015-01-05',
+    alt: {
+      ko: '송도 한옥마을 기와지붕과 뒤편의 현대식 고층 건물',
+      en: 'Traditional tiled hanok rooftops with modern buildings behind them in Songdo',
+      'zh-CN': '松岛韩屋村的传统瓦屋顶及背后的现代高层建筑',
+      ja: '松島韓屋村の瓦屋根と背後にそびえる近代的な高層ビル',
+    },
+  },
+  'haedoji-park': {
+    // File 6751: use the official spring series without claiming a particular sculpture in its alt.
+    imageUrl: 'https://www.ifez.go.kr/other/attach/process.file.do?TP=img&key=D1B3601E7AA9725&sn=79708',
+    sourceUrl: 'https://www.ifez.go.kr/promote/pst/view.do?pst_id=scene_photo&pst_sn=665089',
+    photographedOn: '2022-05-02',
+    alt: {
+      ko: '송도 해돋이공원의 봄철 공원 풍경',
+      en: 'Spring scenery of Haedoji Park in Songdo',
+      'zh-CN': '松岛迎日公园的春日景色',
+      ja: '松島ヘドジ公園の春の風景',
+    },
+  },
+  'michuhol-park': {
+    // Official 2019 spring file 9723: pavilion and pond; image also published on the IFEZ English site.
+    imageUrl: 'https://www.ifez.go.kr/other/attach/process.file.do?TP=dn&key=ECC9BD5DA50E85F&sn=79476',
+    sourceUrl: 'https://www.ifez.go.kr/promote/pst/view.do?pst_id=scene_photo&pst_sn=665035',
+    photographedOn: '2019-04-19',
+    alt: {
+      ko: '미추홀공원 연못에 비친 전통 정자와 수변 산책길',
+      en: 'Traditional pavilion reflected in the pond at Michuhol Park',
+      'zh-CN': '弥邹忽公园池塘中倒映的传统亭阁',
+      ja: 'ミチュホル公園の池に映る伝統的な東屋',
     },
   },
 } as const
