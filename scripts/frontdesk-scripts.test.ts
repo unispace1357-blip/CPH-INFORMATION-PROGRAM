@@ -65,7 +65,7 @@ test('user-provided smoking area is distinctly sourced; existing hotel and facil
   assert.equal(originalHotel.dataStatus, 'demo')
   assert.equal(originalHotel.checkInTime, '15:00')
   assert.equal(originalHotel.checkOutTime, '12:00')
-  assert.equal(originalFacilities.facilities.length, 23)
+  assert.equal(originalFacilities.facilities.length, 26)
 })
 
 test('critical operational responses keep safety and verification qualifiers', () => {
@@ -159,8 +159,8 @@ test('staff search matches bilingual keywords, titles and customer questions lit
     ['체크인 시간', 'check-in-time'],
     ['  MICROWAVE  ', 'microwave-location'],
     ['재떨이', 'smoking-area'],
-    [scripts[0]!.question.en, 'check-in-time'],
-    [scripts[0]!.question.ko, 'check-in-time'],
+    [scripts.find(script => script.id === 'check-in-time')!.question.en, 'check-in-time'],
+    [scripts.find(script => script.id === 'check-in-time')!.question.ko, 'check-in-time'],
     ['와이파이'.normalize('NFD'), 'room-wifi'],
   ]
   for (const [query, id] of cases) assert.ok(searchFrontdeskScripts(scripts, query).some(script => script.id === id), query)
