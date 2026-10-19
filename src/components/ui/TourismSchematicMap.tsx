@@ -47,7 +47,9 @@ export function TourismSchematicMap({ language }: { language: GuideLanguage }) {
           key={point.id}
           type="button"
           className={`tourism-map-pin ${selectedId === point.id ? 'is-selected' : ''}`}
-          style={{ left: `${position.x}%`, top: `${position.y}%` }}
+          data-spot-id={point.id}
+          // Leave location percentages geographic; CSS offsets separate overlapping pins visually.
+          style={{ left: `calc(${position.x}% + var(--pin-offset-x, 0px))`, top: `calc(${position.y}% + var(--pin-offset-y, 0px))` }}
           title={name}
           aria-label={`${index + 1}. ${name}`}
           aria-pressed={selectedId === point.id}
