@@ -5,6 +5,7 @@ on:
     branches:
       - feature/guest-guide-search-menu-20261019
       - feature/songdo-tourism-6777-20261019
+      - feature/original-songdo-tourist-schematic-20261019
   pull_request:
     branches:
       - main

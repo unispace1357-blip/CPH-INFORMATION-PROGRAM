@@ -70,6 +70,7 @@ npm run test:ui
 - [STEP 6 최종 QA — 26곳 분류·메뉴·4언어·운영정보·브라우저 검수 보고서](docs/step06-final-qa-report.md)
 - [2026-10-19 현장 확인 — 금별맥주·한양·플레이그라운드 영업시간/메뉴 정정](docs/step06-field-verification-20261019.md)
 - [송도 관광 안내와 공항 리무진 6777번 시범 안내](docs/step07-tourism-airport-6777.md)
+- [독자 제작 송도 관광 위치 개념도 — 4언어·위치 참고·저작권 표기](docs/original-tourism-map.md)
 - [데이터 계약·출처·미확인 항목](docs/data-model.md)
 - [관리자 저장·파일 반영 절차](docs/admin-manager.md)
 - [승인 호텔 원고·H33 보류 기준](docs/step07a-hotel-data.md)
