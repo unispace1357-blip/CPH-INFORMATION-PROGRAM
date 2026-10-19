@@ -47,7 +47,7 @@ test('local preview contains all 26 real facilities, four languages and no ficti
   assert.equal(data.facilities.length, 26)
   assert.equal(new Set(data.facilities.map(f => f.id)).size, 26)
   assert.deepEqual(data.facilities.slice(0, 5).map(f => [f.id, f.category, f.translations.ko.name]), [
-    ['cu-songdo-senseuri', 'convenience', '씨유(CU) 송도센쓰리점'],
+    ['cu-songdo-senseuri', 'convenience', 'CU 송도센쓰리점'],
     ['blue-ocean-sauna-songdo', 'sauna_spa', '블루오션'],
     ['malt-house-incheon-songdo', 'dining', '더몰트하우스 인천송도점'],
     ['compose-coffee-incheon-songdo-central-park', 'cafe', '컴포즈커피 인천송도센트럴파크점'],
@@ -77,7 +77,7 @@ test('local preview contains all 26 real facilities, four languages and no ficti
     assert.equal(facility.englishPhraseMeanings?.length, 2)
     assert.ok(facility.englishPhraseMeanings!.every(text => text.trim()))
     for (const language of Object.keys(facility.closedDays) as GuideLanguage[]) {
-      assert.equal(Boolean(facility.closedDays[language]), facility.id === 'blue-ocean-sauna-songdo')
+      assert.equal(Boolean(facility.closedDays[language]), ['blue-ocean-sauna-songdo', 'g-tower-ifez-observatory'].includes(facility.id))
     }
   })
   assert.doesNotMatch(JSON.stringify(data), /demo-|가상|fictional|제3자|third-party|第三方|第三者|휴계시간|Further checks|待确认|要確認|다시 조사할 것|공항버스|센트럴원약국|하늘약국/)
@@ -288,4 +288,28 @@ test('all four keyword arrays are preserved and validated', () => {
     invalid.facilities[0]!.keywords[language] = ['  ']
     assert.throws(() => parseFacilityDataset(invalid), /Invalid facility dataset/)
   }
+})
+
+test('STEP 3 official location fixes retain correct water taxi boarding point and avoid speculative map links', () => {
+  const facilities = parseFacilityDataset(fresh()).facilities
+  const cu = facilities.find(facility => facility.id === 'cu-songdo-senseuri')!
+  const outlet = facilities.find(facility => facility.id === 'hyundai-premium-outlet-songdo')!
+  const gTower = facilities.find(facility => facility.id === 'g-tower-ifez-observatory')!
+  const taxi = facilities.find(facility => facility.id === 'songdo-central-park-water-taxi')!
+  assert.equal(cu.translations.ko.name, 'CU 송도센쓰리점')
+  assert.ok(cu.naverMapUrl?.startsWith('https://map.naver.com/p/directions/'))
+  for (const lang of ['ko', 'en', 'zh-CN', 'ja'] as const) {
+    assert.match(outlet.translations[lang].openingHours, /10:30.*20:00.*10:30.*21:00/)
+    assert.match(gTower.translations[lang].openingHours, /20:30/)
+    assert.ok(gTower.closedDays[lang])
+    assert.match(taxi.translations[lang].address, /인천타워대로 253-34/)
+    assert.match(taxi.translations[lang].description, /보트하우스|Boathouse|船屋/)
+    assert.ok(!taxi.translations[lang].address.includes('컨벤시아대로 160'))
+  }
+  for (const facility of [outlet, gTower, taxi]) {
+    assert.equal(facility.naverMapUrl, null)
+    assert.equal(facility.walkingMinutes, null)
+    assert.equal(facility.lastVerifiedAt, null)
+  }
+  assert.deepEqual(searchFacilities(facilities, '웨스트보트하우스').map(f => f.id), [taxi.id])
 })
