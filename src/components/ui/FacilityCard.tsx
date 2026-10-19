@@ -6,6 +6,7 @@ interface FacilityCardProps {
   name: string
   categoryLabel: string
   englishName?: string
+  menuSummary?: string
   selected?: boolean
   walkingText?: string
   detailControls?: string
@@ -21,11 +22,11 @@ interface FacilityCardProps {
   onDetails?: () => void
 }
 
-export function FacilityCard({ name, categoryLabel, englishName, selected = false, walkingText, detailControls, detailButtonId, openingHours, walkingMinutes, hoursLabel = 'Opening hours', walkingLabel = 'Walking time', minuteUnit = 'min', unknownLabel = 'Not connected', detailLabel = 'View details', disabled = true, onDetails }: FacilityCardProps) {
+export function FacilityCard({ name, categoryLabel, englishName, menuSummary, selected = false, walkingText, detailControls, detailButtonId, openingHours, walkingMinutes, hoursLabel = 'Opening hours', walkingLabel = 'Walking time', minuteUnit = 'min', unknownLabel = 'Not connected', detailLabel = 'View details', disabled = true, onDetails }: FacilityCardProps) {
   const titleId = useId()
   return (
     <article className={`facility-card ${selected ? 'is-selected' : ''}`} aria-labelledby={titleId}>
-      <p className="eyebrow">{categoryLabel}</p><h3 id={titleId}>{name}</h3>{englishName && <p className="facility-english-name" lang="en">{englishName}</p>}
+      <p className="eyebrow">{categoryLabel}</p><h3 id={titleId}>{name}</h3>{englishName && <p className="facility-english-name" lang="en">{englishName}</p>}{menuSummary && <p className="facility-menu-summary">{menuSummary}</p>}
       <dl className="facility-meta">
         <div><dt>{hoursLabel}</dt><dd>{openingHours || unknownLabel}</dd></div>
         <div><dt>{walkingLabel}</dt><dd>{walkingText ?? (walkingMinutes == null ? unknownLabel : `${walkingMinutes} ${minuteUnit}`)}</dd></div>
