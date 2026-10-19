@@ -441,33 +441,33 @@
       "translations": {
         "ko": {
           "name": "한양 송도한옥마을점",
-          "description": "한식·소고기·불고기 · 주요 메뉴 예시: 한우양념불고기, 한우생불고기, 갈비탕, 보리굴비정식",
+          "description": "한식·소고기·불고기 · 주요 메뉴 예시: 한우양념불고기, 한우생불고기",
           "address": "인천 연수구 테크노파크로 180",
-          "openingHours": "11:30~22:00 / 주중 휴식 15:00~17:00",
+          "openingHours": "월~금 11:30~22:00 (브레이크 15:00~17:00) / 토·일 11:00~22:00 (라스트 오더 21:30)",
           "directions": "",
           "notes": ""
         },
         "en": {
           "name": "Hanyang Korean Restaurant, Songdo Hanok Village (한양 송도한옥마을점)",
-          "description": "Korean beef bulgogi & set meals · Menu examples: marinated Korean beef bulgogi, plain Korean beef bulgogi, beef rib soup, dried yellow corvina set meal",
+          "description": "Korean beef bulgogi · Menu examples: marinated Korean beef bulgogi, non-marinated Korean beef bulgogi",
           "address": "Technopark-ro 180, Yeonsu-gu, Incheon",
-          "openingHours": "11:30–22:00; weekday break 15:00–17:00",
+          "openingHours": "Mon–Fri 11:30–22:00 (break 15:00–17:00) / Sat–Sun 11:00–22:00 (last order 21:30)",
           "directions": "",
           "notes": ""
         },
         "zh-CN": {
           "name": "한양 송도한옥마을점（韩餐厅）",
-          "description": "韩餐·牛肉料理 · 菜品示例：韩牛调味烤肉、韩牛烤肉、牛排骨汤、黄花鱼套餐",
+          "description": "韩餐·韩牛烤肉 · 菜品示例：调味韩牛烤肉、原味韩牛烤肉",
           "address": "仁川广域市延寿区 Technopark-ro 180",
-          "openingHours": "11:30–22:00；周一至周五休息时间15:00–17:00",
+          "openingHours": "周一至周五 11:30–22:00（休息 15:00–17:00）/ 周六、周日 11:00–22:00（最后点餐 21:30）",
           "directions": "",
           "notes": ""
         },
         "ja": {
           "name": "한양 송도한옥마을점（韓国料理店）",
-          "description": "韓国料理・牛肉料理 · メニュー例：味付け韓牛プルコギ、韓牛プルコギ、カルビタン、イシモチ定食",
+          "description": "韓国料理・韓牛プルコギ · メニュー例：味付け韓牛プルコギ、味付けなしの韓牛プルコギ",
           "address": "仁川広域市延寿区 Technopark-ro 180",
-          "openingHours": "11:30–22:00、平日の休憩15:00–17:00",
+          "openingHours": "月～金 11:30–22:00（休憩 15:00–17:00）/ 土・日 11:00–22:00（ラストオーダー 21:30）",
           "directions": "",
           "notes": ""
         }
@@ -477,65 +477,57 @@
           "한식·소고기·불고기",
           "한우양념불고기",
           "한우생불고기",
-          "갈비탕",
-          "보리굴비정식",
           "한식",
           "고기",
           "불고기",
           "한우",
           "소고기",
-          "탕",
-          "갈비",
-          "한식·불고기",
           "한우 양념불고기",
           "음식점",
           "식당",
-          "레스토랑"
+          "레스토랑",
+          "한우불고기",
+          "양념불고기",
+          "생불고기"
         ],
         "en": [
-          "Korean beef dishes",
           "marinated beef bulgogi",
           "beef bulgogi",
-          "beef rib soup",
-          "dried yellow corvina set meal",
           "korean",
           "beef",
           "bulgogi",
-          "galbitang",
           "Korean cuisine",
-          "marinated beef bulgogi and beef rib soup",
           "Hanyang Songdo",
           "Hanyang restaurant",
           "restaurant",
           "dining",
-          "Korean beef bulgogi & set meals"
+          "Korean beef bulgogi",
+          "marinated Korean beef bulgogi",
+          "non-marinated Korean beef bulgogi"
         ],
         "zh-CN": [
-          "韩餐·牛肉料理",
-          "韩牛调味烤肉",
-          "韩牛烤肉",
-          "牛排骨汤",
-          "黄花鱼套餐",
           "韩餐",
           "牛肉",
           "烤肉",
-          "腌制牛肉烤肉"
+          "腌制牛肉烤肉",
+          "韩餐·韩牛烤肉",
+          "调味韩牛烤肉",
+          "原味韩牛烤肉",
+          "韩牛"
         ],
         "ja": [
-          "韓国料理・牛肉料理",
-          "味付け韓牛プルコギ",
-          "韓牛プルコギ",
-          "カルビタン",
-          "イシモチ定食",
           "韓国料理",
           "牛肉",
           "プルコギ",
-          "味付け牛プルコギ"
+          "味付け牛プルコギ",
+          "韓国料理・韓牛プルコギ",
+          "味付け韓牛プルコギ",
+          "味付けなしの韓牛プルコギ"
         ]
       },
       "englishPhrases": [
-        "Hanyang is a Korean restaurant in Songdo Hanok Village. Typical menu items include marinated Korean beef bulgogi, plain Korean beef bulgogi and beef rib soup; availability may vary.",
-        "It's at 180 Technopark-ro, in the Hanok Village area. On weekdays, there's a break from 3 to 5 p.m. Let me show you the walking route."
+        "Hanyang specializes in Korean beef bulgogi, including marinated and non-marinated Hanwoo beef. Menu items may vary.",
+        "Hanyang is at 180 Technopark-ro. It opens at 11:30 a.m. on weekdays and 11 a.m. on weekends. There is a break from 3 to 5 p.m. on weekdays. Last orders are at 9:30 p.m."
       ],
       "walkingMinutes": 3,
       "closedDays": {
@@ -546,8 +538,8 @@
       },
       "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3r09,2AEG3u,%ED%95%9C%EC%96%91%20%ED%95%9C%EC%98%A5%EB%A7%88%EC%9D%84%EC%A0%90,36465910,PLACE_POI/-/walk?c=17.00,0,0,0,dh",
       "englishPhraseMeanings": [
-        "한양은 송도 한옥마을에 있는 한식당입니다. 안내된 메뉴는 매장 상황에 따라 달라질 수 있습니다.",
-        "한옥마을 지역의 테크노파크로 180에 있습니다. 평일에는 오후 3시부터 5시까지 브레이크타임이 있습니다. 도보 경로를 보여드릴게요."
+        "한양은 한우 불고기 전문 한식당으로, 양념불고기와 생불고기 등을 안내할 수 있습니다. 메뉴는 변동될 수 있습니다.",
+        "테크노파크로 180에 있습니다. 평일 오전 11시 30분, 주말 오전 11시에 개점하며 평일에는 오후 3시부터 5시까지 브레이크타임입니다. 마지막 주문은 오후 9시 30분입니다."
       ]
     },
     {
@@ -1722,33 +1714,33 @@
       "translations": {
         "ko": {
           "name": "플레이그라운드 브루어리 탭룸 송도",
-          "description": "수제맥주·펍·양식 · 주요 메뉴 예시: 수제맥주, 통새우 수제버거, 베트남 스타일 치킨, 감자튀김",
+          "description": "수제맥주·펍·양식 · 주요 메뉴 예시: 수제맥주, 베트남 스타일 치킨, 통새우 수제버거와 프렌치프라이, 등파육과 칠리 카라멜 소스",
           "address": "인천 연수구 컨벤시아대로 80 현대힐스테이트 401동 139호",
-          "openingHours": "15:00~00:00 (라스트 오더 23:00)",
+          "openingHours": "월~금 15:00~24:00 (라스트 오더 23:00) / 토 12:00~24:00 (라스트 오더 23:00) / 일 12:00~22:00 (라스트 오더 21:00)",
           "directions": "",
           "notes": ""
         },
         "en": {
           "name": "Playground Brewery Taproom Songdo (플레이그라운드 브루어리 탭룸 송도)",
-          "description": "Craft beer & pub food · Menu examples: craft beer, shrimp burger, Vietnamese-style chicken, French fries",
+          "description": "Craft beer & pub food · Menu examples: craft beer, Vietnamese-style chicken, shrimp burger with fries, slow-cooked pork with chili caramel sauce",
           "address": "Convensia-daero 80, 현대힐스테이트, Building 401, Unit 139, Yeonsu-gu, Incheon",
-          "openingHours": "15:00–00:00 (last order 23:00)",
+          "openingHours": "Mon–Fri 15:00–24:00 (last order 23:00) / Sat 12:00–24:00 (last order 23:00) / Sun 12:00–22:00 (last order 21:00)",
           "directions": "",
           "notes": ""
         },
         "zh-CN": {
           "name": "플레이그라운드 브루어리 탭룸 송도（酒吧与精酿啤酒）",
-          "description": "精酿啤酒·酒吧餐食 · 菜品示例：精酿啤酒、鲜虾汉堡、越南风味炸鸡、薯条",
+          "description": "精酿啤酒·酒吧餐食 · 菜品示例：精酿啤酒、越南风味炸鸡、鲜虾汉堡配薯条、辣椒焦糖酱炖猪肉",
           "address": "仁川广域市延寿区 Convensia-daero 80，현대힐스테이트 401栋139号室",
-          "openingHours": "15:00–00:00（最后点单23:00）",
+          "openingHours": "周一至周五 15:00–24:00（最后点单23:00）/ 周六 12:00–24:00（最后点单23:00）/ 周日 12:00–22:00（最后点单21:00）",
           "directions": "",
           "notes": ""
         },
         "ja": {
           "name": "플레이그라운드 브루어리 탭룸 송도（パブ・クラフトビール）",
-          "description": "クラフトビール・パブ料理 · メニュー例：クラフトビール、エビバーガー、ベトナム風チキン、フライドポテト",
+          "description": "クラフトビール・パブ料理 · メニュー例：クラフトビール、ベトナム風チキン、エビバーガーとポテトフライ、豚肉の煮込み・チリキャラメルソース",
           "address": "仁川広域市延寿区 Convensia-daero 80、현대힐스테이트 401棟139号室",
-          "openingHours": "15:00–00:00（ラストオーダー23:00）",
+          "openingHours": "月～金 15:00–24:00（ラストオーダー23:00）/ 土 12:00–24:00（ラストオーダー23:00）/ 日 12:00–22:00（ラストオーダー21:00）",
           "directions": "",
           "notes": ""
         }
@@ -1773,7 +1765,10 @@
           "수제버거",
           "음식점",
           "식당",
-          "레스토랑"
+          "레스토랑",
+          "등파육",
+          "칠리 카라멜 소스",
+          "어향 가지 튀김"
         ],
         "en": [
           "Craft beer & pub food",
@@ -1792,7 +1787,9 @@
           "Playground Brewery",
           "Playground Brewery Taproom",
           "restaurant",
-          "dining"
+          "dining",
+          "slow-cooked pork",
+          "chili caramel sauce"
         ],
         "zh-CN": [
           "精酿啤酒·酒吧餐食",
@@ -1804,7 +1801,8 @@
           "酒吧",
           "汉堡",
           "炸鸡",
-          "精酿啤酒酒吧"
+          "精酿啤酒酒吧",
+          "辣椒焦糖酱炖猪肉"
         ],
         "ja": [
           "クラフトビール・パブ料理",
@@ -1817,12 +1815,14 @@
           "バー",
           "バーガー",
           "チキン",
-          "クラフトビール・パブ"
+          "クラフトビール・パブ",
+          "ポテトフライ",
+          "豚肉の煮込み"
         ]
       },
       "englishPhrases": [
-        "Playground Brewery Taproom is a place for craft beer in Songdo. Typical menu items include craft beer, shrimp burger and Vietnamese-style chicken; availability may vary.",
-        "It's at 80 Convensia-daero, in the Hyundai Hillstate complex, Building 401, unit 139. Last orders are at 11 p.m. I can show you the route."
+        "Playground Brewery Taproom serves craft beer and pub food, such as Vietnamese-style chicken, shrimp burgers with fries, and slow-cooked pork with chili caramel sauce.",
+        "It is at 80 Convensia-daero, Building 401, unit 139. It opens at 3 p.m. on weekdays and noon on weekends; Sunday closes at 10 p.m. Last orders are at 11 p.m. Monday through Saturday and 9 p.m. on Sunday."
       ],
       "walkingMinutes": 26,
       "closedDays": {
@@ -1833,8 +1833,8 @@
       },
       "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3RTY,2AEUcq,%ED%94%8C%EB%A0%88%EC%9D%B4%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C%20%EB%B8%8C%EB%A3%A8%EC%96%B4%EB%A6%AC%20%ED%83%AD%EB%A3%B8%20%EC%86%A1%EB%8F%84,137449520,PLACE_POI/-/walk?c=14.00,0,0,0,dh",
       "englishPhraseMeanings": [
-        "플레이그라운드 브루어리 탭룸은 송도에서 수제맥주를 즐길 수 있는 곳입니다. 안내된 메뉴는 매장 상황에 따라 달라질 수 있습니다.",
-        "컨벤시아대로 80 현대힐스테이트 401동 139호에 있습니다. 마지막 주문은 오후 11시입니다. 길을 보여드릴게요."
+        "플레이그라운드 브루어리 탭룸은 수제맥주와 베트남 스타일 치킨, 통새우 수제버거, 등파육 등의 안주를 판매하는 펍입니다.",
+        "컨벤시아대로 80, 401동 139호에 있습니다. 평일 오후 3시, 주말 정오에 개점하며 일요일에는 오후 10시에 문을 닫습니다. 마지막 주문은 월~토 오후 11시, 일요일 오후 9시입니다."
       ]
     },
     {
@@ -1845,33 +1845,33 @@
       "translations": {
         "ko": {
           "name": "금별맥주 송도롯데몰점",
-          "description": "맥주·호프·요리주점 · 주요 메뉴 예시: 맥주, 핫크리스피치킨, 불고기 피자, 트러플 감자채전",
+          "description": "맥주·호프·요리주점 · 주요 메뉴 예시: 맥주, 핫크리스피치킨, 불고기 피자, 토마토 해장 파스탕",
           "address": "인천 연수구 하모니로 144 지웰푸르지오시티 A101~102호",
-          "openingHours": "영업시간 자료 상충 — 방문 전 매장 확인 필요",
+          "openingHours": "매일 17:00~다음날 01:00 (라스트 오더 00:00, 명절 등 특별 휴무 가능)",
           "directions": "",
           "notes": ""
         },
         "en": {
           "name": "Geumbyeol Beer Songdo Lotte Mall (금별맥주 송도롯데몰점)",
-          "description": "Beer pub & bar food · Menu examples: beer, crispy fried chicken, bulgogi pizza, truffle potato pancake",
+          "description": "Beer pub & bar food · Menu examples: beer, hot crispy chicken, bulgogi pizza, tomato hangover soup pasta",
           "address": "Harmony-ro 144, 지웰푸르지오시티, Units A101–102, Yeonsu-gu, Incheon",
-          "openingHours": "Conflicting hours listed online — confirm with the venue before visiting",
+          "openingHours": "Daily 17:00–01:00 next day (last order 00:00; may close on holidays)",
           "directions": "",
           "notes": ""
         },
         "zh-CN": {
           "name": "금별맥주 송도롯데몰점（酒吧与啤酒）",
-          "description": "啤酒酒吧·下酒菜 · 菜品示例：啤酒、香脆炸鸡、烤肉披萨、松露土豆煎饼",
+          "description": "啤酒酒吧·下酒菜 · 菜品示例：啤酒、香脆辣炸鸡、烤肉披萨、番茄解酒汤意面",
           "address": "仁川广域市延寿区 Harmony-ro 144，지웰푸르지오시티 A101–102号室",
-          "openingHours": "网上营业时间信息不一致，前往前请向店铺确认",
+          "openingHours": "每日 17:00–次日01:00（最后点单00:00；节假日可能休息）",
           "directions": "",
           "notes": ""
         },
         "ja": {
           "name": "금별맥주 송도롯데몰점（パブ・ビール）",
-          "description": "ビアパブ・おつまみ · メニュー例：ビール、クリスピーチキン、プルコギピザ、トリュフポテトチヂミ",
+          "description": "ビアパブ・おつまみ · メニュー例：ビール、スパイシークリスピーチキン、プルコギピザ、トマトスープパスタ",
           "address": "仁川広域市延寿区 Harmony-ro 144、지웰푸르지오시티 A101–102号室",
-          "openingHours": "営業時間の情報が一致していないため、来店前に店舗へご確認ください",
+          "openingHours": "毎日 17:00～翌01:00（ラストオーダー00:00、祝日等は臨時休業の場合あり）",
           "directions": "",
           "notes": ""
         }
@@ -1882,7 +1882,6 @@
           "맥주",
           "핫크리스피치킨",
           "불고기 피자",
-          "트러플 감자채전",
           "술집",
           "맥주집",
           "호프",
@@ -1890,58 +1889,64 @@
           "안주",
           "치킨",
           "피자",
-          "감자튀김",
           "호프·맥주집",
           "음식점",
           "식당",
-          "레스토랑"
+          "레스토랑",
+          "토마토 해장 파스탕",
+          "토마토 파스타",
+          "해장 파스타",
+          "쫀득 분모자 볼스지"
         ],
         "en": [
           "Beer pub & bar food",
           "beer",
           "crispy fried chicken",
           "bulgogi pizza",
-          "truffle potato pancake",
           "bar",
           "pub",
           "fried chicken",
           "pizza",
           "Beer pub",
-          "pizza and fries",
           "chicken",
           "Geumbyeol Beer",
           "Geumbyeol Pub",
           "restaurant",
-          "dining"
+          "dining",
+          "hot crispy chicken",
+          "tomato hangover soup pasta",
+          "tomato soup pasta",
+          "chewy wide glass noodles"
         ],
         "zh-CN": [
           "啤酒酒吧·下酒菜",
           "啤酒",
           "香脆炸鸡",
           "烤肉披萨",
-          "松露土豆煎饼",
           "酒吧",
           "炸鸡",
           "披萨",
           "啤酒酒吧",
-          "薯条"
+          "香脆辣炸鸡",
+          "番茄解酒汤意面",
+          "意面"
         ],
         "ja": [
           "ビアパブ・おつまみ",
           "ビール",
           "クリスピーチキン",
           "プルコギピザ",
-          "トリュフポテトチヂミ",
           "居酒屋",
           "チキン",
           "ピザ",
           "ビアパブ",
-          "フライドポテト"
+          "スパイシークリスピーチキン",
+          "トマトスープパスタ"
         ]
       },
       "englishPhrases": [
-        "Geumbyeol Beer is a pub in Songdo. Typical menu items include beer, crispy fried chicken and bulgogi pizza; availability may vary.",
-        "The pub is at 144 Harmony-ro, units A101–A102. Please confirm today's opening hours with the venue; published schedules differ."
+        "Geumbyeol Beer is a Korean beer pub. Popular menu examples include hot crispy chicken, bulgogi pizza and tomato soup pasta. Availability may vary.",
+        "Geumbyeol Beer is at 144 Harmony-ro, units A101–A102. It is usually open daily from 5 p.m. to 1 a.m., with last orders at midnight. It may close on major holidays."
       ],
       "walkingMinutes": 19,
       "closedDays": {
@@ -1952,8 +1957,8 @@
       },
       "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3Dar,2AEq3J,%EA%B8%88%EB%B3%84%EB%A7%A5%EC%A3%BC%20%EC%86%A1%EB%8F%84%EB%A1%AF%EB%8D%B0%EB%AA%B0%EC%A0%90,1289345202,PLACE_POI/-/walk?c=15.00,0,0,0,dh",
       "englishPhraseMeanings": [
-        "금별맥주는 송도에 있는 술집입니다. 안내된 메뉴는 매장 상황에 따라 달라질 수 있습니다.",
-        "하모니로 144 A101~A102호에 있습니다. 등록된 영업시간 자료가 서로 달라 당일 영업시간은 매장에 확인해야 합니다."
+        "금별맥주는 맥주와 핫크리스피치킨, 불고기 피자, 토마토 해장 파스탕을 안내할 수 있는 요리주점입니다. 메뉴는 변동될 수 있습니다.",
+        "하모니로 144 A101~A102호에 있습니다. 보통 매일 오후 5시부터 다음 날 오전 1시까지 영업하며 마지막 주문은 자정입니다. 추석 등 명절에는 휴무일 수 있습니다."
       ]
     },
     {
