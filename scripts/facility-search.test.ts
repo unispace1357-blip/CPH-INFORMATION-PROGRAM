@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
+import facilityData from '../src/data/facilities.json' with { type: 'json' }
 import { FACILITY_CATEGORIES } from '../src/types/facility.ts'
 import { searchFacilities, resolveSelectedFacility } from '../src/services/facilitySearch.ts'
 import { searchGuestFacilities } from '../src/services/guestFacilitySearch.ts'
@@ -92,4 +93,15 @@ test('staff loader uses the shared facilityDataset and propagates errors without
   const dataset = { schemaVersion: 1 as const, dataStatus: 'demo' as const, facilities: searchFixtures() }
   assert.equal(await loadStaffDataset(async () => ({ facilityDataset: dataset })), dataset)
   await assert.rejects(() => loadStaffDataset(async () => { throw new Error('Validation failed') }), /Validation failed/)
+})
+
+test('every beer-serving venue is searchable by shared beer keyword in Staff and Guest', () => {
+  const expected = ['malt-house-incheon-songdo', 'playground-brewery-taproom-songdo', 'geumbyeol-beer-songdo-lotte-mall']
+  for (const search of [searchFacilities, searchGuestFacilities]) {
+    const matched = search(facilityData.facilities as any, '맥주')
+    for (const id of expected) assert.ok(matched.some(item => item.id === id), id)
+    assert.ok(search(facilityData.facilities as any, '경복궁 갈비').some(item => item.id === 'gyeongbokgung-hanok-village'))
+    assert.ok(search(facilityData.facilities as any, '현프아').some(item => item.id === 'hyundai-premium-outlet-songdo'))
+    assert.ok(search(facilityData.facilities as any, '수상택시').some(item => item.id === 'songdo-central-park-water-taxi'))
+  }
 })
