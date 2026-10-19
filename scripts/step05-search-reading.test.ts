@@ -3,6 +3,7 @@ import test from 'node:test'
 import rawFacilities from '../src/data/facilities.json' with { type: 'json' }
 import rawScripts from '../src/data/frontdesk-scripts.json' with { type: 'json' }
 import { parseFacilityDataset } from '../src/data/validateFacilityDataset.ts'
+import { parseFrontdeskScriptDataset } from '../src/data/validateFrontdeskScriptDataset.ts'
 import { searchFacilities, normalizeSearchTerm } from '../src/services/facilitySearch.ts'
 import { searchGuestFacilities } from '../src/services/guestFacilitySearch.ts'
 import { searchFrontdeskScripts } from '../src/services/frontdeskScriptSearch.ts'
@@ -101,7 +102,7 @@ test('STEP 5 English reading hints preserve original English exactly and have bo
 })
 
 test('STEP 5 front-desk script search includes replies but never internal staff checks', () => {
-  const scripts = structuredClone(rawScripts.scripts)
+  const scripts = parseFrontdeskScriptDataset(structuredClone(rawScripts)).scripts
   const smoking = scripts.find(s => s.id === 'indoor-smoking-policy')!
   const delivery = scripts.find(s => s.id === 'food-delivery')!
   assert.ok(searchFrontdeskScripts(scripts, 'cleaning fee').some(s => s.id === smoking.id))
