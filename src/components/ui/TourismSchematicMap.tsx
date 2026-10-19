@@ -78,15 +78,16 @@ export function TourismSchematicMap({ language }: { language: GuideLanguage }) {
         <div className="tourism-photo-media">
           {failedPhotoId === selected.id
             ? <p className="tourism-photo-unavailable">{photoUi.photoUnavailable}</p>
-            : <img
-                key={selected.id}
-                src={photo.imageUrl}
-                alt={photo.alt[language]}
-                loading="lazy"
-                decoding="async"
-                referrerPolicy="no-referrer"
-                onError={() => setFailedPhotoId(selected.id)}
-              />}
+            : <a className="tourism-photo-original-link" href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" aria-label={`${selectedName}: ${photoUi.sourceLabel}`}>
+                <img
+                  key={selected.id}
+                  src={`${import.meta.env.BASE_URL}tourism-photos/${selected.id}.webp`}
+                  alt={photo.alt[language]}
+                  loading="eager"
+                  decoding="async"
+                  onError={() => setFailedPhotoId(selected.id)}
+                />
+              </a>}
         </div>
         <figcaption className="tourism-photo-caption">
           <a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer" aria-label={`${photoUi.photoLabel}: ${selectedName} — ${photoUi.sourceLabel}`}>
