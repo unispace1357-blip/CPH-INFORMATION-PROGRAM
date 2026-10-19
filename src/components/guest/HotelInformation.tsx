@@ -44,9 +44,9 @@ export function HotelInformation({ state, language, selected, onSelect, onClose 
         <dl className="detail-facts">
           {(selected === 'checkIn' || selected === 'checkOut') && <div><dt>{selected === 'checkIn' ? m.ui.checkInTimeLabel : m.ui.checkOutTimeLabel}</dt><dd>{localizedValue(selected === 'checkIn' ? hotel.checkInTime : hotel.checkOutTime, language, 'timeUnavailable')}</dd></div>}
           <div><dt>{m.ui.hotelName}</dt><dd>{localizedValue(hotel.translations[language].name, language)}</dd></div>
-          <div><dt>{m.ui.description}</dt><dd>{localizedValue(hotel.translations[language].description, language)}</dd></div>
+          {hotel.translations[language].description.trim() && <div><dt>{m.ui.description}</dt><dd>{localizedValue(hotel.translations[language].description, language)}</dd></div>}
           <div><dt>{m.ui.address}</dt><dd>{localizedValue(hotel.translations[language].address, language)}</dd></div>
-          <div><dt>{m.ui.notes}</dt><dd><HotelParagraphs text={localizedValue(hotel.translations[language].notes, language)} /></dd></div>
+          {selected === 'roomUsage' && <div><dt>{m.ui.notes}</dt><dd><HotelParagraphs text={localizedValue(hotel.translations[language].notes, language)} /></dd></div>}
         </dl>
         <p className="verification-date">{guestVerificationDate(hotel.lastVerifiedAt, language)}</p>
         <p className="field-hint">{m.ui.verificationNotice}</p>
