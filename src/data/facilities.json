@@ -53,7 +53,9 @@
         "en": [
           "CU",
           "convenience",
-          "convenience store"
+          "convenience store",
+          "CU Songdo Senseuri",
+          "CU Songdo Central Park"
         ],
         "zh-CN": [],
         "ja": []
@@ -116,7 +118,10 @@
       },
       "keywords": {
         "ko": [],
-        "en": [],
+        "en": [
+          "Blue Ocean Sauna",
+          "Blue Ocean Spa"
+        ],
         "zh-CN": [],
         "ja": []
       },
@@ -192,7 +197,10 @@
           "맥주집",
           "바베큐",
           "양식·브런치",
-          "와인"
+          "와인",
+          "음식점",
+          "식당",
+          "레스토랑"
         ],
         "en": [
           "Western steaks & brunch",
@@ -207,7 +215,11 @@
           "barbecue",
           "pub",
           "Western dining & brunch",
-          "platters and beer"
+          "platters and beer",
+          "The Malt House",
+          "Malt House Songdo",
+          "restaurant",
+          "dining"
         ],
         "zh-CN": [
           "西餐·牛排·早午餐",
@@ -300,7 +312,8 @@
           "차",
           "음료",
           "주스",
-          "카페·커피"
+          "카페·커피",
+          "커피숍"
         ],
         "en": [
           "Coffee & drinks",
@@ -312,7 +325,10 @@
           "latte",
           "juice",
           "Coffee shop",
-          "latte and fruit ade"
+          "latte and fruit ade",
+          "Compose Coffee",
+          "Compose Songdo",
+          "coffee shop"
         ],
         "zh-CN": [
           "咖啡馆·饮品",
@@ -393,7 +409,9 @@
       },
       "keywords": {
         "ko": [],
-        "en": [],
+        "en": [
+          "Chaeum Pharmacy"
+        ],
         "zh-CN": [],
         "ja": []
       },
@@ -468,7 +486,10 @@
           "탕",
           "갈비",
           "한식·불고기",
-          "한우 양념불고기"
+          "한우 양념불고기",
+          "음식점",
+          "식당",
+          "레스토랑"
         ],
         "en": [
           "Korean beef dishes",
@@ -481,7 +502,11 @@
           "bulgogi",
           "galbitang",
           "Korean cuisine",
-          "marinated beef bulgogi and beef rib soup"
+          "marinated beef bulgogi and beef rib soup",
+          "Hanyang Songdo",
+          "Hanyang restaurant",
+          "restaurant",
+          "dining"
         ],
         "zh-CN": [
           "韩餐·牛肉料理",
@@ -579,7 +604,10 @@
           "한우",
           "한식·고기구이",
           "소갈비",
-          "갈비찜"
+          "갈비찜",
+          "음식점",
+          "식당",
+          "레스토랑"
         ],
         "en": [
           "Korean beef ribs & set meals",
@@ -593,7 +621,11 @@
           "galbi",
           "bbq",
           "Korean barbecue & set meals",
-          "braised short ribs and Korean course meals"
+          "braised short ribs and Korean course meals",
+          "Gyeongbokgung restaurant",
+          "Gyeongbokgung Hanok Village",
+          "restaurant",
+          "dining"
         ],
         "zh-CN": [
           "韩餐·牛排骨·套餐",
@@ -691,7 +723,10 @@
           "볶음밥",
           "오리",
           "중식·중화요리",
-          "면"
+          "면",
+          "음식점",
+          "식당",
+          "레스토랑"
         ],
         "en": [
           "Chinese cuisine & course meals",
@@ -707,7 +742,11 @@
           "Chinese dining",
           "black-bean noodles",
           "spicy noodle soup",
-          "sweet-and-sour pork and course meals"
+          "sweet-and-sour pork and course meals",
+          "Paljinhyang restaurant",
+          "Paljinhyang",
+          "restaurant",
+          "dining"
         ],
         "zh-CN": [
           "中餐·中式套餐",
@@ -801,7 +840,8 @@
           "라떼",
           "디저트",
           "빵",
-          "카페·디저트"
+          "카페·디저트",
+          "커피숍"
         ],
         "en": [
           "Coffee & desserts",
@@ -813,7 +853,10 @@
           "latte",
           "dessert",
           "Cafe & desserts",
-          "latte and cake"
+          "latte and cake",
+          "Hollys Coffee",
+          "Hollys Songdo",
+          "coffee shop"
         ],
         "zh-CN": [
           "咖啡馆·甜品",
@@ -891,7 +934,9 @@
       },
       "keywords": {
         "ko": [],
-        "en": [],
+        "en": [
+          "Songhaeon Sauna"
+        ],
         "zh-CN": [],
         "ja": []
       },
@@ -966,7 +1011,10 @@
           "한식·해산물",
           "주꾸미볶음",
           "알쌈주꾸미",
-          "볶음"
+          "볶음",
+          "음식점",
+          "식당",
+          "레스토랑"
         ],
         "en": [
           "Korean spicy stir-fried octopus",
@@ -979,7 +1027,11 @@
           "korean",
           "Korean spicy seafood",
           "stir-fried webfoot octopus",
-          "roe-wrapped octopus and fried rice"
+          "roe-wrapped octopus and fried rice",
+          "Songjjujip",
+          "Song Jju Jip",
+          "restaurant",
+          "dining"
         ],
         "zh-CN": [
           "韩餐·辣炒小章鱼",
@@ -1075,7 +1127,10 @@
           "치킨",
           "포장",
           "간편식",
-          "분식·간편식"
+          "분식·간편식",
+          "음식점",
+          "식당",
+          "레스토랑"
         ],
         "en": [
           "Korean rice rolls & quick bites",
@@ -1088,7 +1143,11 @@
           "chicken",
           "takeout",
           "Korean quick bites",
-          "wasabi gimbap and sweet crispy chicken"
+          "wasabi gimbap and sweet crispy chicken",
+          "Otto Gimbap",
+          "Otto Kimbap",
+          "restaurant",
+          "dining"
         ],
         "zh-CN": [
           "韩式简餐·紫菜包饭",
@@ -1183,7 +1242,10 @@
           "양식",
           "수제버거·양식",
           "소고기버거",
-          "새우버거"
+          "새우버거",
+          "음식점",
+          "식당",
+          "레스토랑"
         ],
         "en": [
           "Handmade burgers",
@@ -1200,7 +1262,11 @@
           "beef burgers",
           "shrimp burgers",
           "fries and craft beer",
-          "fries"
+          "fries",
+          "Burger Room 181",
+          "Burgeroom 181",
+          "restaurant",
+          "dining"
         ],
         "zh-CN": [
           "西餐·手工汉堡",
@@ -1296,7 +1362,10 @@
           "후라이드",
           "패스트푸드",
           "포장",
-          "패스트푸드·치킨"
+          "패스트푸드·치킨",
+          "음식점",
+          "식당",
+          "레스토랑"
         ],
         "en": [
           "Fast food & chicken burgers",
@@ -1310,7 +1379,12 @@
           "Fast food & chicken",
           "chicken burgers",
           "fried chicken and fries",
-          "fries"
+          "fries",
+          "Mom's Touch",
+          "Moms Touch",
+          "Mom's Touch Songdo",
+          "restaurant",
+          "dining"
         ],
         "zh-CN": [
           "快餐·鸡肉汉堡",
@@ -1402,7 +1476,10 @@
           "고기버거",
           "소고기",
           "패스트푸드",
-          "포장"
+          "포장",
+          "음식점",
+          "식당",
+          "레스토랑"
         ],
         "en": [
           "Fast-food burgers",
@@ -1414,7 +1491,11 @@
           "fast food",
           "Whopper burgers",
           "hamburgers and fries",
-          "fries"
+          "fries",
+          "Burger King",
+          "Burger King Songdo",
+          "restaurant",
+          "dining"
         ],
         "zh-CN": [
           "快餐·汉堡",
@@ -1491,7 +1572,9 @@
       },
       "keywords": {
         "ko": [],
-        "en": [],
+        "en": [
+          "Incheon Port"
+        ],
         "zh-CN": [],
         "ja": []
       },
@@ -1564,7 +1647,8 @@
           "디저트",
           "빵",
           "음료",
-          "카페·커피"
+          "카페·커피",
+          "커피숍"
         ],
         "en": [
           "Coffee & cafe food",
@@ -1577,7 +1661,10 @@
           "latte",
           "food",
           "Coffee shop",
-          "Frappuccino and sandwiches"
+          "Frappuccino and sandwiches",
+          "Starbucks",
+          "Starbucks Songdo Central Park",
+          "coffee shop"
         ],
         "zh-CN": [
           "咖啡馆·饮品与轻食",
@@ -1676,7 +1763,10 @@
           "치킨",
           "안주",
           "펍·수제맥주",
-          "수제버거"
+          "수제버거",
+          "음식점",
+          "식당",
+          "레스토랑"
         ],
         "en": [
           "Craft beer & pub food",
@@ -1691,7 +1781,11 @@
           "burger",
           "chicken",
           "Brewery & pub",
-          "burgers and fries"
+          "burgers and fries",
+          "Playground Brewery",
+          "Playground Brewery Taproom",
+          "restaurant",
+          "dining"
         ],
         "zh-CN": [
           "精酿啤酒·酒吧餐食",
@@ -1790,7 +1884,10 @@
           "치킨",
           "피자",
           "감자튀김",
-          "호프·맥주집"
+          "호프·맥주집",
+          "음식점",
+          "식당",
+          "레스토랑"
         ],
         "en": [
           "Beer pub & bar food",
@@ -1804,7 +1901,11 @@
           "pizza",
           "Beer pub",
           "pizza and fries",
-          "chicken"
+          "chicken",
+          "Geumbyeol Beer",
+          "Geumbyeol Pub",
+          "restaurant",
+          "dining"
         ],
         "zh-CN": [
           "啤酒酒吧·下酒菜",
@@ -1889,7 +1990,10 @@
       },
       "keywords": {
         "ko": [],
-        "en": [],
+        "en": [
+          "Central Park Station",
+          "Central Park subway station"
+        ],
         "zh-CN": [],
         "ja": []
       },
@@ -1951,7 +2055,10 @@
       },
       "keywords": {
         "ko": [],
-        "en": [],
+        "en": [
+          "Lotte Mart",
+          "Lotte Mart Songdo"
+        ],
         "zh-CN": [],
         "ja": []
       },
@@ -2012,8 +2119,13 @@
         }
       },
       "keywords": {
-        "ko": [],
-        "en": [],
+        "ko": [
+          "관광지"
+        ],
+        "en": [
+          "Songdo Central Park",
+          "attraction"
+        ],
         "zh-CN": [],
         "ja": []
       },
@@ -2075,7 +2187,10 @@
       },
       "keywords": {
         "ko": [],
-        "en": [],
+        "en": [
+          "Byeol Onnuri Pharmacy",
+          "Onnuri Pharmacy"
+        ],
         "zh-CN": [],
         "ja": []
       },
@@ -2146,7 +2261,9 @@
         "en": [
           "outlet",
           "shopping",
-          "fashion"
+          "fashion",
+          "Hyundai Premium Outlet Songdo",
+          "Hyundai Outlet"
         ],
         "zh-CN": [
           "奥特莱斯",
@@ -2220,13 +2337,17 @@
           "전망대",
           "관광",
           "IFEZ",
-          "야경"
+          "야경",
+          "관광지"
         ],
         "en": [
           "G tower",
           "observatory",
           "observation deck",
-          "viewpoint"
+          "viewpoint",
+          "G Tower",
+          "IFEZ Observatory",
+          "attraction"
         ],
         "zh-CN": [
           "G塔",
@@ -2305,7 +2426,8 @@
           "관광",
           "웨스트보트하우스",
           "서쪽 보트하우스",
-          "수상택시선착장"
+          "수상택시선착장",
+          "관광지"
         ],
         "en": [
           "water taxi",
@@ -2313,7 +2435,9 @@
           "boathouse",
           "water activity",
           "West Boathouse",
-          "water taxi terminal"
+          "water taxi terminal",
+          "Songdo Water Taxi",
+          "attraction"
         ],
         "zh-CN": [
           "水上出租车",
