@@ -114,6 +114,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
       assert.ok(await guest.locator('#guest-detail-title').isVisible());
       await guest.locator('#guest-facility-detail button').first().click();
       assert.equal(await guest.locator('#guest-detail-title').count(), 0);
+      if (await guest.locator('.facility-card').count() === 26) { await guest.setViewportSize({ width: 390, height: 844 }); await guest.evaluate(() => window.scrollTo(0, 0)); await guest.screenshot({ path: path.join(output, 'guest-language-' + language + '.png'), fullPage: false }); }
       log('Guest: ' + language + ' 26 localized facility names, all 14 menus, search, detail and close');
     }
     await guest.locator('.language-options').getByRole('button', { name: '한국어', exact: true }).click();
@@ -128,9 +129,11 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     for (const width of [320, 390, 768, 1280]) {
       await guest.setViewportSize({ width, height: 820 });
       await noOverflow(guest);
+      await guest.evaluate(() => window.scrollTo(0, 0));
       await guest.screenshot({ path: path.join(output, 'guest-' + width + '.png'), fullPage: true });
       await staff.setViewportSize({ width, height: 820 });
       await noOverflow(staff);
+      await staff.evaluate(() => window.scrollTo(0, 0));
       await staff.screenshot({ path: path.join(output, 'staff-' + width + '.png'), fullPage: true });
     }
     log('Responsive: Guest and Staff no horizontal overflow at 320, 390, 768 and 1280px');
