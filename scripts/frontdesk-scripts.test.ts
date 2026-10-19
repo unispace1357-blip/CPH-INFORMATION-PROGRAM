@@ -3,6 +3,7 @@ import test from 'node:test'
 import raw from '../src/data/frontdesk-scripts.json' with { type: 'json' }
 import schema from '../src/data/frontdesk-scripts.schema.json' with { type: 'json' }
 import originalHotel from '../src/data/hotel.json' with { type: 'json' }
+import amendments from '../docs/reference/step2-operational-amendments.json' with { type: 'json' }
 import originalFacilities from '../src/data/facilities.json' with { type: 'json' }
 import { parseFrontdeskScriptDataset } from '../src/data/validateFrontdeskScriptDataset.ts'
 import { frontdeskScriptDataset } from '../src/data/frontdeskScriptDataset.ts'
@@ -188,4 +189,22 @@ test('six staff categories combine with search using AND and retain source order
 test('Staff lazy loader reuses the validated dataset and propagates invalid-data failures without substitutes', async () => {
   assert.strictEqual(await loadFrontdeskScripts(), frontdeskScriptDataset)
   await assert.rejects(() => loadFrontdeskScripts(async () => { throw new Error('Invalid frontdesk scripts') }), /Invalid frontdesk scripts/)
+})
+
+test('STEP 2 keeps indoor smoking first, parking separate, and delivery scripts in sync with hotel copy', () => {
+  const data = parseFrontdeskScriptDataset(fresh())
+  assert.deepEqual(data.scripts.slice(0, 2).map(script => script.id), ['indoor-smoking-policy', 'smoking-area'])
+  assert.deepEqual(data.scripts.filter(script => script.category === 'parking').map(script => script.id), ['parking-fee', 'vehicle-registration'])
+  assert.ok(data.scripts.filter(script => script.category === 'hotel-facilities').every(script => !/parking|vehicle-registration/.test(script.id)))
+  for (const language of ['ko', 'en', 'zh-CN', 'ja'] as const) {
+    const roomParts = originalHotel.translations[language].roomUsage.split('\n\n')
+    assert.equal(roomParts[5], amendments.replacements.H19[language])
+    assert.equal(roomParts[6], amendments.replacements.H20[language])
+  }
+  const delivery = data.scripts.find(script => script.id === 'food-delivery')!
+  const driver = data.scripts.find(script => script.id === 'delivery-driver-access')!
+  assert.match(delivery.quickAnswer.ko, /프론트 앞 선반/)
+  assert.match(delivery.quickAnswer.en, /shelf in front of the front desk/)
+  assert.match(driver.quickAnswer.ko, /프론트 앞 선반/)
+  assert.doesNotMatch(delivery.details!.en + driver.details!.en, /meet the driver outside|collect it outside/i)
 })
