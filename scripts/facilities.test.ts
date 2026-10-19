@@ -133,7 +133,7 @@ test('confirmed hours retain breaks, last order and day-specific closing in ever
   assert.equal(park.translations.ko.address, '인천 연수구 컨벤시아대로 160 일원')
   assert.equal(park.walkingMinutes, 6)
   assert.equal(park.translations.ko.directions, '')
-  assert.equal(data.facilities.find(f => f.id === 'playground-brewery-taproom-songdo')!.translations.ko.openingHours, '15:00~00:00 (라스트 오더 23:00)')
+  assert.equal(data.facilities.find(f => f.id === 'playground-brewery-taproom-songdo')!.translations.ko.openingHours, '월~금 15:00~24:00 (라스트 오더 23:00) / 토 12:00~24:00 (라스트 오더 23:00) / 일 12:00~22:00 (라스트 오더 21:00)')
   assert.equal(data.facilities.find(f => f.id === 'byeol-onnuri-pharmacy-songdo')!.translations.ko.openingHours, '08:30~다음날 01:00; 24시간 자판기 보유')
   const [cu, blue, malt, cafe, pharmacy] = data.facilities
   assert.equal(cu!.translations.ko.openingHours, '24시간')
