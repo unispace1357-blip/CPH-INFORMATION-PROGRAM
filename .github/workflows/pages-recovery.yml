@@ -53,8 +53,10 @@ jobs:
     permissions:
       pages: write
       id-token: write
+    # Temporary, main-only recovery path while the default github-pages environment is waiting.
+    if: github.ref == 'refs/heads/main'
     environment:
-      name: github-pages
+      name: cph-pages-recovery
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/configure-pages@v5
