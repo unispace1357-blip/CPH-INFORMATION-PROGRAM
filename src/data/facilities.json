@@ -219,7 +219,8 @@
           "The Malt House",
           "Malt House Songdo",
           "restaurant",
-          "dining"
+          "dining",
+          "Western dining, steaks & brunch"
         ],
         "zh-CN": [
           "西餐·牛排·早午餐",
@@ -327,7 +328,8 @@
           "Coffee shop",
           "latte and fruit ade",
           "Compose Coffee",
-          "Compose Songdo"
+          "Compose Songdo",
+          "Coffee & cold drinks"
         ],
         "zh-CN": [
           "咖啡馆·饮品",
@@ -505,7 +507,8 @@
           "Hanyang Songdo",
           "Hanyang restaurant",
           "restaurant",
-          "dining"
+          "dining",
+          "Korean beef bulgogi & set meals"
         ],
         "zh-CN": [
           "韩餐·牛肉料理",
@@ -624,7 +627,8 @@
           "Gyeongbokgung restaurant",
           "Gyeongbokgung Hanok Village",
           "restaurant",
-          "dining"
+          "dining",
+          "Korean beef ribs & set menus"
         ],
         "zh-CN": [
           "韩餐·牛排骨·套餐",
@@ -745,7 +749,8 @@
           "Paljinhyang restaurant",
           "Paljinhyang",
           "restaurant",
-          "dining"
+          "dining",
+          "Chinese cuisine & set menus"
         ],
         "zh-CN": [
           "中餐·中式套餐",
@@ -1031,7 +1036,8 @@
           "restaurant",
           "dining",
           "flying-fish roe wraps",
-          "webfoot octopus"
+          "webfoot octopus",
+          "Korean spicy stir-fried webfoot octopus"
         ],
         "zh-CN": [
           "韩餐·辣炒小章鱼",
@@ -1043,7 +1049,8 @@
           "韩式辣炒海鲜",
           "鱼卵包章鱼",
           "炒饭",
-          "飞鱼籽"
+          "飞鱼籽",
+          "韩式辣炒小章鱼"
         ],
         "ja": [
           "韓国料理・イイダコ炒め",
@@ -1265,7 +1272,8 @@
           "Burger Room 181",
           "Burgeroom 181",
           "restaurant",
-          "dining"
+          "dining",
+          "Gourmet burgers"
         ],
         "zh-CN": [
           "西餐·手工汉堡",
@@ -1662,7 +1670,8 @@
           "Coffee shop",
           "Frappuccino and sandwiches",
           "Starbucks",
-          "Starbucks Songdo Central Park"
+          "Starbucks Songdo Central Park",
+          "Coffee & light meals"
         ],
         "zh-CN": [
           "咖啡馆·饮品与轻食",
