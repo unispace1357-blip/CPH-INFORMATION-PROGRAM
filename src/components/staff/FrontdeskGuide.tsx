@@ -58,7 +58,7 @@ export function FrontdeskGuide() {
         <div className="staff-heading-group"><span className="staff-section-number" aria-hidden="true">01</span><div><p className="staff-section-kicker">HOTEL ENGLISH ASSISTANCE</p><h2 id="frontdesk-search-title">호텔 업무 영어 응대</h2></div></div>
         <Button variant="quiet" disabled={!query} onClick={() => setQuery('')}>검색어 지우기</Button>
       </div>
-      <SearchInput label="호텔 업무 제목, 고객 질문 또는 키워드" placeholder="체크인, 조식, Wi-Fi, late check-out" value={query} onChange={event => setQuery(event.target.value)} disabled={!dataset} hint="한국어·영어 키워드, 스크립트 제목과 고객 질문을 검색합니다." />
+      <SearchInput label="호텔 업무 제목, 고객 질문 또는 키워드" placeholder="체크인, 조식, Wi-Fi, late check-out" value={query} onChange={event => setQuery(event.target.value)} disabled={!dataset} hint="한국어·영어 키워드, 제목과 고객 질문·답변 내용을 검색합니다. 직원 전용 확인사항은 검색에서 제외됩니다." />
       <div className="frontdesk-category-grid staff-category-grid" role="group" aria-label="호텔 업무 카테고리">
         <CategoryCard label="전체" icon="grid" compact selected={category === 'all'} disabled={!dataset} onClick={() => setCategory('all')} />
         {FRONTDESK_SCRIPT_CATEGORIES.map(code => <CategoryCard key={code} label={categories[code].label} icon={categories[code].icon} compact selected={category === code} disabled={!dataset} onClick={() => setCategory(code)} />)}
