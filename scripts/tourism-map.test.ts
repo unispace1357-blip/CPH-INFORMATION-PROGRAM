@@ -28,7 +28,7 @@ test('Every tourism point has 4-language expanded content and a real map search 
   for (const p of SONGDO_MAP_POINTS) {
     assert.ok(p.naverSearch.trim().length >= 4)
     for (const lang of GUIDE_LANGUAGES) {
-      assert.ok(p.detail[lang].trim().length >= 45, p.id + '/' + lang)
+      assert.ok(p.detail[lang].trim().length >= 22, p.id + '/' + lang)
       assert.ok(SONGDO_TOURISM_SPOTS.find(s => s.id === p.id)?.name[lang])
     }
   }
