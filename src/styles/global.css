@@ -179,3 +179,30 @@ main { flex: 1; padding-block: var(--space-8) var(--space-10); }
 .local-guide-spot-list li { display: flex; flex-direction: column; gap: var(--space-1); border: 1px solid #DBE1E8; border-radius: var(--radius-small); padding: var(--space-3); min-width: 0; }
 .local-guide-spot-list li span { font-size: .9rem; color: var(--color-text-secondary); }
 .local-guide-staff-copy { display: grid; gap: var(--space-2); padding-top: var(--space-3); border-top: 1px solid #DBE1E8; }
+
+/* Original static tourism location diagram: no commercial tiles, screenshots or third-party artwork. */
+.tourism-map { display: grid; gap: .75rem; min-width: 0; }
+.tourism-map-title { font-size: 1.06rem; font-weight: 750; margin: .3rem 0 0; }
+.tourism-map-subtitle, .tourism-map-footnote { font-size: .85rem; color: #526274; line-height: 1.55; margin: 0; }
+.tourism-map-drawing { position: relative; overflow: hidden; width: 100%; height: clamp(300px, 52vw, 430px); min-width: 0; isolation: isolate; border-radius: 16px; border: 1px solid #d6e6dd; background: #eff8f3; }
+.tourism-map-art { position: absolute; width: 100%; height: 100%; inset: 0; pointer-events: none; }
+.tourism-map-north { position: absolute; right: 13px; top: 12px; z-index: 1; background: #ffffffdf; border-radius: 20px; padding: 5px 9px; font-size: .78rem; font-weight: 750; color: #244a4b; }
+.tourism-map-pin, .tourism-map-hotel { position: absolute; z-index: 2; display: flex; align-items: center; justify-content: center; transform: translate(-50%, -50%); border-radius: 50%; width: 31px; height: 31px; font-size: .875rem; font-weight: 750; box-shadow: 0 2px 5px #1b394a45; }
+.tourism-map-pin { background: #fff; color: #164e63; border: 2px solid #287d99; cursor: pointer; touch-action: manipulation; }
+.tourism-map-pin.is-selected { color: #fff; background: #146b8b; border: 3px solid #fff; outline: 3px solid #146b8b; }
+.tourism-map-pin:focus-visible, .tourism-map-location:focus-visible, .tourism-map-external-link:focus-visible { outline: 3px solid #174d84; outline-offset: 4px; }
+.tourism-map-hotel { background: #f6a73f; border: 2px solid #fff; color: #593411; width: 27px; height: 27px; pointer-events: none; }
+.tourism-map-legend { display: flex; align-items: center; gap: 8px; color: #3b5266; font-size: .82rem; }
+.tourism-map-legend-hotel { display: inline-flex; align-items: center; justify-content: center; width: 19px; height: 19px; border-radius: 100%; color: #593411; background: #f6a73f; font-weight: 800; }
+.tourism-map-places-heading { margin: .3rem 0 0; font-size: .95rem; }
+.tourism-map-place-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(195px, 100%), 1fr)); gap: 8px; }
+.tourism-map-location { min-height: 45px; display: flex; align-items: center; gap: 9px; text-align: start; padding: 10px 12px; border: 1px solid #cadbe3; border-radius: 10px; background: #fff; color: #233d4e; cursor: pointer; font-size: .875rem; line-height: 1.35; }
+.tourism-map-location.is-selected { border-color: #1680a2; background: #e7f4f7; font-weight: 700; }
+.tourism-map-number { flex: 0 0 23px; width: 23px; height: 23px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #fff; background: #237b95; font-size: .82rem; font-weight: 750; }
+.tourism-map-detail { display: grid; gap: 8px; background: #f5f9fb; border: 1px solid #dae6ea; border-radius: 12px; padding: 16px; }
+.tourism-map-selected-kicker { margin: 0; font-size: .76rem; color: #597182; font-weight: 700; }
+.tourism-map-detail h5 { margin: 0; font-size: 1.05rem; }
+.tourism-map-detail p:not(.tourism-map-selected-kicker) { margin: 0; font-size: .91rem; line-height: 1.65; }
+.tourism-map-external-link { justify-self: start; display: inline-flex; align-items: center; gap: 6px; font-weight: 650; font-size: .91rem; text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.tourism-map-credit { color: #61747c; font-size: .73rem; line-height: 1.5; margin: 0; }
+@media (max-width: 375px) { .tourism-map-drawing { height: 318px; } .tourism-map-pin { width: 28px; height: 28px; } }
