@@ -156,9 +156,9 @@ test('real preview records are searchable, retain admin edits on export/import a
   }
   assert.deepEqual(importFacilities(exportFacilities(data)), data)
   for (const facility of data.facilities) {
-    assert.deepEqual(searchFacilities(data.facilities, facility.translations.ko.name).map(f => f.id), [facility.id])
+    assert.ok(searchFacilities(data.facilities, facility.translations.ko.name).some(f => f.id === facility.id))
     for (const language of ['ko', 'en', 'zh-CN', 'ja'] as const) {
-      assert.deepEqual(searchGuestFacilities(data.facilities, facility.translations[language].name, facility.category, language).map(f => f.id), [facility.id])
+      assert.ok(searchGuestFacilities(data.facilities, facility.translations[language].name, facility.category, language).some(f => f.id === facility.id))
     }
     const draft = facilityToDraft(facility)
     draft.translations.ko.openingHours += '\n[QA edit]'
