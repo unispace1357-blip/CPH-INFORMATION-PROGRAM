@@ -3,10 +3,11 @@ import test from 'node:test'
 import hotel from '../src/data/hotel.json' with { type: 'json' }
 import facilities from '../src/data/facilities.json' with { type: 'json' }
 import reference from '../docs/reference/step07a-approved-copy.json' with { type: 'json' }
+import amendments from '../docs/reference/step2-operational-amendments.json' with { type: 'json' }
 import { GUIDE_LANGUAGES } from '../src/types/guide.ts'
 import { parseHotelDataset } from '../src/data/validateHotelDataset.ts'
 import { validateProductionData } from '../src/data/validateProductionData.ts'
-import { hotelParagraphs } from '../src/services/guestHotelPresentation.ts'
+import { guestSmokingNotice, hotelParagraphs } from '../src/services/guestHotelPresentation.ts'
 import { importHotel, exportHotel } from '../tools/admin/services/workspace.ts'
 import { APPROVED_MAPPING, verifyApprovedHotel } from './validate-hotel-copy.ts'
 import { publicationFixtures } from './admin-test-fixtures.ts'
@@ -22,10 +23,10 @@ test('approved reference records all 35 IDs, 34 unique applied IDs, source hash 
   assert.equal(reference.translatorComparisonRows, 105); assert.equal(reference.translatorResultsRecorded, 0)
 })
 
-test('all 35 approved IDs appear once in their assigned field in every language, except held H33', () => {
+test('historical approved paragraphs stay intact except user-authorized H19/H20 delivery updates, and H33 stays held', () => {
   for (const record of reference.records) {
     for (const language of GUIDE_LANGUAGES) {
-      const text = record.translations[language]
+      const text = (record.id === 'H19' || record.id === 'H20') ? amendments.replacements[record.id][language] : record.translations[language]
       assert.ok(text.length > 0)
       const containing = Object.entries(hotel.translations[language]).filter(([, value]) => value.split('\n\n').includes(text)).map(([field]) => field)
       if (record.id === 'H33') assert.deepEqual(containing, [])
@@ -38,8 +39,8 @@ test('all 35 approved IDs appear once in their assigned field in every language,
   }
 })
 for (const language of GUIDE_LANGUAGES) {
-  test(`${language} complete hotel fields match approved cells exactly, retaining empty description`, () => {
-    for (const [field, ids] of Object.entries(APPROVED_MAPPING)) assert.equal(hotel.translations[language][field as keyof typeof APPROVED_MAPPING], ids.map(id => reference.records.find(record => record.id === id)!.translations[language]).join('\n\n'))
+  test(`${language} hotel fields retain all approved cells except exact H19/H20 overrides`, () => {
+    for (const [field, ids] of Object.entries(APPROVED_MAPPING)) assert.equal(hotel.translations[language][field as keyof typeof APPROVED_MAPPING], ids.map(id => (id === 'H19' || id === 'H20') ? amendments.replacements[id][language] : reference.records.find(record => record.id === id)!.translations[language]).join('\n\n'))
     assert.equal(hotel.translations[language].description, '')
   })
 }
@@ -109,4 +110,31 @@ test('Admin import, editing one language and export/reimport preserve all approv
   assert.equal(roundtrip.translations.ko.description, '관리자 동작 확인용 가상 초안')
   for (const language of GUIDE_LANGUAGES) for (const [field, text] of Object.entries(hotel.translations[language])) if (language !== 'ko' || field !== 'description') assert.equal(roundtrip.translations[language][field as keyof typeof roundtrip.translations.ko], text)
   assert.equal(hotel.translations.ko.description, '')
+})
+
+test('guest no-smoking notice exposes only approved indoor smoking and cleaning fee copy in four languages', () => {
+  const loaded = parseHotelDataset(hotel)
+  for (const language of GUIDE_LANGUAGES) {
+    assert.equal(
+      guestSmokingNotice(loaded, language),
+      [reference.records.find(record => record.id === 'H22')!.translations[language],
+        reference.records.find(record => record.id === 'H23')!.translations[language]].join('\n\n'),
+    )
+    assert.equal(loaded.translations[language].roomUsage.split('\n\n')[5], amendments.replacements.H19[language])
+    assert.equal(loaded.translations[language].roomUsage.split('\n\n')[6], amendments.replacements.H20[language])
+    assert.ok(!loaded.translations[language].roomUsage.includes(reference.records.find(record => record.id === 'H19')!.translations[language]))
+    assert.ok(!loaded.translations[language].roomUsage.includes(reference.records.find(record => record.id === 'H20')!.translations[language]))
+  }
+})
+
+test('H19/H20 delivery amendments cannot be reverted, duplicated or moved to another section', () => {
+  const reverted = structuredClone(hotel)
+  for (const language of GUIDE_LANGUAGES) {
+    reverted.translations[language].roomUsage = reverted.translations[language].roomUsage
+      .replace(amendments.replacements.H19[language], reference.records.find(record => record.id === 'H19')!.translations[language])
+  }
+  assert.ok(verifyApprovedHotel(reverted).some(error => error.id === 'H19'))
+  const duplicated = structuredClone(hotel)
+  duplicated.translations.ko.roomUsage += '\n\n' + amendments.replacements.H20.ko
+  assert.ok(verifyApprovedHotel(duplicated).some(error => error.field.endsWith('paragraphCount')))
 })
