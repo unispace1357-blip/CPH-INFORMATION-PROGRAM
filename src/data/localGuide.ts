@@ -29,6 +29,7 @@ export interface LocalGuideCopy {
   copyLabel: string
   copiedLabel: string
   copyFailedLabel: string
+  guideOnlyResult: string
 }
 
 export const LOCAL_GUIDE_COPY: Record<GuideLanguage, LocalGuideCopy> = {
@@ -51,6 +52,7 @@ export const LOCAL_GUIDE_COPY: Record<GuideLanguage, LocalGuideCopy> = {
     copyLabel: '영어 문구 복사',
     copiedLabel: '복사 완료',
     copyFailedLabel: '복사하지 못했습니다. 문구를 직접 선택해 주세요.',
+    guideOnlyResult: '아래 별도 안내 자료를 확인해 주세요.',
   },
   en: {
     airportTitle: 'Incheon Airport Limousine Bus 6777',
@@ -71,6 +73,7 @@ export const LOCAL_GUIDE_COPY: Record<GuideLanguage, LocalGuideCopy> = {
     copyLabel: 'Copy English',
     copiedLabel: 'Copied',
     copyFailedLabel: 'Could not copy. Please select and copy the text manually.',
+    guideOnlyResult: 'See the separate guide below.',
   },
   'zh-CN': {
     airportTitle: '仁川机场豪华巴士 6777 路',
@@ -87,10 +90,11 @@ export const LOCAL_GUIDE_COPY: Record<GuideLanguage, LocalGuideCopy> = {
     tourismTitle: '松岛旅游指南',
     tourismIntro: '根据酒店提供的松岛会展中心游客地图整理的主要景点，不包含旧优惠券或促销活动。',
     tourismCaution: '景点开放时间、入场规定及交通路线可能变更，请在出行前确认。',
-    staffEnglishLabel: '前台英语 안내'.replace(' 안내', '短语'),
+    staffEnglishLabel: '前台英语短语',
     copyLabel: '复制英文',
     copiedLabel: '已复制',
     copyFailedLabel: '无法复制，请手动选择文本。',
+    guideOnlyResult: '请查看下方的专项指南。',
   },
   ja: {
     airportTitle: '仁川空港リムジンバス 6777番',
@@ -111,6 +115,7 @@ export const LOCAL_GUIDE_COPY: Record<GuideLanguage, LocalGuideCopy> = {
     copyLabel: '英語をコピー',
     copiedLabel: 'コピーしました',
     copyFailedLabel: 'コピーできませんでした。文章を選択してコピーしてください。',
+    guideOnlyResult: '下記の専用案内をご確認ください。',
   },
 }
 
