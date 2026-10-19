@@ -83,7 +83,7 @@ export function TourismSchematicMap({ language }: { language: GuideLanguage }) {
                   key={selected.id}
                   src={photo.imageUrl}
                   alt={photo.alt[language]}
-                  loading="lazy"
+                  loading="eager"
                   decoding="async"
                   referrerPolicy="no-referrer"
                   onError={() => setFailedPhotoId(selected.id)}
