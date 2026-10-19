@@ -12,13 +12,13 @@ import { searchFrontdeskScripts } from '../src/services/frontdeskScriptSearch.ts
 import { loadFrontdeskScripts } from '../src/services/loadFrontdeskScripts.ts'
 
 const fresh = () => structuredClone(raw)
-const expectedCounts = [5, 5, 7, 8, 3, 2]
+const expectedCounts = [5, 5, 7, 8, 4, 2]
 
-test('front desk V1.1 contains 30 ordered bilingual scripts and no unreviewed approvals', () => {
+test('front desk V1.1 contains 31 ordered bilingual scripts and no unreviewed approvals', () => {
   const data = parseFrontdeskScriptDataset(fresh())
   assert.equal(data.schemaVersion, 1)
   assert.equal(data.dataStatus, 'demo')
-  assert.equal(data.scripts.length, 30)
+  assert.equal(data.scripts.length, 31)
   assert.deepEqual(data, frontdeskScriptDataset)
   assert.deepEqual(
     FRONTDESK_SCRIPT_CATEGORIES.map(category => data.scripts.filter(script => script.category === category).length),
@@ -29,7 +29,7 @@ test('front desk V1.1 contains 30 ordered bilingual scripts and no unreviewed ap
     schema.definitions.script.properties.sourceSection.enum.filter((value): value is string => value !== null),
     FRONTDESK_SOURCE_SECTIONS,
   )
-  assert.equal(new Set(data.scripts.map(script => script.id)).size, 30)
+  assert.equal(new Set(data.scripts.map(script => script.id)).size, 31)
   for (const script of data.scripts) {
     assert.equal(script.reviewStatus, 'draft', script.id)
     assert.equal(script.lastVerifiedAt, null, script.id)
