@@ -69,8 +69,8 @@ export const TOURISM_PHOTOS: Readonly<Record<string, TourismPhoto>> = {
     alt: {
       ko: '송도 해돋이공원의 봄철 공원 풍경',
       en: 'Spring scenery of Haedoji Park in Songdo',
-      'zh-CN': '松岛迎日公园的春日景色',
-      ja: '松島ヘドジ公園の春の風景',
+      'zh-CN': '松岛迎日公园里绿树与花坛的春日风景',
+      ja: '松島ヘドジ公園の春に広がる緑と花々の風景',
     },
   },
   'michuhol-park': {
@@ -81,8 +81,8 @@ export const TOURISM_PHOTOS: Readonly<Record<string, TourismPhoto>> = {
     alt: {
       ko: '미추홀공원 연못에 비친 전통 정자와 수변 산책길',
       en: 'Traditional pavilion reflected in the pond at Michuhol Park',
-      'zh-CN': '弥邹忽公园池塘中倒映的传统亭阁',
-      ja: 'ミチュホル公園の池に映る伝統的な東屋',
+      'zh-CN': '弥邹忽公园池塘中倒映的韩国传统亭阁与步道',
+      ja: 'ミチュホル公園の池に映る伝統的な東屋と水辺',
     },
   },
 } as const
