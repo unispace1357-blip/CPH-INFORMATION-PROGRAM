@@ -44,6 +44,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     assert.ok((await staff.locator('.information-notice').allTextContents()).some(t => t.includes('금연')));
     await staff.getByRole('button', { name: '요청사항', exact: true }).click();
     const requestDialog = staff.getByRole('dialog', { name: '직원 요청사항' });
+    await requestDialog.waitFor({ state: 'visible' });
     assert.equal(await requestDialog.count(), 1);
     await requestDialog.getByLabel('요청 유형').selectOption('정보 수정');
     await requestDialog.getByLabel('관련 화면').selectOption('주변 시설 안내');
