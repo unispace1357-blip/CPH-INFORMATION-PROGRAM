@@ -150,6 +150,8 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
         const image = document.querySelector('.tourism-photo-media img');
         return (image && image.complete) || document.querySelector('.tourism-photo-unavailable');
       }, null, { timeout: 40000 });
+      const localPhoto = await guest.locator('.tourism-photo-media img').getAttribute('src');
+      assert.ok(localPhoto.endsWith('/tourism-photos/' + id + '.webp'), 'Photo must be served locally for ' + id);
       const photoState = await guest.locator('.tourism-photo-media img').evaluate(img => {
         const rect = img.getBoundingClientRect();
         return { loaded: img.complete && img.naturalWidth > 0, shownRatio: rect.width / rect.height, naturalRatio: img.naturalWidth / img.naturalHeight, height: rect.height };
