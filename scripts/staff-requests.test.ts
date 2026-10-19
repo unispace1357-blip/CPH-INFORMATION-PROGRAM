@@ -3,6 +3,7 @@ import test from 'node:test'
 import {
   buildStaffRequestFormUrl, formatStaffRequest, isValidStaffRequest, STAFF_REQUEST_MARKER,
 } from '../src/services/staffRequests.ts'
+import { STAFF_REQUEST_PREFILL_URL } from '../src/config/staffRequestForm.ts'
 
 const template = 'https://docs.google.com/forms/d/e/1FAIpQLTest/viewform?usp=pp_url&entry.123456=' + STAFF_REQUEST_MARKER
 
@@ -33,4 +34,21 @@ test('only a Google responder prefill link with one exact marker enables form ha
   assert.equal(buildStaffRequestFormUrl('https://docs.google.com/forms/d/e/abc/viewform', body), null)
   assert.equal(buildStaffRequestFormUrl('https://docs.google.com/forms/d/e/abc/viewform?entry.1=wrong', body), null)
   assert.equal(buildStaffRequestFormUrl('https://docs.google.com/forms/d/e/abc/viewform?entry.1=' + STAFF_REQUEST_MARKER + '&entry.2=' + STAFF_REQUEST_MARKER, body), null)
+})
+
+
+test('connected CPH responder link pre-fills only the request content field safely', () => {
+  const request = formatStaffRequest({
+    category: '정보 추가',
+    screen: '주변 시설 안내',
+    details: '세탁소 정보를 추가해 주세요.',
+  })
+  const result = buildStaffRequestFormUrl(STAFF_REQUEST_PREFILL_URL, request)
+  assert.ok(result, 'Google Forms responder link must be valid')
+  const url = new URL(result)
+  assert.equal(url.origin, 'https://docs.google.com')
+  assert.equal(url.searchParams.get('usp'), 'pp_url')
+  assert.equal(url.searchParams.get('entry.1268471161'), request)
+  assert.equal(url.searchParams.get('entry.1268471161')?.includes(STAFF_REQUEST_MARKER), false)
+  assert.equal([...url.searchParams.keys()].filter(k => /^entry\.\d+$/.test(k)).length, 1)
 })
