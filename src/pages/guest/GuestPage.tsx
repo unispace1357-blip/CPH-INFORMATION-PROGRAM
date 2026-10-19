@@ -21,6 +21,7 @@ import { HotelInformation } from '../../components/guest/HotelInformation'
 import { GuestFacilityResults } from '../../components/guest/GuestFacilityResults'
 import { GuestFacilityDetail } from '../../components/guest/GuestFacilityDetail'
 import { AirportBusGuide, SongdoTourismGuide } from '../../components/ui/LocalTravelGuides'
+import { LOCAL_GUIDE_COPY } from '../../data/localGuide'
 import { UI_CATEGORIES } from '../../config/uiCategories'
 
 export function GuestPage() {
@@ -80,7 +81,7 @@ export function GuestPage() {
         <div className="section-heading"><h2 id="guest-results-title">{m.ui.resultsTitle}</h2><p className="status-label" role="status" aria-live="polite">{dataset ? message(language, 'resultCount', { count: results.length }) : facilities.status === 'error' ? m.ui.informationUnavailable : m.ui.loadingFacilities}</p></div>
         {showAirportGuide && <AirportBusGuide language={language} />}
         {showTourismGuide && <SongdoTourismGuide language={language} />}
-        {facilities.status === 'loading' ? <LoadingState label={m.ui.loadingFacilities} /> : facilities.status === 'error' ? <div role="alert"><InformationNotice title={m.ui.facilityDataErrorTitle} tone="warning"><p>{m.ui.dataErrorDescription}</p><Button variant="secondary" onClick={() => window.location.reload()}>{m.ui.refresh}</Button></InformationNotice></div> : <GuestFacilityResults results={results} publicCount={facilities.dataset.facilities.filter(item => item.isPublished).length} language={language} selectedId={selected?.id ?? null} onSelect={setSelectedId} />}
+        {facilities.status === 'loading' ? <LoadingState label={m.ui.loadingFacilities} /> : facilities.status === 'error' ? <div role="alert"><InformationNotice title={m.ui.facilityDataErrorTitle} tone="warning"><p>{m.ui.dataErrorDescription}</p><Button variant="secondary" onClick={() => window.location.reload()}>{m.ui.refresh}</Button></InformationNotice></div> : (results.length === 0 && (showAirportGuide || showTourismGuide)) ? <p className="field-hint">{LOCAL_GUIDE_COPY[language].departurePlaceLabel}: {LOCAL_GUIDE_COPY[language].tourismCaution}</p> : <GuestFacilityResults results={results} publicCount={facilities.dataset.facilities.filter(item => item.isPublished).length} language={language} selectedId={selected?.id ?? null} onSelect={setSelectedId} />}
       </section>
       <div id="guest-facility-detail"><GuestFacilityDetail facility={selected} language={language} onClose={closeFacility} /></div>
     </div>
