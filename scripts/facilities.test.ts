@@ -11,6 +11,9 @@ import { importFacilities, exportFacilities, facilityToDraft, saveFacility } fro
 
 const expectedWalkingMinutesById = new Map<string, number | null>([
   ['cu-songdo-senseuri', 2],
+  ['hyundai-premium-outlet-songdo', null],
+  ['g-tower-ifez-observatory', null],
+  ['songdo-central-park-water-taxi', null],
   ['blue-ocean-sauna-songdo', 25],
   ['malt-house-incheon-songdo', 3],
   ['compose-coffee-incheon-songdo-central-park', 2],
@@ -37,27 +40,27 @@ const expectedWalkingMinutesById = new Map<string, number | null>([
 
 const fresh = () => structuredClone(rawData)
 
-test('local preview contains all 23 real facilities, four languages and no fictional records', () => {
+test('local preview contains all 26 real facilities, four languages and no fictional records', () => {
   const data = parseFacilityDataset(fresh())
   assert.equal(data.schemaVersion, 1)
   assert.equal(data.dataStatus, 'demo')
-  assert.equal(data.facilities.length, 23)
-  assert.equal(new Set(data.facilities.map(f => f.id)).size, 23)
+  assert.equal(data.facilities.length, 26)
+  assert.equal(new Set(data.facilities.map(f => f.id)).size, 26)
   assert.deepEqual(data.facilities.slice(0, 5).map(f => [f.id, f.category, f.translations.ko.name]), [
-    ['cu-songdo-senseuri', 'convenience', 'CU 송도센쓰리점'],
+    ['cu-songdo-senseuri', 'convenience', '씨유(CU) 송도센쓰리점'],
     ['blue-ocean-sauna-songdo', 'sauna_spa', '블루오션'],
     ['malt-house-incheon-songdo', 'dining', '더몰트하우스 인천송도점'],
     ['compose-coffee-incheon-songdo-central-park', 'cafe', '컴포즈커피 인천송도센트럴파크점'],
     ['chaeum-pharmacy-songdo', 'pharmacy', '채움약국'],
   ])
-  assert.deepEqual(data.facilities.slice(5).map(f => f.id), ['hanyang-songdo-hanok-village', 'gyeongbokgung-hanok-village', 'paljinhyang-hanok-village', 'hollys-incheon-hanok-village', 'songhaeon-songdo', 'songjjujip-main', 'otto-gimbap-songdo', 'burgeroom181-songdo', 'moms-touch-songdo-central-park', 'burger-king-incheon-songdo-central-park', 'incheon-port-hangdong-7ga', 'starbucks-songdo-central-park', 'playground-brewery-taproom-songdo', 'geumbyeol-beer-songdo-lotte-mall', 'central-park-station-exit-3', 'lotte-mart-songdo', 'songdo-central-park', 'byeol-onnuri-pharmacy-songdo'])
+  assert.deepEqual(data.facilities.slice(5).map(f => f.id), ['hanyang-songdo-hanok-village', 'gyeongbokgung-hanok-village', 'paljinhyang-hanok-village', 'hollys-incheon-hanok-village', 'songhaeon-songdo', 'songjjujip-main', 'otto-gimbap-songdo', 'burgeroom181-songdo', 'moms-touch-songdo-central-park', 'burger-king-incheon-songdo-central-park', 'incheon-port-hangdong-7ga', 'starbucks-songdo-central-park', 'playground-brewery-taproom-songdo', 'geumbyeol-beer-songdo-lotte-mall', 'central-park-station-exit-3', 'lotte-mart-songdo', 'songdo-central-park', 'byeol-onnuri-pharmacy-songdo', 'hyundai-premium-outlet-songdo', 'g-tower-ifez-observatory', 'songdo-central-park-water-taxi'])
   const numbers = (text: string) => text.match(/\d+/g) ?? []
   const addressNumbers = [['180', '11', '1', '109'], ['81', '6', '601'], ['180', '11', '3', '305'], ['180', '11', '1', '112'], ['197', '16', '2', '240']]
   data.facilities.forEach((facility, index) => {
     assert.equal(facility.isPublished, true)
     assert.equal(facility.lastVerifiedAt, null)
     assert.equal(facility.walkingMinutes, expectedWalkingMinutesById.get(facility.id), facility.id)
-    assert.equal(typeof facility.naverMapUrl, 'string')
+    assert.ok(facility.naverMapUrl === null || typeof facility.naverMapUrl === 'string')
     assert.deepEqual(Object.keys(facility.translations), ['ko', 'en', 'zh-CN', 'ja'])
     for (const text of Object.values(facility.translations)) {
       assert.ok(text.name.includes(facility.translations.ko.name))
