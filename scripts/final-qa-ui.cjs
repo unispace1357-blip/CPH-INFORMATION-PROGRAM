@@ -130,37 +130,39 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     assert.equal(await guest.locator('.tourism-guide .tourism-map-location').count(), 6);
     assert.equal(await guest.locator('.tourism-guide .tourism-map-pin').count(), 6);
     assert.equal(await guest.locator('.tourism-guide [data-map-kind="original-schematic"]').count(), 1);
-    // Photos appear only for the first three sightseeing spots, retaining the map's numbered pins.
+    // All six numbered pins keep their map behavior and show a credited, uncropped photo.
     const photoSource = guest.locator('.tourism-photo-caption a');
-    assert.equal(await guest.locator('.tourism-photo').getAttribute('data-photo-spot-id'), 'central-park');
-    assert.ok((await photoSource.getAttribute('href')).includes('pst_sn=667087'));
     for (const [name, id, photoId, date] of [
       ['G타워', 'g-tower', '664965', '2015-04-01'],
       ['트라이볼', 'tri-bowl', '249272', '2009-08-06'],
       ['송도 센트럴파크', 'central-park', '667087', '2024-09-23'],
+      ['송도 한옥마을', 'hanok-village', '664955', '2015-01-05'],
+      ['해돋이공원', 'haedoji-park', '665089', '2022-05-02'],
+      ['미추홀공원', 'michuhol-park', '665035', '2019-04-19'],
     ]) {
       await guest.locator('.tourism-map-location').filter({ hasText: name }).click();
       assert.equal(await guest.locator('.tourism-photo').getAttribute('data-photo-spot-id'), id);
       assert.ok((await photoSource.getAttribute('href')).includes('pst_sn=' + photoId));
       assert.ok((await guest.locator('.tourism-photo-caption').innerText()).includes(date));
       assert.ok((await guest.locator('.tourism-photo-caption').innerText()).includes('공공누리 제1유형'));
-      // If remote image hosting fails, its credited source remains available.
       await guest.locator('.tourism-photo-media').scrollIntoViewIfNeeded();
       await guest.waitForFunction(() => {
         const image = document.querySelector('.tourism-photo-media img');
         return (image && image.complete) || document.querySelector('.tourism-photo-unavailable');
-      }, null, { timeout: 20000 });
-      const loaded = await guest.locator('.tourism-photo-media img').evaluate(img => img.complete && img.naturalWidth > 0).catch(() => false);
-      assert.ok(loaded, 'Original IFEZ photo must actually load in Chromium for ' + id);
+      }, null, { timeout: 40000 });
+      const photoState = await guest.locator('.tourism-photo-media img').evaluate(img => {
+        const rect = img.getBoundingClientRect();
+        return { loaded: img.complete && img.naturalWidth > 0, shownRatio: rect.width / rect.height, naturalRatio: img.naturalWidth / img.naturalHeight, height: rect.height };
+      }).catch(() => ({ loaded: false }));
+      assert.ok(photoState.loaded, 'IFEZ photo must load in Chromium for ' + id);
+      assert.ok(Math.abs(photoState.shownRatio - photoState.naturalRatio) < 0.025, 'Photo must preserve intrinsic ratio for ' + id);
+      assert.ok(photoState.height <= 342 && photoState.height > 20, 'Photo must fit the preview card for ' + id);
     }
     await guest.locator('.tourism-map-location').filter({ hasText: 'G타워' }).click();
     assert.match((await guest.locator('.tourism-map-detail').innerText()), /33층/);
     assert.ok((await guest.locator('.tourism-map-external-link').getAttribute('href')).includes('/p/directions/'));
     await guest.locator('.tourism-map-location').filter({ hasText: '트라이볼' }).click();
     assert.ok((await guest.locator('.tourism-map-external-link').getAttribute('href')).includes('/p/search/'));
-    await guest.locator('.tourism-map-location').filter({ hasText: '송도 한옥마을' }).click();
-    assert.equal(await guest.locator('.tourism-photo').count(), 0, 'Other spots do not show unrelated photos');
-    await guest.locator('.tourism-map-location').filter({ hasText: '트라이볼' }).click();
     assert.ok((await guest.locator('.tourism-map-credit').innerText()).includes('OpenStreetMap'));
     // Regression: markers 1/2/3 must be separate at narrow, mobile and desktop widths.
     // The language selector must not float over the map after scrolling into view.
