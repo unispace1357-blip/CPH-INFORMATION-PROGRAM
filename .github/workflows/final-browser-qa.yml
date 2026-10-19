@@ -1,0 +1,50 @@
+name: Final real-browser QA (no deployment)
+
+on:
+  push:
+    branches: [feature/guest-guide-search-menu-20261019]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  chromium-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Install isolated browser QA tools
+        run: |
+          npm install --prefix /tmp/cph-browser-check --no-package-lock --no-save playwright@1.56.1
+          node /tmp/cph-browser-check/node_modules/playwright/cli.js install --with-deps chromium
+      - name: Start local guest/staff and admin apps
+        run: |
+          nohup npm run dev -- --host 127.0.0.1 --port 5173 --strictPort >/tmp/cph-app.log 2>&1 &
+          nohup npm run admin:dev -- --host 127.0.0.1 --port 5190 --strictPort >/tmp/cph-admin.log 2>&1 &
+          for i in $(seq 1 50); do
+            if curl -fsS http://127.0.0.1:5173/ >/dev/null && curl -fsS http://127.0.0.1:5190/ >/dev/null; then exit 0; fi
+            sleep 2
+          done
+          cat /tmp/cph-app.log /tmp/cph-admin.log
+          exit 1
+      - name: Chromium Staff/Guest/Admin end-to-end QA
+        env:
+          NODE_PATH: /tmp/cph-browser-check/node_modules
+          CPH_UI_BASE_URL: http://127.0.0.1:5173
+          CPH_ADMIN_BASE_URL: http://127.0.0.1:5190
+          CPH_UI_ARTIFACT_DIR: /tmp/cph-final-qa
+        run: node scripts/final-qa-ui.cjs
+      - name: Archive QA screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cph-final-qa-screenshots
+          path: /tmp/cph-final-qa/
+          if-no-files-found: ignore
+          retention-days: 14
