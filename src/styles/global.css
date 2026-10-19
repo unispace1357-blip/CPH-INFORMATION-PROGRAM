@@ -213,15 +213,17 @@ main { flex: 1; padding-block: var(--space-8) var(--space-10); }
 .tourism-map-detail { display: grid; gap: 8px; background: #f5f9fb; border: 1px solid #dae6ea; border-radius: 12px; padding: 16px; }
 .tourism-map-selected-kicker { margin: 0; font-size: .76rem; color: #597182; font-weight: 700; }
 .tourism-map-detail h5 { margin: 0; font-size: 1.05rem; }
-.tourism-photo { display: grid; gap: 7px; width: min(100%, 440px); margin: 3px 0 5px; }
-.tourism-photo-media { display: grid; place-items: center; min-height: 175px; max-height: 260px; aspect-ratio: 16 / 10; border-radius: 11px; background: #e8eff2; overflow: hidden; }
-.tourism-photo-media img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.tourism-photo { display: grid; gap: 7px; width: min(100%, 480px); margin: 3px 0 5px; }
+.tourism-photo-media { display: grid; place-items: center; min-height: 0; border-radius: 11px; background: #e8eff2; overflow: hidden; }
+.tourism-photo-media img { display: block; width: auto; max-width: 100%; height: auto; max-height: 340px; object-fit: contain; }
+.tourism-photo-original-link { display: flex; align-items: center; justify-content: center; min-width: 0; width: 100%; padding: 0; }
+.tourism-photo-original-link:focus-visible { outline: 3px solid #174d84; outline-offset: -3px; border-radius: 11px; }
 .tourism-photo-unavailable { padding: 18px; text-align: center; font-size: .9rem; line-height: 1.6; color: #455a68; }
-.tourism-photo-caption { max-width: 440px; color: #576b77; font-size: .74rem; line-height: 1.6; overflow-wrap: anywhere; }
+.tourism-photo-caption { max-width: 480px; color: #576b77; font-size: .74rem; line-height: 1.6; overflow-wrap: anywhere; }
 .tourism-photo-caption a { color: #285d77; text-decoration: underline; text-underline-offset: 2px; }
 .tourism-photo-caption a:focus-visible { outline: 3px solid #174d84; outline-offset: 3px; border-radius: 2px; }
 .tourism-photo-historic { display: block; color: #627685; }
-@media (max-width: 375px) { .tourism-photo-media { min-height: 150px; } }
+@media (max-width: 599px) { .tourism-photo-media img { max-height: 290px; } }
 
 .tourism-map-detail p:not(.tourism-map-selected-kicker) { margin: 0; font-size: .91rem; line-height: 1.65; }
 .tourism-map-external-link { justify-self: start; display: inline-flex; align-items: center; gap: 6px; font-weight: 650; font-size: .91rem; text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
