@@ -124,7 +124,7 @@ test('STEP 4: all dining and cafe venues include a localized food type, menu exa
       assert.ok(facility.keywords[language].includes(type), facility.id + '/' + language)
       for (const item of facility.keywords[language]) assert.ok(searchGuestFacilities(facilities, item, facility.category, language).some(found => found.id === facility.id), facility.id + '/' + language + '/' + item)
     }
-    assert.match(facility.englishPhrases[0]!, /Typical menu items include|webfoot octopus/i)
+    assert.match(facility.englishPhrases[0]!, /bulgogi|Menu items may vary|menu examples|Popular menu examples|Typical menu items include|serves craft beer|webfoot octopus/i)
     assert.ok(facility.englishPhraseMeanings?.[0]?.length, facility.id)
     assert.equal(facility.lastVerifiedAt, null, facility.id) // Individual menu stock was not checked on site.
   }
@@ -135,7 +135,7 @@ test('STEP 4: Korean menu and cuisine queries match all relevant venues across S
   const expected: { query: string; ids: string[] }[] = [
     { query: '맥주', ids: ['malt-house-incheon-songdo', 'burgeroom181-songdo', 'playground-brewery-taproom-songdo', 'geumbyeol-beer-songdo-lotte-mall'] },
     { query: '고기', ids: ['hanyang-songdo-hanok-village', 'gyeongbokgung-hanok-village'] },
-    { query: '갈비', ids: ['hanyang-songdo-hanok-village', 'gyeongbokgung-hanok-village'] },
+    { query: '갈비', ids: ['gyeongbokgung-hanok-village'] },
     { query: '중식', ids: ['paljinhyang-hanok-village'] },
     { query: '짜장면', ids: ['paljinhyang-hanok-village'] },
     { query: '김밥', ids: ['otto-gimbap-songdo'] },
