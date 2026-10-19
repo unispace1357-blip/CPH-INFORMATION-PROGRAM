@@ -44,7 +44,7 @@ export function GuestPage() {
   const selected = resolveSelectedFacility(results, selectedId)
   const isDemo = dataset?.dataStatus === 'demo' || (hotel.status === 'ready' && hotel.dataset.dataStatus === 'demo')
   const showAirportGuide = category === 'transportation' || (category === 'all' && /6777|공항|리무진|airport|limousine|机场|空港/i.test(query))
-  const showTourismGuide = category === 'attraction' || (category === 'all' && /관광|송도|tourism|sightseeing|旅游|観光/i.test(query))
+  const showTourismGuide = category === 'attraction' || (category === 'all' && /관광|송도지도|tourism|sightseeing|旅游|観光/i.test(query))
 
   function updateFilters(nextQuery: string, nextCategory: StaffCategoryFilter) {
     setQuery(nextQuery); setCategory(nextCategory)
