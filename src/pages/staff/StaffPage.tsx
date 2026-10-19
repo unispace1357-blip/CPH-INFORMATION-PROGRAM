@@ -37,7 +37,7 @@ export function StaffPage() {
   const results = useMemo(() => searchFacilities(dataset?.facilities ?? [], query, category), [dataset, query, category])
   const selected = resolveSelectedFacility(results, selectedId)
   const showAirportGuide = category === 'transportation' || (category === 'all' && /6777|공항|리무진|airport|limousine/i.test(query))
-  const showTourismGuide = category === 'attraction' || (category === 'all' && /관광|송도|tourism|sightseeing/i.test(query))
+  const showTourismGuide = category === 'attraction' || (category === 'all' && /관광|송도지도|tourism|sightseeing/i.test(query))
   useEffect(() => {
     if (selectedId && window.matchMedia('(max-width: 999px)').matches) {
       detailHeading.current?.focus({ preventScroll: true })
