@@ -136,6 +136,14 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await guest.locator('.tourism-map-location').filter({ hasText: '트라이볼' }).click();
     assert.ok((await guest.locator('.tourism-map-detail a').getAttribute('href')).includes('/p/search/'));
     assert.ok((await guest.locator('.tourism-map-credit').innerText()).includes('OpenStreetMap'));
+    // Capture the actual rendered visitor guide, not a conceptual mockup.
+    await guest.setViewportSize({ width: 1280, height: 900 });
+    await guest.locator('.tourism-guide').screenshot({ path: path.join(output, 'tourism-guide-desktop-1280.png') });
+    await guest.setViewportSize({ width: 390, height: 844 });
+    await guest.locator('.tourism-guide').screenshot({ path: path.join(output, 'tourism-guide-mobile-390.png') });
+    await guest.setViewportSize({ width: 320, height: 760 });
+    await guest.locator('.tourism-guide').screenshot({ path: path.join(output, 'tourism-guide-small-mobile-320.png') });
+    await guest.setViewportSize({ width: 1280, height: 900 });
     assert.equal(await guest.locator('.airport-bus-guide').count(), 0);
     await guest.locator('.guest-category-grid').getByRole('button', { name: '관광', exact: true }).click();
     await waitCards(guest, 26);
