@@ -175,7 +175,7 @@ test('staff search matches bilingual keywords, titles and customer questions lit
   assert.deepEqual(searchFrontdeskScripts([], '조식'), [])
 })
 
-test('five staff categories combine with search using AND and retain source order', () => {
+test('six staff categories combine with search using AND and retain source order', () => {
   const scripts = frontdeskScriptDataset.scripts
   for (const category of FRONTDESK_SCRIPT_CATEGORIES) {
     assert.deepEqual(searchFrontdeskScripts(scripts, '', category), scripts.filter(script => script.category === category))
