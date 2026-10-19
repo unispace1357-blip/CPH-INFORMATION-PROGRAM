@@ -43,7 +43,7 @@ export function StaffRequestDialog({ onDismiss }: Props) {
   }
 
   return <dialog ref={dialogRef} className="staff-request-dialog" aria-labelledby="staff-request-title"
-    aria-describedby="staff-request-description" onCancel={onDismiss} onClose={onDismiss}>
+    aria-describedby="staff-request-description" onCancel={onDismiss}>
     <div className="staff-request-dialog-heading">
       <div><p className="staff-request-eyebrow">FRONT DESK FEEDBACK</p><h2 id="staff-request-title">직원 요청사항</h2></div>
       <Button variant="quiet" aria-label="요청사항 창 닫기" onClick={onDismiss}>닫기</Button>
