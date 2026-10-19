@@ -960,6 +960,46 @@
       "sourceSection": "notes",
       "reviewStatus": "draft",
       "lastVerifiedAt": null
+    },
+    {
+      "id": "airport-limousine-6777",
+      "category": "hotel-facilities",
+      "title": "인천공항 리무진 6777번",
+      "keywords": [
+        "6777",
+        "공항버스",
+        "리무진",
+        "공항",
+        "인천공항",
+        "센트럴파크역",
+        "포스코부영타워",
+        "airport bus",
+        "limousine",
+        "airport",
+        "terminal"
+      ],
+      "question": {
+        "en": "Where can I catch the 6777 airport limousine bus, and what time does it leave?",
+        "ko": "인천공항 가는 6777번 버스는 어디서 타고 언제 출발하나요?"
+      },
+      "quickAnswer": {
+        "en": "Bus 6777 leaves from the stop near Central Park Station Exit 1, by POSCO Booyoung Tower, and goes to Incheon Airport Terminals 1 and 2. Times may change, so please check the latest schedule before boarding.",
+        "ko": "6777번 버스는 센트럴파크역 1번 출구 방향 포스코·부영타워 인근 정류장에서 출발해 인천공항 제1·제2터미널로 갑니다. 시간표가 달라질 수 있으니 탑승 전 최신 운행정보를 확인해 주세요."
+      },
+      "details": {
+        "en": "The hotel handout lists these scheduled departures from the Central Park stop: 05:27, 06:07, 06:47, 08:47, 10:27, 11:57, 13:27, 14:57, 16:27, 17:57, 19:27, 20:27. These are not departure times from the hotel. Bus schedules, routes, stops and holiday services may change; fares and bookings should be checked separately.",
+        "ko": "호텔 안내문에 기재된 센트럴파크 정류장 출발 예정 시각: 05:27, 06:07, 06:47, 08:47, 10:27, 11:57, 13:27, 14:57, 16:27, 17:57, 19:27, 20:27. 호텔 출발 시각이 아닙니다. 운행시간, 노선, 정류장 및 휴일 운행은 달라질 수 있으며 요금과 예약은 별도 확인해야 합니다."
+      },
+      "staffChecks": [
+        "호텔 제공 공항버스 안내문(2026-10-19 사진) 기반의 참고용 예정 시각",
+        "승차장은 센트럴파크역 1번 출구 방향·포스코부영타워 인근으로 설명하되 실제 탑승 전 정류장 확인",
+        "요금·실시간 도착·운휴 및 예약 가능 여부를 추측하지 않기",
+        "공항버스 안내문/네이버 지도와 내용이 다를 경우 최신 운영사 정보를 우선"
+      ],
+      "sourceType": "user-provided",
+      "sourceSection": null,
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
     }
   ]
 }
