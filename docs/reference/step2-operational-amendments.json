@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "effectiveDate": "2026-10-19",
+  "rationale": "User-confirmed update: food deliveries are collected from the shelf in front of the front desk after entering through the main entrance. The previous outside pickup instruction is superseded. Keep original Step07A reference unchanged for audit.",
+  "replacements": {
+    "H19": {
+      "ko": "배달 음식을 주문하신 경우, 호텔 정문으로 들어오신 뒤 프론트 앞 선반에서 직접 수령해 주세요.",
+      "en": "If you order food delivery, please enter through the hotel's main entrance and collect your order from the shelf in front of the front desk.",
+      "zh-CN": "如您订购外卖，请从酒店正门进入，并在前台前方的置物架上自行领取餐食。",
+      "ja": "フードデリバリーをご注文の場合は、ホテル正面玄関からお入りいただき、フロント前の棚でお受け取りください。"
+    },
+    "H20": {
+      "ko": "배달 기사는 객실까지 배달할 수 없습니다. 배달 음식 분실에 대해 호텔은 책임지지 않습니다.",
+      "en": "Delivery drivers cannot bring orders directly to guest rooms. The hotel is not responsible for lost food deliveries.",
+      "zh-CN": "外卖配送员不能直接送餐至客房。如外卖餐食遗失，酒店概不负责。",
+      "ja": "配達員が客室まで直接お届けすることはできません。配達された食品の紛失について、ホテルは責任を負いかねます。"
+    }
+  }
+}
