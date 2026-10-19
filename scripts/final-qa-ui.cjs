@@ -136,6 +136,33 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await guest.locator('.tourism-map-location').filter({ hasText: '트라이볼' }).click();
     assert.ok((await guest.locator('.tourism-map-detail a').getAttribute('href')).includes('/p/search/'));
     assert.ok((await guest.locator('.tourism-map-credit').innerText()).includes('OpenStreetMap'));
+    // Regression: markers 1/2/3 must be separate at narrow, mobile and desktop widths.
+    // The language selector must not float over the map after scrolling into view.
+    for (const width of [320, 390, 768, 1280]) {
+      await guest.setViewportSize({ width, height: 820 });
+      await guest.locator('.tourism-map-drawing').scrollIntoViewIfNeeded();
+      const geometry = await guest.evaluate(() => {
+        const el = document.querySelector('.tourism-map-drawing');
+        const toolbar = document.querySelector('.guest-language-toolbar');
+        const pins = ['central-park', 'tri-bowl', 'g-tower'].map(id => {
+          const pin = document.querySelector(`.tourism-map-pin[data-spot-id="${id}"]`);
+          const rect = pin.getBoundingClientRect();
+          return { id, x: rect.x + rect.width / 2, y: rect.y + rect.height / 2, radius: Math.max(rect.width, rect.height) / 2 };
+        });
+        const mapRect = el.getBoundingClientRect();
+        const toolbarRect = toolbar.getBoundingClientRect();
+        const overlap = toolbarRect.left < mapRect.right && toolbarRect.right > mapRect.left &&
+          toolbarRect.top < mapRect.bottom && toolbarRect.bottom > mapRect.top;
+        return { pins, toolbarPosition: getComputedStyle(toolbar).position, overlap };
+      });
+      assert.equal(geometry.toolbarPosition, 'static', 'Language toolbar must remain in document flow');
+      assert.equal(geometry.overlap, false, 'Language toolbar must not cover the diagram');
+      for (let i = 0; i < geometry.pins.length; i++) for (let j = i + 1; j < geometry.pins.length; j++) {
+        const a = geometry.pins[i], b = geometry.pins[j];
+        const distance = Math.hypot(a.x - b.x, a.y - b.y);
+        assert.ok(distance > a.radius + b.radius + 7, `Overlapping sightseeing pins ${a.id} and ${b.id} at ${width}px: ${distance.toFixed(1)}px`);
+      }
+    }
     // Capture the actual rendered visitor guide, not a conceptual mockup.
     await guest.setViewportSize({ width: 1280, height: 900 });
     await guest.locator('.tourism-guide').screenshot({ path: path.join(output, 'tourism-guide-desktop-1280.png') });
