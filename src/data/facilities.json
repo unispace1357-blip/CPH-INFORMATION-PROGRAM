@@ -17,7 +17,7 @@
           "notes": ""
         },
         "en": {
-          "name": "CU 송도센쓰리점 (convenience store)",
+          "name": "CU Songdo Senseuri (CU 송도센쓰리점)",
           "description": "Convenience store.",
           "address": "Incheon Tower-daero 180beon-gil 11, Building A, 1F, Unit 109, Yeonsu-gu, Incheon",
           "openingHours": "24 hours",
@@ -92,7 +92,7 @@
           "notes": ""
         },
         "en": {
-          "name": "블루오션 (sauna)",
+          "name": "Blue Ocean Sauna (블루오션)",
           "description": "Sauna.",
           "address": "Convensia-daero 81, 드림시티, 6F, Unit 601, Yeonsu-gu, Incheon",
           "openingHours": "24 hours, open year-round",
@@ -157,7 +157,7 @@
           "notes": ""
         },
         "en": {
-          "name": "더몰트하우스 인천송도점 (Western restaurant)",
+          "name": "The Malt House Songdo (더몰트하우스 인천송도점)",
           "description": "Western dining, steaks & brunch · Menu examples: steak, pasta, sharing platters, pizza, beer",
           "address": "Incheon Tower-daero 180beon-gil 11, Building A, 3F, Unit 305, Yeonsu-gu, Incheon",
           "openingHours": "10:00–23:00 (break 15:00–17:00); last order 22:00",
@@ -277,7 +277,7 @@
           "notes": ""
         },
         "en": {
-          "name": "컴포즈커피 인천송도센트럴파크점 (cafe)",
+          "name": "Compose Coffee Songdo Central Park (컴포즈커피 인천송도센트럴파크점)",
           "description": "Coffee & cold drinks · Menu examples: Americano, cafe latte, fruit-flavored ade",
           "address": "Incheon Tower-daero 180beon-gil 11, Building A, 1F, Unit 112, Yeonsu-gu, Incheon",
           "openingHours": "08:00–22:00 (Sunday: closes at 21:00; Monday and Tuesday: closes at 20:00)",
@@ -384,7 +384,7 @@
           "notes": ""
         },
         "en": {
-          "name": "채움약국 (pharmacy)",
+          "name": "Chaeum Pharmacy (채움약국)",
           "description": "Pharmacy.",
           "address": "Incheon Tower-daero 197beon-gil 16, 2F, Unit 240, Yeonsu-gu, Incheon",
           "openingHours": "09:00–19:30 (break 13:00–14:00); Saturday 09:00–14:00",
@@ -448,7 +448,7 @@
           "notes": ""
         },
         "en": {
-          "name": "한양 송도한옥마을점 (korean restaurant)",
+          "name": "Hanyang Korean Restaurant, Songdo Hanok Village (한양 송도한옥마을점)",
           "description": "Korean beef bulgogi & set meals · Menu examples: marinated Korean beef bulgogi, plain Korean beef bulgogi, beef rib soup, dried yellow corvina set meal",
           "address": "Technopark-ro 180, Yeonsu-gu, Incheon",
           "openingHours": "11:30–22:00; weekday break 15:00–17:00",
@@ -565,7 +565,7 @@
           "notes": ""
         },
         "en": {
-          "name": "경복궁 한옥마을점 (korean restaurant)",
+          "name": "Gyeongbokgung Korean Restaurant, Hanok Village (경복궁 한옥마을점)",
           "description": "Korean beef ribs & set menus · Menu examples: marinated beef short ribs, fresh beef ribs, braised short ribs, Korean set meals",
           "address": "Technopark-ro 180, Building 가, Floors 1–2, Yeonsu-gu, Incheon",
           "openingHours": "11:30–22:00 (last order 21:30)",
@@ -688,7 +688,7 @@
           "notes": ""
         },
         "en": {
-          "name": "팔진향 한옥마을점 (chinese restaurant)",
+          "name": "Paljinhyang Chinese Restaurant, Hanok Village (팔진향 한옥마을점)",
           "description": "Chinese cuisine & set menus · Menu examples: jjajangmyeon (black-bean noodles), jjamppong (spicy seafood noodle soup), sweet-and-sour pork, Peking duck, course meals",
           "address": "Technopark-ro 180, Building 나, 2F, Yeonsu-gu, Incheon",
           "openingHours": "11:30–22:00 (break 15:00–17:00; last order 21:30)",
@@ -809,7 +809,7 @@
           "notes": ""
         },
         "en": {
-          "name": "할리스 인천한옥마을점 (cafe)",
+          "name": "Hollys Coffee, Incheon Hanok Village (할리스 인천한옥마을점)",
           "description": "Coffee & desserts · Menu examples: Americano, cafe latte, cake",
           "address": "Technopark-ro 180, Yeonsu-gu, Incheon",
           "openingHours": "09:00–22:30",
@@ -912,7 +912,7 @@
           "notes": ""
         },
         "en": {
-          "name": "송해온 (sauna)",
+          "name": "Songhaeon Seawater Hot Spring (송해온)",
           "description": "Sauna.",
           "address": "Incheon Tower-daero 197beon-gil 16, Yeonsu-gu, Incheon",
           "openingHours": "06:00–22:00",
@@ -976,7 +976,7 @@
           "notes": ""
         },
         "en": {
-          "name": "송쭈집 본점 (korean restaurant)",
+          "name": "Songjjujip (송쭈집 본점)",
           "description": "Korean spicy stir-fried webfoot octopus · Menu examples: webfoot octopus set with flying-fish roe wraps, spicy stir-fried webfoot octopus, cheese fried rice",
           "address": "Central-ro 160, Yeonsu-gu, Incheon",
           "openingHours": "11:00–21:50 (break 15:00–16:30); last orders 14:00 and 20:50",
@@ -1098,7 +1098,7 @@
           "notes": ""
         },
         "en": {
-          "name": "오토김밥 (gimbap restaurant)",
+          "name": "Otto Gimbap Songdo (오토김밥)",
           "description": "Korean rice rolls & quick bites · Menu examples: signature Otto gimbap, wasabi gimbap, sweet crispy fried chicken",
           "address": "Central-ro 160, Building 103, Building C, Units 243–246, Yeonsu-gu, Incheon",
           "openingHours": "10:00–19:00 (break 14:00–16:00)",
@@ -1208,7 +1208,7 @@
           "notes": ""
         },
         "en": {
-          "name": "버거룸181 (burger restaurant)",
+          "name": "Burger Room 181 (버거룸181)",
           "description": "Gourmet burgers · Menu examples: signature 181 beef burger, shrimp burger, French fries, craft beer",
           "address": "Central-ro 160, Building A, 2F, Units 228–230, Yeonsu-gu, Incheon",
           "openingHours": "11:00–21:30 (break 16:00–17:00, last order 21:00)",
@@ -1333,7 +1333,7 @@
           "notes": ""
         },
         "en": {
-          "name": "맘스터치 송도센트럴파크점 (fast food restaurant)",
+          "name": "Mom's Touch Songdo Central Park (맘스터치 송도센트럴파크점)",
           "description": "Fast food & chicken burgers · Menu examples: Thigh Burger (Ssai Burger), fried chicken, French fries",
           "address": "Central-ro 160, Retail Building 1, Unit 126, Yeonsu-gu, Incheon",
           "openingHours": "08:30–22:00 (last order 21:50)",
@@ -1449,7 +1449,7 @@
           "notes": ""
         },
         "en": {
-          "name": "버거킹 인천송도센트럴파크점 (fast food restaurant)",
+          "name": "Burger King Songdo Central Park (버거킹 인천송도센트럴파크점)",
           "description": "Fast-food burgers · Menu examples: Whopper, hamburgers, French fries",
           "address": "Central-ro 194, Building B, 1F, Yeonsu-gu, Incheon",
           "openingHours": "10:00–23:00",
@@ -1553,7 +1553,7 @@
           "notes": ""
         },
         "en": {
-          "name": "인천항 (port)",
+          "name": "Incheon Port (인천항)",
           "description": "Port.",
           "address": "항동7가 88, Jung-gu, Incheon",
           "openingHours": "",
@@ -1617,7 +1617,7 @@
           "notes": ""
         },
         "en": {
-          "name": "스타벅스 송도센트럴파크점 (cafe)",
+          "name": "Starbucks Songdo Central Park (스타벅스 송도센트럴파크점)",
           "description": "Coffee & light meals · Menu examples: Americano, Frappuccino, sandwiches, cake",
           "address": "Central-ro 194, Building A, Units 101–103, Yeonsu-gu, Incheon",
           "openingHours": "07:00–22:00 (delivery 10:00–21:30)",
@@ -1729,7 +1729,7 @@
           "notes": ""
         },
         "en": {
-          "name": "플레이그라운드 브루어리 탭룸 송도 (pub and craft beer)",
+          "name": "Playground Brewery Taproom Songdo (플레이그라운드 브루어리 탭룸 송도)",
           "description": "Craft beer & pub food · Menu examples: craft beer, shrimp burger, Vietnamese-style chicken, French fries",
           "address": "Convensia-daero 80, 현대힐스테이트, Building 401, Unit 139, Yeonsu-gu, Incheon",
           "openingHours": "15:00–00:00 (last order 23:00)",
@@ -1852,7 +1852,7 @@
           "notes": ""
         },
         "en": {
-          "name": "금별맥주 송도롯데몰점 (pub and beer)",
+          "name": "Geumbyeol Beer Songdo Lotte Mall (금별맥주 송도롯데몰점)",
           "description": "Beer pub & bar food · Menu examples: beer, crispy fried chicken, bulgogi pizza, truffle potato pancake",
           "address": "Harmony-ro 144, 지웰푸르지오시티, Units A101–102, Yeonsu-gu, Incheon",
           "openingHours": "16:30–02:00 the following day (Friday and Saturday: until 04:30 the following day)",
@@ -1971,7 +1971,7 @@
           "notes": ""
         },
         "en": {
-          "name": "센트럴파크역 3번 출구 (subway station exit)",
+          "name": "Central Park Station Exit 3 (센트럴파크역 3번 출구)",
           "description": "Subway station exit.",
           "address": "센트럴파크역, Incheon Subway Line 1",
           "openingHours": "Not applicable",
@@ -2036,7 +2036,7 @@
           "notes": ""
         },
         "en": {
-          "name": "롯데마트 송도점 (supermarket and daily necessities)",
+          "name": "Lotte Mart Songdo (롯데마트 송도점)",
           "description": "Supermarket and daily necessities.",
           "address": "Convensia-daero 177, Yeonsu-gu, Incheon",
           "openingHours": "10:00–23:00",
@@ -2101,7 +2101,7 @@
           "notes": ""
         },
         "en": {
-          "name": "송도 센트럴파크 (park and walking)",
+          "name": "Songdo Central Park (송도 센트럴파크)",
           "description": "Park and walking.",
           "address": "Around Convensia-daero 160, Yeonsu-gu, Incheon",
           "openingHours": "Park walks available; activity facilities are separate",
@@ -2168,7 +2168,7 @@
           "notes": ""
         },
         "en": {
-          "name": "별온누리약국 (pharmacy and late-night option)",
+          "name": "Byeol Onnuri Pharmacy (별온누리약국)",
           "description": "Pharmacy and late-night option.",
           "address": "Harmony-ro 158, 송도타임스페이스, Building A, Units 110–112, Yeonsu-gu, Incheon",
           "openingHours": "08:30–01:00 the following day; 24-hour vending machine available",
@@ -2233,7 +2233,7 @@
           "notes": ""
         },
         "en": {
-          "name": "현대프리미엄아울렛 송도점 (Hyundai Premium Outlet)",
+          "name": "Hyundai Premium Outlet Songdo (현대프리미엄아울렛 송도점)",
           "description": "Outlet shopping · Fashion, lifestyle and dining",
           "address": "인천광역시 연수구 Songdo International-daero 123",
           "openingHours": "10:30–20:00 (dining 10:30–21:00; closing and extended-hour days may vary)",
@@ -2313,7 +2313,7 @@
           "notes": ""
         },
         "en": {
-          "name": "G타워 IFEZ 홍보관 전망대 (G-Tower IFEZ Observatory)",
+          "name": "G-Tower IFEZ Observatory (33F) (G타워 IFEZ 홍보관 전망대)",
           "description": "Attraction · 33rd-floor observation deck and exhibition",
           "address": "인천광역시 연수구 Art Center-daero 175, G타워 33층",
           "openingHours": "Tue–Fri 10:00–21:00 / Sat, Sun & some holidays 13:00–21:00 (last entry 20:30)",
@@ -2396,7 +2396,7 @@
           "notes": ""
         },
         "en": {
-          "name": "송도 센트럴파크 수상택시 (Songdo Central Park water taxi)",
+          "name": "Songdo Central Park Water Taxi (West Boathouse) (송도 센트럴파크 수상택시)",
           "description": "Sightseeing water taxi · Board at West Boathouse (not the East Boathouse boat rentals)",
           "address": "인천광역시 연수구 Incheon Tower-daero 253-34 (웨스트보트하우스)",
           "openingHours": "Service changes with the season and weather (confirm with the operator)",
