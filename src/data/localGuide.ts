@@ -41,7 +41,7 @@ export const LOCAL_GUIDE_COPY: Record<GuideLanguage, LocalGuideCopy> = {
     boarding: '센트럴파크역 1번 출구 방향, 포스코·부영타워 인근 정류장 (호텔 안내문 기준)',
     departuresLabel: '6777번 센트럴파크 출발 예정 시각',
     departurePlaceLabel: '시간 기준',
-    departurePlace: '센트럴파크 정류장 출발 시각입니다. 호텔에서 출발하는 시간이 아닙니다.',
+    departurePlace: '센트럴파크 정류장 출발 시각입니다. 호텔 출발 시각이 아닙니다.',
     disclaimerTitle: '운행정보 변경 가능',
     disclaimer: '버스 시간표·노선·정류장과 운행 여부는 교통 사정, 휴일 또는 운영사 사정에 따라 변경될 수 있습니다. 탑승 전 최신 정보를 확인해 주세요.',
     fareUnknown: '요금·예약·실시간 도착 정보는 이 안내에 포함되지 않습니다.',
