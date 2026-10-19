@@ -54,12 +54,12 @@ test('Only previously verified facility direction URLs can be reused', () => {
   }
 })
 
-test('Three publicly licensed IFEZ landmark photos include exact sources and accessible credits', () => {
+test('Six publicly licensed IFEZ landmark photos include sources and accessible credits', () => {
   const ids = Object.keys(TOURISM_PHOTOS)
-  assert.deepEqual(ids, ['central-park', 'tri-bowl', 'g-tower'])
+  assert.deepEqual(ids, SONGDO_MAP_POINTS.map(point => point.id))
   for (const [id, photo] of Object.entries(TOURISM_PHOTOS)) {
     assert.ok(SONGDO_MAP_POINTS.some(point => point.id === id), id)
-    assert.match(photo.imageUrl, /^https:\/\/www\.ifez\.go\.kr\/other\/attach\/process\.file\.do\?TP=img&key=[A-Z0-9]+&sn=\d+$/)
+    assert.match(photo.imageUrl, /^https:\/\/www\.ifez\.go\.kr\/other\/attach\/process\.file\.do\?TP=(?:img|dn)&key=[A-Z0-9]+&sn=\d+$/)
     assert.match(photo.sourceUrl, /^https:\/\/www\.ifez\.go\.kr\/promote\/pst\/view\.do\?pst_id=scene_photo&pst_sn=\d+$/)
     assert.match(photo.photographedOn, /^\d{4}-\d{2}-\d{2}$/)
     for (const lang of GUIDE_LANGUAGES) assert.ok(photo.alt[lang].length >= 15, id + '/' + lang)
@@ -67,6 +67,10 @@ test('Three publicly licensed IFEZ landmark photos include exact sources and acc
   assert.equal(TOURISM_PHOTOS['central-park']?.photographedOn, '2024-09-23')
   assert.equal(TOURISM_PHOTOS['tri-bowl']?.photographedOn, '2009-08-06')
   assert.equal(TOURISM_PHOTOS['g-tower']?.photographedOn, '2015-04-01')
+  assert.match(TOURISM_PHOTOS['g-tower']!.imageUrl, /sn=79213$/, 'New G-Tower photo must show the entire building');
+  assert.equal(TOURISM_PHOTOS['hanok-village']?.photographedOn, '2015-01-05')
+  assert.equal(TOURISM_PHOTOS['haedoji-park']?.photographedOn, '2022-05-02')
+  assert.equal(TOURISM_PHOTOS['michuhol-park']?.photographedOn, '2019-04-19')
   for (const lang of GUIDE_LANGUAGES) {
     const ui = TOURISM_PHOTO_UI[lang]
     assert.ok(ui.sourceLabel.includes('IFEZ') && ui.sourceLabel.length >= 25, lang)
