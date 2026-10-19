@@ -45,9 +45,9 @@ test('final QA: each English venue label is Latin-readable with Korean search/na
   }
 })
 
-test('final QA: time conflict is not misrepresented as an official definite opening hour', () => {
+test('final QA: guest-confirmed Geumbyeol schedule is consistent across four languages', () => {
   const geumbyeol = byId('geumbyeol-beer-songdo-lotte-mall')
-  for (const lang of GUIDE_LANGUAGES) assert.ok(!/\d{2}:\d{2}/.test(geumbyeol.translations[lang].openingHours))
+  for (const lang of GUIDE_LANGUAGES) assert.deepEqual(geumbyeol.translations[lang].openingHours.match(/\d{2}:\d{2}/g), ['17:00','01:00','00:00'])
   const burger = byId('burgeroom181-songdo')
   for (const lang of GUIDE_LANGUAGES) {
     assert.match(burger.translations[lang].openingHours, /16:00.*17:00/)
