@@ -306,8 +306,19 @@ test('STEP 3 official location fixes retain correct water taxi boarding point an
     assert.match(taxi.translations[lang].description, /보트하우스|Boathouse|船屋|ボートハウス/)
     assert.ok(!taxi.translations[lang].address.includes('컨벤시아대로 160'))
   }
-  for (const facility of [outlet, gTower, taxi]) {
-    assert.equal(facility.naverMapUrl, null)
+  const routeExpectations = [
+    [outlet, '35439053', 'transit', '현대프리미엄아울렛 송도점'],
+    [gTower, '19453537', 'walk', 'G타워'],
+    [taxi, '31104025', 'transit', '송도코마린웨스트보트하우스'],
+  ] as const
+  for (const [facility, destinationId, mode, placeName] of routeExpectations) {
+    const url = facility.naverMapUrl
+    assert.ok(url?.startsWith('https://map.naver.com/p/directions/'), facility.id)
+    const path = decodeURIComponent(new URL(url!).pathname)
+    assert.ok(path.includes('송도센트럴파크호텔,19398065,PLACE_POI/'), facility.id)
+    assert.ok(path.includes(placeName + ',' + destinationId + ',PLACE_POI'), facility.id)
+    assert.ok(path.endsWith('/-/' + mode), facility.id)
+    // A route link does not establish measured travel time or an on-site verification date.
     assert.equal(facility.walkingMinutes, null)
     assert.equal(facility.lastVerifiedAt, null)
   }
