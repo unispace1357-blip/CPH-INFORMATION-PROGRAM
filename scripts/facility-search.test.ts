@@ -22,8 +22,8 @@ const cases: [string, string, string[]][] = [
   ['literal asterisk', '*', ['qa-beta']],
   ['regex-looking query is literal', '.*', []],
   ['no results', '존재하지않는시설', []],
-  ['Chinese keyword included', '汉语限定', ['qa-alpha']],
-  ['Japanese keyword included', '日本語限定', ['qa-alpha']],
+  ['Chinese keyword included', '汉语限定', ['qa-alpha', 'qa-beta', 'qa-gamma']],
+  ['Japanese keyword included', '日本語限定', ['qa-alpha', 'qa-beta', 'qa-gamma']],
   ['category name is not an implicit keyword', '사우나', []],
 ]
 for (const [label, query, expected] of cases) {
