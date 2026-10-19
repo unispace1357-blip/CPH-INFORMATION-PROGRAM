@@ -309,7 +309,7 @@ test('STEP 3 official location fixes retain correct water taxi boarding point an
   const routeExpectations = [
     [outlet, '35439053', 'transit', '현대프리미엄아울렛 송도점'],
     [gTower, '19453537', 'walk', 'G타워'],
-    [taxi, '31104025', 'transit', '송도코마린웨스트보트하우스'],
+    [taxi, '31104025', 'walk', '송도코마린웨스트보트하우스'],
   ] as const
   for (const [facility, destinationId, mode, placeName] of routeExpectations) {
     const url = facility.naverMapUrl
