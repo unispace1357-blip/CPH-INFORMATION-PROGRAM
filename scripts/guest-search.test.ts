@@ -55,7 +55,7 @@ test('guest selection survives UI language changes but not excluded search resul
 })
 
 test('guest searches description and address, but does not invent category synonyms', () => {
-  assert.ok(searchGuestFacilities(guestFixtures(), 'QA address').length >= 0)
+  assert.deepEqual(searchGuestFacilities(guestFixtures(), 'QA address').map(item => item.id), ['guest-qa-a'])
   assert.deepEqual(searchGuestFacilities(guestFixtures(), 'sauna'), [])
 })
 
