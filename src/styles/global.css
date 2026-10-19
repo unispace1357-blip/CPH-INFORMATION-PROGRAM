@@ -255,3 +255,45 @@ main { flex: 1; padding-block: var(--space-8) var(--space-10); }
 .tourism-map-external-link { justify-self: start; display: inline-flex; align-items: center; gap: 6px; font-weight: 650; font-size: .91rem; text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
 .tourism-map-credit { color: #61747c; font-size: .73rem; line-height: 1.5; margin: 0; }
 @media (max-width: 375px) { .tourism-map-drawing { height: 318px; } .tourism-map-pin { width: 28px; height: 28px; } }
+
+/* Staff-only request capture; never shown in the guest header. */
+.staff-header-actions { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 10px; }
+.staff-request-trigger { background: #f6e9d2; color: #293f63; border-color: #e5cfab; font-weight: 800; }
+.staff-request-trigger:hover { background: #fff5e6; }
+.staff-request-dialog {
+  position: fixed;
+  width: min(560px, calc(100vw - 24px));
+  max-height: min(90dvh, 800px);
+  margin: auto;
+  padding: 24px;
+  overflow: auto;
+  border: 1px solid #d6e0ec;
+  border-radius: 18px;
+  color: var(--color-text);
+  background: var(--color-surface);
+  box-shadow: 0 18px 65px rgb(12 31 58 / 35%);
+}
+.staff-request-dialog::backdrop { background: rgb(17 31 51 / 64%); }
+.staff-request-dialog-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.staff-request-dialog-heading h2 { font-size: 1.4rem; }
+.staff-request-eyebrow { color: #5d7699; font-size: .72rem; font-weight: 800; letter-spacing: .1em; }
+.staff-request-description { margin: 8px 0 18px; color: var(--color-text-secondary); font-size: .94rem; }
+.staff-request-form { display: flex; flex-direction: column; gap: 8px; }
+.staff-request-form label { font-weight: 700; font-size: .94rem; margin-top: 8px; }
+.staff-request-form select,
+.staff-request-form textarea,
+.staff-request-manual-copy { width: 100%; min-height: 44px; border: 1px solid #a7bbd5; border-radius: 9px; background: #fff; color: var(--color-text); padding: 10px 12px; }
+.staff-request-form textarea { resize: vertical; line-height: 1.6; }
+.staff-request-form select:focus-visible, .staff-request-form textarea:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+.staff-request-count { color: var(--color-text-secondary); font-size: .8rem; text-align: right; }
+.staff-request-privacy { background: #fff7ed; border-left: 3px solid #c89555; border-radius: 6px; padding: 9px 12px; font-size: .82rem; line-height: 1.65; }
+.staff-request-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 8px; }
+.staff-request-unavailable { color: #6e5b43; font-size: .82rem; font-weight: 650; }
+.staff-request-instructions, .staff-request-status { color: #405f86; font-size: .85rem; line-height: 1.6; }
+.staff-request-submit { text-align: center; }
+.staff-request-manual-copy { font-size: .85rem; }
+@media (max-width: 599px) {
+  .staff-header-actions { justify-content: flex-start; }
+  .staff-request-dialog { padding: 18px; }
+  .staff-request-actions .button { flex: 1 1 auto; }
+}
