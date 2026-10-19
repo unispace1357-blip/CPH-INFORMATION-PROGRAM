@@ -4,7 +4,7 @@ import type { IconName } from '../components/ui/Icon'
 /** Display labels only. No facility JSON or search/filter logic is imported here. */
 export const FACILITY_CATEGORY_OPTIONS = [
   { code: 'hotel', staffLabel: '호텔 관련', guestLabel: 'Hotel facilities', icon: 'hotel' },
-  { code: 'dining', staffLabel: '음식점', guestLabel: 'Restaurants', icon: 'dining' },
+  { code: 'dining', staffLabel: '음식점·주점', guestLabel: 'Restaurants & Pubs', icon: 'dining' },
   { code: 'cafe', staffLabel: '카페', guestLabel: 'Cafes', icon: 'cafe' },
   { code: 'convenience', staffLabel: '편의점', guestLabel: 'Convenience stores', icon: 'convenience' },
   { code: 'pharmacy', staffLabel: '약국', guestLabel: 'Pharmacies', icon: 'pharmacy' },
