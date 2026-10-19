@@ -302,7 +302,7 @@ test('STEP 3 official location fixes retain correct water taxi boarding point an
     assert.match(outlet.translations[lang].openingHours, /10:30.*20:00.*10:30.*21:00/)
     assert.match(gTower.translations[lang].openingHours, /20:30/)
     assert.ok(gTower.closedDays[lang])
-    assert.match(taxi.translations[lang].address, /인천타워대로 253-34/)
+    assert.match(taxi.translations[lang].address, lang === 'ko' ? /인천타워대로 253-34/ : /Incheon Tower-daero 253-34/)
     assert.match(taxi.translations[lang].description, /보트하우스|Boathouse|船屋|ボートハウス/)
     assert.ok(!taxi.translations[lang].address.includes('컨벤시아대로 160'))
   }
