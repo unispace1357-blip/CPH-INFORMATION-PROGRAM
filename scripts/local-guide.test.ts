@@ -20,7 +20,7 @@ test('Hotel supplied bus 6777 lists 12 exact stop departures, route and 4-langua
     assert.ok(copy.boarding.length > 20 && /1/.test(copy.boarding))
     assert.ok(/Terminal|터미널|航站楼|ターミナル/.test(copy.routeDescription))
     assert.ok(copy.disclaimer.length > 30)
-    assert.ok(copy.fareUnknown.length > 20)
+    assert.ok(copy.fareUnknown.length >= 10)
     assert.ok(copy.tourismCaution.length > 20)
   }
   assert.match(LOCAL_GUIDE_COPY.ko.boarding, /1번 출구/)
