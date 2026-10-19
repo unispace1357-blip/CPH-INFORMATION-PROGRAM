@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import facilityData from '../src/data/facilities.json' with { type: 'json' }
+import { GUIDE_LANGUAGES } from '../src/types/guide.ts'
+import { parseFacilityDataset } from '../src/data/validateFacilityDataset.ts'
 import { FACILITY_CATEGORIES } from '../src/types/facility.ts'
 import { searchFacilities, resolveSelectedFacility } from '../src/services/facilitySearch.ts'
 import { searchGuestFacilities } from '../src/services/guestFacilitySearch.ts'
@@ -104,4 +106,51 @@ test('every beer-serving venue is searchable by shared beer keyword in Staff and
     assert.ok(search(facilityData.facilities as any, '현프아').some(item => item.id === 'hyundai-premium-outlet-songdo'))
     assert.ok(search(facilityData.facilities as any, '수상택시').some(item => item.id === 'songdo-central-park-water-taxi'))
   }
+})
+
+test('STEP 4: all dining and cafe venues include a localized food type, menu examples and searchable keywords', () => {
+  const facilities = parseFacilityDataset(facilityData).facilities
+  const foodVenues = facilities.filter(facility => facility.category === 'dining' || facility.category === 'cafe')
+  assert.equal(foodVenues.length, 14)
+  assert.equal(foodVenues.filter(facility => facility.category === 'dining').length, 11)
+  assert.equal(foodVenues.filter(facility => facility.category === 'cafe').length, 3)
+  for (const facility of foodVenues) {
+    for (const language of GUIDE_LANGUAGES) {
+      const description = facility.translations[language].description
+      assert.ok(description.trim().length > 20, facility.id + '/' + language)
+      assert.match(description, /메뉴 예시:|Menu examples:|菜品示例：|メニュー例：/, facility.id + '/' + language)
+      assert.ok(facility.keywords[language].length >= 5, facility.id + '/' + language)
+      const type = description.split(' · ')[0]!
+      assert.ok(facility.keywords[language].includes(type), facility.id + '/' + language)
+      for (const item of facility.keywords[language]) assert.ok(searchGuestFacilities(facilities, item, facility.category, language).some(found => found.id === facility.id), facility.id + '/' + language + '/' + item)
+    }
+    assert.match(facility.englishPhrases[0]!, /Menu examples include:/)
+    assert.match(facility.englishPhraseMeanings?.[0] ?? '', /대표 메뉴 예시:/)
+    assert.equal(facility.lastVerifiedAt, null, facility.id) // Individual menu stock was not checked on site.
+  }
+})
+
+test('STEP 4: Korean menu and cuisine queries match all relevant venues across Staff and Guest', () => {
+  const facilities = parseFacilityDataset(facilityData).facilities
+  const expected: { query: string; ids: string[] }[] = [
+    { query: '맥주', ids: ['malt-house-incheon-songdo', 'burgeroom181-songdo', 'playground-brewery-taproom-songdo', 'geumbyeol-beer-songdo-lotte-mall'] },
+    { query: '고기', ids: ['hanyang-songdo-hanok-village', 'gyeongbokgung-hanok-village'] },
+    { query: '갈비', ids: ['hanyang-songdo-hanok-village', 'gyeongbokgung-hanok-village'] },
+    { query: '중식', ids: ['paljinhyang-hanok-village'] },
+    { query: '짜장면', ids: ['paljinhyang-hanok-village'] },
+    { query: '김밥', ids: ['otto-gimbap-songdo'] },
+    { query: '쭈꾸미', ids: ['songjjujip-main'] },
+    { query: '수제버거', ids: ['burgeroom181-songdo', 'playground-brewery-taproom-songdo'] },
+    { query: '커피', ids: ['compose-coffee-incheon-songdo-central-park', 'hollys-incheon-hanok-village', 'starbucks-songdo-central-park'] },
+    { query: '햄버거', ids: ['burgeroom181-songdo', 'moms-touch-songdo-central-park', 'burger-king-incheon-songdo-central-park'] },
+  ]
+  for (const { query, ids } of expected) {
+    for (const search of [searchFacilities, searchGuestFacilities]) {
+      const result = search(facilities, query).map(facility => facility.id)
+      for (const id of ids) assert.ok(result.includes(id), query + ': ' + id)
+    }
+  }
+  assert.ok(searchFacilities(facilities, '경복궁 갈비').some(item => item.id === 'gyeongbokgung-hanok-village'))
+  assert.ok(searchGuestFacilities(facilities, '베트남 치킨').some(item => item.id === 'playground-brewery-taproom-songdo'))
+  assert.ok(searchGuestFacilities(facilities, 'waSAbi', 'dining').some(item => item.id === 'otto-gimbap-songdo'))
 })
