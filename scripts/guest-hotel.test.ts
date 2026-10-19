@@ -4,7 +4,7 @@ import { GUIDE_LANGUAGES } from '../src/types/guide.ts'
 import { MESSAGES } from '../src/i18n/messages.ts'
 import type { HotelCategory } from '../src/i18n/types.ts'
 import { localizedValue } from '../src/i18n/formatters.ts'
-import { hotelHasInformation, hotelTopicText } from '../src/services/guestHotelPresentation.ts'
+import { guestSmokingNotice, hotelHasInformation, hotelParagraphs, hotelTopicText } from '../src/services/guestHotelPresentation.ts'
 import { loadGuestFacilities, loadGuestHotel } from '../src/services/loadGuestData.ts'
 import { loadStaffDataset } from '../src/services/loadStaffDataset.ts'
 import { guestFacilityDataset, emptyGuestHotel } from './guest-test-fixtures.ts'
@@ -16,6 +16,17 @@ for (const category of ['checkIn', 'checkOut', 'breakfast', 'parking', 'roomUsag
     for (const language of GUIDE_LANGUAGES) assert.equal(hotelTopicText(hotel, category, language), `Fictional QA ${category}: ${language}`)
   })
 }
+
+test('prominent smoking notice retains exact hotel policy and 200,000 fee in all four languages', async () => {
+  const hotel = await loadGuestHotel()
+  for (const language of GUIDE_LANGUAGES) {
+    const paragraphs = hotelParagraphs(guestSmokingNotice(hotel, language))
+    assert.equal(paragraphs.length, 2)
+    assert.equal(paragraphs[0], hotelParagraphs(hotel.translations[language].roomUsage)[8])
+    assert.equal(paragraphs[1], hotelParagraphs(hotel.translations[language].notes)[1])
+    assert.match(paragraphs[1]!, /200,000/)
+  }
+})
 
 test('empty hotel and unconfirmed common times stay unavailable in every language', () => {
   const hotel = emptyGuestHotel()

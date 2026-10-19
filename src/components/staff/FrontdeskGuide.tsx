@@ -9,6 +9,8 @@ import { Button } from '../ui/Button'
 import { CategoryCard } from '../ui/CategoryCard'
 import { EmptyState } from '../ui/EmptyState'
 import { InformationNotice } from '../ui/InformationNotice'
+import { SmokingPolicyNotice } from '../ui/SmokingPolicyNotice'
+import { hotelDataset } from '../../data/hotelDataset'
 import { LoadingState } from '../ui/LoadingState'
 import type { IconName } from '../ui/Icon'
 import { FrontdeskScriptDetail } from './FrontdeskScriptDetail'
@@ -50,8 +52,7 @@ export function FrontdeskGuide() {
   }
 
   return <div className="frontdesk-guide">
-    {dataset?.scripts.find(script => script.id === 'indoor-smoking-policy') && <InformationNotice title="객실 및 실내 금연 안내" tone="warning">{dataset.scripts.find(script => script.id === 'indoor-smoking-policy')!.details?.ko}</InformationNotice>}
-    {dataset?.scripts.some(script => script.reviewStatus === 'draft') && <InformationNotice title="검수 전 응대 자료" tone="warning">검수 전 · draft 표시가 있는 문장은 초안입니다. 실제 안내 전 현재 호텔 운영 기준과 직원 확인사항을 확인해 주세요.</InformationNotice>}
+    {dataset?.scripts.some(script => script.id === 'indoor-smoking-policy') && <SmokingPolicyNotice hotel={hotelDataset} language="ko" />}
     {dataState.status === 'error' && <div role="alert"><InformationNotice title="호텔 업무 스크립트를 불러오지 못했습니다" tone="warning"><p>데이터 검증 결과를 확인하고 다시 시도해 주세요. 주변 시설 안내는 별도 탭에서 이용할 수 있습니다.</p><Button variant="secondary" onClick={() => window.location.reload()}>새로고침</Button></InformationNotice></div>}
     <section className="panel search-panel" aria-labelledby="frontdesk-search-title">
       <div className="section-heading staff-section-heading">

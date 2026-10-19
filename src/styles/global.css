@@ -49,6 +49,32 @@ main { flex: 1; padding-block: var(--space-8) var(--space-10); }
 .notice-title { font-size: 1rem; font-weight: 700; margin-bottom: var(--space-1); }
 .notice-content { font-size: .925rem; line-height: 1.75; color: var(--color-text-secondary); }
 .notice-content p + p { margin-top: var(--space-2); }
+/* Critical hotel policy: make the no-smoking rule and possible room cleaning fee unmissable. */
+.smoking-policy-notice .information-notice {
+  border: 2px solid #b52c24;
+  border-left-width: 6px;
+  background: #fff5f1;
+  box-shadow: 0 4px 18px rgb(133 29 20 / 12%);
+}
+.smoking-policy-notice .information-notice > .icon { color: #a9251d; }
+.smoking-policy-notice .notice-title {
+  color: #861c17;
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+.smoking-policy-notice .notice-content { color: #382522; font-size: 1rem; }
+.smoking-policy-copy { display: grid; gap: var(--space-3); min-width: 0; }
+.smoking-policy-copy p { margin: 0; overflow-wrap: anywhere; }
+.smoking-policy-copy p + p { margin-top: 0; }
+.smoking-policy-rule { font-weight: 650; }
+.smoking-policy-fee {
+  border-radius: var(--radius-small);
+  background: #ffe0d7;
+  color: #801c16;
+  padding: var(--space-3) var(--space-4);
+  font-size: 1.025rem;
+  line-height: 1.65;
+}
 .search-panel > h2, .guest-search-panel > h2 { margin-bottom: var(--space-5); }
 .field-label { display: block; font-size: .95rem; font-weight: 600; margin-bottom: var(--space-2); }
 .search-control { display: flex; align-items: center; gap: var(--space-3); padding-inline: var(--space-4); min-height: 54px; border: 1px solid var(--color-text-secondary); background: var(--color-surface); border-radius: var(--radius-medium); color: var(--color-text-secondary); }
