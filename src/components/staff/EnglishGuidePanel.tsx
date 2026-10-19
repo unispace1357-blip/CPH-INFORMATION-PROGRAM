@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Button } from '../ui/Button'
 import { Icon } from '../ui/Icon'
+import { EnglishReadingText } from './EnglishReadingText'
 import { copyText, joinEnglishPhrases } from '../../services/clipboard'
 
 interface CopyState { target: number | 'all'; status: 'pending' | 'success' | 'failed' }
@@ -26,10 +27,10 @@ export function EnglishGuidePanel({ phrases, meanings = [] }: { phrases: readonl
       <div className="section-heading"><h3 id="english-guide-title" lang="en">English Guide</h3>
         {phrases.length !== 1 && <Button variant="secondary" disabled={!phrases.length || pending} onClick={() => void copy('all')} icon={<Icon name="copy" size={16} />}>{phrases.length ? '전체 문구 복사' : '복사'}</Button>}
       </div>
-      <p className="field-hint">복사 버튼은 영어 문장만 복사합니다.</p>
+      <p className="field-hint">어려운 영어 단어 옆의 한글 발음은 직원 참고용입니다. 복사하면 원래 영어 문장만 복사됩니다.</p>
       {!phrases.length ? <p className="phrase-placeholder">영어 안내 문구가 아직 등록되지 않았습니다.</p> : <ol className="english-phrases">{phrases.map((phrase, index) => <li key={index}>
         <h4 className="english-phrase-label">{index === 0 ? '기본 안내' : index === 1 ? '상세 안내' : `추가 안내 ${index - 1}`}</h4>
-        <p className="english-phrase-text" lang="en">{phrase}</p>
+        <p className="english-phrase-text" lang="en"><EnglishReadingText text={phrase} /></p>
         <p className="english-phrase-meaning" lang="ko">{meanings[index]?.trim() ? meanings[index] : '한국어 뜻 미등록'}</p>
         <Button variant="secondary" disabled={pending} onClick={() => void copy(index)} aria-label={`영어 문구 ${index + 1} 복사`} icon={<Icon name="copy" size={16} />}>{copyState?.target === index && copyState.status === 'success' ? '복사 완료' : '복사'}</Button>
       </li>)}</ol>}

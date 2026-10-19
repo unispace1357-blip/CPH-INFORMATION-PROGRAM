@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto'
 import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import reference from '../docs/reference/step07a-approved-copy.json' with { type: 'json' }
+import amendments from '../docs/reference/step2-operational-amendments.json' with { type: 'json' }
 import { GUIDE_LANGUAGES } from '../src/types/guide.ts'
 import type { GuideLanguage } from '../src/types/guide.ts'
 import { parseHotelDataset } from '../src/data/validateHotelDataset.ts'
@@ -29,6 +30,16 @@ export function verifyApprovedHotel(input: unknown): CopyMismatch[] {
   compare('reference', 'recordIds', ids, reference.records.map(record => record.id), 'Missing or duplicate workbook record')
   compare('reference', 'mapping', APPROVED_MAPPING, reference.mapping, 'Mapping differs from the final instruction')
   compare('reference', 'excludedIds', ['H33'], reference.excludedIds, 'Public hold must stay H33')
+  // Preserve historical workbook hashes; only two user-requested delivery corrections may differ.
+  compare('amendments', 'schemaVersion', 1, amendments.schemaVersion, 'Unexpected amendment schema')
+  compare('amendments', 'effectiveDate', '2026-10-19', amendments.effectiveDate, 'Unexpected amendment date')
+  compare('amendments', 'replacementIds', ['H19', 'H20'], Object.keys(amendments.replacements).sort(), 'Only delivery paragraphs may be replaced')
+  for (const id of ['H19', 'H20'] as const) {
+    compare(id, 'replacementLanguages', [...GUIDE_LANGUAGES], Object.keys(amendments.replacements[id]), 'All four languages must be provided')
+    for (const language of GUIDE_LANGUAGES) {
+      if (!amendments.replacements[id][language]?.trim()) errors.push({ id, field: 'amendment', language, expected: 'nonblank', actual: amendments.replacements[id][language], reason: 'Blank operational update' })
+    }
+  }
   for (const record of reference.records) {
     for (const language of GUIDE_LANGUAGES) {
       const value = record.translations[language]
@@ -44,7 +55,7 @@ export function verifyApprovedHotel(input: unknown): CopyMismatch[] {
     for (const [field, fieldIds] of Object.entries(APPROVED_MAPPING)) {
       const actual = hotel.translations[language][field as keyof typeof APPROVED_MAPPING]
       const paragraphs = actual.split('\n\n')
-      fieldIds.forEach((id, index) => compare(id, field, reference.records.find(record => record.id === id)?.translations[language], paragraphs[index], 'Approved cell missing, altered, duplicated or placed in the wrong field', language))
+      fieldIds.forEach((id, index) => compare(id, field, (id === 'H19' || id === 'H20' ? amendments.replacements[id][language] : reference.records.find(record => record.id === id)?.translations[language]), paragraphs[index], 'Approved cell missing, altered, duplicated or placed in the wrong field', language))
       compare(fieldIds.join(','), `${field}.paragraphCount`, fieldIds.length, paragraphs.length, 'Unexpected or duplicate paragraph', language)
     }
     const held = reference.records.find(record => record.id === 'H33')!.translations[language]
@@ -57,6 +68,6 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   try {
     const errors = verifyApprovedHotel(JSON.parse(readFileSync(new URL('../src/data/hotel.json', import.meta.url), 'utf8')))
     if (errors.length) { console.error(JSON.stringify(errors, null, 2)); process.exitCode = 1 }
-    else console.log('PASS: H01–H35 recognized; 34 approved entries × 4 languages exactly match; H33 withheld; confirmed times/date and demo status preserved. Translator checks not performed.')
+    else console.log('PASS: historical H01–H35 hashes intact; only H19/H20 delivery updates applied in four languages; H33 withheld; other approved entries preserved.')
   } catch (error) { console.error(error instanceof Error ? error.message : error); process.exitCode = 1 }
 }

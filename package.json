@@ -15,7 +15,7 @@
     "validate:production": "node scripts/validate-production.ts",
     "build:production": "node scripts/clean-production.ts && npm run validate:production && tsc -b && node scripts/build-production.ts",
     "validate:hotel-copy": "node scripts/validate-hotel-copy.ts",
-    "test:ui": "node scripts/ui-smoke.cjs",
+    "test:ui": "node scripts/final-qa-ui.cjs",
     "admin:dev": "vite --config vite.admin.config.ts",
     "admin:build": "tsc -p tsconfig.admin.json && vite build --config vite.admin.config.ts"
   },

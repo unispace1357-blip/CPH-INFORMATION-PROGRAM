@@ -19,6 +19,7 @@ const categories: Record<FrontdeskScriptCategory, { label: string; icon: IconNam
   'room-usage': { label: '객실 이용', icon: 'bed' },
   'hotel-policy': { label: '호텔 정책', icon: 'info' },
   'hotel-facilities': { label: '호텔 시설', icon: 'hotel' },
+  'parking': { label: '주차 안내', icon: 'parking' },
 }
 type DataState = { status: 'loading' } | { status: 'error' } | { status: 'ready'; dataset: FrontdeskScriptDataset }
 
@@ -49,6 +50,7 @@ export function FrontdeskGuide() {
   }
 
   return <div className="frontdesk-guide">
+    {dataset?.scripts.find(script => script.id === 'indoor-smoking-policy') && <InformationNotice title="객실 및 실내 금연 안내" tone="warning">{dataset.scripts.find(script => script.id === 'indoor-smoking-policy')!.details?.ko}</InformationNotice>}
     {dataset?.scripts.some(script => script.reviewStatus === 'draft') && <InformationNotice title="검수 전 응대 자료" tone="warning">검수 전 · draft 표시가 있는 문장은 초안입니다. 실제 안내 전 현재 호텔 운영 기준과 직원 확인사항을 확인해 주세요.</InformationNotice>}
     {dataState.status === 'error' && <div role="alert"><InformationNotice title="호텔 업무 스크립트를 불러오지 못했습니다" tone="warning"><p>데이터 검증 결과를 확인하고 다시 시도해 주세요. 주변 시설 안내는 별도 탭에서 이용할 수 있습니다.</p><Button variant="secondary" onClick={() => window.location.reload()}>새로고침</Button></InformationNotice></div>}
     <section className="panel search-panel" aria-labelledby="frontdesk-search-title">
@@ -56,7 +58,7 @@ export function FrontdeskGuide() {
         <div className="staff-heading-group"><span className="staff-section-number" aria-hidden="true">01</span><div><p className="staff-section-kicker">HOTEL ENGLISH ASSISTANCE</p><h2 id="frontdesk-search-title">호텔 업무 영어 응대</h2></div></div>
         <Button variant="quiet" disabled={!query} onClick={() => setQuery('')}>검색어 지우기</Button>
       </div>
-      <SearchInput label="호텔 업무 제목, 고객 질문 또는 키워드" placeholder="체크인, 조식, Wi-Fi, late check-out" value={query} onChange={event => setQuery(event.target.value)} disabled={!dataset} hint="한국어·영어 키워드, 스크립트 제목과 고객 질문을 검색합니다." />
+      <SearchInput label="호텔 업무 제목, 고객 질문 또는 키워드" placeholder="체크인, 조식, Wi-Fi, late check-out" value={query} onChange={event => setQuery(event.target.value)} disabled={!dataset} hint="한국어·영어 키워드, 제목과 고객 질문·답변 내용을 검색합니다. 직원 전용 확인사항은 검색에서 제외됩니다." />
       <div className="frontdesk-category-grid staff-category-grid" role="group" aria-label="호텔 업무 카테고리">
         <CategoryCard label="전체" icon="grid" compact selected={category === 'all'} disabled={!dataset} onClick={() => setCategory('all')} />
         {FRONTDESK_SCRIPT_CATEGORIES.map(code => <CategoryCard key={code} label={categories[code].label} icon={categories[code].icon} compact selected={category === code} disabled={!dataset} onClick={() => setCategory(code)} />)}

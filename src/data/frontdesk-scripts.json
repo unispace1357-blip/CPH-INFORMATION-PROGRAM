@@ -3,6 +3,77 @@
   "dataStatus": "demo",
   "scripts": [
     {
+      "id": "indoor-smoking-policy",
+      "category": "hotel-policy",
+      "title": "객실 및 실내 금연",
+      "keywords": [
+        "금연",
+        "객실 흡연",
+        "흡연금지",
+        "no smoking",
+        "smoke in room",
+        "cleaning fee"
+      ],
+      "question": {
+        "en": "Can I smoke in my room?",
+        "ko": "객실에서 흡연할 수 있나요?"
+      },
+      "quickAnswer": {
+        "en": "I'm sorry, but smoking is not allowed inside the hotel.",
+        "ko": "죄송하지만 호텔 내부에서는 흡연이 금지되어 있습니다."
+      },
+      "details": {
+        "en": "Smoking is not allowed in guest rooms or indoor areas. A cleaning fee of 200,000 won may apply if you smoke in your room.",
+        "ko": "객실 및 호텔 실내에서는 흡연이 금지되어 있습니다. 객실에서 흡연하시면 200,000원의 청소비가 발생할 수 있습니다."
+      },
+      "staffChecks": [
+        "객실 흡연 청소비 등록 기준: 200,000원",
+        "실제 청구 판단 및 처리 절차는 내부 기준 확인",
+        "흡연 장소 문의 시 흡연 장소 스크립트 연결"
+      ],
+      "sourceType": "hotel-data",
+      "sourceSection": "notes",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "smoking-area",
+      "category": "hotel-policy",
+      "title": "흡연 장소 안내",
+      "keywords": [
+        "흡연장",
+        "흡연",
+        "담배",
+        "재떨이",
+        "은색 통",
+        "smoking area",
+        "smoke",
+        "ashtray",
+        "silver bin"
+      ],
+      "question": {
+        "en": "Where is the smoking area?",
+        "ko": "흡연 장소는 어디인가요?"
+      },
+      "quickAnswer": {
+        "en": "The smoking area is outside, to the left of the main entrance.",
+        "ko": "흡연 장소는 정문 밖 왼쪽에 있습니다."
+      },
+      "details": {
+        "en": "Go out through the main entrance and turn left. You'll see a silver ashtray bin there.",
+        "ko": "정문으로 나가 왼쪽으로 가시면 은색 재떨이 통이 보입니다."
+      },
+      "staffChecks": [
+        "위치: 호텔 정문 밖 왼쪽",
+        "식별물: 은색 재떨이 통",
+        "재떨이 또는 흡연 장소 변경 여부를 운영 중 확인"
+      ],
+      "sourceType": "user-provided",
+      "sourceSection": null,
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
       "id": "check-in-time",
       "category": "check-in-out",
       "title": "체크인 시간",
@@ -541,77 +612,6 @@
       "lastVerifiedAt": null
     },
     {
-      "id": "indoor-smoking-policy",
-      "category": "hotel-policy",
-      "title": "객실 및 실내 금연",
-      "keywords": [
-        "금연",
-        "객실 흡연",
-        "흡연금지",
-        "no smoking",
-        "smoke in room",
-        "cleaning fee"
-      ],
-      "question": {
-        "en": "Can I smoke in my room?",
-        "ko": "객실에서 흡연할 수 있나요?"
-      },
-      "quickAnswer": {
-        "en": "I'm sorry, but smoking is not allowed inside the hotel.",
-        "ko": "죄송하지만 호텔 내부에서는 흡연이 금지되어 있습니다."
-      },
-      "details": {
-        "en": "Smoking is not allowed in guest rooms or indoor areas. A cleaning fee of 200,000 won may apply if you smoke in your room.",
-        "ko": "객실 및 호텔 실내에서는 흡연이 금지되어 있습니다. 객실에서 흡연하시면 200,000원의 청소비가 발생할 수 있습니다."
-      },
-      "staffChecks": [
-        "객실 흡연 청소비 등록 기준: 200,000원",
-        "실제 청구 판단 및 처리 절차는 내부 기준 확인",
-        "흡연 장소 문의 시 흡연 장소 스크립트 연결"
-      ],
-      "sourceType": "hotel-data",
-      "sourceSection": "notes",
-      "reviewStatus": "draft",
-      "lastVerifiedAt": null
-    },
-    {
-      "id": "smoking-area",
-      "category": "hotel-policy",
-      "title": "흡연 장소 안내",
-      "keywords": [
-        "흡연장",
-        "흡연",
-        "담배",
-        "재떨이",
-        "은색 통",
-        "smoking area",
-        "smoke",
-        "ashtray",
-        "silver bin"
-      ],
-      "question": {
-        "en": "Where is the smoking area?",
-        "ko": "흡연 장소는 어디인가요?"
-      },
-      "quickAnswer": {
-        "en": "The smoking area is outside, to the left of the main entrance.",
-        "ko": "흡연 장소는 정문 밖 왼쪽에 있습니다."
-      },
-      "details": {
-        "en": "Go out through the main entrance and turn left. You'll see a silver ashtray bin there.",
-        "ko": "정문으로 나가 왼쪽으로 가시면 은색 재떨이 통이 보입니다."
-      },
-      "staffChecks": [
-        "위치: 호텔 정문 밖 왼쪽",
-        "식별물: 은색 재떨이 통",
-        "재떨이 또는 흡연 장소 변경 여부를 운영 중 확인"
-      ],
-      "sourceType": "user-provided",
-      "sourceSection": null,
-      "reviewStatus": "draft",
-      "lastVerifiedAt": null
-    },
-    {
       "id": "food-delivery",
       "category": "hotel-policy",
       "title": "음식 배달 이용",
@@ -628,19 +628,20 @@
         "ko": "음식 배달을 주문할 수 있나요?"
       },
       "quickAnswer": {
-        "en": "Food delivery is generally restricted. If you order food, please pick it up outside the main entrance.",
-        "ko": "음식 배달은 원칙적으로 제한됩니다. 주문하시면 정문 밖에서 직접 수령해 주세요."
+        "en": "You can order food delivery. Please collect it from the shelf in front of the front desk after entering through the main entrance.",
+        "ko": "음식 배달을 주문하실 수 있습니다. 정문으로 들어오신 뒤 프론트 앞 선반에서 직접 수령해 주세요."
       },
       "details": {
-        "en": "Delivery drivers cannot enter the hotel. You need to meet the driver outside and collect the food yourself.",
-        "ko": "배달 기사는 호텔 내부로 들어올 수 없습니다. 호텔 밖에서 직접 만나 음식을 수령하셔야 합니다."
+        "en": "After entering the hotel through the main entrance, pick up your order from the designated shelf in front of reception. Please check that it is your order. Delivery to guest rooms is not available.",
+        "ko": "호텔 정문으로 들어오시면 프론트 앞 지정 선반에서 배달 음식을 수령하실 수 있습니다. 본인 주문이 맞는지 확인해 주세요. 객실 앞까지 배달되지는 않습니다."
       },
       "staffChecks": [
-        "원칙적 제한과 현장 처리 방식 구분",
-        "음식 배달 분실 관련 호텔 규정은 관련 문의 시 별도 안내"
+        "프론트 앞 선반 수령: 사용자가 2026-10-19 확인한 현장 동선",
+        "호텔 기본 안내 H19/H20도 동일한 수령 동선으로 갱신됨",
+        "분실 관련 호텔 책임 제한은 원고 기준 유지"
       ],
-      "sourceType": "hotel-data",
-      "sourceSection": "roomUsage",
+      "sourceType": "user-provided",
+      "sourceSection": null,
       "reviewStatus": "draft",
       "lastVerifiedAt": null
     },
@@ -661,16 +662,16 @@
         "ko": "배달 기사가 객실로 올 수 있나요?"
       },
       "quickAnswer": {
-        "en": "I'm sorry, but delivery drivers cannot enter the hotel.",
-        "ko": "죄송하지만 배달 기사는 호텔 내부로 들어올 수 없습니다."
+        "en": "Delivery drivers do not deliver to guest rooms. You can collect your food from the shelf in front of the front desk.",
+        "ko": "배달 기사는 객실로 배달하지 않습니다. 프론트 앞 선반에서 음식을 수령하실 수 있습니다."
       },
       "details": {
-        "en": "For security reasons, please meet the driver outside the main entrance.",
-        "ko": "보안상의 이유로 정문 밖에서 배달 기사를 직접 만나 주세요."
+        "en": "Please enter through the main entrance and check the shelf in front of reception to collect your delivery.",
+        "ko": "정문으로 들어오신 후 프론트 앞 선반에서 배달 음식을 찾아 주세요."
       },
       "staffChecks": [],
-      "sourceType": "hotel-data",
-      "sourceSection": "roomUsage",
+      "sourceType": "user-provided",
+      "sourceSection": null,
       "reviewStatus": "draft",
       "lastVerifiedAt": null
     },
@@ -817,7 +818,7 @@
     },
     {
       "id": "parking-fee",
-      "category": "hotel-facilities",
+      "category": "parking",
       "title": "주차 요금",
       "keywords": [
         "주차",
@@ -847,7 +848,7 @@
     },
     {
       "id": "vehicle-registration",
-      "category": "hotel-facilities",
+      "category": "parking",
       "title": "차량 등록",
       "keywords": [
         "차량등록",

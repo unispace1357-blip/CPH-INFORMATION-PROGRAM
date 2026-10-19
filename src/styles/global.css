@@ -159,3 +159,9 @@ main { flex: 1; padding-block: var(--space-8) var(--space-10); }
 .pending-transit-actions .button:disabled { background: #F1F3F5; color: #545B64; border-color: #D9DEE3; cursor: default; }
 .guest-detail-panel .section-heading .button, .guest-topic-detail .section-heading .button { max-width: 100%; }
 @media (min-width: 768px) { .guest-result-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } .guest-topic-detail .detail-facts > div, .guest-detail-panel .detail-facts > div { grid-template-columns: 150px minmax(0, 1fr); } }
+
+/* STEP 4: food type and representative items stay visible before opening restaurant details. */
+.facility-menu-summary { margin: var(--space-2) 0 var(--space-3); font-size: .875rem; line-height: 1.55; color: var(--color-text-secondary, #475569); overflow-wrap: anywhere; }
+
+/* STEP 5: quiet phonetic annotation; staff-only components opt into this class. */
+.staff-reading-hint { color: #476b93; font-size: .87em; font-weight: 600; white-space: nowrap; }
