@@ -2,7 +2,7 @@
 import type { DatasetStatus } from './guide.ts'
 
 export const FRONTDESK_SCRIPT_CATEGORIES = [
-  'check-in-out', 'breakfast', 'room-usage', 'hotel-policy', 'hotel-facilities',
+  'check-in-out', 'breakfast', 'room-usage', 'hotel-policy', 'hotel-facilities', 'parking',
 ] as const
 
 export type FrontdeskScriptCategory = (typeof FRONTDESK_SCRIPT_CATEGORIES)[number]
