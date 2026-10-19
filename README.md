@@ -67,6 +67,7 @@ npm run test:ui
 - [STEP 3 신규 시설 검수 및 호텔 직원 지도 링크 체크리스트](docs/step03-facility-verification.md)
 - [STEP 4 음식점·카페 메뉴 자료 및 검색 검수](docs/step04-menu-verification.md)
 - [STEP 5 다국어 검색·별칭·영어 발음 보조 검수](docs/step05-search-pronunciation-qa.md)
+- [STEP 6 최종 QA — 26곳 분류·메뉴·4언어·운영정보·브라우저 검수 보고서](docs/step06-final-qa-report.md)
 - [데이터 계약·출처·미확인 항목](docs/data-model.md)
 - [관리자 저장·파일 반영 절차](docs/admin-manager.md)
 - [승인 호텔 원고·H33 보류 기준](docs/step07a-hotel-data.md)
