@@ -84,7 +84,7 @@ export const MESSAGES = {
     },
     "categories": {
       "hotel": "Hotel facilities",
-      "dining": "Restaurants",
+      "dining": "Restaurants & Pubs",
       "cafe": "Cafes",
       "convenience": "Convenience stores",
       "pharmacy": "Pharmacies",
@@ -183,7 +183,7 @@ export const MESSAGES = {
     },
     "categories": {
       "hotel": "호텔 관련 시설",
-      "dining": "음식점",
+      "dining": "음식점·주점",
       "cafe": "카페",
       "convenience": "편의점",
       "pharmacy": "약국",
@@ -282,7 +282,7 @@ export const MESSAGES = {
     },
     "categories": {
       "hotel": "酒店设施",
-      "dining": "餐厅",
+      "dining": "餐厅·酒吧",
       "cafe": "咖啡馆",
       "convenience": "便利店",
       "pharmacy": "药店",
@@ -381,7 +381,7 @@ export const MESSAGES = {
     },
     "categories": {
       "hotel": "ホテル関連施設",
-      "dining": "飲食店",
+      "dining": "飲食店・パブ",
       "cafe": "カフェ",
       "convenience": "コンビニ",
       "pharmacy": "薬局",
