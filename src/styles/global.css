@@ -195,7 +195,7 @@ main { flex: 1; padding-block: var(--space-8) var(--space-10); }
 .tourism-map-pin[data-spot-id="tri-bowl"] { --pin-offset-x: 0px; --pin-offset-y: 16px; }
 .tourism-map-pin[data-spot-id="g-tower"] { --pin-offset-x: 22px; --pin-offset-y: -12px; }
 @media (max-width: 599px) {
-  .tourism-map-pin[data-spot-id="central-park"] { --pin-offset-x: -14px; --pin-offset-y: 10px; }
+  .tourism-map-pin[data-spot-id="central-park"] { --pin-offset-x: -20px; --pin-offset-y: 10px; }
   .tourism-map-pin[data-spot-id="tri-bowl"] { --pin-offset-x: 0px; --pin-offset-y: 14px; }
   .tourism-map-pin[data-spot-id="g-tower"] { --pin-offset-x: 18px; --pin-offset-y: -10px; }
 }
