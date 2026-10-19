@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
+import { readFileSync, statSync } from 'node:fs'
 import { SONGDO_TOURISM_SPOTS } from '../src/data/localGuide.ts'
 import { HOTEL_MAP_POINT, SONGDO_MAP_POINTS, TOURISM_MAP_UI, approximateMapPosition } from '../src/data/tourismMap.ts'
 import { TOURISM_PHOTOS, TOURISM_PHOTO_UI } from '../src/data/tourismPhotos.ts'
@@ -76,5 +77,16 @@ test('Six publicly licensed IFEZ landmark photos include sources and accessible 
     assert.ok(ui.sourceLabel.includes('IFEZ') && ui.sourceLabel.length >= 25, lang)
     assert.ok(ui.photoUnavailable.length >= 12)
     assert.ok(ui.historicNotice.length >= 14)
+  }
+})
+
+test('All six local WebP previews are complete, compact and ready for offline public deployment', () => {
+  for (const id of Object.keys(TOURISM_PHOTOS)) {
+    const file = new URL(`../public/tourism-photos/${id}.webp`, import.meta.url)
+    const stat = statSync(file)
+    assert.ok(stat.size >= 5000 && stat.size < 350000, `${id} must be optimized for phone loading`)
+    const bytes = readFileSync(file)
+    assert.equal(bytes.toString('ascii', 0, 4), 'RIFF', id + ' RIFF signature')
+    assert.equal(bytes.toString('ascii', 8, 12), 'WEBP', id + ' WebP signature')
   }
 })
