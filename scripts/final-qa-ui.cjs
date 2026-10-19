@@ -145,9 +145,13 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
       assert.ok((await guest.locator('.tourism-photo-caption').innerText()).includes(date));
       assert.ok((await guest.locator('.tourism-photo-caption').innerText()).includes('공공누리 제1유형'));
       // If remote image hosting fails, its credited source remains available.
-      const photoImage = guest.locator('.tourism-photo-media img');
-      if (await photoImage.count()) assert.ok((await photoImage.getAttribute('src')).startsWith('https://www.ifez.go.kr/other/attach/'));
-      else assert.ok(await guest.locator('.tourism-photo-unavailable').isVisible());
+      await guest.locator('.tourism-photo-media').scrollIntoViewIfNeeded();
+      await guest.waitForFunction(() => {
+        const image = document.querySelector('.tourism-photo-media img');
+        return (image && image.complete) || document.querySelector('.tourism-photo-unavailable');
+      }, null, { timeout: 20000 });
+      const loaded = await guest.locator('.tourism-photo-media img').evaluate(img => img.complete && img.naturalWidth > 0).catch(() => false);
+      assert.ok(loaded, 'Original IFEZ photo must actually load in Chromium for ' + id);
     }
     await guest.locator('.tourism-map-location').filter({ hasText: 'G타워' }).click();
     assert.match((await guest.locator('.tourism-map-detail').innerText()), /33층/);
