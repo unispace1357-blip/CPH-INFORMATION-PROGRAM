@@ -137,11 +137,12 @@ main { flex: 1; padding-block: var(--space-8) var(--space-10); }
 @media (min-width: 1000px) { .staff-detail-content .detail-facts > div { grid-template-columns: 104px minmax(0, 1fr); gap: var(--space-3); } }
 
 /* STEP 05 Guest interaction; original Staff layout tokens and rules are retained. */
-.guest-language-toolbar { position: sticky; top: 0; z-index: 2; background: var(--color-background); padding-top: var(--space-2); }
+/* Keep the language switcher in document flow: sticky previously obscured the tourism map. */
+.guest-language-toolbar { position: static; background: var(--color-background); padding-top: var(--space-2); }
 .guest-language-toolbar .language-selector { padding-bottom: var(--space-3); }
 .hotel-category-grid { margin-top: var(--space-4); }
 .guest-topic-detail { margin-top: var(--space-4); }
-.guest-topic-detail h3, .guest-detail-panel h2 { scroll-margin-top: 150px; overflow-wrap: anywhere; }
+.guest-topic-detail h3, .guest-detail-panel h2 { scroll-margin-top: 24px; overflow-wrap: anywhere; }
 .guest-topic-detail .section-heading, .guest-detail-panel .section-heading { align-items: flex-start; }
 .guest-topic-detail .section-heading h3, .guest-detail-panel .section-heading h2 { flex: 1; min-width: 0; }
 .guest-result-list { display: grid; gap: var(--space-4); }
@@ -189,6 +190,16 @@ main { flex: 1; padding-block: var(--space-8) var(--space-10); }
 .tourism-map-north { position: absolute; right: 13px; top: 12px; z-index: 1; background: #ffffffdf; border-radius: 20px; padding: 5px 9px; font-size: .78rem; font-weight: 750; color: #244a4b; }
 .tourism-map-pin, .tourism-map-hotel { position: absolute; z-index: 2; display: flex; align-items: center; justify-content: center; transform: translate(-50%, -50%); border-radius: 50%; width: 31px; height: 31px; font-size: .875rem; font-weight: 750; box-shadow: 0 2px 5px #1b394a45; }
 .tourism-map-pin { background: #fff; color: #164e63; border: 2px solid #287d99; cursor: pointer; touch-action: manipulation; }
+/* Visual separation only; the geographic data and Naver links remain unchanged. */
+.tourism-map-pin[data-spot-id="central-park"] { --pin-offset-x: -18px; --pin-offset-y: 10px; }
+.tourism-map-pin[data-spot-id="tri-bowl"] { --pin-offset-x: 0px; --pin-offset-y: 16px; }
+.tourism-map-pin[data-spot-id="g-tower"] { --pin-offset-x: 22px; --pin-offset-y: -12px; }
+@media (max-width: 599px) {
+  .tourism-map-pin[data-spot-id="central-park"] { --pin-offset-x: -14px; --pin-offset-y: 10px; }
+  .tourism-map-pin[data-spot-id="tri-bowl"] { --pin-offset-x: 0px; --pin-offset-y: 14px; }
+  .tourism-map-pin[data-spot-id="g-tower"] { --pin-offset-x: 18px; --pin-offset-y: -10px; }
+}
+.tourism-guide, .tourism-map { scroll-margin-top: 24px; }
 .tourism-map-pin.is-selected { color: #fff; background: #146b8b; border: 3px solid #fff; outline: 3px solid #146b8b; }
 .tourism-map-pin:focus-visible, .tourism-map-location:focus-visible, .tourism-map-external-link:focus-visible { outline: 3px solid #174d84; outline-offset: 4px; }
 .tourism-map-hotel { background: #f6a73f; border: 2px solid #fff; color: #593411; width: 27px; height: 27px; pointer-events: none; }
