@@ -19,6 +19,16 @@ export function EnglishGuidePanel({ phrases, meanings = [] }: { phrases: readonl
     if (mounted.current) setCopyState({ target, status: result === 'success' ? 'success' : 'failed' })
   }
 
+  // Small on-screen reading aid; never changes the English text copied to guests.
+  const readingHints: [RegExp, string][] = [
+    [/coastal/i, 'coastal (코스털)'],
+    [/observatory/i, 'observatory (업저버토리)'],
+    [/convensia/i, 'Convensia (컨벤시아)'],
+    [/brewery/i, 'brewery (브루어리)'],
+    [/premium outlet/i, 'premium outlet (프리미엄 아울렛)'],
+  ]
+  const hints = readingHints.filter(([pattern]) => phrases.some(phrase => pattern.test(phrase))).map(([, label]) => label)
+
   const announcement = copyState?.status === 'success' ? '복사 완료' : copyState?.status === 'failed'
     ? '복사에 실패했습니다. 문구를 직접 선택해 복사해 주세요.' : pending ? '복사 중…' : ''
   return (
@@ -27,6 +37,7 @@ export function EnglishGuidePanel({ phrases, meanings = [] }: { phrases: readonl
         {phrases.length !== 1 && <Button variant="secondary" disabled={!phrases.length || pending} onClick={() => void copy('all')} icon={<Icon name="copy" size={16} />}>{phrases.length ? '전체 문구 복사' : '복사'}</Button>}
       </div>
       <p className="field-hint">복사 버튼은 영어 문장만 복사합니다.</p>
+      {hints.length > 0 && <p className="field-hint">발음 참고: {hints.join(" · ")}</p>}
       {!phrases.length ? <p className="phrase-placeholder">영어 안내 문구가 아직 등록되지 않았습니다.</p> : <ol className="english-phrases">{phrases.map((phrase, index) => <li key={index}>
         <h4 className="english-phrase-label">{index === 0 ? '기본 안내' : index === 1 ? '상세 안내' : `추가 안내 ${index - 1}`}</h4>
         <p className="english-phrase-text" lang="en">{phrase}</p>
