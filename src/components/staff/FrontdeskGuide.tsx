@@ -19,6 +19,7 @@ const categories: Record<FrontdeskScriptCategory, { label: string; icon: IconNam
   'room-usage': { label: '객실 이용', icon: 'bed' },
   'hotel-policy': { label: '호텔 정책', icon: 'info' },
   'hotel-facilities': { label: '호텔 시설', icon: 'hotel' },
+  'parking': { label: '주차 안내', icon: 'parking' },
 }
 type DataState = { status: 'loading' } | { status: 'error' } | { status: 'ready'; dataset: FrontdeskScriptDataset }
 
