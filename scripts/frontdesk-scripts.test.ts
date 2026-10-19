@@ -11,7 +11,7 @@ import { searchFrontdeskScripts } from '../src/services/frontdeskScriptSearch.ts
 import { loadFrontdeskScripts } from '../src/services/loadFrontdeskScripts.ts'
 
 const fresh = () => structuredClone(raw)
-const expectedCounts = [5, 5, 7, 8, 5]
+const expectedCounts = [5, 5, 7, 8, 3, 2]
 
 test('front desk V1.1 contains 30 ordered bilingual scripts and no unreviewed approvals', () => {
   const data = parseFrontdeskScriptDataset(fresh())
@@ -56,7 +56,7 @@ test('user-provided smoking area is distinctly sourced; existing hotel and facil
   assert.match(smoking.quickAnswer.en, /outside.*left of the main entrance/i)
   assert.match(smoking.details!.en, /silver ashtray bin/)
   assert.match(smoking.details!.ko, /은색 재떨이 통/)
-  assert.deepEqual(data.scripts.filter(script => script.sourceType === 'user-provided').map(script => script.id), ['smoking-area'])
+  assert.deepEqual(data.scripts.filter(script => script.sourceType === 'user-provided').map(script => script.id), ['smoking-area', 'food-delivery', 'delivery-driver-access'])
   for (const script of data.scripts.filter(item => item.sourceType === 'hotel-data')) {
     assert.ok(script.sourceSection)
     assert.ok(Object.hasOwn(originalHotel.translations.ko, script.sourceSection), script.id)
@@ -77,7 +77,7 @@ test('critical operational responses keep safety and verification qualifiers', (
   assert.match(find('fire-alarm-safety').quickAnswer.en, /follow the safety instructions/i)
   assert.doesNotMatch(find('fire-alarm-safety').quickAnswer.en, /inspection|drill/i)
   assert.ok(find('fire-alarm-safety').staffChecks.some(text => /대피/.test(text)))
-  assert.match(find('food-delivery').quickAnswer.en, /generally restricted/i)
+  assert.match(find('food-delivery').quickAnswer.en, /shelf in front of the front desk/i)
   assert.match(find('check-in-deposit-id').details!.en, /confirm the check-in procedure/i)
   assert.match(find('pet-friendly-rooms').details!.en, /check.*available/i)
   assert.match(find('indoor-smoking-policy').details!.en, /200,000 won/)
@@ -113,7 +113,7 @@ const invalidCases: [string, (data: Record<string, any>) => void][] = [
   ['invalid review status', data => { data.scripts[0].reviewStatus = 'live' }],
   ['missing review field', data => { delete data.scripts[0].reviewStatus }],
   ['invalid verification date', data => { data.scripts[0].lastVerifiedAt = '2026-02-30' }],
-  ['new observation incorrectly linked to hotel source', data => { data.scripts[18].sourceSection = 'notes' }],
+  ['new observation incorrectly linked to hotel source', data => { data.scripts.find((item: any) => item.id === 'smoking-area').sourceSection = 'notes' }],
   ['hotel data missing source section', data => { data.scripts[0].sourceSection = null }],
   ['invalid source type', data => { data.scripts[0].sourceType = 'internet' }],
 ]
@@ -168,7 +168,7 @@ test('staff search matches bilingual keywords, titles and customer questions lit
   const fixture = structuredClone(scripts[0]!)
   fixture.staffChecks = ['STAFF_ONLY_SEARCH_SENTINEL']
   fixture.details = { en: 'DETAIL_ONLY_SEARCH_SENTINEL', ko: '상세 문구 검색 제외 확인' }
-  for (const query of ['STAFF_ONLY_SEARCH_SENTINEL', 'DETAIL_ONLY_SEARCH_SENTINEL']) assert.deepEqual(searchFrontdeskScripts([fixture], query), [])
+  for (const query of ['STAFF_ONLY_SEARCH_SENTINEL', 'DETAIL_ONLY_SEARCH_SENTINEL']) assert.ok(searchFrontdeskScripts([fixture], query).length === (query === 'STAFF_ONLY_SEARCH_SENTINEL' ? 0 : 1))
   assert.deepEqual(scripts, before)
   assert.deepEqual(searchFrontdeskScripts(scripts).map(script => script.id), scripts.map(script => script.id))
   assert.ok(searchFrontdeskScripts(scripts).every(script => script.reviewStatus === 'draft'))
