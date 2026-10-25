@@ -3,6 +3,17 @@ import type { Facility, FacilityCategory } from '../types/facility.ts'
 
 export type StaffCategoryFilter = FacilityCategory | 'all'
 
+/** Hotel-selected restaurant-area highlight, scoped to the dining filter only. */
+export const FEATURED_DINING_FACILITY_ID = 'songdo-timespace-complex'
+
+/** Stable order for other categories and other results; never mutate source JSON. */
+export function orderFacilitiesForCategory(results: readonly Facility[], category: StaffCategoryFilter): Facility[] {
+  if (category !== 'dining') return [...results]
+  const index = results.findIndex(item => item.id === FEATURED_DINING_FACILITY_ID)
+  if (index <= 0) return [...results]
+  return [results[index]!, ...results.slice(0, index), ...results.slice(index + 1)]
+}
+
 /** A small deliberate synonym table, not fuzzy matching that could send a guest to the wrong venue. */
 const QUERY_SYNONYMS: Readonly<Record<string, readonly string[]>> = {
   '호프집': ['맥주'], '맥줏집': ['맥주'], '술집': ['맥주'], '펍': ['맥주'],
@@ -59,7 +70,7 @@ export function matchesFacility(facility: Facility, query = '', category: StaffC
 
 /** Stable source order, all matching venues (not just the first), independent of UI language. */
 export function searchFacilities(facilities: readonly Facility[], query = '', category: StaffCategoryFilter = 'all'): Facility[] {
-  return facilities.filter(facility => matchesFacility(facility, query, category))
+  return orderFacilitiesForCategory(facilities.filter(facility => matchesFacility(facility, query, category)), category)
 }
 
 export function resolveSelectedFacility(results: readonly Facility[], selectedId: string | null): Facility | null {
