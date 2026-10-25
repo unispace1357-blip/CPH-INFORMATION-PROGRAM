@@ -11,6 +11,14 @@ const labels: Record<GuideLanguage, { heading: string; featured: string; notice:
   ja: { heading: 'おすすめスポット', featured: '★ おすすめ', notice: '経路の到着地について' },
 }
 
+// These four food types come from the same published Timespace facility record.
+const MENU_TAGS: Record<GuideLanguage, readonly string[]> = {
+  ko: ['카레', '라멘', '돼지고기구이', '즉석떡볶이'],
+  en: ['Curry', 'Ramen', 'Grilled pork', 'Tteokbokki'],
+  'zh-CN': ['咖喱', '拉面', '烤猪肉', '炒年糕'],
+  ja: ['カレー', 'ラーメン', '豚焼肉', 'トッポッキ'],
+}
+
 /** A single source record drives both the guest spotlight and the staff overview. */
 export function FeaturedTimespace({ facility, language, onDetails, compact = false }: {
   facility: Facility | null | undefined
@@ -30,6 +38,9 @@ export function FeaturedTimespace({ facility, language, onDetails, compact = fal
       <div className="concierge-featured-body">
         <h3>{translated.name}</h3>
         <p className="concierge-featured-description">{translated.description}</p>
+        {!compact && <div className="concierge-featured-tags" aria-label={m.ui.description}>
+          {MENU_TAGS[language].map(tag => <span key={tag}>{tag}</span>)}
+        </div>}
         <div className="concierge-featured-actions">
           <button type="button" className="button button--secondary" onClick={() => onDetails(facility.id)}>{m.ui.viewDetails}</button>
           {route ? <a className="button button--primary" href={route} target="_blank" rel="noopener noreferrer">{m.ui.directions}</a>
