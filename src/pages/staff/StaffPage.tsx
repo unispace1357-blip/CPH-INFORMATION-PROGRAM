@@ -100,7 +100,7 @@ export function StaffPage() {
         <button type="button" className={activeTab === 'hotel' ? 'is-active' : ''} onClick={() => navigateStaffTab('hotel')}><Icon name="hotel" size={20} />호텔 안내</button>
         <button type="button" className={activeTab === 'facilities' ? 'is-active' : ''} onClick={() => navigateStaffTab('facilities')}><Icon name="attraction" size={20} />주변 시설</button>
         <button type="button" onClick={() => { const phrases = document.getElementById('staff-quick-phrases-title'); phrases?.scrollIntoView({ block: 'start' }); phrases?.focus({ preventScroll: true }) }}><Icon name="copy" size={20} />영어 응대 문구</button>
-        <button type="button" onClick={() => document.querySelector<HTMLButtonElement>('.staff-request-trigger')?.click()}><Icon name="info" size={20} />요청사항</button>
+        <button type="button" onClick={() => document.querySelector<HTMLButtonElement>('.staff-request-trigger')?.click()}><Icon name="info" size={20} />요청 접수</button>
       </nav>
       <section className="staff-intro" aria-label="프론트 안내 대시보드">
         <ConciergeHero audience="staff" />
