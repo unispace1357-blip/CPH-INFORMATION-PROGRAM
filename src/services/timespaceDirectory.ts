@@ -17,7 +17,10 @@ export interface TimespaceTenant {
   status?: 'closed'
   menu: Record<GuideLanguage, string>
 }
-export const TIMESPACE_TENANTS = (raw.tenants as TimespaceTenant[]).filter(tenant => tenant.status !== 'closed')
+export function activeTimespaceTenants(tenants: readonly TimespaceTenant[]): TimespaceTenant[] {
+  return tenants.filter(tenant => tenant.status !== 'closed')
+}
+export const TIMESPACE_TENANTS = activeTimespaceTenants(raw.tenants as TimespaceTenant[])
 
 const CATEGORY_LABELS: Record<TimespaceCategoryFilter, Record<GuideLanguage, string>> = {
   all: { ko: '전체', en: 'All', 'zh-CN': '全部', ja: 'すべて' },
