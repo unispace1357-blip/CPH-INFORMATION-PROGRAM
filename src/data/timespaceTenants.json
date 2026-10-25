@@ -1,0 +1,217 @@
+{
+  "complexId": "songdo-timespace-complex",
+  "researchedOn": "2026-10-26",
+  "address": "인천광역시 연수구 하모니로 158",
+  "tenants": [
+    {
+      "id": "dora-bowl",
+      "name": "도라보울 송도타임스페이스점",
+      "category": "curry",
+      "building": "A",
+      "floor": 1,
+      "rooms": "115~116",
+      "menu": {
+        "ko": "스프카레 · 돈카츠",
+        "en": "Soup curry · Pork cutlet",
+        "zh-CN": "汤咖喱 · 炸猪排",
+        "ja": "スープカレー · とんかつ"
+      }
+    },
+    {
+      "id": "oily",
+      "name": "오일리",
+      "category": "western",
+      "building": "A",
+      "floor": 1,
+      "rooms": "127",
+      "menu": {
+        "ko": "파스타 · 뇨끼",
+        "en": "Pasta · Gnocchi",
+        "zh-CN": "意面 · 意式面疙瘩",
+        "ja": "パスタ · ニョッキ"
+      }
+    },
+    {
+      "id": "lucas-pizza",
+      "name": "루카스피자 송도타임스페이스점",
+      "category": "pizza",
+      "building": "B",
+      "floor": 1,
+      "rooms": "120",
+      "menu": {
+        "ko": "뉴욕식 피자 · 조각피자",
+        "en": "New York-style pizza · Pizza by the slice",
+        "zh-CN": "纽约风格披萨 · 单片披萨",
+        "ja": "ニューヨーク風ピザ · スライスピザ"
+      }
+    },
+    {
+      "id": "guldari-chicken",
+      "name": "마포굴다리 계고기 갈매기",
+      "category": "grill",
+      "building": "B",
+      "floor": 1,
+      "rooms": "121",
+      "menu": {
+        "ko": "숯불 닭갈비 · 닭구이",
+        "en": "Charcoal-grilled chicken · Chicken barbecue",
+        "zh-CN": "炭火烤鸡 · 烤鸡肉",
+        "ja": "炭火タッカルビ · 鶏焼肉"
+      }
+    },
+    {
+      "id": "boniboni",
+      "name": "보니보니즉석떡볶이 송도점",
+      "category": "snack",
+      "building": "B",
+      "floor": 2,
+      "rooms": "217",
+      "menu": {
+        "ko": "즉석떡볶이 · 튀김",
+        "en": "Cook-at-table tteokbokki · Fried snacks",
+        "zh-CN": "现煮辣炒年糕 · 炸物",
+        "ja": "即席トッポッキ · 揚げ物"
+      }
+    },
+    {
+      "id": "hanmaeum",
+      "name": "한마음정육식당 송도타임스페이스점",
+      "category": "grill",
+      "building": "B",
+      "floor": 2,
+      "rooms": "205~208",
+      "menu": {
+        "ko": "삼겹살 · 목살 · 소고기구이",
+        "en": "Pork belly · Pork shoulder · Grilled beef",
+        "zh-CN": "五花肉 · 猪肩肉 · 烤牛肉",
+        "ja": "サムギョプサル · 肩ロース · 牛焼肉"
+      }
+    },
+    {
+      "id": "daepan-1985",
+      "name": "대판1985",
+      "category": "japanese",
+      "building": "C",
+      "floor": 1,
+      "rooms": "104",
+      "menu": {
+        "ko": "오코노미야키 · 야끼소바",
+        "en": "Okonomiyaki · Yakisoba",
+        "zh-CN": "大阪烧 · 日式炒面",
+        "ja": "お好み焼き · 焼きそば"
+      }
+    },
+    {
+      "id": "yangmokjang-1274",
+      "name": "양목장1274 송도타임스페이스점",
+      "category": "grill",
+      "building": "C",
+      "floor": 1,
+      "rooms": "109~110",
+      "menu": {
+        "ko": "양갈비 · 양고기구이",
+        "en": "Lamb chops · Grilled lamb",
+        "zh-CN": "羊排 · 烤羊肉",
+        "ja": "ラムチョップ · 羊焼肉"
+      }
+    },
+    {
+      "id": "jou-gopdori",
+      "name": "조우곱도리탕 송도타임스페이스 본점",
+      "category": "korean",
+      "building": "C",
+      "floor": 1,
+      "rooms": "116~117",
+      "menu": {
+        "ko": "곱도리탕 · 곱창",
+        "en": "Spicy tripe & chicken stew · Beef tripe",
+        "zh-CN": "肥肠鸡肉辣锅 · 牛肠",
+        "ja": "モツ入り鶏鍋 · ホルモン"
+      }
+    },
+    {
+      "id": "two-find-peter",
+      "name": "투파인드피터 송도점",
+      "category": "western",
+      "building": "C",
+      "floor": 2,
+      "rooms": "204~205",
+      "menu": {
+        "ko": "파스타 · 리조또 · 브런치",
+        "en": "Pasta · Risotto · Brunch",
+        "zh-CN": "意面 · 烩饭 · 早午餐",
+        "ja": "パスタ · リゾット · ブランチ"
+      }
+    },
+    {
+      "id": "sutmeong",
+      "name": "숯멍 송도타임스페이스 본점",
+      "category": "grill",
+      "building": "D",
+      "floor": 1,
+      "rooms": "109~111",
+      "menu": {
+        "ko": "삼겹살 · 목살",
+        "en": "Pork belly · Pork shoulder",
+        "zh-CN": "五花肉 · 猪肩肉",
+        "ja": "サムギョプサル · 豚肩ロース"
+      }
+    },
+    {
+      "id": "slow-cali",
+      "name": "슬로우캘리 송도점",
+      "category": "healthy",
+      "building": "D",
+      "floor": 1,
+      "rooms": "112",
+      "menu": {
+        "ko": "포케 · 샐러드",
+        "en": "Poké bowls · Salads",
+        "zh-CN": "波奇饭 · 沙拉",
+        "ja": "ポキボウル · サラダ"
+      }
+    },
+    {
+      "id": "bondaega",
+      "name": "본대가 송도본점",
+      "category": "korean",
+      "building": "D",
+      "floor": 1,
+      "rooms": "113~114",
+      "menu": {
+        "ko": "감자탕 · 뼈해장국",
+        "en": "Pork-bone stew · Pork-bone soup",
+        "zh-CN": "韩式猪骨汤锅 · 猪骨醒酒汤",
+        "ja": "カムジャタン · 豚骨スープ"
+      }
+    },
+    {
+      "id": "samsan",
+      "name": "삼산회관 인천송도타임스페이스점",
+      "category": "korean",
+      "building": "D",
+      "floor": 1,
+      "rooms": "127~128",
+      "menu": {
+        "ko": "돼지김치구이 · 김치찌개",
+        "en": "Grilled pork & kimchi · Kimchi stew",
+        "zh-CN": "猪肉泡菜烤锅 · 泡菜汤",
+        "ja": "豚キムチ焼き · キムチチゲ"
+      }
+    },
+    {
+      "id": "donforest",
+      "name": "돈포레스트 송도타임스페이스점",
+      "category": "grill",
+      "building": "D",
+      "floor": 4,
+      "rooms": "405~407",
+      "menu": {
+        "ko": "제주삼겹살 · 목살 · 오겹살",
+        "en": "Jeju pork belly · Pork shoulder · Five-layer pork",
+        "zh-CN": "济州五花肉 · 猪肩肉 · 带皮五花肉",
+        "ja": "済州サムギョプサル · 肩ロース · オギョプサル"
+      }
+    }
+  ]
+}

@@ -18,3 +18,6 @@
 
 /* Guest-only venue cards and concise details; staff workspace remains unchanged. */
 @import './styles/guest-facility-clarity.css';
+
+/* Timespace-only dining subdirectory; no duplicate global facility records. */
+@import './styles/timespace-directory.css';

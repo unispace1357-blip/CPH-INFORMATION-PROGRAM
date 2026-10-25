@@ -8,6 +8,7 @@ import { Button } from '../ui/Button'
 import { Icon } from '../ui/Icon'
 import { CONCIERGE_IMAGES } from '../ui/ConciergeHero'
 import { NaverDirectionsLink } from '../ui/NaverDirectionsLink'
+import { TimespaceDiningDirectory } from '../ui/TimespaceDiningDirectory'
 
 /** Customer summary, not the operational staff record. Staff details stay unchanged. */
 export function GuestFacilityDetail({ facility, language, onClose }: { facility: Facility | null; language: GuideLanguage; onClose: () => void }) {
@@ -38,7 +39,8 @@ export function GuestFacilityDetail({ facility, language, onClose }: { facility:
       </div>
       {isTimespace && <img className="guest-place-photo" src={CONCIERGE_IMAGES.timespace} alt="" width="690" height="192" loading="lazy" decoding="async" />}
       <p className="guest-place-summary">{summary}</p>
-      {menuExamples.length > 0 && <section className="guest-place-menu" aria-label={copy.menuTitle}>
+      {isTimespace && <TimespaceDiningDirectory language={language} />}
+      {!isTimespace && menuExamples.length > 0 && <section className="guest-place-menu" aria-label={copy.menuTitle}>
         <h3>{copy.menuTitle}</h3>
         <ul className="guest-place-menu-list">{menuExamples.map(example => <li key={example}>{example}</li>)}</ul>
       </section>}

@@ -14,14 +14,14 @@ test('guest summaries remove internal inventory and verification wording in all 
   for (const language of GUIDE_LANGUAGES) {
     const before = structuredClone(timespace)
     const { summary, menuExamples, routeNotice } = guestFacilityPresentation(timespace, language)
-    assert.equal(menuExamples.length, 4, language)
+    assert.equal(menuExamples.length, 8, language)
     assert.ok(summary.length > 12 && !forbidden.test(summary), language)
     assert.ok(routeNotice && routeNotice.length > 20, language)
     assert.ok(!forbidden.test(guestFacilityCardTeaser(timespace, language)), language)
     assert.deepEqual(timespace, before, 'visitor projection must not mutate source')
   }
-  assert.match(timespace.translations.ko.description, /모든 음식점을 개별 등록/)
-  assert.match(timespace.translations.en.description, /full tenant directory/)
+  assert.match(timespace.translations.ko.description, /15곳/)
+  assert.doesNotMatch(timespace.translations.en.description, /Obake|ramen|full tenant directory/)
 })
 
 test('existing dining and cafe menu examples become readable source-backed chips', () => {
