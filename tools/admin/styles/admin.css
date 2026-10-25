@@ -40,3 +40,14 @@
 .admin-footer { padding: 20px 32px; border-top: 1px solid var(--color-border); font-size: .8rem; color: var(--color-text-secondary); }
 @media (max-width: 1099px) { .admin-workspace { grid-template-columns: 1fr; } .admin-navigation { grid-template-columns: repeat(4, minmax(0, 1fr)); } .admin-navigation p { grid-column: 1/-1; } .admin-facility-workspace { grid-template-columns: 1fr; } }
 @media (max-width: 599px) { .admin-header { padding: 20px 16px; } .admin-main { padding: 16px; } .admin-navigation { grid-template-columns: repeat(2, minmax(0, 1fr)); } .admin-field-grid { grid-template-columns: 1fr; } .admin-status { width: 100%; } }
+
+.admin-timespace-page[hidden]{display:none;}
+.admin-timespace-page{display:grid;gap:18px;min-width:0;}
+.admin-timespace-page .section-heading{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.admin-timespace-fieldset{min-width:0;border:0;margin:0;padding:0;display:grid;gap:16px;}
+.admin-timespace-workspace{display:grid;grid-template-columns:minmax(275px,.86fr) minmax(0,1.14fr);gap:16px;align-items:start;min-width:0;}
+.admin-timespace-list,.admin-timespace-editor,.admin-timespace-files{min-width:0;}
+.admin-timespace-list .admin-records{max-height:760px;overflow:auto;}
+.admin-timespace-editor h4{margin-top:18px;}
+.admin-timespace-page .button{max-width:100%;white-space:normal;}
+@media(max-width:1099px){.admin-timespace-workspace{grid-template-columns:1fr;}.admin-navigation{grid-template-columns:repeat(auto-fit,minmax(145px,1fr));}}
