@@ -41,20 +41,52 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
       [...document.querySelectorAll('.concierge-hero-image,.concierge-featured-image')].every(img => img.complete && img.naturalWidth >= 1600 && img.naturalHeight >= 900));
     assert.ok((await staff.locator('#staff-essentials').innerText()).includes('35,000'));
     assert.equal(await staff.locator('.staff-board-rail').count(), 1);
-    log('Staff layout: concept photos, source-backed hotel facts and optional sidebar');
+    await staff.waitForSelector('#staff-hub-input');
+    const pcGeometry = await staff.evaluate(() => {
+      const box = s => { const r = document.querySelector(s).getBoundingClientRect(); return { x:r.x,y:r.y,width:r.width,height:r.height,bottom:r.bottom,right:r.right }; };
+      return {header:box('.site-header'),rail:box('.staff-board-rail'),hero:box('.staff-intro .concierge-hero'),
+        hub:box('.staff-search-hub'),overview:box('.staff-overview-grid'),
+        left:box('.staff-overview-column:first-child'),right:box('.staff-overview-column:last-child'),
+        facts:box('.staff-essential-panel'),featured:box('.staff-overview-column:first-child .concierge-featured'),
+        scripts:box('.staff-quick-phrases')};
+    });
+    assert.ok(pcGeometry.rail.width >= 150 && pcGeometry.hero.x > pcGeometry.rail.right,
+      'Desktop sidebar must sit beside—not overlap—the hero: ' + JSON.stringify(pcGeometry));
+    assert.ok(pcGeometry.hero.y < 90 && pcGeometry.hub.y > pcGeometry.hero.y &&
+      pcGeometry.overview.y > pcGeometry.hub.y,
+      'Hero, search and two-column overview must be in the correct order: ' + JSON.stringify(pcGeometry));
+    assert.ok(Math.abs(pcGeometry.left.y-pcGeometry.right.y) < 3 &&
+      pcGeometry.left.width > 340 && pcGeometry.right.width > 340,
+      'Staff dashboard must use readable two-column cards: ' + JSON.stringify(pcGeometry));
+    assert.equal(await staff.locator('.staff-essential-panel .concierge-fact').count(), 4);
+    assert.equal(await staff.locator('.staff-topic-shortcuts button').count(), 4);
+    assert.equal(await staff.locator('.staff-quick-phrase button').count(), 4);
+    await noOverflow(staff);
+    await staff.evaluate(() => scrollTo(0, 0));
+    await staff.screenshot({path:path.join(output,'staff-stage4-first-fold-1280.png'),fullPage:false});
+    await staff.locator('.staff-overview-grid').screenshot({path:path.join(output,'staff-stage4-dashboard-cards-1280.png')});
+    log('Staff stage 4 geometry: compact side rail, photo hero, scoped search, four hotel facts, functional topic tiles and 2-column dashboard');
     await staff.waitForSelector('#frontdesk-search-title');
     assert.equal(await staff.getByRole('tab', { name: '호텔 업무 영어 응대' }).getAttribute('aria-selected'), 'true');
     assert.equal(await staff.locator('.staff-search-hub').count(), 1);
     assert.ok((await staff.locator('.staff-quick-phrases').innerText()).includes('35,000'));
     const staffHashBefore = await staff.evaluate(() => location.hash);
-    await staff.getByRole('navigation', { name: '직원 주요 업무 바로가기' }).getByRole('button', { name: '호텔 주요 정보' }).click();
-    assert.equal(await staff.evaluate(() => location.hash), staffHashBefore, 'Staff anchor must not replace HashRouter route');
+    await staff.getByRole('navigation', { name: '직원 주요 업무 바로가기' }).getByRole('button', { name: '통합 검색' }).click();
+    assert.equal(await staff.evaluate(() => location.hash), staffHashBefore, 'Staff rail must not replace HashRouter route');
+    assert.equal(await staff.locator('#staff-hub-input').evaluate(el => document.activeElement === el), true);
     assert.equal(await staff.getByRole('heading', { name: 'Page not found' }).count(), 0);
     await staff.locator('#staff-hub-input').fill('조식');
     await staff.getByRole('region', { name: '통합 검색' }).getByRole('button', { name: '검색', exact: true }).click();
     assert.equal(await staff.locator('#staff-hotel-panel input[type="search"]').inputValue(), '조식');
     await staff.locator('#staff-hotel-panel input[type="search"]').fill('');
-    log('Staff dashboard: anchor routing safe, unified search reaches source scripts');
+    await staff.getByRole('group', { name: '호텔 안내 바로가기' }).getByRole('button', { name: '교통·주차' }).click();
+    assert.equal(await staff.locator('#staff-hotel-panel input[type="search"]').inputValue(), '주차');
+    await staff.locator('#staff-hotel-panel input[type="search"]').fill('');
+    await waitCards(staff, 33, '.frontdesk-script-card');
+    await staff.getByRole('navigation', { name: '직원 주요 업무 바로가기' }).getByRole('button', { name: '요청 접수' }).click();
+    assert.equal(await staff.getByRole('dialog', { name: '직원 요청사항' }).count(), 1);
+    await staff.getByRole('button', { name: '요청사항 창 닫기' }).click();
+    log('Staff dashboard: safe rail navigation, scoped search, functional hotel cards and request entry');
     await waitCards(staff, 33, '.frontdesk-script-card');
     assert.deepEqual((await staff.locator('.frontdesk-script-title').allTextContents()).slice(0, 2), scripts.slice(0, 2).map(s => s.title));
     assert.ok((await staff.locator('.information-notice').allTextContents()).some(t => t.includes('금연')));
