@@ -22,7 +22,7 @@ import { GuestFacilityResults } from '../../components/guest/GuestFacilityResult
 import { GuestFacilityDetail } from '../../components/guest/GuestFacilityDetail'
 import { AirportBusGuide, SongdoTourismGuide } from '../../components/ui/LocalTravelGuides'
 import { LOCAL_GUIDE_COPY } from '../../data/localGuide'
-import { UI_CATEGORIES } from '../../config/uiCategories'
+import { UI_CATEGORIES, visibleFacilityCategories } from '../../config/uiCategories'
 
 export function GuestPage() {
   const { language, setLanguage } = useGuestLanguage()
@@ -71,7 +71,7 @@ export function GuestPage() {
       <HotelInformation state={hotel} language={language} selected={hotelTopic} onSelect={setHotelTopic} onClose={closeHotel} />
       <section className="guest-section" id="nearby-facilities" aria-labelledby="nearby-facilities-title">
         <div className="section-heading"><h2 id="nearby-facilities-title">{m.ui.nearbyTitle}</h2><Button variant={category === 'all' ? 'primary' : 'secondary'} aria-pressed={category === 'all'} disabled={!dataset} onClick={() => updateFilters(query, 'all')}>{m.ui.allFacilities}</Button></div>
-        <div className="guest-category-grid" role="group" aria-label={m.ui.facilityCategoriesLabel}>{UI_CATEGORIES.map(item => <CategoryCard key={item.code} label={m.categories[item.code]} icon={item.icon} selected={category === item.code} disabled={!dataset} onClick={() => updateFilters(query, category === item.code ? 'all' : item.code)} aria-controls="guest-facility-results" />)}</div>
+        <div className="guest-category-grid" role="group" aria-label={m.ui.facilityCategoriesLabel}>{(dataset ? visibleFacilityCategories(dataset.facilities) : UI_CATEGORIES).map(item => <CategoryCard key={item.code} label={m.categories[item.code]} icon={item.icon} selected={category === item.code} disabled={!dataset} onClick={() => updateFilters(query, category === item.code ? 'all' : item.code)} aria-controls="guest-facility-results" />)}</div>
       </section>
       <section className="panel guest-search-panel" id="guest-search" aria-labelledby="guest-search-title">
         <div className="section-heading"><h2 id="guest-search-title">{m.ui.searchTitle}</h2><Button variant="quiet" disabled={!query} onClick={() => updateFilters('', category)}>{m.ui.clearSearch}</Button></div>

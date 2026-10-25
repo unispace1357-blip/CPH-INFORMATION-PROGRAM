@@ -12,7 +12,7 @@ import { StaffSearchResults } from '../../components/staff/StaffSearchResults'
 import { StaffFacilityDetail } from '../../components/staff/StaffFacilityDetail'
 import { FrontdeskGuide } from '../../components/staff/FrontdeskGuide'
 import { AirportBusGuide, SongdoTourismGuide } from '../../components/ui/LocalTravelGuides'
-import { UI_CATEGORIES } from '../../config/uiCategories'
+import { UI_CATEGORIES, visibleFacilityCategories } from '../../config/uiCategories'
 import { loadStaffDataset } from '../../services/loadStaffDataset'
 import { searchFacilities, resolveSelectedFacility } from '../../services/facilitySearch'
 import type { StaffCategoryFilter } from '../../services/facilitySearch'
@@ -99,7 +99,7 @@ export function StaffPage() {
         <div className="section-heading"><h3>카테고리</h3><span className="status-label">검색어와 함께 적용</span></div>
         <div className="staff-category-grid" role="group" aria-label="시설 카테고리">
           <CategoryCard label="전체" icon="grid" selected={category === 'all'} compact disabled={!dataset} onClick={() => updateFilters(query, 'all')} />
-          {UI_CATEGORIES.map(item => <CategoryCard key={item.code} label={item.staffLabel} icon={item.icon} selected={category === item.code} compact disabled={!dataset} onClick={() => updateFilters(query, item.code)} />)}
+          {(dataset ? visibleFacilityCategories(dataset.facilities) : UI_CATEGORIES).map(item => <CategoryCard key={item.code} label={item.staffLabel} icon={item.icon} selected={category === item.code} compact disabled={!dataset} onClick={() => updateFilters(query, item.code)} />)}
         </div>
       </section>
       <div className="staff-workspace">

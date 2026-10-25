@@ -17,3 +17,12 @@ export const FACILITY_CATEGORY_OPTIONS = [
 
 /** Public category buttons omit ATM; legacy records and local admin options stay intact. */
 export const UI_CATEGORIES = FACILITY_CATEGORY_OPTIONS.filter(item => item.code !== 'atm')
+
+/** Never show an empty facility category. Transport and sightseeing keep their separately supplied guides. */
+export function visibleFacilityCategories(
+  facilities: readonly { category: FacilityCategory; isPublished: boolean }[],
+) {
+  const present = new Set(facilities.filter(item => item.isPublished).map(item => item.category))
+  return UI_CATEGORIES.filter(item =>
+    present.has(item.code) || item.code === 'transportation' || item.code === 'attraction')
+}
