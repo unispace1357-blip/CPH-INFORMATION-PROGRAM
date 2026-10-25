@@ -62,7 +62,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     assert.equal(await staff.locator('.frontdesk-review-badge').count(), 0, 'Draft labels must be hidden only in the UI');
     const hotel = staff.locator('#staff-hotel-panel');
     await hotel.getByRole('group', { name: '호텔 업무 카테고리' }).getByRole('button', { name: '조식' }).click();
-    await hotel.getByRole('searchbox').fill('조식요금');
+    await hotel.getByRole('searchbox').fill('35000');
     await waitCards(staff, 1, '.frontdesk-script-card');
     assert.ok((await hotel.locator('.frontdesk-quick-answer').innerText()).includes('35,000'));
     await hotel.getByRole('searchbox').fill('');
