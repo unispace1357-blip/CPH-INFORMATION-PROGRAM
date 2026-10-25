@@ -3,6 +3,7 @@ import type { GuideLanguage } from '../../types/guide'
 import { MESSAGES } from '../../i18n/messages'
 import { validatedNaverMapUrl } from '../../services/naverMapUrl'
 import { CONCIERGE_IMAGES } from './ConciergeHero'
+import { GUEST_FACILITY_COPY, guestFacilityPresentation } from '../../services/guestFacilityPresentation'
 
 const labels: Record<GuideLanguage, { heading: string; featured: string; notice: string }> = {
   ko: { heading: '추천 장소', featured: '★ 추천', notice: '길찾기 도착지 안내' },
