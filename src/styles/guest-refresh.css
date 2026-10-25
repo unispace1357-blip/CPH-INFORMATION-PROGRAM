@@ -1,0 +1,129 @@
+/* Phase 2: clearer mobile-first guest wayfinding; no effect on staff/admin. */
+.app-shell--guest main {
+  background: radial-gradient(ellipse 730px 320px at 96% 0, rgba(137, 173, 212, .14), transparent 74%), #f4f7fb;
+}
+.app-shell--guest .guest-page { gap: clamp(20px, 3vw, 32px); }
+.app-shell--guest .guest-page > .page-header { padding: 10px 2px; }
+.app-shell--guest .guest-page > .page-header h1 { color: #213f65; }
+.app-shell--guest .hotel-information {
+  padding: clamp(16px, 3vw, 26px);
+  border: 1px solid #d5e0ee;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 10px 32px rgb(37 70 112 / 7%);
+  min-width: 0;
+}
+.app-shell--guest .hotel-information-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: end;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.app-shell--guest .hotel-information-heading-copy { min-width: 0; }
+.app-shell--guest .hotel-section-eyebrow {
+  color: #6b83a3; font-size: .72rem; font-weight: 800; letter-spacing: .14em; margin-bottom: 4px;
+}
+.app-shell--guest .hotel-information h2 { font-size: clamp(1.25rem, 3vw, 1.5rem); color: #26466f; }
+.app-shell--guest .hotel-search-field { min-width: 0; }
+.app-shell--guest .hotel-search-field .field-label { color: #3f5e86; font-size: .86rem; margin-bottom: 5px; }
+.app-shell--guest .hotel-search-field .search-control { min-height: 49px; background: #f8fbff; border: 1px solid #a9bdd8; }
+.app-shell--guest .hotel-search-field .search-control:focus-within { border-color: #4773a6; outline: 3px solid #dce9fb; outline-offset: 1px; }
+.app-shell--guest .hotel-search-field .search-control input { font-size: .94rem; }
+.app-shell--guest .hotel-category-grid { margin-top: 18px; }
+.app-shell--guest .hotel-category-grid .category-card {
+  min-height: 73px;
+  padding: 14px 15px;
+  background: #f8fbff;
+  border-color: #d4dfed;
+  color: #2f4d71;
+  font-weight: 700;
+  gap: 9px;
+}
+.app-shell--guest .hotel-category-grid .category-card.is-selected {
+  background: #eaf2ff;
+  border-color: #4a79b1;
+  box-shadow: inset 0 0 0 1px #83abd7;
+}
+.app-shell--guest .hotel-category-grid .category-card:not(:disabled):hover { background: #eaf3fe; }
+.app-shell--guest .hotel-category-grid .category-icon { color: #416c9d; }
+.app-shell--guest .hotel-search-results {
+  margin: 14px 0 18px;
+  padding: 13px;
+  border: 1px solid #d5e4f2;
+  border-radius: 13px;
+  background: #f3f8fe;
+}
+.app-shell--guest .hotel-search-results-heading {
+  display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
+  gap: 8px; margin-bottom: 10px; color: #2b4e76; font-weight: 750; font-size: .9rem;
+}
+.app-shell--guest .hotel-search-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.app-shell--guest .hotel-search-list li { min-width: 0; }
+.app-shell--guest .hotel-search-list button {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 3px;
+  width: 100%; min-width: 0; padding: 12px 14px; text-align: left;
+  border: 1px solid #d3e0ec; border-radius: 10px; background: #fff; color: #243f61;
+}
+.app-shell--guest .hotel-search-list button:hover { border-color: #668ebc; background: #fbfdff; }
+.app-shell--guest .hotel-search-topic { color: #55799c; font-size: .82rem; font-weight: 650; }
+.app-shell--guest .hotel-search-preview {
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+  line-clamp: 2; overflow: hidden; max-width: 100%;
+  font-size: .88rem; line-height: 1.55; color: #50657b; overflow-wrap: anywhere;
+}
+.app-shell--guest .hotel-search-empty { padding: 10px; font-size: .93rem; color: #52667e; }
+.app-shell--guest .guest-topic-detail {
+  background: #fcfdff; border-color: #d6e2f0; border-radius: 14px;
+  padding: clamp(14px, 2.5vw, 23px); box-shadow: none;
+}
+.app-shell--guest .guest-topic-detail > .section-heading { border-bottom: 1px solid #e0e8f2; padding-bottom: 12px; }
+.app-shell--guest .guest-topic-detail h3 { color: #274b74; }
+.app-shell--guest .hotel-numbered-list {
+  display: grid; gap: 11px; list-style: none; padding: 0; margin: 0; counter-reset: none;
+}
+.app-shell--guest .hotel-numbered-item {
+  min-width: 0; display: flex; align-items: flex-start; gap: 12px;
+  background: #fff; border: 1px solid #dce6f0; border-radius: 12px; padding: 14px 15px;
+  scroll-margin-top: 20px;
+}
+.app-shell--guest .hotel-numbered-item:focus {
+  outline: 3px solid #e0a952; outline-offset: 2px; border-color: #bf8b47;
+}
+.app-shell--guest .hotel-number {
+  flex: 0 0 33px; display: grid; place-items: center; min-height: 33px; border-radius: 9px;
+  color: #345c8b; background: #eaf2fb; font-size: .77rem; font-weight: 850; font-variant-numeric: tabular-nums;
+}
+.app-shell--guest .hotel-numbered-content { flex: 1; min-width: 0; }
+.app-shell--guest .hotel-numbered-content h4 {
+  font-size: .97rem; font-weight: 750; color: #294d77; margin: 1px 0 5px;
+}
+.app-shell--guest .hotel-numbered-content p {
+  font-size: .94rem; line-height: 1.78; overflow-wrap: anywhere; white-space: pre-wrap;
+}
+.app-shell--guest .guest-topic-detail .hotel-topic-text > .hotel-copy-paragraphs { gap: 9px; }
+.app-shell--guest .guest-topic-detail .hotel-topic-text > .hotel-copy-paragraphs > p {
+  border-left: 3px solid #a8bfdc; background: #fff; border-radius: 0 9px 9px 0;
+  padding: 10px 13px; font-size: .95rem;
+}
+.app-shell--guest .guest-topic-detail .detail-facts {
+  padding-top: 14px; border-top: 1px solid #e2eaf4;
+}
+.app-shell--guest .guest-topic-detail .detail-facts dt { color: #315273; }
+.app-shell--guest .guest-topic-detail .detail-facts dd { color: #495d74; }
+.app-shell--guest .guest-topic-detail .detail-facts dd .hotel-copy-paragraphs { gap: 8px; }
+.app-shell--guest .guest-topic-detail .detail-facts dd .hotel-copy-paragraphs > p { padding-bottom: 7px; border-bottom: 1px solid #e9edf4; }
+@media (min-width: 760px) {
+  .app-shell--guest .hotel-information-heading { grid-template-columns: minmax(0, 1fr) minmax(270px, 390px); }
+  .app-shell--guest .hotel-category-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .app-shell--guest .hotel-category-grid .category-card { flex-direction: column; align-items: flex-start; justify-content: center; }
+  .app-shell--guest .hotel-search-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 599px) {
+  .app-shell--guest .hotel-category-grid .category-card { min-height: 64px; padding: 11px 12px; }
+  .app-shell--guest .hotel-numbered-item { padding: 12px; gap: 9px; }
+  .app-shell--guest .hotel-number { flex-basis: 29px; min-height: 29px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .app-shell--guest .hotel-search-list button { transition: none; }
+}
