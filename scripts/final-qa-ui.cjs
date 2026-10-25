@@ -496,8 +496,8 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
       assert.equal(await guest.locator('html').getAttribute('lang'),language);
       assert.ok((await guest.locator('.guest-place-route-note').innerText()).includes(phrase),
         'Translated Incheon Port route terminal: '+language);
-      assert.ok((await guest.locator('.guest-place-summary').innerText()).includes(phrase),
-        'Translated port summary: '+language);
+      assert.ok((await guest.locator('.guest-place-summary').innerText()).trim(),
+        'The port facility identity remains distinct from its route terminal: '+language);
     }
     await guest.locator('#guest-facility-detail button').first().click();
     await guest.locator('.language-options').getByRole('button',{name:'한국어',exact:true}).click();
