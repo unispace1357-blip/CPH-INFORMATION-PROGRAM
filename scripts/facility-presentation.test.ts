@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import { confirmedText, formatWalkingMinutes, formatVerificationDate } from '../src/services/facilityPresentation.ts'
+import { guestWalkingTime } from '../src/i18n/formatters.ts'
 
 test('missing/blank operating information stays unconfirmed rather than invented', () => {
   assert.equal(confirmedText('', '영업시간 미확인'), '영업시간 미확인')
@@ -13,6 +14,16 @@ test('registered numeric walking times are displayed directly, including zero an
   assert.equal(formatWalkingMinutes(10), '약 도보 10분')
   assert.equal(formatWalkingMinutes(0), '약 도보 0분')
   assert.equal(formatWalkingMinutes(7.5), '약 도보 7.5분')
+})
+
+test('Naver route distance is shown with time while absent or invalid distances are omitted', () => {
+  assert.equal(formatWalkingMinutes(15, 835), '약 도보 15분 (835m)')
+  assert.equal(formatWalkingMinutes(15, null), '약 도보 15분')
+  assert.equal(formatWalkingMinutes(15, -1), '약 도보 15분')
+  assert.equal(formatWalkingMinutes(null, 835), '도보시간 미확인')
+  for (const language of ['ko', 'en', 'zh-CN', 'ja'] as const) {
+    assert.match(guestWalkingTime(15, language, 835), /15.*835m/)
+  }
 })
 
 test('null, nonnumeric and invalid walking times are never calculated or coerced', () => {

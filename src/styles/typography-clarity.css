@@ -1,0 +1,156 @@
+/*
+ * Readability pass based on front-desk split-screen screenshot.
+ * No font files or CDN requests: native Windows/macOS/CJK fallback stack.
+ * Add after the isolated guest/staff layouts, so spatial geometry is unchanged.
+ */
+body { letter-spacing: -.01em; }
+.app-shell--staff .staff-section-heading h2,
+.app-shell--staff .staff-overview-section-header h2,
+.app-shell--staff .staff-quick-phrases .concierge-section-heading h2,
+.app-shell--staff .staff-search-hub h2 {
+  color:#16324a;
+  font-size:clamp(1.1rem, 1.6vw, 1.22rem);
+  font-weight:800;
+  line-height:1.42;
+}
+.app-shell--staff .staff-hub-topline .staff-search-hub-description {
+  color:#40566e;
+  font-size:.89rem;
+  line-height:1.55;
+}
+.app-shell--staff .staff-search-hub-form input {
+  color:#203b57;
+  font-size:1rem;
+  font-weight:550;
+}
+.app-shell--staff .staff-search-hub-form input::placeholder {
+  color:#526980;
+  opacity:1;
+}
+.app-shell--staff .staff-search-suggestions > span { color:#435a72; font-size:.8rem; }
+.app-shell--staff .staff-search-suggestions button { font-size:.81rem; font-weight:650; }
+.app-shell--staff .staff-result-list .facility-card h3 {
+  color:#163757;
+  font-size:1.14rem;
+  font-weight:800;
+  line-height:1.45;
+  letter-spacing:-.02em;
+}
+.app-shell--staff .staff-result-list .facility-english-name {
+  color:#435b74;
+  font-size:.89rem;
+  line-height:1.5;
+}
+.app-shell--staff .staff-result-list .facility-menu-summary {
+  color:#344c65;
+  font-size:.94rem;
+  line-height:1.65;
+}
+.app-shell--staff .staff-result-list .facility-meta {
+  font-size:.93rem;
+  line-height:1.55;
+}
+.app-shell--staff .staff-result-list .facility-meta dt {
+  color:#495f75;
+  font-size:.88rem;
+  font-weight:700;
+}
+.app-shell--staff .staff-result-list .facility-meta dd {
+  color:#263f5a;
+  font-size:.92rem;
+  font-weight:650;
+  line-height:1.55;
+}
+.app-shell--staff .staff-result-list .facility-meta > div:nth-child(2) dd {
+  color:#234e7b;
+  font-size:.86rem;
+  font-weight:800;
+}
+.app-shell--staff .staff-detail-intro .detail-title {
+  color:#163757;
+  font-size:1.5rem;
+  font-weight:800;
+  letter-spacing:-.02em;
+}
+.app-shell--staff .staff-detail-intro .detail-description {
+  color:#344c65;
+  font-size:1rem;
+  line-height:1.72;
+}
+.app-shell--staff .staff-walking-caption {
+  color:#485e75;
+  font-size:.81rem;
+}
+.app-shell--staff .staff-walking-summary strong {
+  color:#173f67;
+  font-size:1.12rem;
+  font-weight:800;
+}
+.app-shell--staff .staff-detail-content .english-guide h3 {
+  color:#1c456f;
+  font-weight:800;
+}
+.app-shell--staff .staff-detail-content .english-phrase-label {
+  color:#315273;
+  font-size:1rem;
+  font-weight:800;
+}
+.app-shell--staff .staff-detail-content .english-phrase-text {
+  color:#20394f;
+  font-size:1.12rem;
+  font-weight:600;
+  line-height:1.75;
+}
+.app-shell--staff .staff-detail-content .english-phrase-meaning {
+  color:#3e5570;
+  font-size:.98rem;
+  line-height:1.66;
+}
+.app-shell--staff .staff-facility-metadata .detail-facts dt {
+  color:#3d5672;
+  font-size:.95rem;
+  font-weight:750;
+}
+.app-shell--staff .staff-facility-metadata .detail-facts dd {
+  color:#344a63;
+  font-size:.97rem;
+  line-height:1.66;
+}
+.app-shell--staff .staff-quick-phrase h3 {
+  color:#1f476f;
+  font-size:.84rem;
+  font-weight:800;
+}
+.app-shell--staff .staff-quick-phrase p {
+  color:#2e4760;
+  font-size:.87rem;
+  line-height:1.6;
+}
+.app-shell--staff .staff-quick-phrase .staff-quick-phrase-ko {
+  color:#496077;
+  font-size:.81rem;
+  line-height:1.56;
+}
+.app-shell--staff .staff-request-shortcut p,
+.app-shell--staff .concierge-featured--compact .concierge-featured-description {
+  color:#435a72;
+  font-size:.83rem;
+  line-height:1.58;
+}
+.app-shell--staff .staff-topic-shortcuts button {
+  color:#25476a;
+  font-size:.8rem;
+  font-weight:700;
+}
+.app-shell--staff .staff-board-rail button { font-size:.85rem; }
+.app-shell--staff .staff-detail-content .field-hint,
+.app-shell--staff .staff-result-list .field-hint {
+  color:#506780;
+  font-size:.86rem;
+  line-height:1.6;
+}
+@media (max-width:599px) {
+  .app-shell--staff .staff-result-list .facility-card h3 { font-size:1.08rem; }
+  .app-shell--staff .staff-detail-content .english-phrase-text { font-size:1.03rem; }
+  .app-shell--staff .staff-detail-intro .detail-title { font-size:1.35rem; }
+}

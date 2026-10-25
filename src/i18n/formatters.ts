@@ -10,9 +10,11 @@ export function localizedValue(value: unknown, language: GuideLanguage, key: UiM
   return typeof value === 'string' && value.trim() ? value.trim() : message(language, key)
 }
 
-export function guestWalkingTime(value: unknown, language: GuideLanguage): string {
-  return typeof value === 'number' && Number.isFinite(value) && value >= 0
-    ? message(language, 'aboutWalk', { minutes: value }) : message(language, 'walkingUnavailable')
+export function guestWalkingTime(value: unknown, language: GuideLanguage, distanceMeters?: number | null): string {
+  if (typeof value !== 'number' || !Number.isFinite(value) || value < 0) return message(language, 'walkingUnavailable')
+  const minutesText = message(language, 'aboutWalk', { minutes: value })
+  return typeof distanceMeters === 'number' && Number.isFinite(distanceMeters) && distanceMeters >= 0
+    ? `${minutesText} (${distanceMeters.toLocaleString('en-US')}m)` : minutesText
 }
 
 export function guestVerificationDate(value: unknown, language: GuideLanguage): string {

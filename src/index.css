@@ -12,3 +12,6 @@
 
 /* Stage 4: staff-only desktop mockup geometry (guest layout stays unchanged). */
 @import './styles/staff-desktop-stage4.css';
+
+/* Readability polish without changing the layout or loading remote fonts. */
+@import './styles/typography-clarity.css';

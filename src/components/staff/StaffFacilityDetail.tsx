@@ -19,9 +19,10 @@ export function StaffFacilityDetail({ facility, headingRef }: { facility: Facili
         <p className="facility-english-name" lang="en">{en.name}</p>
         <p className="detail-description">{confirmedText(ko.description, '시설 설명 미확인')}</p>
         <div className="staff-detail-shortcuts">
-          <div className="staff-walking-summary"><Icon name="clock" size={22} /><span><span className="staff-walking-caption">예상 도보시간</span><strong>{formatWalkingMinutes(facility.walkingMinutes)}</strong></span></div>
+          <div className="staff-walking-summary"><Icon name="clock" size={22} /><span><span className="staff-walking-caption">예상 도보시간</span><strong>{formatWalkingMinutes(facility.walkingMinutes, facility.walkingDistanceMeters)}</strong></span></div>
           <NaverDirectionsLink url={facility.naverMapUrl} label="네이버 지도 길찾기" unavailable="길찾기 링크 미등록" newTabNotice="네이버 지도가 새 탭에서 열립니다." />
         </div>
+        {facility.id === 'songdo-timespace-complex' && <p className="field-hint">15분(835m)은 네이버 지도 도착지인 인근 스타벅스 송도캐슬파크점 기준입니다. 송도 타임스페이스까지 추가 이동해 주세요.</p>}
         <p className="field-hint">네이버 지도 길찾기를 연 뒤 지도에서 인쇄할 수 있습니다.</p>
       </div>
       <EnglishGuidePanel key={facility.id} phrases={facility.englishPhrases} meanings={facility.englishPhraseMeanings} />
@@ -31,7 +32,7 @@ export function StaffFacilityDetail({ facility, headingRef }: { facility: Facili
           <div><dt>주소</dt><dd>{confirmedText(ko.address, '주소 미확인')}</dd></div>
           <div><dt>영업시간</dt><dd>{confirmedText(ko.openingHours, '영업시간 미확인')}</dd></div>
           <div><dt>휴무일</dt><dd>{confirmedText(facility.closedDays.ko, '휴무일 미확인')}</dd></div>
-          <div><dt>예상 도보시간</dt><dd>{formatWalkingMinutes(facility.walkingMinutes)}</dd></div>
+          <div><dt>예상 도보시간</dt><dd>{formatWalkingMinutes(facility.walkingMinutes, facility.walkingDistanceMeters)}</dd></div>
           <div><dt>이동 안내</dt><dd>{confirmedText(ko.directions, '이동 안내 미확인')}</dd></div>
           <div><dt>참고 사항</dt><dd>{confirmedText(ko.notes, '등록된 참고 사항 없음')}</dd></div>
         </dl>

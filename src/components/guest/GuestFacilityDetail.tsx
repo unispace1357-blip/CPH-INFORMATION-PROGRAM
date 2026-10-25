@@ -17,7 +17,7 @@ export function GuestFacilityDetail({ facility, language, onClose }: { facility:
     [m.ui.address, localizedValue(text.address, language)],
     [m.ui.openingHours, localizedValue(text.openingHours, language)],
     [m.ui.closedDays, localizedValue(facility.closedDays[language], language)],
-    [m.ui.walkingTime, guestWalkingTime(facility.walkingMinutes, language)],
+    [m.ui.walkingTime, guestWalkingTime(facility.walkingMinutes, language, facility.walkingDistanceMeters)],
     [m.ui.directions, localizedValue(text.directions, language)],
     [m.ui.notes, localizedValue(text.notes, language)],
   ]

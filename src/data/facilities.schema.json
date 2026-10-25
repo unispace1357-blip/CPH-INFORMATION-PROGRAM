@@ -199,6 +199,14 @@
           "minimum": 0,
           "default": null
         },
+        "walkingDistanceMeters": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "Optional map-reported walking distance in meters to the configured Naver route endpoint; endpoint may be a nearby landmark, not the facility entrance."
+        },
         "naverMapUrl": {
           "type": [
             "string",

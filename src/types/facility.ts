@@ -30,6 +30,8 @@ export interface Facility {
   translations: Record<GuideLanguage, FacilityTranslation>
   /** Shared across languages; null means unknown, never an invented estimate. */
   walkingMinutes: number | null
+  /** Map route distance to its registered destination, potentially a nearby landmark. */
+  walkingDistanceMeters?: number | null
   closedDays: LocalizedText
   keywords: Record<GuideLanguage, string[]>
   englishPhrases: string[]
