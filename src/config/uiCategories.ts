@@ -20,9 +20,9 @@ export const UI_CATEGORIES = FACILITY_CATEGORY_OPTIONS.filter(item => item.code 
 
 /** Never show an empty facility category. Transport and sightseeing keep their separately supplied guides. */
 export function visibleFacilityCategories(
-  facilities: readonly { category: FacilityCategory; isPublished: boolean }[],
+  facilities: readonly { category: FacilityCategory; additionalCategories?: readonly FacilityCategory[]; isPublished: boolean }[],
 ) {
-  const present = new Set(facilities.filter(item => item.isPublished).map(item => item.category))
+  const present = new Set(facilities.filter(item => item.isPublished).flatMap(item => [item.category, ...(item.additionalCategories ?? [])]))
   return UI_CATEGORIES.filter(item =>
     present.has(item.code) || item.code === 'transportation' || item.code === 'attraction')
 }
