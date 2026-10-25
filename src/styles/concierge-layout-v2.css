@@ -1,0 +1,139 @@
+/*
+ * CPH Concierge Layout V2 refinements.
+ * Spatial rules only. All palette follows existing CSS tokens and can change later.
+ */
+.visually-hidden { position:absolute!important; width:1px!important; height:1px!important; padding:0!important; margin:-1px!important; overflow:hidden!important; clip:rect(0,0,0,0)!important; white-space:nowrap!important; border:0!important; }
+
+.concierge-hero-search-link {
+  font:inherit;
+  cursor:pointer;
+  text-align:left;
+}
+.concierge-hero-search-link:focus-visible,
+.staff-board-rail button:focus-visible { outline:3px solid var(--color-focus); outline-offset:3px; }
+.app-shell--guest .concierge-hero {
+  min-height:205px;
+  border-radius:12px;
+  background:var(--color-primary);
+}
+.app-shell--guest .concierge-hero::before { background:linear-gradient(90deg, rgba(15,36,63,.85), rgba(15,36,63,.5) 52%, transparent); }
+.app-shell--guest .concierge-hero-copy { padding:clamp(16px,3vw,25px); }
+.app-shell--guest .concierge-hero .concierge-hero-search-link { margin-top:10px; }
+.app-shell--guest .guest-page > .information-notice { order:5; }
+.app-shell--guest .hotel-information { order:2; }
+.app-shell--guest .guest-page > .concierge-featured { order:3; }
+.app-shell--guest #nearby-facilities { order:6; }
+.app-shell--guest #guest-search { order:7; }
+.app-shell--guest #guest-facility-results { order:8; }
+.app-shell--guest #guest-facility-detail { order:9; }
+.app-shell--guest .hotel-information { gap:14px; box-shadow:none; }
+.app-shell--guest .hotel-information > .concierge-hotel-search { order:0; }
+.app-shell--guest .hotel-information > .hotel-search-results { order:1; }
+.app-shell--guest .hotel-information > .smoking-policy-notice { order:2; }
+.app-shell--guest .hotel-information > .concierge-essentials { order:3; }
+.app-shell--guest .hotel-information > .hotel-information-heading { order:4; }
+.app-shell--guest .hotel-information > .hotel-category-grid { order:5; }
+.app-shell--guest .hotel-information > #guest-hotel-detail { order:6; }
+.app-shell--guest .hotel-search-field .field-label { margin-bottom:5px; }
+.app-shell--guest .hotel-category-grid .category-card { min-height:76px; padding:11px; border-radius:11px; }
+.app-shell--guest .concierge-featured { padding:14px; }
+.app-shell--guest .concierge-featured-image { object-position:center; }
+.app-shell--guest .concierge-featured-description { -webkit-line-clamp:2; line-clamp:2; }
+.app-shell--guest .concierge-fact-button strong { overflow-wrap:anywhere; }
+.app-shell--guest .guest-language-toolbar .language-options button { min-width:0; }
+@media (max-width:599px) {
+  .app-shell--guest .site-header-inner { padding-block:6px; gap:5px; }
+  .app-shell--guest .brand-logo { width:74px; height:auto; }
+  .app-shell--guest .brand { gap:8px; }
+  .app-shell--guest .brand-name { font-size:.79rem; }
+  .app-shell--guest .brand-caption { font-size:.68rem; }
+  .app-shell--guest .guest-navigation { font-size:.76rem; gap:10px; }
+  .app-shell--guest main { padding-block:10px; }
+  .app-shell--guest .guest-page { gap:12px; }
+  .app-shell--guest .guest-language-toolbar { padding:0; }
+  .app-shell--guest .guest-language-toolbar .language-selector { padding-bottom:5px; }
+  .app-shell--guest .guest-language-toolbar .language-selector legend { font-size:.73rem; margin-bottom:3px; }
+  .app-shell--guest .guest-language-toolbar .language-options { gap:5px; }
+  .app-shell--guest .guest-language-toolbar .language-options button { min-height:36px; padding:5px 1px; font-size:.76rem; }
+  .app-shell--guest .guest-language-toolbar .field-hint { display:none; }
+  .app-shell--guest .concierge-hero { min-height:195px; }
+  .app-shell--guest .concierge-hero h1 { font-size:1.4rem; }
+  .app-shell--guest .concierge-hero-kicker { font-size:.66rem; }
+  .app-shell--guest .hotel-information { padding:12px; }
+  .app-shell--guest .hotel-information > .smoking-policy-notice .information-notice { padding:12px; }
+  .app-shell--guest .smoking-policy-notice .notice-title { font-size:.99rem; }
+  .app-shell--guest .smoking-policy-fee { font-size:.91rem; padding:9px 11px; }
+  .app-shell--guest .hotel-category-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; }
+  .app-shell--guest .hotel-category-grid .category-card { min-height:80px; font-size:.8rem; padding:9px; }
+  .app-shell--guest .hotel-category-grid .category-icon svg { width:21px; height:21px; }
+  .app-shell--guest .concierge-essentials-grid { gap:6px; }
+  .app-shell--guest .concierge-fact-button { min-height:101px; padding:9px 4px; }
+  .app-shell--guest .concierge-fact-button strong { font-size:.72rem; }
+  .app-shell--guest .concierge-featured-image { height:170px; }
+  .app-shell--guest .concierge-featured-actions { flex-wrap:nowrap; }
+  .app-shell--guest .concierge-featured-actions .button { min-width:0; padding:9px 8px; font-size:.84rem; }
+}
+@media (max-width:370px) {
+  .app-shell--guest .hotel-category-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .app-shell--guest .concierge-hero { min-height:215px; }
+}
+
+.app-shell--staff .staff-page { gap:14px; }
+.app-shell--staff .staff-intro .concierge-hero { min-height:205px; }
+.app-shell--staff .staff-intro-stats { display:none; }
+.app-shell--staff .staff-search-hub {
+  border:1px solid var(--concierge-line);
+  background:var(--color-surface);
+  border-radius:var(--concierge-radius);
+  padding:18px 20px;
+  box-shadow:var(--concierge-soft-shadow);
+  min-width:0;
+}
+.app-shell--staff .staff-search-hub-description { font-size:.88rem; color:var(--color-text-secondary); margin:-4px 0 10px; }
+.staff-search-hub-form { display:flex; align-items:stretch; flex-wrap:wrap; gap:8px; min-width:0; }
+.staff-hub-scope-label { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+.staff-search-hub-form select { flex:0 1 175px; max-width:100%; border:1px solid var(--concierge-line); border-radius:var(--radius-small); padding:8px; color:var(--color-text); background:var(--color-surface); }
+.staff-search-hub-input-label { display:flex; align-items:center; padding-left:10px; color:var(--color-primary); }
+.staff-search-hub-form input { min-height:44px; min-width:120px; flex:1 1 220px; border:1px solid var(--concierge-line); border-radius:var(--radius-small); padding:7px 10px; color:var(--color-text); }
+.staff-search-hub-form .button { min-width:78px; }
+.staff-search-suggestions { display:flex; align-items:center; flex-wrap:wrap; gap:7px; margin-top:10px; }
+.staff-search-suggestions > span { color:var(--color-text-secondary); font-size:.81rem; font-weight:650; }
+.staff-search-suggestions button { border:1px solid var(--concierge-line); border-radius:20px; padding:5px 10px; font-size:.81rem; color:var(--color-primary); background:var(--color-subtle); }
+.staff-search-suggestions button:hover { background:var(--color-tint); }
+.app-shell--staff .staff-overview-grid { grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+.staff-overview-column { display:flex; flex-direction:column; min-width:0; gap:14px; }
+.app-shell--staff .staff-overview-grid .concierge-essentials { padding:15px; }
+.app-shell--staff .staff-overview-grid .concierge-featured { padding:15px; }
+.app-shell--staff .staff-overview-grid .concierge-featured-image { height:150px; }
+.staff-quick-phrases, .staff-request-shortcut { padding:15px; border:1px solid var(--concierge-line); background:var(--color-surface); border-radius:var(--concierge-radius); min-width:0; }
+.staff-quick-phrases-list { display:flex; flex-direction:column; gap:7px; }
+.staff-quick-phrase { display:flex; justify-content:space-between; gap:10px; padding:9px 10px; border-radius:var(--radius-small); background:var(--color-subtle); border:1px solid var(--concierge-line); }
+.staff-quick-phrase div { min-width:0; }
+.staff-quick-phrase h3 { color:var(--color-primary); font-size:.82rem; line-height:1.35; margin:0 0 4px; }
+.staff-quick-phrase p { color:var(--color-text); font-size:.86rem; line-height:1.5; overflow-wrap:anywhere; }
+.staff-quick-phrase .staff-quick-phrase-ko { color:var(--color-text-secondary); font-size:.75rem; }
+.staff-quick-phrase button { flex:0 0 37px; width:37px; align-self:center; min-height:42px; border:0; border-radius:var(--radius-small); background:var(--color-surface); color:var(--color-primary); }
+.staff-quick-copy-status { font-size:.77rem; color:var(--color-text-secondary); min-height:15px; }
+.staff-request-shortcut h2 { font-size:1.06rem; }
+.staff-request-shortcut p { color:var(--color-text-secondary); font-size:.84rem; margin:5px 0 12px; }
+.app-shell--staff .staff-release-notice { order:5; }
+.app-shell--staff .staff-guide-tabs { order:4; }
+.app-shell--staff .staff-tab-panel { order:6; }
+.app-shell--staff .staff-overview-grid { order:3; }
+.app-shell--staff .staff-search-hub { order:2; }
+.app-shell--staff .staff-intro { order:1; }
+.app-shell--staff .staff-board-rail { order:0; }
+@media (min-width:1200px) {
+  .app-shell--staff .staff-board-rail { min-height:530px; }
+  .app-shell--staff .staff-page { padding-left:178px; }
+}
+@media (max-width:850px) {
+  .app-shell--staff .staff-overview-grid { grid-template-columns:1fr; }
+}
+@media (max-width:550px) {
+  .app-shell--staff .staff-search-hub { padding:13px; }
+  .staff-search-hub-form select { flex:1 1 100%; }
+  .staff-search-hub-form input { flex:1 1 calc(100% - 56px); }
+  .staff-search-hub-form .button { width:100%; }
+  .app-shell--staff .staff-overview-grid .concierge-essentials-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
