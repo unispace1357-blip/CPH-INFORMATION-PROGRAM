@@ -16,6 +16,7 @@ import { Button } from '../ui/Button'
 import { SearchInput } from '../ui/SearchInput'
 import type { IconName } from '../ui/Icon'
 import { HotelParagraphs } from './HotelParagraphs'
+import { ConciergeEssentials } from '../ui/ConciergeEssentials'
 
 const topics: { code: HotelCategory; icon: IconName }[] = [
   { code: 'checkIn', icon: 'checkIn' }, { code: 'checkOut', icon: 'checkOut' },
@@ -51,19 +52,20 @@ export function HotelInformation({ state, language, selected, onSelect, onClose 
 
   return (
     <section className="guest-section hotel-information" id="hotel-information" aria-labelledby="hotel-information-title">
+      <div className="concierge-hotel-search"><SearchInput className="hotel-search-field" label={m.ui.hotelSearchLabel} placeholder={m.ui.hotelSearchPlaceholder}
+        value={query} onChange={event => { setQuery(event.target.value); setActiveHit(null) }}
+        disabled={!hotel} maxLength={90} /></div>
+      {state.status === 'loading' && <LoadingState label={m.ui.loadingHotel} />}
+      {state.status === 'error' && <div role="alert"><InformationNotice title={m.ui.hotelDataErrorTitle} tone="warning"><p>{m.ui.dataErrorDescription}</p><Button variant="secondary" onClick={() => window.location.reload()}>{m.ui.refresh}</Button></InformationNotice></div>}
+      {hotel && <SmokingPolicyNotice hotel={hotel} language={language} />}
+      {hotel && <ConciergeEssentials hotel={hotel} language={language} onHotelTopic={selectTopic} />}
+      {hotel && !hotelHasInformation(hotel, language) && <InformationNotice title={m.ui.hotelEmptyTitle}>{m.ui.hotelEmptyDescription}</InformationNotice>}
       <div className="hotel-information-heading">
         <div className="hotel-information-heading-copy">
           <p className="hotel-section-eyebrow">HOTEL ESSENTIALS</p>
           <h2 id="hotel-information-title">{m.ui.hotelTitle}</h2>
         </div>
-        <SearchInput className="hotel-search-field" label={m.ui.hotelSearchLabel} placeholder={m.ui.hotelSearchPlaceholder}
-          value={query} onChange={event => { setQuery(event.target.value); setActiveHit(null) }}
-          disabled={!hotel} maxLength={90} />
       </div>
-      {state.status === 'loading' && <LoadingState label={m.ui.loadingHotel} />}
-      {state.status === 'error' && <div role="alert"><InformationNotice title={m.ui.hotelDataErrorTitle} tone="warning"><p>{m.ui.dataErrorDescription}</p><Button variant="secondary" onClick={() => window.location.reload()}>{m.ui.refresh}</Button></InformationNotice></div>}
-      {hotel && <SmokingPolicyNotice hotel={hotel} language={language} />}
-      {hotel && !hotelHasInformation(hotel, language) && <InformationNotice title={m.ui.hotelEmptyTitle}>{m.ui.hotelEmptyDescription}</InformationNotice>}
       {hotel && query.trim() && <div className="hotel-search-results" aria-label={m.ui.hotelSearchResults}>
         <div className="hotel-search-results-heading">
           <p role="status" aria-live="polite">{m.ui.hotelSearchResults} · {hits.length}</p>
