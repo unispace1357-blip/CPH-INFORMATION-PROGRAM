@@ -71,7 +71,9 @@ export function StaffRequestDialog({ onDismiss }: Props) {
         {formUrl
           ? <a className="button button--primary staff-request-submit" href={formUrl}
               target="_blank" rel="noopener noreferrer">Google Forms에서 접수하기</a>
-          : <span className="staff-request-unavailable" role="status">온라인 접수 연결 전 · 복사만 가능</span>}
+          : !valid
+            ? <span className="staff-request-unavailable" role="status">요청 내용을 10자 이상 작성해 주세요.</span>
+            : <span className="staff-request-unavailable" role="status">온라인 접수 연결 전 · 복사만 가능</span>}
       </div>
       {formUrl && <p className="staff-request-instructions">Google Forms가 열리면 자동 입력된 내용을 확인하고 <strong>제출</strong>을 눌러야 접수가 완료됩니다.</p>}
       {status && <p className="staff-request-status" role="status">{status}</p>}
