@@ -36,7 +36,7 @@ const expectedWalkingMinutesById = new Map<string, number | null>([
   ['lotte-mart-songdo', 11],
   ['songdo-central-park', 6],
   ['byeol-onnuri-pharmacy-songdo', 17],
-  ['songdo-timespace-complex', null],
+  ['songdo-timespace-complex', 15],
 ])
 
 const fresh = () => structuredClone(rawData)
@@ -61,6 +61,7 @@ test('local preview contains all 27 real facilities, four languages and no ficti
     assert.equal(facility.isPublished, true)
     assert.equal(facility.lastVerifiedAt, null)
     assert.equal(facility.walkingMinutes, expectedWalkingMinutesById.get(facility.id), facility.id)
+    assert.equal(facility.walkingDistanceMeters ?? null, facility.id === 'songdo-timespace-complex' ? 835 : null, facility.id)
     assert.ok(facility.naverMapUrl === null || typeof facility.naverMapUrl === 'string')
     assert.deepEqual(Object.keys(facility.translations), ['ko', 'en', 'zh-CN', 'ja'])
     for (const text of Object.values(facility.translations)) {
