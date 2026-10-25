@@ -186,7 +186,9 @@
         },
         "englishPhraseMeanings": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Optional staff Korean meanings in the same order as englishPhrases."
         },
         "walkingMinutes": {
@@ -198,7 +200,10 @@
           "default": null
         },
         "naverMapUrl": {
-          "type": ["string", "null"],
+          "type": [
+            "string",
+            "null"
+          ],
           "format": "naver-map-directions",
           "description": "Optional public HTTPS Naver directions URL, including native/encoded Unicode place names. Register the shared naver-map-directions format from naverMapUrl.ts."
         },
@@ -231,6 +236,26 @@
             "zh-CN": "",
             "ja": ""
           }
+        },
+        "additionalCategories": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "hotel",
+              "dining",
+              "cafe",
+              "convenience",
+              "pharmacy",
+              "shopping",
+              "attraction",
+              "transportation",
+              "sauna_spa",
+              "atm"
+            ]
+          },
+          "uniqueItems": true,
+          "minItems": 1,
+          "description": "Optional additional guest/staff filter categories, without creating duplicate facility records."
         }
       }
     }
