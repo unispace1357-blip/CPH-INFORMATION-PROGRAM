@@ -65,17 +65,22 @@ export function GuestPage() {
     const next = searchGuestFacilities(dataset?.facilities ?? [], nextQuery, nextCategory, language)
     setSelectedId(current => resolveSelectedFacility(next, current)?.id ?? null)
   }
+  function focusExactTenant(value: string) {
+    const tenant = resolveExactTimespaceTenant(value)
+    const complex = dataset?.facilities.find(item => item.id === 'songdo-timespace-complex' && item.isPublished)
+    if (!tenant || !complex) return
+    setCategory('all')
+    setSelectedId(complex.id)
+    setTenantFocus({ tenantId: tenant.id, requestId: ++tenantRequestSequence.current })
+  }
   function onSearchChange(value: string) {
     updateFilters(value, category)
     // Never jump for cuisines, partial names or generic facility keywords.
-    searchTimer.current = setTimeout(() => {
-      const tenant = resolveExactTimespaceTenant(value)
-      const complex = dataset?.facilities.find(item => item.id === 'songdo-timespace-complex' && item.isPublished)
-      if (!tenant || !complex) return
-      setCategory('all')
-      setSelectedId(complex.id)
-      setTenantFocus({ tenantId: tenant.id, requestId: ++tenantRequestSequence.current })
-    }, 400)
+    searchTimer.current = setTimeout(() => focusExactTenant(value), 400)
+  }
+  function repeatExactTenantSearch() {
+    resetTenantNavigation()
+    focusExactTenant(query)
   }
   function selectFacility(id: string) {
     resetTenantNavigation()
@@ -112,7 +117,7 @@ export function GuestPage() {
       </section>
       <section className="panel guest-search-panel" id="guest-search" aria-labelledby="guest-search-title">
         <div className="section-heading"><h2 id="guest-search-title">{m.ui.searchTitle}</h2><Button variant="quiet" disabled={!query} onClick={() => updateFilters('', category)}>{m.ui.clearSearch}</Button></div>
-        <SearchInput label={m.ui.searchLabel} placeholder={m.ui.searchPlaceholder} value={query} onChange={event => onSearchChange(event.target.value)} disabled={!dataset} hint={m.ui.searchHint} />
+        <SearchInput label={m.ui.searchLabel} placeholder={m.ui.searchPlaceholder} value={query} onChange={event => onSearchChange(event.target.value)} onKeyDown={event => { if (event.key === 'Enter') { event.preventDefault(); repeatExactTenantSearch() } }} disabled={!dataset} hint={m.ui.searchHint} />
       </section>
       <section className="guest-section" id="guest-facility-results" aria-labelledby="guest-results-title">
         <div className="section-heading"><h2 id="guest-results-title">{m.ui.resultsTitle}</h2><p className="status-label" role="status" aria-live="polite">{dataset ? message(language, 'resultCount', { count: results.length }) : facilities.status === 'error' ? m.ui.informationUnavailable : m.ui.loadingFacilities}</p></div>
