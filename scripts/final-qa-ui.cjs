@@ -396,7 +396,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await diningDirectory.getByRole('button', {name:/전체/}).click();
     assert.equal(await diningDirectory.locator('.timespace-tenant-card').count(), 15);
     assert.equal(await diningDirectory.locator('.timespace-tenant-card.is-search-match').count(), 0, 'manual category choice clears highlighted tenant');
-    await guestSearch.fill('한마음정육식당');
+    await guestSearch.press('Enter'); // Repeat exact search without changing input text.
     await guest.locator('.timespace-tenant-card.is-search-match').waitFor({state:'visible',timeout:10000});
     await guestSearch.fill('삼겹살');
     await guest.waitForTimeout(550);
