@@ -4,10 +4,10 @@ import { TIMESPACE_CATEGORY_ORDER } from '../../../src/services/timespaceDirecto
 import type { TimespaceTenant } from '../../../src/services/timespaceDirectory.ts'
 
 export type TimespaceTenantDataset = { complexId: string; researchedOn: string; address: string; tenants: TimespaceTenant[] }
-export const INITIAL_TIMESPACE_TENANTS = validateTimespaceTenants(raw)
-
 const categories = new Set<string>(TIMESPACE_CATEGORY_ORDER.filter(category => category !== 'all'))
 const names = ['id', 'name', 'category', 'building', 'floor', 'rooms', 'menu', 'status'] as const
+
+export const INITIAL_TIMESPACE_TENANTS = validateTimespaceTenants(raw)
 
 /** Runtime checks for manually imported JSON, not just compile-time TypeScript. */
 export function validateTimespaceTenants(value: unknown): TimespaceTenantDataset {
