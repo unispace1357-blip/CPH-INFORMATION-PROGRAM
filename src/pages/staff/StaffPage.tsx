@@ -78,7 +78,7 @@ export function StaffPage() {
         <div className="staff-board-rail-brand">CPH <span>CONCIERGE</span></div>
         <button type="button" className={activeTab === 'hotel' ? 'is-active' : ''} onClick={() => setActiveTab('hotel')}><Icon name="hotel" size={20} />호텔 영어 응대</button>
         <button type="button" className={activeTab === 'facilities' ? 'is-active' : ''} onClick={() => setActiveTab('facilities')}><Icon name="attraction" size={20} />주변 시설</button>
-        <a href="#staff-essentials"><Icon name="info" size={20} />호텔 주요 정보</a>
+        <button type="button" onClick={() => { const area = document.getElementById('staff-essentials'); area?.scrollIntoView({ block: 'start' }); area?.focus({ preventScroll: true }) }}><Icon name="info" size={20} />호텔 주요 정보</button>
       </nav>
       <section className="staff-intro" aria-label="프론트 안내 대시보드">
         <ConciergeHero audience="staff" />
@@ -100,7 +100,7 @@ export function StaffPage() {
         </> : <>호텔 업무 영어 문장은 검수 전 초안입니다. 사용 전 확인해 주세요. 정식 운영 배포는 차단되어 있습니다.</>}
       </InformationNotice></div>}
       {dataset?.dataStatus === 'production' && <InformationNotice title="안내 정보 확인">정보 확인일과 미확인 항목을 확인하고, 방문 전 영업시간 등 변동 사항을 확인해 주세요.</InformationNotice>}
-      <div className="staff-overview-grid" id="staff-essentials">
+      <div className="staff-overview-grid" id="staff-essentials" tabIndex={-1}>
         <ConciergeEssentials hotel={hotelDataset} language="ko" includeCheckout />
         <FeaturedTimespace facility={featuredTimespace} language="ko" compact onDetails={openFeaturedFacility} />
       </div>
