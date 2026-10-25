@@ -1,0 +1,105 @@
+/*
+ * CPH Concierge Layout V1 — spatial design only.
+ * Palette inherits the existing tokens; later color work is isolated to this
+ * file and tokens.css. Photo swaps are isolated to ConciergeHero.tsx.
+ */
+:root {
+  --concierge-ink: var(--color-primary);
+  --concierge-page: var(--color-background);
+  --concierge-card: var(--color-surface);
+  --concierge-line: var(--color-border);
+  --concierge-radius: var(--radius-large);
+  --concierge-soft-shadow: var(--shadow-panel);
+}
+.concierge-hero { position:relative; isolation:isolate; min-height:242px; display:flex; align-items:flex-end; overflow:hidden; border-radius:var(--concierge-radius); color:#fff; background:var(--color-primary); }
+.concierge-hero-image { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2; }
+.concierge-hero::before { content:""; position:absolute; z-index:-1; inset:0; background:linear-gradient(90deg,rgba(18,37,62,.91),rgba(21,45,73,.62) 62%,rgba(21,45,73,.12)); pointer-events:none; }
+.concierge-hero-copy { max-width:560px; display:grid; align-content:end; gap:8px; padding:clamp(20px,4vw,37px); }
+.concierge-hero-kicker { font-size:.76rem; font-weight:750; letter-spacing:.14em; color:#e9e0d1; }
+.concierge-hero h1 { color:#fff; font-size:clamp(1.55rem,3.5vw,2.45rem); line-height:1.32; }
+.concierge-hero-copy > p:last-of-type { max-width:50ch; color:#eef1f5; font-size:.95rem; line-height:1.6; }
+.concierge-hero-search-link { display:inline-flex; justify-content:space-between; align-items:center; gap:14px; margin-top:8px; width:min(100%,460px); min-height:46px; padding:10px 15px; border:1px solid #d9e4ef; border-radius:var(--radius-medium); color:var(--color-text); background:#fff; font-weight:650; text-decoration:none; }
+.concierge-hero-search-link:hover { color:var(--color-primary); }
+.concierge-hero-search-link span { font-size:1.3rem; line-height:1; }
+.app-shell--guest .guest-page { gap:16px; }
+.app-shell--guest .guest-language-toolbar { order:0; }
+.app-shell--guest .concierge-hero { order:1; }
+.app-shell--guest .guest-page > .information-notice { order:2; }
+.app-shell--guest .hotel-information { order:3; }
+.app-shell--guest .guest-page > .concierge-featured { order:4; }
+.app-shell--guest #nearby-facilities { order:5; }
+.app-shell--guest #guest-search { order:6; }
+.app-shell--guest #guest-facility-results { order:7; }
+.app-shell--guest #guest-facility-detail { order:8; }
+.app-shell--guest .hotel-information { display:flex; flex-direction:column; gap:16px; }
+.app-shell--guest .concierge-hotel-search { order:0; }
+.app-shell--guest .hotel-information > .smoking-policy-notice { order:1; }
+.app-shell--guest .hotel-information > .concierge-essentials { order:2; }
+.app-shell--guest .hotel-information > .hotel-information-heading { order:3; margin-bottom:0; }
+.app-shell--guest .hotel-information > .hotel-search-results { order:4; }
+.app-shell--guest .hotel-information > .hotel-category-grid { order:5; }
+.app-shell--guest .hotel-information > #guest-hotel-detail { order:6; }
+.app-shell--guest .hotel-category-grid { margin:0; }
+.app-shell--guest .hotel-information-heading { display:block; }
+.concierge-section-heading { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:12px; }
+.concierge-section-heading h2 { color:var(--color-text); font-size:1.14rem; }
+.concierge-essentials { min-width:0; }
+.concierge-essentials-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+.concierge-fact { min-width:0; background:var(--concierge-card); border:1px solid var(--concierge-line); border-radius:var(--radius-medium); overflow:hidden; }
+.concierge-fact-button { width:100%; min-width:0; min-height:118px; padding:13px 8px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; border:0; background:transparent; color:var(--color-text); text-decoration:none; text-align:center; }
+button.concierge-fact-button:hover, a.concierge-fact-button:hover { background:var(--color-subtle); }
+.concierge-fact-button .icon { color:var(--color-primary); }
+.concierge-fact-button strong { font-size:clamp(.72rem,2vw,.93rem); overflow-wrap:anywhere; line-height:1.35; font-variant-numeric:tabular-nums; }
+.concierge-fact-label { font-size:.82rem; font-weight:650; }
+.concierge-featured { display:block; padding:18px; border:1px solid var(--concierge-line); background:var(--concierge-card); border-radius:var(--concierge-radius); box-shadow:var(--concierge-soft-shadow); }
+.concierge-featured-badge { font-size:.78rem; font-weight:800; border:1px solid #e4bd74; border-radius:50px; background:#fff6e7; color:#805c2a; padding:3px 10px; white-space:nowrap; }
+.concierge-featured-card { min-width:0; overflow:hidden; border:1px solid var(--concierge-line); border-radius:var(--radius-medium); background:var(--concierge-card); }
+.concierge-featured-image { display:block; width:100%; height:clamp(155px,24vw,265px); object-fit:cover; background:var(--color-subtle); }
+.concierge-featured-body { padding:14px 16px 16px; display:grid; gap:9px; }
+.concierge-featured-body h3 { line-height:1.4; }
+.concierge-featured-description { font-size:.91rem; line-height:1.65; color:var(--color-text-secondary); display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3; line-clamp:3; overflow:hidden; }
+.concierge-featured-actions { display:flex; flex-wrap:wrap; gap:9px; }
+.concierge-featured-actions .button { flex:1; min-width:130px; }
+.concierge-route-unavailable { font-size:.83rem; color:var(--color-text-secondary); }
+.concierge-route-notice { font-size:.8rem; color:var(--color-text-secondary); }
+.concierge-route-notice summary { cursor:pointer; font-weight:650; }
+.concierge-route-notice p { padding:6px 0; line-height:1.6; overflow-wrap:anywhere; }
+.app-shell--staff .staff-page { position:relative; }
+.staff-board-rail { display:none; }
+.app-shell--staff .staff-intro { padding:0; border:0; background:transparent; overflow:visible; }
+.app-shell--staff .staff-intro::after { display:none; }
+.app-shell--staff .staff-intro .concierge-hero { min-height:210px; }
+.app-shell--staff .staff-intro .concierge-hero h1 { color:#fff; }
+.app-shell--staff .staff-intro .staff-intro-stats { justify-content:flex-end; margin-top:10px; }
+.app-shell--staff .staff-overview-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:stretch; gap:14px; }
+.app-shell--staff .staff-overview-grid > * { min-width:0; }
+.app-shell--staff .staff-overview-grid .concierge-essentials { border:1px solid var(--concierge-line); padding:17px; background:var(--color-surface); border-radius:var(--concierge-radius); }
+.app-shell--staff .concierge-essentials-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.app-shell--staff .concierge-fact-button { min-height:96px; }
+.app-shell--staff .concierge-featured--compact { padding:17px; }
+.app-shell--staff .concierge-featured--compact .concierge-featured-image { height:160px; }
+.app-shell--staff .concierge-featured--compact .concierge-featured-body { padding:12px 14px; }
+.app-shell--staff .concierge-featured--compact .concierge-featured-description { -webkit-line-clamp:2; line-clamp:2; }
+@media (min-width:1200px) {
+  .app-shell--staff .staff-page { padding-left:178px; }
+  .staff-board-rail { position:absolute; display:flex; flex-direction:column; gap:7px; left:0; top:0; width:164px; background:var(--color-primary); color:#fff; padding:16px 9px; border-radius:var(--concierge-radius); min-height:520px; }
+  .staff-board-rail-brand { font-weight:850; font-size:1.2rem; letter-spacing:.12em; padding:15px 10px 25px; border-bottom:1px solid rgba(255,255,255,.25); }
+  .staff-board-rail-brand span { display:block; font-size:.61rem; letter-spacing:.14em; font-weight:650; }
+  .staff-board-rail button,.staff-board-rail a { display:flex; align-items:center; gap:9px; min-height:45px; padding:8px 10px; border-radius:8px; border:0; color:#eef1f8; background:transparent; font-size:.79rem; font-weight:650; text-decoration:none; text-align:left; }
+  .staff-board-rail button:hover,.staff-board-rail a:hover,.staff-board-rail .is-active { background:rgba(255,255,255,.17); }
+}
+@media (max-width:850px) {
+  .app-shell--staff .staff-overview-grid { grid-template-columns:1fr; }
+}
+@media (max-width:550px) {
+  .concierge-hero { min-height:265px; }
+  .concierge-hero-copy { padding:18px; }
+  .concierge-hero h1 { font-size:1.45rem; }
+  .app-shell--guest .hotel-information { padding:14px; }
+  .concierge-fact-button { min-height:103px; padding:10px 4px; }
+  .concierge-fact-button .icon { width:23px; height:23px; }
+  .concierge-fact-button strong { font-size:.69rem; }
+  .concierge-fact-label { font-size:.72rem; }
+  .concierge-featured { padding:13px; }
+  .concierge-featured-image { height:175px; }
+}

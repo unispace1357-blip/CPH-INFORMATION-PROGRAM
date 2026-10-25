@@ -37,6 +37,11 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     assert.equal(scripts.length, 33);
     staff = await context.newPage();
     await staff.goto(base + '/staff');
+    await staff.waitForFunction(() => [...document.querySelectorAll('.concierge-hero-image,.concierge-featured-image')].length === 2 &&
+      [...document.querySelectorAll('.concierge-hero-image,.concierge-featured-image')].every(img => img.complete && img.naturalWidth > 0));
+    assert.ok((await staff.locator('#staff-essentials').innerText()).includes('35,000'));
+    assert.equal(await staff.locator('.staff-board-rail').count(), 1);
+    log('Staff layout: concept photos, source-backed hotel facts and optional sidebar');
     await staff.waitForSelector('#frontdesk-search-title');
     assert.equal(await staff.getByRole('tab', { name: '호텔 업무 영어 응대' }).getAttribute('aria-selected'), 'true');
     await waitCards(staff, 33, '.frontdesk-script-card');
@@ -150,6 +155,11 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     guest.on('response', response => { if (response.status() >= 400) errors.push('Guest HTTP ' + response.status() + ' ' + response.url()); });
     await guest.goto(base + '/guest');
     await waitCards(guest, 27);
+    await guest.waitForFunction(() => [...document.querySelectorAll('.concierge-hero-image,.concierge-featured-image')].length === 2 &&
+      [...document.querySelectorAll('.concierge-hero-image,.concierge-featured-image')].every(img => img.complete && img.naturalWidth > 0));
+    assert.ok((await guest.locator('.concierge-essentials').innerText()).includes('35,000'));
+    assert.equal(await guest.locator('.concierge-featured').count(), 1);
+    log('Guest layout: responsive hero, safety, quick facts and featured place photos');
     assert.equal(await guest.locator('.english-guide').count(), 0);
     assert.equal(await guest.getByRole('button', { name: '요청사항', exact: true }).count(), 0);
     assert.equal(await guest.getByRole('dialog', { name: '직원 요청사항' }).count(), 0);
