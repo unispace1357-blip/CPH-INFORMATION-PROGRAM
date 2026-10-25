@@ -28,9 +28,9 @@ const CATEGORY_LABELS: Record<TimespaceCategoryFilter, Record<GuideLanguage, str
   western: { ko: '파스타·양식', en: 'Pasta & Western', 'zh-CN': '意面·西餐', ja: 'パスタ・洋食' },
   pizza: { ko: '피자', en: 'Pizza', 'zh-CN': '披萨', ja: 'ピザ' },
   curry: { ko: '카레', en: 'Curry', 'zh-CN': '咖喱', ja: 'カレー' },
-  korean: { ko: '한식·찌개', en: 'Korean stews', 'zh-CN': '韩餐·汤锅', ja: '韓国料理・チゲ' },
-  japanese: { ko: '일식·철판', en: 'Japanese griddle', 'zh-CN': '日式铁板', ja: '和食・鉄板' },
-  snack: { ko: '떡볶이·분식', en: 'Tteokbokki', 'zh-CN': '炒年糕·小吃', ja: 'トッポッキ・軽食' },
+  korean: { ko: '한식·찌개', en: 'Korean food & stews', 'zh-CN': '韩餐·汤锅', ja: '韓国料理・チゲ' },
+  japanese: { ko: '일식·철판', en: 'Japanese & teppan dishes', 'zh-CN': '日式铁板', ja: '和食・鉄板' },
+  snack: { ko: '떡볶이·분식', en: 'Tteokbokki & street food', 'zh-CN': '炒年糕·小吃', ja: 'トッポッキ・軽食' },
   healthy: { ko: '포케·샐러드', en: 'Poké & salads', 'zh-CN': '波奇饭·沙拉', ja: 'ポキ・サラダ' },
 }
 
@@ -52,12 +52,12 @@ export const TIMESPACE_DIRECTORY_UI: Record<GuideLanguage, {
     heading: 'Explore restaurants',
     intro: 'Choose the type of food you would like.',
     menuLabel: 'Popular dishes',
-    locationLabel: 'Shop location',
+    locationLabel: 'Restaurant location',
     note: 'Tenants, hours and menus may change. Please check with the restaurant before visiting.',
   },
   'zh-CN': {
-    heading: '探索美食餐厅',
-    intro: '请选择您想吃的餐饮类别。',
+    heading: '浏览餐厅',
+    intro: '请选择您想吃的菜系或餐点。',
     menuLabel: '主要菜品',
     locationLabel: '店铺位置',
     note: '商户、营业时间和菜单可能会调整，请在到访前向店家确认。',
