@@ -17,7 +17,7 @@ export function ConciergeEssentials({ hotel, language, includeCheckout = false, 
 }) {
   const t = labels[language]
   // Only reflect verified source copy; changing hotel.json updates these quick facts automatically.
-  const breakfast = hotel.translations.ko.breakfast.match(/35,000|\d{1,3},\d{3}(?=원)/)?.[0]
+  const breakfast = hotel.translations.ko.breakfast.match(/\d{1,3},\d{3}(?=원)/)?.[0]
   const phone = hotel.translations.ko.notes.match(/0\d{1,2}-\d{3,4}-\d{4}/)?.[0]
   const rows = [
     { key: 'checkIn' as const, icon: 'checkIn' as const, label: t.checkIn, value: hotel.checkInTime || '—' },
