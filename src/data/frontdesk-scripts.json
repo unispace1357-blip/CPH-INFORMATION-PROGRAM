@@ -108,30 +108,36 @@
     {
       "id": "check-in-deposit-id",
       "category": "check-in-out",
-      "title": "체크인 보증금 및 신분증",
+      "title": "체크인 보증용 카드 및 신분 확인",
       "keywords": [
         "보증금",
         "신분증",
         "디파짓",
         "deposit",
         "id",
-        "passport"
+        "passport",
+        "보증용 카드",
+        "키오스크",
+        "guarantee card",
+        "kiosk"
       ],
       "question": {
-        "en": "Do I need to pay a deposit?",
-        "ko": "보증금을 내야 하나요?"
+        "en": "Do I need to show my ID or leave a deposit at check-in?",
+        "ko": "체크인할 때 신분증이나 보증금이 필요한가요?"
       },
       "quickAnswer": {
-        "en": "No deposit is required at check-in.",
-        "ko": "체크인 시 보증금은 필요하지 않습니다."
+        "en": "We do not collect a cash security deposit. Please follow the front desk instructions for identity verification and any guarantee card required at check-in.",
+        "ko": "현금 보증금은 받지 않습니다. 신분 확인 및 보증용 카드 제출 여부는 프론트의 안내를 따라 주세요."
       },
       "details": {
-        "en": "Our hotel information does not require a separate ID submission. Let me confirm the check-in procedure for you.",
-        "ko": "호텔 안내에는 별도의 신분증 제출이 필요하지 않은 것으로 등록되어 있습니다. 체크인 절차를 확인해 드리겠습니다."
+        "en": "Self-service kiosk check-in requires an ID. Depending on the check-in procedure, the front desk may ask for a guarantee card. If you do not have an ID, please speak with our staff so we can confirm the check-in procedure.",
+        "ko": "키오스크 체크인은 신분증이 필요합니다. 체크인 방식에 따라 프론트에서 보증용 카드를 요청할 수 있습니다. 신분증이 없다면 직원에게 문의해 대체 확인 절차를 안내받아 주세요."
       },
       "staffChecks": [
-        "별도 신분증 제출과 현장 신원 확인은 다른 절차",
-        "신원 확인이 필요 없다고 단정하지 말고 현재 운영 절차 확인"
+        "키오스크 체크인에는 신분증이 필요함",
+        "현금 보증금과 보증용 카드 제시를 구분하기",
+        "외국인 보증용 카드 요청 등 실제 운영 기준 확인",
+        "신분증이 없는 경우 직원이 성인 여부 및 현장 대체 절차 확인; 무조건 체크인 가능하다고 보장하지 않음"
       ],
       "sourceType": "hotel-data",
       "sourceSection": "checkIn",
@@ -334,18 +340,18 @@
         "가격",
         "breakfast price",
         "adult breakfast",
-        "32000"
+        "35000"
       ],
       "question": {
         "en": "How much is breakfast?",
         "ko": "조식은 얼마인가요?"
       },
       "quickAnswer": {
-        "en": "Breakfast is 32,000 won per adult.",
-        "ko": "성인 조식은 1인당 32,000원입니다."
+        "en": "Breakfast is 35,000 won per adult.",
+        "ko": "성인 조식은 1인당 35,000원입니다."
       },
       "staffChecks": [
-        "등록 요금: 성인 1인 32,000원",
+        "등록 요금: 성인 1인 35,000원",
         "현행 요금과 구매·결제 가능 여부 확인"
       ],
       "sourceType": "hotel-data",
@@ -425,21 +431,30 @@
     {
       "id": "microwave-location",
       "category": "room-usage",
-      "title": "전자레인지 위치",
+      "title": "전자레인지 및 공용 비품 위치",
       "keywords": [
         "전자레인지",
         "microwave",
         "6층",
         "10층",
-        "16층"
+        "16층",
+        "수저",
+        "젓가락",
+        "나이프",
+        "와인잔",
+        "spoons",
+        "chopsticks",
+        "knives",
+        "wine glasses",
+        "cutlery"
       ],
       "question": {
         "en": "Where can I find a microwave?",
         "ko": "전자레인지는 어디에 있나요?"
       },
       "quickAnswer": {
-        "en": "There are microwaves on the 6th, 10th, and 16th floors.",
-        "ko": "전자레인지는 6층, 10층, 16층에 있습니다."
+        "en": "Microwaves, spoons, chopsticks, knives, and wine glasses are available on the 6th, 10th, and 16th floors.",
+        "ko": "전자레인지와 수저, 젓가락, 나이프, 와인잔은 6층, 10층, 16층에 있습니다."
       },
       "staffChecks": [],
       "sourceType": "hotel-data",
@@ -479,6 +494,79 @@
       ],
       "sourceType": "hotel-data",
       "sourceSection": "roomUsage",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "bedside-light-switch",
+      "category": "room-usage",
+      "title": "침대 옆 조명 스위치",
+      "keywords": [
+        "조명",
+        "불",
+        "전등",
+        "스위치",
+        "침대",
+        "bedside",
+        "light switch",
+        "lights",
+        "turn off",
+        "turn on"
+      ],
+      "question": {
+        "en": "How do I turn off the room lights?",
+        "ko": "객실 불은 어디서 끄나요?"
+      },
+      "quickAnswer": {
+        "en": "You can turn the room lights on or off using the switch beside the bed.",
+        "ko": "침대 옆에 있는 스위치로 객실 불을 켜거나 끌 수 있습니다."
+      },
+      "details": {
+        "en": "Please check for the light switch beside your bed. If you cannot find it or it does not work, contact the front desk.",
+        "ko": "침대 옆 스위치를 확인해 주세요. 찾기 어렵거나 작동하지 않으면 프론트에 문의해 주세요."
+      },
+      "staffChecks": [
+        "객실별 스위치 위치 차이·작동 상태는 현장에서 확인"
+      ],
+      "sourceType": "hotel-data",
+      "sourceSection": "roomUsage",
+      "reviewStatus": "draft",
+      "lastVerifiedAt": null
+    },
+    {
+      "id": "smoke-ventilation-window",
+      "category": "room-usage",
+      "title": "방연창 및 환기 문의",
+      "keywords": [
+        "방연창",
+        "창문",
+        "환기",
+        "연기배출",
+        "ventilation",
+        "window",
+        "smoke vent",
+        "air circulation",
+        "airflow"
+      ],
+      "question": {
+        "en": "Can I open the window for ventilation?",
+        "ko": "환기를 위해 창문을 열 수 있나요?"
+      },
+      "quickAnswer": {
+        "en": "This is a smoke ventilation window designed for fire safety. If you need help with ventilation, please contact the front desk.",
+        "ko": "이 창문은 화재 안전을 위한 방연창입니다. 환기 관련 도움이 필요하시면 프론트에 문의해 주세요."
+      },
+      "details": {
+        "en": "The window serves a smoke ventilation function for fire safety. Please ask the front desk about the window's operation and the available ventilation options.",
+        "ko": "방연창은 화재 시 연기 배출을 위한 설비입니다. 개폐 방법이나 객실 환기 방법은 프론트에 문의해 주세요."
+      },
+      "staffChecks": [
+        "방연창의 정확한 개폐 방식과 고객 조작 허용 여부는 현장 확인 후 확정",
+        "일반 창문처럼 직접 열라고 안내하지 않기",
+        "ventilation은 환기, air conditioning은 냉난방, smoke ventilation window는 방연창"
+      ],
+      "sourceType": "user-provided",
+      "sourceSection": null,
       "reviewStatus": "draft",
       "lastVerifiedAt": null
     },
@@ -976,24 +1064,28 @@
         "airport bus",
         "limousine",
         "airport",
-        "terminal"
+        "terminal",
+        "8000",
+        "8,000",
+        "요금",
+        "fare"
       ],
       "question": {
         "en": "Where can I catch the 6777 airport limousine bus, and what time does it leave?",
         "ko": "인천공항 가는 6777번 버스는 어디서 타고 언제 출발하나요?"
       },
       "quickAnswer": {
-        "en": "Bus 6777 leaves from the stop near Central Park Station Exit 1, by POSCO Booyoung Tower, and goes to Incheon Airport Terminals 1 and 2. Times may change, so please check the latest schedule before boarding.",
-        "ko": "6777번 버스는 센트럴파크역 1번 출구 방향 포스코·부영타워 인근 정류장에서 출발해 인천공항 제1·제2터미널로 갑니다. 시간표가 달라질 수 있으니 탑승 전 최신 운행정보를 확인해 주세요."
+        "en": "Bus 6777 leaves from the stop near Central Park Station Exit 1, by POSCO Booyoung Tower, and goes to Incheon Airport Terminals 1 and 2. The adult fare is 8,000 won. Times may change, so please check the latest schedule before boarding.",
+        "ko": "6777번 버스는 센트럴파크역 1번 출구 방향 포스코·부영타워 인근 정류장에서 출발해 인천공항 제1·제2터미널로 갑니다. 성인 요금은 8,000원입니다. 시간표가 달라질 수 있으니 탑승 전 최신 운행정보를 확인해 주세요."
       },
       "details": {
-        "en": "The hotel handout lists these scheduled departures from the Central Park stop: 05:27, 06:07, 06:47, 08:47, 10:27, 11:57, 13:27, 14:57, 16:27, 17:57, 19:27, 20:27. These are not departure times from the hotel. Bus schedules, routes, stops and holiday services may change; fares and bookings should be checked separately.",
-        "ko": "호텔 안내문에 기재된 센트럴파크 정류장 출발 예정 시각: 05:27, 06:07, 06:47, 08:47, 10:27, 11:57, 13:27, 14:57, 16:27, 17:57, 19:27, 20:27. 호텔 출발 시각이 아닙니다. 운행시간, 노선, 정류장 및 휴일 운행은 달라질 수 있으며 요금과 예약은 별도 확인해야 합니다."
+        "en": "The hotel handout lists these scheduled departures from the Central Park stop: 05:27, 06:07, 06:47, 08:47, 10:27, 11:57, 13:27, 14:57, 16:27, 17:57, 19:27, 20:27. These are not departure times from the hotel. Bus schedules, routes, stops and holiday services may change; the adult fare is KRW 8,000, but booking details should be checked separately.",
+        "ko": "호텔 안내문에 기재된 센트럴파크 정류장 출발 예정 시각: 05:27, 06:07, 06:47, 08:47, 10:27, 11:57, 13:27, 14:57, 16:27, 17:57, 19:27, 20:27. 호텔 출발 시각이 아닙니다. 운행시간, 노선, 정류장 및 휴일 운행은 달라질 수 있으며 성인 요금은 8,000원이며 예약 방법은 별도 확인해야 합니다."
       },
       "staffChecks": [
         "호텔 제공 공항버스 안내문(2026-10-19 사진) 기반의 참고용 예정 시각",
         "승차장은 센트럴파크역 1번 출구 방향·포스코부영타워 인근으로 설명하되 실제 탑승 전 정류장 확인",
-        "요금·실시간 도착·운휴 및 예약 가능 여부를 추측하지 않기",
+        "성인 요금 8,000원(송도컨벤시아 안내 기준); 어린이/기타 요금·실시간 도착·운휴 및 예약 가능 여부는 추측하지 않기",
         "공항버스 안내문/네이버 지도와 내용이 다를 경우 최신 운영사 정보를 우선"
       ],
       "sourceType": "user-provided",
