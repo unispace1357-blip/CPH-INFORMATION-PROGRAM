@@ -33,7 +33,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
   await context.route(/https:\/\/(?:m\.)?map\.naver\.com\//, r => r.fulfill({ contentType: 'text/html', body: '<p>Intercepted: no live route checked</p>' }));
   let staff, guest, admin;
   try {
-    assert.equal(dataset.facilities.length, 26);
+    assert.equal(dataset.facilities.length, 27);
     assert.equal(scripts.length, 33);
     staff = await context.newPage();
     await staff.goto(base + '/staff');
@@ -88,10 +88,10 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     log('Staff: 33 scripts, smoking priority, parking, delivery, airport bus and untouched English clipboard');
 
     await staff.getByRole('tab', { name: '주변 시설 안내' }).click();
-    await waitCards(staff, 26);
+    await waitCards(staff, 27);
     const staffPanel = staff.locator('#staff-facilities-panel');
     assert.deepEqual(await staffPanel.locator('.facility-card h3').allTextContents(), names(dataset.facilities));
-    assert.equal(await staffPanel.locator('.facility-menu-summary').count(), 14);
+    assert.equal(await staffPanel.locator('.facility-menu-summary').count(), 15);
     const fSearch = staffPanel.getByRole('searchbox');
     for (const [query, expected] of [
       ['맥주', ['더몰트하우스 인천송도점', '플레이그라운드 브루어리 탭룸 송도', '금별맥주 송도롯데몰점']],
@@ -105,6 +105,13 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
       const actual = await staffPanel.locator('.facility-card h3').allTextContents();
       for (const name of expected) assert.ok(actual.includes(name), query + ': ' + name);
     }
+    await fSearch.fill('스프카레');
+    await waitCards(staff, 1);
+    assert.equal((await staffPanel.locator('.facility-card h3').allTextContents())[0], '송도 타임스페이스');
+    assert.ok((await staffPanel.locator('.facility-menu-summary').innerText()).includes('도라보울'));
+    await staffPanel.locator('.facility-card button').click();
+    assert.ok((await staffPanel.locator('.english-phrase-text').allTextContents()).some(t => t.includes('Timespace')));
+    assert.ok((await staffPanel.locator('.staff-detail-intro .naver-map-link').getAttribute('href')).includes('1841858743,PLACE_POI'));
     await fSearch.fill('맥주 약국');
     await waitCards(staff, 0);
     await fSearch.fill('더몰트하우스');
@@ -117,12 +124,12 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await staff.waitForFunction(t => navigator.clipboard.readText().then(x => x === t), malt.englishPhrases[0]);
     await staffPanel.getByRole('button', { name: '전체 문구 복사' }).click();
     await staff.waitForFunction(t => navigator.clipboard.readText().then(x => x === t), malt.englishPhrases.join('\n'));
-    log('Staff: all 26 names, 14 menu summaries, aliases, AND search, phonetics excluded from copy');
+    log('Staff: all 27 names, 15 menu summaries, aliases, AND search, phonetics excluded from copy');
 
     guest = await context.newPage();
     guest.on('response', response => { if (response.status() >= 400) errors.push('Guest HTTP ' + response.status() + ' ' + response.url()); });
     await guest.goto(base + '/guest');
-    await waitCards(guest, 26);
+    await waitCards(guest, 27);
     assert.equal(await guest.locator('.english-guide').count(), 0);
     assert.equal(await guest.getByRole('button', { name: '요청사항', exact: true }).count(), 0);
     assert.equal(await guest.getByRole('dialog', { name: '직원 요청사항' }).count(), 0);
@@ -132,22 +139,33 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
       await guest.locator('.language-options').getByRole('button', { name: label, exact: true }).click();
       assert.equal(await guest.locator('html').getAttribute('lang'), language);
       assert.deepEqual(await guest.locator('.facility-card h3').allTextContents(), names(dataset.facilities, language));
-      assert.equal(await guest.locator('.facility-menu-summary').count(), 14);
-      const expectedDescriptions = dataset.facilities.filter(f => f.category === 'dining' || f.category === 'cafe').map(f => f.translations[language].description);
+      assert.equal(await guest.locator('.facility-menu-summary').count(), 15);
+      const expectedDescriptions = dataset.facilities.filter(f => f.category === 'dining' || f.category === 'cafe' || f.id === 'songdo-timespace-complex').map(f => f.translations[language].description);
       assert.deepEqual(await guest.locator('.facility-menu-summary').allTextContents(), expectedDescriptions);
       await guestSearch.fill(language === 'ko' ? '커피숍' : 'coffee');
       await guest.waitForTimeout(100);
       assert.ok(await guest.locator('.facility-card h3').count() >= 3);
       await guestSearch.fill('');
-      await waitCards(guest, 26);
+      await waitCards(guest, 27);
       await guest.locator('#guest-facility-results .facility-card button').first().click();
       assert.ok(await guest.locator('#guest-detail-title').isVisible());
       await guest.locator('#guest-facility-detail button').first().click();
       assert.equal(await guest.locator('#guest-detail-title').count(), 0);
-      if (await guest.locator('.facility-card').count() === 26) { await guest.setViewportSize({ width: 390, height: 844 }); await guest.evaluate(() => window.scrollTo(0, 0)); await guest.screenshot({ path: path.join(output, 'guest-language-' + language + '.png'), fullPage: false }); }
-      log('Guest: ' + language + ' 26 localized facility names, all 14 menus, search, detail and close');
+      if (await guest.locator('.facility-card').count() === 27) { await guest.setViewportSize({ width: 390, height: 844 }); await guest.evaluate(() => window.scrollTo(0, 0)); await guest.screenshot({ path: path.join(output, 'guest-language-' + language + '.png'), fullPage: false }); }
+      log('Guest: ' + language + ' 27 localized facility names, all 15 menus, search, detail and close');
     }
     await guest.locator('.language-options').getByRole('button', { name: '한국어', exact: true }).click();
+    await guestSearch.fill('타임스페이스 스프카레');
+    await waitCards(guest, 1);
+    assert.equal((await guest.locator('.facility-card h3').allTextContents())[0], '송도 타임스페이스');
+    assert.ok((await guest.locator('.facility-menu-summary').innerText()).includes('도라보울'));
+    await guest.locator('#guest-facility-results .facility-card button').click();
+    const timespaceRoute = await guest.locator('#guest-facility-detail .naver-map-link').getAttribute('href');
+    assert.ok(timespaceRoute.includes('19398065,PLACE_POI') && timespaceRoute.includes('1841858743,PLACE_POI'));
+    assert.ok((await guest.locator('#guest-facility-detail').innerText()).includes('같은 건물 A동'));
+    await guestSearch.fill('');
+    await waitCards(guest, 27);
+    log('Timespace: one curated complex, representative cuisines and truthful Building-A walking route');
     await guest.locator('.guest-category-grid').getByRole('button', { name: '교통', exact: true }).click();
     assert.equal(await guest.locator('.airport-bus-guide .local-guide-departures time').count(), 12);
     assert.ok((await guest.locator('.airport-bus-guide').innerText()).includes('운행정보 변경 가능'));
@@ -229,7 +247,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await guest.setViewportSize({ width: 1280, height: 900 });
     assert.equal(await guest.locator('.airport-bus-guide').count(), 0);
     await guest.locator('.guest-category-grid').getByRole('button', { name: '관광', exact: true }).click();
-    await waitCards(guest, 26);
+    await waitCards(guest, 27);
     log('Guest: tourism landmarks and 6777 route, twelve departures and schedule-change warning');
     // Phase 2: hotel search must be separate from nearby-facility search and navigate to exact room guidance.
     assert.equal(await guest.locator('#nearby-facilities .guest-category-grid').getByRole('button', { name: '호텔 관련 시설' }).count(), 0);
@@ -282,8 +300,8 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     admin = await context.newPage();
     await admin.goto(adminBase + '/');
     await admin.waitForSelector('.admin-records');
-    assert.equal(await admin.locator('.admin-records li').count(), 26);
-    log('Admin: all 26 records accessible on the independent management screen');
+    assert.equal(await admin.locator('.admin-records li').count(), 27);
+    log('Admin: all 27 records accessible on the independent management screen');
     assert.deepEqual(errors, [], errors.join('\n'));
     console.log('FINAL QA OK (' + passed.length + ' check groups)');
   } catch (e) {
