@@ -1,6 +1,7 @@
 import type { Facility } from '../types/facility.ts'
 import type { GuideLanguage } from '../types/guide.ts'
 import { TIMESPACE_CATEGORY_ORDER, timespaceCategoryLabel } from './timespaceDirectory.ts'
+import { specialRouteNotice } from './routeAccuracy.ts'
 
 /**
  * Customer-facing presentation only. The source facility descriptions, operational
@@ -62,7 +63,7 @@ export function guestFacilityPresentation(facility: Facility, language: GuideLan
     return {
       summary: copy.timespaceSummary,
       menuExamples: TIMESPACE_CATEGORY_ORDER.filter(category => category !== 'all').map(category => timespaceCategoryLabel(category, language)),
-      routeNotice: copy.timespaceRouteNotice,
+      routeNotice: specialRouteNotice(facility.id, language) ?? copy.timespaceRouteNotice,
     }
   }
   const description = facility.translations[language].description.trim()
@@ -70,7 +71,7 @@ export function guestFacilityPresentation(facility: Facility, language: GuideLan
   return {
     summary: parsed ? parsed[1]!.trim() : description,
     menuExamples: parsed ? parsed[2]!.split(/[,，、]/u).map(item => item.trim()).filter(Boolean) : [],
-    routeNotice: null,
+    routeNotice: specialRouteNotice(facility.id, language),
   }
 }
 
