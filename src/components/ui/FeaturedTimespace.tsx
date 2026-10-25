@@ -3,6 +3,7 @@ import type { GuideLanguage } from '../../types/guide'
 import { MESSAGES } from '../../i18n/messages'
 import { validatedNaverMapUrl } from '../../services/naverMapUrl'
 import { CONCIERGE_IMAGES } from './ConciergeHero'
+import { GUEST_FACILITY_COPY, guestFacilityPresentation } from '../../services/guestFacilityPresentation'
 
 const labels: Record<GuideLanguage, { heading: string; featured: string; notice: string }> = {
   ko: { heading: '추천 장소', featured: '★ 추천', notice: '길찾기 도착지 안내' },
@@ -37,7 +38,7 @@ export function FeaturedTimespace({ facility, language, onDetails, compact = fal
       <img className="concierge-featured-image" src={CONCIERGE_IMAGES.timespace} alt="" width="690" height="192" loading="lazy" decoding="async" />
       <div className="concierge-featured-body">
         <h3>{translated.name}</h3>
-        <p className="concierge-featured-description">{translated.description}</p>
+        <p className="concierge-featured-description">{compact ? translated.description : guestFacilityPresentation(facility, language).summary}</p>
         {!compact && <div className="concierge-featured-tags" aria-label={m.ui.description}>
           {MENU_TAGS[language].map(tag => <span key={tag}>{tag}</span>)}
         </div>}
@@ -46,7 +47,7 @@ export function FeaturedTimespace({ facility, language, onDetails, compact = fal
           {route ? <a className="button button--primary" href={route} target="_blank" rel="noopener noreferrer">{m.ui.directions}</a>
             : <span className="concierge-route-unavailable">{m.ui.naverMapUnavailable}</span>}
         </div>
-        {route && <details className="concierge-route-notice"><summary>{t.notice}</summary><p>{translated.directions}</p></details>}
+        {route && <details className="concierge-route-notice"><summary>{t.notice}</summary><p>{compact ? translated.directions : GUEST_FACILITY_COPY[language].timespaceRouteNotice}</p></details>}
       </div>
     </article>
   </section>

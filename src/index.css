@@ -15,3 +15,6 @@
 
 /* Readability polish without changing the layout or loading remote fonts. */
 @import './styles/typography-clarity.css';
+
+/* Guest-only venue cards and concise details; staff workspace remains unchanged. */
+@import './styles/guest-facility-clarity.css';

@@ -319,8 +319,15 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
       assert.equal(await guest.locator('html').getAttribute('lang'), language);
       assert.deepEqual(await guest.locator('.facility-card h3').allTextContents(), names(dataset.facilities, language));
       assert.equal(await guest.locator('.facility-menu-summary').count(), 15);
-      const expectedDescriptions = dataset.facilities.filter(f => f.category === 'dining' || f.category === 'cafe' || f.id === 'songdo-timespace-complex').map(f => f.translations[language].description);
-      assert.deepEqual(await guest.locator('.facility-menu-summary').allTextContents(), expectedDescriptions);
+      // Guest previews are deliberately curated; staff source descriptions remain unmodified.
+      const foodRecords = dataset.facilities.filter(f => f.category === 'dining' || f.category === 'cafe' || f.id === 'songdo-timespace-complex');
+      const guestPreviews = await guest.locator('.facility-menu-summary').allTextContents();
+      assert.equal(guestPreviews.length, foodRecords.length);
+      assert.ok(guestPreviews.every(t => t.trim() && !/개별 등록|full tenant directory|并非完整商户目录|全店舗ではなく/.test(t)),
+        'No internal record-management language in guest list: ' + JSON.stringify(guestPreviews));
+      const expectedTimespacePreview = guestPreviews.at(-1);
+      assert.ok(expectedTimespacePreview && !expectedTimespacePreview.includes('Menu examples'),
+        'Timespace card should be written for visitors, not data administrators');
       await guestSearch.fill(language === 'ko' ? '커피숍' : 'coffee');
       await guest.waitForTimeout(100);
       assert.ok(await guest.locator('.facility-card h3').count() >= 3);
@@ -343,7 +350,15 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     const timespaceRoute = await guest.locator('#guest-facility-detail .naver-map-link').getAttribute('href');
     assert.ok(timespaceRoute.includes('19398065,PLACE_POI') && timespaceRoute.includes('1617698245,PLACE_POI'));
     assert.ok((await guest.locator('#guest-facility-detail').innerText()).includes('스타벅스 송도캐슬파크점'));
-    assert.ok((await guest.locator('#guest-facility-detail').innerText()).includes('타임스페이스 내부가 아닌'));
+    assert.equal(await guest.locator('.guest-place-menu-list li').count(), 4);
+    assert.ok((await guest.locator('.guest-place-menu-list').innerText()).includes('도라보울'));
+    assert.ok((await guest.locator('.guest-place-route-note').innerText()).includes('추가') === false,
+      'Customer route warning should be concise, not original staff wording');
+    assert.ok((await guest.locator('.guest-place-route-note').innerText()).includes('하모니로 158'));
+    assert.equal(await guest.locator('#guest-facility-detail .verification-date').count(), 0);
+    assert.equal(await guest.locator('#guest-facility-detail .detail-facts').count(), 0);
+    assert.ok(!(await guest.locator('#guest-facility-detail').innerText()).includes('모든 음식점을 개별 등록'));
+    assert.ok(!(await guest.locator('#guest-facility-detail').innerText()).includes('정보 확인 전'));
     assert.match(await guest.locator('#guest-facility-detail').innerText(), /15분.*835m/);
     await guestSearch.fill('');
     await waitCards(guest, 27);
@@ -374,7 +389,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await guest.locator('#nearby-facilities').getByRole('button', { name: '전체 시설' }).click();
     await waitCards(guest, 27);
     assert.equal(await guest.locator('#guest-facility-results .facility-featured-label').count(), 0);
-    log('Timespace: one record under dining + shopping; Starbucks Castle Park waypoint has separate-building caveat');
+    log('Timespace: customer-friendly detail and menu examples, staff caveats retained, nearby landmark explicitly labeled');
     await guest.locator('.guest-category-grid').getByRole('button', { name: '교통', exact: true }).click();
     assert.equal(await guest.locator('.airport-bus-guide .local-guide-departures time').count(), 12);
     assert.ok((await guest.locator('.airport-bus-guide').innerText()).includes('운행정보 변경 가능'));
