@@ -1,0 +1,141 @@
+/*
+ * Guest-only venue guide. Keep staff detail, administrative notes, and datasets
+ * unchanged while prioritizing useful information for hotel guests.
+ */
+.app-shell--guest .guest-place-guide {
+  display:grid;
+  gap:17px;
+  padding:clamp(16px, 3vw, 25px);
+  border:1px solid #d6e2ee;
+  border-radius:16px;
+}
+.app-shell--guest .guest-place-heading {
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  margin:0;
+}
+.app-shell--guest .guest-place-heading > div { min-width:0; }
+.app-shell--guest .guest-place-heading .eyebrow {
+  margin-bottom:5px;
+  font-size:.8rem;
+  letter-spacing:0;
+  font-weight:700;
+  color:#526e8a;
+}
+.app-shell--guest .guest-place-heading h2 {
+  font-size:clamp(1.25rem, 3vw, 1.65rem);
+  line-height:1.38;
+  color:#163c65;
+  font-weight:800;
+}
+.app-shell--guest .guest-place-photo {
+  display:block;
+  width:100%;
+  max-height:260px;
+  aspect-ratio:690 / 192;
+  height:auto;
+  object-fit:cover;
+  border-radius:11px;
+}
+.app-shell--guest .guest-place-summary {
+  color:#29425d;
+  font-size:clamp(1rem, 2vw, 1.13rem);
+  line-height:1.64;
+  font-weight:600;
+}
+.app-shell--guest .guest-place-menu { display:grid; gap:9px; }
+.app-shell--guest .guest-place-menu h3 {
+  font-size:1.03rem;
+  font-weight:800;
+  color:#234768;
+}
+.app-shell--guest .guest-place-menu-list {
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:0;
+  padding:0;
+}
+.app-shell--guest .guest-place-menu-list li {
+  border:1px solid #ccdcec;
+  background:#f2f7fe;
+  padding:8px 12px;
+  border-radius:12px;
+  font-size:.92rem;
+  line-height:1.46;
+  font-weight:650;
+  color:#264b72;
+  overflow-wrap:anywhere;
+  max-width:100%;
+}
+.app-shell--guest .guest-place-essentials { display:grid; gap:8px; }
+.app-shell--guest .guest-place-fact {
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding:12px 14px;
+  border:1px solid #e0e8f1;
+  border-radius:12px;
+  background:#fbfcff;
+  min-width:0;
+}
+.app-shell--guest .guest-place-fact--walk { border-color:#cbdced; background:#f1f7ff; }
+.app-shell--guest .guest-place-fact > .icon { margin-top:2px; color:#426a96; }
+.app-shell--guest .guest-place-fact > div { display:grid; gap:2px; min-width:0; }
+.app-shell--guest .guest-place-fact span { color:#49617a; font-size:.82rem; font-weight:700; }
+.app-shell--guest .guest-place-fact strong {
+  color:#263e58;
+  line-height:1.55;
+  font-size:.95rem;
+  font-weight:650;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+.app-shell--guest .guest-place-fact--walk strong { color:#1c4775; font-size:1.08rem; font-weight:800; }
+.app-shell--guest .guest-place-route-note {
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  padding:12px 14px;
+  border:1px solid #dfd5bd;
+  background:#fffaf0;
+  border-radius:11px;
+  color:#584a2e;
+}
+.app-shell--guest .guest-place-route-note > .icon { flex:none; margin-top:2px; color:#8b6c36; }
+.app-shell--guest .guest-place-route-note p { font-size:.91rem; line-height:1.64; margin:0; }
+.app-shell--guest .guest-place-transit-details {
+  padding:12px 14px;
+  border-radius:11px;
+  background:#f5f8fb;
+  border:1px solid #dbe5ef;
+  color:#334b65;
+}
+.app-shell--guest .guest-place-transit-details summary { cursor:pointer; font-weight:700; }
+.app-shell--guest .guest-place-transit-details p { margin-top:9px; font-size:.9rem; line-height:1.65; }
+.app-shell--guest .guest-place-map-action .naver-directions { margin:0; display:grid; gap:5px; }
+.app-shell--guest .guest-place-map-action .button {
+  min-height:48px;
+  width:100%;
+  font-size:1rem;
+  font-weight:800;
+}
+.app-shell--guest .guest-place-map-action .field-hint {
+  color:#52657a;
+  font-size:.78rem;
+  line-height:1.5;
+  margin:0;
+}
+@media (min-width:760px) {
+  .app-shell--guest .guest-place-essentials { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .app-shell--guest .guest-place-fact:last-child { grid-column:1 / -1; }
+}
+@media (max-width:490px) {
+  .app-shell--guest .guest-place-heading { align-items:flex-start; }
+  .app-shell--guest .guest-place-heading .button { flex:none; min-height:38px; padding:7px 10px; font-size:.84rem; }
+  .app-shell--guest .guest-place-menu-list li { font-size:.87rem; padding:7px 10px; }
+  .app-shell--guest .guest-place-photo { max-height:185px; }
+}
