@@ -21,3 +21,6 @@
 
 /* Timespace-only dining subdirectory; no duplicate global facility records. */
 @import './styles/timespace-directory.css';
+
+/* Front desk productivity + printer-only one-page cards. */
+@import './styles/staff-shortcuts-print.css';
