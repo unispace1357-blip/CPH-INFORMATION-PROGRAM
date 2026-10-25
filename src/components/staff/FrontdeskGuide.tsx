@@ -14,6 +14,7 @@ import { hotelDataset } from '../../data/hotelDataset'
 import { LoadingState } from '../ui/LoadingState'
 import type { IconName } from '../ui/Icon'
 import { FrontdeskScriptDetail } from './FrontdeskScriptDetail'
+import type { Shortcut } from '../../services/staffShortcuts'
 
 const categories: Record<FrontdeskScriptCategory, { label: string; icon: IconName }> = {
   'check-in-out': { label: '체크인·체크아웃', icon: 'checkIn' },
@@ -25,7 +26,14 @@ const categories: Record<FrontdeskScriptCategory, { label: string; icon: IconNam
 }
 type DataState = { status: 'loading' } | { status: 'error' } | { status: 'ready'; dataset: FrontdeskScriptDataset }
 
-export function FrontdeskGuide({ externalSearch }: { externalSearch?: { query: string; sequence: number } | null }) {
+export function FrontdeskGuide({ externalSearch, externalOpen, onScriptOpen, onToggleFavorite, isFavorite, canFavorite = true }: {
+  externalSearch?: { query: string; sequence: number } | null
+  externalOpen?: { id: string; sequence: number } | null
+  onScriptOpen?: (id: string) => void
+  onToggleFavorite?: (entry: Shortcut) => void
+  isFavorite?: (entry: Shortcut) => boolean
+  canFavorite?: boolean
+}) {
   const [dataState, setDataState] = useState<DataState>({ status: 'loading' })
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState<FrontdeskCategoryFilter>('all')
@@ -39,6 +47,13 @@ export function FrontdeskGuide({ externalSearch }: { externalSearch?: { query: s
     }
   }, [externalSearch])
   useEffect(() => {
+    if (externalOpen) {
+      setQuery('')
+      setCategory('all')
+      setSelectedId(externalOpen.id)
+    }
+  }, [externalOpen])
+  useEffect(() => {
     let active = true
     void loadFrontdeskScripts().then(dataset => { if (active) setDataState({ status: 'ready', dataset }) }).catch(() => { if (active) setDataState({ status: 'error' }) })
     return () => { active = false }
@@ -49,6 +64,7 @@ export function FrontdeskGuide({ externalSearch }: { externalSearch?: { query: s
 
   function selectScript(id: string) {
     setSelectedId(id)
+    onScriptOpen?.(id)
     // Focus after React has rendered the selected reply; do not move focus while typing.
     requestAnimationFrame(() => {
       if (window.matchMedia('(max-width: 999px)').matches) {
@@ -84,7 +100,9 @@ export function FrontdeskGuide({ externalSearch }: { externalSearch?: { query: s
       </section>
       <section id="frontdesk-script-detail" className="panel details-panel" aria-labelledby="frontdesk-details-title">
         <div className="section-heading staff-section-heading"><div><p className="staff-section-kicker">READY TO RESPOND</p><h2 id="frontdesk-details-title">응대 문장 확인</h2></div></div>
-        {selected ? <FrontdeskScriptDetail key={selected.id} script={selected} headingRef={detailHeading} /> : <EmptyState title={dataset ? '표시할 응대 문장이 없습니다.' : '응대 문장을 준비하고 있습니다.'} description="스크립트를 검색하고 선택하면 영어 원문과 한국어 뜻을 확인할 수 있습니다." icon="globe" />}
+        {selected ? <FrontdeskScriptDetail key={selected.id} script={selected} headingRef={detailHeading}
+          favorite={isFavorite?.({kind:'script',id:selected.id}) ?? false}
+          canFavorite={canFavorite} onToggleFavorite={() => onToggleFavorite?.({kind:'script',id:selected.id})} /> : <EmptyState title={dataset ? '표시할 응대 문장이 없습니다.' : '응대 문장을 준비하고 있습니다.'} description="스크립트를 검색하고 선택하면 영어 원문과 한국어 뜻을 확인할 수 있습니다." icon="globe" />}
       </section>
     </div>
   </div>

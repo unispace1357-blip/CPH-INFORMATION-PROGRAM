@@ -24,7 +24,7 @@ jobs:
       - name: Install isolated browser QA tools
         run: |
           npm install --prefix /tmp/cph-browser-check --no-package-lock --no-save playwright@1.56.1
-          node /tmp/cph-browser-check/node_modules/playwright/cli.js install --with-deps chromium
+          # GitHub-hosted Ubuntu includes Google Chrome; no browser download needed.
       - name: Start local guest/staff and admin apps
         run: |
           nohup npm run dev -- --host 127.0.0.1 --port 5173 --strictPort >/tmp/cph-app.log 2>&1 &
@@ -38,6 +38,7 @@ jobs:
       - name: Chromium Staff/Guest/Admin end-to-end QA
         env:
           NODE_PATH: /tmp/cph-browser-check/node_modules
+          CPH_BROWSER_CHANNEL: chrome
           CPH_UI_BASE_URL: http://127.0.0.1:5173
           CPH_ADMIN_BASE_URL: http://127.0.0.1:5190
           CPH_UI_ARTIFACT_DIR: /tmp/cph-final-qa

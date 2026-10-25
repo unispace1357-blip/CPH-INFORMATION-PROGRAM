@@ -6,7 +6,7 @@ import { Button } from '../ui/Button'
 import { Icon } from '../ui/Icon'
 import { EnglishReadingText } from './EnglishReadingText'
 
-export function FrontdeskScriptDetail({ script, headingRef }: { script: FrontdeskScript; headingRef: Ref<HTMLHeadingElement> }) {
+export function FrontdeskScriptDetail({ script, headingRef, favorite = false, canFavorite = true, onToggleFavorite }: { script: FrontdeskScript; headingRef: Ref<HTMLHeadingElement>; favorite?: boolean; canFavorite?: boolean; onToggleFavorite?: () => void }) {
   const [copyState, setCopyState] = useState<{ target: 'quick' | 'details'; status: 'pending' | 'success' | 'failed' } | null>(null)
   const mounted = useRef(true)
   useEffect(() => { mounted.current = true; return () => { mounted.current = false } }, [])
@@ -24,6 +24,8 @@ export function FrontdeskScriptDetail({ script, headingRef }: { script: Frontdes
   return <article className="frontdesk-script-detail">
     <div className="section-heading">
       <h3 id="frontdesk-detail-title" className="detail-title" ref={headingRef} tabIndex={-1}>{script.title}</h3>
+      <Button variant="secondary" disabled={!onToggleFavorite || (!favorite && !canFavorite)}
+        onClick={onToggleFavorite}>{favorite ? '★ 즐겨찾기 해제' : '☆ 즐겨찾기 추가'}</Button>
       
     </div>
     <div className="frontdesk-question">
