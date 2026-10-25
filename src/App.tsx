@@ -12,6 +12,9 @@ export default function App() {
     <GuestLanguageProvider>
       <Router>
         <Routes>
+          {/* Recover links previously broken by fragment anchors under HashRouter. */}
+          <Route path="staff-essentials" element={<Navigate to="/staff" replace />} />
+          <Route path="hotel-information" element={<Navigate to="/guest" replace />} />
           <Route path="staff" element={<GuideLayout audience="staff" />}>
             <Route index element={<StaffPage />} />
             <Route path="*" element={<NotFoundPage />} />

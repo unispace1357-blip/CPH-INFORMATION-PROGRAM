@@ -14,6 +14,7 @@ import { Icon } from '../../components/ui/Icon'
 import { StaffSearchResults } from '../../components/staff/StaffSearchResults'
 import { StaffFacilityDetail } from '../../components/staff/StaffFacilityDetail'
 import { FrontdeskGuide } from '../../components/staff/FrontdeskGuide'
+import { StaffSearchHub, StaffQuickPhrases, StaffRequestShortcut } from '../../components/staff/StaffDashboard'
 import { AirportBusGuide, SongdoTourismGuide } from '../../components/ui/LocalTravelGuides'
 import { UI_CATEGORIES, visibleFacilityCategories } from '../../config/uiCategories'
 import { loadStaffDataset } from '../../services/loadStaffDataset'
@@ -30,6 +31,7 @@ export function StaffPage() {
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState<StaffCategoryFilter>('all')
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [hotelSearchRequest, setHotelSearchRequest] = useState<{query: string; sequence: number} | null>(null)
   const detailHeading = useRef<HTMLHeadingElement>(null)
   useEffect(() => {
     let active = true
@@ -63,6 +65,20 @@ export function StaffPage() {
     requestAnimationFrame(() => document.getElementById('staff-facility-detail')?.scrollIntoView({ block: 'start' }))
   }
 
+  function navigateStaffTab(target: StaffTab) {
+    setActiveTab(target)
+    requestAnimationFrame(() => document.getElementById(`staff-${target}-panel`)?.scrollIntoView({ block: 'start' }))
+  }
+
+  function handleDashboardSearch(term: string, scope: StaffTab) {
+    if (scope === 'hotel') {
+      setHotelSearchRequest(previous => ({ query: term, sequence: (previous?.sequence ?? 0) + 1 }))
+    } else {
+      updateFilters(term, 'all')
+    }
+    navigateStaffTab(scope)
+  }
+
   function handleTabKey(event: KeyboardEvent<HTMLDivElement>) {
     if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return
     event.preventDefault()
@@ -76,9 +92,9 @@ export function StaffPage() {
     <div className="staff-page">
       <nav className="staff-board-rail" aria-label="직원 주요 업무 바로가기">
         <div className="staff-board-rail-brand">CPH <span>CONCIERGE</span></div>
-        <button type="button" className={activeTab === 'hotel' ? 'is-active' : ''} onClick={() => setActiveTab('hotel')}><Icon name="hotel" size={20} />호텔 영어 응대</button>
-        <button type="button" className={activeTab === 'facilities' ? 'is-active' : ''} onClick={() => setActiveTab('facilities')}><Icon name="attraction" size={20} />주변 시설</button>
-        <a href="#staff-essentials"><Icon name="info" size={20} />호텔 주요 정보</a>
+        <button type="button" className={activeTab === 'hotel' ? 'is-active' : ''} onClick={() => navigateStaffTab('hotel')}><Icon name="hotel" size={20} />호텔 영어 응대</button>
+        <button type="button" className={activeTab === 'facilities' ? 'is-active' : ''} onClick={() => navigateStaffTab('facilities')}><Icon name="attraction" size={20} />주변 시설</button>
+        <button type="button" onClick={() => { const area = document.getElementById('staff-essentials'); area?.scrollIntoView({ block: 'start' }); area?.focus({ preventScroll: true }) }}><Icon name="info" size={20} />호텔 주요 정보</button>
       </nav>
       <section className="staff-intro" aria-label="프론트 안내 대시보드">
         <ConciergeHero audience="staff" />
@@ -88,6 +104,7 @@ export function StaffPage() {
           <span className="staff-stat"><Icon name="copy" size={21} /><span>영어만 복사</span></span>
         </div>
       </section>
+      <StaffSearchHub onSearch={handleDashboardSearch} />
       {dataset?.dataStatus === 'demo' && <div className="staff-release-notice"><InformationNotice title={import.meta.env.MODE === 'public-test' ? '호텔 업무 영어 응대 안내' : '프론트 테스트용 미리보기'} tone="warning">
         {import.meta.env.MODE === 'public-test' ? <>
           <p>필요한 영어 문장을 검색·복사하세요. 검수 전 문구는 사용 전 확인해 주세요.</p>
@@ -100,15 +117,21 @@ export function StaffPage() {
         </> : <>호텔 업무 영어 문장은 검수 전 초안입니다. 사용 전 확인해 주세요. 정식 운영 배포는 차단되어 있습니다.</>}
       </InformationNotice></div>}
       {dataset?.dataStatus === 'production' && <InformationNotice title="안내 정보 확인">정보 확인일과 미확인 항목을 확인하고, 방문 전 영업시간 등 변동 사항을 확인해 주세요.</InformationNotice>}
-      <div className="staff-overview-grid" id="staff-essentials">
-        <ConciergeEssentials hotel={hotelDataset} language="ko" includeCheckout />
-        <FeaturedTimespace facility={featuredTimespace} language="ko" compact onDetails={openFeaturedFacility} />
+      <div className="staff-overview-grid" id="staff-essentials" tabIndex={-1}>
+        <div className="staff-overview-column">
+          <ConciergeEssentials hotel={hotelDataset} language="ko" includeCheckout />
+          <FeaturedTimespace facility={featuredTimespace} language="ko" compact onDetails={openFeaturedFacility} />
+        </div>
+        <div className="staff-overview-column">
+          <StaffQuickPhrases />
+          <StaffRequestShortcut />
+        </div>
       </div>
       <div className="staff-guide-tabs" role="tablist" aria-label="직원 안내 업무" onKeyDown={handleTabKey}>
         <Button id="staff-hotel-tab" className="staff-guide-tab" role="tab" aria-selected={activeTab === 'hotel'} aria-controls="staff-hotel-panel" tabIndex={activeTab === 'hotel' ? 0 : -1} variant={activeTab === 'hotel' ? 'primary' : 'quiet'} onClick={() => setActiveTab('hotel')}>호텔 업무 영어 응대</Button>
         <Button id="staff-facilities-tab" className="staff-guide-tab" role="tab" aria-selected={activeTab === 'facilities'} aria-controls="staff-facilities-panel" tabIndex={activeTab === 'facilities' ? 0 : -1} variant={activeTab === 'facilities' ? 'primary' : 'quiet'} onClick={() => setActiveTab('facilities')}>주변 시설 안내</Button>
       </div>
-      <section id="staff-hotel-panel" className="staff-tab-panel" role="tabpanel" aria-labelledby="staff-hotel-tab" hidden={activeTab !== 'hotel'} tabIndex={0}><FrontdeskGuide /></section>
+      <section id="staff-hotel-panel" className="staff-tab-panel" role="tabpanel" aria-labelledby="staff-hotel-tab" hidden={activeTab !== 'hotel'} tabIndex={0}><FrontdeskGuide externalSearch={hotelSearchRequest} /></section>
       <section id="staff-facilities-panel" className="staff-tab-panel" role="tabpanel" aria-labelledby="staff-facilities-tab" hidden={activeTab !== 'facilities'} tabIndex={0}>
       {dataState.status === 'error' && <div role="alert"><InformationNotice title="시설 데이터를 불러오지 못했습니다" tone="warning"><p>등록 파일과 데이터 검증 결과를 확인한 뒤 새로고침해 주세요. 시설 정보는 표시하지 않습니다.</p><Button variant="secondary" onClick={() => window.location.reload()}>새로고침</Button></InformationNotice></div>}
       <section className="panel search-panel" aria-labelledby="staff-search-title">
