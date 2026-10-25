@@ -43,7 +43,7 @@ test('Tourism entries omit expired coupons and provide unique bilingual landmark
   }
 })
 
-test('Staff airport script is independent from public hotels/26 facilities and uses same 12 times', () => {
+test('Staff airport script is independent from public hotels/27 facilities and uses same 12 times', () => {
   const scripts = parseFrontdeskScriptDataset(rawFrontdesk).scripts
   assert.equal(scripts.length, 33)
   const bus = scripts.find(script => script.id === 'airport-limousine-6777')!
@@ -60,7 +60,7 @@ test('Staff airport script is independent from public hotels/26 facilities and u
   assert.match(bus.quickAnswer.en, /Times may change/)
   assert.match(bus.quickAnswer.en, /8,000/)
   assert.match(AIRPORT_6777_STAFF_ENGLISH, /8,000/)
-  assert.equal(rawFacilities.facilities.length, 26)
+  assert.equal(rawFacilities.facilities.length, 27)
   assert.equal(rawFacilities.dataStatus, 'demo')
   assert.equal(rawFrontdesk.dataStatus, 'demo')
 })
