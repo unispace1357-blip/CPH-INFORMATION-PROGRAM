@@ -16,9 +16,8 @@ export function GuideLayout({ audience = 'guest' }: { audience?: 'guest' | 'staf
   const { pathname } = useLocation()
   const isIndex = pathname === (isStaff ? '/staff' : '/guest')
 
-  // A plain #section link would replace HashRouter's route in the test packages.
+  // Prevent fragment links from changing HashRouter routes (and keep clean URLs in BrowserRouter).
   function scrollToSection(event: MouseEvent<HTMLAnchorElement>) {
-    if (import.meta.env.MODE !== 'public-test') return
     const target = document.getElementById(event.currentTarget.hash.slice(1))
     if (!target) return
     event.preventDefault()
