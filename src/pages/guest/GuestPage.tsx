@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import type { FacilityDataset } from '../../types/facility'
 import type { HotelDataset } from '../../types/hotel'
 import type { HotelCategory } from '../../i18n/types'
@@ -9,6 +9,8 @@ import { loadGuestFacilities, loadGuestHotel } from '../../services/loadGuestDat
 import type { GuestDataState } from '../../services/loadGuestData'
 import { searchGuestFacilities } from '../../services/guestFacilitySearch'
 import { resolveSelectedFacility } from '../../services/facilitySearch'
+import { resolveExactTimespaceTenant } from '../../services/timespaceTenantNavigation'
+import type { TenantFocusRequest } from '../../services/timespaceTenantNavigation'
 import type { StaffCategoryFilter } from '../../services/facilitySearch'
 import { ConciergeHero } from '../../components/ui/ConciergeHero'
 import { FeaturedTimespace } from '../../components/ui/FeaturedTimespace'
@@ -34,6 +36,10 @@ export function GuestPage() {
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState<StaffCategoryFilter>('all')
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [tenantFocus, setTenantFocus] = useState<TenantFocusRequest>(null)
+  const searchTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const tenantRequestSequence = useRef(0)
+  useEffect(() => () => { if (searchTimer.current) clearTimeout(searchTimer.current) }, [])
   useEffect(() => {
     let active = true
     void loadGuestFacilities().then(dataset => { if (active) setFacilities({ status: 'ready', dataset }) }).catch(() => { if (active) setFacilities({ status: 'error' }) })
@@ -48,10 +54,32 @@ export function GuestPage() {
   const showAirportGuide = category === 'transportation' || (category === 'all' && /6777|공항|리무진|airport|limousine|机场|空港/i.test(query))
   const showTourismGuide = category === 'attraction' || (category === 'all' && /관광|송도지도|tourism|sightseeing|旅游|観光/i.test(query))
 
+  function resetTenantNavigation() {
+    if (searchTimer.current !== null) clearTimeout(searchTimer.current)
+    searchTimer.current = null
+    setTenantFocus(null)
+  }
   function updateFilters(nextQuery: string, nextCategory: StaffCategoryFilter) {
+    resetTenantNavigation()
     setQuery(nextQuery); setCategory(nextCategory)
     const next = searchGuestFacilities(dataset?.facilities ?? [], nextQuery, nextCategory, language)
     setSelectedId(current => resolveSelectedFacility(next, current)?.id ?? null)
+  }
+  function onSearchChange(value: string) {
+    updateFilters(value, category)
+    // Never jump for cuisines, partial names or generic facility keywords.
+    searchTimer.current = setTimeout(() => {
+      const tenant = resolveExactTimespaceTenant(value)
+      const complex = dataset?.facilities.find(item => item.id === 'songdo-timespace-complex' && item.isPublished)
+      if (!tenant || !complex) return
+      setCategory('all')
+      setSelectedId(complex.id)
+      setTenantFocus({ tenantId: tenant.id, requestId: ++tenantRequestSequence.current })
+    }, 400)
+  }
+  function selectFacility(id: string) {
+    resetTenantNavigation()
+    setSelectedId(id)
   }
   function openFeaturedFacility(id: string) {
     updateFilters('', 'all')
@@ -59,6 +87,7 @@ export function GuestPage() {
     requestAnimationFrame(() => document.getElementById('guest-facility-detail')?.scrollIntoView({ block: 'start' }))
   }
   function closeFacility() {
+    resetTenantNavigation()
     const id = selectedId
     setSelectedId(null)
     if (id) document.getElementById(`guest-result-${id}`)?.focus()
@@ -83,15 +112,15 @@ export function GuestPage() {
       </section>
       <section className="panel guest-search-panel" id="guest-search" aria-labelledby="guest-search-title">
         <div className="section-heading"><h2 id="guest-search-title">{m.ui.searchTitle}</h2><Button variant="quiet" disabled={!query} onClick={() => updateFilters('', category)}>{m.ui.clearSearch}</Button></div>
-        <SearchInput label={m.ui.searchLabel} placeholder={m.ui.searchPlaceholder} value={query} onChange={event => updateFilters(event.target.value, category)} disabled={!dataset} hint={m.ui.searchHint} />
+        <SearchInput label={m.ui.searchLabel} placeholder={m.ui.searchPlaceholder} value={query} onChange={event => onSearchChange(event.target.value)} disabled={!dataset} hint={m.ui.searchHint} />
       </section>
       <section className="guest-section" id="guest-facility-results" aria-labelledby="guest-results-title">
         <div className="section-heading"><h2 id="guest-results-title">{m.ui.resultsTitle}</h2><p className="status-label" role="status" aria-live="polite">{dataset ? message(language, 'resultCount', { count: results.length }) : facilities.status === 'error' ? m.ui.informationUnavailable : m.ui.loadingFacilities}</p></div>
         {showAirportGuide && <AirportBusGuide language={language} />}
         {showTourismGuide && <SongdoTourismGuide language={language} />}
-        {facilities.status === 'loading' ? <LoadingState label={m.ui.loadingFacilities} /> : facilities.status === 'error' ? <div role="alert"><InformationNotice title={m.ui.facilityDataErrorTitle} tone="warning"><p>{m.ui.dataErrorDescription}</p><Button variant="secondary" onClick={() => window.location.reload()}>{m.ui.refresh}</Button></InformationNotice></div> : (results.length === 0 && (showAirportGuide || showTourismGuide)) ? <p className="field-hint">{LOCAL_GUIDE_COPY[language].guideOnlyResult}</p> : <GuestFacilityResults category={category} results={results} publicCount={facilities.dataset.facilities.filter(item => item.isPublished).length} language={language} selectedId={selected?.id ?? null} onSelect={setSelectedId} />}
+        {facilities.status === 'loading' ? <LoadingState label={m.ui.loadingFacilities} /> : facilities.status === 'error' ? <div role="alert"><InformationNotice title={m.ui.facilityDataErrorTitle} tone="warning"><p>{m.ui.dataErrorDescription}</p><Button variant="secondary" onClick={() => window.location.reload()}>{m.ui.refresh}</Button></InformationNotice></div> : (results.length === 0 && (showAirportGuide || showTourismGuide)) ? <p className="field-hint">{LOCAL_GUIDE_COPY[language].guideOnlyResult}</p> : <GuestFacilityResults category={category} results={results} publicCount={facilities.dataset.facilities.filter(item => item.isPublished).length} language={language} selectedId={selected?.id ?? null} onSelect={selectFacility} />}
       </section>
-      <div id="guest-facility-detail"><GuestFacilityDetail facility={selected} language={language} onClose={closeFacility} /></div>
+      <div id="guest-facility-detail"><GuestFacilityDetail facility={selected} language={language} onClose={closeFacility} tenantFocus={tenantFocus} /></div>
     </div>
   )
 }
