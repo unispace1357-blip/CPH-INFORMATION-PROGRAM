@@ -10,7 +10,7 @@ export function StaffSearchResults({ results, publicFacilityCount, selectedId, o
   return <div className="staff-result-list">{results.filter(facility => facility.isPublished).map(facility => <FacilityCard
     key={facility.id} name={facility.translations.ko.name} englishName={facility.translations.en.name.replace(` (${facility.translations.ko.name})`, '')}
     categoryLabel={FACILITY_CATEGORY_OPTIONS.find(category => category.code === facility.category)?.staffLabel ?? facility.category}
-    menuSummary={facility.category === 'dining' || facility.category === 'cafe' ? facility.translations.ko.description : undefined}
+    menuSummary={facility.category === 'dining' || facility.category === 'cafe' || facility.id === 'songdo-timespace-complex' ? facility.translations.ko.description : undefined}
     openingHours={confirmedText(facility.translations.ko.openingHours, '영업시간 미확인')}
     walkingText={formatWalkingMinutes(facility.walkingMinutes)}
     hoursLabel="영업시간" walkingLabel="예상 도보시간" detailLabel={selectedId === facility.id ? '선택됨 · 상세 정보' : '상세 보기'}
