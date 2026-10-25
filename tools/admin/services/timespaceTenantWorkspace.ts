@@ -7,7 +7,7 @@ export type TimespaceTenantDataset = { complexId: string; researchedOn: string; 
 export const INITIAL_TIMESPACE_TENANTS = validateTimespaceTenants(raw)
 
 const categories = new Set<string>(TIMESPACE_CATEGORY_ORDER.filter(category => category !== 'all'))
-const names = ['id', 'name', 'category', 'building', 'floor', 'rooms', 'menu'] as const
+const names = ['id', 'name', 'category', 'building', 'floor', 'rooms', 'menu', 'status'] as const
 
 /** Runtime checks for manually imported JSON, not just compile-time TypeScript. */
 export function validateTimespaceTenants(value: unknown): TimespaceTenantDataset {
@@ -25,6 +25,7 @@ export function validateTimespaceTenants(value: unknown): TimespaceTenantDataset
     if (Object.keys(item).some(k => !names.includes(k as typeof names[number]))) throw new Error(`${index + 1}번 매장에 지원하지 않는 항목이 있습니다.`)
     if (typeof item.id !== 'string' || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(item.id) || item.id.length > 60 || seen.has(item.id)) throw new Error(`${index + 1}번 매장 ID 형식 또는 중복 오류`)
     seen.add(item.id)
+    if (item.status !== undefined && item.status !== 'closed') throw new Error(`${item.id}: 영업 종료 상태가 올바르지 않습니다.`)
     if (typeof item.name !== 'string' || !item.name.trim() || item.name.length > 120) throw new Error(`${item.id}: 매장 이름을 확인하세요.`)
     if (typeof item.category !== 'string' || !categories.has(item.category)) throw new Error(`${item.id}: 음식 카테고리를 선택하세요.`)
     if (!['A', 'B', 'C', 'D'].includes(String(item.building))) throw new Error(`${item.id}: A~D동 중 선택하세요.`)
@@ -49,8 +50,12 @@ export function saveTimespaceTenant(data: TimespaceTenantDataset, draft: Timespa
   const tenants = originalId === null ? [...data.tenants,draft] : data.tenants.map(t=>t.id===originalId?draft:t)
   return validateTimespaceTenants({...data, tenants})
 }
-export function removeTimespaceTenant(data: TimespaceTenantDataset, id: string): TimespaceTenantDataset {
-  return validateTimespaceTenants({...data,tenants:data.tenants.filter(t=>t.id!==id)})
+/** Retain history in the admin JSON, while public screens exclude closed shops. */
+export function setTimespaceTenantClosed(data: TimespaceTenantDataset, id: string, closed: boolean): TimespaceTenantDataset {
+  if (!data.tenants.some(t => t.id === id)) throw new Error('매장을 찾지 못했습니다.')
+  return validateTimespaceTenants({...data, tenants:data.tenants.map(t => t.id === id
+    ? { ...t, status: closed ? 'closed' as const : undefined }
+    : t)})
 }
 export function exportTimespaceTenants(data: TimespaceTenantDataset): string {
   return JSON.stringify(validateTimespaceTenants(data),null,2)+'\n'
