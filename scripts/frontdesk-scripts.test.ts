@@ -66,7 +66,7 @@ test('user-provided smoking area is distinctly sourced; existing hotel and facil
   assert.equal(originalHotel.dataStatus, 'demo')
   assert.equal(originalHotel.checkInTime, '15:00')
   assert.equal(originalHotel.checkOutTime, '12:00')
-  assert.equal(originalFacilities.facilities.length, 26)
+  assert.equal(originalFacilities.facilities.length, 27)
 })
 
 test('critical operational responses keep safety and verification qualifiers', () => {
