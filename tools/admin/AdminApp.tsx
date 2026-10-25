@@ -12,15 +12,16 @@ import { Button } from '../../src/components/ui/Button'
 import { InformationNotice } from '../../src/components/ui/InformationNotice'
 import { FacilityEditor } from './components/FacilityEditor'
 import { HotelEditor } from './components/HotelEditor'
+import { TimespaceTenantManager } from './components/TimespaceTenantManager'
 import { TextField } from './components/Fields'
 import { ValidationPanel } from './components/ValidationPanel'
 import { downloadJson } from './services/download'
 import { changeStatus, deleteFacility, explainError, exportFacilities, exportHotel, exportPublicFacilities, facilityToDraft, filterAdminFacilities, hasChanges, importFacilities, importHotel, inspect, MAX_JSON_BYTES, newFacilityDraft, parseAdminFacilities, productionReadiness, saveFacility } from './services/workspace'
 import type { FacilityDraft, ValidationResult } from './services/workspace'
 
-type Menu = 'facilities' | 'hotel' | 'validation' | 'json'
+type Menu = 'facilities' | 'timespace' | 'hotel' | 'validation' | 'json'
 type Editor = { kind: 'facility'; draft: FacilityDraft; originalId: string | null; baseline: string } | { kind: 'hotel'; draft: HotelDataset; baseline: string }
-const menus: { key: Menu; label: string }[] = [{ key: 'facilities', label: '시설 관리' }, { key: 'hotel', label: '호텔 기본 정보' }, { key: 'validation', label: '데이터 검증' }, { key: 'json', label: '가져오기 / 내보내기' }]
+const menus: { key: Menu; label: string }[] = [{ key: 'facilities', label: '시설 관리' }, { key: 'timespace', label: '타임스페이스 음식점' }, { key: 'hotel', label: '호텔 기본 정보' }, { key: 'validation', label: '데이터 검증' }, { key: 'json', label: '가져오기 / 내보내기' }]
 const categoryLabel = (category: FacilityCategory) => FACILITY_CATEGORY_OPTIONS.find(item => item.code === category)?.staffLabel ?? category
 
 function initialData() {
@@ -173,6 +174,7 @@ export function AdminApp() {
           <p className="field-hint" role="status">목록 {list.length}개 / 전체 {facilities?.facilities.length ?? 0}개 · 비공개 포함</p><ul className="admin-records">{list.map(facility => <li key={facility.id} className={editor?.kind === 'facility' && editor.originalId === facility.id ? 'is-selected' : ''}><h3>{facility.translations.ko.name}</h3><p lang="en">{facility.translations.en.name}</p><p className="admin-id">ID: {facility.id}</p><p>{categoryLabel(facility.category)} · {facility.isPublished ? '공개' : '비공개'} · {facility.lastVerifiedAt ?? '확인 전'}</p><p className="field-hint">개발 검증: {inspect(() => parseAdminFacilities({ schemaVersion: 1, dataStatus: facilities!.dataStatus, facilities: [facility] })).valid ? 'PASS' : 'FAIL'}</p><div className="admin-list-actions"><Button variant="secondary" aria-label={`편집 ${facility.id}`} aria-pressed={editor?.kind === 'facility' && editor.originalId === facility.id} onClick={() => openFacility(facility)}>편집</Button><Button variant="quiet" aria-label={`삭제 ${facility.id}`} onClick={() => removeFacility(facility)}>삭제</Button></div></li>)}</ul>{list.length === 0 && <p>표시할 시설이 없습니다. 필터를 확인하거나 JSON을 불러오세요.</p>}</section>
           <section className="panel admin-editor-panel">{editor?.kind === 'facility' ? <FacilityEditor draft={editor.draft} originalId={editor.originalId} language={language} onLanguage={setLanguage} onChange={draft => setEditor({ ...editor, draft })} onSave={saveEditor} onCancel={cancelEditor} /> : <><h2>시설 정보 편집</h2><p>목록에서 시설을 선택하거나 신규 시설을 추가하세요.</p></>}</section>
         </div>}
+        <TimespaceTenantManager active={menu === 'timespace'} />
         {menu === 'hotel' && <section className="panel">{editor?.kind === 'hotel' ? <HotelEditor draft={editor.draft} language={language} onLanguage={setLanguage} onChange={draft => setEditor({ ...editor, draft })} onStatus={status => updateStatus('hotel', status)} onSave={saveEditor} onCancel={cancelEditor} /> : <p>호텔 JSON을 가져오기 메뉴에서 불러오세요.</p>}</section>}
         {menu === 'validation' && <section className="panel admin-validation-page"><h2>데이터 검증</h2><p>저장된 작업 데이터를 검사합니다. 기술 검사 PASS는 실제 시설·호텔 정보의 정확성을 보증하지 않습니다.</p><ValidationPanel title="시설 개발 데이터 검증" result={checks.facilities} /><ValidationPanel title="호텔 개발 데이터 검증" result={checks.hotel} /><ValidationPanel title="현재 운영 배포 검증" result={checks.production} /><ValidationPanel title="운영 전환 전 필수 정보 검사 (상태는 변경하지 않음)" result={checks.readiness} /></section>}
         {menu === 'json' && <section className="panel admin-json-page"><h2>가져오기 / 내보내기</h2><p>파일은 각각 검증 후 확인을 받아 교체합니다. 최대 2MB. 다운로드한 파일은 담당자가 확인한 후 수동으로 반영하세요.</p>
