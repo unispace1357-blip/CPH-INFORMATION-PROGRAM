@@ -1,7 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { KeyboardEvent } from 'react'
 import type { FacilityDataset } from '../../types/facility'
-import { PageHeader } from '../../components/ui/PageHeader'
+import { ConciergeHero } from '../../components/ui/ConciergeHero'
+import { ConciergeEssentials } from '../../components/ui/ConciergeEssentials'
+import { FeaturedTimespace } from '../../components/ui/FeaturedTimespace'
+import { hotelDataset } from '../../data/hotelDataset'
 import { SearchInput } from '../../components/ui/SearchInput'
 import { CategoryCard } from '../../components/ui/CategoryCard'
 import { InformationNotice } from '../../components/ui/InformationNotice'
@@ -36,6 +39,7 @@ export function StaffPage() {
   const dataset = dataState.status === 'ready' ? dataState.dataset : null
   const results = useMemo(() => searchFacilities(dataset?.facilities ?? [], query, category), [dataset, query, category])
   const selected = resolveSelectedFacility(results, selectedId)
+  const featuredTimespace = dataset?.facilities.find(item => item.id === 'songdo-timespace-complex')
   const showAirportGuide = category === 'transportation' || (category === 'all' && /6777|공항|리무진|airport|limousine/i.test(query))
   const showTourismGuide = category === 'attraction' || (category === 'all' && /관광|송도지도|tourism|sightseeing/i.test(query))
   useEffect(() => {
@@ -52,6 +56,13 @@ export function StaffPage() {
     setSelectedId(current => resolveSelectedFacility(nextResults, current)?.id ?? null)
   }
 
+  function openFeaturedFacility(id: string) {
+    setActiveTab('facilities')
+    updateFilters('', 'all')
+    setSelectedId(id)
+    requestAnimationFrame(() => document.getElementById('staff-facility-detail')?.scrollIntoView({ block: 'start' }))
+  }
+
   function handleTabKey(event: KeyboardEvent<HTMLDivElement>) {
     if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return
     event.preventDefault()
@@ -63,13 +74,19 @@ export function StaffPage() {
 
   return (
     <div className="staff-page">
+      <nav className="staff-board-rail" aria-label="직원 주요 업무 바로가기">
+        <div className="staff-board-rail-brand">CPH <span>CONCIERGE</span></div>
+        <button type="button" className={activeTab === 'hotel' ? 'is-active' : ''} onClick={() => setActiveTab('hotel')}><Icon name="hotel" size={20} />호텔 영어 응대</button>
+        <button type="button" className={activeTab === 'facilities' ? 'is-active' : ''} onClick={() => setActiveTab('facilities')}><Icon name="attraction" size={20} />주변 시설</button>
+        <a href="#staff-essentials"><Icon name="info" size={20} />호텔 주요 정보</a>
+      </nav>
       <section className="staff-intro" aria-label="프론트 안내 대시보드">
-        <PageHeader eyebrow="THE CENTRAL PARK HOTEL · FRONT DESK CONCIERGE" title="직원용 안내" description="호텔 업무별 영어 문장과 한국어 뜻을 확인하세요."
-          actions={<div className="staff-intro-stats" aria-label="직원 안내 기능">
-            <span className="staff-stat"><Icon name="globe" size={21} /><span>호텔 업무 응대</span></span>
-            <span className="staff-stat staff-stat--count"><strong>{dataset ? dataset.facilities.filter(item => item.isPublished).length : '—'}</strong><span>주변 시설</span></span>
-            <span className="staff-stat"><Icon name="copy" size={21} /><span>영어만 복사</span></span>
-          </div>} />
+        <ConciergeHero audience="staff" />
+        <div className="staff-intro-stats" aria-label="직원 안내 기능">
+          <span className="staff-stat"><Icon name="globe" size={21} /><span>호텔 업무 응대</span></span>
+          <span className="staff-stat staff-stat--count"><strong>{dataset ? dataset.facilities.filter(item => item.isPublished).length : '—'}</strong><span>주변 시설</span></span>
+          <span className="staff-stat"><Icon name="copy" size={21} /><span>영어만 복사</span></span>
+        </div>
       </section>
       {dataset?.dataStatus === 'demo' && <div className="staff-release-notice"><InformationNotice title={import.meta.env.MODE === 'public-test' ? '호텔 업무 영어 응대 안내' : '프론트 테스트용 미리보기'} tone="warning">
         {import.meta.env.MODE === 'public-test' ? <>
@@ -83,6 +100,10 @@ export function StaffPage() {
         </> : <>호텔 업무 영어 문장은 검수 전 초안입니다. 사용 전 확인해 주세요. 정식 운영 배포는 차단되어 있습니다.</>}
       </InformationNotice></div>}
       {dataset?.dataStatus === 'production' && <InformationNotice title="안내 정보 확인">정보 확인일과 미확인 항목을 확인하고, 방문 전 영업시간 등 변동 사항을 확인해 주세요.</InformationNotice>}
+      <div className="staff-overview-grid" id="staff-essentials">
+        <ConciergeEssentials hotel={hotelDataset} language="ko" includeCheckout />
+        <FeaturedTimespace facility={featuredTimespace} language="ko" compact onDetails={openFeaturedFacility} />
+      </div>
       <div className="staff-guide-tabs" role="tablist" aria-label="직원 안내 업무" onKeyDown={handleTabKey}>
         <Button id="staff-hotel-tab" className="staff-guide-tab" role="tab" aria-selected={activeTab === 'hotel'} aria-controls="staff-hotel-panel" tabIndex={activeTab === 'hotel' ? 0 : -1} variant={activeTab === 'hotel' ? 'primary' : 'quiet'} onClick={() => setActiveTab('hotel')}>호텔 업무 영어 응대</Button>
         <Button id="staff-facilities-tab" className="staff-guide-tab" role="tab" aria-selected={activeTab === 'facilities'} aria-controls="staff-facilities-panel" tabIndex={activeTab === 'facilities' ? 0 : -1} variant={activeTab === 'facilities' ? 'primary' : 'quiet'} onClick={() => setActiveTab('facilities')}>주변 시설 안내</Button>
