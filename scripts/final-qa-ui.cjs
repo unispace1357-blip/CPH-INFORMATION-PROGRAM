@@ -182,7 +182,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await waitCards(guest, 1);
     assert.ok((await guest.locator('#guest-facility-results .facility-card .eyebrow').innerText()).includes('음식점'));
     await guestSearch.fill('');
-    await guest.locator('#nearby-facilities .guest-category-grid').getByRole('button', { name: '전체 시설' }).click();
+    await guest.locator('#nearby-facilities').getByRole('button', { name: '전체 시설' }).click();
     await waitCards(guest, 27);
     log('Timespace: one record under dining + shopping; Starbucks Castle Park waypoint has separate-building caveat');
     await guest.locator('.guest-category-grid').getByRole('button', { name: '교통', exact: true }).click();
