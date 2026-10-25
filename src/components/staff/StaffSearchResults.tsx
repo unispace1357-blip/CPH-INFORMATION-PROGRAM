@@ -9,7 +9,7 @@ export function StaffSearchResults({ results, publicFacilityCount, selectedId, o
   if (!results.length) return <EmptyState title="검색 결과가 없습니다." description="다른 검색어 또는 카테고리를 선택해 주세요." icon="search" />
   return <div className="staff-result-list">{results.filter(facility => facility.isPublished).map(facility => <FacilityCard
     key={facility.id} name={facility.translations.ko.name} englishName={facility.translations.en.name.replace(` (${facility.translations.ko.name})`, '')}
-    categoryLabel={FACILITY_CATEGORY_OPTIONS.find(category => category.code === facility.category)?.staffLabel ?? facility.category}
+    categoryLabel={[facility.category, ...(facility.additionalCategories ?? [])].map(code => FACILITY_CATEGORY_OPTIONS.find(category => category.code === code)?.staffLabel ?? code).join(' · ')}
     menuSummary={facility.category === 'dining' || facility.category === 'cafe' || facility.id === 'songdo-timespace-complex' ? facility.translations.ko.description : undefined}
     openingHours={confirmedText(facility.translations.ko.openingHours, '영업시간 미확인')}
     walkingText={formatWalkingMinutes(facility.walkingMinutes)}
