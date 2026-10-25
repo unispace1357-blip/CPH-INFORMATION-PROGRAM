@@ -38,7 +38,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     staff = await context.newPage();
     await staff.goto(base + '/staff');
     await staff.waitForFunction(() => [...document.querySelectorAll('.concierge-hero-image,.concierge-featured-image')].length === 2 &&
-      [...document.querySelectorAll('.concierge-hero-image,.concierge-featured-image')].every(img => img.complete && img.naturalWidth > 0));
+      [...document.querySelectorAll('.concierge-hero-image,.concierge-featured-image')].every(img => img.complete && img.naturalWidth >= 1600 && img.naturalHeight >= 900));
     assert.ok((await staff.locator('#staff-essentials').innerText()).includes('35,000'));
     assert.equal(await staff.locator('.staff-board-rail').count(), 1);
     log('Staff layout: concept photos, source-backed hotel facts and optional sidebar');
@@ -167,7 +167,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await guest.goto(base + '/guest');
     await waitCards(guest, 27);
     await guest.waitForFunction(() => [...document.querySelectorAll('.concierge-hero-image,.concierge-featured-image')].length === 2 &&
-      [...document.querySelectorAll('.concierge-hero-image,.concierge-featured-image')].every(img => img.complete && img.naturalWidth > 0));
+      [...document.querySelectorAll('.concierge-hero-image,.concierge-featured-image')].every(img => img.complete && img.naturalWidth >= 1600 && img.naturalHeight >= 900));
     assert.ok((await guest.locator('.concierge-essentials').innerText()).includes('35,000'));
     assert.equal(await guest.locator('.concierge-featured').count(), 1);
     log('Guest layout: responsive hero, safety, quick facts and featured place photos');

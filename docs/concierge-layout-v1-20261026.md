@@ -13,7 +13,8 @@ Layout-only trial following the approved mobile guest + desktop staff visual ske
 - Existing theme and logo: `src/styles/tokens.css` and `public/hotel-logo.webp`.
 - Layout-only overrides: `src/styles/concierge-layout.css`, imported after the existing guest/staff styles by `src/index.css`.
 - Photo paths: `src/components/ui/ConciergeHero.tsx` exports `CONCIERGE_IMAGES`; replace `public/concierge/frontdesk-concept.webp` and `public/concierge/timespace-concept.webp` with approved, optimized files at the same paths (or change only the two paths) to refresh without touching React data or logic.
-- The interim photos are low-resolution crops of an AI-generated *visual sketch* supplied earlier in the project conversation. They are **not verified photos of the real hotel reception or Timespace** and must be replaced or clearly treated as illustrations before an approved public hotel launch.
+- **Step 2 photo upgrade (2026-10-26):** Both low-resolution crops have been replaced with independently generated 1672×941 AI concept illustrations (WebP; frontdesk 274,132 bytes and Timespace 289,106 bytes). Their paths and layout remain unchanged; browser QA enforces intrinsic width >= 1600px and height >= 900px.
+- These are **AI concept illustrations, not verified photographs of the real hotel reception or Songdo Timespace**. Do not present them as actual verified location photography in an approved public hotel launch; approved real photos can replace the same filenames later.
 - Quick facts come from `hotel.json` (check-in/check-out, adult breakfast Korean source text, Korean hotel notes phone); if the data omits a value, the fact is hidden or shown as unavailable rather than fabricated. Do not manually adjust prices in a graphic.
 - No changes were made to verification dates, DEMO status, or production release gating.
 
