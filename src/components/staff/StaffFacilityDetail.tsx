@@ -5,6 +5,7 @@ import { EnglishGuidePanel } from './EnglishGuidePanel'
 import { FACILITY_CATEGORY_OPTIONS } from '../../config/uiCategories'
 import { NaverDirectionsLink } from '../ui/NaverDirectionsLink'
 import { Icon } from '../ui/Icon'
+import { TimespaceDiningDirectory } from '../ui/TimespaceDiningDirectory'
 import { confirmedText, formatWalkingMinutes, formatVerificationDate } from '../../services/facilityPresentation'
 
 export function StaffFacilityDetail({ facility, headingRef }: { facility: Facility | null; headingRef: Ref<HTMLHeadingElement> }) {
@@ -26,6 +27,7 @@ export function StaffFacilityDetail({ facility, headingRef }: { facility: Facili
         <p className="field-hint">네이버 지도 길찾기를 연 뒤 지도에서 인쇄할 수 있습니다.</p>
       </div>
       <EnglishGuidePanel key={facility.id} phrases={facility.englishPhrases} meanings={facility.englishPhraseMeanings} />
+      {facility.id === 'songdo-timespace-complex' && <TimespaceDiningDirectory language="ko" staff />}
       <section className="staff-facility-metadata" aria-labelledby="staff-metadata-title">
         <h4 id="staff-metadata-title">시설 기본 정보</h4>
         <dl className="detail-facts">
