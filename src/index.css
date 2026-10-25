@@ -1,2 +1,5 @@
 @import './styles/global.css';
 @import './styles/guest-refresh.css';
+
+/* Spatial layout layer. Palette can be redesigned later without touching app logic. */
+@import './styles/concierge-layout.css';
