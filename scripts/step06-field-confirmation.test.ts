@@ -57,7 +57,7 @@ test('field-confirmed Geumbyeol: daily 17:00 to 01:00, midnight LO and holiday c
 
 test('field evidence does not turn route or unverified venue records into production', () => {
   assert.equal(raw.dataStatus, 'demo')
-  assert.equal(venues.length, 26)
+  assert.equal(venues.length, 27)
   for (const id of ['hanyang-songdo-hanok-village', 'playground-brewery-taproom-songdo', 'geumbyeol-beer-songdo-lotte-mall']) {
     const item = venue(id)
     assert.equal(item.isPublished, true)

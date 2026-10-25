@@ -14,8 +14,8 @@ import { GUIDE_LANGUAGES } from '../src/types/guide.ts'
 const facilities = parseFacilityDataset(rawFacilities).facilities
 const findIds = (query: string) => searchFacilities(facilities, query).map(facility => facility.id)
 
-test('STEP 5 indexes all 26 venues with English aliases and four-language descriptions', () => {
-  assert.equal(facilities.length, 26)
+test('STEP 5 indexes all 27 venues with English aliases and four-language descriptions', () => {
+  assert.equal(facilities.length, 27)
   const before = structuredClone(facilities)
   for (const facility of facilities) {
     assert.ok(facility.keywords.en.length > 0, facility.id)

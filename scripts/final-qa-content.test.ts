@@ -14,8 +14,8 @@ const hotel = parseHotelDataset(hotelRaw)
 const scripts = parseFrontdeskScriptDataset(frontdeskRaw).scripts
 const byId = (id: string) => facilities.find(f => f.id === id)!
 
-test('final QA: 26 public places, dining 11/cafe 3 and shared restaurant/pub label in four languages', () => {
-  assert.equal(facilities.length, 26)
+test('final QA: 27 public places, dining 11/cafe 3 and shared restaurant/pub label in four languages', () => {
+  assert.equal(facilities.length, 27)
   assert.equal(facilities.filter(f => f.category === 'dining').length, 11)
   assert.equal(facilities.filter(f => f.category === 'cafe').length, 3)
   for (const language of GUIDE_LANGUAGES) {
