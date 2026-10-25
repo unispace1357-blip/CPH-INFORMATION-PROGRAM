@@ -271,3 +271,37 @@
   .app-shell--staff .staff-hub-scope-chooser { margin-top:9px; }
   .app-shell--staff .staff-search-hub-form input { min-width:0; }
 }
+
+/* Existing V2 sets the search button to width:100% on phones; keep it within the form. */
+@media (max-width:550px) {
+  .app-shell--staff .staff-search-hub-form {
+    position:relative;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 82px;
+    gap:6px;
+    align-items:stretch;
+  }
+  .app-shell--staff .staff-search-hub-input-label {
+    position:absolute;
+    top:0;
+    left:7px;
+    height:45px;
+    width:26px;
+    margin:0;
+    z-index:1;
+  }
+  .app-shell--staff .staff-search-hub-form input {
+    grid-column:1;
+    width:100%;
+    min-width:0;
+    margin:0;
+    padding-left:35px;
+  }
+  .app-shell--staff .staff-search-hub-form .button {
+    grid-column:2;
+    min-width:0;
+    width:100%;
+    margin:0;
+    padding-inline:5px;
+  }
+}
