@@ -14,7 +14,7 @@ export function StaffFacilityDetail({ facility, headingRef }: { facility: Facili
   return (
     <div className="staff-detail-content">
       <div className="staff-detail-intro">
-        <p className="eyebrow">{FACILITY_CATEGORY_OPTIONS.find(category => category.code === facility.category)?.staffLabel}</p>
+        <p className="eyebrow">{[facility.category, ...(facility.additionalCategories ?? [])].map(code => FACILITY_CATEGORY_OPTIONS.find(category => category.code === code)?.staffLabel ?? code).join(' · ')}</p>
         <h3 id="staff-detail-title" className="detail-title" tabIndex={-1} ref={headingRef}>{ko.name}</h3>
         <p className="facility-english-name" lang="en">{en.name}</p>
         <p className="detail-description">{confirmedText(ko.description, '시설 설명 미확인')}</p>
