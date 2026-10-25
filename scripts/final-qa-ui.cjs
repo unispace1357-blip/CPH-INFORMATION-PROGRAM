@@ -186,13 +186,13 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await scriptSearch.fill('6777');
     await waitCards(staff, 1, '.frontdesk-script-card');
     assert.ok((await hotel.locator('.frontdesk-quick-answer').innerText()).includes('6777'));
-    await scriptSearch.fill('');
-    await waitCards(staff, 33, '.frontdesk-script-card');
-    log('Staff: 33 scripts, smoking priority, parking, delivery, airport bus and untouched English clipboard');
     const quickAccess = staff.locator('.staff-quick-access');
     assert.ok((await quickAccess.innerText()).includes('즐겨찾기'));
     await hotel.getByRole('button',{name:'☆ 즐겨찾기 추가'}).click();
     assert.equal(await quickAccess.locator('[data-shortcut="script:airport-limousine-6777"]').count(),1);
+    await scriptSearch.fill('');
+    await waitCards(staff, 33, '.frontdesk-script-card');
+    log('Staff: 33 scripts, smoking priority, parking, delivery, airport bus and untouched English clipboard');
     log('Staff STEP 5: hotel script added to PC favorites without storing search text');
 
     await staff.getByRole('tab', { name: '주변 시설 안내' }).click();
