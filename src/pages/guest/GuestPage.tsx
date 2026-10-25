@@ -10,7 +10,8 @@ import type { GuestDataState } from '../../services/loadGuestData'
 import { searchGuestFacilities } from '../../services/guestFacilitySearch'
 import { resolveSelectedFacility } from '../../services/facilitySearch'
 import type { StaffCategoryFilter } from '../../services/facilitySearch'
-import { PageHeader } from '../../components/ui/PageHeader'
+import { ConciergeHero } from '../../components/ui/ConciergeHero'
+import { FeaturedTimespace } from '../../components/ui/FeaturedTimespace'
 import { SearchInput } from '../../components/ui/SearchInput'
 import { CategoryCard } from '../../components/ui/CategoryCard'
 import { LanguageSelector } from '../../components/ui/LanguageSelector'
@@ -42,6 +43,7 @@ export function GuestPage() {
   const dataset = facilities.status === 'ready' ? facilities.dataset : null
   const results = useMemo(() => searchGuestFacilities(dataset?.facilities ?? [], query, category, language), [dataset, query, category, language])
   const selected = resolveSelectedFacility(results, selectedId)
+  const featuredTimespace = dataset?.facilities.find(item => item.id === 'songdo-timespace-complex')
   const isDemo = dataset?.dataStatus === 'demo' || (hotel.status === 'ready' && hotel.dataset.dataStatus === 'demo')
   const showAirportGuide = category === 'transportation' || (category === 'all' && /6777|공항|리무진|airport|limousine|机场|空港/i.test(query))
   const showTourismGuide = category === 'attraction' || (category === 'all' && /관광|송도지도|tourism|sightseeing|旅游|観光/i.test(query))
@@ -50,6 +52,11 @@ export function GuestPage() {
     setQuery(nextQuery); setCategory(nextCategory)
     const next = searchGuestFacilities(dataset?.facilities ?? [], nextQuery, nextCategory, language)
     setSelectedId(current => resolveSelectedFacility(next, current)?.id ?? null)
+  }
+  function openFeaturedFacility(id: string) {
+    updateFilters('', 'all')
+    setSelectedId(id)
+    requestAnimationFrame(() => document.getElementById('guest-facility-detail')?.scrollIntoView({ block: 'start' }))
   }
   function closeFacility() {
     const id = selectedId
@@ -65,10 +72,11 @@ export function GuestPage() {
   return (
     <div className="guest-page">
       <div className="guest-language-toolbar"><LanguageSelector value={language} onChange={setLanguage} disabled={false} label={m.ui.languageLabel} hint={m.ui.languageHint} /></div>
-      <PageHeader eyebrow={m.ui.eyebrow} title={m.ui.welcomeTitle} description={m.ui.welcomeDescription} />
+      <ConciergeHero audience="guest" language={language} />
       {isDemo && <InformationNotice title={m.ui.demoTitle} tone="warning">{m.ui.demoWarning}</InformationNotice>}
       {!isDemo && dataset && hotel.status === 'ready' && <InformationNotice title={m.ui.productionNoticeTitle}>{m.ui.productionNotice}</InformationNotice>}
       <HotelInformation state={hotel} language={language} selected={hotelTopic} onSelect={setHotelTopic} onClose={closeHotel} />
+      <FeaturedTimespace facility={featuredTimespace} language={language} onDetails={openFeaturedFacility} />
       <section className="guest-section" id="nearby-facilities" aria-labelledby="nearby-facilities-title">
         <div className="section-heading"><h2 id="nearby-facilities-title">{m.ui.nearbyTitle}</h2><Button variant={category === 'all' ? 'primary' : 'secondary'} aria-pressed={category === 'all'} disabled={!dataset} onClick={() => updateFilters(query, 'all')}>{m.ui.allFacilities}</Button></div>
         <div className="guest-category-grid" role="group" aria-label={m.ui.facilityCategoriesLabel}>{(dataset ? visibleFacilityCategories(dataset.facilities) : UI_CATEGORIES).map(item => <CategoryCard key={item.code} label={m.categories[item.code]} icon={item.icon} selected={category === item.code} disabled={!dataset} onClick={() => updateFilters(query, category === item.code ? 'all' : item.code)} aria-controls="guest-facility-results" />)}</div>
