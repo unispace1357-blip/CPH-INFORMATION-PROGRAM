@@ -184,7 +184,7 @@ export function StaffPage() {
           <div className="staff-heading-group"><span className="staff-section-number" aria-hidden="true">01</span><div><p className="staff-section-kicker">SEARCH & FILTER</p><h2 id="staff-search-title">시설 찾기</h2></div></div>
           <Button variant="quiet" disabled={!query} onClick={() => updateFilters('', category)}>검색어 지우기</Button>
         </div>
-        <SearchInput label="시설명 또는 키워드" placeholder="예: 맥주, 고기, 커피숍, Burger King" value={query} onChange={event => onFacilityQueryChange(event.target.value)} disabled={!dataset} hint="4개 언어의 시설명·메뉴·주소·키워드 및 동의어를 검색합니다. 띄어쓰기 차이도 일부 지원합니다." />
+        <SearchInput label="시설명 또는 키워드" placeholder="예: 맥주, 고기, 커피숍, Burger King" value={query} onChange={event => onFacilityQueryChange(event.target.value)} onKeyDown={event => { if (event.key === 'Enter') { event.preventDefault(); resetTenantNavigation(); openExactTenant(query) } }} disabled={!dataset} hint="4개 언어의 시설명·메뉴·주소·키워드 및 동의어를 검색합니다. 띄어쓰기 차이도 일부 지원합니다." />
         <div className="section-heading"><h3>카테고리</h3><span className="status-label">검색어와 함께 적용</span></div>
         <div className="staff-category-grid" role="group" aria-label="시설 카테고리">
           <CategoryCard label="전체" icon="grid" selected={category === 'all'} compact disabled={!dataset} onClick={() => updateFilters(query, 'all')} />
