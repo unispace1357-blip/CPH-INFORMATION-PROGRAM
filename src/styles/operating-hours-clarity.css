@@ -1,0 +1,18 @@
+/* STEP 1+2+8: registered operational hours are not a live status signal. */
+.operating-hours-guide{display:grid;gap:10px;min-width:0;}
+.operating-hours-grid{display:grid;gap:7px;margin:0;min-width:0;}
+.operating-hours-row{display:grid;grid-template-columns:minmax(85px,110px) minmax(0,1fr);gap:9px;align-items:start;padding:9px 11px;background:#f5f8fd;border:1px solid #dce6f2;border-radius:9px;}
+.operating-hours-row dt{color:#345878;font-size:.84rem;font-weight:750;line-height:1.5;}
+.operating-hours-row dd{margin:0;color:#263e58;line-height:1.55;overflow-wrap:anywhere;font-size:.92rem;font-weight:650;}
+.operating-hours-row--break{background:#fffaf1;border-color:#e9dbbb;}
+.operating-hours-row--lastOrder,.operating-hours-row--lastEntry{background:#eef6ff;border-color:#c9ddf4;}
+.operating-hours-row--closed{background:#faf4f2;border-color:#e6d9d3;}
+.operating-hours-disclaimer{font-size:.83rem;line-height:1.6;font-weight:600;color:#575f70;margin:0;}
+.app-shell--guest .guest-place-fact .operating-hours-guide{margin-top:7px;}
+.app-shell--guest .guest-place-fact .operating-hours-guide .operating-hours-row{grid-template-columns:1fr;gap:2px;padding:9px 10px;}
+.app-shell--guest .guest-place-fact .operating-hours-guide dt{color:#365977;font-size:.82rem;}
+.app-shell--guest .guest-place-fact .operating-hours-guide dd{font-size:.89rem;font-weight:650;}
+.app-shell--staff .staff-facility-metadata .operating-hours-guide{margin:10px 0 16px;}
+.app-shell--staff .staff-route-accuracy-note{margin:12px 0;padding:12px 14px;border-left:4px solid #946927;border-radius:8px;background:#fff8eb;color:#674c28;line-height:1.65;font-weight:650;}
+@media(max-width:480px){.operating-hours-row{grid-template-columns:1fr;gap:3px;}.operating-hours-row dt{font-size:.8rem;}}
+@media print{.operating-hours-guide{display:none!important;}}
