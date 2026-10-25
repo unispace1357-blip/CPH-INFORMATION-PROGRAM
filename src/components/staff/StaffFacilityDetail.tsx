@@ -19,7 +19,7 @@ export function StaffFacilityDetail({ facility, headingRef }: { facility: Facili
         <p className="facility-english-name" lang="en">{en.name}</p>
         <p className="detail-description">{confirmedText(ko.description, '시설 설명 미확인')}</p>
         <div className="staff-detail-shortcuts">
-          <div className="staff-walking-summary"><Icon name="clock" size={22} /><span><span className="staff-walking-caption">예상 도보시간</span><strong>{formatWalkingMinutes(facility.walkingMinutes)}</strong></span></div>
+          <div className="staff-walking-summary"><Icon name="clock" size={22} /><span><span className="staff-walking-caption">예상 도보시간</span><strong>{formatWalkingMinutes(facility.walkingMinutes, facility.walkingDistanceMeters)}</strong></span></div>
           <NaverDirectionsLink url={facility.naverMapUrl} label="네이버 지도 길찾기" unavailable="길찾기 링크 미등록" newTabNotice="네이버 지도가 새 탭에서 열립니다." />
         </div>
         <p className="field-hint">네이버 지도 길찾기를 연 뒤 지도에서 인쇄할 수 있습니다.</p>
