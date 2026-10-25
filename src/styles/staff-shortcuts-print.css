@@ -1,0 +1,65 @@
+/* Staff-only productivity controls: no external fonts, data services or personal info. */
+.app-shell--staff .staff-quick-access{display:grid;gap:12px;padding:16px 19px;border:1px solid #d8e4ef;border-top:3px solid #4777aa;border-radius:13px;background:#fff;min-width:0;}
+.app-shell--staff .staff-quick-access-heading{display:flex;justify-content:space-between;align-items:start;gap:12px;flex-wrap:wrap;}
+.app-shell--staff .staff-quick-access-heading h2{font-size:1.04rem;color:#1f456e;font-weight:800;margin:0;}
+.app-shell--staff .staff-quick-access-heading p{font-size:.82rem;color:#53677c;line-height:1.5;margin:3px 0 0;}
+.app-shell--staff .staff-quick-access-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;}
+.app-shell--staff .staff-quick-access-grid > div{min-width:0;}
+.app-shell--staff .staff-quick-access-grid h3{font-size:.9rem;color:#25486b;font-weight:800;margin:0 0 8px;display:flex;gap:7px;}
+.app-shell--staff .staff-quick-access-grid h3 span{color:#5c738e;font-size:.8rem;}
+.app-shell--staff .staff-shortcut-list{list-style:none;display:flex;flex-wrap:wrap;gap:7px;padding:0;margin:0;}
+.app-shell--staff .staff-shortcut-list li{max-width:100%;}
+.app-shell--staff .staff-shortcut-list button{display:flex;gap:6px;align-items:center;max-width:100%;min-height:38px;border:1px solid #cbdcec;background:#f4f8fe;border-radius:9px;color:#214c74;padding:7px 10px;font-size:.84rem;font-weight:700;cursor:pointer;text-align:left;}
+.app-shell--staff .staff-shortcut-list button:hover{background:#e6f1ff;border-color:#6e9bc7;}
+.app-shell--staff .staff-shortcut-list button:focus-visible{outline:3px solid #bd8a43;outline-offset:2px;}
+.app-shell--staff .staff-shortcut-list button span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.app-shell--staff .staff-shortcut-list button small{color:#586f84;font-weight:550;font-size:.71rem;flex:none;}
+.app-shell--staff .staff-shortcut-empty{font-size:.81rem;line-height:1.5;color:#546a82;margin:0;}
+.app-shell--staff .staff-detail-actions{display:flex;flex-wrap:wrap;gap:9px;margin:13px 0 5px;}
+.app-shell--staff .staff-detail-actions .button{min-height:43px;white-space:normal;}
+.app-shell--staff .frontdesk-script-detail>.section-heading{display:flex;flex-wrap:wrap;gap:10px;}
+.app-shell--staff .frontdesk-script-detail>.section-heading .button{min-height:39px;}
+.staff-printable-card{display:none;}
+@media(max-width:599px){
+  .app-shell--staff .staff-quick-access{padding:14px;}
+  .app-shell--staff .staff-quick-access-grid{grid-template-columns:1fr;gap:12px;}
+  .app-shell--staff .staff-quick-access .staff-shortcut-list{gap:6px;}
+}
+@page{size:A4 portrait;margin:13mm;}
+@media print{
+  html,body,#root{width:100%!important;height:270mm!important;overflow:hidden!important;margin:0!important;padding:0!important;background:#fff!important;color:#142739!important;}
+  body *{visibility:hidden!important;box-shadow:none!important;}
+  .staff-printable-card,.staff-printable-card *{visibility:visible!important;}
+  .staff-printable-card{
+    display:block!important;position:fixed!important;z-index:2147483647!important;
+    top:0!important;left:0!important;right:auto!important;
+    box-sizing:border-box!important;width:175mm!important;max-height:255mm!important;
+    overflow:hidden!important;padding:12mm!important;margin:0!important;
+    border:1px solid #a8b7c5!important;background:#fff!important;
+    color:#142739!important;font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif!important;
+    font-size:10.5pt!important;line-height:1.5!important;
+    print-color-adjust:exact;-webkit-print-color-adjust:exact;
+  }
+  .staff-printable-card p{margin:0 0 4mm;}
+  .staff-printable-card .print-card-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;border-bottom:2px solid #355d81;padding-bottom:5mm;gap:2mm;}
+  .staff-printable-card .print-hotel-name{font-weight:800;letter-spacing:.03em;color:#214768!important;}
+  .staff-printable-card .print-card-eyebrow{font-size:8pt;color:#54708b!important;}
+  .staff-printable-card h2{font-size:20pt;line-height:1.28;font-weight:800;margin:7mm 0 2mm;color:#1e4264!important;}
+  .staff-printable-card .print-card-en{color:#526c83!important;font-size:10pt;}
+  .staff-printable-card .print-card-description{font-size:11.2pt;line-height:1.55;margin:5mm 0;}
+  .staff-printable-card .print-card-menu{margin:3mm 0 4mm;border:1px solid #d8e0e8;background:#f5f8fb!important;border-radius:3mm;padding:3mm;}
+  .staff-printable-card .print-card-menu strong{color:#25496f!important;}
+  .staff-printable-card .print-card-menu p{margin:1mm 0 0;font-size:10.5pt;}
+  .staff-printable-card .print-card-facts{display:grid;gap:2.5mm;margin:5mm 0;}
+  .staff-printable-card .print-card-facts>div{display:grid;grid-template-columns:29mm 1fr;gap:4mm;padding-bottom:2.5mm;border-bottom:1px solid #e1e5eb;}
+  .staff-printable-card .print-card-facts dt{font-weight:800;color:#3f5871!important;}
+  .staff-printable-card .print-card-facts dd{margin:0;overflow-wrap:anywhere;}
+  .staff-printable-card .print-card-route{display:flex;gap:7mm;align-items:center;margin:7mm 0;border:1px solid #9db1c5;border-radius:3mm;padding:4mm;page-break-inside:avoid;}
+  .staff-printable-card .print-card-qr{width:49mm;height:49mm;flex:none;background:#fff!important;}
+  .staff-printable-card .print-card-route strong{font-size:12pt;color:#25496f!important;}
+  .staff-printable-card .print-card-route p{font-size:9.5pt;line-height:1.5;margin:2mm 0;}
+  .staff-printable-card .print-card-route small{color:#536b7b!important;}
+  .staff-printable-card .print-card-warning{padding:3mm;border:1px solid #dec990;background:#fff8ed!important;border-radius:2mm;line-height:1.55;color:#6b4f27!important;font-size:9.2pt;}
+  .staff-printable-card .print-card-footer{margin-top:5mm;font-size:9pt;color:#455d76!important;}
+  .staff-printable-card .print-card-demo{margin-top:4mm;color:#874829!important;font-weight:800;font-size:8.5pt;}
+}
