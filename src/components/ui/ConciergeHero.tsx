@@ -3,8 +3,8 @@ import { MESSAGES } from '../../i18n/messages'
 
 /** Photo slots are intentionally independent from all hotel copy and theme CSS. */
 export const CONCIERGE_IMAGES = {
-  frontdesk: `${import.meta.env.BASE_URL}concierge/frontdesk-concept.jpg`,
-  timespace: `${import.meta.env.BASE_URL}concierge/timespace-concept.jpg`,
+  frontdesk: `${import.meta.env.BASE_URL}concierge/frontdesk-concept.webp`,
+  timespace: `${import.meta.env.BASE_URL}concierge/timespace-concept.webp`,
 } as const
 
 export function ConciergeHero({ audience, language = 'ko' }: { audience: 'guest' | 'staff'; language?: GuideLanguage }) {
