@@ -2475,6 +2475,123 @@
         "송도 센트럴파크 수상택시는 이스트가 아닌 웨스트보트하우스에서 탑승합니다.",
         "승선 장소는 인천타워대로 253-34입니다. 운항시간과 요금은 변동될 수 있으니 방문 전 운영사에 확인해 주세요."
       ]
+    },
+    {
+      "id": "songdo-timespace-complex",
+      "category": "shopping",
+      "isPublished": true,
+      "lastVerifiedAt": null,
+      "translations": {
+        "ko": {
+          "name": "송도 타임스페이스",
+          "description": "복합상업시설·식당가 · 대표 메뉴 예시: 카레(도라보울), 라멘(오바케), 돼지고기구이(숯멍), 즉석떡볶이(보니보니). 모든 음식점을 개별 등록하지 않고 음식 종류와 대표 매장을 안내합니다.",
+          "address": "인천광역시 연수구 하모니로 158 (송도동 8-21), 송도타임스페이스",
+          "openingHours": "매장별 운영시간·휴무일이 다릅니다. 방문 전 해당 매장 확인.",
+          "directions": "호텔에서 타임스페이스로 이동할 때는 네이버 도보 경로를 확인해 주세요. 현재 길찾기 목적지는 같은 건물 A동 1층의 별온누리약국이며, 타임스페이스에는 A·B·C·D동이 있습니다. 원하는 음식점의 동을 현장에서 확인해 주세요.",
+          "notes": "대표 매장과 메뉴는 변경될 수 있습니다. 카레: 도라보울(A동), 라멘: 오바케(C동), 고기구이: 숯멍(D동), 즉석떡볶이: 보니보니(B동). 모든 매장의 영업 여부나 정확한 입점 위치를 보증하지 않습니다."
+        },
+        "en": {
+          "name": "Songdo Timespace (송도 타임스페이스)",
+          "description": "Shopping and dining complex · Menu examples: soup curry (Dora Bowl), Japanese ramen (Obake), grilled pork (Sutmeong), Korean tteokbokki (Boni Boni). An overview of dining choices rather than a full tenant directory.",
+          "address": "158 Harmony-ro, Yeonsu-gu, Incheon (Songdo-dong 8-21), Songdo Timespace",
+          "openingHours": "Opening days and hours vary by shop. Please check with the venue before visiting.",
+          "directions": "Use the Naver Map walking route from the hotel. Its destination is Byeol Onnuri Pharmacy in Building A of the same Timespace complex, not the entire plaza. Find your restaurant in Buildings A, B, C or D.",
+          "notes": "Representative tenants may change. Curry: Dora Bowl (A); ramen: Obake (C); grilled pork: Sutmeong (D); spicy rice cakes: Boni Boni (B). Confirm each restaurant's current location and opening status."
+        },
+        "zh-CN": {
+          "name": "송도 타임스페이스（松岛 Timespace 综合商业区）",
+          "description": "综合商业区与餐饮街 · 餐饮示例：汤咖喱（Dora Bowl）、日式拉面（Obake）、烤猪肉（Sutmeong）、韩式炒年糕（Boni Boni）。此处介绍代表性的餐饮选择，并非完整商户目录。",
+          "address": "仁川广域市延寿区 Harmony-ro 158（松岛洞 8-21），松岛 Timespace",
+          "openingHours": "各店铺营业时间及休息日不同，请在到访前确认。",
+          "directions": "请查看从酒店出发的 Naver 地图步行路线。路线终点为同一商业区 A 栋的 Byeol Onnuri 药店，而非整个广场；餐馆分布于 A、B、C、D 栋。",
+          "notes": "代表店铺及菜单可能变动。汤咖喱 Dora Bowl（A栋）、拉面 Obake（C栋）、烤肉 Sutmeong（D栋）、炒年糕 Boni Boni（B栋）。请向店家确认实际营业情况和位置。"
+        },
+        "ja": {
+          "name": "송도 타임스페이스（松島タイムスペース）",
+          "description": "複合商業施設・飲食店街 · 料理の例：スープカレー（ドラボウル）、ラーメン（オバケ）、豚焼肉（スッモン）、トッポッキ（ボニボニ）。全店舗ではなく代表的な飲食店と料理ジャンルをご案内します。",
+          "address": "仁川広域市延寿区 Harmony-ro 158（松島洞 8-21）、松島タイムスペース",
+          "openingHours": "営業時間・休業日は店舗によって異なります。訪問前にご確認ください。",
+          "directions": "ホテルからの徒歩ルートをNaver地図で確認してください。ルートの目的地は同じ施設のA棟にある別オンヌリ薬局で、施設全体の中心ではありません。飲食店はA～D棟に分かれています。",
+          "notes": "代表店舗やメニューは変更される場合があります。スープカレー：ドラボウル（A棟）、ラーメン：オバケ（C棟）、豚焼肉：スッモン（D棟）、トッポッキ：ボニボニ（B棟）。営業状況と場所は各店舗にご確認ください。"
+        }
+      },
+      "keywords": {
+        "ko": [
+          "타임스페이스",
+          "타임 스페이스",
+          "송도타임스페이스",
+          "타임스페이스 맛집",
+          "복합상가",
+          "먹거리",
+          "식당가",
+          "카레",
+          "스프카레",
+          "라멘",
+          "일본라멘",
+          "고기",
+          "고깃집",
+          "돼지고기",
+          "떡볶이",
+          "즉석떡볶이",
+          "도라보울",
+          "오바케",
+          "숯멍",
+          "보니보니"
+        ],
+        "en": [
+          "Songdo Timespace",
+          "Times Space",
+          "shopping complex",
+          "dining area",
+          "food court",
+          "restaurant area",
+          "soup curry",
+          "curry",
+          "ramen",
+          "grilled pork",
+          "Korean barbecue",
+          "tteokbokki",
+          "rice cakes",
+          "Dora Bowl",
+          "Obake",
+          "Sutmeong",
+          "Boni Boni"
+        ],
+        "zh-CN": [
+          "松岛时代广场",
+          "餐饮街",
+          "咖喱",
+          "拉面",
+          "烤肉",
+          "炒年糕"
+        ],
+        "ja": [
+          "タイムスペース",
+          "飲食店街",
+          "カレー",
+          "ラーメン",
+          "焼肉",
+          "トッポッキ"
+        ]
+      },
+      "englishPhrases": [
+        "Songdo Timespace is a shopping and dining complex at 158 Harmony-ro, with several restaurant options such as curry, ramen, grilled meat and tteokbokki.",
+        "For example, Dora Bowl serves soup curry, Obake serves ramen, Sutmeong is a grilled pork restaurant, and Boni Boni serves tteokbokki. Please check each restaurant's opening hours before visiting.",
+        "This Naver walking route leads to Byeol Onnuri Pharmacy in Building A of the same Timespace complex. Other restaurants may be in Buildings B, C or D."
+      ],
+      "englishPhraseMeanings": [
+        "송도 타임스페이스는 하모니로 158의 복합상업시설로 카레·라멘·고기구이·떡볶이 등 다양한 식사를 선택할 수 있습니다.",
+        "대표적으로 도라보울은 스프카레, 오바케는 라멘, 숯멍은 돼지고기구이, 보니보니는 즉석떡볶이를 판매합니다. 방문 전 개별 매장의 영업시간을 확인해 주세요.",
+        "이 네이버 도보 경로는 같은 타임스페이스 A동의 별온누리약국을 목적지로 합니다. 다른 식당들은 B·C·D동에 있을 수 있습니다."
+      ],
+      "walkingMinutes": 17,
+      "closedDays": {
+        "ko": "점포별 상이",
+        "en": "Varies by shop",
+        "zh-CN": "各店不同",
+        "ja": "店舗により異なります"
+      },
+      "naverMapUrl": "https://map.naver.com/p/directions/3z3nAD,2AEFuG,%EC%86%A1%EB%8F%84%EC%84%BC%ED%8A%B8%EB%9F%B4%ED%8C%8C%ED%81%AC%ED%98%B8%ED%85%94,19398065,PLACE_POI/3z3zPN,2AElJf,%EB%B3%84%EC%98%A8%EB%88%84%EB%A6%AC%EC%95%BD%EA%B5%AD,1841858743,PLACE_POI/-/walk?c=15.00,0,0,0,dh"
     }
   ]
 }
