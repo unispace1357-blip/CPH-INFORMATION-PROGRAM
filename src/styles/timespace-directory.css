@@ -1,0 +1,28 @@
+/* One complex, fifteen eateries: accessible in-place category selection. */
+.timespace-directory { min-width:0; display:grid; gap:12px; padding:15px; border:1px solid #d4e0ee; border-radius:13px; background:#f8fbff; }
+.timespace-directory-heading { display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+.timespace-directory-heading h3 { margin:0; color:#1b4269; font-weight:800; font-size:1.15rem; line-height:1.4; }
+.timespace-directory-heading p { margin-top:4px; color:#485f78; font-size:.87rem; line-height:1.55; }
+.timespace-directory-count { flex:none; background:#e3eefa; padding:6px 10px; border-radius:16px; font-weight:800; font-variant-numeric:tabular-nums; color:#1f4f80; font-size:.85rem; }
+.timespace-category-filters { display:flex; flex-wrap:wrap; align-items:center; gap:7px; }
+.timespace-category-filter { display:inline-flex; align-items:center; gap:6px; border-radius:999px; border:1px solid #c7d9eb; padding:8px 11px; min-height:40px; background:#fff; color:#294b70; font-weight:700; font-size:.86rem; line-height:1.35; text-align:left; }
+.timespace-category-filter span { color:#56728d; font-size:.77rem; font-variant-numeric:tabular-nums; }
+.timespace-category-filter[aria-pressed="true"] { color:#fff; background:#285485; border-color:#285485; }
+.timespace-category-filter[aria-pressed="true"] span { color:#edf6ff; }
+.timespace-category-filter:focus-visible { outline:3px solid #b97d27; outline-offset:2px; }
+.timespace-tenant-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(245px,100%),1fr)); gap:10px; list-style:none; margin:0; padding:0; min-width:0; }
+.timespace-tenant-card { min-width:0; display:grid; align-content:start; gap:10px; background:#fff; padding:14px; border:1px solid #d9e3ee; border-radius:12px; }
+.timespace-tenant-top { display:grid; gap:6px; align-content:start; }
+.timespace-tenant-top > strong { color:#203e5c; font-size:1.03rem; font-weight:800; line-height:1.5; overflow-wrap:anywhere; }
+.timespace-tenant-category { justify-self:start; background:#eaf2ff; border-radius:12px; padding:3px 8px; color:#255382; font-size:.77rem; font-weight:750; line-height:1.5; }
+.timespace-tenant-menu, .timespace-tenant-location { min-width:0; margin:0; color:#344e67; font-size:.91rem; line-height:1.55; overflow-wrap:anywhere; }
+.timespace-tenant-menu > span, .timespace-tenant-location > span { display:block; color:#526980; font-weight:700; font-size:.78rem; margin-bottom:3px; }
+.timespace-tenant-location { border-top:1px solid #edf1f5; padding-top:8px; }
+.timespace-tenant-location strong { font-weight:800; color:#214c78; }
+.timespace-directory-note { color:#556677; font-size:.82rem; line-height:1.55; margin:0; }
+.timespace-directory--staff { padding:14px; margin-top:18px; }
+@media(max-width:599px) {
+  .timespace-directory { padding:12px; }
+  .timespace-category-filter { min-height:38px; padding:7px 10px; font-size:.82rem; }
+  .timespace-tenant-card { padding:12px; }
+}
