@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "effectiveDate": "2026-10-25",
+  "source": "User-provided hotel front-desk operational updates; not final production approval.",
+  "rationale": "Remove misleading check-in document/deposit statement; update adult breakfast fee, shared-floor utensils and glasses, and bedside light switch. Preserve historical workbook reference and Step2 amendments.",
+  "removedIds": [
+    "H05"
+  ],
+  "replacements": {
+    "H10": {
+      "ko": "조식 성인 요금은 1인 35,000원입니다.",
+      "en": "Breakfast costs KRW 35,000 per adult.",
+      "zh-CN": "成人早餐费用为每人35,000韩元。",
+      "ja": "朝食の大人料金は1名35,000ウォンです。"
+    },
+    "H15": {
+      "ko": "전자레인지와 수저, 젓가락, 나이프, 와인잔은 6층, 10층, 16층에 마련되어 있습니다.",
+      "en": "Microwaves, spoons, chopsticks, knives, and wine glasses are available on floors 6, 10, and 16.",
+      "zh-CN": "6楼、10楼和16楼备有微波炉、勺子、筷子、餐刀和葡萄酒杯。",
+      "ja": "6階・10階・16階には電子レンジ、スプーン、箸、ナイフ、ワイングラスをご用意しています。"
+    }
+  },
+  "additions": {
+    "roomUsage": {
+      "ko": "객실 조명은 침대 옆 스위치로 켜거나 끌 수 있습니다.",
+      "en": "You can turn the room lights on or off using the switch beside the bed.",
+      "zh-CN": "您可以使用床边的开关打开或关闭客房灯光。",
+      "ja": "客室の照明はベッド横のスイッチで点灯・消灯できます。"
+    }
+  }
+}

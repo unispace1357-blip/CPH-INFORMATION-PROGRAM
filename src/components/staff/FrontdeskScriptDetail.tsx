@@ -24,7 +24,7 @@ export function FrontdeskScriptDetail({ script, headingRef }: { script: Frontdes
   return <article className="frontdesk-script-detail">
     <div className="section-heading">
       <h3 id="frontdesk-detail-title" className="detail-title" ref={headingRef} tabIndex={-1}>{script.title}</h3>
-      <span className={`frontdesk-review-badge frontdesk-review-badge--${script.reviewStatus}`}>{script.reviewStatus === 'draft' ? '검수 전 · draft' : '검수 완료'}</span>
+      
     </div>
     <div className="frontdesk-question">
       <h4>고객 질문</h4>

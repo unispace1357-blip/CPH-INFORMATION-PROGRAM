@@ -70,7 +70,7 @@ export function FrontdeskGuide() {
         <div className="section-heading staff-section-heading"><h2 id="frontdesk-results-title">응대 스크립트</h2><p className="status-label" role="status" aria-live="polite">{dataset ? `검색 결과 ${results.length}개 / 전체 ${dataset.scripts.length}개` : dataState.status === 'error' ? '검색 불가' : '데이터 확인 중'}</p></div>
         {dataState.status === 'loading' ? <LoadingState label="호텔 업무 스크립트를 불러오고 있습니다…" /> : dataset && !results.length ? <EmptyState title="검색 결과가 없습니다." description="다른 검색어 또는 카테고리를 선택해 주세요." icon="search" /> : <ul className="frontdesk-script-list">{results.map(script => <li key={script.id}>
           <button type="button" className="frontdesk-script-card" aria-pressed={script.id === selected?.id} aria-controls="frontdesk-script-detail" onClick={() => selectScript(script.id)}>
-            <span className="frontdesk-card-meta"><span>{categories[script.category].label}</span><span className={`frontdesk-review-badge frontdesk-review-badge--${script.reviewStatus}`}>{script.reviewStatus === 'draft' ? '검수 전 · draft' : '검수 완료'}</span></span>
+            <span className="frontdesk-card-meta"><span>{categories[script.category].label}</span></span>
             <span className="frontdesk-script-title">{script.title}</span><span className="frontdesk-script-question" lang="ko">{script.question.ko}</span>
           </button>
         </li>)}</ul>}

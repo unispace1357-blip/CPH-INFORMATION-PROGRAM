@@ -3,6 +3,7 @@ import type { GuideLanguage } from '../types/guide.ts'
 /** Hotel handout provided on 2026-10-19; timetable is NOT an operator live feed. */
 export const AIRPORT_LIMOUSINE_6777 = {
   routeNumber: '6777',
+  adultFareKrw: 8000,
   destinations: ['Incheon Airport Terminal 1', 'Incheon Airport Terminal 2'],
   departures: [
     '05:27', '06:07', '06:47', '08:47', '10:27', '11:57',
@@ -21,7 +22,8 @@ export interface LocalGuideCopy {
   departurePlace: string
   disclaimerTitle: string
   disclaimer: string
-  fareUnknown: string
+  fareLabel: string
+  fareNote: string
   tourismTitle: string
   tourismIntro: string
   tourismCaution: string
@@ -44,7 +46,8 @@ export const LOCAL_GUIDE_COPY: Record<GuideLanguage, LocalGuideCopy> = {
     departurePlace: '센트럴파크 정류장 출발 시각입니다. 호텔 출발 시각이 아닙니다.',
     disclaimerTitle: '운행정보 변경 가능',
     disclaimer: '버스 시간표·노선·정류장과 운행 여부는 교통 사정, 휴일 또는 운영사 사정에 따라 변경될 수 있습니다. 탑승 전 최신 정보를 확인해 주세요.',
-    fareUnknown: '요금·예약·실시간 도착 정보는 이 안내에 포함되지 않습니다.',
+    fareLabel: '성인 요금',
+    fareNote: '기준 운임 8,000원. 어린이 요금, 예약 및 실시간 도착 정보는 탑승 전 확인해 주세요.',
     tourismTitle: '송도 관광 가이드',
     tourismIntro: '호텔 주변의 주요 관광지를 직접 제작한 위치 개념도와 함께 소개합니다. 실제 이동은 네이버 지도에서 확인해 주세요.',
     tourismCaution: '관광시설의 운영시간, 입장 가능 여부와 이동 경로는 변경될 수 있습니다. 방문 전 확인해 주세요.',
@@ -65,7 +68,8 @@ export const LOCAL_GUIDE_COPY: Record<GuideLanguage, LocalGuideCopy> = {
     departurePlace: 'These times are for the bus stop at Central Park Station, not departures from the hotel.',
     disclaimerTitle: 'Schedule subject to change',
     disclaimer: 'Bus times, routes, stops and services may change due to traffic, holidays or operator updates. Please confirm the latest information before boarding.',
-    fareUnknown: 'Fares, bookings and real-time arrivals are not included in this guide.',
+    fareLabel: 'Adult fare',
+    fareNote: 'Standard adult fare: KRW 8,000. Check child fares, bookings and live arrivals before travel.',
     tourismTitle: 'Songdo sightseeing guide',
     tourismIntro: 'Explore nearby sights with an original location diagram. Use Naver Map for actual directions.',
     tourismCaution: 'Opening hours, admission and routes may change. Please check before visiting.',
@@ -86,7 +90,8 @@ export const LOCAL_GUIDE_COPY: Record<GuideLanguage, LocalGuideCopy> = {
     departurePlace: '以下为中央公园站巴士站的发车时间，并非酒店出发时间。',
     disclaimerTitle: '时刻表可能变更',
     disclaimer: '交通状况、节假日或运营方调整可能导致班次、线路、站点和运营情况变化。乘车前请确认最新信息。',
-    fareUnknown: '本指南不提供票价、预约或实时到站信息。',
+    fareLabel: '成人票价',
+    fareNote: '成人参考票价为8,000韩元。儿童票价、预约及实时到站信息请在乘车前确认。',
     tourismTitle: '松岛旅游指南',
     tourismIntro: '查看酒店附近主要景点及原创位置示意图。实际路线请使用Naver地图确认。',
     tourismCaution: '景点开放时间、入场规定及交通路线可能变更，请在出行前确认。',
@@ -107,7 +112,8 @@ export const LOCAL_GUIDE_COPY: Record<GuideLanguage, LocalGuideCopy> = {
     departurePlace: '以下はセントラルパーク停留所の発車時刻で、ホテル発の時刻ではありません。',
     disclaimerTitle: '運行情報は変更される場合があります',
     disclaimer: '交通状況、祝日、運行会社の都合により、時刻・ルート・停留所・運行状況が変更になる場合があります。乗車前に最新情報をご確認ください。',
-    fareUnknown: '運賃・予約・リアルタイム到着情報はこの案内に含まれません。',
+    fareLabel: '大人運賃',
+    fareNote: '大人運賃の目安は8,000ウォンです。子供運賃、予約・リアルタイム運行情報は乗車前にご確認ください。',
     tourismTitle: '松島観光ガイド',
     tourismIntro: 'ホテル周辺の主な見どころを独自制作の位置概略図で紹介します。実際の経路はNaverマップでご確認ください。',
     tourismCaution: '施設の営業時間、入場条件や移動経路は変更される場合があります。訪問前にご確認ください。',
@@ -139,4 +145,4 @@ export const SONGDO_TOURISM_SPOTS: ReadonlyArray<{
 ]
 
 export const AIRPORT_6777_STAFF_ENGLISH =
-  'Bus 6777 departs from the stop near Central Park Station Exit 1, by POSCO Booyoung Tower. It goes to Incheon Airport Terminal 1 and then Terminal 2. Times and services may change, so please check the latest schedule before boarding.'
+  'Bus 6777 departs from the stop near Central Park Station Exit 1, by POSCO Booyoung Tower. It goes to Incheon Airport Terminal 1 and then Terminal 2. The adult fare is 8,000 won. Times and services may change, so please check the latest schedule before boarding.'

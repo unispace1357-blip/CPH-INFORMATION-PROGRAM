@@ -4,6 +4,7 @@ import hotel from '../src/data/hotel.json' with { type: 'json' }
 import facilities from '../src/data/facilities.json' with { type: 'json' }
 import reference from '../docs/reference/step07a-approved-copy.json' with { type: 'json' }
 import amendments from '../docs/reference/step2-operational-amendments.json' with { type: 'json' }
+import updates from '../docs/reference/step1-info-accuracy-20261025.json' with { type: 'json' }
 import { GUIDE_LANGUAGES } from '../src/types/guide.ts'
 import { parseHotelDataset } from '../src/data/validateHotelDataset.ts'
 import { validateProductionData } from '../src/data/validateProductionData.ts'
@@ -23,13 +24,13 @@ test('approved reference records all 35 IDs, 34 unique applied IDs, source hash 
   assert.equal(reference.translatorComparisonRows, 105); assert.equal(reference.translatorResultsRecorded, 0)
 })
 
-test('historical approved paragraphs stay intact except user-authorized H19/H20 delivery updates, and H33 stays held', () => {
+test('historical paragraphs are preserved except tracked accuracy and delivery updates; H05 withdrawn and H33 held', () => {
   for (const record of reference.records) {
     for (const language of GUIDE_LANGUAGES) {
-      const text = (record.id === 'H19' || record.id === 'H20') ? amendments.replacements[record.id][language] : record.translations[language]
+      const text = (updates.replacements as Record<string, Record<string, string>>)[record.id]?.[language] ?? (amendments.replacements as Record<string, Record<string, string>>)[record.id]?.[language] ?? record.translations[language]
       assert.ok(text.length > 0)
       const containing = Object.entries(hotel.translations[language]).filter(([, value]) => value.split('\n\n').includes(text)).map(([field]) => field)
-      if (record.id === 'H33') assert.deepEqual(containing, [])
+      if (record.id === 'H33' || record.id === 'H05') assert.deepEqual(containing, [])
       else {
         const field = Object.entries(APPROVED_MAPPING).find(([, ids]) => (ids as readonly string[]).includes(record.id))![0]
         assert.deepEqual(containing, [field])
@@ -39,8 +40,15 @@ test('historical approved paragraphs stay intact except user-authorized H19/H20 
   }
 })
 for (const language of GUIDE_LANGUAGES) {
-  test(`${language} hotel fields retain all approved cells except exact H19/H20 overrides`, () => {
-    for (const [field, ids] of Object.entries(APPROVED_MAPPING)) assert.equal(hotel.translations[language][field as keyof typeof APPROVED_MAPPING], ids.map(id => (id === 'H19' || id === 'H20') ? amendments.replacements[id][language] : reference.records.find(record => record.id === id)!.translations[language]).join('\n\n'))
+  test(`${language} hotel fields match historical cells plus documented updates`, () => {
+    for (const [field, ids] of Object.entries(APPROVED_MAPPING)) {
+      const expected = ids.filter(id => !updates.removedIds.includes(id as 'H05')).map(id =>
+        (updates.replacements as Record<string, Record<string, string>>)[id]?.[language] ??
+        (amendments.replacements as Record<string, Record<string, string>>)[id]?.[language] ??
+        reference.records.find(record => record.id === id)!.translations[language])
+      if (field === 'roomUsage') expected.push(updates.additions.roomUsage[language])
+      assert.equal(hotel.translations[language][field as keyof typeof APPROVED_MAPPING], expected.join('\n\n'))
+    }
     assert.equal(hotel.translations[language].description, '')
   })
 }
@@ -52,7 +60,7 @@ test('approved common fields and unchanged JSON schema remain valid; both source
 })
 test('all fees stay in won without inventing amounts or applying currency conversions', () => {
   for (const language of GUIDE_LANGUAGES) {
-    assert.ok(hotel.translations[language].breakfast.includes('32,000')); assert.ok(hotel.translations[language].breakfast.includes('19,000'))
+    assert.ok(hotel.translations[language].breakfast.includes('35,000')); assert.ok(hotel.translations[language].breakfast.includes('19,000'))
     assert.ok(hotel.translations[language].checkOut.includes('11,000'))
     for (const amount of ['200,000', '50,000', '22,000']) assert.ok(hotel.translations[language].notes.includes(amount))
     assert.ok(!/[$€¥]/.test(hotel.translations[language].breakfast))
@@ -85,10 +93,10 @@ test('unapproved description still blocks readiness even with complete productio
   assert.throws(() => validateProductionData(facilities, hotel, '2026-10-15'), /dataStatus must be production/)
 })
 test('copy mismatch reports ID, language, approved value and actual value without repairing the input', () => {
-  const candidate = structuredClone(hotel); candidate.translations.en.breakfast = candidate.translations.en.breakfast.replace('32,000', '30,000')
+  const candidate = structuredClone(hotel); candidate.translations.en.breakfast = candidate.translations.en.breakfast.replace('35,000', '30,000')
   const before = structuredClone(candidate), errors = verifyApprovedHotel(candidate)
   const issue = errors.find(item => item.id === 'H10' && item.language === 'en')!
-  assert.equal(issue.field, 'breakfast'); assert.ok(String(issue.expected).includes('32,000')); assert.ok(String(issue.actual).includes('30,000'))
+  assert.equal(issue.field, 'breakfast'); assert.ok(String(issue.expected).includes('35,000')); assert.ok(String(issue.actual).includes('30,000'))
   assert.deepEqual(candidate, before)
 })
 test('duplicate, swapped field and held paragraph are rejected rather than quietly removed', () => {
@@ -137,4 +145,15 @@ test('H19/H20 delivery amendments cannot be reverted, duplicated or moved to ano
   const duplicated = structuredClone(hotel)
   duplicated.translations.ko.roomUsage += '\n\n' + amendments.replacements.H20.ko
   assert.ok(verifyApprovedHotel(duplicated).some(error => error.field.endsWith('paragraphCount')))
+})
+
+test('2026-10-25: withdrawn check-in claim, 35,000 breakfast, shared amenities and bedside light appear in all languages', () => {
+  for (const language of GUIDE_LANGUAGES) {
+    assert.equal(hotel.translations[language].checkIn.split('\n\n').length, 1)
+    assert.ok(!hotel.translations[language].checkIn.includes(reference.records.find(record => record.id === 'H05')!.translations[language]))
+    assert.ok(hotel.translations[language].breakfast.includes(updates.replacements.H10[language]))
+    assert.ok(hotel.translations[language].roomUsage.includes(updates.replacements.H15[language]))
+    assert.ok(hotel.translations[language].roomUsage.endsWith(updates.additions.roomUsage[language]))
+    assert.ok(!hotel.translations[language].breakfast.includes('32,000'))
+  }
 })

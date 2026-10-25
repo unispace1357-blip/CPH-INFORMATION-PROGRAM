@@ -12,13 +12,13 @@ import { searchFrontdeskScripts } from '../src/services/frontdeskScriptSearch.ts
 import { loadFrontdeskScripts } from '../src/services/loadFrontdeskScripts.ts'
 
 const fresh = () => structuredClone(raw)
-const expectedCounts = [5, 5, 7, 8, 4, 2]
+const expectedCounts = [5, 5, 9, 8, 4, 2]
 
-test('front desk V1.1 contains 31 ordered bilingual scripts and no unreviewed approvals', () => {
+test('front desk V1.1 contains 33 ordered bilingual scripts and no unreviewed approvals', () => {
   const data = parseFrontdeskScriptDataset(fresh())
   assert.equal(data.schemaVersion, 1)
   assert.equal(data.dataStatus, 'demo')
-  assert.equal(data.scripts.length, 31)
+  assert.equal(data.scripts.length, 33)
   assert.deepEqual(data, frontdeskScriptDataset)
   assert.deepEqual(
     FRONTDESK_SCRIPT_CATEGORIES.map(category => data.scripts.filter(script => script.category === category).length),
@@ -29,7 +29,7 @@ test('front desk V1.1 contains 31 ordered bilingual scripts and no unreviewed ap
     schema.definitions.script.properties.sourceSection.enum.filter((value): value is string => value !== null),
     FRONTDESK_SOURCE_SECTIONS,
   )
-  assert.equal(new Set(data.scripts.map(script => script.id)).size, 31)
+  assert.equal(new Set(data.scripts.map(script => script.id)).size, 33)
   for (const script of data.scripts) {
     assert.equal(script.reviewStatus, 'draft', script.id)
     assert.equal(script.lastVerifiedAt, null, script.id)
@@ -57,7 +57,7 @@ test('user-provided smoking area is distinctly sourced; existing hotel and facil
   assert.match(smoking.quickAnswer.en, /outside.*left of the main entrance/i)
   assert.match(smoking.details!.en, /silver ashtray bin/)
   assert.match(smoking.details!.ko, /은색 재떨이 통/)
-  assert.deepEqual(data.scripts.filter(script => script.sourceType === 'user-provided').map(script => script.id), ['smoking-area', 'food-delivery', 'delivery-driver-access', 'airport-limousine-6777'])
+  assert.deepEqual(data.scripts.filter(script => script.sourceType === 'user-provided').map(script => script.id), ['smoking-area', 'smoke-ventilation-window', 'food-delivery', 'delivery-driver-access', 'airport-limousine-6777'])
   for (const script of data.scripts.filter(item => item.sourceType === 'hotel-data')) {
     assert.ok(script.sourceSection)
     assert.ok(Object.hasOwn(originalHotel.translations.ko, script.sourceSection), script.id)
@@ -207,4 +207,18 @@ test('STEP 2 keeps indoor smoking first, parking separate, and delivery scripts 
   assert.match(delivery.quickAnswer.en, /shelf in front of the front desk/)
   assert.match(driver.quickAnswer.ko, /프론트 앞 선반/)
   assert.doesNotMatch(delivery.details!.en + driver.details!.en, /meet the driver outside|collect it outside/i)
+})
+
+test('2026-10-25 accuracy amendments keep valid bilingual content and not-approved flags', () => {
+  const data = parseFrontdeskScriptDataset(fresh())
+  const find = (id: string) => data.scripts.find(script => script.id === id)!
+  assert.match(find('check-in-deposit-id').details!.en, /kiosk.*ID/i)
+  assert.match(find('check-in-deposit-id').quickAnswer.en, /guarantee card/i)
+  assert.doesNotMatch(find('check-in-deposit-id').details!.en, /does not require a separate ID/i)
+  assert.match(find('breakfast-adult-price').quickAnswer.en, /35,000/)
+  assert.match(find('microwave-location').quickAnswer.en, /chopsticks.*wine glasses/i)
+  assert.match(find('bedside-light-switch').quickAnswer.en, /switch beside the bed/i)
+  assert.match(find('smoke-ventilation-window').quickAnswer.en, /smoke ventilation window/i)
+  assert.match(find('airport-limousine-6777').quickAnswer.en, /8,000 won/)
+  assert.ok(data.scripts.every(script => !JSON.stringify(script).includes('32,000') && script.reviewStatus === 'draft' && script.lastVerifiedAt === null))
 })
