@@ -3,3 +3,6 @@
 
 /* Spatial layout layer. Palette can be redesigned later without touching app logic. */
 @import './styles/concierge-layout.css';
+
+/* Layout V2: screenshot layout refinements, still separate from theme palette. */
+@import './styles/concierge-layout-v2.css';
