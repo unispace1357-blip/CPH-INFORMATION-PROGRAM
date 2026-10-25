@@ -152,7 +152,7 @@
           "name": "더몰트하우스 인천송도점",
           "description": "양식·스테이크·브런치 · 주요 메뉴 예시: 스테이크, 파스타, 플래터, 피자, 맥주",
           "address": "인천 연수구 인천타워대로180번길 11 A동 3층 305호",
-          "openingHours": "10:00~23:00(브레이크 타임 15~17시) 라스트 오더 22:00",
+          "openingHours": "10:00~23:00 (브레이크타임 15:00~17:00, 라스트오더 22:00)",
           "directions": "",
           "notes": ""
         },
@@ -379,7 +379,7 @@
           "name": "채움약국",
           "description": "약국",
           "address": "인천 연수구 인천타워대로197번길 16 2층 240호",
-          "openingHours": "9:00~19:30(13:00~14:00 휴게시간) 토요일은 9:00~14:00",
+          "openingHours": "09:00~19:30 (휴게시간 13:00~14:00), 토요일 09:00~14:00",
           "directions": "",
           "notes": ""
         },
@@ -1538,7 +1538,7 @@
       "translations": {
         "ko": {
           "name": "인천항",
-          "description": "항구",
+          "description": "항구 · 현재 길찾기는 인천항 연안여객터미널 기준입니다.",
           "address": "인천광역시 중구 항동7가 88",
           "openingHours": "",
           "directions": "인천항 연안여객터미널 기준 참고 경로입니다. 호텔에서 인천스타트업파크 버스 정류장으로 이동한 뒤 16-1번 버스를 이용하세요. 연안아파트에서 36번 또는 14번 버스로 환승하여 연안여객터미널 정류장에서 하차합니다. 전체 이동시간은 약 1시간이며 출발 시각과 교통 상황에 따라 달라질 수 있습니다.",
@@ -1546,7 +1546,7 @@
         },
         "en": {
           "name": "Incheon Port (인천항)",
-          "description": "Port.",
+          "description": "Port · The current map route leads to Incheon Coastal Passenger Terminal.",
           "address": "항동7가 88, Jung-gu, Incheon",
           "openingHours": "",
           "directions": "This is a reference route to the Incheon Port Coastal Passenger Terminal. From the hotel, go to the 인천스타트업파크 bus stop and take bus 16-1. At 연안아파트, transfer to bus 36 or 14, then get off at the 연안여객터미널 bus stop. The total journey takes about 1 hour and may vary depending on departure time and traffic conditions.",
@@ -1554,7 +1554,7 @@
         },
         "zh-CN": {
           "name": "인천항（港口）",
-          "description": "港口。",
+          "description": "港口 · 当前地图路线的目的地是仁川港沿岸客运站。",
           "address": "仁川广域市中区 항동7가 88",
           "openingHours": "",
           "directions": "以下为前往仁川港沿岸客运码头的参考路线。从酒店前往인천스타트업파크公交站，乘坐16-1路公交车。在연안아파트站换乘36路或14路公交车，在연안여객터미널站下车。全程约1小时，具体时间会因出发时刻和交通状况而变化。",
@@ -1562,7 +1562,7 @@
         },
         "ja": {
           "name": "인천항（港）",
-          "description": "港。",
+          "description": "港 · 現在の地図経路は仁川港沿岸旅客ターミナルまでの案内です。",
           "address": "仁川広域市中区 항동7가 88",
           "openingHours": "",
           "directions": "仁川港沿岸旅客ターミナルまでの参考経路です。ホテルから인천스타트업파크バス停へ移動し、16-1番バスに乗車してください。연안아파트で36番または14番バスに乗り換え、연안여객터미널バス停で下車します。全行程は約1時間で、出発時刻や交通状況により変わります。",
@@ -2107,7 +2107,7 @@
         },
         "en": {
           "name": "Songdo Central Park (송도 센트럴파크)",
-          "description": "Park and walking.",
+          "description": "Urban park with walking paths and waterfront scenery.",
           "address": "Around Convensia-daero 160, Yeonsu-gu, Incheon",
           "openingHours": "Park walks available; activity facilities are separate",
           "directions": "",
@@ -2115,7 +2115,7 @@
         },
         "zh-CN": {
           "name": "송도 센트럴파크（公园与散步）",
-          "description": "公园与散步。",
+          "description": "城市公园·步道与水岸景观。",
           "address": "仁川广域市延寿区 Convensia-daero 160一带",
           "openingHours": "可在公园散步；体验设施另行安排",
           "directions": "",
@@ -2123,7 +2123,7 @@
         },
         "ja": {
           "name": "송도 센트럴파크（公園・散策）",
-          "description": "公園・散策。",
+          "description": "都市公園・散策路・水辺の景色。",
           "address": "仁川広域市延寿区 Convensia-daero 160一帯",
           "openingHours": "公園の散策が可能です。体験施設は別です。",
           "directions": "",
@@ -2166,7 +2166,7 @@
       "translations": {
         "ko": {
           "name": "별온누리약국",
-          "description": "약국·야간 대안",
+          "description": "약국 · 등록 정보상 심야 이용 가능 (방문 전 영업시간 확인)",
           "address": "인천 연수구 하모니로 158 송도타임스페이스 A동 110~112호",
           "openingHours": "08:30~다음날 01:00; 24시간 자판기 보유",
           "directions": "",
@@ -2174,7 +2174,7 @@
         },
         "en": {
           "name": "Byeol Onnuri Pharmacy (별온누리약국)",
-          "description": "Pharmacy and late-night option.",
+          "description": "Pharmacy · Listed late-night hours; please confirm before visiting.",
           "address": "Harmony-ro 158, 송도타임스페이스, Building A, Units 110–112, Yeonsu-gu, Incheon",
           "openingHours": "08:30–01:00 the following day; 24-hour vending machine available",
           "directions": "",
@@ -2182,7 +2182,7 @@
         },
         "zh-CN": {
           "name": "별온누리약국（药店与夜间选择）",
-          "description": "药店与夜间选择。",
+          "description": "药店 · 登记信息显示营业至深夜，到访前请确认营业时间。",
           "address": "仁川广域市延寿区 Harmony-ro 158，송도타임스페이스 A栋110–112号室",
           "openingHours": "08:30–次日01:00；设有24小时自动售货机",
           "directions": "",
@@ -2190,7 +2190,7 @@
         },
         "ja": {
           "name": "별온누리약국（薬局・夜間の選択肢）",
-          "description": "薬局・夜間の選択肢。",
+          "description": "薬局 · 登録情報では深夜まで営業しています。訪問前に営業時間をご確認ください。",
           "address": "仁川広域市延寿区 Harmony-ro 158、송도타임스페이스 A棟110–112号室",
           "openingHours": "08:30–翌日01:00、24時間利用可能な自動販売機あり",
           "directions": "",
