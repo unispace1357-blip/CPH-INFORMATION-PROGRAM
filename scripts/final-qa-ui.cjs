@@ -212,9 +212,19 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await waitCards(staff, 1);
     assert.equal((await staffPanel.locator('.facility-card h3').allTextContents())[0], '송도 타임스페이스');
     assert.ok((await staffPanel.locator('.facility-menu-summary').innerText()).includes('도라보울'));
+    assert.match(await staffPanel.locator('.facility-card .facility-meta').innerText(), /15분.*835m/);
+    const typeCheck = await staffPanel.locator('.facility-card h3').first().evaluate(el => ({
+      fontSize: parseFloat(getComputedStyle(el).fontSize),
+      fontFamily: getComputedStyle(el).fontFamily,
+      fontWeight: Number(getComputedStyle(el).fontWeight)
+    }));
+    assert.ok(typeCheck.fontSize >= 17 && typeCheck.fontWeight >= 700 &&
+      typeCheck.fontFamily.includes('Segoe UI'), 'Readable local typography: ' + JSON.stringify(typeCheck));
     await staffPanel.locator('.facility-card button').click();
     assert.ok((await staffPanel.locator('.english-phrase-text').allTextContents()).some(t => t.includes('Timespace')));
     assert.ok((await staffPanel.locator('.staff-detail-intro .naver-map-link').getAttribute('href')).includes('1617698245,PLACE_POI'));
+    assert.match(await staffPanel.locator('.staff-walking-summary').innerText(), /15분.*835m/);
+    assert.ok((await staffPanel.locator('.staff-detail-intro').innerText()).includes('스타벅스 송도캐슬파크점 기준'));
     await fSearch.fill('타임스페이스');
     await staffPanel.getByRole('group', { name: '시설 카테고리' }).getByRole('button', { name: '음식점·주점' }).click();
     await waitCards(staff, 1);
@@ -334,7 +344,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     assert.ok(timespaceRoute.includes('19398065,PLACE_POI') && timespaceRoute.includes('1617698245,PLACE_POI'));
     assert.ok((await guest.locator('#guest-facility-detail').innerText()).includes('스타벅스 송도캐슬파크점'));
     assert.ok((await guest.locator('#guest-facility-detail').innerText()).includes('타임스페이스 내부가 아닌'));
-    assert.ok((await guest.locator('#guest-facility-detail').innerText()).includes('도보시간 미확인'));
+    assert.match(await guest.locator('#guest-facility-detail').innerText(), /15분.*835m/);
     await guestSearch.fill('');
     await waitCards(guest, 27);
     // Timespace is one record in both filter categories, rather than two duplicate facility cards.
