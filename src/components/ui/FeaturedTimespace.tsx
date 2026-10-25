@@ -38,7 +38,7 @@ export function FeaturedTimespace({ facility, language, onDetails, compact = fal
       <img className="concierge-featured-image" src={CONCIERGE_IMAGES.timespace} alt="" width="690" height="192" loading="lazy" decoding="async" />
       <div className="concierge-featured-body">
         <h3>{translated.name}</h3>
-        <p className="concierge-featured-description">{translated.description}</p>
+        <p className="concierge-featured-description">{compact ? translated.description : guestFacilityPresentation(facility, language).summary}</p>
         {!compact && <div className="concierge-featured-tags" aria-label={m.ui.description}>
           {MENU_TAGS[language].map(tag => <span key={tag}>{tag}</span>)}
         </div>}
