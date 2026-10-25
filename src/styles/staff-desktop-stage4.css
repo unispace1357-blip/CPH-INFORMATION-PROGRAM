@@ -1,0 +1,307 @@
+/*
+ * Stage 4 — staff PC composition only (A+B reference).
+ * Isolated spatial treatment. Keep the brand palette in existing theme CSS.
+ * Guest/mobile, operational text, staff data and DEMO logic are untouched.
+ */
+.app-shell--staff .staff-hub-topline {
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:11px;
+}
+.app-shell--staff .staff-hub-topline h2 { color:var(--color-primary); font-size:1.15rem; line-height:1.4; }
+.app-shell--staff .staff-hub-topline .staff-search-hub-description {
+  margin:2px 0 0;
+  font-size:.79rem;
+  line-height:1.45;
+}
+.app-shell--staff .staff-hub-scope-chooser {
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  min-width:155px;
+  color:var(--color-text-secondary);
+  font-size:.67rem;
+  font-weight:650;
+}
+.app-shell--staff .staff-hub-scope-chooser select {
+  border:1px solid var(--concierge-line);
+  border-radius:8px;
+  padding:5px 10px;
+  min-height:34px;
+  background:#fff;
+  color:var(--color-primary);
+  font-size:.76rem;
+  font-weight:700;
+  cursor:pointer;
+}
+.app-shell--staff .staff-search-hub-form {
+  display:flex;
+  align-items:center;
+  flex-wrap:nowrap;
+  gap:7px;
+  min-height:45px;
+}
+.app-shell--staff .staff-search-hub-input-label {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  align-self:stretch;
+  min-width:35px;
+  padding:0;
+  margin-right:-43px;
+  z-index:1;
+  pointer-events:none;
+}
+.app-shell--staff .staff-search-hub-form input {
+  flex:1 1 0;
+  width:100%;
+  min-width:0;
+  min-height:45px;
+  padding:9px 12px 9px 41px;
+  border:1px solid #afc4dd;
+  border-radius:9px;
+  background:#fff;
+}
+.app-shell--staff .staff-search-hub-form .button {
+  flex:none;
+  min-width:80px;
+  min-height:45px;
+  border-radius:9px;
+}
+.app-shell--staff .staff-search-suggestions { gap:5px; margin-top:8px; }
+.app-shell--staff .staff-search-suggestions > span { margin-right:4px; font-size:.72rem; }
+.app-shell--staff .staff-search-suggestions button { font-size:.73rem; padding:4px 9px; line-height:1.35; }
+.app-shell--staff .staff-essential-panel {
+  min-width:0;
+  padding:14px;
+  background:var(--color-surface);
+  border:1px solid var(--concierge-line);
+  border-radius:var(--concierge-radius);
+}
+.app-shell--staff .staff-overview-section-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  margin-bottom:11px;
+}
+.app-shell--staff .staff-overview-section-header h2 { font-size:1rem; color:var(--color-primary); }
+.app-shell--staff .staff-overview-section-header button {
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  border:0;
+  padding:6px 2px;
+  background:transparent;
+  color:#3772aa;
+  font-size:.73rem;
+  font-weight:650;
+}
+.app-shell--staff .staff-essential-panel > .concierge-essentials { border:0; padding:0; background:transparent; border-radius:0; }
+.app-shell--staff .staff-essential-panel .concierge-essentials > .concierge-section-heading { display:none; }
+.app-shell--staff .staff-essential-panel .concierge-essentials-grid { grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; }
+.app-shell--staff .staff-essential-panel .concierge-fact-button {
+  min-height:95px;
+  padding:9px 3px;
+  gap:5px;
+}
+.app-shell--staff .staff-essential-panel .concierge-fact-button .icon { width:22px; height:22px; color:#1b79db; }
+.app-shell--staff .staff-essential-panel .concierge-fact-label { font-size:.7rem; }
+.app-shell--staff .staff-essential-panel .concierge-fact-button strong {
+  font-size:.7rem;
+  line-height:1.35;
+  letter-spacing:-.02em;
+}
+.app-shell--staff .staff-topic-shortcuts {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:6px;
+  margin-top:8px;
+}
+.app-shell--staff .staff-topic-shortcuts button {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  min-width:0;
+  min-height:83px;
+  padding:8px 3px;
+  border:1px solid var(--concierge-line);
+  border-radius:9px;
+  background:#fff;
+  color:#2d547f;
+  text-align:center;
+  font-size:.71rem;
+  font-weight:650;
+  line-height:1.35;
+  word-break:keep-all;
+}
+.app-shell--staff .staff-topic-shortcuts button:hover { background:var(--color-subtle); }
+.app-shell--staff .staff-topic-shortcuts button .icon { color:#1b79db; }
+.app-shell--staff .staff-overview-grid { gap:12px; align-items:start; }
+.app-shell--staff .staff-overview-column { gap:10px; }
+.app-shell--staff .staff-overview-grid .concierge-featured--compact { padding:13px; box-shadow:none; }
+.app-shell--staff .concierge-featured--compact .concierge-section-heading { margin-bottom:9px; }
+.app-shell--staff .concierge-featured--compact .concierge-section-heading h2 { font-size:1rem; }
+.app-shell--staff .concierge-featured--compact .concierge-featured-card { border-radius:9px; }
+.app-shell--staff .concierge-featured--compact .concierge-featured-image { height:132px; }
+.app-shell--staff .concierge-featured--compact .concierge-featured-body { gap:5px; padding:10px 11px; }
+.app-shell--staff .concierge-featured--compact .concierge-featured-body h3 { font-size:.89rem; }
+.app-shell--staff .concierge-featured--compact .concierge-featured-description { font-size:.73rem; line-height:1.4; -webkit-line-clamp:2; line-clamp:2; }
+.app-shell--staff .concierge-featured--compact .concierge-featured-actions .button { min-width:0; min-height:34px; padding:6px; font-size:.75rem; }
+.app-shell--staff .concierge-featured--compact .concierge-route-notice { font-size:.72rem; }
+.app-shell--staff .staff-quick-phrases, .app-shell--staff .staff-request-shortcut {
+  padding:13px;
+  box-shadow:none;
+}
+.app-shell--staff .staff-quick-phrases > .concierge-section-heading { margin-bottom:9px; }
+.app-shell--staff .staff-quick-phrases > .concierge-section-heading h2 { font-size:1rem; }
+.app-shell--staff .staff-quick-phrases-list { gap:5px; }
+.app-shell--staff .staff-quick-phrase { padding:7px 9px; border-radius:9px; }
+.app-shell--staff .staff-quick-phrase h3 { font-size:.72rem; margin:0 0 2px; }
+.app-shell--staff .staff-quick-phrase p { font-size:.78rem; line-height:1.4; }
+.app-shell--staff .staff-quick-phrase .staff-quick-phrase-ko { font-size:.71rem; line-height:1.4; }
+.app-shell--staff .staff-quick-phrase button { flex-basis:35px; min-height:39px; }
+.app-shell--staff .staff-quick-copy-status { min-height:0; }
+.app-shell--staff .staff-request-shortcut h2 { font-size:1rem; }
+.app-shell--staff .staff-request-shortcut p { font-size:.77rem; margin:4px 0 10px; }
+.app-shell--staff .staff-request-shortcut .button { min-height:36px; font-size:.78rem; }
+.app-shell--staff .staff-release-notice { margin-top:0; }
+@media (min-width:860px) {
+  .app-shell--staff main { padding-block:15px 26px; }
+  .app-shell--staff .staff-page { gap:11px; }
+  .app-shell--staff .staff-intro .concierge-hero { min-height:197px; border-radius:11px; }
+  .app-shell--staff .staff-intro .concierge-hero-copy { padding:22px 25px; gap:5px; }
+  .app-shell--staff .staff-intro .concierge-hero h1 { font-size:clamp(1.55rem,2.5vw,2.1rem); }
+  .app-shell--staff .staff-intro .concierge-hero::before { background:linear-gradient(90deg,rgba(17,35,59,.8),rgba(17,35,59,.31) 65%,rgba(17,35,59,.08)); }
+  .app-shell--staff .staff-search-hub { padding:13px 16px; box-shadow:none; }
+  .app-shell--staff .staff-overview-grid { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
+  .app-shell--staff .staff-guide-tabs { margin-top:3px; }
+}
+@media (min-width:1200px) {
+  .app-shell--staff { position:relative; }
+  /* Preserve request and guest-preview controls while avoiding a redundant full-width header. */
+  .app-shell--staff .site-header {
+    position:absolute;
+    top:20px;
+    left:0;
+    width:100%;
+    height:0;
+    z-index:10;
+    background:transparent;
+    border:0;
+    pointer-events:none;
+  }
+  .app-shell--staff .site-header-inner { justify-content:flex-end; align-items:flex-start; padding-block:0; padding-inline:28px; }
+  .app-shell--staff .site-header .brand { display:none; }
+  .app-shell--staff .staff-header-actions { display:flex; flex-wrap:wrap; gap:6px; pointer-events:auto; }
+  .app-shell--staff .staff-header-actions .header-link {
+    min-height:35px;
+    padding:5px 8px;
+    border:1px solid rgb(255 255 255 / 65%);
+    background:rgb(30 57 92 / 72%);
+    color:#fff;
+    font-size:.72rem;
+  }
+  .app-shell--staff .staff-page { padding-left:181px; }
+  .app-shell--staff .staff-board-rail {
+    width:169px;
+    min-height:0;
+    top:0;
+    bottom:auto;
+    gap:5px;
+    padding:16px 9px;
+    background:linear-gradient(180deg,#102a4d 0%,#203e64 100%);
+    border-radius:12px;
+  }
+  .app-shell--staff .staff-board-rail-brand {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2px;
+    padding:5px 4px 16px;
+    margin-bottom:10px;
+    text-align:center;
+    border-bottom:1px solid rgb(255 255 255 / 26%);
+    font-size:.61rem;
+    font-weight:750;
+    letter-spacing:.035em;
+  }
+  .app-shell--staff .staff-board-rail-brand img { width:92px; height:76px; object-fit:contain; }
+  .app-shell--staff .staff-board-rail-brand span { font-size:.61rem; line-height:1.4; }
+  .app-shell--staff .staff-board-rail-brand small { font-size:.55rem; letter-spacing:.09em; font-weight:500; }
+  .app-shell--staff .staff-board-rail button {
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    width:100%;
+    padding:10px 10px;
+    min-height:45px;
+    border-radius:8px;
+    font-size:.8rem;
+    text-align:left;
+  }
+  .app-shell--staff .staff-board-rail button.staff-rail-search {
+    background:#2367bb;
+    border-left:3px solid #d7bd80;
+    color:#fff;
+    font-weight:750;
+  }
+  .app-shell--staff .staff-board-rail button.staff-rail-search:hover { background:#347bd0; }
+}
+@media (min-width:860px) and (max-width:1199px) {
+  .app-shell--staff .site-header-inner { padding-block:8px; }
+  .app-shell--staff .site-header .brand-logo { width:74px; }
+  .app-shell--staff .site-header .brand-name { font-size:1.01rem; }
+  .app-shell--staff .site-header .brand-caption { font-size:.7rem; }
+  .app-shell--staff .site-header .header-link { min-height:38px; font-size:.79rem; }
+}
+@media (max-width:859px) {
+  .app-shell--staff .staff-essential-panel .concierge-essentials-grid,
+  .app-shell--staff .staff-topic-shortcuts { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .app-shell--staff .staff-overview-grid { grid-template-columns:1fr; }
+}
+@media (max-width:490px) {
+  .app-shell--staff .staff-hub-topline { display:block; }
+  .app-shell--staff .staff-hub-scope-chooser { margin-top:9px; }
+  .app-shell--staff .staff-search-hub-form input { min-width:0; }
+}
+
+/* Existing V2 sets the search button to width:100% on phones; keep it within the form. */
+@media (max-width:550px) {
+  .app-shell--staff .staff-search-hub-form {
+    position:relative;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 82px;
+    gap:6px;
+    align-items:stretch;
+  }
+  .app-shell--staff .staff-search-hub-input-label {
+    position:absolute;
+    top:0;
+    left:7px;
+    height:45px;
+    width:26px;
+    margin:0;
+    z-index:1;
+  }
+  .app-shell--staff .staff-search-hub-form input {
+    grid-column:1;
+    width:100%;
+    min-width:0;
+    margin:0;
+    padding-left:35px;
+  }
+  .app-shell--staff .staff-search-hub-form .button {
+    grid-column:2;
+    min-width:0;
+    width:100%;
+    margin:0;
+    padding-inline:5px;
+  }
+}

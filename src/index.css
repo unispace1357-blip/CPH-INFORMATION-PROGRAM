@@ -9,3 +9,6 @@
 
 /* Stage 3 guest-only mobile layout; colors remain on existing tokens. */
 @import './styles/guest-mobile-stage3.css';
+
+/* Stage 4: staff-only desktop mockup geometry (guest layout stays unchanged). */
+@import './styles/staff-desktop-stage4.css';

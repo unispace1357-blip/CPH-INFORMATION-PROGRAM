@@ -14,7 +14,7 @@ import { Icon } from '../../components/ui/Icon'
 import { StaffSearchResults } from '../../components/staff/StaffSearchResults'
 import { StaffFacilityDetail } from '../../components/staff/StaffFacilityDetail'
 import { FrontdeskGuide } from '../../components/staff/FrontdeskGuide'
-import { StaffSearchHub, StaffQuickPhrases, StaffRequestShortcut } from '../../components/staff/StaffDashboard'
+import { StaffSearchHub, StaffQuickPhrases, StaffRequestShortcut, StaffTopicShortcuts } from '../../components/staff/StaffDashboard'
 import { AirportBusGuide, SongdoTourismGuide } from '../../components/ui/LocalTravelGuides'
 import { UI_CATEGORIES, visibleFacilityCategories } from '../../config/uiCategories'
 import { loadStaffDataset } from '../../services/loadStaffDataset'
@@ -91,10 +91,16 @@ export function StaffPage() {
   return (
     <div className="staff-page">
       <nav className="staff-board-rail" aria-label="직원 주요 업무 바로가기">
-        <div className="staff-board-rail-brand">CPH <span>CONCIERGE</span></div>
-        <button type="button" className={activeTab === 'hotel' ? 'is-active' : ''} onClick={() => navigateStaffTab('hotel')}><Icon name="hotel" size={20} />호텔 영어 응대</button>
+        <div className="staff-board-rail-brand">
+          <img src={`${import.meta.env.BASE_URL}hotel-logo.webp`} alt="The Central Park Hotel Songdo" width="110" height="86" />
+          <span>THE CENTRAL PARK HOTEL</span>
+          <small>SONGDO · CONCIERGE</small>
+        </div>
+        <button type="button" className="staff-rail-search" onClick={() => { const input = document.getElementById('staff-hub-input') as HTMLInputElement | null; input?.scrollIntoView({ block: 'center' }); input?.focus({ preventScroll: true }) }}><Icon name="search" size={20} />통합 검색</button>
+        <button type="button" className={activeTab === 'hotel' ? 'is-active' : ''} onClick={() => navigateStaffTab('hotel')}><Icon name="hotel" size={20} />호텔 안내</button>
         <button type="button" className={activeTab === 'facilities' ? 'is-active' : ''} onClick={() => navigateStaffTab('facilities')}><Icon name="attraction" size={20} />주변 시설</button>
-        <button type="button" onClick={() => { const area = document.getElementById('staff-essentials'); area?.scrollIntoView({ block: 'start' }); area?.focus({ preventScroll: true }) }}><Icon name="info" size={20} />호텔 주요 정보</button>
+        <button type="button" onClick={() => { const phrases = document.getElementById('staff-quick-phrases-title'); phrases?.scrollIntoView({ block: 'start' }); phrases?.focus({ preventScroll: true }) }}><Icon name="copy" size={20} />영어 응대 문구</button>
+        <button type="button" onClick={() => document.querySelector<HTMLButtonElement>('.staff-request-trigger')?.click()}><Icon name="info" size={20} />요청 접수</button>
       </nav>
       <section className="staff-intro" aria-label="프론트 안내 대시보드">
         <ConciergeHero audience="staff" />
@@ -119,7 +125,11 @@ export function StaffPage() {
       {dataset?.dataStatus === 'production' && <InformationNotice title="안내 정보 확인">정보 확인일과 미확인 항목을 확인하고, 방문 전 영업시간 등 변동 사항을 확인해 주세요.</InformationNotice>}
       <div className="staff-overview-grid" id="staff-essentials" tabIndex={-1}>
         <div className="staff-overview-column">
-          <ConciergeEssentials hotel={hotelDataset} language="ko" includeCheckout />
+          <section className="staff-essential-panel" aria-label="호텔 주요 정보 카드">
+            <div className="staff-overview-section-header"><h2>호텔 주요 정보</h2><button type="button" onClick={() => navigateStaffTab('hotel')}>전체보기 <Icon name="arrow" size={14}/></button></div>
+            <ConciergeEssentials hotel={hotelDataset} language="ko" includeCheckout />
+            <StaffTopicShortcuts onSearch={handleDashboardSearch} />
+          </section>
           <FeaturedTimespace facility={featuredTimespace} language="ko" compact onDetails={openFeaturedFacility} />
         </div>
         <div className="staff-overview-column">
