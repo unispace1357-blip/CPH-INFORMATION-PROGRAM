@@ -609,6 +609,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
 
     await staff.reload();
     await staff.waitForSelector('.staff-quick-access');
+    await staff.locator('.staff-quick-access-grid > div:first-child [data-shortcut="facility:songdo-timespace-complex"]').waitFor({state:'visible',timeout:15000});
     assert.equal(await staff.locator('.staff-quick-access-grid > div:first-child [data-shortcut="facility:songdo-timespace-complex"]').count(),1);
     assert.equal(await staff.locator('.staff-quick-access-grid > div:first-child [data-shortcut="script:airport-limousine-6777"]').count(),1);
     const persisted = await staff.evaluate(()=>JSON.parse(localStorage.getItem('cph:staff:shortcuts:v1')));
