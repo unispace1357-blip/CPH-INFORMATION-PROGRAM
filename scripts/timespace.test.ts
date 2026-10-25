@@ -76,3 +76,26 @@ test('one Timespace record appears under both dining and shopping with matching 
   timespaceDraft.additionalCategories = ['shopping']
   assert.throws(() => parseFacilityDataset(wrongCategory), /additionalCategories must not duplicate/)
 })
+
+test('Timespace is pinned to top of dining only, with all other relative positions preserved', () => {
+  const source = structuredClone(parsed.facilities)
+  const featured = 'songdo-timespace-complex'
+  for (const search of [searchFacilities, searchGuestFacilities]) {
+    const dining = search(parsed.facilities, '', 'dining')
+    assert.equal(dining[0]?.id, featured)
+    assert.equal(dining.filter(item => item.id === featured).length, 1)
+    const unpinned = parsed.facilities.filter(item =>
+      item.isPublished && (item.category === 'dining' || (item.additionalCategories ?? []).includes('dining')))
+    assert.deepEqual(dining.slice(1).map(item => item.id), unpinned.filter(item => item.id !== featured).map(item => item.id))
+    assert.deepEqual(search(parsed.facilities, '', 'all').map(item => item.id), parsed.facilities.map(item => item.id))
+    assert.deepEqual(search(parsed.facilities, '', 'shopping').map(item => item.id),
+      parsed.facilities.filter(item => item.category === 'shopping').map(item => item.id))
+    const keyword = search(parsed.facilities, '고기', 'dining')
+    assert.equal(keyword[0]?.id, featured, 'matching dining search should prioritize Timespace')
+    assert.equal(search(parsed.facilities, '없는특수문구', 'dining').length, 0)
+  }
+  for (const language of GUIDE_LANGUAGES) {
+    assert.equal(searchGuestFacilities(parsed.facilities, '', 'dining', language)[0]?.id, featured, language)
+  }
+  assert.deepEqual(parsed.facilities, source)
+})
