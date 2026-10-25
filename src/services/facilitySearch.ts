@@ -39,7 +39,7 @@ export function facilitySearchText(facility: Facility): string {
 }
 
 export function matchesFacility(facility: Facility, query = '', category: StaffCategoryFilter = 'all'): boolean {
-  if (!facility.isPublished || (category !== 'all' && facility.category !== category)) return false
+  if (!facility.isPublished || (category !== 'all' && facility.category !== category && !(facility.additionalCategories ?? []).includes(category))) return false
   const tokens = normalizeSearchTerm(query).split(' ').filter(Boolean)
   if (!tokens.length) return true
 

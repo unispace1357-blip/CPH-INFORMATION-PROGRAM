@@ -8,12 +8,12 @@ import { GUIDE_LANGUAGES } from '../src/types/guide.ts'
 
 const parsed = parseFacilityDataset(raw)
 const timespace = parsed.facilities.find(item => item.id === 'songdo-timespace-complex')!
-const waypoint = parsed.facilities.find(item => item.id === 'byeol-onnuri-pharmacy-songdo')!
 
 test('Timespace is one representative commercial-complex entry, not a misleading list of unverified venue records', () => {
   assert.equal(parsed.facilities.length, 27)
-  assert.ok(timespace && waypoint)
+  assert.ok(timespace)
   assert.equal(timespace.category, 'shopping')
+  assert.deepEqual(timespace.additionalCategories, ['dining'])
   assert.equal(timespace.isPublished, true)
   assert.equal(timespace.lastVerifiedAt, null)
   assert.equal(raw.dataStatus, 'demo')
@@ -39,14 +39,15 @@ test('Timespace presents real representative menu categories in each language wi
   }
 })
 
-test('existing real Naver walking route leads from hotel to pharmacy in Timespace A; caveat is visible and accurate', () => {
-  assert.equal(timespace.naverMapUrl, waypoint.naverMapUrl)
+test('user supplied Naver walking route leads to nearby Starbucks Castle Park, never falsely labels it Timespace', () => {
   assert.ok(timespace.naverMapUrl?.includes('19398065,PLACE_POI'), 'hotel origin must be preserved')
-  assert.ok(timespace.naverMapUrl?.includes('1841858743,PLACE_POI'), 'destination is pharmacy, not a fabricated Timespace POI')
+  assert.ok(timespace.naverMapUrl?.includes('1617698245,PLACE_POI'), 'destination must be supplied Starbucks Songdo Castle Park')
   assert.ok(timespace.naverMapUrl?.includes('/walk?'))
-  assert.equal(timespace.walkingMinutes, waypoint.walkingMinutes)
-  assert.match(timespace.translations.ko.directions, /목적지.*별온누리약국/)
-  assert.match(timespace.translations.en.directions, /destination is Byeol Onnuri Pharmacy/)
+  assert.equal(timespace.walkingMinutes, null, 'old pharmacy walking time must not carry to Starbucks route')
+  const caveats = { ko: /스타벅스 송도캐슬파크점.*타임스페이스 내부가 아닌/, en: /Starbucks Songdo Castle Park.*not inside Songdo Timespace/, 'zh-CN': /星巴克.*并非松岛 Timespace 内部/, ja: /スターバックス.*建物内ではありません/ }
+  for (const lang of GUIDE_LANGUAGES) assert.match(timespace.translations[lang].directions, caveats[lang])
+  assert.match(timespace.englishPhrases[2]!, /Starbucks Songdo Castle Park.*not the Timespace entrance/)
+  assert.match(timespace.englishPhraseMeanings![2]!, /스타벅스 송도캐슬파크점/)
 })
 
 test('Timespace can be found by complex name or food keywords in both guest and staff searches', () => {
@@ -58,4 +59,20 @@ test('Timespace can be found by complex name or food keywords in both guest and 
     }
   }
   assert.deepEqual(parsed.facilities, before)
+})
+
+test('one Timespace record appears under both dining and shopping with matching keyword filters', () => {
+  const snapshot = structuredClone(parsed.facilities)
+  for (const category of ['shopping', 'dining'] as const) {
+    assert.equal(searchFacilities(parsed.facilities, '타임스페이스', category).filter(f => f.id === timespace.id).length, 1)
+    for (const lang of GUIDE_LANGUAGES) {
+      assert.equal(searchGuestFacilities(parsed.facilities, '카레', category, lang).filter(f => f.id === timespace.id).length, 1)
+    }
+  }
+  assert.deepEqual(searchFacilities(parsed.facilities, '타임스페이스', 'cafe'), [])
+  assert.deepEqual(parsed.facilities, snapshot)
+  const wrongCategory = structuredClone(raw)
+  const timespaceDraft = wrongCategory.facilities.find(f => f.id === timespace.id)!
+  timespaceDraft.additionalCategories = ['shopping']
+  assert.throws(() => parseFacilityDataset(wrongCategory), /additionalCategories must not duplicate/)
 })

@@ -24,6 +24,9 @@ export function parseFacilityDataset(value: unknown): FacilityDataset {
       throw new Error(`Duplicate facility ID: ${facility.id}`)
     }
     ids.add(facility.id)
+    if (facility.additionalCategories?.includes(facility.category)) {
+      throw new Error(`Invalid facility dataset: ${facility.id}.additionalCategories must not duplicate its primary category`)
+    }
     if (facility.englishPhraseMeanings && facility.englishPhraseMeanings.length !== facility.englishPhrases.length) {
       throw new Error(`Invalid facility dataset: ${facility.id}.englishPhraseMeanings must match englishPhrases length`)
     }
