@@ -6,6 +6,7 @@ import { FacilityCard } from '../ui/FacilityCard'
 import { FEATURED_DINING_FACILITY_ID } from '../../services/facilitySearch'
 import type { StaffCategoryFilter } from '../../services/facilitySearch'
 import { EmptyState } from '../ui/EmptyState'
+import { GUEST_FACILITY_COPY, TIMESPACE_FACILITY_ID, guestFacilityCardTeaser } from '../../services/guestFacilityPresentation'
 
 const FEATURED_TEXT: Record<GuideLanguage, string> = {
   ko: '추천', en: 'Featured', 'zh-CN': '推荐', ja: 'おすすめ',
