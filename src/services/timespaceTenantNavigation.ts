@@ -1,4 +1,5 @@
-import { TIMESPACE_TENANTS } from './timespaceDirectory.ts'
+import { TIMESPACE_TENANTS, timespaceCategoryLabel } from './timespaceDirectory.ts'
+import { GUIDE_LANGUAGES } from '../types/guide.ts'
 import type { TimespaceTenant } from './timespaceDirectory.ts'
 
 /** Navigation is an explicit event, so searching for the same shop twice refocuses it. */
@@ -39,4 +40,19 @@ export function resolveExactTimespaceTenant(query: string): TimespaceTenant | nu
 /** A matching tenant must still belong to a published Timespace facility; callers check that separately. */
 export function isExactTimespaceTenantName(query: string): boolean {
   return resolveExactTimespaceTenant(query) !== null
+}
+
+/** Non-navigating suggestions: broad names and food terms may match several shops. */
+export function findTimespaceTenantCandidates(query: string): TimespaceTenant[] {
+  const term = exactNameKey(query)
+  if (term.length < 2 || ['타임스페이스', '송도타임스페이스', '송도', 'timespace', 'songdo', 'songdotimespace'].includes(term)) return []
+  return TIMESPACE_TENANTS.filter(tenant => {
+    const labels = [
+      tenant.name, ...(TENANT_ALIASES[tenant.id] ?? []),
+      ...Object.values(tenant.menu),
+      ...GUIDE_LANGUAGES.map(language => timespaceCategoryLabel(tenant.category, language)),
+    ]
+    return labels.some(label => exactNameKey(label).includes(term)) ||
+      Object.values(tenant.menu).some(text => text.split(/[·,，、]/u).some(part => exactNameKey(part).includes(term)))
+  })
 }

@@ -13,9 +13,14 @@ export interface TimespaceTenant {
   building: 'A' | 'B' | 'C' | 'D'
   floor: number
   rooms: string
+  /** Archived shops stay in the admin file but are not public. */
+  status?: 'closed'
   menu: Record<GuideLanguage, string>
 }
-export const TIMESPACE_TENANTS = raw.tenants as TimespaceTenant[]
+export function activeTimespaceTenants(tenants: readonly TimespaceTenant[]): TimespaceTenant[] {
+  return tenants.filter(tenant => tenant.status !== 'closed')
+}
+export const TIMESPACE_TENANTS = activeTimespaceTenants(raw.tenants as TimespaceTenant[])
 
 const CATEGORY_LABELS: Record<TimespaceCategoryFilter, Record<GuideLanguage, string>> = {
   all: { ko: '전체', en: 'All', 'zh-CN': '全部', ja: 'すべて' },
@@ -37,28 +42,28 @@ export const TIMESPACE_DIRECTORY_UI: Record<GuideLanguage, {
   note: string
 }> = {
   ko: {
-    heading: '음식점 15곳 살펴보기',
+    heading: '음식점 둘러보기',
     intro: '먹고 싶은 음식 종류를 선택해 보세요.',
     menuLabel: '대표 메뉴',
     locationLabel: '매장 위치',
     note: '매장 입점·영업시간·메뉴는 변경될 수 있습니다. 방문 전 각 매장에서 확인해 주세요.',
   },
   en: {
-    heading: 'Explore 15 restaurants',
+    heading: 'Explore restaurants',
     intro: 'Choose the type of food you would like.',
     menuLabel: 'Popular dishes',
     locationLabel: 'Shop location',
     note: 'Tenants, hours and menus may change. Please check with the restaurant before visiting.',
   },
   'zh-CN': {
-    heading: '探索15家餐厅',
+    heading: '探索美食餐厅',
     intro: '请选择您想吃的餐饮类别。',
     menuLabel: '主要菜品',
     locationLabel: '店铺位置',
     note: '商户、营业时间和菜单可能会调整，请在到访前向店家确认。',
   },
   ja: {
-    heading: '飲食店15店舗を探す',
+    heading: '飲食店を探す',
     intro: '食べたい料理の種類をお選びください。',
     menuLabel: '主な料理',
     locationLabel: '店舗の場所',

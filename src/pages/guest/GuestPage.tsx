@@ -23,6 +23,8 @@ import { Button } from '../../components/ui/Button'
 import { HotelInformation } from '../../components/guest/HotelInformation'
 import { GuestFacilityResults } from '../../components/guest/GuestFacilityResults'
 import { GuestFacilityDetail } from '../../components/guest/GuestFacilityDetail'
+import { TimespaceTenantCandidates } from '../../components/ui/TimespaceTenantCandidates'
+import type { TimespaceTenant } from '../../services/timespaceDirectory'
 import { AirportBusGuide, SongdoTourismGuide } from '../../components/ui/LocalTravelGuides'
 import { LOCAL_GUIDE_COPY } from '../../data/localGuide'
 import { UI_CATEGORIES, visibleFacilityCategories } from '../../config/uiCategories'
@@ -78,6 +80,10 @@ export function GuestPage() {
     // Never jump for cuisines, partial names or generic facility keywords.
     searchTimer.current = setTimeout(() => focusExactTenant(value), 400)
   }
+  function chooseTenantCandidate(tenant: TimespaceTenant) {
+    updateFilters(tenant.name, 'all')
+    focusExactTenant(tenant.name)
+  }
   function repeatExactTenantSearch() {
     resetTenantNavigation()
     focusExactTenant(query)
@@ -118,6 +124,7 @@ export function GuestPage() {
       <section className="panel guest-search-panel" id="guest-search" aria-labelledby="guest-search-title">
         <div className="section-heading"><h2 id="guest-search-title">{m.ui.searchTitle}</h2><Button variant="quiet" disabled={!query} onClick={() => updateFilters('', category)}>{m.ui.clearSearch}</Button></div>
         <SearchInput label={m.ui.searchLabel} placeholder={m.ui.searchPlaceholder} value={query} onChange={event => onSearchChange(event.target.value)} onKeyDown={event => { if (event.key === 'Enter') { event.preventDefault(); repeatExactTenantSearch() } }} disabled={!dataset} hint={m.ui.searchHint} />
+        {dataset && <TimespaceTenantCandidates query={query} language={language} onSelect={chooseTenantCandidate} />}
       </section>
       <section className="guest-section" id="guest-facility-results" aria-labelledby="guest-results-title">
         <div className="section-heading"><h2 id="guest-results-title">{m.ui.resultsTitle}</h2><p className="status-label" role="status" aria-live="polite">{dataset ? message(language, 'resultCount', { count: results.length }) : facilities.status === 'error' ? m.ui.informationUnavailable : m.ui.loadingFacilities}</p></div>
