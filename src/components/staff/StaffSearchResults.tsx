@@ -14,7 +14,7 @@ export function StaffSearchResults({ results, publicFacilityCount, category, sel
     categoryLabel={[facility.category, ...(facility.additionalCategories ?? [])].map(code => FACILITY_CATEGORY_OPTIONS.find(category => category.code === code)?.staffLabel ?? code).join(' · ')}
     menuSummary={facility.category === 'dining' || facility.category === 'cafe' || facility.id === 'songdo-timespace-complex' ? facility.translations.ko.description : undefined}
     openingHours={confirmedText(facility.translations.ko.openingHours, '영업시간 미확인')}
-    walkingText={formatWalkingMinutes(facility.walkingMinutes)}
+    walkingText={formatWalkingMinutes(facility.walkingMinutes, facility.walkingDistanceMeters)}
     hoursLabel="영업시간" walkingLabel="예상 도보시간" detailLabel={selectedId === facility.id ? '선택됨 · 상세 정보' : '상세 보기'}
     selected={selectedId === facility.id} disabled={false} onDetails={() => onSelect(facility.id)}
     detailControls="staff-facility-detail"
