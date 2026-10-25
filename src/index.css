@@ -6,3 +6,6 @@
 
 /* Layout V2: screenshot layout refinements, still separate from theme palette. */
 @import './styles/concierge-layout-v2.css';
+
+/* Stage 3 guest-only mobile layout; colors remain on existing tokens. */
+@import './styles/guest-mobile-stage3.css';
