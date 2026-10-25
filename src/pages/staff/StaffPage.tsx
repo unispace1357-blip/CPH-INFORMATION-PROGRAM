@@ -110,7 +110,7 @@ export function StaffPage() {
           </div>
           {showAirportGuide && <AirportBusGuide language="ko" staff />}
           {showTourismGuide && <SongdoTourismGuide language="ko" />}
-          {dataState.status === 'loading' ? <LoadingState label="시설 정보를 확인하고 있습니다…" /> : dataState.status === 'error' ? <p className="field-hint">데이터 오류로 검색 결과를 표시할 수 없습니다.</p> : <StaffSearchResults results={results} publicFacilityCount={dataState.dataset.facilities.filter(item => item.isPublished).length} selectedId={selected?.id ?? null} onSelect={setSelectedId} />}
+          {dataState.status === 'loading' ? <LoadingState label="시설 정보를 확인하고 있습니다…" /> : dataState.status === 'error' ? <p className="field-hint">데이터 오류로 검색 결과를 표시할 수 없습니다.</p> : <StaffSearchResults category={category} results={results} publicFacilityCount={dataState.dataset.facilities.filter(item => item.isPublished).length} selectedId={selected?.id ?? null} onSelect={setSelectedId} />}
         </section>
         <section id="staff-facility-detail" className="panel details-panel" aria-labelledby="staff-details-title">
           <div className="section-heading staff-section-heading">

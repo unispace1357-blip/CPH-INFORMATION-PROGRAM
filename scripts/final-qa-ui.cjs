@@ -116,7 +116,14 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await staffPanel.getByRole('group', { name: '시설 카테고리' }).getByRole('button', { name: '음식점·주점' }).click();
     await waitCards(staff, 1);
     assert.ok((await staffPanel.locator('.facility-card .eyebrow').innerText()).includes('쇼핑'));
+    assert.equal(await staffPanel.locator('.facility-featured-label').innerText(), '★ 추천');
+    await fSearch.fill('');
+    await waitCards(staff, 12);
+    assert.ok((await staffPanel.locator('.facility-card h3').first().innerText()).startsWith('송도 타임스페이스'));
+    assert.equal(await staffPanel.locator('.facility-featured-label').count(), 1);
     await staffPanel.getByRole('group', { name: '시설 카테고리' }).getByRole('button', { name: '전체' }).click();
+    await waitCards(staff, 27);
+    assert.equal(await staffPanel.locator('.facility-featured-label').count(), 0);
     await fSearch.fill('맥주 약국');
     await waitCards(staff, 0);
     await fSearch.fill('더몰트하우스');
@@ -174,16 +181,29 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await waitCards(guest, 27);
     // Timespace is one record in both filter categories, rather than two duplicate facility cards.
     await guest.locator('#nearby-facilities .guest-category-grid').getByRole('button', { name: '음식점·주점' }).click();
+    await waitCards(guest, 12);
+    for (const [language, label] of Object.entries(languages)) {
+      await guest.locator('.language-options').getByRole('button', { name: label, exact: true }).click();
+      const featuredCard = guest.locator('#guest-facility-results .facility-card').first();
+      const featured = dataset.facilities.find(f => f.id === 'songdo-timespace-complex');
+      assert.ok((await featuredCard.locator('h3').innerText()).startsWith(featured.translations[language].name));
+      assert.equal(await featuredCard.locator('.facility-featured-label').innerText(),
+        { ko: '★ 추천', en: '★ Featured', 'zh-CN': '★ 推荐', ja: '★ おすすめ' }[language]);
+      assert.equal(await guest.locator('#guest-facility-results .facility-featured-label').count(), 1);
+    }
+    await guest.locator('.language-options').getByRole('button', { name: '한국어', exact: true }).click();
     await guestSearch.fill('타임스페이스');
     await waitCards(guest, 1);
-    assert.equal((await guest.locator('#guest-facility-results .facility-card h3').allTextContents())[0], '송도 타임스페이스');
+    assert.ok((await guest.locator('#guest-facility-results .facility-card h3').first().innerText()).startsWith('송도 타임스페이스'));
     assert.ok((await guest.locator('#guest-facility-results .facility-card .eyebrow').innerText()).includes('쇼핑'));
     await guest.locator('#nearby-facilities .guest-category-grid').getByRole('button', { name: '쇼핑' }).click();
     await waitCards(guest, 1);
     assert.ok((await guest.locator('#guest-facility-results .facility-card .eyebrow').innerText()).includes('음식점'));
+    assert.equal(await guest.locator('#guest-facility-results .facility-featured-label').count(), 0);
     await guestSearch.fill('');
     await guest.locator('#nearby-facilities').getByRole('button', { name: '전체 시설' }).click();
     await waitCards(guest, 27);
+    assert.equal(await guest.locator('#guest-facility-results .facility-featured-label').count(), 0);
     log('Timespace: one record under dining + shopping; Starbucks Castle Park waypoint has separate-building caveat');
     await guest.locator('.guest-category-grid').getByRole('button', { name: '교통', exact: true }).click();
     assert.equal(await guest.locator('.airport-bus-guide .local-guide-departures time').count(), 12);

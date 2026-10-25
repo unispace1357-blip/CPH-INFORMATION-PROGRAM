@@ -297,3 +297,21 @@ main { flex: 1; padding-block: var(--space-8) var(--space-10); }
   .staff-request-dialog { padding: 18px; }
   .staff-request-actions .button { flex: 1 1 auto; }
 }
+
+/* Restaurant category spotlight: explicit hotel curation, not a user rating. */
+.facility-featured-label {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  gap: 3px;
+  margin-inline-start: .6em;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: #fff4d6;
+  border: 1px solid #e1ba61;
+  color: #775014;
+  font-size: .74rem;
+  line-height: 1.5;
+  font-weight: 750;
+  white-space: nowrap;
+}
