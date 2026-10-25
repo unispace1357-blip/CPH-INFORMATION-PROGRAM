@@ -1,5 +1,6 @@
 import { GUIDE_LANGUAGES } from '../types/guide.ts'
 import type { Facility, FacilityCategory } from '../types/facility.ts'
+import { timespaceSearchTerms } from './timespaceDirectory.ts'
 
 export type StaffCategoryFilter = FacilityCategory | 'all'
 
@@ -39,10 +40,11 @@ function compactSearchTerm(value: string): string {
 }
 
 export function facilitySearchFields(facility: Facility): string[] {
-  return GUIDE_LANGUAGES.flatMap(lang => {
+  const additional = facility.id === FEATURED_DINING_FACILITY_ID ? timespaceSearchTerms() : []
+  return [...GUIDE_LANGUAGES.flatMap(lang => {
     const t = facility.translations[lang]
     return [t.name, t.description, t.address, t.openingHours, t.directions, t.notes, facility.closedDays[lang], ...facility.keywords[lang]]
-  })
+  }), ...additional]
 }
 
 export function facilitySearchText(facility: Facility): string {
