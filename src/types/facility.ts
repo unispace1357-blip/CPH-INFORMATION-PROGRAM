@@ -21,6 +21,8 @@ export interface FacilityTranslation {
 export interface Facility {
   id: string
   category: FacilityCategory
+  /** Additional filter categories without duplicating this facility in the dataset. */
+  additionalCategories?: FacilityCategory[]
   /** Display control only; bundled JSON remains publicly readable. */
   isPublished: boolean
   /** YYYY-MM-DD; null means the information has not been verified. */
