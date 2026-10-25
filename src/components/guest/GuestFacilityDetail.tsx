@@ -24,7 +24,7 @@ export function GuestFacilityDetail({ facility, language, onClose }: { facility:
   return (
     <section className="panel guest-detail-panel" aria-labelledby="guest-detail-title">
       <div className="section-heading"><h2 id="guest-detail-title" ref={heading} tabIndex={-1}>{text.name}</h2><Button variant="secondary" onClick={onClose}>{m.ui.closeDetails}</Button></div>
-      <p className="eyebrow">{m.categories[facility.category]}</p><p className="detail-description">{localizedValue(text.description, language)}</p>
+      <p className="eyebrow">{[facility.category, ...(facility.additionalCategories ?? [])].map(code => m.categories[code]).join(' · ')}</p><p className="detail-description">{localizedValue(text.description, language)}</p>
       <dl className="detail-facts">{facts.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
       <NaverDirectionsLink url={facility.naverMapUrl} label={m.ui.naverMapDirections} unavailable={m.ui.naverMapUnavailable} newTabNotice={m.ui.naverMapNewTab} />
       <p className="verification-date">{guestVerificationDate(facility.lastVerifiedAt, language)}</p>
