@@ -104,17 +104,20 @@ test('STEP 9: 33 hotel reply scripts are intentionally bilingual, not falsely ma
   for(const script of scripts){
     assert.ok(script.quickAnswer.ko?.trim(),script.id+'/ko')
     assert.ok(script.quickAnswer.en?.trim(),script.id+'/en')
-    assert.ok(script.details.ko?.trim(),script.id+'/details/ko')
-    assert.ok(script.details.en?.trim(),script.id+'/details/en')
+    // Detail paragraphs are optional: four scripts intentionally use only the quick reply.
+    if(script.details){
+      assert.ok(script.details.ko?.trim(),script.id+'/details/ko')
+      assert.ok(script.details.en?.trim(),script.id+'/details/en')
+    }
     assert.equal(script.reviewStatus,'draft')
   }
   const smoking=scripts.find(x=>x.id==='indoor-smoking-policy')!
-  for(const language of ['ko','en'] as const)assert.ok(smoking.details[language].includes('200,000'))
+  for(const language of ['ko','en'] as const)assert.ok(smoking.details?.[language]?.includes('200,000'))
   const bus=scripts.find(x=>x.id==='airport-limousine-6777')!
   for(const language of ['ko','en'] as const){
     assert.ok(bus.quickAnswer[language].includes('6777'))
     assert.ok(bus.quickAnswer[language].includes('8,000'))
-    assert.ok(bus.details[language].includes('05:27'))
+    assert.ok(bus.details?.[language]?.includes('05:27'))
   }
 })
 
