@@ -38,6 +38,7 @@ jobs:
       - name: Chromium Staff/Guest/Admin end-to-end QA
         env:
           NODE_PATH: /tmp/cph-browser-check/node_modules
+          CPH_BROWSER_CHANNEL: chrome
           CPH_UI_BASE_URL: http://127.0.0.1:5173
           CPH_ADMIN_BASE_URL: http://127.0.0.1:5190
           CPH_UI_ARTIFACT_DIR: /tmp/cph-final-qa
