@@ -1,5 +1,6 @@
 import type { Facility } from '../types/facility.ts'
 import type { GuideLanguage } from '../types/guide.ts'
+import { TIMESPACE_CATEGORY_ORDER, timespaceCategoryLabel } from './timespaceDirectory.ts'
 
 /**
  * Customer-facing presentation only. The source facility descriptions, operational
@@ -7,7 +8,6 @@ import type { GuideLanguage } from '../types/guide.ts'
  */
 export const GUEST_FACILITY_COPY: Record<GuideLanguage, {
   timespaceSummary: string
-  timespaceMenuExamples: readonly string[]
   menuTitle: string
   nearbyLandmark: string
   timespaceRouteNotice: string
@@ -16,7 +16,6 @@ export const GUEST_FACILITY_COPY: Record<GuideLanguage, {
 }> = {
   ko: {
     timespaceSummary: '다양한 음식점과 쇼핑 시설이 모여 있는 복합상업시설입니다.',
-    timespaceMenuExamples: ['카레 · 도라보울', '라멘 · 오바케', '고기구이 · 숯멍', '떡볶이 · 보니보니'],
     menuTitle: '대표 음식과 메뉴',
     nearbyLandmark: '인근 기준점까지 도보',
     timespaceRouteNotice: '현재 네이버 길찾기는 인근 스타벅스 송도캐슬파크점에서 끝납니다. 송도 타임스페이스(하모니로 158)까지 조금 더 이동해 주세요.',
@@ -25,7 +24,6 @@ export const GUEST_FACILITY_COPY: Record<GuideLanguage, {
   },
   en: {
     timespaceSummary: 'A shopping and dining complex with a variety of restaurants.',
-    timespaceMenuExamples: ['Curry · Dora Bowl', 'Ramen · Obake', 'Grilled pork · Sutmeong', 'Tteokbokki · Boni Boni'],
     menuTitle: 'Food and menu highlights',
     nearbyLandmark: 'Walk to nearby landmark',
     timespaceRouteNotice: 'The current Naver walking route ends at Starbucks Songdo Castle Park nearby. Continue on to Songdo Timespace at 158 Harmony-ro.',
@@ -34,7 +32,6 @@ export const GUEST_FACILITY_COPY: Record<GuideLanguage, {
   },
   'zh-CN': {
     timespaceSummary: '汇集多家餐厅与购物设施的综合商业区。',
-    timespaceMenuExamples: ['咖喱 · Dora Bowl', '拉面 · Obake', '烤猪肉 · Sutmeong', '炒年糕 · Boni Boni'],
     menuTitle: '特色餐饮与菜品',
     nearbyLandmark: '步行至附近地标',
     timespaceRouteNotice: '当前 Naver 步行路线的终点是附近的星巴克 Songdo Castle Park 店。请继续前往 Harmony-ro 158 的松岛 Timespace。',
@@ -43,7 +40,6 @@ export const GUEST_FACILITY_COPY: Record<GuideLanguage, {
   },
   ja: {
     timespaceSummary: '飲食店やショッピング施設が集まる複合商業施設です。',
-    timespaceMenuExamples: ['カレー · ドラボウル', 'ラーメン · オバケ', '豚焼肉 · スッモン', 'トッポッキ · ボニボニ'],
     menuTitle: 'おすすめの料理・メニュー',
     nearbyLandmark: '近くの目印まで徒歩',
     timespaceRouteNotice: '現在のNAVER徒歩経路は近くのスターバックス松島キャッスルパーク店が終点です。そこからHarmony-ro 158の松島タイムスペースまでお進みください。',
@@ -65,7 +61,7 @@ export function guestFacilityPresentation(facility: Facility, language: GuideLan
   if (facility.id === TIMESPACE_FACILITY_ID) {
     return {
       summary: copy.timespaceSummary,
-      menuExamples: [...copy.timespaceMenuExamples],
+      menuExamples: TIMESPACE_CATEGORY_ORDER.filter(category => category !== 'all').map(category => timespaceCategoryLabel(category, language)),
       routeNotice: copy.timespaceRouteNotice,
     }
   }
