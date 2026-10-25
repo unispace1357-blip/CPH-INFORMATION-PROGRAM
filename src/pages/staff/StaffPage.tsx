@@ -185,8 +185,6 @@ export function StaffPage() {
         </div>
       </section>
       <StaffSearchHub onSearch={handleDashboardSearch} />
-      <StaffQuickAccess data={shortcuts.data} facilities={dataset?.facilities ?? []}
-        storageAvailable={shortcuts.storageAvailable} onOpen={openShortcut} onClear={clearShortcuts} />
       {dataset?.dataStatus === 'demo' && <div className="staff-release-notice"><InformationNotice title={import.meta.env.MODE === 'public-test' ? '호텔 업무 영어 응대 안내' : '프론트 테스트용 미리보기'} tone="warning">
         {import.meta.env.MODE === 'public-test' ? <>
           <p>필요한 영어 문장을 검색·복사하세요. 검수 전 문구는 사용 전 확인해 주세요.</p>
@@ -211,6 +209,8 @@ export function StaffPage() {
         <div className="staff-overview-column">
           <StaffQuickPhrases />
           <StaffRequestShortcut />
+          <StaffQuickAccess data={shortcuts.data} facilities={dataset?.facilities ?? []}
+            storageAvailable={shortcuts.storageAvailable} onOpen={openShortcut} onClear={clearShortcuts} />
         </div>
       </div>
       <div className="staff-guide-tabs" role="tablist" aria-label="직원 안내 업무" onKeyDown={handleTabKey}>
