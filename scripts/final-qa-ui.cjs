@@ -73,6 +73,46 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await staff.screenshot({path:path.join(output,'staff-stage4-first-fold-1280.png'),fullPage:false});
     await staff.locator('.staff-overview-grid').screenshot({path:path.join(output,'staff-stage4-dashboard-cards-1280.png')});
     log('Staff stage 4 geometry: compact side rail, photo hero, scoped search, four hotel facts, functional topic tiles and 2-column dashboard');
+    // Stage 5: check the previously untested desktop breakpoints, not just 1280px.
+    for (const width of [1024, 1440]) {
+      await staff.setViewportSize({ width, height: 900 });
+      await noOverflow(staff);
+      const geometry = await staff.evaluate(() => {
+        const rect = selector => {
+          const el = document.querySelector(selector);
+          const b = el.getBoundingClientRect();
+          return { x: b.x, y: b.y, right: b.right, width: b.width, height: b.height };
+        };
+        const rail = document.querySelector('.staff-board-rail');
+        const request = document.querySelector('.staff-header-actions .staff-request-trigger');
+        return {
+          railVisible: rail && getComputedStyle(rail).display !== 'none',
+          railRight: rail?.getBoundingClientRect().right,
+          requestVisible: request && getComputedStyle(request).display !== 'none' && request.getBoundingClientRect().width > 0,
+          hero: rect('.staff-intro .concierge-hero'),
+          hub: rect('.staff-search-hub'),
+          overview: rect('.staff-overview-grid'),
+          left: rect('.staff-overview-column:first-child'),
+          right: rect('.staff-overview-column:last-child')
+        };
+      });
+      assert.ok(geometry.hub.y > geometry.hero.y && geometry.overview.y > geometry.hub.y,
+        'Desktop vertical hierarchy must remain ordered at ' + width + ': ' + JSON.stringify(geometry));
+      assert.ok(Math.abs(geometry.left.y - geometry.right.y) < 3 &&
+        geometry.left.width > 285 && geometry.right.width > 285,
+        'Desktop two-column workspace must remain usable at ' + width + ': ' + JSON.stringify(geometry));
+      assert.ok(geometry.requestVisible, 'Staff request entry must remain visible at ' + width);
+      if (width === 1024) {
+        assert.equal(geometry.railVisible, false, '1024px must use normal header without side rail');
+      } else {
+        assert.ok(geometry.railVisible && geometry.hero.x >= geometry.railRight - 2,
+          '1440px rail and photo must not overlap: ' + JSON.stringify(geometry));
+      }
+      await staff.evaluate(() => scrollTo(0, 0));
+      await staff.screenshot({ path: path.join(output, 'staff-stage5-desktop-' + width + '.png'), fullPage: false });
+      log('Staff stage 5 ' + width + 'px: responsive geometry, visible request entry, two columns, zero horizontal overflow');
+    }
+    await staff.setViewportSize({ width: 1280, height: 900 });
     await staff.waitForSelector('#frontdesk-search-title');
     assert.equal(await staff.getByRole('tab', { name: '호텔 업무 영어 응대' }).getAttribute('aria-selected'), 'true');
     assert.equal(await staff.locator('.staff-search-hub').count(), 1);
@@ -371,7 +411,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     assert.ok((await guest.locator('.tourism-map-credit').innerText()).includes('OpenStreetMap'));
     // Regression: markers 1/2/3 must be separate at narrow, mobile and desktop widths.
     // The language selector must not float over the map after scrolling into view.
-    for (const width of [320, 390, 768, 1280]) {
+    for (const width of [320, 390, 768, 1024, 1280, 1440]) {
       await guest.setViewportSize({ width, height: 820 });
       await guest.locator('.tourism-map-drawing').scrollIntoViewIfNeeded();
       const geometry = await guest.evaluate(() => {
@@ -443,7 +483,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
       await staff.evaluate(() => window.scrollTo(0, 0));
       await staff.screenshot({ path: path.join(output, 'staff-' + width + '.png'), fullPage: true });
     }
-    log('Responsive: Guest and Staff no horizontal overflow at 320, 390, 768 and 1280px');
+    log('Responsive: Guest and Staff no horizontal overflow at 320, 390, 768, 1024, 1280 and 1440px');
 
     await guestSearch.fill('수상택시');
     await waitCards(guest, 1);
