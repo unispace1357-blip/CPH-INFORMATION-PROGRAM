@@ -111,7 +111,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     assert.ok((await staffPanel.locator('.facility-menu-summary').innerText()).includes('도라보울'));
     await staffPanel.locator('.facility-card button').click();
     assert.ok((await staffPanel.locator('.english-phrase-text').allTextContents()).some(t => t.includes('Timespace')));
-    assert.ok((await staffPanel.locator('.staff-detail-intro .naver-map-link').getAttribute('href')).includes('1841858743,PLACE_POI'));
+    assert.ok((await staffPanel.locator('.staff-detail-intro .naver-map-link').getAttribute('href')).includes('1617698245,PLACE_POI'));
     await fSearch.fill('타임스페이스');
     await staffPanel.getByRole('group', { name: '시설 카테고리' }).getByRole('button', { name: '음식점·주점' }).click();
     await waitCards(staff, 1);
