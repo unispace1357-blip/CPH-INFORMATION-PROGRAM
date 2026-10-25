@@ -1,0 +1,357 @@
+/*
+ * Stage 3: guest mobile spatial refinement against approved A+B mobile mockup.
+ * Mobile only. Do not change theme tokens or operational hotel copy.
+ * The real hotel search input overlaps the bottom of the photo; no fake second search.
+ */
+.guest-mobile-controls { display:none; }
+
+@media (max-width:767px) {
+  .app-shell--guest .site-header { background:#233d60; }
+  .app-shell--guest .site-header-inner {
+    position:relative;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    min-height:70px;
+    padding-block:7px;
+    padding-inline:52px;
+    gap:0;
+  }
+  .app-shell--guest .site-header .brand {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:0;
+    min-width:0;
+  }
+  .app-shell--guest .site-header .brand-logo {
+    width:68px;
+    max-height:58px;
+    height:auto;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+    object-fit:contain;
+  }
+  .app-shell--guest .site-header .brand-copy,
+  .app-shell--guest .guest-navigation,
+  .app-shell--guest .guest-language-toolbar { display:none; }
+  .app-shell--guest .guest-mobile-controls {
+    display:contents;
+  }
+  .app-shell--guest .guest-mobile-menu {
+    position:absolute;
+    top:50%;
+    left:15px;
+    transform:translateY(-50%);
+    z-index:25;
+    font-size:.87rem;
+  }
+  .app-shell--guest .guest-mobile-menu summary {
+    display:grid;
+    place-items:center;
+    width:38px;
+    height:42px;
+    list-style:none;
+    border-radius:8px;
+    color:#fff;
+    font-size:1.55rem;
+    line-height:1;
+    cursor:pointer;
+  }
+  .app-shell--guest .guest-mobile-menu summary::-webkit-details-marker { display:none; }
+  .app-shell--guest .guest-mobile-menu summary:focus-visible,
+  .app-shell--guest .guest-mobile-language select:focus-visible {
+    outline:3px solid #ffd995;
+    outline-offset:2px;
+  }
+  .app-shell--guest .guest-mobile-menu[open] nav {
+    position:absolute;
+    top:49px;
+    left:0;
+    min-width:170px;
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+    border:1px solid #b9c9d9;
+    border-radius:10px;
+    background:#fff;
+    box-shadow:0 12px 25px rgb(6 30 62 / 25%);
+    padding:7px;
+  }
+  .app-shell--guest .guest-mobile-menu nav a {
+    display:block;
+    min-height:42px;
+    padding:11px 12px;
+    text-decoration:none;
+    font-weight:650;
+    color:#29496c;
+  }
+  .app-shell--guest .guest-mobile-menu nav a:hover { background:#eaf2fd; }
+  .app-shell--guest .guest-mobile-language {
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+    display:flex;
+    align-items:center;
+    gap:2px;
+    color:#fff;
+    min-width:0;
+  }
+  .app-shell--guest .guest-mobile-language select {
+    max-width:106px;
+    min-height:42px;
+    padding:6px 13px 6px 3px;
+    border:0;
+    background:transparent;
+    color:#fff;
+    font-size:.83rem;
+    font-weight:650;
+    cursor:pointer;
+  }
+  .app-shell--guest .guest-mobile-language option { color:#1d3658; background:#fff; }
+  .app-shell--guest main { padding-block:10px 22px; }
+  .app-shell--guest main > .page-container { padding-inline:12px; }
+  .app-shell--guest .guest-page { display:grid; gap:11px; }
+
+  /* Hero: keep photograph, its headline and the functional hotel search in one composition. */
+  .app-shell--guest .concierge-hero {
+    order:0;
+    min-height:220px;
+    align-items:stretch;
+    border-radius:12px;
+    overflow:hidden;
+  }
+  .app-shell--guest .concierge-hero-image { object-position:center; }
+  .app-shell--guest .concierge-hero::before {
+    background:linear-gradient(90deg,rgba(14,29,49,.8) 0%,rgba(14,29,49,.28) 75%),
+               linear-gradient(0deg,rgba(10,28,50,.62),transparent 72%);
+  }
+  .app-shell--guest .concierge-hero-copy {
+    align-self:stretch;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    gap:5px;
+    padding:13px 15px 62px;
+    max-width:100%;
+    min-width:0;
+  }
+  .app-shell--guest .concierge-hero-kicker {
+    margin:0;
+    color:#f3dfbd;
+    font-size:.63rem;
+    letter-spacing:.05em;
+  }
+  .app-shell--guest .concierge-hero h1 {
+    font-size:clamp(1.13rem,5.2vw,1.38rem);
+    line-height:1.32;
+    font-weight:770;
+    color:#fff;
+    text-shadow:0 2px 4px rgb(0 0 0 / 32%);
+  }
+  .app-shell--guest .concierge-hero-copy > p:last-of-type {
+    color:#f7f7f7;
+    font-size:.78rem;
+    line-height:1.5;
+    margin:0;
+    text-shadow:0 2px 3px rgb(0 0 0 / 38%);
+  }
+  .app-shell--guest .hotel-information {
+    order:1;
+    position:relative;
+    z-index:2;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    min-width:0;
+    padding:0!important;
+    margin-top:-65px;
+    border:0;
+    border-radius:0;
+    box-shadow:none;
+    background:transparent;
+  }
+  .app-shell--guest .hotel-information > .concierge-hotel-search {
+    order:0;
+    background:transparent;
+    margin:0 11px 0;
+    padding:0;
+    position:relative;
+  }
+  .app-shell--guest .hotel-search-field { margin:0; }
+  .app-shell--guest .hotel-search-field .field-label {
+    position:absolute;
+    width:1px;
+    height:1px;
+    padding:0;
+    margin:-1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    white-space:nowrap;
+    border:0;
+  }
+  .app-shell--guest .hotel-search-field .search-control {
+    min-height:48px;
+    background:#fff;
+    border:1px solid #a2b4cc;
+    border-radius:10px;
+    box-shadow:0 5px 14px rgb(11 39 70 / 22%);
+  }
+  .app-shell--guest .hotel-search-field .search-control input {
+    padding:10px 0;
+    font-size:.86rem;
+    line-height:1.4;
+    background:#fff;
+  }
+  .app-shell--guest .hotel-information > .hotel-search-results {
+    order:1;
+    margin:0;
+    border:1px solid #bdd0e9;
+    box-shadow:0 6px 18px rgb(22 50 81 / 10%);
+  }
+  .app-shell--guest .hotel-information > .smoking-policy-notice {
+    order:2;
+    margin:0;
+  }
+  .app-shell--guest .smoking-policy-notice .information-notice {
+    padding:10px 12px;
+    border-radius:12px;
+    border:2px solid #d72d28;
+    background:#fff7f5;
+    box-shadow:none;
+  }
+  .app-shell--guest .smoking-policy-notice .notice-title {
+    font-size:.99rem;
+    font-weight:800;
+  }
+  .app-shell--guest .smoking-policy-notice .notice-content {
+    font-size:.82rem;
+    line-height:1.47;
+  }
+  .app-shell--guest .smoking-policy-copy { gap:6px; }
+  .app-shell--guest .smoking-policy-rule { line-height:1.5; }
+  .app-shell--guest .smoking-policy-fee {
+    padding:9px 10px;
+    font-size:.82rem;
+    line-height:1.45;
+    border-radius:8px;
+  }
+  .app-shell--guest .hotel-information > .concierge-essentials {
+    order:3;
+    background:#fff;
+    border:1px solid #d5e0ee;
+    border-radius:12px;
+    padding:10px 10px 12px;
+    margin:0;
+  }
+  .app-shell--guest .concierge-section-heading { margin-bottom:8px; }
+  .app-shell--guest .concierge-section-heading h2,
+  .app-shell--guest .hotel-information h2 { font-size:1rem; }
+  .app-shell--guest .concierge-essentials-grid { gap:6px; }
+  .app-shell--guest .concierge-fact { border-radius:9px; }
+  .app-shell--guest .concierge-fact-button {
+    min-height:93px;
+    padding:9px 3px;
+    gap:4px;
+  }
+  .app-shell--guest .concierge-fact-button .icon { width:25px; height:25px; color:#1f6fc1; }
+  .app-shell--guest .concierge-fact-label { font-size:.76rem; }
+  .app-shell--guest .concierge-fact-button strong { font-size:clamp(.63rem,2.5vw,.78rem); line-height:1.4; }
+
+  /* One visual card, preserving all five original hotel topic buttons and detail content. */
+  .app-shell--guest .hotel-information > .hotel-information-heading {
+    order:4;
+    margin:0 0 -10px;
+    background:#fff;
+    border:1px solid #d5e0ee;
+    border-bottom:0;
+    border-radius:12px 12px 0 0;
+    padding:11px 11px 0;
+  }
+  .app-shell--guest .hotel-information-heading .hotel-section-eyebrow { display:none; }
+  .app-shell--guest .hotel-information > .hotel-category-grid {
+    order:5;
+    display:flex;
+    flex-wrap:nowrap;
+    gap:7px;
+    padding:8px 10px 12px;
+    margin:0;
+    min-width:0;
+    overflow-x:auto;
+    overscroll-behavior-inline:contain;
+    scroll-snap-type:x proximity;
+    background:#fff;
+    border:1px solid #d5e0ee;
+    border-top:0;
+    border-radius:0 0 12px 12px;
+    scrollbar-width:thin;
+  }
+  .app-shell--guest .hotel-category-grid .category-card,
+  .app-shell--guest .hotel-category-grid .category-card:last-child {
+    flex:0 0 74px;
+    scroll-snap-align:start;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    min-height:76px;
+    padding:9px 4px;
+    border-radius:9px;
+    text-align:center;
+    font-size:.72rem;
+    line-height:1.3;
+    word-break:keep-all;
+  }
+  .app-shell--guest .hotel-category-grid .category-card .category-icon { margin:0; }
+  .app-shell--guest .hotel-category-grid .category-card .category-icon .icon { width:23px; height:23px; }
+  .app-shell--guest .hotel-information > #guest-hotel-detail { order:6; }
+  .app-shell--guest .hotel-information > #guest-hotel-detail > .field-hint { display:none; }
+
+  /* Photo-first recommendation, before browsing other facilities. */
+  .app-shell--guest .guest-page > .concierge-featured {
+    order:2;
+    padding:11px;
+    border-radius:12px;
+    box-shadow:none;
+  }
+  .app-shell--guest .concierge-featured-card { border-radius:10px; overflow:hidden; }
+  .app-shell--guest .concierge-featured-image { height:155px; object-position:center; }
+  .app-shell--guest .concierge-featured-body { gap:6px; padding:10px 11px 12px; }
+  .app-shell--guest .concierge-featured-body h3 { font-size:.98rem; }
+  .app-shell--guest .concierge-featured-description { font-size:.79rem; line-height:1.5; -webkit-line-clamp:2; line-clamp:2; }
+  .app-shell--guest .concierge-featured-actions { margin-top:3px; }
+  .app-shell--guest .concierge-featured-actions .button { font-size:.83rem; min-height:39px; }
+  .app-shell--guest .concierge-route-notice { margin-top:2px; }
+
+  .app-shell--guest .guest-page > .information-notice { order:3; margin:0; }
+  .app-shell--guest #nearby-facilities { order:4; }
+  .app-shell--guest #guest-search { order:5; }
+  .app-shell--guest #guest-facility-results { order:6; }
+  .app-shell--guest #guest-facility-detail { order:7; }
+  .app-shell--guest #nearby-facilities,
+  .app-shell--guest #guest-search,
+  .app-shell--guest #guest-facility-results { padding:12px; border:1px solid #d5e0ee; border-radius:12px; background:#fff; }
+  .app-shell--guest #nearby-facilities .guest-category-grid { grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; }
+  .app-shell--guest #nearby-facilities .category-card { min-height:73px; padding:10px 6px; }
+  .app-shell--guest .section-heading { gap:8px; }
+}
+
+@media (max-width:355px) {
+  .app-shell--guest .site-header-inner { min-height:64px; }
+  .app-shell--guest .site-header .brand-logo { width:59px; }
+  .app-shell--guest .guest-mobile-language select { max-width:94px; font-size:.76rem; }
+  .app-shell--guest .guest-page { gap:9px; }
+  .app-shell--guest .concierge-hero { min-height:224px; }
+  .app-shell--guest .concierge-fact-button strong { font-size:.62rem; }
+  .app-shell--guest .hotel-category-grid .category-card { flex-basis:70px; }
+}
+
+@media (max-width:767px) {
+  .app-shell--guest .concierge-featured-tags { display:flex; flex-wrap:wrap; gap:5px; }
+  .app-shell--guest .concierge-featured-tags span { padding:4px 8px; border-radius:999px; background:#edf4ff; color:#285e99; font-size:.72rem; font-weight:650; }
+}

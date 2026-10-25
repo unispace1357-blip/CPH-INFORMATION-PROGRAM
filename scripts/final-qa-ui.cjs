@@ -176,17 +176,56 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     assert.equal(await guest.getByRole('dialog', { name: '직원 요청사항' }).count(), 0);
     assert.ok((await guest.locator('#hotel-information .information-notice').allTextContents()).some(t => /smoking|금연/i.test(t)));
     const guestHashBefore = await guest.evaluate(() => location.hash);
-    await guest.locator('.concierge-hero-search-link').click();
-    assert.equal(await guest.evaluate(() => location.hash), guestHashBefore, 'Guest hero shortcut must preserve route');
+    assert.equal(await guest.locator('.concierge-hero-search-link').count(), 0, 'Remove duplicated fake search button');
+    assert.equal(await guest.locator('#hotel-information input[type="search"]').count(), 1, 'Keep only one functional hotel search');
+    await guest.locator('#hotel-information input[type="search"]').focus();
+    assert.equal(await guest.evaluate(() => location.hash), guestHashBefore, 'Hotel input focus must preserve route');
     assert.equal(await guest.locator('#hotel-information input[type="search"]').evaluate(el => document.activeElement === el), true);
+    await guest.setViewportSize({ width: 390, height: 844 });
+    assert.equal(await guest.locator('.guest-mobile-language select').isVisible(), true, 'Show native language picker in mobile header');
+    assert.equal(await guest.locator('.guest-language-toolbar').isVisible(), false, 'Hide redundant language row on mobile');
+    await guest.locator('.guest-mobile-language select').selectOption('en');
+    assert.equal(await guest.locator('html').getAttribute('lang'), 'en');
+    await guest.locator('.guest-mobile-language select').selectOption('ko');
+    assert.equal(await guest.locator('html').getAttribute('lang'), 'ko');
+    await guest.locator('.guest-mobile-menu summary').click();
+    await guest.locator('.guest-mobile-menu nav a').first().click();
+    assert.equal(await guest.evaluate(() => location.hash), guestHashBefore, 'Mobile hamburger anchor must not break HashRouter');
+    assert.equal(await guest.getByRole('heading', { name: 'Page not found' }).count(), 0);
+    const mobileLayout = await guest.evaluate(() => {
+      const rect = q => document.querySelector(q).getBoundingClientRect();
+      const hero = rect('.guest-page > .concierge-hero');
+      const search = rect('.concierge-hotel-search .search-control');
+      const smoke = rect('#hotel-information .smoking-policy-notice');
+      const facts = rect('#hotel-information .concierge-essentials');
+      const topics = rect('#hotel-information .hotel-category-grid');
+      const featured = rect('.guest-page > .concierge-featured');
+      return { hero: [hero.top, hero.bottom], search: [search.top, search.bottom],
+        smoke: smoke.top, facts: facts.top, topics: topics.top, featured: featured.top };
+    });
+    assert.ok(mobileLayout.search[0] >= mobileLayout.hero[0] &&
+      mobileLayout.search[0] < mobileLayout.hero[1] &&
+      mobileLayout.search[1] <= mobileLayout.hero[1] + 18, 'Real search must overlap the photo-bottom: ' + JSON.stringify(mobileLayout));
+    assert.ok(mobileLayout.smoke > mobileLayout.search[1] &&
+      mobileLayout.facts > mobileLayout.smoke &&
+      mobileLayout.topics > mobileLayout.facts &&
+      mobileLayout.featured > mobileLayout.topics,
+      'Mobile order: hero/search > smoking > facts > topic cards > Timespace: ' + JSON.stringify(mobileLayout));
+    assert.ok(mobileLayout.featured < 1100, 'Feature card should not be buried under a long duplicated mobile header');
+    await noOverflow(guest);
+    await guest.evaluate(() => window.scrollTo(0, 0));
+    await guest.screenshot({ path: path.join(output, 'guest-stage3-first-fold-390.png'), fullPage: false });
+    await guest.screenshot({ path: path.join(output, 'guest-stage3-top-sections-390.png'), fullPage: true });
+    await guest.setViewportSize({ width: 1280, height: 900 });
     const order = await guest.evaluate(() => {
       const selectors = ['.concierge-hero', '#hotel-information .smoking-policy-notice', '#hotel-information .concierge-essentials', '.guest-page > .concierge-featured'];
       return selectors.map(s => document.querySelector(s).getBoundingClientRect().top + scrollY);
     });
     assert.ok(order.every((v, i) => i === 0 || v > order[i-1]), 'Mobile/guest layout must match hero > safety > hotel facts > featured order: ' + order);
-    log('Guest dashboard: hero focus link preserves route; section stacking follows approved sketch');
+    log('Guest stage 3: compact header, working language switch, single overlapping search, safety and featured sequence');
     const guestSearch = guest.locator('#guest-search input[type="search"]');
     for (const [language, label] of Object.entries(languages)) {
+      await guest.setViewportSize({ width: 1280, height: 900 });
       await guest.locator('.language-options').getByRole('button', { name: label, exact: true }).click();
       assert.equal(await guest.locator('html').getAttribute('lang'), language);
       assert.deepEqual(await guest.locator('.facility-card h3').allTextContents(), names(dataset.facilities, language));
@@ -205,6 +244,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
       if (await guest.locator('.facility-card').count() === 27) { await guest.setViewportSize({ width: 390, height: 844 }); await guest.evaluate(() => window.scrollTo(0, 0)); await guest.screenshot({ path: path.join(output, 'guest-language-' + language + '.png'), fullPage: false }); }
       log('Guest: ' + language + ' 27 localized facility names, all 15 menus, search, detail and close');
     }
+    await guest.setViewportSize({ width: 1280, height: 900 });
     await guest.locator('.language-options').getByRole('button', { name: '한국어', exact: true }).click();
     await guestSearch.fill('타임스페이스 스프카레');
     await waitCards(guest, 1);
@@ -222,6 +262,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await guest.locator('#nearby-facilities .guest-category-grid').getByRole('button', { name: '음식점·주점' }).click();
     await waitCards(guest, 12);
     for (const [language, label] of Object.entries(languages)) {
+      await guest.setViewportSize({ width: 1280, height: 900 });
       await guest.locator('.language-options').getByRole('button', { name: label, exact: true }).click();
       const featuredCard = guest.locator('#guest-facility-results .facility-card').first();
       const featured = dataset.facilities.find(f => f.id === 'songdo-timespace-complex');
@@ -230,6 +271,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
         { ko: '★ 추천', en: '★ Featured', 'zh-CN': '★ 推荐', ja: '★ おすすめ' }[language]);
       assert.equal(await guest.locator('#guest-facility-results .facility-featured-label').count(), 1);
     }
+    await guest.setViewportSize({ width: 1280, height: 900 });
     await guest.locator('.language-options').getByRole('button', { name: '한국어', exact: true }).click();
     await guestSearch.fill('타임스페이스');
     await waitCards(guest, 1);

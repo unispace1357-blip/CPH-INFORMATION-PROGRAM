@@ -11,14 +11,13 @@ export function GuideLayout({ audience = 'guest' }: { audience?: 'guest' | 'staf
   const isStaff = audience === 'staff'
   const [isRequestOpen, setIsRequestOpen] = useState(false)
   const requestTriggerRef = useRef<HTMLButtonElement>(null)
-  const { language } = useGuestLanguage()
+  const { language, setLanguage } = useGuestLanguage()
   const m = MESSAGES[language].ui
   const { pathname } = useLocation()
   const isIndex = pathname === (isStaff ? '/staff' : '/guest')
 
-  // A plain #section link would replace HashRouter's route in the test packages.
+  // Prevent fragment links from changing HashRouter routes (and keep clean URLs in BrowserRouter).
   function scrollToSection(event: MouseEvent<HTMLAnchorElement>) {
-    if (import.meta.env.MODE !== 'public-test') return
     const target = document.getElementById(event.currentTarget.hash.slice(1))
     if (!target) return
     event.preventDefault()
@@ -45,6 +44,26 @@ export function GuideLayout({ audience = 'guest' }: { audience?: 'guest' | 'staf
             <img className="brand-logo" src={`${import.meta.env.BASE_URL}hotel-logo.webp`} width="214" height="166" alt="The Central Park Hotel Songdo" />
             <span className="brand-copy"><span className="brand-name">{isStaff ? 'Information Guide' : 'SONGDO CENTRAL PARK HOTEL'}</span><span className="brand-caption">{isStaff ? 'FRONT DESK · 직원용 안내' : m.brandCaption}</span></span>
           </Link>
+          {!isStaff && <div className="guest-mobile-controls">
+            <details className="guest-mobile-menu">
+              <summary aria-label={m.navigationLabel}><span aria-hidden="true">☰</span></summary>
+              <nav aria-label={m.navigationLabel}>
+                <a href="#hotel-information" onClick={event => { scrollToSection(event); event.currentTarget.closest('details')?.removeAttribute('open') }}>{m.navHotel}</a>
+                <a href="#nearby-facilities" onClick={event => { scrollToSection(event); event.currentTarget.closest('details')?.removeAttribute('open') }}>{m.navNearby}</a>
+                <a href="#guest-search" onClick={event => { scrollToSection(event); event.currentTarget.closest('details')?.removeAttribute('open') }}>{m.navSearch}</a>
+              </nav>
+            </details>
+            <label className="guest-mobile-language">
+              <Icon name="globe" size={17} />
+              <span className="visually-hidden">{m.languageLabel}</span>
+              <select aria-label={m.languageLabel} value={language} onChange={event => setLanguage(event.target.value as typeof language)}>
+                <option value="ko">한국어</option>
+                <option value="en">English</option>
+                <option value="zh-CN">简体中文</option>
+                <option value="ja">日本語</option>
+              </select>
+            </label>
+          </div>}
           {isStaff ? <nav className="staff-header-actions" aria-label="직원용 내비게이션">
             <button ref={requestTriggerRef} type="button" className="header-link staff-request-trigger"
               onClick={() => setIsRequestOpen(true)} aria-haspopup="dialog">요청사항</button>

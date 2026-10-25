@@ -16,7 +16,6 @@ export function ConciergeHero({ audience, language = 'ko' }: { audience: 'guest'
       <p className="concierge-hero-kicker">{isStaff ? 'FRONT DESK CONCIERGE' : m.ui.eyebrow}</p>
       <h1>{isStaff ? '직원용 안내' : m.ui.welcomeTitle}</h1>
       <p>{isStaff ? '호텔 업무 영어 문장과 주변 시설 정보를 빠르게 확인하세요.' : m.ui.welcomeDescription}</p>
-      {!isStaff && <button type="button" className="concierge-hero-search-link" onClick={() => { const input = document.querySelector<HTMLInputElement>('#hotel-information input[type="search"]'); input?.scrollIntoView({ block: 'center' }); input?.focus({ preventScroll: true }) }}>{m.ui.hotelSearchLabel} <span aria-hidden="true">⌕</span></button>}
     </div>
   </section>
 }
