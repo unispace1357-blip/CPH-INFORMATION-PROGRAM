@@ -5,11 +5,13 @@ import { EnglishGuidePanel } from './EnglishGuidePanel'
 import { FACILITY_CATEGORY_OPTIONS } from '../../config/uiCategories'
 import { NaverDirectionsLink } from '../ui/NaverDirectionsLink'
 import { Icon } from '../ui/Icon'
+import { Button } from '../ui/Button'
+import { StaffPrintableCard } from './StaffPrintableCard'
 import { TimespaceDiningDirectory } from '../ui/TimespaceDiningDirectory'
 import type { TenantFocusRequest } from '../../services/timespaceTenantNavigation'
 import { confirmedText, formatWalkingMinutes, formatVerificationDate } from '../../services/facilityPresentation'
 
-export function StaffFacilityDetail({ facility, headingRef, tenantFocus = null }: { facility: Facility | null; headingRef: Ref<HTMLHeadingElement>; tenantFocus?: TenantFocusRequest }) {
+export function StaffFacilityDetail({ facility, headingRef, tenantFocus = null, favorite = false, canFavorite = true, onToggleFavorite }: { facility: Facility | null; headingRef: Ref<HTMLHeadingElement>; tenantFocus?: TenantFocusRequest; favorite?: boolean; canFavorite?: boolean; onToggleFavorite?: () => void }) {
   if (!facility || !facility.isPublished) return <><EmptyState title="시설을 선택해 주세요" description="검색 결과에서 상세 보기를 선택하면 시설 안내와 영어 문구를 확인할 수 있습니다." icon="hotel" /><EnglishGuidePanel phrases={[]} /></>
   const ko = facility.translations.ko
   const en = facility.translations.en
@@ -25,8 +27,15 @@ export function StaffFacilityDetail({ facility, headingRef, tenantFocus = null }
           <NaverDirectionsLink url={facility.naverMapUrl} label="네이버 지도 길찾기" unavailable="길찾기 링크 미등록" newTabNotice="네이버 지도가 새 탭에서 열립니다." />
         </div>
         {facility.id === 'songdo-timespace-complex' && <p className="field-hint">15분(835m)은 네이버 지도 도착지인 인근 스타벅스 송도캐슬파크점 기준입니다. 송도 타임스페이스까지 추가 이동해 주세요.</p>}
-        <p className="field-hint">네이버 지도 길찾기를 연 뒤 지도에서 인쇄할 수 있습니다.</p>
+        <div className="staff-detail-actions">
+          <Button variant="secondary" disabled={!onToggleFavorite || (!favorite && !canFavorite)}
+            onClick={onToggleFavorite}>{favorite ? '★ 즐겨찾기 해제' : '☆ 즐겨찾기 추가'}</Button>
+          <Button variant="secondary" onClick={() => window.print()}>인쇄용 안내 카드 출력</Button>
+        </div>
+        {!favorite && !canFavorite && <p className="field-hint">즐겨찾기는 최대 6개입니다. 기존 항목을 해제한 후 추가해 주세요.</p>}
+        <p className="field-hint">인쇄용 안내 카드는 호텔에서 직접 작성한 텍스트와 로컬 생성 길찾기 QR로 구성됩니다. 인쇄 전에 목적지와 영업시간을 확인해 주세요.</p>
       </div>
+      <StaffPrintableCard facility={facility} />
       <EnglishGuidePanel key={facility.id} phrases={facility.englishPhrases} meanings={facility.englishPhraseMeanings} />
       {facility.id === 'songdo-timespace-complex' && <TimespaceDiningDirectory language="ko" staff focusRequest={tenantFocus} />}
       <section className="staff-facility-metadata" aria-labelledby="staff-metadata-title">
