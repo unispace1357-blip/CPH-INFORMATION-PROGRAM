@@ -43,7 +43,9 @@ test('user supplied Naver walking route leads to nearby Starbucks Castle Park, n
   assert.ok(timespace.naverMapUrl?.includes('19398065,PLACE_POI'), 'hotel origin must be preserved')
   assert.ok(timespace.naverMapUrl?.includes('1617698245,PLACE_POI'), 'destination must be supplied Starbucks Songdo Castle Park')
   assert.ok(timespace.naverMapUrl?.includes('/walk?'))
-  assert.equal(timespace.walkingMinutes, null, 'old pharmacy walking time must not carry to Starbucks route')
+  // 15 minutes / 835m refers to the supplied Naver route ending at Starbucks, not a measured Timespace entrance route.
+  assert.equal(timespace.walkingMinutes, 15, 'map-reported walking time to the nearby landmark')
+  assert.equal(timespace.walkingDistanceMeters, 835, 'map-reported distance to the nearby landmark')
   const caveats = { ko: /스타벅스 송도캐슬파크점.*타임스페이스 내부가 아닌/, en: /Starbucks Songdo Castle Park.*not inside Songdo Timespace/, 'zh-CN': /星巴克.*并非松岛 Timespace 内部/, ja: /スターバックス.*建物内ではありません/ }
   for (const lang of GUIDE_LANGUAGES) assert.match(timespace.translations[lang].directions, caveats[lang])
   assert.match(timespace.englishPhrases[2]!, /Starbucks Songdo Castle Park.*not the Timespace entrance/)
