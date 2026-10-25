@@ -26,22 +26,45 @@ export function StaffSearchHub({ onSearch }: { onSearch: (term: string, scope: S
   }
 
   return <section className="staff-search-hub" aria-labelledby="staff-dashboard-search-title">
-    <div className="concierge-section-heading"><h2 id="staff-dashboard-search-title">통합 검색</h2></div>
-    <p className="staff-search-hub-description">호텔 영어 응대와 주변 시설 중 검색 범위를 선택하면 해당 결과로 이동합니다.</p>
+    <div className="staff-hub-topline">
+      <div>
+        <h2 id="staff-dashboard-search-title">통합 검색</h2>
+        <p className="staff-search-hub-description">호텔 정보와 주변 시설, 영어 응대 문구를 빠르게 검색하세요.</p>
+      </div>
+      <label className="staff-hub-scope-chooser" htmlFor="staff-hub-scope">
+        <span>검색 범위</span>
+        <select id="staff-hub-scope" value={scope} onChange={e => setScope(e.target.value as SearchScope)}>
+          <option value="hotel">호텔 영어 응대</option><option value="facilities">주변 시설</option>
+        </select>
+      </label>
+    </div>
     <form className="staff-search-hub-form" onSubmit={submit}>
-      <label className="staff-hub-scope-label" htmlFor="staff-hub-scope">검색 범위</label>
-      <select id="staff-hub-scope" value={scope} onChange={e => setScope(e.target.value as SearchScope)}>
-        <option value="hotel">호텔 영어 응대</option><option value="facilities">주변 시설</option>
-      </select>
-      <label className="staff-search-hub-input-label" htmlFor="staff-hub-input"><Icon name="search" size={19} /><span className="visually-hidden">검색어 입력</span></label>
+      <label className="staff-search-hub-input-label" htmlFor="staff-hub-input"><Icon name="search" size={21} /><span className="visually-hidden">검색어 입력</span></label>
       <input id="staff-hub-input" type="search" value={term} onChange={e => setTerm(e.target.value)} placeholder="체크인, 조식, Wi-Fi, 타임스페이스 등 검색" autoComplete="off" />
-      <button type="submit" className="button button--primary" disabled={!term.trim()}>검색</button>
+      <button type="submit" className="button button--primary" disabled={!term.trim()} aria-label="검색">검색</button>
     </form>
     <div className="staff-search-suggestions" aria-label="자주 검색하는 항목">
       <span>주요 검색어</span>
       {quickTerms.map(t => <button key={t.scope + t.term} type="button" onClick={() => { setTerm(t.term); setScope(t.scope); onSearch(t.term, t.scope) }}>{t.term}</button>)}
     </div>
   </section>
+}
+
+const staffTopicTiles: { label: string; term: string; icon: 'bed' | 'hotel' | 'info' | 'parking' }[] = [
+  { label: '객실 이용', term: 'Wi-Fi', icon: 'bed' },
+  { label: '공용 비품', term: '전자레인지', icon: 'hotel' },
+  { label: '반려동물', term: '반려동물', icon: 'info' },
+  { label: '교통·주차', term: '주차', icon: 'parking' },
+]
+
+/** Compact topic shortcuts run real script searches; they are not dead presentation tiles. */
+export function StaffTopicShortcuts({ onSearch }: { onSearch: (term: string, scope: SearchScope) => void }) {
+  return <div className="staff-topic-shortcuts" role="group" aria-label="호텔 안내 바로가기">
+    {staffTopicTiles.map(tile =>
+      <button key={tile.label} type="button" onClick={() => onSearch(tile.term, 'hotel')}>
+        <Icon name={tile.icon} size={21} /><span>{tile.label}</span>
+      </button>)}
+  </div>
 }
 
 const featureIds = ['check-in-time', 'breakfast-adult-price', 'room-wifi', 'check-out-time']
