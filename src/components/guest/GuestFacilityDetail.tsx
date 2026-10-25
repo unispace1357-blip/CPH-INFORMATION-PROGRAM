@@ -8,6 +8,7 @@ import { Button } from '../ui/Button'
 import { Icon } from '../ui/Icon'
 import { CONCIERGE_IMAGES } from '../ui/ConciergeHero'
 import { NaverDirectionsLink } from '../ui/NaverDirectionsLink'
+import { OperatingHoursGuide } from '../ui/OperatingHoursGuide'
 import { TimespaceDiningDirectory } from '../ui/TimespaceDiningDirectory'
 import type { TenantFocusRequest } from '../../services/timespaceTenantNavigation'
 
@@ -52,7 +53,7 @@ export function GuestFacilityDetail({ facility, language, onClose, tenantFocus =
         </div>}
         {venue.openingHours.trim() && <div className="guest-place-fact">
           <Icon name="info" size={21} />
-          <div><span>{m.ui.openingHours}</span><strong>{venue.openingHours}</strong></div>
+          <div><span>{m.ui.openingHours}</span><OperatingHoursGuide value={venue.openingHours} language={language} closedDays={facility.closedDays[language]} /></div>
         </div>}
         {venue.address.trim() && <div className="guest-place-fact">
           <Icon name="hotel" size={21} />
