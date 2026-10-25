@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { MAX_FAVORITES, MAX_RECENT, STAFF_SHORTCUTS_KEY, parseStaffShortcuts, readStaffShortcuts, writeStaffShortcuts, recordRecent, toggleFavorite, isFavorite } from '../src/services/staffShortcuts.ts'
+import { MAX_FAVORITES, MAX_RECENT, STAFF_SHORTCUTS_KEY, readStaffShortcuts, writeStaffShortcuts, recordRecent, toggleFavorite, isFavorite } from '../src/services/staffShortcuts.ts'
 import type { Shortcut, StaffShortcutsData } from '../src/services/staffShortcuts.ts'
 
 const place=(n:number):Shortcut=>({kind:'facility',id:'place-'+n})
