@@ -70,7 +70,7 @@ test('local preview contains all 27 real facilities, four languages and no ficti
       if (index < 5) assert.deepEqual(numbers(text.address), addressNumbers[index])
       assert.ok(text.description.trim())
       assert.equal(Boolean(text.openingHours.trim()), facility.id !== 'incheon-port-hangdong-7ga')
-      assert.equal(Boolean(text.notes), facility.id === 'songdo-timespace-complex') // Complex has public tenant/route caveats only.
+      assert.equal(Boolean(text.notes), ['songdo-timespace-complex', 'g-tower-ifez-observatory'].includes(facility.id)) // IFEZ 29F official advisory is separate from 33F observatory.
       assert.equal(Boolean(text.directions), ['incheon-port-hangdong-7ga', 'central-park-station-exit-3', 'songdo-timespace-complex'].includes(facility.id))
       assert.deepEqual(numbers(text.directions).sort(), numbers(facility.translations.ko.directions).sort())
     }
