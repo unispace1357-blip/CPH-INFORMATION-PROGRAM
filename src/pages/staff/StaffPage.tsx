@@ -19,6 +19,8 @@ import { AirportBusGuide, SongdoTourismGuide } from '../../components/ui/LocalTr
 import { UI_CATEGORIES, visibleFacilityCategories } from '../../config/uiCategories'
 import { loadStaffDataset } from '../../services/loadStaffDataset'
 import { searchFacilities, resolveSelectedFacility } from '../../services/facilitySearch'
+import { resolveExactTimespaceTenant } from '../../services/timespaceTenantNavigation'
+import type { TenantFocusRequest } from '../../services/timespaceTenantNavigation'
 import type { StaffCategoryFilter } from '../../services/facilitySearch'
 
 type DataState = { status: 'loading' } | { status: 'error' } | { status: 'ready'; dataset: FacilityDataset }
@@ -31,6 +33,10 @@ export function StaffPage() {
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState<StaffCategoryFilter>('all')
   const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [tenantFocus, setTenantFocus] = useState<TenantFocusRequest>(null)
+  const searchTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const tenantRequestSequence = useRef(0)
+  useEffect(() => () => { if (searchTimer.current) clearTimeout(searchTimer.current) }, [])
   const [hotelSearchRequest, setHotelSearchRequest] = useState<{query: string; sequence: number} | null>(null)
   const detailHeading = useRef<HTMLHeadingElement>(null)
   useEffect(() => {
@@ -45,13 +51,41 @@ export function StaffPage() {
   const showAirportGuide = category === 'transportation' || (category === 'all' && /6777|공항|리무진|airport|limousine/i.test(query))
   const showTourismGuide = category === 'attraction' || (category === 'all' && /관광|송도지도|tourism|sightseeing/i.test(query))
   useEffect(() => {
-    if (selectedId && window.matchMedia('(max-width: 999px)').matches) {
+    if (selectedId && !tenantFocus && window.matchMedia('(max-width: 999px)').matches) {
       detailHeading.current?.focus({ preventScroll: true })
       detailHeading.current?.scrollIntoView({ block: 'start', behavior: 'instant' })
     }
-  }, [selectedId])
+  }, [selectedId, tenantFocus])
+
+  function resetTenantNavigation() {
+    if (searchTimer.current !== null) clearTimeout(searchTimer.current)
+    searchTimer.current = null
+    setTenantFocus(null)
+  }
+
+  function openExactTenant(term: string): boolean {
+    const tenant = resolveExactTimespaceTenant(term)
+    const complex = dataset?.facilities.find(item => item.id === 'songdo-timespace-complex' && item.isPublished)
+    if (!tenant || !complex) return false
+    setActiveTab('facilities')
+    setCategory('all')
+    setSelectedId(complex.id)
+    setTenantFocus({ tenantId: tenant.id, requestId: ++tenantRequestSequence.current })
+    return true
+  }
+
+  function onFacilityQueryChange(value: string) {
+    updateFilters(value, category)
+    searchTimer.current = setTimeout(() => { openExactTenant(value) }, 400)
+  }
+
+  function selectFacility(id: string) {
+    resetTenantNavigation()
+    setSelectedId(id)
+  }
 
   function updateFilters(nextQuery: string, nextCategory: StaffCategoryFilter) {
+    resetTenantNavigation()
     setQuery(nextQuery)
     setCategory(nextCategory)
     const nextResults = searchFacilities(dataset?.facilities ?? [], nextQuery, nextCategory)
@@ -75,6 +109,7 @@ export function StaffPage() {
       setHotelSearchRequest(previous => ({ query: term, sequence: (previous?.sequence ?? 0) + 1 }))
     } else {
       updateFilters(term, 'all')
+      if (openExactTenant(term)) return
     }
     navigateStaffTab(scope)
   }
@@ -149,7 +184,7 @@ export function StaffPage() {
           <div className="staff-heading-group"><span className="staff-section-number" aria-hidden="true">01</span><div><p className="staff-section-kicker">SEARCH & FILTER</p><h2 id="staff-search-title">시설 찾기</h2></div></div>
           <Button variant="quiet" disabled={!query} onClick={() => updateFilters('', category)}>검색어 지우기</Button>
         </div>
-        <SearchInput label="시설명 또는 키워드" placeholder="예: 맥주, 고기, 커피숍, Burger King" value={query} onChange={event => updateFilters(event.target.value, category)} disabled={!dataset} hint="4개 언어의 시설명·메뉴·주소·키워드 및 동의어를 검색합니다. 띄어쓰기 차이도 일부 지원합니다." />
+        <SearchInput label="시설명 또는 키워드" placeholder="예: 맥주, 고기, 커피숍, Burger King" value={query} onChange={event => onFacilityQueryChange(event.target.value)} onKeyDown={event => { if (event.key === 'Enter') { event.preventDefault(); resetTenantNavigation(); openExactTenant(query) } }} disabled={!dataset} hint="4개 언어의 시설명·메뉴·주소·키워드 및 동의어를 검색합니다. 띄어쓰기 차이도 일부 지원합니다." />
         <div className="section-heading"><h3>카테고리</h3><span className="status-label">검색어와 함께 적용</span></div>
         <div className="staff-category-grid" role="group" aria-label="시설 카테고리">
           <CategoryCard label="전체" icon="grid" selected={category === 'all'} compact disabled={!dataset} onClick={() => updateFilters(query, 'all')} />
@@ -164,14 +199,14 @@ export function StaffPage() {
           </div>
           {showAirportGuide && <AirportBusGuide language="ko" staff />}
           {showTourismGuide && <SongdoTourismGuide language="ko" />}
-          {dataState.status === 'loading' ? <LoadingState label="시설 정보를 확인하고 있습니다…" /> : dataState.status === 'error' ? <p className="field-hint">데이터 오류로 검색 결과를 표시할 수 없습니다.</p> : <StaffSearchResults category={category} results={results} publicFacilityCount={dataState.dataset.facilities.filter(item => item.isPublished).length} selectedId={selected?.id ?? null} onSelect={setSelectedId} />}
+          {dataState.status === 'loading' ? <LoadingState label="시설 정보를 확인하고 있습니다…" /> : dataState.status === 'error' ? <p className="field-hint">데이터 오류로 검색 결과를 표시할 수 없습니다.</p> : <StaffSearchResults category={category} results={results} publicFacilityCount={dataState.dataset.facilities.filter(item => item.isPublished).length} selectedId={selected?.id ?? null} onSelect={selectFacility} />}
         </section>
         <section id="staff-facility-detail" className="panel details-panel" aria-labelledby="staff-details-title">
           <div className="section-heading staff-section-heading">
             <div className="staff-heading-group"><span className="staff-section-number" aria-hidden="true">03</span><div><p className="staff-section-kicker">GUEST ASSISTANCE</p><h2 id="staff-details-title">시설 상세 정보</h2></div></div>
             <Icon name="info" size={20} />
           </div>
-          <StaffFacilityDetail facility={selected} headingRef={detailHeading} />
+          <StaffFacilityDetail facility={selected} headingRef={detailHeading} tenantFocus={tenantFocus} />
         </section>
       </div>
       </section>

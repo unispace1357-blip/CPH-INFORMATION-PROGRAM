@@ -6,9 +6,10 @@ import { FACILITY_CATEGORY_OPTIONS } from '../../config/uiCategories'
 import { NaverDirectionsLink } from '../ui/NaverDirectionsLink'
 import { Icon } from '../ui/Icon'
 import { TimespaceDiningDirectory } from '../ui/TimespaceDiningDirectory'
+import type { TenantFocusRequest } from '../../services/timespaceTenantNavigation'
 import { confirmedText, formatWalkingMinutes, formatVerificationDate } from '../../services/facilityPresentation'
 
-export function StaffFacilityDetail({ facility, headingRef }: { facility: Facility | null; headingRef: Ref<HTMLHeadingElement> }) {
+export function StaffFacilityDetail({ facility, headingRef, tenantFocus = null }: { facility: Facility | null; headingRef: Ref<HTMLHeadingElement>; tenantFocus?: TenantFocusRequest }) {
   if (!facility || !facility.isPublished) return <><EmptyState title="시설을 선택해 주세요" description="검색 결과에서 상세 보기를 선택하면 시설 안내와 영어 문구를 확인할 수 있습니다." icon="hotel" /><EnglishGuidePanel phrases={[]} /></>
   const ko = facility.translations.ko
   const en = facility.translations.en
@@ -27,7 +28,7 @@ export function StaffFacilityDetail({ facility, headingRef }: { facility: Facili
         <p className="field-hint">네이버 지도 길찾기를 연 뒤 지도에서 인쇄할 수 있습니다.</p>
       </div>
       <EnglishGuidePanel key={facility.id} phrases={facility.englishPhrases} meanings={facility.englishPhraseMeanings} />
-      {facility.id === 'songdo-timespace-complex' && <TimespaceDiningDirectory language="ko" staff />}
+      {facility.id === 'songdo-timespace-complex' && <TimespaceDiningDirectory language="ko" staff focusRequest={tenantFocus} />}
       <section className="staff-facility-metadata" aria-labelledby="staff-metadata-title">
         <h4 id="staff-metadata-title">시설 기본 정보</h4>
         <dl className="detail-facts">
