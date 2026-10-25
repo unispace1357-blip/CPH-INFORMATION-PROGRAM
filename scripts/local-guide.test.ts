@@ -9,6 +9,7 @@ import { searchFrontdeskScripts } from '../src/services/frontdeskScriptSearch.ts
 
 test('Hotel supplied bus 6777 lists 12 exact stop departures, route and 4-language change notice', () => {
   assert.equal(AIRPORT_LIMOUSINE_6777.routeNumber, '6777')
+  assert.equal(AIRPORT_LIMOUSINE_6777.adultFareKrw, 8000)
   assert.deepEqual(AIRPORT_LIMOUSINE_6777.departures, [
     '05:27', '06:07', '06:47', '08:47', '10:27', '11:57',
     '13:27', '14:57', '16:27', '17:57', '19:27', '20:27'
@@ -20,7 +21,8 @@ test('Hotel supplied bus 6777 lists 12 exact stop departures, route and 4-langua
     assert.ok(copy.boarding.length > 20 && /1/.test(copy.boarding))
     assert.ok(/Terminal|터미널|航站楼|ターミナル/.test(copy.routeDescription))
     assert.ok(copy.disclaimer.length > 30)
-    assert.ok(copy.fareUnknown.length >= 10)
+    assert.ok(copy.fareLabel.length >= 3)
+    assert.match(copy.fareNote, /8,000/)
     assert.ok(copy.tourismCaution.length > 20)
   }
   assert.match(LOCAL_GUIDE_COPY.ko.boarding, /1번 출구/)
@@ -43,7 +45,7 @@ test('Tourism entries omit expired coupons and provide unique bilingual landmark
 
 test('Staff airport script is independent from public hotels/26 facilities and uses same 12 times', () => {
   const scripts = parseFrontdeskScriptDataset(rawFrontdesk).scripts
-  assert.equal(scripts.length, 31)
+  assert.equal(scripts.length, 33)
   const bus = scripts.find(script => script.id === 'airport-limousine-6777')!
   assert.equal(bus.category, 'hotel-facilities')
   assert.equal(bus.reviewStatus, 'draft')
@@ -56,6 +58,8 @@ test('Staff airport script is independent from public hotels/26 facilities and u
     assert.ok(bus.details?.ko.includes(time), time)
   }
   assert.match(bus.quickAnswer.en, /Times may change/)
+  assert.match(bus.quickAnswer.en, /8,000/)
+  assert.match(AIRPORT_6777_STAFF_ENGLISH, /8,000/)
   assert.equal(rawFacilities.facilities.length, 26)
   assert.equal(rawFacilities.dataStatus, 'demo')
   assert.equal(rawFrontdesk.dataStatus, 'demo')
