@@ -25,12 +25,19 @@ const categories: Record<FrontdeskScriptCategory, { label: string; icon: IconNam
 }
 type DataState = { status: 'loading' } | { status: 'error' } | { status: 'ready'; dataset: FrontdeskScriptDataset }
 
-export function FrontdeskGuide() {
+export function FrontdeskGuide({ externalSearch }: { externalSearch?: { query: string; sequence: number } | null }) {
   const [dataState, setDataState] = useState<DataState>({ status: 'loading' })
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState<FrontdeskCategoryFilter>('all')
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const detailHeading = useRef<HTMLHeadingElement>(null)
+  useEffect(() => {
+    if (externalSearch) {
+      setQuery(externalSearch.query)
+      setCategory('all')
+      setSelectedId(null)
+    }
+  }, [externalSearch])
   useEffect(() => {
     let active = true
     void loadFrontdeskScripts().then(dataset => { if (active) setDataState({ status: 'ready', dataset }) }).catch(() => { if (active) setDataState({ status: 'error' }) })
