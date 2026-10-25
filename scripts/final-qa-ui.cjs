@@ -192,7 +192,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     const quickAccess = staff.locator('.staff-quick-access');
     assert.ok((await quickAccess.innerText()).includes('즐겨찾기'));
     await hotel.getByRole('button',{name:'☆ 즐겨찾기 추가'}).click();
-    assert.equal(await quickAccess.locator('[data-shortcut="script:airport-bus"]').count(),1);
+    assert.equal(await quickAccess.locator('[data-shortcut="script:airport-limousine-6777"]').count(),1);
     log('Staff STEP 5: hotel script added to PC favorites without storing search text');
 
     await staff.getByRole('tab', { name: '주변 시설 안내' }).click();
