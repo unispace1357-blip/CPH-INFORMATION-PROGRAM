@@ -30,7 +30,7 @@ const noOverflow = async page => {
 const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
 (async () => {
   fs.mkdirSync(output, { recursive: true });
-  const browser = await chromium.launch({ headless: true, args: ['--no-sandbox'] });
+  const browser = await chromium.launch({ headless: true, channel: process.env.CPH_BROWSER_CHANNEL || undefined, args: ['--no-sandbox'] });
   const context = await browser.newContext({ viewport: { width: 1280, height: 900 }, acceptDownloads: true, reducedMotion: 'reduce' });
   await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: new URL(base).origin });
   context.on('page', p => {
