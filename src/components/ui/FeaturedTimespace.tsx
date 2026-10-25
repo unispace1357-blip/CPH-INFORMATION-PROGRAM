@@ -47,7 +47,7 @@ export function FeaturedTimespace({ facility, language, onDetails, compact = fal
           {route ? <a className="button button--primary" href={route} target="_blank" rel="noopener noreferrer">{m.ui.directions}</a>
             : <span className="concierge-route-unavailable">{m.ui.naverMapUnavailable}</span>}
         </div>
-        {route && <details className="concierge-route-notice"><summary>{t.notice}</summary><p>{translated.directions}</p></details>}
+        {route && <details className="concierge-route-notice"><summary>{t.notice}</summary><p>{compact ? translated.directions : GUEST_FACILITY_COPY[language].timespaceRouteNotice}</p></details>}
       </div>
     </article>
   </section>
