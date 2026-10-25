@@ -17,7 +17,14 @@ const waitCards = async (page, size, selector = '.facility-card') => {
   await page.waitForFunction(([s, n]) => document.querySelectorAll(s).length === n, [selector, size], { timeout: 15000 });
 };
 const noOverflow = async page => {
-  const dims = await page.evaluate(() => ({ width: innerWidth, scroll: document.documentElement.scrollWidth }));
+  const dims = await page.evaluate(() => ({ width: innerWidth, scroll: document.documentElement.scrollWidth,
+    offenders: [...document.querySelectorAll('body *')].filter(el => {
+      const r = el.getBoundingClientRect(); const st = getComputedStyle(el);
+      return (r.right > innerWidth + 2 || r.left < -2) && st.position !== 'fixed' && r.width > 0;
+    }).slice(0, 12).map(el => ({ tag: el.tagName, class: String(el.className).slice(0,90),
+      text: el.textContent?.trim().slice(0,35), x: Math.round(el.getBoundingClientRect().x),
+      right: Math.round(el.getBoundingClientRect().right), width: Math.round(el.getBoundingClientRect().width) }))
+  }));
   assert.ok(dims.scroll <= dims.width + 2, 'horizontal overflow: ' + JSON.stringify(dims));
 };
 const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
