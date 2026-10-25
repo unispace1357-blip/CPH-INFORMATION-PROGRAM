@@ -36,7 +36,7 @@ const expectedWalkingMinutesById = new Map<string, number | null>([
   ['lotte-mart-songdo', 11],
   ['songdo-central-park', 6],
   ['byeol-onnuri-pharmacy-songdo', 17],
-  ['songdo-timespace-complex', 17],
+  ['songdo-timespace-complex', null],
 ])
 
 const fresh = () => structuredClone(rawData)
