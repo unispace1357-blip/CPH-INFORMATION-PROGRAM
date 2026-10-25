@@ -140,9 +140,9 @@ test('confirmed hours retain breaks, last order and day-specific closing in ever
   const [cu, blue, malt, cafe, pharmacy] = data.facilities
   assert.equal(cu!.translations.ko.openingHours, '24시간')
   assert.equal(blue!.translations.ko.openingHours, '24시간 연중 무휴')
-  assert.equal(malt!.translations.ko.openingHours, '10:00~23:00(브레이크 타임 15~17시) 라스트 오더 22:00')
+  assert.equal(malt!.translations.ko.openingHours, '10:00~23:00 (브레이크타임 15:00~17:00, 라스트오더 22:00)')
   assert.equal(cafe!.translations.ko.openingHours, '08:00~22:00 (일요일 21:00 월,화 20:00 마감)')
-  assert.equal(pharmacy!.translations.ko.openingHours, '9:00~19:30(13:00~14:00 휴게시간) 토요일은 9:00~14:00')
+  assert.equal(pharmacy!.translations.ko.openingHours, '09:00~19:30 (휴게시간 13:00~14:00), 토요일 09:00~14:00')
 })
 
 test('real preview records are searchable, retain admin edits on export/import and still respect hiding', () => {

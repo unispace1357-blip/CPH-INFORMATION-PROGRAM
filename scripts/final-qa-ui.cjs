@@ -482,6 +482,42 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await waitCards(guest, 27);
     assert.equal(await guest.locator('#guest-facility-results .facility-featured-label').count(), 0);
     log('Timespace: customer-friendly detail and menu examples, staff caveats retained, nearby landmark explicitly labeled');
+    // STEP 7+9: check actual displayed notices and hour labels through all four language switches.
+    await guestSearch.fill('인천항');
+    await waitCards(guest, 1);
+    await guest.locator('#guest-facility-results .facility-card button').click();
+    for (const [language, label, phrase] of [
+      ['ko','한국어','연안여객터미널'],
+      ['en','English','Coastal Passenger Terminal'],
+      ['zh-CN','简体中文','沿岸客运站'],
+      ['ja','日本語','沿岸旅客ターミナル']
+    ]) {
+      await guest.locator('.language-options').getByRole('button',{name:label,exact:true}).click();
+      assert.equal(await guest.locator('html').getAttribute('lang'),language);
+      assert.ok((await guest.locator('.guest-place-route-note').innerText()).includes(phrase),
+        'Translated Incheon Port route terminal: '+language);
+      assert.ok((await guest.locator('.guest-place-summary').innerText()).trim(),
+        'The port facility identity remains distinct from its route terminal: '+language);
+    }
+    await guest.locator('#guest-facility-detail button').first().click();
+    await guest.locator('.language-options').getByRole('button',{name:'한국어',exact:true}).click();
+    await guestSearch.fill('더몰트하우스');
+    await waitCards(guest,1);
+    await guest.locator('#guest-facility-results .facility-card button').click();
+    for (const [language,label,breakTerm,orderTerm] of [
+      ['ko','한국어','브레이크','라스트오더'],
+      ['en','English','Break','Last order'],
+      ['zh-CN','简体中文','休息时间','最后点单'],
+      ['ja','日本語','休憩時間','ラストオーダー']
+    ]) {
+      await guest.locator('.language-options').getByRole('button',{name:label,exact:true}).click();
+      const rows=await guest.locator('#guest-facility-detail .operating-hours-guide').innerText();
+      assert.ok(rows.includes(breakTerm)&&rows.includes(orderTerm)&&rows.includes('15:00')&&rows.includes('17:00'), language+': break/last-order/hours');
+    }
+    await guest.locator('#guest-facility-detail button').first().click();
+    await guest.locator('.language-options').getByRole('button',{name:'한국어',exact:true}).click();
+    await guestSearch.fill('');
+    log('STEP 7+9: four-language coastal terminal and restaurant break/order hours displayed in real browser');
     await guest.locator('.guest-category-grid').getByRole('button', { name: '교통', exact: true }).click();
     assert.equal(await guest.locator('.airport-bus-guide .local-guide-departures time').count(), 12);
     assert.ok((await guest.locator('.airport-bus-guide').innerText()).includes('운행정보 변경 가능'));
