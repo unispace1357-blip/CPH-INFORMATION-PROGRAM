@@ -41,9 +41,12 @@ test('5 failed admin attempts lock entry for 15 min, password unlocks afterward'
     assert.equal(fifth.lockedSeconds,900)
     assert.equal(auth.status().lockedSeconds,900)
     assert.equal(auth.verify('different-password123').ok,false)
+    const restarted=createAdminAuth(join(dir,'auth.json'),{now:()=>clock})
+    assert.equal(restarted.status().lockedSeconds,900)
+    assert.equal(restarted.verify('different-password123').ok,false)
     clock+=15*60*1000
-    assert.equal(auth.verify('different-password123').ok,true)
-    assert.equal(auth.status().lockedSeconds,0)
+    assert.equal(restarted.verify('different-password123').ok,true)
+    assert.equal(restarted.status().lockedSeconds,0)
   }finally{rmSync(dir,{recursive:true,force:true})}
 })
 
