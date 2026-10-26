@@ -3,6 +3,7 @@ import { BrowserRouter, HashRouter, Navigate, Route, Routes } from 'react-router
 import { GuideLayout } from './components/layout/GuideLayout'
 import { GuestPage } from './pages/guest/GuestPage'
 import { StaffPage } from './pages/staff/StaffPage'
+import { StaffHelpPage } from './pages/staff/StaffHelpPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="hotel-information" element={<Navigate to="/guest" replace />} />
           <Route path="staff" element={<GuideLayout audience="staff" />}>
             <Route index element={<StaffPage />} />
+            <Route path="help" element={<StaffHelpPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
           <Route element={<GuideLayout audience="guest" />}>
