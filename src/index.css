@@ -27,3 +27,6 @@
 
 /* Registered hours and endpoint caveats, never live-open claims. */
 @import './styles/operating-hours-clarity.css';
+
+/* Design C — Boutique Editorial (customer/staff only, after legacy layouts). */
+@import './styles/boutique-editorial-c.css';

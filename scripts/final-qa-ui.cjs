@@ -72,6 +72,14 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await staff.evaluate(() => scrollTo(0, 0));
     await staff.screenshot({path:path.join(output,'staff-stage4-first-fold-1280.png'),fullPage:false});
     await staff.locator('.staff-overview-grid').screenshot({path:path.join(output,'staff-stage4-dashboard-cards-1280.png')});
+    assert.ok((await staff.locator('.staff-intro .concierge-hero').innerText()).includes('Staff Concierge'));
+    const boutiqueStaff = await staff.evaluate(() => ({
+      theme: getComputedStyle(document.querySelector('.app-shell')).getPropertyValue('--color-primary').trim(),
+      serif: getComputedStyle(document.querySelector('.staff-intro .concierge-hero h1')).fontFamily,
+    }));
+    assert.equal(boutiqueStaff.theme, '#3f4f46');
+    assert.ok(boutiqueStaff.serif.includes('Georgia'));
+    log('Design C staff: deep-green sidebar, editorial serif hero, intact two-column dashboard');
     log('Staff stage 4 geometry: compact side rail, photo hero, scoped search, four hotel facts, functional topic tiles and 2-column dashboard');
     // Stage 5: check the previously untested desktop breakpoints, not just 1280px.
     for (const width of [1024, 1440]) {
@@ -365,6 +373,21 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
       return selectors.map(s => document.querySelector(s).getBoundingClientRect().top + scrollY);
     });
     assert.ok(order.every((v, i) => i === 0 || v > order[i-1]), 'Mobile/guest layout must match hero > safety > hotel facts > featured order: ' + order);
+    assert.ok((await guest.locator('.guest-page > .concierge-hero h1').innerText()).includes('A Special Stay'));
+    const editorial = guest.locator('#hotel-information .boutique-entry');
+    assert.equal(await editorial.locator('button').count(), 2);
+    await editorial.locator('img').first().evaluate(el => el.decode());
+    await editorial.locator('img').last().evaluate(el => el.decode());
+    assert.ok(await editorial.locator('img').evaluateAll(elements => elements.every(el => el.naturalWidth > 0)));
+    await editorial.locator('.boutique-entry-card--nearby').click();
+    assert.equal(await guest.locator('#nearby-facilities h2').evaluate(el => document.activeElement === el), true);
+    assert.equal(await guest.evaluate(() => location.hash), guestHashBefore);
+    await editorial.locator('.boutique-entry-card--hotel').click();
+    assert.ok((await guest.locator('#guest-hotel-detail').innerText()).includes('객실'));
+    await guest.locator('#guest-hotel-detail .section-heading button').click();
+    assert.equal(await guest.evaluate(() => location.hash), guestHashBefore);
+    await noOverflow(guest);
+    log('Design C guest: two loaded photographic tiles navigate to actual hotel/nearby content without losing HashRouter');
     log('Guest stage 3: compact header, working language switch, single overlapping search, safety and featured sequence');
     const guestSearch = guest.locator('#guest-search input[type="search"]');
     for (const [language, label] of Object.entries(languages)) {
