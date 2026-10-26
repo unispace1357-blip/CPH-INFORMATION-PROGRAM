@@ -67,6 +67,14 @@ jobs:
             await read(asset)
           }
           for (const route of ['staff', 'guest']) assert.ok((await read(route + '/')).includes('#/' + route))
+          const adminHtml = await read('admin/')
+          assert.ok(adminHtml.includes('admin/assets/'), 'Missing separate public DEMO admin bundle')
+          const adminAssets = [...adminHtml.matchAll(/(?:src|href)="([^"]+\.(?:js|css))"/g)].map(match => match[1])
+          assert.ok(adminAssets.some(path => path.endsWith('.js')), 'Missing demo admin JavaScript')
+          for (const asset of adminAssets) {
+            assert.ok(new URL(asset, base).pathname.startsWith(base.pathname + 'admin/'), 'Admin asset escaped its own subpath')
+            await read(asset)
+          }
           console.log(`::notice title=Public Pages HTTP verification::PASS ${base.href} and ${assets.length} local assets, staff/guest direct-entry pages all returned HTTP 200; browser interaction is tested separately.`)
           JS
 
