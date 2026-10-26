@@ -36,3 +36,6 @@
 
 /* Staff-only help center layered after design C. */
 @import './styles/staff-help.css';
+
+/* Placeholder for future staff operations manuals. */
+@import './styles/staff-work.css';

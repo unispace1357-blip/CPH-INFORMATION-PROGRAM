@@ -21,6 +21,7 @@ import { TimespaceTenantCandidates } from '../../components/ui/TimespaceTenantCa
 import { TIMESPACE_TENANTS } from '../../services/timespaceDirectory'
 import type { TimespaceTenant } from '../../services/timespaceDirectory'
 import { FrontdeskGuide } from '../../components/staff/FrontdeskGuide'
+import { StaffWorkPanel } from '../../components/staff/StaffWorkPanel'
 import { StaffSearchHub, StaffQuickPhrases, StaffRequestShortcut, StaffTopicShortcuts } from '../../components/staff/StaffDashboard'
 import { AirportBusGuide, SongdoTourismGuide } from '../../components/ui/LocalTravelGuides'
 import { UI_CATEGORIES, visibleFacilityCategories } from '../../config/uiCategories'
@@ -39,6 +40,7 @@ export function StaffPage() {
   const navigate = useNavigate()
   const handledHelpNavigation = useRef<string | null>(null)
   const [activeTab, setActiveTab] = useState<StaffTab>('hotel')
+  const [showWork, setShowWork] = useState(false)
   const [dataState, setDataState] = useState<DataState>({ status: 'loading' })
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState<StaffCategoryFilter>('all')
@@ -174,7 +176,21 @@ export function StaffPage() {
   function clearShortcuts() {
     if (window.confirm('이 PC의 즐겨찾기·최근 선택 항목을 모두 지울까요?')) shortcuts.clear()
   }
+  function focusSidebarSearch() {
+    const focus = () => {
+      const input = document.getElementById('staff-hub-input') as HTMLInputElement | null
+      input?.scrollIntoView({ block: 'center' })
+      input?.focus({ preventScroll: true })
+    }
+    // On the normal dashboard preserve immediate focus for keyboard users and existing QA.
+    // When returning from the work-only panel, wait until the search field is mounted.
+    if (showWork) {
+      setShowWork(false)
+      requestAnimationFrame(focus)
+    } else focus()
+  }
   function navigateStaffTab(target: StaffTab) {
+    setShowWork(false)
     setActiveTab(target)
     requestAnimationFrame(() => document.getElementById(`staff-${target}-panel`)?.scrollIntoView({ block: 'start' }))
   }
@@ -206,14 +222,16 @@ export function StaffPage() {
           <span>THE CENTRAL PARK HOTEL</span>
           <small>SONGDO · CONCIERGE</small>
         </div>
-        <button type="button" className="staff-rail-search" onClick={() => { const input = document.getElementById('staff-hub-input') as HTMLInputElement | null; input?.scrollIntoView({ block: 'center' }); input?.focus({ preventScroll: true }) }}><Icon name="search" size={20} />통합 검색</button>
-        <button type="button" className={activeTab === 'hotel' ? 'is-active' : ''} onClick={() => navigateStaffTab('hotel')}><Icon name="hotel" size={20} />호텔 안내</button>
-        <button type="button" className={activeTab === 'facilities' ? 'is-active' : ''} onClick={() => navigateStaffTab('facilities')}><Icon name="attraction" size={20} />주변 시설</button>
-        <button type="button" onClick={() => { const phrases = document.getElementById('staff-quick-phrases-title'); phrases?.scrollIntoView({ block: 'start' }); phrases?.focus({ preventScroll: true }) }}><Icon name="copy" size={20} />영어 응대 문구</button>
+        <button type="button" className="staff-rail-search" onClick={focusSidebarSearch}><Icon name="search" size={20} />통합 검색</button>
+        <button type="button" className={!showWork && activeTab === 'hotel' ? 'is-active' : ''} onClick={() => navigateStaffTab('hotel')}><Icon name="hotel" size={20} />호텔 안내</button>
+        <button type="button" className={!showWork && activeTab === 'facilities' ? 'is-active' : ''} onClick={() => navigateStaffTab('facilities')}><Icon name="attraction" size={20} />주변 시설</button>
+        <button type="button" className={showWork ? 'is-active' : ''} aria-pressed={showWork} onClick={() => { setShowWork(true); requestAnimationFrame(() => document.getElementById('staff-work-title')?.focus({ preventScroll: true })) }}><Icon name="grid" size={20} />업무용</button>
+        <button type="button" onClick={() => { setShowWork(false); requestAnimationFrame(() => { const phrases = document.getElementById('staff-quick-phrases-title'); phrases?.scrollIntoView({ block: 'start' }); phrases?.focus({ preventScroll: true }) }) }}><Icon name="copy" size={20} />영어 응대 문구</button>
         <button type="button" onClick={() => navigate('/staff/help')}><Icon name="info" size={20} />도움말</button>
         <button type="button" onClick={() => document.querySelector<HTMLButtonElement>('.staff-request-trigger')?.click()}><Icon name="info" size={20} />요청 접수</button>
         <button type="button" onClick={() => document.querySelector<HTMLButtonElement>('.staff-admin-trigger')?.click()}><Icon name="lock" size={20} />관리자 화면</button>
       </nav>
+      {showWork ? <StaffWorkPanel /> : <>
       <section className="staff-intro" aria-label="프론트 안내 대시보드">
         <ConciergeHero audience="staff" />
         <div className="staff-intro-stats" aria-label="직원 안내 기능">
@@ -297,6 +315,7 @@ export function StaffPage() {
         </section>
       </div>
       </section>
+      </>}
     </div>
   )
 }

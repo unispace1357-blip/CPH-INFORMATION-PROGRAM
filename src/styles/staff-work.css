@@ -1,0 +1,15 @@
+/* Staff-only operations category: reserved for future manuals; no content records yet. */
+.app-shell--staff .staff-work-panel {
+  min-height: 260px;
+  border-color: var(--boutique-border, #ded7ca);
+  padding: clamp(24px, 4vw, 42px);
+  background: var(--boutique-white, #fff);
+}
+.app-shell--staff .staff-work-panel h1 {
+  margin: 8px 0 16px;
+  color: var(--boutique-deep, #293c34);
+}
+.app-shell--staff .staff-work-panel .staff-work-empty-message {
+  color: var(--boutique-muted, #66726b);
+  line-height: 1.8;
+}
