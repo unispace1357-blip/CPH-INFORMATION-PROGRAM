@@ -48,16 +48,12 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
       [...document.querySelectorAll('.concierge-hero-image,.concierge-featured-image')].every(img => img.complete && img.naturalWidth >= 1600 && img.naturalHeight >= 900));
     assert.ok((await staff.locator('#staff-essentials').innerText()).includes('35,000'));
     assert.equal(await staff.locator('.staff-board-rail').count(), 1);
+    // The local development server intentionally shows a different draft warning
+    // from the publicly built DEMO. Public text is checked in public-build.test.ts.
     const staffRelease = staff.locator('.staff-release-notice');
-    assert.ok((await staffRelease.innerText()).includes('프론트 통합 안내 시스템'));
-    const programSummary = staffRelease.locator('summary');
-    assert.equal(await programSummary.innerText(), '프로그램 안내 및 저작권');
-    await programSummary.click();
-    const copyrightCopy = await staffRelease.innerText();
-    assert.ok(copyrightCopy.includes('신속하고 정확한 고객 안내'));
-    assert.ok(copyrightCopy.includes('© 2026 Antonio'));
-    assert.ok(!copyrightCopy.includes('아직 초기 단계'));
-    log('Staff copy: updated concierge purpose and owner copyright, obsolete development promise removed');
+    assert.ok((await staffRelease.innerText()).includes('프론트 테스트용 미리보기'));
+    assert.ok((await staffRelease.innerText()).includes('검수 전 초안'));
+    log('Staff copy: development-only draft warning retained; public wording checked in bundle test');
     await staff.waitForSelector('#staff-hub-input');
     const pcGeometry = await staff.evaluate(() => {
       const box = s => { const r = document.querySelector(s).getBoundingClientRect(); return { x:r.x,y:r.y,width:r.width,height:r.height,bottom:r.bottom,right:r.right }; };
