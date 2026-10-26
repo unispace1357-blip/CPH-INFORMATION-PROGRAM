@@ -1,0 +1,47 @@
+/* Password gate stays in Staff UI; public Pages never serves an administrator bundle. */
+.app-shell--staff .staff-admin-trigger{display:inline-flex;align-items:center;gap:6px;}
+.app-shell--staff .staff-admin-backdrop{
+  position:fixed;inset:0;z-index:100000;display:grid;place-items:center;
+  overflow:auto;padding:18px;background:rgba(26,36,29,.72);
+  pointer-events:auto;backdrop-filter:blur(4px);
+}
+.app-shell--staff .staff-admin-dialog{
+  width:min(100%,445px);max-height:min(90vh,760px);overflow-y:auto;
+  border:1px solid #c4b398;border-top:4px solid #b79d71;
+  border-radius:17px;background:#faf8f3;box-shadow:0 24px 65px rgba(0,0,0,.33);
+  color:#293f30;padding:clamp(20px,4vw,29px);
+}
+.app-shell--staff .staff-admin-dialog-title{display:flex;align-items:center;gap:12px;padding-bottom:15px;border-bottom:1px solid #e2d8c9;}
+.app-shell--staff .staff-admin-dialog-title .icon{flex:none;color:#596c59;}
+.app-shell--staff .staff-admin-dialog-title span{font-size:.61rem;letter-spacing:.15em;font-weight:750;color:#8f7655;}
+.app-shell--staff .staff-admin-dialog-title h2{margin:3px 0 0;font-size:1.22rem;color:#293e30;}
+.app-shell--staff #staff-admin-description{font-size:.91rem;line-height:1.7;margin:15px 0;color:#4c5e4f;}
+.app-shell--staff .staff-admin-form{display:grid;gap:8px;}
+.app-shell--staff .staff-admin-form label{font-size:.85rem;font-weight:750;margin-top:6px;color:#354a39;}
+.app-shell--staff .staff-admin-form input{
+  min-height:45px;width:100%;border:1px solid #b8c5b6;border-radius:9px;
+  background:white;color:#203b29;padding:9px 12px;font-size:1rem;
+}
+.app-shell--staff .staff-admin-form input:focus-visible,
+.app-shell--staff .staff-admin-dialog button:focus-visible{outline:3px solid #a28a61;outline-offset:2px;}
+.app-shell--staff .staff-admin-submit{
+  min-height:46px;border-radius:9px;background:#3f4f46;color:white;
+  font-size:.95rem;font-weight:750;border:1px solid #3f4f46;cursor:pointer;margin-top:10px;
+}
+.app-shell--staff .staff-admin-submit:disabled{opacity:.55;cursor:not-allowed;}
+.app-shell--staff .staff-admin-message{
+  margin:15px 0;padding:10px 12px;border-left:3px solid #ab8155;
+  background:#fff8ec;color:#604e36;line-height:1.55;font-size:.88rem;
+}
+.app-shell--staff .staff-admin-security-note{color:#687064;font-size:.79rem;line-height:1.6;margin:14px 0;}
+.app-shell--staff .staff-admin-cancel{
+  min-height:41px;width:100%;padding:8px;background:#efeee9;color:#344d3c;
+  border:1px solid #d0cebf;border-radius:8px;font-size:.89rem;cursor:pointer;
+}
+@media(max-width:767px){
+  .app-shell--staff .staff-admin-dialog{width:100%;}
+  .app-shell--staff .staff-header-actions .staff-admin-trigger{min-width:0;}
+}
+@media print{
+  .staff-admin-backdrop,.staff-admin-trigger{display:none!important;}
+}
