@@ -51,3 +51,8 @@
 .admin-timespace-editor h4{margin-top:18px;}
 .admin-timespace-page .button{max-width:100%;white-space:normal;}
 @media(max-width:1099px){.admin-timespace-workspace{grid-template-columns:1fr;}.admin-navigation{grid-template-columns:repeat(auto-fit,minmax(145px,1fr));}}
+
+/* Available only in guarded Windows admin window or local development. */
+.admin-logout-button{border:1px solid #dcc8a4;border-radius:9px;background:#f7ecdb;color:#3f4f46;min-height:43px;padding:10px 13px;font-size:.86rem;font-weight:750;cursor:pointer;}
+.admin-logout-button:hover{background:#ead8ba;}
+.admin-logout-button:focus-visible{outline:3px solid #b89a61;outline-offset:2px;}
