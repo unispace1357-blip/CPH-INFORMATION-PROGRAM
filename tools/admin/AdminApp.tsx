@@ -164,9 +164,9 @@ export function AdminApp() {
   const unlockedDesktopAdmin = window.location.protocol === 'cph-admin:' && window.location.hostname === 'app'
   const staticDemoAdmin = import.meta.env.MODE === 'public-test-admin' && /\/admin\/(?:index\.html)?$/.test(window.location.pathname)
   if (!localAdmin && !unlockedDesktopAdmin && !staticDemoAdmin) return <main className="panel"><h1>로컬 전용 관리자</h1><p>관리자 화면은 안전한 로컬 실행 환경에서만 사용할 수 있습니다.</p></main>
-  return <div className="admin-shell" data-admin-boundary="CPH_LOCAL_ADMIN_ONLY">
+  return <div className="admin-shell" data-admin-boundary={staticDemoAdmin ? "CPH_PUBLIC_DEMO_EDITOR" : "CPH_LOCAL_ADMIN_ONLY"}>
     <a className="skip-link" href="#admin-main">편집 본문으로 이동</a>
-    <header className="admin-header"><div><span className="eyebrow">LOCAL DATA WORKSPACE</span><h1>CPH ADMIN MANAGER</h1><p>로컬 전용 · JSON 수동 검수 및 다운로드</p></div>{(unlockedDesktopAdmin || staticDemoAdmin) && <button type="button" className="admin-logout-button" onClick={()=>{if(staticDemoAdmin){revokeDemoAdminSession();window.location.assign("../#/staff")}else window.close()}}>관리자 종료 · 직원 화면 복귀</button>}<div className="admin-status" role="status"><span>시설: {facilities?.dataStatus.toUpperCase() ?? '미등록'} · 호텔: {hotel?.dataStatus.toUpperCase() ?? '미등록'}</span><span>{editorDirty ? '저장되지 않은 편집 내용' : workspaceDirty ? '파일 저장 확인이 필요한 변경사항' : '작업 데이터 변경 없음'}</span><span>{issue ? '작업 검증 오류 있음' : checks.facilities.valid && checks.hotel.valid ? '개발 데이터 검증 완료' : '데이터 검증 오류 있음'}</span><span>{checks.production.valid ? '운영 배포 기술 조건 충족 · 담당자 검수 필요' : '운영 배포 준비 미완료'}</span></div></header>
+    <header className="admin-header"><div><span className="eyebrow">{staticDemoAdmin?"PUBLIC DEMO EDITOR":"LOCAL DATA WORKSPACE"}</span><h1>CPH ADMIN MANAGER</h1><p>{staticDemoAdmin?"GitHub Pages 공개 DEMO · 편집 결과는 현재 브라우저에만 저장됩니다.":"로컬 전용 · JSON 수동 검수 및 다운로드"}</p></div>{(unlockedDesktopAdmin || staticDemoAdmin) && <button type="button" className="admin-logout-button" onClick={()=>{if(staticDemoAdmin){revokeDemoAdminSession();window.location.assign("../#/staff")}else window.close()}}>관리자 종료 · 직원 화면 복귀</button>}<div className="admin-status" role="status"><span>시설: {facilities?.dataStatus.toUpperCase() ?? '미등록'} · 호텔: {hotel?.dataStatus.toUpperCase() ?? '미등록'}</span><span>{editorDirty ? '저장되지 않은 편집 내용' : workspaceDirty ? '파일 저장 확인이 필요한 변경사항' : '작업 데이터 변경 없음'}</span><span>{issue ? '작업 검증 오류 있음' : checks.facilities.valid && checks.hotel.valid ? '개발 데이터 검증 완료' : '데이터 검증 오류 있음'}</span><span>{checks.production.valid ? '운영 배포 기술 조건 충족 · 담당자 검수 필요' : '운영 배포 준비 미완료'}</span></div></header>
     <div className="admin-workspace"><nav className="admin-navigation" aria-label="관리자 메뉴">{menus.map(item => <Button key={item.key} variant={menu === item.key ? 'primary' : 'secondary'} aria-current={menu === item.key ? 'page' : undefined} disabled={importing} onClick={() => openMenu(item.key)}>{item.label}</Button>)}<p>저장 위치: 현재 브라우저 메모리. 새로고침·종료 전에 JSON 파일을 내려받으세요.</p></nav>
       <main id="admin-main" tabIndex={-1} className="admin-main">
         <InformationNotice title="자동 반영되지 않습니다" tone="warning">이 화면의 저장은 원본 JSON·GitHub·공개 사이트를 수정하지 않습니다. DEMO 데이터는 실제 고객 안내에 사용할 수 없습니다. 개인정보·비밀 정보는 입력하지 마세요.</InformationNotice>
@@ -191,6 +191,6 @@ export function AdminApp() {
         </section>}
         </fieldset>
       </main>
-    </div><footer className="admin-footer">CPH · 로컬 편집 도구. 이탈 경고는 브라우저 제한이 있으므로 내려받은 파일을 직접 확인하세요.</footer>
+    </div><footer className="admin-footer">CPH · {staticDemoAdmin?"공개 테스트 편집 도구":"로컬 편집 도구"}. 이탈 경고는 브라우저 제한이 있으므로 내려받은 파일을 직접 확인하세요.</footer>
   </div>
 }
