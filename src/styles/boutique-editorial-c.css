@@ -1,0 +1,328 @@
+/*
+ * Design C — Boutique Editorial
+ * Scope visual decisions to the guest/staff application; the localhost-only
+ * admin remains unchanged. All original navigation and print-only content stay intact.
+ * Photographs are existing bundled assets, never remote requests.
+ */
+.app-shell {
+  --boutique-beige:#ede6dd;
+  --boutique-green:#3f4f46;
+  --boutique-deep:#293c34;
+  --boutique-bronze:#c9a876;
+  --boutique-white:#ffffff;
+  --boutique-paper:#faf8f4;
+  --boutique-border:#ded7ca;
+  --boutique-muted:#66726b;
+  --boutique-soft-shadow:0 12px 36px rgba(38,50,42,.075);
+  --color-primary:#3f4f46;
+  --color-primary-hover:#283f33;
+  --color-background:#faf8f4;
+  --color-surface:#ffffff;
+  --color-text:#29382f;
+  --color-text-secondary:#516055;
+  --color-border:#ded7ca;
+  --color-focus:#95733d;
+  --color-tint:#e9eee7;
+  --color-subtle:#f3f1eb;
+  --color-warning-background:#fff7ee;
+  --concierge-ink:#3f4f46;
+  --concierge-page:#faf8f4;
+  --concierge-card:#fff;
+  --concierge-line:#ded7ca;
+  --concierge-soft-shadow:var(--boutique-soft-shadow);
+  color:var(--color-text);
+  background:var(--boutique-paper);
+}
+.app-shell main{background:linear-gradient(140deg,#faf8f4 0%,#f1ece5 51%,#faf8f4 100%);}
+.app-shell :is(.panel,.guest-section,.staff-essential-panel,.concierge-featured) {
+  border-color:var(--boutique-border);
+}
+.app-shell :is(.panel,.concierge-featured,.staff-essential-panel){
+  box-shadow:var(--boutique-soft-shadow);
+}
+.app-shell :is(h1,h2,h3){letter-spacing:-.025em;}
+.app-shell :is(.section-heading h2,.concierge-section-heading h2,.hotel-information-heading h2) {
+  color:var(--boutique-deep);
+}
+.app-shell .site-header{
+  border-bottom:1px solid #d8cbb7;
+  background:linear-gradient(115deg,#ede6dd,#f8f5ef 55%,#efe9de);
+  color:var(--boutique-deep);
+}
+.app-shell .site-header :is(.brand,.brand-name,.header-link,.guest-navigation a){color:var(--boutique-deep);}
+.app-shell .site-header .brand-caption{color:#667264;}
+.app-shell .site-header .header-link {background:rgba(255,255,255,.66);border:1px solid #d3c7b7;}
+.app-shell .site-header .header-link:hover,.app-shell .site-header .guest-navigation a:hover{background:#e5ddcf;}
+.app-shell .site-header .guest-navigation{border-top-color:#d8ccbd;}
+.app-shell .site-header .brand-logo{box-shadow:none;border:0;}
+.app-shell .site-header .brand-name{font-family:Georgia,"Times New Roman",serif;letter-spacing:.055em;font-weight:650;}
+.app-shell .site-footer{border-top:1px solid var(--boutique-border);background:#e9e4da;color:#495b4f;}
+.app-shell .site-footer :is(p,.footer-title){color:#435449;}
+.app-shell .button--primary,
+.app-shell .staff-search-hub-form .button--primary{
+  background:var(--boutique-green);color:white;border-color:var(--boutique-green);
+}
+.app-shell .button--primary:not(:disabled):hover{background:var(--boutique-deep);border-color:var(--boutique-deep);}
+.app-shell :is(.button--secondary,.button--quiet){color:var(--boutique-deep);}
+.app-shell :is(.button--secondary,.button--quiet):not(:disabled):hover{background:#ece9e0;}
+.app-shell :is(.search-control,.staff-search-hub-form input){
+  background:#fff;border-color:#b9c5b9;color:var(--boutique-deep);
+}
+.app-shell :is(.search-control,.staff-search-hub-form input):focus-within{border-color:#6b806f;}
+.app-shell :is(.category-card:not(.is-selected),.concierge-fact){
+  border-color:#ddd7ca;background:#f9f8f4;color:#385146;
+}
+.app-shell :is(.category-card.is-selected,.staff-category-grid .category-card.is-selected) {
+  color:#fff;background:var(--boutique-green);border-color:var(--boutique-green);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);
+}
+.app-shell .category-card.is-selected .category-icon{color:#fff;}
+.app-shell .category-card:not(.is-selected) .category-icon,
+.app-shell .concierge-fact-button .icon{color:#5b7160;}
+.app-shell .status-label{background:#e9eee7;color:#3b5645;}
+.app-shell :is(.concierge-featured-badge,.staff-section-number) {
+  background:#f2e9da;color:#715b36;border-color:#dbc7a8;
+}
+
+/* Editorial photo hero — existing local image, warmer framing and typography. */
+.app-shell .concierge-hero{
+  min-height:255px;background:var(--boutique-green);
+  border-radius:21px;box-shadow:0 18px 42px rgba(28,43,33,.15);
+}
+.app-shell .concierge-hero-image{
+  object-fit:cover;object-position:center 48%;
+  filter:saturate(.77) sepia(.18) brightness(.88);
+}
+.app-shell .concierge-hero::before{
+  background:linear-gradient(90deg,rgba(32,44,36,.91) 0%,rgba(48,60,50,.77) 46%,rgba(56,66,52,.22) 100%);
+}
+.app-shell .concierge-hero-copy{max-width:650px;gap:11px;padding:clamp(25px,4vw,45px);}
+.app-shell .concierge-hero-kicker,.app-shell .boutique-hero-caption{
+  color:#e7d2af;letter-spacing:.17em;text-transform:uppercase;
+  font-size:.69rem;font-weight:650;line-height:1.45;
+}
+.app-shell .concierge-hero h1{
+  font-family:Georgia,"Times New Roman",serif;font-weight:500;
+  letter-spacing:-.045em;font-size:clamp(2.2rem,4.4vw,3.7rem);
+  line-height:1.06;color:#fff9ed;
+}
+.app-shell .boutique-hero-line{display:block;}
+.app-shell .concierge-hero-copy > p:last-of-type{
+  color:#fbf5eb;font-size:clamp(.87rem,1.35vw,1.03rem);max-width:55ch;line-height:1.55;
+}
+.app-shell .boutique-hero-caption{display:block;font-size:.61rem;letter-spacing:.21em;}
+
+/* Two real photo entry points immediately after the critical no-smoking notice. */
+.app-shell .boutique-entry{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;min-width:0;}
+.app-shell .boutique-entry-card{
+  position:relative;isolation:isolate;display:flex;align-items:flex-end;justify-content:space-between;
+  min-width:0;min-height:165px;border:1px solid #d2c7b5;
+  border-radius:15px;overflow:hidden;cursor:pointer;text-align:left;
+  padding:19px 18px;background:var(--boutique-green);color:#fff;
+  box-shadow:0 6px 21px rgba(38,53,41,.12);
+}
+.app-shell .boutique-entry-card img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  z-index:-2;filter:sepia(.13) saturate(.78);
+  transition:transform .24s ease;
+}
+.app-shell .boutique-entry-card:after{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(0deg,rgba(26,39,31,.86) 0%,rgba(30,41,31,.25) 88%);
+}
+.app-shell .boutique-entry-card:hover img{transform:scale(1.045);}
+.app-shell .boutique-entry-card:focus-visible{outline:3px solid var(--color-focus);outline-offset:3px;}
+.app-shell .boutique-entry-copy{display:grid;gap:1px;min-width:0;}
+.app-shell .boutique-entry-copy strong{font-size:clamp(1.06rem,2.2vw,1.28rem);font-weight:750;color:#fff;}
+.app-shell .boutique-entry-copy small{
+  font-family:Georgia,"Times New Roman",serif;font-size:.78rem;letter-spacing:.08em;
+  color:#f0dfc0;
+}
+.app-shell .boutique-entry-arrow{
+  flex:none;display:grid;place-items:center;width:33px;height:33px;
+  border:1px solid rgba(255,255,255,.78);border-radius:50%;color:#fff;font-size:1.13rem;
+}
+
+/* Customer: guest photos, warm content panels, gentle capsule navigation. */
+.app-shell--guest .guest-page{gap:clamp(13px,2.3vw,24px);}
+.app-shell--guest .hotel-information{
+  background:transparent;border:0;box-shadow:none;padding:0;gap:16px;
+}
+.app-shell--guest .hotel-information > .boutique-entry {order:3;}
+.app-shell--guest .hotel-information > .concierge-essentials {order:4;}
+.app-shell--guest .hotel-information > .hotel-information-heading{order:5;}
+.app-shell--guest .hotel-information > .hotel-category-grid{order:6;}
+.app-shell--guest .hotel-information > #guest-hotel-detail{order:7;}
+.app-shell--guest .hotel-information > .hotel-search-results{order:1;}
+.app-shell--guest .hotel-information > .smoking-policy-notice{order:2;}
+.app-shell--guest .hotel-information > .concierge-hotel-search{order:0;}
+.app-shell--guest .hotel-information > .concierge-essentials,
+.app-shell--guest :is(#nearby-facilities,#guest-search,#guest-facility-results) {
+  border-color:var(--boutique-border);background:#fff;
+}
+.app-shell--guest .hotel-information h2{color:var(--boutique-deep);}
+.app-shell--guest .hotel-section-eyebrow{color:#987c50;}
+.app-shell--guest .hotel-category-grid .category-card{
+  background:#f8f6f1;border-color:#e1d9cd;color:#3e5347;
+}
+.app-shell--guest .hotel-category-grid .category-card.is-selected{
+  background:var(--boutique-green);color:#fff;border-color:var(--boutique-green);
+}
+.app-shell--guest #nearby-facilities .category-card{border-radius:14px;}
+.app-shell--guest .concierge-featured{background:#fff;border-radius:17px;}
+.app-shell--guest .concierge-featured-image{filter:saturate(.82) sepia(.12);}
+.app-shell--guest .concierge-featured-card{border-color:#e0d9cd;}
+.app-shell--guest .guest-page>.information-notice{order:4;}
+.app-shell--guest #nearby-facilities{order:5;}
+.app-shell--guest #guest-search{order:6;}
+.app-shell--guest #guest-facility-results{order:7;}
+.app-shell--guest #guest-facility-detail{order:8;}
+.app-shell--guest .guest-page>.concierge-featured{order:3;}
+.app-shell--guest .guest-page>.concierge-hero{order:1;}
+.app-shell--guest .hotel-information{order:2;}
+.app-shell--guest .guest-language-toolbar{order:0;}
+.app-shell--guest .smoking-policy-notice .information-notice{
+  border-color:#a92f2b;background:#fff9f7;box-shadow:0 3px 14px rgba(137,55,45,.07);
+}
+.app-shell--guest .smoking-policy-fee{background:#fbe7e0;color:#742721;}
+
+/* Staff: spacious editorial work desk, same landmarks and actions. */
+.app-shell--staff .staff-page{gap:15px;}
+.app-shell--staff .staff-intro .concierge-hero{min-height:232px;border-radius:17px;}
+.app-shell--staff .staff-intro .concierge-hero-copy{gap:8px;}
+.app-shell--staff .staff-intro .concierge-hero h1{
+  font-size:clamp(2rem,3.4vw,3.15rem);line-height:1.08;
+  font-family:Georgia,"Times New Roman",serif;font-weight:500;
+}
+.app-shell--staff .staff-board-rail{
+  background:linear-gradient(180deg,#3f4f46,#2e4037);
+  border:1px solid rgba(198,177,137,.42);
+  box-shadow:0 9px 28px rgba(27,42,34,.16);
+}
+.app-shell--staff .staff-board-rail-brand{border-bottom-color:rgba(222,208,181,.31);}
+.app-shell--staff .staff-board-rail-brand small{color:#e0d0b1;}
+.app-shell--staff .staff-board-rail button{color:#fff5e7;}
+.app-shell--staff .staff-board-rail .is-active,
+.app-shell--staff .staff-board-rail button:hover{background:rgba(201,168,118,.22);}
+.app-shell--staff .staff-board-rail button.staff-rail-search{
+  background:#d4bd94;border-left:3px solid #f1e2c6;color:#24382c;font-weight:800;
+}
+.app-shell--staff .staff-board-rail button.staff-rail-search:hover{background:#e4cda5;}
+.app-shell--staff .staff-search-hub{
+  background:#fff;border:1px solid #ded7ca;box-shadow:var(--boutique-soft-shadow);
+}
+.app-shell--staff .staff-hub-topline h2{font-family:Georgia,"Times New Roman",serif;color:#334639;font-size:1.35rem;}
+.app-shell--staff .staff-hub-scope-chooser select{color:#334b3e;border-color:#cccfc4;}
+.app-shell--staff .staff-search-hub-form input{background:#fff;border:1px solid #b9c4b7;}
+.app-shell--staff .staff-search-hub-input-label{color:#597360;}
+.app-shell--staff .staff-search-suggestions button{
+  background:#f2f1ea;border:1px solid #d9d7cb;color:#4b6252;
+}
+.app-shell--staff .staff-search-suggestions button:hover{background:#e6eadd;}
+.app-shell--staff .staff-essential-panel,
+.app-shell--staff .staff-quick-phrases,
+.app-shell--staff .staff-request-shortcut{
+  background:#fff;border-color:var(--boutique-border);
+  box-shadow:var(--boutique-soft-shadow);
+}
+.app-shell--staff :is(.staff-overview-section-header h2,.staff-quick-phrases h2,.staff-request-shortcut h2){
+  font-family:Georgia,"Malgun Gothic",serif;color:#344a3a;
+}
+.app-shell--staff .staff-essential-panel .concierge-fact-button .icon,
+.app-shell--staff .staff-topic-shortcuts button .icon{color:#607866;}
+.app-shell--staff .staff-topic-shortcuts button {
+  color:#3b5646;border-color:#ddd7c9;background:#faf8f2;
+}
+.app-shell--staff .staff-topic-shortcuts button:hover{background:#edf0e8;}
+.app-shell--staff .staff-quick-phrase{
+  background:#f7f6f0;border-color:#e0dbcf;
+}
+.app-shell--staff .staff-quick-phrase h3{color:#35503e;}
+.app-shell--staff .staff-quick-phrase button{color:#445c4d;background:#fff;}
+.app-shell--staff .staff-quick-access{border-color:#ded7ca;border-top-color:#ad8c5d;background:#fff;}
+.app-shell--staff .staff-quick-access-heading h2,
+.app-shell--staff .staff-quick-access-grid h3{color:#344b3d;}
+.app-shell--staff .staff-shortcut-list button{
+  color:#3b5a44;border-color:#ddd8cb;background:#f5f3ec;
+}
+.app-shell--staff .staff-shortcut-list button:hover{border-color:#b5a88e;background:#eeebe2;}
+.app-shell--staff .staff-guide-tabs .button[aria-selected="true"]{background:#3f4f46;color:#fff;}
+.app-shell--staff .staff-section-number{background:#eee6d9;color:#7b6544;}
+.app-shell--staff .staff-section-kicker{color:#8d7657;}
+.app-shell--staff .staff-result-list .facility-card.is-selected{
+  background:#edf1e9;border-left-color:#56705c;border-color:#bfcebb;
+}
+.app-shell--staff .details-panel{border-top-color:#a58a62;}
+.app-shell--staff .results-panel{border-top-color:#77907a;}
+.app-shell--staff .staff-quick-phrase:has(button:focus-visible){outline-offset:4px;}
+
+/* Tiny phone: compact visual cards, retain real search-on-photo and important warning. */
+@media (max-width:767px){
+  .app-shell--guest .site-header{background:#eee6da;}
+  .app-shell--guest .guest-mobile-menu summary{color:#2f4637;}
+  .app-shell--guest .guest-mobile-menu nav a{color:#3b5441;}
+  .app-shell--guest .guest-mobile-menu[open] nav{border-color:#cbbb9f;background:#fffdf8;}
+  .app-shell--guest .guest-mobile-menu nav a:hover{background:#eff0e9;}
+  .app-shell--guest .guest-mobile-language{color:#2e4838;}
+  .app-shell--guest .guest-mobile-language select{color:#2e4838;}
+  .app-shell--guest .guest-mobile-language option{color:#2e4838;}
+  .app-shell--guest main{padding-top:9px;}
+  .app-shell--guest .concierge-hero{
+    order:0;min-height:226px;border-radius:13px;box-shadow:0 8px 25px rgba(39,49,40,.14);
+  }
+  .app-shell--guest .concierge-hero-copy{
+    padding:15px 16px 63px;gap:5px;max-width:100%;justify-content:center;
+  }
+  .app-shell--guest .concierge-hero::before {
+    background:linear-gradient(90deg,rgba(27,42,31,.88),rgba(47,58,42,.28) 97%),
+               linear-gradient(0deg,rgba(32,41,34,.5),transparent 70%);
+  }
+  .app-shell--guest .concierge-hero-kicker{font-size:.55rem;letter-spacing:.095em;}
+  .app-shell--guest .concierge-hero h1{
+    font-size:clamp(1.55rem,6.3vw,2rem);line-height:1.11;
+  }
+  .app-shell--guest .concierge-hero-copy > p:last-of-type{font-size:.76rem;line-height:1.43;}
+  .app-shell--guest .boutique-hero-caption{display:none;}
+  .app-shell--guest .hotel-information{order:1;gap:9px;margin-top:-65px;padding:0!important;}
+  .app-shell--guest .hotel-search-field .search-control{border:1px solid #a9bda9;border-radius:10px;}
+  .app-shell--guest .hotel-information>.smoking-policy-notice{order:2;}
+  .app-shell--guest .hotel-information>.boutique-entry{order:3;}
+  .app-shell--guest .hotel-information>.concierge-essentials{order:4;border-color:#e3dacc;}
+  .app-shell--guest .hotel-information>.hotel-information-heading{order:5;border-color:#e3dacc;}
+  .app-shell--guest .hotel-information>.hotel-category-grid{order:6;border-color:#e3dacc;}
+  .app-shell--guest .hotel-information>#guest-hotel-detail{order:7;}
+  .app-shell--guest .boutique-entry{gap:8px;}
+  .app-shell--guest .boutique-entry-card{
+    min-height:104px;padding:10px 9px;border-radius:11px;gap:4px;
+  }
+  .app-shell--guest .boutique-entry-copy strong{font-size:.92rem;line-height:1.3;}
+  .app-shell--guest .boutique-entry-copy small{font-size:.63rem;letter-spacing:.015em;}
+  .app-shell--guest .boutique-entry-arrow{width:24px;height:24px;font-size:.88rem;}
+  .app-shell--guest .concierge-featured-image{filter:saturate(.83) sepia(.13);}
+  .app-shell--guest .hotel-information .concierge-fact-button .icon{color:#5c7462;}
+  .app-shell--guest .guest-page>.concierge-featured{order:2;}
+  .app-shell--guest .guest-page>.information-notice{order:3;}
+  .app-shell--guest #nearby-facilities{order:4;}
+  .app-shell--guest #guest-search{order:5;}
+  .app-shell--guest #guest-facility-results{order:6;}
+  .app-shell--guest #guest-facility-detail{order:7;}
+  .app-shell--guest .hotel-category-grid .category-card{background:#f8f6f0;border-color:#e3dccf;}
+  .app-shell--guest .hotel-category-grid .category-card.is-selected{background:#3f4f46;color:#fff;}
+}
+@media (min-width:768px) and (max-width:1199px){
+  .app-shell--guest .boutique-entry-card{min-height:168px;}
+  .app-shell--staff .concierge-hero h1{font-size:2.7rem;}
+}
+@media (min-width:1200px){
+  .app-shell--staff .staff-board-rail {
+    background:linear-gradient(180deg,#3f4f46,#2d4035);
+    border-radius:14px;
+  }
+  .app-shell--staff .staff-header-actions .header-link{
+    background:rgba(38,51,42,.85);border:1px solid #e6d1ad;color:white;
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  .app-shell .boutique-entry-card img{transition:none;}
+  .app-shell .boutique-entry-card:hover img{transform:none;}
+}
