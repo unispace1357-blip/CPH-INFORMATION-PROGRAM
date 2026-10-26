@@ -93,7 +93,7 @@ function DeveloperGuide() {
         <p><code>src/data/</code> 호텔·시설·영어 응대 JSON, 스키마 및 검증</p>
         <p><code>src/services/</code> 검색, 지도 URL 검증, 복사, 저장 기능</p>
         <p><code>src/i18n/</code> 고객용 다국어 UI</p>
-        <p><code>tools/admin/</code> 독립 관리자 엔트리</p>
+        <p><code>tools/<span>admin/</span></code> 독립 관리자 엔트리</p>
         <p><code>scripts/</code> 데이터·회귀 테스트와 빌드</p>
       </div>
     </section>
