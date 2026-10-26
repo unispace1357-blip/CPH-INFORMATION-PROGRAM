@@ -96,7 +96,7 @@ test('explicit DEMO test build supports subpaths, excludes private/admin data, p
     assert.match(await readFile(join(outDir, '404.html'), 'utf8'), /location.replace/)
     assert.ok((await readdir(outDir)).includes('admin'), 'DEMO web admin directory missing')
     assert.match(await readFile(join(outDir,'admin/index.html'),'utf8'), /\/CPH-INFORMATION-PROGRAM\/admin\/assets\//)
-    assert.ok(text.includes('Songdo-Admin-2026!'), 'demo-only password is intentionally public; never treat it as secure')
+    assert.ok(text.includes('sjy@123456'), 'demo-only password is intentionally public; never treat it as secure')
     await assertNoAdminAssets(join(outDir,'assets'))
     assert.throws(() => preparePublicDeployment(fixture.facilities, fixture.hotel), /dataStatus/)
     assert.deepEqual(await readFile(new URL('../src/data/facilities.json', import.meta.url)), originalFacilities)

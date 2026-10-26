@@ -3,7 +3,7 @@
  * Both the sample password and administrator JS are visible to any website visitor.
  * Do not use this for private or sensitive information.
  */
-export const DEMO_ADMIN_PASSWORD = 'Songdo-Admin-2026!'
+export const DEMO_ADMIN_PASSWORD = 'sjy@123456'
 const SESSION_KEY = 'cph:public-demo:admin-unlocked:v1'
 export function isDemoAdminPassword(value:string):boolean{
   return value === DEMO_ADMIN_PASSWORD
