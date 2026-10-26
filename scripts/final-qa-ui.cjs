@@ -53,14 +53,14 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await staff.locator('.staff-admin-trigger').click();
     const adminGate = staff.getByRole('dialog',{name:'관리자 인증'});
     assert.equal(await adminGate.count(),1);
-    assert.ok((await adminGate.innerText()).includes('Windows 실행 프로그램'));
+    assert.ok((await adminGate.innerText()).includes('공개 테스트 빌드'));
     assert.equal(await adminGate.locator('input[type="password"]').count(),0,
-      'Static public frontend must never accept an unverified password');
+      'Local development mode has no shared web password gate');
     assert.equal(await staff.locator('[data-admin-boundary]').count(),0,
       'Private editor must not render in public staff app');
     await adminGate.getByRole('button',{name:'직원 화면으로 돌아가기'}).click();
     assert.equal(await staff.getByRole('dialog',{name:'관리자 인증'}).count(),0);
-    log('Staff admin: gate entry from menu, web fails securely with no password field or admin files');
+    log('Staff admin: dev-only gate does not request credentials; static DEMO is checked separately');
     // The local development server intentionally shows a different draft warning
     // from the publicly built DEMO. Public text is checked in public-build.test.ts.
     const staffRelease = staff.locator('.staff-release-notice');
