@@ -37,8 +37,20 @@ export async function buildPublicTest(options: { facilitiesFile?: string; hotelF
     const basePath = base === './' ? '/' : base
     await writeFile(join(outDir, '404.html'), `<!doctype html><meta charset="utf-8"><title>CPH Public Test</title><script>const base=${JSON.stringify(basePath)};const route=location.pathname.startsWith(base)?location.pathname.slice(base.length):'not-found';location.replace(base+'#/'+route+location.search)</script>`)
     await writeFile(join(outDir, '.nojekyll'), '')
+    // The staff and customer bundle still excludes administrator modules.
+    // Only the explicit PUBLIC DEMO build gets a separate client-side gated
+    // /admin/ page. The Electron base './' keeps its native, guarded admin.
     await assertNoAdminAssets(outDir)
-    console.log(`PASS: explicit public test DEMO build (${facilities.facilities.length} facilities); local admin excluded; production gate unchanged`)
+    if(base!=='./'){
+      await build({
+        root:join(root,'tools/admin'),
+        configFile:join(root,'vite.admin.config.ts'),
+        mode:'public-test-admin',
+        base:base+'admin/',
+        build:{outDir:join(outDir,'admin'),emptyOutDir:true,sourcemap:false},
+      })
+    }
+    console.log(`PASS: public DEMO build (${facilities.facilities.length} published facilities); ${base==='./'?'desktop uses native admin':'separate static DEMO admin at /admin/'}; production gate unchanged`)
   } catch (error) {
     await rm(outDir, { recursive: true, force: true })
     throw error

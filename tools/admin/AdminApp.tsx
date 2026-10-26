@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { revokeDemoAdminSession } from '../../src/services/demoAdminGate'
 import type { DatasetStatus, GuideLanguage } from '../../src/types/guide'
 import type { Facility, FacilityCategory, FacilityDataset } from '../../src/types/facility'
 import type { HotelDataset } from '../../src/types/hotel'
@@ -161,10 +162,11 @@ export function AdminApp() {
 
   const localAdmin = ['127.0.0.1', 'localhost', '[::1]'].includes(window.location.hostname)
   const unlockedDesktopAdmin = window.location.protocol === 'cph-admin:' && window.location.hostname === 'app'
-  if (!localAdmin && !unlockedDesktopAdmin) return <main className="panel"><h1>로컬 전용 관리자</h1><p>관리자 화면은 안전한 로컬 실행 환경에서만 사용할 수 있습니다.</p></main>
-  return <div className="admin-shell" data-admin-boundary="CPH_LOCAL_ADMIN_ONLY">
+  const staticDemoAdmin = import.meta.env.MODE === 'public-test-admin' && /\/admin\/(?:index\.html)?$/.test(window.location.pathname)
+  if (!localAdmin && !unlockedDesktopAdmin && !staticDemoAdmin) return <main className="panel"><h1>로컬 전용 관리자</h1><p>관리자 화면은 안전한 로컬 실행 환경에서만 사용할 수 있습니다.</p></main>
+  return <div className="admin-shell" data-admin-boundary={staticDemoAdmin ? "CPH_PUBLIC_DEMO_EDITOR" : "CPH_LOCAL_ADMIN_ONLY"}>
     <a className="skip-link" href="#admin-main">편집 본문으로 이동</a>
-    <header className="admin-header"><div><span className="eyebrow">LOCAL DATA WORKSPACE</span><h1>CPH ADMIN MANAGER</h1><p>로컬 전용 · JSON 수동 검수 및 다운로드</p></div>{unlockedDesktopAdmin && <button type="button" className="admin-logout-button" onClick={()=>window.close()}>관리자 창 닫기 · 직원 화면 복귀</button>}<div className="admin-status" role="status"><span>시설: {facilities?.dataStatus.toUpperCase() ?? '미등록'} · 호텔: {hotel?.dataStatus.toUpperCase() ?? '미등록'}</span><span>{editorDirty ? '저장되지 않은 편집 내용' : workspaceDirty ? '파일 저장 확인이 필요한 변경사항' : '작업 데이터 변경 없음'}</span><span>{issue ? '작업 검증 오류 있음' : checks.facilities.valid && checks.hotel.valid ? '개발 데이터 검증 완료' : '데이터 검증 오류 있음'}</span><span>{checks.production.valid ? '운영 배포 기술 조건 충족 · 담당자 검수 필요' : '운영 배포 준비 미완료'}</span></div></header>
+    <header className="admin-header"><div><span className="eyebrow">{staticDemoAdmin?"PUBLIC DEMO EDITOR":"LOCAL DATA WORKSPACE"}</span><h1>CPH ADMIN MANAGER</h1><p>{staticDemoAdmin?"GitHub Pages 공개 DEMO · 편집 결과는 현재 브라우저에만 저장됩니다.":"로컬 전용 · JSON 수동 검수 및 다운로드"}</p></div>{(unlockedDesktopAdmin || staticDemoAdmin) && <button type="button" className="admin-logout-button" onClick={()=>{if(staticDemoAdmin){revokeDemoAdminSession();window.location.assign("../#/staff")}else window.close()}}>관리자 종료 · 직원 화면 복귀</button>}<div className="admin-status" role="status"><span>시설: {facilities?.dataStatus.toUpperCase() ?? '미등록'} · 호텔: {hotel?.dataStatus.toUpperCase() ?? '미등록'}</span><span>{editorDirty ? '저장되지 않은 편집 내용' : workspaceDirty ? '파일 저장 확인이 필요한 변경사항' : '작업 데이터 변경 없음'}</span><span>{issue ? '작업 검증 오류 있음' : checks.facilities.valid && checks.hotel.valid ? '개발 데이터 검증 완료' : '데이터 검증 오류 있음'}</span><span>{checks.production.valid ? '운영 배포 기술 조건 충족 · 담당자 검수 필요' : '운영 배포 준비 미완료'}</span></div></header>
     <div className="admin-workspace"><nav className="admin-navigation" aria-label="관리자 메뉴">{menus.map(item => <Button key={item.key} variant={menu === item.key ? 'primary' : 'secondary'} aria-current={menu === item.key ? 'page' : undefined} disabled={importing} onClick={() => openMenu(item.key)}>{item.label}</Button>)}<p>저장 위치: 현재 브라우저 메모리. 새로고침·종료 전에 JSON 파일을 내려받으세요.</p></nav>
       <main id="admin-main" tabIndex={-1} className="admin-main">
         <InformationNotice title="자동 반영되지 않습니다" tone="warning">이 화면의 저장은 원본 JSON·GitHub·공개 사이트를 수정하지 않습니다. DEMO 데이터는 실제 고객 안내에 사용할 수 없습니다. 개인정보·비밀 정보는 입력하지 마세요.</InformationNotice>
@@ -182,13 +184,13 @@ export function AdminApp() {
         {menu === 'json' && <section className="panel admin-json-page"><h2>가져오기 / 내보내기</h2><p>파일은 각각 검증 후 확인을 받아 교체합니다. 최대 2MB. 다운로드한 파일은 담당자가 확인한 후 수동으로 반영하세요.</p>
           <div className="admin-field-grid"><div className="admin-field"><label htmlFor="facilities-file">시설 JSON 불러오기</label><input id="facilities-file" type="file" accept=".json,application/json" onChange={event => { void readFile('facilities', event.target.files?.[0]); event.target.value = '' }} /></div><div className="admin-field"><label htmlFor="hotel-file">호텔 JSON 불러오기</label><input id="hotel-file" type="file" accept=".json,application/json" onChange={event => { void readFile('hotel', event.target.files?.[0]); event.target.value = '' }} /></div></div>
           <div className="admin-field"><label htmlFor="facility-data-status">시설 데이터 상태</label><select id="facility-data-status" disabled={!facilities || !hotel} value={facilities?.dataStatus ?? 'demo'} onChange={event => updateStatus('facilities', event.target.value as DatasetStatus)}><option value="demo">DEMO</option><option value="production">PRODUCTION</option></select></div>
-          <h3>관리자 편집용 전체 JSON</h3><p>전체 시설에는 비공개 시설도 포함됩니다. 원본을 보존하는 검수·백업용 파일이며 공개 배포용 파일과 구분하세요.</p><div className="admin-editor-actions"><Button disabled={!facilities} onClick={() => exportFile('facilities')}>전체 시설 JSON 다운로드</Button><Button disabled={!hotel} onClick={() => exportFile('hotel')}>호텔 JSON 다운로드</Button></div>
+          <h3>관리자 편집용 전체 JSON</h3><p>{staticDemoAdmin?"공개 DEMO에서는 공개 승인된 시설만 포함합니다. 비공개 시설은 이 웹 빌드에서 제공되지 않습니다.":"전체 시설에는 비공개 시설도 포함됩니다. 원본을 보존하는 검수·백업용 파일이며 공개 배포용 파일과 구분하세요."}</p><div className="admin-editor-actions"><Button disabled={!facilities} onClick={() => exportFile('facilities')}>전체 시설 JSON 다운로드</Button><Button disabled={!hotel} onClick={() => exportFile('hotel')}>호텔 JSON 다운로드</Button></div>
           <p>다운로드 요청만으로 변경사항 경고를 해제하지 않습니다. PC에 파일이 저장된 것을 확인한 뒤 아래 버튼을 누르세요.</p><div className="admin-editor-actions"><Button variant="secondary" disabled={requestedFacilities === null} onClick={() => confirmDownloaded('facilities')}>전체 시설 파일 저장 확인</Button><Button variant="secondary" disabled={requestedHotel === null} onClick={() => confirmDownloaded('hotel')}>호텔 파일 저장 확인</Button></div>
           <h3>공개 시설 선별</h3><p>비공개 시설을 완전히 제외한 같은 스키마의 시설 JSON을 생성합니다. DEMO 미리보기는 배포할 수 없습니다. 공개용 파일 다운로드는 전체 데이터의 백업을 대신하지 않습니다.</p><div className="admin-editor-actions"><Button variant="secondary" disabled={!facilities} onClick={() => exportFile('public')}>공개 시설 선별 미리보기 다운로드</Button><Button disabled={!checks.production.valid} onClick={() => exportFile('production')}>운영 검증 후 공개 시설 다운로드</Button></div>
           <p className="field-hint">운영 빌드는 원본을 덮어쓰지 않고 공개용 스냅샷을 다시 생성·검증하여 사용합니다. 파일 다운로드만으로 GitHub나 사이트에 반영되지 않습니다.</p>
         </section>}
         </fieldset>
       </main>
-    </div><footer className="admin-footer">CPH · 로컬 편집 도구. 이탈 경고는 브라우저 제한이 있으므로 내려받은 파일을 직접 확인하세요.</footer>
+    </div><footer className="admin-footer">CPH · {staticDemoAdmin?"공개 테스트 편집 도구":"로컬 편집 도구"}. 이탈 경고는 브라우저 제한이 있으므로 내려받은 파일을 직접 확인하세요.</footer>
   </div>
 }

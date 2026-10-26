@@ -1,0 +1,18 @@
+/* Intentional visual lock on a publicly accessible static DEMO. */
+.public-admin-login{min-height:100dvh;display:grid;place-items:center;padding:25px;background:linear-gradient(145deg,#ede6dd,#f9f7f2 57%,#e6eadd);font-family:system-ui,-apple-system,"Malgun Gothic",sans-serif;}
+.public-admin-login-card{width:min(440px,100%);display:grid;gap:15px;border:1px solid #cfbfa8;background:#fff;border-radius:17px;padding:clamp(22px,4vw,36px);box-shadow:0 18px 55px rgba(33,49,39,.13);color:#344b3b;}
+.public-admin-login-card h1{margin:0;font:500 2.05rem/1.15 Georgia,"Malgun Gothic",serif;color:#334a3a;}
+.public-admin-login-card p{margin:0;line-height:1.65;}
+.public-admin-login-card .public-admin-kicker{font-size:.7rem;letter-spacing:.14em;color:#9d835c;font-weight:800;}
+.public-admin-login-card label{font-size:.86rem;font-weight:750;margin-top:7px;}
+.public-admin-login-card input{width:100%;min-height:49px;border:1px solid #b7bfb5;border-radius:9px;background:white;padding:10px 14px;font-size:1rem;}
+.public-admin-login-card input:focus-visible,.public-admin-login-card button:focus-visible{outline:3px solid #a8926c;outline-offset:2px;}
+.public-admin-login-card button{min-height:49px;color:white;background:#3f4f46;border:1px solid #3f4f46;border-radius:9px;font-weight:800;cursor:pointer;}
+.public-admin-login-card a{color:#3f4f46;text-align:center;text-decoration:underline;font-size:.88rem;}
+.public-admin-login-card .public-admin-footnote{font-size:.79rem;color:#606d61;background:#f6f2e9;padding:10px 12px;border-left:3px solid #b99e76;border-radius:5px;}
+.public-admin-login-card .public-admin-error{color:#9a3131;font-weight:750;}
+.public-admin-topbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:flex-end;padding:10px 17px;background:#324a3a;color:#fff;font-family:system-ui,sans-serif;}
+.public-admin-topbar strong{margin-right:auto;}
+.public-admin-topbar button,.public-admin-topbar a{padding:8px 13px;border-radius:8px;background:#f4eee4;color:#344c39;border:1px solid #dcc6a3;font-weight:750;text-decoration:none;cursor:pointer;}
+.public-admin-disclaimer{margin:0;padding:12px 18px;background:#fffaec;color:#5a513d;border-bottom:1px solid #e8d6aa;line-height:1.6;font-size:.87rem;}
+@media(max-width:500px){.public-admin-topbar{font-size:.8rem;}.public-admin-topbar strong{flex-basis:100%;}}
