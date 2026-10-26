@@ -17,6 +17,7 @@ import { SearchInput } from '../ui/SearchInput'
 import type { IconName } from '../ui/Icon'
 import { HotelParagraphs } from './HotelParagraphs'
 import { ConciergeEssentials } from '../ui/ConciergeEssentials'
+import { BoutiqueEditorialTiles } from '../ui/BoutiqueEditorialTiles'
 
 const topics: { code: HotelCategory; icon: IconName }[] = [
   { code: 'checkIn', icon: 'checkIn' }, { code: 'checkOut', icon: 'checkOut' },
@@ -58,6 +59,7 @@ export function HotelInformation({ state, language, selected, onSelect, onClose 
       {state.status === 'loading' && <LoadingState label={m.ui.loadingHotel} />}
       {state.status === 'error' && <div role="alert"><InformationNotice title={m.ui.hotelDataErrorTitle} tone="warning"><p>{m.ui.dataErrorDescription}</p><Button variant="secondary" onClick={() => window.location.reload()}>{m.ui.refresh}</Button></InformationNotice></div>}
       {hotel && <SmokingPolicyNotice hotel={hotel} language={language} />}
+      {hotel && <BoutiqueEditorialTiles language={language} onHotelTopic={() => selectTopic('roomUsage')} />}
       {hotel && <ConciergeEssentials hotel={hotel} language={language} onHotelTopic={selectTopic} />}
       {hotel && !hotelHasInformation(hotel, language) && <InformationNotice title={m.ui.hotelEmptyTitle}>{m.ui.hotelEmptyDescription}</InformationNotice>}
       <div className="hotel-information-heading">
