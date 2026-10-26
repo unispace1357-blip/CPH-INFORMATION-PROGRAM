@@ -48,6 +48,19 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
       [...document.querySelectorAll('.concierge-hero-image,.concierge-featured-image')].every(img => img.complete && img.naturalWidth >= 1600 && img.naturalHeight >= 900));
     assert.ok((await staff.locator('#staff-essentials').innerText()).includes('35,000'));
     assert.equal(await staff.locator('.staff-board-rail').count(), 1);
+    assert.equal(await staff.locator('.staff-admin-trigger').count(),1);
+    assert.equal(await staff.locator('.staff-board-rail button').filter({hasText:'관리자 화면'}).count(),1);
+    await staff.locator('.staff-admin-trigger').click();
+    const adminGate = staff.getByRole('dialog',{name:'관리자 인증'});
+    assert.equal(await adminGate.count(),1);
+    assert.ok((await adminGate.innerText()).includes('Windows 실행 프로그램'));
+    assert.equal(await adminGate.locator('input[type="password"]').count(),0,
+      'Static public frontend must never accept an unverified password');
+    assert.equal(await staff.locator('[data-admin-boundary]').count(),0,
+      'Private editor must not render in public staff app');
+    await adminGate.getByRole('button',{name:'직원 화면으로 돌아가기'}).click();
+    assert.equal(await staff.getByRole('dialog',{name:'관리자 인증'}).count(),0);
+    log('Staff admin: gate entry from menu, web fails securely with no password field or admin files');
     // The local development server intentionally shows a different draft warning
     // from the publicly built DEMO. Public text is checked in public-build.test.ts.
     const staffRelease = staff.locator('.staff-release-notice');

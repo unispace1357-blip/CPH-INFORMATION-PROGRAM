@@ -16,6 +16,15 @@ const output = join(root, 'release', platform === 'win32' ? 'CPH-Front-Desk-Publ
 const temporary = await mkdtemp(join(tmpdir(), 'cph-desktop-build-'))
 try {
   await buildPublicTest({ base: './', outDir: join(temporary, 'web') })
+  // Independent local admin build. It is NOT copied to public GitHub Pages.
+  // The admin bundle is packaged only inside the desktop runtime and is
+  // accessible solely after main-process password verification.
+  // Node 24 cannot spawn npm.cmd directly via execFileSync on Windows
+  // (EINVAL). Invoke the installed build CLIs through the Node executable.
+  execFileSync(process.execPath, [join(root, 'node_modules', 'typescript', 'bin', 'tsc'),
+    '-p', 'tsconfig.admin.json'], { cwd: root, stdio: 'inherit' })
+  execFileSync(process.execPath, [join(root, 'node_modules', 'vite', 'bin', 'vite.js'),
+    'build', '--config', 'vite.admin.config.ts', '--base=./'], { cwd: root, stdio: 'inherit' })
   // @electron/get verifies the official release checksum; no custom mirrors or unsigned downloads.
   const archive = await downloadArtifact({ version, artifactName: 'electron', platform, arch: 'x64', cacheRoot: join(tmpdir(), 'cph-electron-cache') })
   await rm(output, { recursive: true, force: true })
@@ -24,7 +33,10 @@ try {
   const appRoot = join(output, 'resources', 'app')
   await mkdir(appRoot, { recursive: true })
   await cp(join(temporary, 'web'), join(appRoot, 'web'), { recursive: true })
+  await cp(join(root, 'dist-admin'), join(appRoot, 'admin'), { recursive: true })
   await cp(join(root, 'desktop', 'main.cjs'), join(appRoot, 'main.cjs'))
+  await cp(join(root, 'desktop', 'admin-auth.cjs'), join(appRoot, 'admin-auth.cjs'))
+  await cp(join(root, 'desktop', 'staff-preload.cjs'), join(appRoot, 'staff-preload.cjs'))
   await writeFile(join(appRoot, 'package.json'), JSON.stringify({ name: 'cph-front-desk-public-test', version: '0.0.0', main: 'main.cjs' }))
   const facilities = createPublicDataset(JSON.parse(await readFile(join(root, 'src/data/facilities.json'), 'utf8')))
   await writeFile(join(appRoot, 'map-links.json'), JSON.stringify(facilities.facilities.map(item => validatedNaverMapUrl(item.naverMapUrl)).filter(Boolean)))

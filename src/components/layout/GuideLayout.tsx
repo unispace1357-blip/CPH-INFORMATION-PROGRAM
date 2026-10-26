@@ -4,6 +4,7 @@ import { Link, Outlet, useLocation } from 'react-router-dom'
 import { PageContainer } from '../ui/PageContainer'
 import { Icon } from '../ui/Icon'
 import { StaffRequestDialog } from '../staff/StaffRequestDialog'
+import { StaffAdminAccess } from '../staff/StaffAdminAccess'
 import { useGuestLanguage } from '../../i18n/guestLanguageContext'
 import { MESSAGES } from '../../i18n/messages'
 
@@ -65,6 +66,7 @@ export function GuideLayout({ audience = 'guest' }: { audience?: 'guest' | 'staf
             </label>
           </div>}
           {isStaff ? <nav className="staff-header-actions" aria-label="직원용 내비게이션">
+            <StaffAdminAccess />
             <button ref={requestTriggerRef} type="button" className="header-link staff-request-trigger"
               onClick={() => setIsRequestOpen(true)} aria-haspopup="dialog">요청사항</button>
             <Link className="header-link" to="/guest">고객 화면 미리보기<Icon name="arrow" size={17} /></Link>
