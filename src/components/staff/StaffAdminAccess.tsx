@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import { Icon } from '../ui/Icon'
+import { grantDemoAdminSession, isDemoAdminPassword } from '../../services/demoAdminGate'
 
 type AdminAuthStatus = {
   ready:boolean
@@ -19,9 +20,9 @@ declare global {
   }
 }
 
-/** Only packaged staff Electron has the safe main-process bridge.
- * Public GitHub Pages deliberately has neither credentials nor an admin bundle. */
+/** Electron keeps native strong password verification; public DEMO opts into an explicit nonsecure visual gate. */
 export function StaffAdminAccess(){
+  const isStaticDemo = import.meta.env.MODE === 'public-test'
   const [visible,setVisible]=useState(false)
   const [status,setStatus]=useState<AdminAuthStatus|null>(null)
   const [password,setPassword]=useState('')
@@ -39,7 +40,8 @@ export function StaffAdminAccess(){
   async function openDialog(){
     setVisible(true);setMessage('');setPassword('');setConfirmation('');setStatus(null)
     if(!window.cphAdmin){
-      setMessage('웹 공개 테스트에는 관리자 화면을 포함하지 않습니다. 관리자 인증은 Windows 실행 프로그램에서만 가능합니다.')
+      if(isStaticDemo)setStatus({ready:true,configured:true})
+      else setMessage('공개 테스트 빌드에서 관리자 화면을 사용할 수 있습니다. 개발 서버에서는 지원하지 않습니다.')
       return
     }
     setBusy(true)
@@ -61,7 +63,19 @@ export function StaffAdminAccess(){
 
   async function submit(event:FormEvent<HTMLFormElement>){
     event.preventDefault()
-    if(busy||!status?.ready||!window.cphAdmin)return
+    if(busy||!status?.ready)return
+    if(!window.cphAdmin){
+      if(isStaticDemo && isDemoAdminPassword(password)){
+        grantDemoAdminSession()
+        setPassword('')
+        // Always navigate within the Vite base path; never put credentials in URLs.
+        window.location.assign(import.meta.env.BASE_URL+'admin/')
+      }else{
+        setPassword('')
+        setMessage('비밀번호가 일치하지 않습니다.')
+      }
+      return
+    }
     setBusy(true);setMessage('')
     try {
       if(!status.configured){
@@ -90,14 +104,16 @@ export function StaffAdminAccess(){
         <div className="staff-admin-dialog-title">
           <Icon name="shield-check" size={26}/>
           <div>
-            <span>CPH ADMIN · PRIVATE WORKSPACE</span>
+            <span>{!window.cphAdmin&&isStaticDemo?'CPH ADMIN · PUBLIC DEMO':'CPH ADMIN · LOCAL WORKSPACE'}</span>
             <h2 id="staff-admin-title">{status?.ready&&!status.configured?'관리자 최초 비밀번호 설정':'관리자 인증'}</h2>
           </div>
         </div>
         <p id="staff-admin-description">
           {status?.ready&&!status.configured
             ? '최초 사용 전에 본인이 비밀번호를 설정하세요. 이 Windows 사용자 프로필에만 설정되며 서버나 GitHub에 전송되지 않습니다.'
-            : '관리자 비밀번호를 입력하면 별도의 보호된 편집창이 열립니다. 작업 내용은 JSON으로 내려받아 직접 반영해야 합니다.'}
+            : !window.cphAdmin && isStaticDemo
+              ? '관리자 비밀번호를 입력하면 GitHub Pages 안의 편집 화면으로 이동합니다. 편집한 내용은 자동 게시되지 않으며 JSON으로 내려받아야 합니다.'
+              : '관리자 비밀번호를 입력하면 별도의 보호된 편집창이 열립니다. 작업 내용은 JSON으로 내려받아 직접 반영해야 합니다.'}
         </p>
         {status?.ready&&<form onSubmit={event=>{void submit(event)}} className="staff-admin-form">
           <label htmlFor="staff-admin-password">{status.configured?'비밀번호':'새 비밀번호 (12자 이상, 문자·숫자 포함)'}</label>
@@ -114,7 +130,9 @@ export function StaffAdminAccess(){
             disabled={busy||!!status.lockedSeconds}>{busy?'확인 중…':status.configured?'관리자 화면 열기':'비밀번호 설정'}</button>
         </form>}
         {message&&<p role="status" className="staff-admin-message">{message}</p>}
-        <p className="staff-admin-security-note">보안을 위해 공개 웹에는 비밀번호·인증키·관리자 파일을 올리지 않습니다. 공용 Windows 계정의 관리자 설정은 다른 PC에 적용되지 않습니다.</p>
+        <p className="staff-admin-security-note">{!window.cphAdmin && isStaticDemo
+          ? '공개 정적 사이트의 비밀번호는 실제 보안 인증이 아닌 화면 잠금입니다. 소스에서 확인·우회할 수 있습니다. 개인정보나 비밀 정보는 입력하지 마세요.'
+          : 'Windows 전용 인증은 로컬 Windows 사용자 프로필에 저장됩니다. 같은 Windows 계정의 파일 접근자까지 막지는 못합니다.'}</p>
         <button type="button" onClick={dismiss} disabled={busy} className="staff-admin-cancel">직원 화면으로 돌아가기</button>
       </section>
     </div>}
