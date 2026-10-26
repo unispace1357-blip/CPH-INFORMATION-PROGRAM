@@ -14,6 +14,8 @@ const iconPaths = {
   atm: 'M3 3h18v18H3V3 M6 7h12v4H6V7 M7 15h.01 M11 15h.01 M7 18h.01 M11 18h.01 M16 15h2',
   grid: 'M3 3h7v7H3V3 M14 3h7v7h-7V3 M3 14h7v7H3v-7 M14 14h7v7h-7v-7',
   clock: 'M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0 M12 7v5l3 2',
+  lock: 'M5 11h14v10H5V11 M8 11V7a4 4 0 0 1 8 0v4',
+  'shield-check': 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z m-4-10 3 3 5-5',
   arrow: 'M4 12h16 m-6-6 6 6-6 6',
   copy: 'M8 8h13v13H8V8 M16 8V3H3v13h5',
   info: 'M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0 M12 11v6 M12 7h.01',
