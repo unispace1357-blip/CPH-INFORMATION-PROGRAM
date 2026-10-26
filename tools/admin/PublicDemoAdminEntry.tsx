@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import type { FormEvent } from 'react'
 import { AdminApp } from './AdminApp'
 import { DEMO_ADMIN_PASSWORD, grantDemoAdminSession, hasDemoAdminSession, isDemoAdminPassword, revokeDemoAdminSession } from '../../src/services/demoAdminGate'
 import './styles/public-demo-gate.css'
@@ -11,7 +12,7 @@ export function PublicDemoAdminEntry(){
   const [unlocked,setUnlocked]=useState(hasDemoAdminSession)
   const [password,setPassword]=useState('')
   const [error,setError]=useState('')
-  function submit(event:React.FormEvent<HTMLFormElement>){
+  function submit(event:FormEvent<HTMLFormElement>){
     event.preventDefault()
     if(isDemoAdminPassword(password)){
       setPassword('');setError('');grantDemoAdminSession();setUnlocked(true)
