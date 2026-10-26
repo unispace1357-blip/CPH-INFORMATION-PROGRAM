@@ -1,0 +1,37 @@
+name: Verify local desktop admin package
+
+on:
+  pull_request:
+    paths:
+      - "desktop/**"
+      - "tools/admin/**"
+      - "scripts/package-desktop.mjs"
+      - "scripts/desktop-admin-auth.test.ts"
+      - "src/components/staff/StaffAdminAccess.tsx"
+      - ".github/workflows/desktop-admin-package.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  admin-desktop:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci
+      - run: npm run desktop:package -- --directory-only
+      - name: Verify private desktop-only admin bundle and IPC
+        shell: pwsh
+        run: |
+          $root = "release/CPH-Front-Desk-Public-Test-win-x64/resources/app"
+          $required = @("admin/index.html","admin-auth.cjs","main.cjs","staff-preload.cjs","web/index.html")
+          foreach ($name in $required) {
+            if (!(Test-Path (Join-Path $root $name))) { throw "Missing packaged file $name" }
+          }
+          if (Test-Path "$root/web/admin") { throw "Admin unexpectedly shipped in public staff bundle" }
+          if (Test-Path "dist-public-test/admin") { throw "Admin unexpectedly shipped in public web build" }
+          Write-Host "PASS: private desktop admin assets; public site excludes admin."
