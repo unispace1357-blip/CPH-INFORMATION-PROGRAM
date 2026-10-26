@@ -66,6 +66,7 @@ export function GuideLayout({ audience = 'guest' }: { audience?: 'guest' | 'staf
             </label>
           </div>}
           {isStaff ? <nav className="staff-header-actions" aria-label="직원용 내비게이션">
+            <Link className="header-link staff-help-trigger" to="/staff/help"><Icon name="info" size={16}/> 도움말</Link>
             <StaffAdminAccess />
             <button ref={requestTriggerRef} type="button" className="header-link staff-request-trigger"
               onClick={() => setIsRequestOpen(true)} aria-haspopup="dialog">요청사항</button>

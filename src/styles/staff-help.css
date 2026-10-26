@@ -1,0 +1,49 @@
+/* Staff-only Help Center — Boutique C palette; guest and admin styles remain unchanged. */
+.app-shell--staff .staff-help-page{max-width:1070px;margin:0 auto;display:grid;gap:20px;padding-bottom:25px;color:#293c34}
+.app-shell--staff .staff-help-back a{display:inline-flex;min-height:44px;align-items:center;color:#3f4f46;font-weight:750;text-decoration:none}
+.app-shell--staff .staff-help-back a:hover{text-decoration:underline}
+.app-shell--staff .staff-help-hero{border:1px solid #d7c9b1;border-radius:19px;padding:27px 32px;background:linear-gradient(120deg,#f5ecdc,#fbfaf5 68%);box-shadow:0 12px 28px rgba(38,50,42,.06)}
+.app-shell--staff .staff-help-eyebrow{font-size:.74rem;font-weight:850;letter-spacing:.12em;color:#7e6644}
+.app-shell--staff .staff-help-hero h1{margin:8px 0;color:#293c34}
+.app-shell--staff .staff-help-tagline{font-weight:750;color:#5d674f;margin-bottom:12px}
+.app-shell--staff .staff-help-hero p{line-height:1.8;word-break:keep-all}
+.app-shell--staff .staff-help-switcher{display:flex;gap:8px;flex-wrap:wrap;padding:7px;border:1px solid #dfd5c7;border-radius:13px;background:#f4efe6}
+.app-shell--staff .staff-help-switcher button{flex:1 1 180px;min-height:46px;border:1px solid transparent;border-radius:10px;background:transparent;color:#526457;font-weight:750}
+.app-shell--staff .staff-help-switcher button.is-selected{background:#3f4f46;border-color:#3f4f46;color:white;box-shadow:0 4px 12px rgba(38,50,42,.15)}
+.app-shell--staff .staff-help-copy{display:grid;gap:18px}
+.app-shell--staff .staff-help-section{padding:24px 29px;border:1px solid #ded7ca;border-radius:16px;background:#fff;box-shadow:0 7px 22px rgba(38,50,42,.04)}
+.app-shell--staff .staff-help-section>h2{margin:0 0 14px;padding-bottom:13px;border-bottom:1px solid #e7dfd2;color:#293c34}
+.app-shell--staff .staff-help-section p{margin:0 0 11px;line-height:1.8}
+.app-shell--staff .staff-help-section p:last-child{margin-bottom:0}
+.app-shell--staff .staff-help-section code{border-radius:4px;background:#f2eee8;padding:2px 5px;color:#384d40;overflow-wrap:anywhere}
+.app-shell--staff .staff-help-steps{display:grid;gap:12px;padding:0;list-style:none}
+.app-shell--staff .staff-help-steps li{padding:13px 17px;border:1px solid #e2ddcf;border-radius:10px;background:#faf8f4}
+.app-shell--staff .staff-help-steps li p{margin:5px 0 0}
+.app-shell--staff .staff-help-features{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.app-shell--staff .staff-help-feature{display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0;padding:19px 20px;border:1px solid #dedbd0;border-radius:13px;background:#faf9f5}
+.app-shell--staff .staff-help-feature--wide{grid-column:1/-1}
+.app-shell--staff .staff-help-feature h3{color:#34483c;margin:0}
+.app-shell--staff .staff-help-feature p{margin:0;line-height:1.72}
+.app-shell--staff .staff-help-feature ul{padding-left:22px;margin:0}
+.app-shell--staff .staff-help-action{display:inline-flex;align-items:center;justify-content:space-between;gap:10px;min-height:43px;padding:8px 12px;margin-top:auto;border:1px solid #b7aa8d;border-radius:8px;background:#ebe4d6;color:#2d4437;font-weight:800;text-decoration:none}
+.app-shell--staff .staff-help-action:hover{background:#ded1b9}
+.app-shell--staff .staff-help-developer .staff-help-section ul{padding-left:22px;margin:0;display:grid;gap:8px}
+.app-shell--staff .staff-help-code-list{display:grid;gap:5px}
+.app-shell--staff .staff-help-code-list p{margin:0}
+.app-shell--staff .staff-help-section pre{max-width:100%;overflow:auto;background:#293c34;color:#f7f4ea;padding:17px;border-radius:10px;line-height:1.75}
+.app-shell--staff .staff-help-section pre code{background:transparent;color:inherit;padding:0}
+.app-shell--staff .staff-help-footer{text-align:right;padding:8px}
+.app-shell--staff .staff-help-footer a{display:inline-flex;align-items:center;gap:9px;font-weight:750;color:#34483c}
+@media(max-width:750px){
+ .app-shell--staff .staff-help-hero{padding:22px 19px}
+ .app-shell--staff .staff-help-section{padding:19px 15px}
+ .app-shell--staff .staff-help-features{grid-template-columns:1fr}
+ .app-shell--staff .staff-help-feature--wide{grid-column:auto}
+}
+@media(min-width:1200px){
+ .app-shell--staff .staff-help-page{padding-top:40px}
+}
+@media print{
+ .app-shell--staff .staff-help-switcher,.app-shell--staff .staff-help-back,.app-shell--staff .staff-help-action,.app-shell--staff .staff-help-footer{display:none}
+ .app-shell--staff .staff-help-section{box-shadow:none;break-inside:avoid}
+}

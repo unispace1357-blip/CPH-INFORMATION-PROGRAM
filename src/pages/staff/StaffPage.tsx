@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { KeyboardEvent } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import type { FacilityDataset } from '../../types/facility'
 import { ConciergeHero } from '../../components/ui/ConciergeHero'
 import { ConciergeEssentials } from '../../components/ui/ConciergeEssentials'
@@ -34,6 +35,9 @@ const STAFF_TABS = ['hotel', 'facilities'] as const
 type StaffTab = (typeof STAFF_TABS)[number]
 
 export function StaffPage() {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const handledHelpNavigation = useRef<string | null>(null)
   const [activeTab, setActiveTab] = useState<StaffTab>('hotel')
   const [dataState, setDataState] = useState<DataState>({ status: 'loading' })
   const [query, setQuery] = useState('')
@@ -54,6 +58,38 @@ export function StaffPage() {
     return () => { active = false }
   }, [])
   const dataset = dataState.status === 'ready' ? dataState.dataset : null
+  // Follow Help Center links to real staff panels; wait for Timespace data when needed.
+  useEffect(() => {
+    const target = (location.state as { helpTarget?: string } | null)?.helpTarget
+    if (!target || handledHelpNavigation.current === location.key) return
+    if (target === 'timespace' && !dataset) return
+    handledHelpNavigation.current = location.key
+    if (target === 'facilities' || target === 'timespace' || target === 'print') setActiveTab('facilities')
+    if (target === 'english') setActiveTab('hotel')
+    if (target === 'timespace' && dataset) {
+      setCategory('all')
+      setQuery('타임스페이스')
+      const complex = dataset.facilities.find(item => item.id === 'songdo-timespace-complex' && item.isPublished)
+      if (complex) setSelectedId(complex.id)
+    }
+    const destinations: Record<string, string> = {
+      search: '#staff-hub-input',
+      english: '#staff-hotel-panel',
+      facilities: '#staff-facilities-panel',
+      timespace: '#staff-facility-detail',
+      quick: '.staff-quick-access',
+      print: '#staff-facilities-panel',
+    }
+    if (target === 'request') {
+      requestAnimationFrame(() => document.querySelector<HTMLButtonElement>('.staff-request-trigger')?.click())
+      return
+    }
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      const element = document.querySelector<HTMLElement>(destinations[target] ?? '#staff-hub-input')
+      element?.scrollIntoView({ block: 'start' })
+      if (target === 'search') element?.focus({ preventScroll: true })
+    }))
+  }, [location.key, location.state, dataset])
   const results = useMemo(() => searchFacilities(dataset?.facilities ?? [], query, category), [dataset, query, category])
   const selected = resolveSelectedFacility(results, selectedId)
   const featuredTimespace = dataset?.facilities.find(item => item.id === 'songdo-timespace-complex')
@@ -174,6 +210,7 @@ export function StaffPage() {
         <button type="button" className={activeTab === 'hotel' ? 'is-active' : ''} onClick={() => navigateStaffTab('hotel')}><Icon name="hotel" size={20} />호텔 안내</button>
         <button type="button" className={activeTab === 'facilities' ? 'is-active' : ''} onClick={() => navigateStaffTab('facilities')}><Icon name="attraction" size={20} />주변 시설</button>
         <button type="button" onClick={() => { const phrases = document.getElementById('staff-quick-phrases-title'); phrases?.scrollIntoView({ block: 'start' }); phrases?.focus({ preventScroll: true }) }}><Icon name="copy" size={20} />영어 응대 문구</button>
+        <button type="button" onClick={() => navigate('/staff/help')}><Icon name="info" size={20} />도움말</button>
         <button type="button" onClick={() => document.querySelector<HTMLButtonElement>('.staff-request-trigger')?.click()}><Icon name="info" size={20} />요청 접수</button>
         <button type="button" onClick={() => document.querySelector<HTMLButtonElement>('.staff-admin-trigger')?.click()}><Icon name="lock" size={20} />관리자 화면</button>
       </nav>

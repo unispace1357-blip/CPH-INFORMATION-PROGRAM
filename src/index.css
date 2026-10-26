@@ -33,3 +33,6 @@
 
 /* Password-protected local desktop admin entry, outside print layouts. */
 @import './styles/staff-admin-gate.css';
+
+/* Staff-only help center layered after design C. */
+@import './styles/staff-help.css';
