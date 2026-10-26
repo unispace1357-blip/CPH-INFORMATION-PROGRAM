@@ -19,8 +19,12 @@ try {
   // Independent local admin build. It is NOT copied to public GitHub Pages.
   // The admin bundle is packaged only inside the desktop runtime and is
   // accessible solely after main-process password verification.
-  execFileSync(process.platform === 'win32' ? 'npm.cmd' : 'npm',
-    ['run', 'admin:build', '--', '--base=./'], { cwd: root, stdio: 'inherit' })
+  // Node 24 cannot spawn npm.cmd directly via execFileSync on Windows
+  // (EINVAL). Invoke the installed build CLIs through the Node executable.
+  execFileSync(process.execPath, [join(root, 'node_modules', 'typescript', 'bin', 'tsc'),
+    '-p', 'tsconfig.admin.json'], { cwd: root, stdio: 'inherit' })
+  execFileSync(process.execPath, [join(root, 'node_modules', 'vite', 'bin', 'vite.js'),
+    'build', '--config', 'vite.admin.config.ts', '--base=./'], { cwd: root, stdio: 'inherit' })
   // @electron/get verifies the official release checksum; no custom mirrors or unsigned downloads.
   const archive = await downloadArtifact({ version, artifactName: 'electron', platform, arch: 'x64', cacheRoot: join(tmpdir(), 'cph-electron-cache') })
   await rm(output, { recursive: true, force: true })
