@@ -185,14 +185,16 @@ export function StaffPage() {
         </div>
       </section>
       <StaffSearchHub onSearch={handleDashboardSearch} />
-      {dataset?.dataStatus === 'demo' && <div className="staff-release-notice"><InformationNotice title={import.meta.env.MODE === 'public-test' ? '호텔 업무 영어 응대 안내' : '프론트 테스트용 미리보기'} tone="warning">
+      {dataset?.dataStatus === 'demo' && <div className="staff-release-notice"><InformationNotice title={import.meta.env.MODE === 'public-test' ? '프론트 통합 안내 시스템' : '프론트 테스트용 미리보기'} tone="warning">
         {import.meta.env.MODE === 'public-test' ? <>
-          <p>필요한 영어 문장을 검색·복사하세요. 검수 전 문구는 사용 전 확인해 주세요.</p>
+          <p>호텔 이용 정보와 주변 시설, 영어 응대 문구를 한곳에서 확인할 수 있습니다. 안내 전 최신 정보와 문구를 확인해 주세요.</p>
           <details className="staff-release-details">
-            <summary>업데이트 계획 및 저작권 안내</summary>
-            <p>현재 주변 시설 정보와 영어 안내 문구를 수집·검증하며 프로그램을 개선하고 있습니다. 아직 초기 단계이지만, 지속적인 업데이트를 통해 실제 프론트 업무에 도움이 되는 완성도 높은 프로그램으로 발전시키겠습니다.</p>
-            <p>수록된 안내 정보는 변경될 수 있으므로 이용 전 확인해 주세요.</p>
-            <p>© 2026 Antonio. All rights reserved. 본 프로그램의 저작권은 Antonio에게 있으며, 사전 허가 없는 복제·재배포 및 도용을 금합니다.</p>
+            <summary>프로그램 안내 및 저작권</summary>
+            <p>본 프로그램은 송도센트럴파크호텔 프론트의 신속하고 정확한 고객 안내를 지원하기 위해 제작되었습니다.</p>
+            <p>호텔 이용 정보와 주변 시설 안내, 영어 응대 문구를 한 화면에서 확인할 수 있도록 구성하여 직원들의 업무 편의성과 고객 응대의 효율성을 높이고자 합니다.</p>
+            <p>시설 운영시간 및 안내 정보는 변경될 수 있으므로, 고객에게 안내하기 전 최신 정보를 확인해 주시기 바랍니다.</p>
+            <p>© 2026 Antonio. All rights reserved.</p>
+            <p>본 프로그램의 저작권은 Antonio에게 있으며, 사전 허가 없는 복제·재배포 및 무단 사용을 금합니다.</p>
           </details>
         </> : <>호텔 업무 영어 문장은 검수 전 초안입니다. 사용 전 확인해 주세요. 정식 운영 배포는 차단되어 있습니다.</>}
       </InformationNotice></div>}
