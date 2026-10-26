@@ -30,3 +30,6 @@
 
 /* Design C — Boutique Editorial (customer/staff only, after legacy layouts). */
 @import './styles/boutique-editorial-c.css';
+
+/* Password-protected local desktop admin entry, outside print layouts. */
+@import './styles/staff-admin-gate.css';
