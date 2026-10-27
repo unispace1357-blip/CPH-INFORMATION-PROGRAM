@@ -177,6 +177,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     assert.equal(await staff.locator('#staff-hotel-panel input[type="search"]').inputValue(), '조식');
     await staff.locator('#staff-hotel-panel input[type="search"]').fill('');
     await staff.getByRole('group', { name: '호텔 안내 바로가기' }).getByRole('button', { name: '교통·주차' }).click();
+    await staff.waitForFunction(() => document.querySelector('#staff-hotel-panel input[type="search"]')?.value === '주차', null, { timeout: 5000 });
     assert.equal(await staff.locator('#staff-hotel-panel input[type="search"]').inputValue(), '주차');
     await staff.locator('#staff-hotel-panel input[type="search"]').fill('');
     await waitCards(staff, 33, '.frontdesk-script-card');
