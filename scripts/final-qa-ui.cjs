@@ -163,7 +163,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     assert.ok((await staff.locator('.staff-work-detail').innerText()).includes('20,000원'));
     await staff.getByRole('group', { name: '업무 분류' }).getByRole('button', { name: /펫캉스/ }).click();
     await staff.locator('#staff-work-query').fill('보증금');
-    await staff.locator('.staff-work-list').getByRole('button', { name: /펫캉스 청소비 및 보증금/ }).click();
+    await staff.locator('.staff-work-list').getByRole('button', { name: /펫캉스 청소비·보증금/ }).click();
     await staff.waitForFunction(() => document.querySelector('.staff-work-detail')?.textContent?.includes('받지 않습니다'), null, { timeout: 5000 });
     assert.ok((await staff.locator('.staff-work-detail').innerText()).includes('받지 않습니다'));
     await staff.locator('#staff-work-query').fill('');
