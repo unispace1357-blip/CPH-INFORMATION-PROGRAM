@@ -1,15 +1,71 @@
-/* Staff-only operations category: reserved for future manuals; no content records yet. */
+/* Staff operations reference: interactive master/detail on desktop, stacked on mobile. */
 .app-shell--staff .staff-work-panel {
-  min-height: 260px;
-  border-color: var(--boutique-border, #ded7ca);
-  padding: clamp(24px, 4vw, 42px);
+  min-height: 520px;
+  border: 1px solid var(--boutique-border, #ded7ca);
+  border-radius: 16px;
+  padding: clamp(17px, 3vw, 32px);
   background: var(--boutique-white, #fff);
 }
-.app-shell--staff .staff-work-panel h1 {
-  margin: 8px 0 16px;
-  color: var(--boutique-deep, #293c34);
+.app-shell--staff .staff-work-header {display:flex;gap:12px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;margin-bottom:22px}
+.app-shell--staff .staff-work-header h1{margin:6px 0 8px;color:var(--boutique-deep,#293c34);font-size:clamp(1.65rem,3vw,2.2rem)}
+.app-shell--staff .staff-work-header p:last-child{color:#66736b;max-width:720px}
+.app-shell--staff .staff-work-total{white-space:nowrap;padding:6px 12px;border:1px solid #d8c7a9;border-radius:100px;color:#566449;background:#f5efe6;font-size:.81rem;font-weight:800}
+.app-shell--staff .staff-work-search{position:relative;display:grid;gap:8px;margin-bottom:16px}
+.app-shell--staff .staff-work-search label{display:flex;align-items:center;gap:8px;font-weight:800;color:#435749}
+.app-shell--staff .staff-work-search input{width:100%;height:52px;border:1.5px solid #b9c1b7;border-radius:11px;padding:10px 120px 10px 16px;background:#fbfaf6;color:#293c34;font-size:1rem}
+.app-shell--staff .staff-work-search input:focus-visible{outline:3px solid #c9a876;outline-offset:2px}
+.app-shell--staff .staff-work-search button{position:absolute;right:9px;bottom:8px;min-height:36px;border:0;border-radius:8px;padding:5px 10px;background:#e8e3d8;color:#42574b;font-size:.79rem;font-weight:700}
+.app-shell--staff .staff-work-category-list{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.app-shell--staff .staff-work-category-list button{display:inline-flex;gap:7px;align-items:center;justify-content:center;min-height:40px;padding:7px 12px;border:1px solid #d9d9d1;border-radius:100px;background:#f7f5ef;color:#405147;font-size:.84rem;font-weight:700}
+.app-shell--staff .staff-work-category-list button span{font-size:.75rem;opacity:.8}
+.app-shell--staff .staff-work-category-list button.is-selected,.app-shell--staff .staff-work-category-list button:hover{color:#fff;border-color:#3f4f46;background:#3f4f46}
+.app-shell--staff .staff-work-content{display:grid;grid-template-columns:minmax(260px,.85fr) minmax(0,1.4fr);gap:18px;align-items:start}
+.app-shell--staff .staff-work-results{min-width:0;overflow:hidden;border:1px solid #e2ded5;border-radius:13px;background:#f9f7f2}
+.app-shell--staff .staff-work-list-header{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:16px 18px;border-bottom:1px solid #e3ddd1}
+.app-shell--staff .staff-work-list-header h2{font-size:1.05rem}
+.app-shell--staff .staff-work-list-header span{color:#66736b;font-size:.81rem}
+.app-shell--staff .staff-work-list{list-style:none;padding:7px;margin:0;display:grid;gap:5px;max-height:760px;overflow-y:auto}
+.app-shell--staff .staff-work-list li{margin:0}
+.app-shell--staff .staff-work-list button{display:grid;gap:4px;width:100%;min-height:76px;padding:12px 13px;text-align:left;border:1px solid transparent;border-radius:9px;background:transparent;color:#34463a}
+.app-shell--staff .staff-work-list button.is-selected{border-color:#c7b38d;background:#fff;box-shadow:0 2px 9px rgba(39,54,44,.07)}
+.app-shell--staff .staff-work-list button:hover{background:#f0eadf}
+.app-shell--staff .staff-work-list-category{font-size:.72rem;color:#6f786e}
+.app-shell--staff .staff-work-list strong{font-size:.96rem;line-height:1.45;overflow-wrap:anywhere}
+.app-shell--staff .staff-work-list-action{display:flex;align-items:center;gap:4px;font-size:.75rem;color:#526a59}
+.app-shell--staff .staff-work-detail-container{min-width:0;border:1px solid #e2ded5;border-radius:13px;background:#fff}
+.app-shell--staff .staff-work-detail{padding:clamp(18px,2.6vw,28px);display:grid;gap:16px;overflow-wrap:anywhere}
+.app-shell--staff .staff-work-detail-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.app-shell--staff .staff-work-eyebrow{letter-spacing:.04em;font-size:.74rem;font-weight:800;color:#6c6045}
+.app-shell--staff .staff-work-source{border:1px solid #e2d7c6;border-radius:6px;padding:2px 8px;font-size:.72rem;color:#766d60}
+.app-shell--staff .staff-work-detail h2{font-size:clamp(1.25rem,2.2vw,1.65rem);color:#293c34;line-height:1.4}
+.app-shell--staff .staff-work-detail h3{font-size:.98rem;color:#3b4c3e}
+.app-shell--staff .staff-work-summary{padding:12px 14px;border-left:4px solid #c9a876;border-radius:6px;background:#f6f1e8;color:#414f40;font-weight:650}
+.app-shell--staff .staff-work-steps{display:grid;gap:11px;list-style:none;margin:0;padding:0}
+.app-shell--staff .staff-work-steps li{display:flex;align-items:flex-start;gap:12px}
+.app-shell--staff .staff-work-steps p{margin:0;line-height:1.7}
+.app-shell--staff .staff-work-step-number{display:grid;place-items:center;flex:none;margin-top:2px;width:25px;height:25px;border-radius:8px;background:#e7ede5;color:#3b5144;font-size:.78rem;font-weight:800}
+.app-shell--staff .staff-work-caution,.app-shell--staff .staff-work-followup,.app-shell--staff .staff-work-notes{display:grid;gap:7px;padding:13px 15px;border-radius:9px;background:#f8f6f1;border:1px solid #e2ddd3}
+.app-shell--staff .staff-work-caution{display:flex;align-items:flex-start;background:#fff4ed;border-color:#e9bfa8;color:#763c25}
+.app-shell--staff .staff-work-caution .icon{margin-top:2px;color:#a54e26}
+.app-shell--staff .staff-work-caution p,.app-shell--staff .staff-work-followup p{margin:0}
+.app-shell--staff .staff-work-followup{border-left:4px solid #bb976d}
+.app-shell--staff .staff-work-notes ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.app-shell--staff .staff-work-review{padding:8px 12px;border-radius:7px;background:#f5f0e6;color:#63563e;font-size:.81rem}
+.app-shell--staff .staff-work-data-note{padding-top:12px;border-top:1px solid #e8e1d6;font-size:.77rem;color:#798077}
+.app-shell--staff .staff-work-empty-message{padding:22px;color:#69766b;line-height:1.7}
+@media(max-width:900px){
+  .app-shell--staff .staff-work-content{grid-template-columns:1fr}
+  .app-shell--staff .staff-work-list{max-height:350px}
 }
-.app-shell--staff .staff-work-panel .staff-work-empty-message {
-  color: var(--boutique-muted, #66726b);
-  line-height: 1.8;
+@media(max-width:550px){
+  .app-shell--staff .staff-work-search input{padding-right:16px}
+  .app-shell--staff .staff-work-search button{position:static;justify-self:end;margin-top:0}
+  .app-shell--staff .staff-work-category-list{gap:6px}
+  .app-shell--staff .staff-work-category-list button{font-size:.78rem}
+  .app-shell--staff .staff-work-header{margin-bottom:13px}
+}
+@media print{
+  .app-shell--staff .staff-work-search,.app-shell--staff .staff-work-category-list,.app-shell--staff .staff-work-results{display:none}
+  .app-shell--staff .staff-work-content{display:block}
+  .app-shell--staff .staff-work-detail-container{border:0}
 }
