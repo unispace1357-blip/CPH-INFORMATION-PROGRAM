@@ -14,28 +14,25 @@ function ArticleDetail({ article }: { article: OperationArticle }) {
   return <article className="staff-work-detail" aria-labelledby="staff-work-detail-title">
     <div className="staff-work-detail-top">
       <span className="staff-work-eyebrow">{category?.label}</span>
-      <span className="staff-work-source">{article.source}</span>
     </div>
     <h2 id="staff-work-detail-title">{article.title}</h2>
     {article.summary && <p className="staff-work-summary">{article.summary}</p>}
     {article.caution && <div className="staff-work-caution" role="note">
       <Icon name="info" size={19} />
-      <p><strong>안전 주의</strong> {article.caution}</p>
+      <p><strong>주의</strong> {article.caution}</p>
     </div>}
-    <h3>확인 및 처리 순서</h3>
+    <h3>처리 방법</h3>
     <ol className="staff-work-steps">
       {article.steps.map((step, index) => <li key={index}><span className="staff-work-step-number" aria-hidden="true">{index + 1}</span><p>{step}</p></li>)}
     </ol>
     {article.followUp && <section className="staff-work-followup" aria-labelledby="staff-work-followup-title">
-      <h3 id="staff-work-followup-title">해결되지 않을 때</h3>
+      <h3 id="staff-work-followup-title">안 될 때</h3>
       <p>{article.followUp}</p>
     </section>}
     {!!article.notes?.length && <section className="staff-work-notes" aria-labelledby="staff-work-notes-title">
-      <h3 id="staff-work-notes-title">참고사항</h3>
+      <h3 id="staff-work-notes-title">참고</h3>
       <ul>{article.notes.map((note,index)=><li key={index}>{note}</li>)}</ul>
     </section>}
-    {article.review && <p className="staff-work-review">사진 자료 기준 항목입니다. 요금·기간·객실 배정 기준은 안내 전 현재 운영 기준을 확인해 주세요.</p>}
-    <p className="staff-work-data-note">내부 업무 참고용 · 자료 출처: {article.source === '사진 매뉴얼' ? '제공된 인쇄 매뉴얼' : article.source === '최신 정정' ? '직접 전달한 최신 정정사항 및 기존 자료' : '프론트 업무 메모'}</p>
   </article>
 }
 
@@ -57,9 +54,9 @@ export function StaffWorkPanel() {
   return <section className="staff-work-panel" aria-labelledby="staff-work-title">
     <div className="staff-work-header">
       <div>
-        <p className="staff-section-kicker">STAFF OPERATIONS · FRONT DESK</p>
+        <p className="staff-section-kicker">FRONT DESK</p>
         <h1 id="staff-work-title" tabIndex={-1}>업무용 매뉴얼</h1>
-        <p>객실 문제 해결부터 객실 배정, 숙박권, 부가서비스까지 필요한 내용을 빠르게 찾아보세요.</p>
+        <p>업무별로 선택하거나 검색해서 확인하세요.</p>
       </div>
       <span className="staff-work-total">{OPERATION_ARTICLES.length}개 업무 안내</span>
     </div>
@@ -90,10 +87,10 @@ export function StaffWorkPanel() {
               onClick={() => selectArticle(article.id)}>
               <span className="staff-work-list-category">{OPERATION_CATEGORIES.find(c => c.id === article.category)?.label}</span>
               <strong>{article.title}</strong>
-              <span className="staff-work-list-action">내용 보기 <Icon name="arrow" size={15}/></span>
+              <span className="staff-work-list-action">열기 <Icon name="arrow" size={15}/></span>
             </button>
           </li>)}
-        </ul> : <p className="staff-work-empty-message">검색 결과가 없습니다. 다른 단어나 분류로 다시 검색해 보세요.</p>}
+        </ul> : <p className="staff-work-empty-message">검색 결과 없음. 다른 단어로 검색해 보세요.</p>}
       </section>
       <div className="staff-work-detail-container">
         {selected ? <ArticleDetail key={selected.id} article={selected} /> :

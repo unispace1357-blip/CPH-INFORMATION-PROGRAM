@@ -64,3 +64,16 @@ test('electrical interventions retain explicit safety ownership and source cavea
   }
   assert.ok(OPERATION_ARTICLES.find(a => a.id === 'voucher-steps')?.review)
 })
+
+test('employee-facing manual uses short task instructions, not image-source commentary', async () => {
+  const panel = await readFile(new URL('../src/components/staff/StaffWorkPanel.tsx', import.meta.url), 'utf8')
+  assert.doesNotMatch(panel, /자료 출처|사진 자료 기준|최신 정정사항|staff-work-source|staff-work-data-note|staff-work-review/)
+  const editorial = /기재되어|기재됨|기록되어|사진 기준|사진 매뉴얼|기존 메모|원문 매뉴얼|최신 정정|사용자 전달 내용|제공된 인쇄 매뉴얼/
+  for (const article of OPERATION_ARTICLES) {
+    const visible = [article.title, article.summary ?? '', ...article.steps, ...(article.notes ?? []), article.caution ?? '', article.followUp ?? ''].join('\n')
+    assert.doesNotMatch(visible, editorial, article.id)
+  }
+  const voucher = OPERATION_ARTICLES.find(article => article.id === 'voucher-steps')!
+  assert.ok(voucher.notes?.some(note => note.includes('사용 제한일 확인')), 'keep actionable restrictions')
+  assert.ok(!voucher.notes?.some(note => note.includes('기재')), 'remove meta commentary')
+})

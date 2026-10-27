@@ -36,7 +36,6 @@
 .app-shell--staff .staff-work-detail{padding:clamp(18px,2.6vw,28px);display:grid;gap:16px;overflow-wrap:anywhere}
 .app-shell--staff .staff-work-detail-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .app-shell--staff .staff-work-eyebrow{letter-spacing:.04em;font-size:.74rem;font-weight:800;color:#6c6045}
-.app-shell--staff .staff-work-source{border:1px solid #e2d7c6;border-radius:6px;padding:2px 8px;font-size:.72rem;color:#766d60}
 .app-shell--staff .staff-work-detail h2{font-size:clamp(1.25rem,2.2vw,1.65rem);color:#293c34;line-height:1.4}
 .app-shell--staff .staff-work-detail h3{font-size:.98rem;color:#3b4c3e}
 .app-shell--staff .staff-work-summary{padding:12px 14px;border-left:4px solid #c9a876;border-radius:6px;background:#f6f1e8;color:#414f40;font-weight:650}
@@ -50,8 +49,6 @@
 .app-shell--staff .staff-work-caution p,.app-shell--staff .staff-work-followup p{margin:0}
 .app-shell--staff .staff-work-followup{border-left:4px solid #bb976d}
 .app-shell--staff .staff-work-notes ul{margin:0;padding-left:20px;display:grid;gap:6px}
-.app-shell--staff .staff-work-review{padding:8px 12px;border-radius:7px;background:#f5f0e6;color:#63563e;font-size:.81rem}
-.app-shell--staff .staff-work-data-note{padding-top:12px;border-top:1px solid #e8e1d6;font-size:.77rem;color:#798077}
 .app-shell--staff .staff-work-empty-message{padding:22px;color:#69766b;line-height:1.7}
 @media(max-width:900px){
   .app-shell--staff .staff-work-content{grid-template-columns:1fr}
