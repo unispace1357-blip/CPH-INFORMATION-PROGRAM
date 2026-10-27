@@ -94,3 +94,10 @@ test('reference notes contain confirmed, actionable details instead of speculati
   const voucher = OPERATION_ARTICLES.find(article => article.id === 'voucher-steps')!
   assert.ok(voucher.notes?.some(note => note.includes('사용 제한일')), 'keep voucher booking conditions')
 })
+
+test('staff action buttons and manual count badge have explicit contrast styles', async () => {
+  const css = await readFile(new URL('../src/styles/staff-work.css', import.meta.url), 'utf8')
+  assert.match(css, /staff-work-total\\s*\\{[\\s\\S]*?background:#d9e2d6;color:#243229/)
+  assert.match(css, /site-header \\.staff-header-actions \\.header-link,[\\s\\S]*?color:#fff/)
+  assert.match(css, /staff-header-actions \\.header-link:focus-visible/)
+})
