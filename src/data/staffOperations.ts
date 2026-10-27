@@ -80,7 +80,7 @@ export const OPERATION_ARTICLES: readonly OperationArticle[] = [
   { id:'departments',category:'contacts',title:'부서별 내선번호 전체',keywords:['전화','내선','연락처','예약실','하키','HK','하우스키핑','시설','식당','주방','F/B'],steps:['객실 예약실: 5000 / 5031 / 5032 / 4099','하우스키핑(H/K): 5080 (지희주 계장님) / 5081 (이선미 주임님)','시설팀: 5030','하이웨이브 조식 및 오전 행사 세팅: 5016','룸서비스(라운지 오픈 이후): 5082','재경팀: 5008','메인주방: 5042','F/B 사무실: 5012 / 5013'],notes:['내선번호와 담당자 정보는 사용자가 직접 제공한 내부 업무 자료 기준입니다.'],source:'직접 전달' },
 ]
 
-const normalize = (text: string): string => text.normalize('NFKC').toLocaleLowerCase().replace(/[\s\-_.·/()[\]]+/g, '')
+const normalize = (text: string): string => text.normalize('NFKC').toLocaleLowerCase().replace(/[^\p{L}\p{N}]+/gu, '')
 export function searchOperations(articles: readonly OperationArticle[], query: string, category: OperationCategory | 'all'): OperationArticle[] {
   const compact = normalize(query.trim())
   return articles.filter(article => {
