@@ -39,6 +39,8 @@ test('direct corrections replace old smart TV locations and 200,000-won pet depo
   for (const expected of ['DBP','11~14층','10,000원','15층','20,000원','DTW','14~15층','SDL','DBC','스마트 TV 없음']) {
     assert.ok(text.includes(expected), expected)
   }
+  assert.ok(tv.steps.some(step => step === 'DTW 14~15층: 1박·1객실당 10,000원 추가'))
+  assert.equal(tv.notes?.length ?? 0, 0, 'no open DTW fee question should remain')
   const pet = OPERATION_ARTICLES.find(x => x.id === 'pet-fee')!
   assert.equal(pet.source, '최신 정정')
   assert.ok(pet.steps[0]?.includes('받지 않습니다'))
@@ -76,4 +78,19 @@ test('employee-facing manual uses short task instructions, not image-source comm
   const voucher = OPERATION_ARTICLES.find(article => article.id === 'voucher-steps')!
   assert.ok(voucher.notes?.some(note => note.includes('사용 제한일 확인')), 'keep actionable restrictions')
   assert.ok(!voucher.notes?.some(note => note.includes('기재')), 'remove meta commentary')
+})
+
+test('reference notes contain confirmed, actionable details instead of speculative caveats', () => {
+  for (const article of OPERATION_ARTICLES) {
+    for (const note of article.notes ?? []) {
+      assert.doesNotMatch(note, /확인 필요|적용 단위|적용 방식 확인|객실별 확인|예외 호실|다를 수 있으니|기기별 확인/, article.id)
+    }
+  }
+  for (const id of ['room-views', 'smart-tv-pricing', 'request-amenities', 'pet-fee']) {
+    assert.equal(OPERATION_ARTICLES.find(article => article.id === id)?.notes?.length ?? 0, 0, id)
+  }
+  const pet = OPERATION_ARTICLES.find(article => article.id === 'pet-policy')!
+  assert.ok(pet.notes?.some(note => note.includes('10kg')), 'keep actual pet occupancy limit')
+  const voucher = OPERATION_ARTICLES.find(article => article.id === 'voucher-steps')!
+  assert.ok(voucher.notes?.some(note => note.includes('사용 제한일')), 'keep voucher booking conditions')
 })
