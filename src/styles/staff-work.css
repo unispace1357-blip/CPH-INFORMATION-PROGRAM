@@ -9,7 +9,14 @@
 .app-shell--staff .staff-work-header {display:flex;gap:12px;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;margin-bottom:22px}
 .app-shell--staff .staff-work-header h1{margin:6px 0 8px;color:var(--boutique-deep,#293c34);font-size:clamp(1.65rem,3vw,2.2rem)}
 .app-shell--staff .staff-work-header p:last-child{color:#66736b;max-width:720px}
-.app-shell--staff .staff-work-total{white-space:nowrap;padding:6px 12px;border:1px solid #d8c7a9;border-radius:100px;color:#566449;background:#f5efe6;font-size:.81rem;font-weight:800}
+.app-shell--staff .staff-work-total{
+  display:inline-flex;align-items:center;justify-content:center;
+  white-space:nowrap;min-height:34px;padding:6px 13px;
+  border:1px solid #5f6f62;border-radius:999px;
+  background:#d9e2d6;color:#243229;
+  font-size:.88rem;font-weight:800;line-height:1.2;
+  box-shadow:0 1px 2px rgba(0,0,0,.09);
+}
 .app-shell--staff .staff-work-search{position:relative;display:grid;gap:8px;margin-bottom:16px}
 .app-shell--staff .staff-work-search label{display:flex;align-items:center;gap:8px;font-weight:800;color:#435749}
 .app-shell--staff .staff-work-search input{width:100%;height:52px;border:1.5px solid #b9c1b7;border-radius:11px;padding:10px 120px 10px 16px;background:#fbfaf6;color:#293c34;font-size:1rem}
@@ -65,4 +72,25 @@
   .app-shell--staff .staff-work-search,.app-shell--staff .staff-work-category-list,.app-shell--staff .staff-work-results{display:none}
   .app-shell--staff .staff-work-content{display:block}
   .app-shell--staff .staff-work-detail-container{border:0}
+}
+
+/* Header controls use a deep-green fill at desktop widths; keep the labels white.
+   Higher specificity prevents the generic boutique header rule from overriding them. */
+@media (min-width:1200px){
+  .app-shell--staff .site-header .staff-header-actions .header-link,
+  .app-shell--staff .site-header .staff-header-actions .header-link:visited{
+    color:#fff;
+    background:#33493c;
+    border-color:#c8b691;
+    font-weight:750;
+    text-shadow:none;
+  }
+  .app-shell--staff .site-header .staff-header-actions .header-link:hover{
+    color:#fff;
+    background:#263e32;
+  }
+  .app-shell--staff .site-header .staff-header-actions .header-link:focus-visible{
+    outline:3px solid #c8b691;
+    outline-offset:2px;
+  }
 }
