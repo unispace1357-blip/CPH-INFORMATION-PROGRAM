@@ -157,7 +157,7 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     assert.ok((await staff.locator('.staff-work-total').innerText()).includes('40개'));
     await staff.locator('#staff-work-query').fill('스마트 TV');
     await staff.getByRole('group', { name: '업무 분류' }).getByRole('button', { name: /객실 타입·배정/ }).click();
-    await staff.locator('.staff-work-list').getByRole('button', { name: /스마트 TV 객실 배정과 추가 요금/ }).click();
+    await staff.locator('.staff-work-list').getByRole('button', { name: /스마트 TV 객실 및 추가 요금/ }).click();
     await staff.waitForFunction(() => document.querySelector('.staff-work-detail')?.textContent?.includes('15층'), null, { timeout: 5000 });
     assert.ok((await staff.locator('.staff-work-detail').innerText()).includes('15층'));
     assert.ok((await staff.locator('.staff-work-detail').innerText()).includes('20,000원'));
