@@ -40,3 +40,9 @@ test('Russian guest localization covers UI, all 27 venues, hotel notices and 15 
   for (const tenant of TIMESPACE_TENANTS) { assert.ok(tenant.menu.ru); assert.match(timespaceLocation(tenant,'ru'), /Корпус/) }
   assert.equal(Object.hasOwn(hotelDataset.translations, 'ru'), false)
 })
+
+test('Russian complimentary amenities and printing are localized and searchable',()=>{
+  const hotel = withRussianHotel(hotelDataset)
+  for (const [q,index] of [['фен',27],['распечатать',28]] as const) assert.ok(searchHotelInformation(hotel,'ru',q).some(h=>h.category==='roomUsage'&&h.index===index))
+  assert.match(hotelParagraphs(hotelTopicText(hotel,'roomUsage','ru'))[28]!,/100 вон/)
+})

@@ -124,3 +124,18 @@ test('latest TV troubleshooting procedures update five existing facility article
     assert.ok(searchOperations(OPERATION_ARTICLES, query!, 'facilities').some(article => article.id === id), query)
   }
 })
+
+test('room assignment and type-change procedures preserve the supplied workflow and free amenities', () => {
+  const get = (id: string) => OPERATION_ARTICLES.find(a => a.id === id)!
+  const elevator = get('elevator-room-assignment')
+  assert.equal(elevator.category,'rooms')
+  for (const q of ['엘리베이터','엘베','승강기']) assert.ok(searchOperations(OPERATION_ARTICLES,q,'rooms').some(a => a.id === elevator.id))
+  assert.match(elevator.steps.join(' '), /22~25호.*04~07호.*1604·1605호.*23~25호.*06호·24호/)
+  const change = get('room-type-change')
+  assert.equal(change.category,'rooms')
+  assert.match(change.steps.join(' '), /사용 가능 객실.*인차지.*객실료 고정.*리마크.*객실료 고정 금지.*일별요금.*폴리오.*LS 룸터치.*H\/K.*예약실.*일별요금/)
+  assert.match(change.caution!, /절대 객실료 고정 금지/)
+  assert.equal(OPERATION_ARTICLES.filter(a => a.id === 'request-amenities').length,1)
+  assert.match(get('request-amenities').summary!,/모두 무료/)
+  assert.match(get('request-amenities').steps.join(' '),/빗.*가운.*생수 3병.*샴푸.*수건/)
+})
