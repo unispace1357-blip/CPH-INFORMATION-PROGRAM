@@ -23,15 +23,15 @@ export function activeTimespaceTenants(tenants: readonly TimespaceTenant[]): Tim
 export const TIMESPACE_TENANTS = activeTimespaceTenants(raw.tenants as TimespaceTenant[])
 
 const CATEGORY_LABELS: Record<TimespaceCategoryFilter, Record<GuideLanguage, string>> = {
-  all: { ko: '전체', en: 'All', 'zh-CN': '全部', ja: 'すべて' },
-  grill: { ko: '고기구이', en: 'Grilled meat', 'zh-CN': '烤肉', ja: '焼肉' },
-  western: { ko: '파스타·양식', en: 'Pasta & Western', 'zh-CN': '意面·西餐', ja: 'パスタ・洋食' },
-  pizza: { ko: '피자', en: 'Pizza', 'zh-CN': '披萨', ja: 'ピザ' },
-  curry: { ko: '카레', en: 'Curry', 'zh-CN': '咖喱', ja: 'カレー' },
-  korean: { ko: '한식·찌개', en: 'Korean food & stews', 'zh-CN': '韩餐·汤锅', ja: '韓国料理・チゲ' },
-  japanese: { ko: '일식·철판', en: 'Japanese & teppan dishes', 'zh-CN': '日式铁板', ja: '和食・鉄板' },
-  snack: { ko: '떡볶이·분식', en: 'Tteokbokki & street food', 'zh-CN': '炒年糕·小吃', ja: 'トッポッキ・軽食' },
-  healthy: { ko: '포케·샐러드', en: 'Poké & salads', 'zh-CN': '波奇饭·沙拉', ja: 'ポキ・サラダ' },
+  all: { ko: '전체', en: 'All', 'zh-CN': '全部', ru: "Все", ja: 'すべて' },
+  grill: { ko: '고기구이', en: 'Grilled meat', 'zh-CN': '烤肉', ru: "Мясо на гриле", ja: '焼肉' },
+  western: { ko: '파스타·양식', en: 'Pasta & Western', 'zh-CN': '意面·西餐', ru: "Паста и европейская кухня", ja: 'パスタ・洋食' },
+  pizza: { ko: '피자', en: 'Pizza', 'zh-CN': '披萨', ru: "Пицца", ja: 'ピザ' },
+  curry: { ko: '카레', en: 'Curry', 'zh-CN': '咖喱', ru: "Карри", ja: 'カレー' },
+  korean: { ko: '한식·찌개', en: 'Korean food & stews', 'zh-CN': '韩餐·汤锅', ru: "Корейские блюда и супы", ja: '韓国料理・チゲ' },
+  japanese: { ko: '일식·철판', en: 'Japanese & teppan dishes', 'zh-CN': '日式铁板', ru: "Японская кухня и теппан", ja: '和食・鉄板' },
+  snack: { ko: '떡볶이·분식', en: 'Tteokbokki & street food', 'zh-CN': '炒年糕·小吃', ru: "Токпокки и закуски", ja: 'トッポッキ・軽食' },
+  healthy: { ko: '포케·샐러드', en: 'Poké & salads', 'zh-CN': '波奇饭·沙拉', ru: "Поке и салаты", ja: 'ポキ・サラダ' },
 }
 
 export const TIMESPACE_DIRECTORY_UI: Record<GuideLanguage, {
@@ -62,6 +62,7 @@ export const TIMESPACE_DIRECTORY_UI: Record<GuideLanguage, {
     locationLabel: '店铺位置',
     note: '商户、营业时间和菜单可能会调整，请在到访前向店家确认。',
   },
+  ru: {"heading":"Каталог ресторанов","intro":"Выберите желаемый вид кухни.","menuLabel":"Популярные блюда","locationLabel":"Расположение ресторана","note":"Рестораны, часы работы и меню могут меняться. Уточняйте перед посещением."},
   ja: {
     heading: '飲食店を探す',
     intro: '食べたい料理の種類をお選びください。',
@@ -80,6 +81,7 @@ export function timespaceLocation(tenant: TimespaceTenant, language: GuideLangua
     case 'ko': return `${tenant.building}동 ${tenant.floor}층 ${tenant.rooms}호`
     case 'en': return `Block ${tenant.building} · Floor ${tenant.floor} · Unit ${tenant.rooms}`
     case 'zh-CN': return `${tenant.building}栋 ${tenant.floor}层 ${tenant.rooms}号`
+    case 'ru': return `Корпус ${tenant.building} · Этаж ${tenant.floor} · Помещение ${tenant.rooms}`
     case 'ja': return `${tenant.building}棟 ${tenant.floor}階 ${tenant.rooms}号`
   }
 }

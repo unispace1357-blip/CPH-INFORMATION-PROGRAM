@@ -21,7 +21,7 @@ export function AirportBusGuide({ language, staff = false }: { language: GuideLa
     <dl className="local-guide-facts">
       <div><dt>{copy.routeLabel}</dt><dd>{copy.routeDescription}</dd></div>
       <div><dt>{copy.boardingLabel}</dt><dd>{copy.boarding}</dd></div>
-      <div><dt>{copy.fareLabel}</dt><dd>{language === 'en' ? `KRW ${AIRPORT_LIMOUSINE_6777.adultFareKrw.toLocaleString('ko-KR')}` : `${AIRPORT_LIMOUSINE_6777.adultFareKrw.toLocaleString('ko-KR')}${language === 'ko' ? '원' : language === 'ja' ? 'ウォン' : '韩元'}`}</dd></div>
+      <div><dt>{copy.fareLabel}</dt><dd>{language === 'en' ? `KRW ${AIRPORT_LIMOUSINE_6777.adultFareKrw.toLocaleString('ko-KR')}` : `${AIRPORT_LIMOUSINE_6777.adultFareKrw.toLocaleString('ko-KR')}${language === 'ko' ? '원' : language === 'ja' ? 'ウォン' : language === 'ru' ? ' вон' : '韩元'}`}</dd></div>
     </dl>
     <p className="local-guide-subtitle">{copy.departuresLabel}</p>
     <ol className="local-guide-departures" aria-label={copy.departuresLabel}>

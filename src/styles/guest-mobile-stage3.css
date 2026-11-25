@@ -355,3 +355,8 @@
   .app-shell--guest .concierge-featured-tags { display:flex; flex-wrap:wrap; gap:5px; }
   .app-shell--guest .concierge-featured-tags span { padding:4px 8px; border-radius:999px; background:#edf4ff; color:#285e99; font-size:.72rem; font-weight:650; }
 }
+
+/* Russian labels can be longer; keep the guest layout readable. */
+html[lang=ru] .guest-page :is(button, h2, h3, .concierge-fact-label, .concierge-fact-button strong) { overflow-wrap:anywhere; }
+html[lang=ru] .guest-page .language-options { flex-wrap:wrap; }
+html[lang=ru] .guest-page .concierge-fact-button strong { white-space:normal; }

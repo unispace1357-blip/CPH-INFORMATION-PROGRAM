@@ -101,6 +101,7 @@ export const LOCAL_GUIDE_COPY: Record<GuideLanguage, LocalGuideCopy> = {
     copyFailedLabel: '无法复制，请手动选择文本。',
     guideOnlyResult: '请查看下方的专项指南。',
   },
+  ru: {"airportTitle":"Автобус-лимузин 6777 до аэропорта Инчхон","routeLabel":"Маршрут","routeDescription":"Central Park → аэропорт Инчхон, терминал 1 → терминал 2","boardingLabel":"Место посадки","boarding":"Около POSCO Booyoung Tower, у выхода 1 станции Central Park (по памятке отеля)","departuresLabel":"Расписание отправлений от Central Park","departurePlaceLabel":"Важно","departurePlace":"Это время отправления от остановки Central Park, а не от отеля.","disclaimerTitle":"Расписание может измениться","disclaimer":"Время, маршруты, остановки и рейсы могут меняться из-за движения, праздников или решений перевозчика. Уточните актуальные сведения перед посадкой.","fareLabel":"Тариф для взрослых","fareNote":"Стандартный взрослый тариф: 8 000 вон. Детские тарифы, бронирование и фактическое время прибытия уточняйте перед поездкой.","tourismTitle":"Достопримечательности Сонгдо","tourismIntro":"Изучите ближайшие места по схеме. Для реального маршрута используйте Naver Map.","tourismCaution":"Часы работы, вход и маршруты могут меняться. Уточняйте перед посещением.","staffEnglishLabel":"Английский текст для сотрудников","copyLabel":"Копировать английский","copiedLabel":"Скопировано","copyFailedLabel":"Не удалось скопировать. Выделите и скопируйте текст вручную.","guideOnlyResult":"См. отдельный гид ниже."},
   ja: {
     airportTitle: '仁川空港リムジンバス 6777番',
     routeLabel: '運行ルート',
@@ -130,18 +131,18 @@ export const SONGDO_TOURISM_SPOTS: ReadonlyArray<{
   name: Record<GuideLanguage, string>
   note: Record<GuideLanguage, string>
 }> = [
-  { id: 'central-park', name: { ko: '송도 센트럴파크', en: 'Songdo Central Park', 'zh-CN': '松岛中央公园', ja: '松島セントラルパーク' },
-    note: { ko: '산책과 수변 풍경', en: 'Waterfront walks and park scenery', 'zh-CN': '滨水步道与公园风景', ja: '水辺の散歩と公園の景色' } },
-  { id: 'tri-bowl', name: { ko: '트라이볼', en: 'Tri-Bowl', 'zh-CN': 'Tri-Bowl 艺术空间', ja: 'トライボウル' },
-    note: { ko: '독특한 건축물과 문화공간', en: 'Distinctive architecture and cultural space', 'zh-CN': '独特建筑与文化空间', ja: '特徴的な建築と文化施設' } },
-  { id: 'g-tower', name: { ko: 'G타워', en: 'G-Tower', 'zh-CN': 'G塔', ja: 'Gタワー' },
-    note: { ko: '송도 전망과 IFEZ 홍보관', en: 'City views and the IFEZ exhibition', 'zh-CN': '城市景观与 IFEZ 展览', ja: '松島の眺望とIFEZ展示' } },
-  { id: 'hanok-village', name: { ko: '송도 한옥마을', en: 'Songdo Hanok Village', 'zh-CN': '松岛韩屋村', ja: '松島韓屋村' },
-    note: { ko: '한옥 양식 건물과 식당가', en: 'Korean-style buildings and restaurants', 'zh-CN': '韩屋建筑与餐饮场所', ja: '韓屋風の建物とレストラン' } },
-  { id: 'haedoji-park', name: { ko: '해돋이공원', en: 'Haedoji Park', 'zh-CN': '日出公园', ja: '日の出公園' },
-    note: { ko: '공원 산책과 녹지', en: 'Green space and walking paths', 'zh-CN': '绿地与散步路线', ja: '緑地と散歩道' } },
-  { id: 'michuhol-park', name: { ko: '미추홀공원', en: 'Michuhol Park', 'zh-CN': '弥邹忽公园', ja: 'ミチュホル公園' },
-    note: { ko: '전통 경관을 참고한 휴식 공간', en: 'A park with traditional landscaping', 'zh-CN': '具有传统景观的休憩公园', ja: '伝統的な景観を取り入れた公園' } },
+  { id: 'central-park', name: { ko: '송도 센트럴파크', en: 'Songdo Central Park', 'zh-CN': '松岛中央公园', ru: "Центральный парк Сонгдо", ja: '松島セントラルパーク' },
+    note: { ko: '산책과 수변 풍경', en: 'Waterfront walks and park scenery', 'zh-CN': '滨水步道与公园风景', ru: "Прогулки вдоль воды и виды парка", ja: '水辺の散歩と公園の景色' } },
+  { id: 'tri-bowl', name: { ko: '트라이볼', en: 'Tri-Bowl', 'zh-CN': 'Tri-Bowl 艺术空间', ru: "Tri-Bowl", ja: 'トライボウル' },
+    note: { ko: '독특한 건축물과 문화공간', en: 'Distinctive architecture and cultural space', 'zh-CN': '独特建筑与文化空间', ru: "Необычная архитектура и культурное пространство", ja: '特徴的な建築と文化施設' } },
+  { id: 'g-tower', name: { ko: 'G타워', en: 'G-Tower', 'zh-CN': 'G塔', ru: "G-Tower", ja: 'Gタワー' },
+    note: { ko: '송도 전망과 IFEZ 홍보관', en: 'City views and the IFEZ exhibition', 'zh-CN': '城市景观与 IFEZ 展览', ru: "Виды города и выставка IFEZ", ja: '松島の眺望とIFEZ展示' } },
+  { id: 'hanok-village', name: { ko: '송도 한옥마을', en: 'Songdo Hanok Village', 'zh-CN': '松岛韩屋村', ru: "Деревня ханок Сонгдо", ja: '松島韓屋村' },
+    note: { ko: '한옥 양식 건물과 식당가', en: 'Korean-style buildings and restaurants', 'zh-CN': '韩屋建筑与餐饮场所', ru: "Здания в корейском стиле и рестораны", ja: '韓屋風の建物とレストラン' } },
+  { id: 'haedoji-park', name: { ko: '해돋이공원', en: 'Haedoji Park', 'zh-CN': '日出公园', ru: "Парк Хэдоджи", ja: '日の出公園' },
+    note: { ko: '공원 산책과 녹지', en: 'Green space and walking paths', 'zh-CN': '绿地与散步路线', ru: "Зелёные зоны и прогулочные дорожки", ja: '緑地と散歩道' } },
+  { id: 'michuhol-park', name: { ko: '미추홀공원', en: 'Michuhol Park', 'zh-CN': '弥邹忽公园', ru: "Парк Мичухоль", ja: 'ミチュホル公園' },
+    note: { ko: '전통 경관을 참고한 휴식 공간', en: 'A park with traditional landscaping', 'zh-CN': '具有传统景观的休憩公园', ru: "Парк с традиционным ландшафтным дизайном", ja: '伝統的な景観を取り入れた公園' } },
 ]
 
 export const AIRPORT_6777_STAFF_ENGLISH =
