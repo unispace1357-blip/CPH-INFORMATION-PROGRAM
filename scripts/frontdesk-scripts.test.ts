@@ -262,3 +262,11 @@ test('five operational replies are categorized, searchable and keep charges dist
   assert.match(get('room-blanket-rental').quickAnswer.en, /5,000 laundry fee per room/)
   assert.match(get('phone-charger-rental').quickAnswer.en, /10,000 cash deposit/)
 })
+
+test('staff check-in response includes early fees and preserves availability checks', () => {
+  const script = frontdeskScriptDataset.scripts.find(s => s.id === 'check-in-time')!
+  assert.match(script.quickAnswer.en, /3 PM.*11,000 per hour.*before 9:00 AM.*one night/)
+  assert.match(script.quickAnswer.ko, /오후 3시.*시간당 11,000원.*오전 9시 이전.*1박/)
+  assert.ok(script.staffChecks.some(s => s.includes('가능 여부')))
+  for (const query of ['얼리','얼리체크인','조기입실','early check-in']) assert.ok(searchFrontdeskScripts(frontdeskScriptDataset.scripts, query).some(s => s.id === script.id))
+})

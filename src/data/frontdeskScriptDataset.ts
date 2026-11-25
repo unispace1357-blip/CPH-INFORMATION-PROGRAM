@@ -3,6 +3,7 @@ import { parseFrontdeskScriptDataset } from './validateFrontdeskScriptDataset.ts
 import type { FrontdeskScript, FrontdeskScriptDataset } from '../types/frontdeskScript.ts'
 import { coolingNotice, ROOM_CLIMATE_COPY, WINTER_COOLING_UNAVAILABLE } from './roomClimateNotices.ts'
 import { HOTEL_OPERATIONAL_NOTICES } from './hotelOperationalNotices.ts'
+import { EARLY_CHECK_IN_COPY } from './checkInAmenitiesCopy.ts'
 
 /** Apply the current operational amendment without rewriting the historical script snapshot. */
 export function applyRoomClimateScripts(dataset: FrontdeskScriptDataset, winter = WINTER_COOLING_UNAVAILABLE): FrontdeskScriptDataset {
@@ -45,7 +46,12 @@ export function applyOperationalScripts(dataset: FrontdeskScriptDataset): Frontd
     staffChecks: [], sourceType: 'user-provided', sourceSection: null,
     reviewStatus: 'draft', lastVerifiedAt: null,
   }))
-  return parseFrontdeskScriptDataset({ ...dataset, scripts: [...dataset.scripts, ...additions] })
+  const existing = dataset.scripts.map(script => script.id !== 'check-in-time' ? script : {
+    ...script,
+    quickAnswer: { ko: script.quickAnswer.ko + ' ' + EARLY_CHECK_IN_COPY.ko, en: script.quickAnswer.en + ' ' + EARLY_CHECK_IN_COPY.en },
+    details: { ko: (script.details?.ko ?? script.quickAnswer.ko) + ' ' + EARLY_CHECK_IN_COPY.ko, en: (script.details?.en ?? script.quickAnswer.en) + ' ' + EARLY_CHECK_IN_COPY.en },
+  })
+  return parseFrontdeskScriptDataset({ ...dataset, scripts: [...existing, ...additions] })
 }
 
 /** Staff-only lazy dataset; validation still rejects unreviewed production scripts. */

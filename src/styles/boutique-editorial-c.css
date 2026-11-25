@@ -388,3 +388,9 @@
   .app-shell--guest .boutique-entry-card { min-height:105px; }
 }
 @media print { .app-shell .room-climate-cards { display:none!important; } }
+
+/* Guest fifth quick fact: preserve the existing card grid and make purchase terms readable. */
+.app-shell--guest .concierge-fact--amenities .concierge-fact-button { gap:4px; }
+.app-shell--guest .concierge-amenities-items { font-size:.76rem; line-height:1.35; color:#514b42; overflow-wrap:anywhere; }
+.app-shell--guest .concierge-fact--amenities strong { color:#702b33; }
+@media(max-width:767px) { .app-shell--guest .concierge-amenities-items { font-size:.7rem; } }

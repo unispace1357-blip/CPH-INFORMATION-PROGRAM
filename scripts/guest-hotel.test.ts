@@ -144,3 +144,18 @@ test('heating notice preserves the panel location, 26°C setting limit and gradu
     for (const query of ['26도','온돌','바닥난방','floor heating']) assert.ok(searchHotelInformation(hotel, language, query).some(hit => hit.category === 'roomUsage' && hit.index === 12 && hit.text === heating), language + ': ' + query)
   }
 })
+
+test('early check-in prices are localized and searchable without changing the approved base check-in time', async () => {
+  const hotel = await loadGuestHotel()
+  const before = structuredClone(hotel)
+  for (const language of GUIDE_LANGUAGES) {
+    const copy = hotelTopicText(hotel, 'checkIn', language)
+    assert.ok(copy.startsWith(hotel.translations[language].checkIn))
+    assert.match(copy, /11,000/)
+    assert.match(copy, /9시|9:00 AM|9点|9時/)
+    assert.match(copy, /1박|one night|一晚|1泊/)
+    for (const query of ['얼리체크인','조기입실','일찍입실','early check-in']) assert.ok(searchHotelInformation(hotel, language, query).some(h => h.category === 'checkIn' && h.text === copy), language + ': ' + query)
+  }
+  assert.equal(hotel.checkInTime, '15:00')
+  assert.deepEqual(hotel, before)
+})

@@ -4,13 +4,14 @@ import type { HotelCategory } from '../i18n/types.ts'
 import { localizedValue } from '../i18n/formatters.ts'
 import { ROOM_CLIMATE_COPY, coolingNotice } from '../data/roomClimateNotices.ts'
 import { operationalNoticesFor } from '../data/hotelOperationalNotices.ts'
+import { EARLY_CHECK_IN_COPY } from '../data/checkInAmenitiesCopy.ts'
 
 export function hotelHasInformation(hotel: HotelDataset, language: GuideLanguage): boolean {
   return hotel.checkInTime !== null || hotel.checkOutTime !== null || Object.values(hotel.translations[language]).some(value => value.trim())
 }
 
 export function hotelTopicText(hotel: HotelDataset, category: HotelCategory, language: GuideLanguage): string {
-  if (category === 'roomUsage' || category === 'parking') return localizedValue(hotelDisplayParagraphs(hotel, category, language).join('\n\n'), language)
+  if (category === 'roomUsage' || category === 'parking' || category === 'checkIn') return localizedValue(hotelDisplayParagraphs(hotel, category, language).join('\n\n'), language)
   return localizedValue(hotel.translations[language][category], language)
 }
 
@@ -36,7 +37,14 @@ export function roomUsageDisplayParagraphs(hotel: HotelDataset, language: GuideL
 /** The current hotel data is the approved workbook snapshot. Keep synthetic/empty
  * datasets free of operational additions, as with the existing climate overlay.
  */
-export function hotelDisplayParagraphs(hotel: HotelDataset, category: 'roomUsage' | 'parking', language: GuideLanguage): string[] {
+export function hotelDisplayParagraphs(hotel: HotelDataset, category: 'roomUsage' | 'parking' | 'checkIn', language: GuideLanguage): string[] {
+  if (category === 'checkIn') {
+    const paragraphs = hotelParagraphs(hotel.translations[language].checkIn)
+    if (hotel.checkInTime === '15:00' && paragraphs.length && hotelParagraphs(hotel.translations[language].roomUsage).length >= 12) {
+      paragraphs[0] += ' ' + EARLY_CHECK_IN_COPY[language]
+    }
+    return paragraphs
+  }
   const paragraphs = category === 'roomUsage' ? roomUsageDisplayParagraphs(hotel, language) : hotelParagraphs(hotel.translations[language].parking)
   if (hotelParagraphs(hotel.translations[language].roomUsage).length < 12 || !paragraphs.length) return paragraphs
   return [...paragraphs, ...operationalNoticesFor(category).map(item => item.copy[language].text)]

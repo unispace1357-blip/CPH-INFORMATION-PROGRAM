@@ -62,7 +62,7 @@ export function HotelInformation({ state, language, selected, onSelect, onClose 
       {hotel && <SmokingPolicyNotice hotel={hotel} language={language} />}
       {hotel && <RoomClimateCards language={language} onHeating={() => selectTopic('roomUsage')} onCooling={() => selectTopic('roomUsage')} />}
       {hotel && <BoutiqueEditorialTiles language={language} onHotelTopic={() => selectTopic('roomUsage')} />}
-      {hotel && <ConciergeEssentials hotel={hotel} language={language} includeCheckout onHotelTopic={selectTopic} />}
+      {hotel && <ConciergeEssentials hotel={hotel} language={language} includeCheckout onHotelTopic={selectTopic} onAmenities={() => { setActiveHit({ category: 'roomUsage', source: 'topic', index: 4 }); onSelect('roomUsage') }} />}
       {hotel && !hotelHasInformation(hotel, language) && <InformationNotice title={m.ui.hotelEmptyTitle}>{m.ui.hotelEmptyDescription}</InformationNotice>}
       <div className="hotel-information-heading">
         <div className="hotel-information-heading-copy">

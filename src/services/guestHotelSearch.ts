@@ -71,11 +71,11 @@ export function searchHotelInformation(hotel: HotelDataset, language: GuideLangu
     const categoryMatch = tokens.every(token => tokenMatches(categoryNames, token))
     const sources = category === 'roomUsage' ? (['roomUsage', 'notes'] as const) : ([category] as const)
     for (const field of sources) {
-      const paragraphs = field === 'roomUsage' || field === 'parking' ? hotelDisplayParagraphs(hotel, field, language) : hotelParagraphs(hotel.translations[language][field])
+      const paragraphs = field === 'roomUsage' || field === 'parking' || field === 'checkIn' ? hotelDisplayParagraphs(hotel, field, language) : hotelParagraphs(hotel.translations[language][field])
       for (let index = 0; index < paragraphs.length; index++) {
         const title = field === 'roomUsage' ? roomUsageDisplayLabels(language)[index] ?? '' : field === 'parking' ? parkingDisplayLabels(language)[index] ?? '' : MESSAGES[language].hotelCategories[category]
         const allLanguages = languages.map(lang =>
-          [(field === 'roomUsage' || field === 'parking' ? hotelDisplayParagraphs(hotel, field, lang) : hotelParagraphs(hotel.translations[lang][field]))[index] ?? '',
+          [(field === 'roomUsage' || field === 'parking' || field === 'checkIn' ? hotelDisplayParagraphs(hotel, field, lang) : hotelParagraphs(hotel.translations[lang][field]))[index] ?? '',
             field === 'roomUsage' ? roomUsageDisplayLabels(lang)[index] ?? '' : field === 'parking' ? parkingDisplayLabels(lang)[index] ?? '' : ''].join(' ')).join(' ')
         const operational = field === 'roomUsage' ? operationalNoticesFor(field)[index - 13] : field === 'parking' ? operationalNoticesFor(field)[index - 1] : undefined
         const aliases = (GUEST_PARAGRAPH_ALIAS_IDS[field]?.[index] ?? []).flatMap(id => HOTEL_SEARCH_ALIASES[id] ?? [])
