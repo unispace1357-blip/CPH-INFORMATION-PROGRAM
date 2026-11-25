@@ -88,7 +88,7 @@ test('guest hotel keyword search finds localized breakfast, Wi-Fi, microwave and
     const breakfastPrice = searchHotelInformation(hotel, language, '35,000')
     assert.ok(breakfastPrice.some(hit => hit.category === 'breakfast'), language)
     assert.deepEqual(searchHotelInformation(hotel, language, 'zz-unknown-guest-phrase'), [])
-    assert.ok(wifi.every(hit => hit.text === hotelParagraphs(hotel.translations[language][hit.source === 'notes' ? 'notes' : hit.category])[hit.index]), language)
+    assert.ok(wifi.every(hit => hit.category !== 'petStay' && hit.text === hotelParagraphs(hotel.translations[language][hit.source === 'notes' ? 'notes' : hit.category])[hit.index]), language)
   }
   assert.deepEqual(hotel, before)
 })
