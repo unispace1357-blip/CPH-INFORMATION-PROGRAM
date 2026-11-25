@@ -5,7 +5,7 @@
 export const HOTEL_SEARCH_ALIASES: Readonly<Record<string, readonly string[]>> = {
   'microwave-location': ['렌지','레인지','전자렌지','데우기','햇반','microwave','수저','숟가락','젓가락','포크','나이프','와인잔','컵','cutlery','spoon','fork','knife','wine glass'],
   'room-wifi': ['와이파이','와파','인터넷','무선인터넷','비번','비밀번호','wifi','wi-fi','password'],
-  'room-heating-controls': ['난방','히터','보일러','춥다','추워요','온도','heating','heater','cold','temperature'],
+  'room-heating-controls': ['난방','히터','보일러','춥다','추워요','온도','온돌','바닥난방','바닥 난방','최대온도','최대 온도','26도','26°C','난방시간','난방 시간','heating','heater','cold','temperature','underfloor heating','floor heating','地暖','床暖房'],
   'air-conditioning-controls': ['에어컨','에어콘','냉방기','냉방','덥다','더워요','온도','리모컨','ac','cooling','air conditioning','hot','temperature'],
   'bedside-light-switch': ['불','전등','조명','스위치','불끄기','light','lighting','light switch'],
   'smoke-ventilation-window': ['창문','창문열기','환기','바람','window','ventilation'],

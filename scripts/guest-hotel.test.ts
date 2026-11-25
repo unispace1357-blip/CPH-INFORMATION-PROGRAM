@@ -133,3 +133,14 @@ test('five operational notices appear under room usage or parking and search in 
   }
   assert.deepEqual(hotel, before)
 })
+
+test('heating notice preserves the panel location, 26°C setting limit and gradual floor heating in every language', async () => {
+  const hotel = await loadGuestHotel()
+  for (const language of GUIDE_LANGUAGES) {
+    const heating = hotelParagraphs(hotelTopicText(hotel, 'roomUsage', language))[12]!
+    assert.match(heating, /26°C/, language)
+    assert.match(heating, /온돌|underfloor heating|地暖|床暖房/, language)
+    assert.match(heating, /시간이 소요|time to warm up|需要一些时间|時間がかかります/, language)
+    for (const query of ['26도','온돌','바닥난방','floor heating']) assert.ok(searchHotelInformation(hotel, language, query).some(hit => hit.category === 'roomUsage' && hit.index === 12 && hit.text === heating), language + ': ' + query)
+  }
+})

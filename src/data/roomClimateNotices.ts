@@ -18,7 +18,7 @@ type RoomClimateCopy = {
 export const ROOM_CLIMATE_COPY: Record<GuideLanguage, RoomClimateCopy> = {
   ko: {
     title: '객실 온도 조절', heatingTitle: '객실 난방 조절',
-    heating: '객실 난방은 객실 전화기 위에 설치된 조절 패널에서 조절하실 수 있습니다.',
+    heating: '객실 난방은 객실 전화기 위에 설치된 조절 패널에서 조절하실 수 있습니다. 설정 온도는 최대 26°C이며, 온돌(바닥난방) 방식으로 객실이 따뜻해지기까지 다소 시간이 소요됩니다.',
     coolingTitle: '냉방 조절', winter: '동절기에는 에어컨(냉방)을 이용하실 수 없습니다.',
     coolingControls: '냉방은 화장실 입구 왼쪽 벽면의 흰색 패널 또는 에어컨 리모컨으로 조절할 수 있습니다.',
     seasonalControls: '냉방 이용이 가능한 기간에는 화장실 입구 왼쪽 벽면의 흰색 패널 또는 에어컨 리모컨으로 조절하실 수 있습니다.',
@@ -26,7 +26,7 @@ export const ROOM_CLIMATE_COPY: Record<GuideLanguage, RoomClimateCopy> = {
   },
   en: {
     title: 'Room temperature controls', heatingTitle: 'Room heating',
-    heating: 'You can adjust the room heating using the control panel located above the telephone in your room.',
+    heating: 'You can adjust the room heating using the control panel above the telephone in your room. The maximum temperature setting is 26°C. As the room uses underfloor heating, it may take some time to warm up.',
     coolingTitle: 'Air conditioning (cooling)', winter: 'Air conditioning (cooling) is unavailable during the winter season.',
     coolingControls: 'Use the white wall panel to the left of the bathroom entrance or the air conditioner remote control.',
     seasonalControls: 'When cooling is available, use the white wall panel to the left of the bathroom entrance or the air conditioner remote control.',
@@ -34,7 +34,7 @@ export const ROOM_CLIMATE_COPY: Record<GuideLanguage, RoomClimateCopy> = {
   },
   'zh-CN': {
     title: '客房温度调节', heatingTitle: '客房暖气调节',
-    heating: '您可以使用客房电话上方的控制面板调节暖气。',
+    heating: '您可以使用客房电话上方的控制面板调节暖气。最高设定温度为26°C。客房采用地暖，室内升温需要一些时间。',
     coolingTitle: '空调制冷', winter: '冬季无法使用空调制冷功能。',
     coolingControls: '可使用浴室入口左侧墙上的白色控制面板或空调遥控器调节制冷。',
     seasonalControls: '在可使用制冷的期间，请使用浴室入口左侧墙上的白色控制面板或空调遥控器。',
@@ -42,7 +42,7 @@ export const ROOM_CLIMATE_COPY: Record<GuideLanguage, RoomClimateCopy> = {
   },
   ja: {
     title: '客室の温度調節', heatingTitle: '客室の暖房調節',
-    heating: '客室の暖房は、客室電話の上に設置された操作パネルで調節できます。',
+    heating: '客室の暖房は、客室電話の上に設置された操作パネルで調節できます。設定温度の上限は26°Cです。床暖房のため、客室が暖まるまでに多少時間がかかります。',
     coolingTitle: '冷房の操作', winter: '冬季はエアコンの冷房機能をご利用いただけません。',
     coolingControls: '浴室入口の左側の壁にある白いパネル、またはエアコンのリモコンで冷房を調節できます。',
     seasonalControls: '冷房をご利用いただける期間は、浴室入口の左側の壁にある白いパネル、またはエアコンのリモコンで調節できます。',

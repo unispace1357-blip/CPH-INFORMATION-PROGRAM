@@ -21,6 +21,7 @@ test('curated staff aliases find their intended script', () => {
   }
   const search = (q: string) => searchFrontdeskScripts(frontdeskScriptDataset.scripts, q)
   assert.equal(search('렌지')[0]?.id, 'microwave-location')
+  for (const query of ['26도','온돌','바닥난방','floor heating']) assert.equal(search(query)[0]?.id, 'room-heating-controls', query)
   assert.ok(search('충전').some(s => s.id === 'ev-charging-stations'))
   assert.ok(search('충전').some(s => s.id === 'phone-charger-rental'))
   assert.equal(search('아이폰 충전')[0]?.id, 'phone-charger-rental')
