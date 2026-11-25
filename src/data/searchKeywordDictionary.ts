@@ -18,7 +18,7 @@ export const HOTEL_SEARCH_ALIASES: Readonly<Record<string, readonly string[]>> =
   'phone-charger-rental': ['핸드폰충전','휴대폰충전','충전','충전기','C타입','8핀','아이폰충전','USB-C','type-c','lightning','charger'],
   'room-slippers-items': ['실내화','슬리퍼','비품반출','slippers'],
   'guest-room-noise': ['시끄럽다','시끄러워요','소음','고성방가','층간소음','noise'],
-  'check-in-time': ['체크인','입실','입실시간','체크인시간','check-in','check in'],
+  'check-in-time': ['체크인','입실','입실시간','체크인시간','check-in','check in','얼리체크인','얼리 체크인','얼리','조기입실','조기 입실','일찍입실','일찍 입실','early check-in','early check in','提前入住','アーリーチェックイン'],
   'check-out-time': ['체크아웃','퇴실','퇴실시간','체크아웃시간','check-out','check out'],
   'late-check-out': ['레이트','늦은퇴실','연장','추가시간','late checkout','late check-out'],
   'room-key-return-loss': ['카드','카드키','룸키','키분실','열쇠','key card','room key'],
