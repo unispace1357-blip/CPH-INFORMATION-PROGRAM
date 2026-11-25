@@ -1,5 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Icon } from '../ui/Icon'
+import { StaffVisualGuide } from './StaffVisualGuide'
+import { hasVisualGuide } from '../../data/staffVisualGuideIds'
 import {
   OPERATION_ARTICLES,
   OPERATION_CATEGORIES,
@@ -21,7 +23,8 @@ function ArticleDetail({ article }: { article: OperationArticle }) {
       <Icon name="info" size={19} />
       <p><strong>주의</strong> {article.caution}</p>
     </div>}
-    <h3>처리 방법</h3>
+    <StaffVisualGuide article={article}/>
+    <h3>{hasVisualGuide(article.id) ? '상세 처리 방법' : '처리 방법'}</h3>
     <ol className="staff-work-steps">
       {article.steps.map((step, index) => <li key={index}><span className="staff-work-step-number" aria-hidden="true">{index + 1}</span><p>{step}</p></li>)}
     </ol>
@@ -83,11 +86,11 @@ export function StaffWorkPanel() {
         </div>
         {results.length ? <ul className="staff-work-list">
           {results.map(article => <li key={article.id}>
-            <button type="button" aria-pressed={selected?.id === article.id} className={selected?.id === article.id ? 'is-selected' : ''}
+            <button type="button" data-operation-id={article.id} aria-pressed={selected?.id === article.id} className={selected?.id === article.id ? 'is-selected' : ''}
               onClick={() => selectArticle(article.id)}>
               <span className="staff-work-list-category">{OPERATION_CATEGORIES.find(c => c.id === article.category)?.label}</span>
               <strong>{article.title}</strong>
-              <span className="staff-work-list-action">열기 <Icon name="arrow" size={15}/></span>
+              <span className="staff-work-list-action">{hasVisualGuide(article.id) ? "그림 가이드 · 열기" : "열기"} <Icon name="arrow" size={15}/></span>
             </button>
           </li>)}
         </ul> : <p className="staff-work-empty-message">검색 결과 없음. 다른 단어로 검색해 보세요.</p>}

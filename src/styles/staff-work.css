@@ -94,3 +94,64 @@
     outline-offset:2px;
   }
 }
+
+/* Editable HTML/SVG work diagrams, scoped to staff. Color is supplementary. */
+.app-shell--staff .staff-visual-guide {display:grid;gap:12px;min-width:0;padding:clamp(12px,2vw,20px);border:1px solid #d4dbd0;border-radius:12px;background:#f6f7f3;color:#293c34;container-type:inline-size}
+.app-shell--staff .staff-visual-guide header{display:grid;gap:4px;padding-bottom:9px;border-bottom:1px solid #d4dbd0}
+.app-shell--staff .staff-visual-guide header span{font-size:.68rem;letter-spacing:.12em;font-weight:800;color:#52695b}
+.app-shell--staff .staff-visual-guide header h3{font-size:1.08rem;margin:0}
+.app-shell--staff .staff-visual-guide h4{margin:0;font-size:.91rem;color:#33493c}
+.app-shell--staff .visual-symbol{width:29px;height:29px;flex:none;color:#385545}
+.app-shell--staff .visual-node{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center;padding:11px 9px;min-width:0;border:1px solid #a8b9a9;border-radius:9px;background:#fff;color:#293c34;line-height:1.45}
+.app-shell--staff .visual-node strong{font-size:.91rem;overflow-wrap:anywhere}
+.app-shell--staff .visual-node span{font-size:.81rem;overflow-wrap:anywhere;color:#4b5b50}
+.app-shell--staff .visual-node--warning{background:#f5ecdb;border-color:#ad8b55;color:#62451f}
+.app-shell--staff .visual-node--warning .visual-symbol,.app-shell--staff .visual-node--warning span{color:#62451f}
+.app-shell--staff .visual-flow{display:grid;gap:4px;list-style:none;padding:0;margin:0}
+.app-shell--staff .visual-flow li{display:grid;grid-template-columns:24px minmax(0,1fr);align-items:center;gap:7px;min-width:0}
+.app-shell--staff .visual-step-index{display:grid;place-items:center;width:24px;height:24px;background:#354c3d;color:#fff;border-radius:50%;font-weight:800;font-size:.75rem}
+.app-shell--staff .visual-down{grid-column:2;text-align:center;color:#52695b;font-weight:800;line-height:1.1}
+.app-shell--staff .visual-flow--grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.app-shell--staff .visual-flow--grid li{position:relative;display:grid;grid-template-columns:minmax(0,1fr);align-items:stretch}
+.app-shell--staff .visual-flow--grid .visual-step-index{position:absolute;top:5px;left:5px;width:20px;height:20px;font-size:.7rem}
+.app-shell--staff .visual-flow--grid .visual-node{min-height:108px;padding:20px 8px 9px}
+.app-shell--staff .visual-branch{display:grid;gap:0}
+.app-shell--staff .visual-branch>.visual-node{width:min(100%,340px);justify-self:center;background:#e3eae3}
+.app-shell--staff .visual-connector{display:block;width:100%;height:28px;color:#748778}
+.app-shell--staff .visual-branch-pair,.app-shell--staff .visual-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.app-shell--staff .visual-branch-pair .visual-node{min-height:112px}
+.app-shell--staff .visual-callout{display:flex;align-items:flex-start;gap:9px;padding:11px;border:1px solid #c8ac79;border-radius:8px;background:#f5ecdb;color:#5c401f;line-height:1.5;font-size:.84rem;overflow-wrap:anywhere}
+.app-shell--staff .visual-branch .visual-callout{margin-top:10px}
+.app-shell--staff .visual-callout .visual-symbol{width:22px;height:22px;color:#715022}
+.app-shell--staff .visual-mode-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+.app-shell--staff .visual-mode-controls button{min-height:44px;border:1px solid #a8b9a9;border-radius:7px;background:#fff;color:#304638;font:inherit;font-size:.79rem;font-weight:700;padding:7px 3px;overflow-wrap:anywhere}
+.app-shell--staff .visual-mode-controls button[aria-pressed=true]{background:#354c3d;color:#fff;border-color:#354c3d}
+.app-shell--staff .visual-mode-controls button:focus-visible{outline:3px solid #a88445;outline-offset:2px}
+.app-shell--staff .visual-mode-panel{display:none;gap:9px}
+.app-shell--staff .visual-mode-panel.is-active{display:grid}
+.app-shell--staff .visual-final,.app-shell--staff .visual-elevator-head{display:grid;justify-items:center;gap:5px;border-radius:8px;background:#354c3d;color:#fff;padding:12px;text-align:center}
+.app-shell--staff .visual-final .visual-symbol,.app-shell--staff .visual-elevator-head .visual-symbol{color:#fff}
+.app-shell--staff .visual-final span{font-size:.85rem}
+.app-shell--staff .visual-room-line{display:grid;gap:7px}
+.app-shell--staff .visual-room-line>div{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+.app-shell--staff .visual-room-line>div>span{display:grid;align-content:center;text-align:center;min-height:52px;padding:5px 2px;background:#f4ecdc;border:1px solid #c6ac7b;border-radius:6px;color:#634721;font-size:.88rem}
+.app-shell--staff .visual-room-line>div>span.is-front{border:2px solid #81602e;background:#e9d8b9}
+.app-shell--staff .visual-room-line small{font-size:.68rem;font-weight:800}
+.app-shell--staff .visual-table{width:100%;border-collapse:separate;border-spacing:4px;table-layout:fixed;font-size:.82rem}
+.app-shell--staff .visual-table caption{text-align:left;font-size:.76rem;font-weight:700;margin-bottom:5px;color:#485e50}
+.app-shell--staff .visual-table th,.app-shell--staff .visual-table td{padding:8px 3px;text-align:center;overflow-wrap:anywhere;border-radius:6px;background:#e5ece3;border:1px solid #cbd8c9}
+.app-shell--staff .visual-table th{background:#354c3d;color:#fff}
+.app-shell--staff .visual-table th:first-child{width:22%}
+.app-shell--staff .visual-table td strong,.app-shell--staff .visual-table td span{display:block}
+.app-shell--staff .visual-output{display:grid;grid-template-columns:minmax(0,1fr) 20px minmax(0,1fr);align-items:center;gap:5px}
+.app-shell--staff .visual-output>div,.app-shell--staff .visual-heating>div{display:grid;justify-items:center;gap:5px;text-align:center;background:#fff;border:1px solid #a8b9a9;border-radius:9px;padding:12px 5px}
+.app-shell--staff .visual-output>div:first-child{background:#f5ecdb;border-color:#ad8b55}
+.app-shell--staff .visual-heating{display:grid;gap:5px;text-align:center;justify-items:center}
+.app-shell--staff .visual-heating>div{width:min(100%,260px)}
+.app-shell--staff .visual-heating b{font-size:1.3rem;color:#354c3d}
+.app-shell--staff .visual-timeline{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.app-shell--staff .visual-time{display:grid;align-content:start;justify-items:center;gap:6px;padding:10px 3px;text-align:center;background:#fff;border:1px solid #a8b9a9;border-top:4px solid #718779;border-radius:7px;font-size:.82rem}
+.app-shell--staff .visual-time.is-warning{background:#f5ecdb;border-color:#ad8b55;color:#62451f}
+.app-shell--staff .staff-visual-guide>small{color:#526459;font-size:.74rem}
+@container (max-width:390px){.app-shell--staff .visual-flow--grid{grid-template-columns:repeat(2,minmax(0,1fr))}.app-shell--staff .visual-timeline{grid-template-columns:1fr}.app-shell--staff .visual-time{grid-template-columns:30px 1fr 1fr;align-items:center;text-align:left}.app-shell--staff .visual-node{padding:10px 6px}}
+@media print{.app-shell--staff .staff-visual-guide{container-type:normal;break-inside:auto}.app-shell--staff .visual-mode-controls{display:none}.app-shell--staff .visual-mode-panel{display:grid;break-inside:avoid}.app-shell--staff .visual-node,.app-shell--staff .visual-time{break-inside:avoid}.app-shell--staff .visual-flow li{break-inside:avoid}}

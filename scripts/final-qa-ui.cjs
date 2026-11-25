@@ -164,6 +164,27 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     const smartTvManual = await staff.locator('.staff-work-detail').innerText();
     assert.ok(smartTvManual.includes('DTW 14~15층: 1박·1객실당 10,000원'), 'DTW nightly room rate must be definitive');
     assert.ok(!smartTvManual.includes('적용 단위는 확인 필요'), 'no unresolved DTW reference');
+    await staff.locator('#staff-work-query').fill('');
+    await staff.getByRole('group', { name: '업무 분류' }).getByRole('button', { name: /^전체/ }).click();
+    for (const id of ["tv-remote","tv-general-reset","tv-smart-reset","tv-network","tv-optical","room-lights","door-lock","room-heating","smoke-window","skylight-remote","skylight-lights","parksuite-skylight","whirlpool-noise","room-type-change","elevator-room-assignment","smart-tv-pricing","room-views","request-amenities","voucher-steps","pet-policy","early-checkin","late-checkout"]) {
+      await staff.locator('[data-operation-id="'+id+'"]').click();
+      assert.equal(await staff.locator('[data-visual-guide="'+id+'"]').isVisible(),true,id);
+      assert.ok(await staff.locator('.staff-work-steps li').count(),id+' original detail remains');
+    }
+    await staff.locator('[data-operation-id="room-type-change"]').click();
+    const modes = staff.getByRole('group',{name:'룸타입 변경 상황 선택'});
+    await modes.getByRole('button',{name:'입실 전 장박'}).click();
+    assert.match(await staff.locator('.visual-mode-panel.is-active').innerText(),/객실료 고정 금지/);
+    await modes.getByRole('button',{name:'입실 후'}).click();
+    assert.match(await staff.locator('.visual-mode-panel.is-active').innerText(),/LS 룸터치/);
+    await staff.screenshot({path:path.join(output,'staff-room-change-visual.png'),fullPage:false});
+    await staff.locator('[data-operation-id="tv-remote"]').click();
+    await staff.screenshot({path:path.join(output,'staff-tv-visual.png'),fullPage:false});
+    await staff.setViewportSize({width:390,height:844});
+    await noOverflow(staff);
+    await staff.screenshot({path:path.join(output,'staff-tv-visual-mobile.png'),fullPage:false});
+    await staff.setViewportSize({width:1440,height:900});
+    log('Staff visual guides: 22 articles, original instructions, situation controls and mobile overflow');
     await staff.getByRole('group', { name: '업무 분류' }).getByRole('button', { name: /펫캉스/ }).click();
     await staff.locator('#staff-work-query').fill('보증금');
     await staff.locator('.staff-work-list').getByRole('button', { name: /펫캉스 청소비·보증금/ }).click();

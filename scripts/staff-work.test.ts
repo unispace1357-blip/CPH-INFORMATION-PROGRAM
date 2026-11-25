@@ -139,3 +139,23 @@ test('room assignment and type-change procedures preserve the supplied workflow 
   assert.match(get('request-amenities').summary!,/모두 무료/)
   assert.match(get('request-amenities').steps.join(' '),/빗.*가운.*생수 3병.*샴푸.*수건/)
 })
+
+test('all selected visual guides map to existing staff articles and leave simple manuals text-only', async () => {
+  const { VISUAL_GUIDE_IDS, hasVisualGuide } = await import('../src/data/staffVisualGuideIds.ts')
+  assert.equal(VISUAL_GUIDE_IDS.length,22)
+  assert.equal(new Set(VISUAL_GUIDE_IDS).size,22)
+  const component=await readFile(new URL('../src/components/staff/StaffVisualGuide.tsx',import.meta.url),'utf8')
+  for(const id of VISUAL_GUIDE_IDS){
+    assert.ok(OPERATION_ARTICLES.some(a=>a.id===id),id)
+    assert.ok(component.includes("case '"+id+"'"),id)
+    assert.ok(hasVisualGuide(id))
+  }
+  assert.equal(hasVisualGuide('departments'),false)
+  assert.equal(hasVisualGuide('lost-key'),false)
+  const panel=await readFile(new URL('../src/components/staff/StaffWorkPanel.tsx',import.meta.url),'utf8')
+  assert.match(panel, /<StaffVisualGuide article=\{article\}/)
+  assert.match(panel, /article.steps.map/)
+  const heating=OPERATION_ARTICLES.find(a=>a.id==='room-heating')!
+  assert.match(heating.steps.join(' '), /전화기 위.*26°C.*온돌/)
+  assert.match(OPERATION_ARTICLES.find(a=>a.id==='room-lights')!.steps[0]!, /동일한 카드키/)
+})
