@@ -6,7 +6,7 @@ import originalHotel from '../src/data/hotel.json' with { type: 'json' }
 import amendments from '../docs/reference/step2-operational-amendments.json' with { type: 'json' }
 import originalFacilities from '../src/data/facilities.json' with { type: 'json' }
 import { parseFrontdeskScriptDataset } from '../src/data/validateFrontdeskScriptDataset.ts'
-import { frontdeskScriptDataset } from '../src/data/frontdeskScriptDataset.ts'
+import { applyRoomClimateScripts, frontdeskScriptDataset } from '../src/data/frontdeskScriptDataset.ts'
 import { FRONTDESK_SCRIPT_CATEGORIES, FRONTDESK_SOURCE_SECTIONS } from '../src/types/frontdeskScript.ts'
 import { searchFrontdeskScripts } from '../src/services/frontdeskScriptSearch.ts'
 import { loadFrontdeskScripts } from '../src/services/loadFrontdeskScripts.ts'
@@ -19,7 +19,7 @@ test('front desk V1.1 contains 33 ordered bilingual scripts and no unreviewed ap
   assert.equal(data.schemaVersion, 1)
   assert.equal(data.dataStatus, 'demo')
   assert.equal(data.scripts.length, 33)
-  assert.deepEqual(data, frontdeskScriptDataset)
+  assert.deepEqual(applyRoomClimateScripts(data), frontdeskScriptDataset)
   assert.deepEqual(
     FRONTDESK_SCRIPT_CATEGORIES.map(category => data.scripts.filter(script => script.category === category).length),
     expectedCounts,
@@ -221,4 +221,20 @@ test('2026-10-25 accuracy amendments keep valid bilingual content and not-approv
   assert.match(find('smoke-ventilation-window').quickAnswer.en, /smoke ventilation window/i)
   assert.match(find('airport-limousine-6777').quickAnswer.en, /8,000 won/)
   assert.ok(data.scripts.every(script => !JSON.stringify(script).includes('32,000') && script.reviewStatus === 'draft' && script.lastVerifiedAt === null))
+})
+
+test('2026-11-25 operational amendment adds heating and sensor, with a single winter switch', () => {
+  const data = parseFrontdeskScriptDataset(fresh())
+  const winter = applyRoomClimateScripts(data, true)
+  const summer = applyRoomClimateScripts(data, false)
+  assert.equal(winter.scripts.length, 34)
+  const get = (d: typeof winter, id: string) => d.scripts.find(item => item.id === id)!
+  assert.match(get(winter, 'room-heating-controls').quickAnswer.ko, /객실 전화기 위/)
+  assert.match(get(winter, 'air-conditioning-controls').quickAnswer.ko, /동절기.*이용하실 수 없습니다/)
+  assert.match(get(winter, 'air-conditioning-controls').details!.ko, /화장실 입구 왼쪽/)
+  assert.doesNotMatch(get(summer, 'air-conditioning-controls').quickAnswer.ko, /동절기/)
+  assert.match(get(winter, 'indoor-smoking-policy').details!.ko, /흡연 감지 센서/)
+  assert.match(get(winter, 'indoor-smoking-policy').details!.en, /200,000/)
+  for (const query of ['난방', '히터', '전화기']) assert.ok(searchFrontdeskScripts(winter.scripts, query).some(item => item.id === 'room-heating-controls'))
+  assert.equal(data.scripts.length, 33)
 })

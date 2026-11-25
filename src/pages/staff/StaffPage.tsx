@@ -3,6 +3,7 @@ import type { KeyboardEvent } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import type { FacilityDataset } from '../../types/facility'
 import { ConciergeHero } from '../../components/ui/ConciergeHero'
+import { RoomClimateCards } from '../../components/ui/RoomClimateCards'
 import { ConciergeEssentials } from '../../components/ui/ConciergeEssentials'
 import { FeaturedTimespace } from '../../components/ui/FeaturedTimespace'
 import { hotelDataset } from '../../data/hotelDataset'
@@ -241,6 +242,7 @@ export function StaffPage() {
         </div>
       </section>
       <StaffSearchHub onSearch={handleDashboardSearch} />
+      <RoomClimateCards language="ko" onHeating={() => handleDashboardSearch('객실 난방', 'hotel')} onCooling={() => handleDashboardSearch('냉방 조절', 'hotel')} />
       {dataset?.dataStatus === 'demo' && <div className="staff-release-notice"><InformationNotice title={import.meta.env.MODE === 'public-test' ? '프론트 통합 안내 시스템' : '프론트 테스트용 미리보기'} tone="warning">
         {import.meta.env.MODE === 'public-test' ? <>
           <p>호텔 이용 정보와 주변 시설, 영어 응대 문구를 한곳에서 확인할 수 있습니다. 안내 전 최신 정보와 문구를 확인해 주세요.</p>

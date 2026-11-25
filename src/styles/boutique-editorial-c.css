@@ -148,11 +148,11 @@
 .app-shell--guest .hotel-information{
   background:transparent;border:0;box-shadow:none;padding:0;gap:16px;
 }
-.app-shell--guest .hotel-information > .boutique-entry {order:3;}
-.app-shell--guest .hotel-information > .concierge-essentials {order:4;}
-.app-shell--guest .hotel-information > .hotel-information-heading{order:5;}
-.app-shell--guest .hotel-information > .hotel-category-grid{order:6;}
-.app-shell--guest .hotel-information > #guest-hotel-detail{order:7;}
+ .app-shell--guest .hotel-information > .boutique-entry {order:4;}
+.app-shell--guest .hotel-information > .concierge-essentials {order:5;}
+.app-shell--guest .hotel-information > .hotel-information-heading{order:6;}
+.app-shell--guest .hotel-information > .hotel-category-grid{order:7;}
+.app-shell--guest .hotel-information > #guest-hotel-detail{order:8;}
 .app-shell--guest .hotel-information > .hotel-search-results{order:1;}
 .app-shell--guest .hotel-information > .smoking-policy-notice{order:2;}
 .app-shell--guest .hotel-information > .concierge-hotel-search{order:0;}
@@ -286,11 +286,11 @@
   .app-shell--guest .hotel-information{order:1;gap:9px;margin-top:-65px;padding:0!important;}
   .app-shell--guest .hotel-search-field .search-control{border:1px solid #a9bda9;border-radius:10px;}
   .app-shell--guest .hotel-information>.smoking-policy-notice{order:2;}
-  .app-shell--guest .hotel-information>.boutique-entry{order:3;}
-  .app-shell--guest .hotel-information>.concierge-essentials{order:4;border-color:#e3dacc;}
-  .app-shell--guest .hotel-information>.hotel-information-heading{order:5;border-color:#e3dacc;}
-  .app-shell--guest .hotel-information>.hotel-category-grid{order:6;border-color:#e3dacc;}
-  .app-shell--guest .hotel-information>#guest-hotel-detail{order:7;}
+  .app-shell--guest .hotel-information>.boutique-entry{order:4;}
+  .app-shell--guest .hotel-information>.concierge-essentials{order:5;border-color:#e3dacc;}
+  .app-shell--guest .hotel-information>.hotel-information-heading{order:6;border-color:#e3dacc;}
+  .app-shell--guest .hotel-information>.hotel-category-grid{order:7;border-color:#e3dacc;}
+  .app-shell--guest .hotel-information>#guest-hotel-detail{order:8;}
   .app-shell--guest .boutique-entry{gap:8px;}
   .app-shell--guest .boutique-entry-card{
     min-height:104px;padding:10px 9px;border-radius:11px;gap:4px;
@@ -326,3 +326,65 @@
   .app-shell .boutique-entry-card img{transition:none;}
   .app-shell .boutique-entry-card:hover img{transform:none;}
 }
+
+/* Boutique Concierge 2.0 — approved A concept, shared operational notice cards.
+ * Keep semantic buttons, existing layout landmarks, data-backed actions and print rules. */
+.app-shell .room-climate-cards {
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; min-width:0;
+}
+.app-shell--guest .hotel-information > .room-climate-cards { order:3; }
+.app-shell--staff .staff-page > .room-climate-cards { order:2; }
+.app-shell .room-climate-card {
+  display:grid; grid-template-columns:36px minmax(0,1fr) 18px; gap:10px; align-items:center;
+  width:100%; min-width:0; padding:12px 14px; min-height:72px; text-align:start;
+  color:#29382f; border:1px solid; border-radius:12px; cursor:pointer; font:inherit;
+  box-shadow:0 3px 12px rgba(44,44,36,.055);
+}
+.app-shell .room-climate-card--heating { background:#f6eee1; border-color:#d9c3a0; }
+.app-shell .room-climate-card--cooling { background:#edf4f6; border-color:#bfd5dd; }
+.app-shell .room-climate-icon { display:grid; place-items:center; width:36px; height:36px; border-radius:9px; }
+.app-shell .room-climate-card--heating .room-climate-icon { color:#815424; background:#ecdfc8; }
+.app-shell .room-climate-card--cooling .room-climate-icon { color:#225d76; background:#dcebf0; }
+.app-shell .room-climate-copy { display:grid; gap:3px; min-width:0; overflow-wrap:anywhere; line-height:1.45; }
+.app-shell .room-climate-title { font-size:.91rem; font-weight:800; }
+.app-shell .room-climate-primary { font-size:.83rem; font-weight:650; color:#25362e; }
+.app-shell .room-climate-secondary { font-size:.76rem; color:#415662; line-height:1.45; }
+.app-shell .room-climate-arrow { color:#53695c; }
+.app-shell .room-climate-card:hover { box-shadow:0 5px 16px rgba(40,49,42,.14); border-color:#a48a64; }
+.app-shell .room-climate-card:focus-visible { outline:3px solid #8f6c36; outline-offset:2px; }
+.app-shell .smoking-policy-sensor {
+  color:#7e2420; font-weight:750; padding:4px 0; line-height:1.5;
+}
+.app-shell .smoking-policy-notice .information-notice { border-radius:12px; }
+.app-shell--staff .staff-intro .concierge-hero { min-height:170px; }
+.app-shell--staff .staff-search-hub { border-radius:13px; }
+.app-shell--staff .staff-essential-panel,
+.app-shell--staff .staff-quick-phrases,
+.app-shell--staff .staff-request-shortcut,
+.app-shell--staff .staff-quick-access { border-radius:13px; }
+.app-shell--staff .staff-overview-section-header,
+.app-shell--staff .staff-quick-phrases .concierge-section-heading {
+  padding-bottom:8px; border-bottom:1px solid #e2d8c8;
+}
+.app-shell--staff .staff-topic-shortcuts button {
+  border-color:#d5c8b3; background:linear-gradient(180deg,#fffdf9,#f1ebe1);
+  box-shadow:0 2px 7px rgba(52,62,49,.055);
+}
+.app-shell--staff .staff-quick-phrase { background:#faf8f3; }
+@media (min-width:1200px) {
+  .app-shell--staff .staff-board-rail { min-height:600px; }
+  .app-shell--staff .room-climate-card { min-height:85px; }
+}
+@media (max-width:767px) {
+  .app-shell--guest .concierge-hero { min-height:205px; }
+  .app-shell--guest .hotel-information > .room-climate-cards,
+  .app-shell--staff .room-climate-cards { grid-template-columns:minmax(0,1fr); gap:7px; }
+  .app-shell .room-climate-card { padding:10px 11px; grid-template-columns:32px minmax(0,1fr) 16px; gap:8px; min-height:64px; }
+  .app-shell .room-climate-icon { width:32px; height:32px; }
+  .app-shell .room-climate-title { font-size:.88rem; }
+  .app-shell .room-climate-primary { font-size:.81rem; }
+  .app-shell .room-climate-secondary { font-size:.73rem; }
+  .app-shell--guest .concierge-essentials-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .app-shell--guest .boutique-entry-card { min-height:105px; }
+}
+@media print { .app-shell .room-climate-cards { display:none!important; } }

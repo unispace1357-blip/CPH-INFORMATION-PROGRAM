@@ -6,7 +6,7 @@ import type { GuestDataState } from '../../services/loadGuestData'
 import { MESSAGES } from '../../i18n/messages'
 import { guestVerificationDate, localizedValue } from '../../i18n/formatters'
 import { hotelHasInformation, hotelTopicText } from '../../services/guestHotelPresentation'
-import { searchHotelInformation, ROOM_USAGE_LABELS } from '../../services/guestHotelSearch'
+import { searchHotelInformation, roomUsageDisplayLabels } from '../../services/guestHotelSearch'
 import type { HotelSearchHit } from '../../services/guestHotelSearch'
 import { CategoryCard } from '../ui/CategoryCard'
 import { InformationNotice } from '../ui/InformationNotice'
@@ -18,6 +18,7 @@ import type { IconName } from '../ui/Icon'
 import { HotelParagraphs } from './HotelParagraphs'
 import { ConciergeEssentials } from '../ui/ConciergeEssentials'
 import { BoutiqueEditorialTiles } from '../ui/BoutiqueEditorialTiles'
+import { RoomClimateCards } from '../ui/RoomClimateCards'
 
 const topics: { code: HotelCategory; icon: IconName }[] = [
   { code: 'checkIn', icon: 'checkIn' }, { code: 'checkOut', icon: 'checkOut' },
@@ -59,8 +60,9 @@ export function HotelInformation({ state, language, selected, onSelect, onClose 
       {state.status === 'loading' && <LoadingState label={m.ui.loadingHotel} />}
       {state.status === 'error' && <div role="alert"><InformationNotice title={m.ui.hotelDataErrorTitle} tone="warning"><p>{m.ui.dataErrorDescription}</p><Button variant="secondary" onClick={() => window.location.reload()}>{m.ui.refresh}</Button></InformationNotice></div>}
       {hotel && <SmokingPolicyNotice hotel={hotel} language={language} />}
+      {hotel && <RoomClimateCards language={language} onHeating={() => selectTopic('roomUsage')} onCooling={() => selectTopic('roomUsage')} />}
       {hotel && <BoutiqueEditorialTiles language={language} onHotelTopic={() => selectTopic('roomUsage')} />}
-      {hotel && <ConciergeEssentials hotel={hotel} language={language} onHotelTopic={selectTopic} />}
+      {hotel && <ConciergeEssentials hotel={hotel} language={language} includeCheckout onHotelTopic={selectTopic} />}
       {hotel && !hotelHasInformation(hotel, language) && <InformationNotice title={m.ui.hotelEmptyTitle}>{m.ui.hotelEmptyDescription}</InformationNotice>}
       <div className="hotel-information-heading">
         <div className="hotel-information-heading-copy">
@@ -89,7 +91,7 @@ export function HotelInformation({ state, language, selected, onSelect, onClose 
       <div id="guest-hotel-detail">{hotel && selected ? <div className="panel guest-topic-detail">
         <div className="section-heading"><h3 ref={heading} tabIndex={-1}>{m.hotelCategories[selected]}</h3><Button variant="secondary" onClick={() => { setActiveHit(null); onClose() }}>{m.ui.closeDetails}</Button></div>
         <div className="hotel-topic-text"><HotelParagraphs text={hotelTopicText(hotel, selected, language)}
-          labels={selected === 'roomUsage' ? ROOM_USAGE_LABELS[language] : undefined} idPrefix="guest-hotel-topic-item" /></div>
+          labels={selected === 'roomUsage' ? roomUsageDisplayLabels(language) : undefined} idPrefix="guest-hotel-topic-item" /></div>
         <dl className="detail-facts">
           {(selected === 'checkIn' || selected === 'checkOut') && <div><dt>{selected === 'checkIn' ? m.ui.checkInTimeLabel : m.ui.checkOutTimeLabel}</dt><dd>{localizedValue(selected === 'checkIn' ? hotel.checkInTime : hotel.checkOutTime, language, 'timeUnavailable')}</dd></div>}
           <div><dt>{m.ui.hotelName}</dt><dd>{localizedValue(hotel.translations[language].name, language)}</dd></div>

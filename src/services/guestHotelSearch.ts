@@ -2,7 +2,8 @@ import type { HotelDataset } from '../types/hotel.ts'
 import type { GuideLanguage } from '../types/guide.ts'
 import type { HotelCategory } from '../i18n/types.ts'
 import { MESSAGES } from '../i18n/messages.ts'
-import { hotelParagraphs } from './guestHotelPresentation.ts'
+import { hotelParagraphs, roomUsageDisplayParagraphs } from './guestHotelPresentation.ts'
+import { ROOM_CLIMATE_COPY } from '../data/roomClimateNotices.ts'
 
 export const HOTEL_TOPICS = ['checkIn', 'checkOut', 'breakfast', 'parking', 'roomUsage'] as const satisfies readonly HotelCategory[]
 
@@ -12,6 +13,10 @@ export const ROOM_USAGE_LABELS: Record<GuideLanguage, readonly string[]> = {
   en: ['Wi-Fi', 'Microwaves & utensils', 'Nearby convenience store', 'Air conditioning', 'Disposable amenities', 'Food delivery pickup', 'Delivery policy', 'Fire safety checks', 'No smoking', 'Room noise', 'Slippers & room items', 'Bedside light switch'],
   'zh-CN': ['Wi-Fi 无线网络', '微波炉及餐具', '附近便利店', '空调控制', '一次性用品', '外卖领取', '外卖注意事项', '消防设施检查', '室内禁烟', '客房噪音', '拖鞋及客房用品', '床边灯光开关'],
   ja: ['Wi-Fi', '電子レンジ・食器類', '近くのコンビニ', 'エアコン操作', '使い捨てアメニティ', 'デリバリー受け取り', '配達時の注意', '消防設備点検', '館内禁煙', '客室の騒音', 'スリッパ・客室備品', 'ベッド横の照明'],
+}
+
+export function roomUsageDisplayLabels(language: GuideLanguage): readonly string[] {
+  return [...ROOM_USAGE_LABELS[language], ROOM_CLIMATE_COPY[language].heatingTitle]
 }
 
 export interface HotelSearchHit {
@@ -34,6 +39,11 @@ const aliasGroups = [
   ['체크아웃', 'checkout', '退房', 'チェックアウト'],
   ['주차', 'parking', '停车', '駐車'],
   ['보증금', 'deposit', '押金', 'デポジット'],
+  ['난방', '히터', 'heating', 'heater', '暖气', '暖房'],
+  ['냉방', '에어컨', 'cooling', 'airconditioning', '制冷', '冷房'],
+  ['온도', 'temperature', '난방', '냉방', '温度'],
+  ['전화기', '전화', 'telephone', 'phone', '电话', '電話'],
+  ['흡연센서', '흡연감지센서', 'smokingdetectionsensor', '吸烟检测传感器', '喫煙検知センサー'],
 ]
 
 export const normalizeHotelKeyword = (value: string): string =>
@@ -54,12 +64,12 @@ export function searchHotelInformation(hotel: HotelDataset, language: GuideLangu
     const categoryMatch = tokens.every(token => tokenMatches(categoryNames, token))
     const sources = category === 'roomUsage' ? (['roomUsage', 'notes'] as const) : ([category] as const)
     for (const field of sources) {
-      const paragraphs = hotelParagraphs(hotel.translations[language][field])
+      const paragraphs = field === 'roomUsage' ? roomUsageDisplayParagraphs(hotel, language) : hotelParagraphs(hotel.translations[language][field])
       for (let index = 0; index < paragraphs.length; index++) {
-        const title = field === 'roomUsage' ? ROOM_USAGE_LABELS[language][index] ?? '' : MESSAGES[language].hotelCategories[category]
+        const title = field === 'roomUsage' ? roomUsageDisplayLabels(language)[index] ?? '' : MESSAGES[language].hotelCategories[category]
         const allLanguages = languages.map(lang =>
-          [hotelParagraphs(hotel.translations[lang][field])[index] ?? '',
-            field === 'roomUsage' ? ROOM_USAGE_LABELS[lang][index] ?? '' : ''].join(' ')).join(' ')
+          [(field === 'roomUsage' ? roomUsageDisplayParagraphs(hotel, lang) : hotelParagraphs(hotel.translations[lang][field]))[index] ?? '',
+            field === 'roomUsage' ? roomUsageDisplayLabels(lang)[index] ?? '' : ''].join(' ')).join(' ')
         const searchable = normalizeHotelKeyword(allLanguages)
         if (tokens.every(token => tokenMatches(searchable, token)) || (categoryMatch && index === 0 && field !== 'notes')) {
           results.push({ category, source: field === 'notes' ? 'notes' : 'topic', index, title, text: paragraphs[index]! })
