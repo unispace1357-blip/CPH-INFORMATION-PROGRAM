@@ -5,6 +5,8 @@ import { MESSAGES } from '../i18n/messages.ts'
 import { hotelParagraphs, hotelDisplayParagraphs } from './guestHotelPresentation.ts'
 import { operationalNoticesFor } from '../data/hotelOperationalNotices.ts'
 import { ROOM_CLIMATE_COPY } from '../data/roomClimateNotices.ts'
+import { GUEST_PARAGRAPH_ALIAS_IDS, HOTEL_SEARCH_ALIASES } from '../data/searchKeywordDictionary.ts'
+import { keywordScore } from './keywordRanking.ts'
 
 export const HOTEL_TOPICS = ['checkIn', 'checkOut', 'breakfast', 'parking', 'roomUsage'] as const satisfies readonly HotelCategory[]
 
@@ -63,7 +65,7 @@ function tokenMatches(index: string, token: string): boolean {
 export function searchHotelInformation(hotel: HotelDataset, language: GuideLanguage, query: string): HotelSearchHit[] {
   const tokens = query.trim().split(/\s+/u).map(normalizeHotelKeyword).filter(Boolean)
   if (!tokens.length) return []
-  const results: HotelSearchHit[] = []
+  const results: { hit: HotelSearchHit; score: number }[] = []
   for (const category of HOTEL_TOPICS) {
     const categoryNames = normalizeHotelKeyword(languages.map(lang => MESSAGES[lang].hotelCategories[category]).join(' '))
     const categoryMatch = tokens.every(token => tokenMatches(categoryNames, token))
@@ -76,12 +78,15 @@ export function searchHotelInformation(hotel: HotelDataset, language: GuideLangu
           [(field === 'roomUsage' || field === 'parking' ? hotelDisplayParagraphs(hotel, field, lang) : hotelParagraphs(hotel.translations[lang][field]))[index] ?? '',
             field === 'roomUsage' ? roomUsageDisplayLabels(lang)[index] ?? '' : field === 'parking' ? parkingDisplayLabels(lang)[index] ?? '' : ''].join(' ')).join(' ')
         const operational = field === 'roomUsage' ? operationalNoticesFor(field)[index - 13] : field === 'parking' ? operationalNoticesFor(field)[index - 1] : undefined
-        const searchable = normalizeHotelKeyword([allLanguages, ...(operational?.keywords ?? [])].join(' '))
-        if (tokens.every(token => tokenMatches(searchable, token)) || (categoryMatch && index === 0 && field !== 'notes')) {
-          results.push({ category, source: field === 'notes' ? 'notes' : 'topic', index, title, text: paragraphs[index]! })
+        const aliases = (GUEST_PARAGRAPH_ALIAS_IDS[field]?.[index] ?? []).flatMap(id => HOTEL_SEARCH_ALIASES[id] ?? [])
+        const searchable = normalizeHotelKeyword([allLanguages, ...(operational?.keywords ?? []), ...aliases].join(' '))
+        const rank = keywordScore(query, [title], operational?.keywords ?? [], aliases, [allLanguages])
+        const fallback = tokens.every(token => tokenMatches(searchable, token)) || (categoryMatch && index === 0 && field !== 'notes')
+        if (rank >= 0 || fallback) {
+          results.push({ hit: { category, source: field === 'notes' ? 'notes' : 'topic', index, title, text: paragraphs[index]! }, score: Math.max(rank, 0) })
         }
       }
     }
   }
-  return results
+  return results.sort((a,b) => b.score - a.score).map(item => item.hit)
 }
