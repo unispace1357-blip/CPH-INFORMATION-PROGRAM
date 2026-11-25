@@ -102,3 +102,25 @@ test('staff action buttons and manual count badge have explicit contrast styles'
   assert.ok(css.includes('color:#fff;'), 'white label on dark green controls')
   assert.ok(css.includes('.header-link:focus-visible'), 'visible focus outline')
 })
+
+test('latest TV troubleshooting procedures update five existing facility articles without duplicates', () => {
+  const find = (id: string) => {
+    const matches = OPERATION_ARTICLES.filter(article => article.id === id)
+    assert.equal(matches.length, 1, id)
+    assert.equal(matches[0]!.category, 'facilities')
+    assert.equal(matches[0]!.source, '최신 정정')
+    return matches[0]!
+  }
+  const general = find('tv-general-reset')
+  assert.match(general.steps.join(' → '), /DTV 채널 선택.*유선방송.*자동 채널 설정.*100%가 되자마자 확인.*중지하시겠습니까.*예.*확인 버튼/)
+  const smart = find('tv-smart-reset')
+  assert.match(smart.steps.join(' → '), /홈 메뉴.*설정.*채널\/방송.*자동 채널 설정.*시작.*100% 완료 시 자동/)
+  assert.ok(smart.notes?.some(note => note.includes('중지 버튼을 누를 필요 없음')))
+  const remote = find('tv-remote')
+  assert.match(remote.steps.join(' → '), /일반 TV.*빨간색 불빛.*보이면.*전원 버튼을 여러 번.*보이지 않으면.*메인보드.*시설팀/)
+  assert.match(find('tv-optical').steps.join(' → '), /홈 메뉴.*설정.*음향.*옵티컬.*TV 스피커/)
+  assert.match(find('tv-network').steps.join(' → '), /집 모양 홈 버튼.*왼쪽 이동.*설정.*네트워크 선택.*초기화 후 재설정.*확인.*무선 연결.*해당 객실 층/)
+  for (const [query, id] of [['DTV채널선택','tv-general-reset'],['스마트티비','tv-smart-reset'],['리모콘','tv-remote'],['옵티컬','tv-optical'],['네트워크 초기화','tv-network']]) {
+    assert.ok(searchOperations(OPERATION_ARTICLES, query!, 'facilities').some(article => article.id === id), query)
+  }
+})
