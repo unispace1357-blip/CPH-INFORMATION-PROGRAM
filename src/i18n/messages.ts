@@ -103,7 +103,8 @@ export const MESSAGES = {
       "checkOut": "Check-out",
       "breakfast": "Breakfast",
       "parking": "Parking",
-      "roomUsage": "Room information"
+      "roomUsage": "Room information",
+      "petStay": "Pet-friendly stay"
     }
   },
   "ko": {
@@ -206,7 +207,8 @@ export const MESSAGES = {
       "checkOut": "체크아웃",
       "breakfast": "조식 안내",
       "parking": "주차 안내",
-      "roomUsage": "객실 이용 안내"
+      "roomUsage": "객실 이용 안내",
+      "petStay": "펫캉스 안내"
     }
   },
   "zh-CN": {
@@ -309,7 +311,8 @@ export const MESSAGES = {
       "checkOut": "退房",
       "breakfast": "早餐",
       "parking": "停车",
-      "roomUsage": "客房使用指南"
+      "roomUsage": "客房使用指南",
+      "petStay": "宠物住宿指南"
     }
   },
   "ja": {
@@ -412,7 +415,8 @@ export const MESSAGES = {
       "checkOut": "チェックアウト",
       "breakfast": "朝食",
       "parking": "駐車場",
-      "roomUsage": "客室のご利用案内"
+      "roomUsage": "客室のご利用案内",
+      "petStay": "ペット同伴宿泊"
     }
   },
   "ru": {
@@ -515,7 +519,8 @@ export const MESSAGES = {
       "checkOut": "Выезд",
       "breakfast": "Завтрак",
       "parking": "Парковка",
-      "roomUsage": "Информация о номере"
+      "roomUsage": "Информация о номере",
+      "petStay": "Проживание с питомцем"
     }
   }
 } satisfies Record<GuideLanguage, GuestMessages>

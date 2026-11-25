@@ -2,13 +2,14 @@ import type { HotelDataset } from '../types/hotel.ts'
 import type { GuideLanguage } from '../types/guide.ts'
 import type { HotelCategory } from '../i18n/types.ts'
 import { MESSAGES } from '../i18n/messages.ts'
-import { hotelParagraphs, hotelDisplayParagraphs } from './guestHotelPresentation.ts'
+import { hotelParagraphs, hotelDisplayParagraphs, petStayParagraphs, generalHotelNotes, hasPetStayPolicy } from './guestHotelPresentation.ts'
 import { operationalNoticesFor } from '../data/hotelOperationalNotices.ts'
 import { ROOM_CLIMATE_COPY } from '../data/roomClimateNotices.ts'
 import { GUEST_PARAGRAPH_ALIAS_IDS, HOTEL_SEARCH_ALIASES } from '../data/searchKeywordDictionary.ts'
+import { PET_STAY_NOTICES, PET_NOTE_LABELS, PET_NOTE_ALIAS_IDS, PET_NOTE_INDEXES } from '../data/petStayNotices.ts'
 import { keywordScore } from './keywordRanking.ts'
 
-export const HOTEL_TOPICS = ['checkIn', 'checkOut', 'breakfast', 'parking', 'roomUsage'] as const satisfies readonly HotelCategory[]
+export const HOTEL_TOPICS = ['checkIn', 'checkOut', 'breakfast', 'parking', 'roomUsage', 'petStay'] as const satisfies readonly HotelCategory[]
 
 /** Order follows the existing, four-language hotel roomUsage paragraphs. Data wording is not rewritten. */
 export const ROOM_USAGE_LABELS: Record<GuideLanguage, readonly string[]> = {
@@ -25,6 +26,10 @@ export function roomUsageDisplayLabels(language: GuideLanguage): readonly string
 
 export function parkingDisplayLabels(language: GuideLanguage): readonly string[] {
   return [MESSAGES[language].hotelCategories.parking, ...operationalNoticesFor('parking').map(item => item.copy[language].title)]
+}
+
+export function petStayDisplayLabels(language: GuideLanguage): readonly string[] {
+  return [...PET_STAY_NOTICES.map(item => item.copy[language][0]), ...PET_NOTE_LABELS[language]]
 }
 
 export interface HotelSearchHit {
@@ -70,16 +75,31 @@ export function searchHotelInformation(hotel: HotelDataset, language: GuideLangu
   for (const category of HOTEL_TOPICS) {
     const categoryNames = normalizeHotelKeyword(languages.map(lang => MESSAGES[lang].hotelCategories[category]).join(' '))
     const categoryMatch = tokens.every(token => tokenMatches(categoryNames, token))
+    if (category === 'petStay') {
+      const paragraphs = petStayParagraphs(hotel, language)
+      for (let index = 0; index < paragraphs.length; index++) {
+        const title = petStayDisplayLabels(language)[index] ?? ''
+        const notice = PET_STAY_NOTICES[index]
+        const aliasId = PET_NOTE_ALIAS_IDS[index - PET_STAY_NOTICES.length]
+        const aliases = aliasId ? HOTEL_SEARCH_ALIASES[aliasId] ?? [] : []
+        const allLanguages = languages.filter(lang => hotel.translations[lang]).map(lang => [petStayParagraphs(hotel, lang)[index] ?? '', petStayDisplayLabels(lang)[index] ?? ''].join(' ')).join(' ')
+        const rank = keywordScore(query, [title], notice?.keywords ?? [], aliases, [allLanguages])
+        const searchable = normalizeHotelKeyword([allLanguages, ...(notice?.keywords ?? []), ...aliases].join(' '))
+        if (rank >= 0 || tokens.every(token => tokenMatches(searchable, token)) || (categoryMatch && index === 0)) results.push({ hit: { category, source: 'topic', index, title, text: paragraphs[index]! }, score: Math.max(rank, 0) })
+      }
+      continue
+    }
     const sources = category === 'roomUsage' ? (['roomUsage', 'notes'] as const) : ([category] as const)
     for (const field of sources) {
-      const paragraphs = field === 'roomUsage' || field === 'parking' || field === 'checkIn' || field === 'checkOut' ? hotelDisplayParagraphs(hotel, field, language) : hotelParagraphs(hotel.translations[language][field])
+      const paragraphs = field === 'notes' ? generalHotelNotes(hotel, language) : field === 'roomUsage' || field === 'parking' || field === 'checkIn' || field === 'checkOut' ? hotelDisplayParagraphs(hotel, field, language) : hotelParagraphs(hotel.translations[language][field])
       for (let index = 0; index < paragraphs.length; index++) {
         const title = field === 'roomUsage' ? roomUsageDisplayLabels(language)[index] ?? '' : field === 'parking' ? parkingDisplayLabels(language)[index] ?? '' : MESSAGES[language].hotelCategories[category]
         const allLanguages = languages.filter(lang => hotel.translations[lang]).map(lang =>
-          [(field === 'roomUsage' || field === 'parking' || field === 'checkIn' || field === 'checkOut' ? hotelDisplayParagraphs(hotel, field, lang) : hotelParagraphs(hotel.translations[lang][field]))[index] ?? '',
+          [(field === 'notes' ? generalHotelNotes(hotel, lang) : field === 'roomUsage' || field === 'parking' || field === 'checkIn' || field === 'checkOut' ? hotelDisplayParagraphs(hotel, field, lang) : hotelParagraphs(hotel.translations[lang][field]))[index] ?? '',
             field === 'roomUsage' ? roomUsageDisplayLabels(lang)[index] ?? '' : field === 'parking' ? parkingDisplayLabels(lang)[index] ?? '' : ''].join(' ')).join(' ')
         const operational = field === 'roomUsage' ? operationalNoticesFor(field)[index - 13] : field === 'parking' ? operationalNoticesFor(field)[index - 1] : field === 'checkIn' || field === 'checkOut' ? operationalNoticesFor(field)[index - hotelParagraphs(hotel.translations[language][field]).length] : undefined
-        const aliases = (GUEST_PARAGRAPH_ALIAS_IDS[field]?.[index] ?? []).flatMap(id => HOTEL_SEARCH_ALIASES[id] ?? [])
+        const sourceIndex = field === 'notes' && hasPetStayPolicy(hotel, language) && index >= 3 ? index + PET_NOTE_INDEXES.length : index
+        const aliases = (GUEST_PARAGRAPH_ALIAS_IDS[field]?.[sourceIndex] ?? []).flatMap(id => HOTEL_SEARCH_ALIASES[id] ?? [])
         const searchable = normalizeHotelKeyword([allLanguages, ...(operational?.keywords ?? []), ...aliases].join(' '))
         const rank = keywordScore(query, [title], operational?.keywords ?? [], aliases, [allLanguages])
         const fallback = tokens.every(token => tokenMatches(searchable, token)) || (categoryMatch && index === 0 && field !== 'notes')

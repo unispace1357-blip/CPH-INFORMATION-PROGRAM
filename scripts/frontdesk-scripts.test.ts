@@ -289,3 +289,14 @@ test('guest amenities and printing are searchable in staff responses; room-assig
   assert.match(scripts.find(x=>x.id==='guest-printing-service')!.quickAnswer.ko,/프론트 왼쪽.*1장당 100원/)
   assert.ok(!scripts.some(x=>['room-type-change','elevator-room-assignment'].includes(x.id)))
 })
+
+test('pet English response covers eligibility, standard fees and supplies while preserving damage charges',()=>{
+  const scripts=frontdeskScriptDataset.scripts
+  const rooms=scripts.find(s=>s.id==='pet-friendly-rooms')!
+  const fees=scripts.find(s=>s.id==='pet-cleaning-damage')!
+  assert.match(rooms.details!.en,/9th floor.*10 kg/)
+  assert.match(rooms.details!.en,/dog bed, pet bowls and toilet pads/)
+  assert.match(fees.details!.en,/50,000/)
+  assert.match(fees.details!.en,/33,000.*55,000/)
+  assert.ok(searchFrontdeskScripts(scripts,'펫캉스').some(s=>s.id===rooms.id))
+})

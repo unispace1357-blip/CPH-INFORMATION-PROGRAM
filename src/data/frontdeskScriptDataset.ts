@@ -4,6 +4,7 @@ import type { FrontdeskScript, FrontdeskScriptDataset } from '../types/frontdesk
 import { coolingNotice, ROOM_CLIMATE_COPY, WINTER_COOLING_UNAVAILABLE } from './roomClimateNotices.ts'
 import { HOTEL_OPERATIONAL_NOTICES } from './hotelOperationalNotices.ts'
 import { EARLY_CHECK_IN_COPY } from './checkInAmenitiesCopy.ts'
+import { PET_STAY_NOTICES } from './petStayNotices.ts'
 
 /** Apply the current operational amendment without rewriting the historical script snapshot. */
 export function applyRoomClimateScripts(dataset: FrontdeskScriptDataset, winter = WINTER_COOLING_UNAVAILABLE): FrontdeskScriptDataset {
@@ -46,10 +47,14 @@ export function applyOperationalScripts(dataset: FrontdeskScriptDataset): Frontd
     staffChecks: [], sourceType: 'user-provided', sourceSection: null,
     reviewStatus: 'draft', lastVerifiedAt: null,
   }))
-  const existing = dataset.scripts.map(script => script.id !== 'check-in-time' ? script : {
+  const existing = dataset.scripts.map(script => {
+    const petNotices = script.id === 'pet-friendly-rooms' ? PET_STAY_NOTICES.filter(item => item.key !== 'fees') : script.id === 'pet-cleaning-damage' ? PET_STAY_NOTICES.filter(item => item.key === 'fees') : []
+    if (petNotices.length) return { ...script, keywords: [...new Set([...script.keywords, ...petNotices.flatMap(item => item.keywords)])], details: { ko: [(script.details?.ko ?? script.quickAnswer.ko), ...petNotices.map(item => item.copy.ko[1])].join('\n'), en: [(script.details?.en ?? script.quickAnswer.en), ...petNotices.map(item => item.copy.en[1])].join('\n') } }
+    return script.id !== 'check-in-time' ? script : {
     ...script,
     quickAnswer: { ko: script.quickAnswer.ko + ' ' + EARLY_CHECK_IN_COPY.ko, en: script.quickAnswer.en + ' ' + EARLY_CHECK_IN_COPY.en },
     details: { ko: (script.details?.ko ?? script.quickAnswer.ko) + ' ' + EARLY_CHECK_IN_COPY.ko, en: (script.details?.en ?? script.quickAnswer.en) + ' ' + EARLY_CHECK_IN_COPY.en },
+  }
   })
   return parseFrontdeskScriptDataset({ ...dataset, scripts: [...existing, ...additions] })
 }

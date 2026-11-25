@@ -46,3 +46,12 @@ test('Russian complimentary amenities and printing are localized and searchable'
   for (const [q,index] of [['фен',27],['распечатать',28]] as const) assert.ok(searchHotelInformation(hotel,'ru',q).some(h=>h.category==='roomUsage'&&h.index===index))
   assert.match(hotelParagraphs(hotelTopicText(hotel,'roomUsage','ru'))[28]!,/100 вон/)
 })
+
+test('Russian pet stay has dedicated labels, fees and keywords', async () => {
+  const { petStayParagraphs, generalHotelNotes } = await import('../src/services/guestHotelPresentation.ts')
+  const h=withRussianHotel(hotelDataset)
+  assert.equal(petStayParagraphs(h,'ru').length,9)
+  assert.match(petStayParagraphs(h,'ru')[1]!,/33 000.*55 000/)
+  assert.equal(generalHotelNotes(h,'ru').length,3)
+  assert.ok(searchHotelInformation(h,'ru','питомец').some(hit=>hit.category==='petStay'))
+})

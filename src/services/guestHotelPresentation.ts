@@ -5,12 +5,14 @@ import { localizedValue } from '../i18n/formatters.ts'
 import { ROOM_CLIMATE_COPY, coolingNotice } from '../data/roomClimateNotices.ts'
 import { operationalNoticesFor } from '../data/hotelOperationalNotices.ts'
 import { EARLY_CHECK_IN_COPY } from '../data/checkInAmenitiesCopy.ts'
+import { PET_STAY_NOTICES, PET_NOTE_INDEXES } from '../data/petStayNotices.ts'
 
 export function hotelHasInformation(hotel: HotelDataset, language: GuideLanguage): boolean {
   return hotel.checkInTime !== null || hotel.checkOutTime !== null || Object.values(hotel.translations[language]).some(value => value.trim())
 }
 
 export function hotelTopicText(hotel: HotelDataset, category: HotelCategory, language: GuideLanguage): string {
+  if (category === 'petStay') return localizedValue(petStayParagraphs(hotel, language).join('\n\n'), language)
   if (category === 'roomUsage' || category === 'parking' || category === 'checkIn' || category === 'checkOut') return localizedValue(hotelDisplayParagraphs(hotel, category, language).join('\n\n'), language)
   return localizedValue(hotel.translations[language][category], language)
 }
@@ -58,4 +60,19 @@ export function guestSmokingNotice(hotel: HotelDataset, language: GuideLanguage)
   const roomPolicy = hotelParagraphs(hotel.translations[language].roomUsage)[8]
   const feePolicy = hotelParagraphs(hotel.translations[language].notes)[1]
   return roomPolicy && feePolicy ? [roomPolicy, feePolicy].join('\n\n') : ''
+}
+
+/** The approved notes contain general items 0–2 and pet policies 3–7. Preserve the source snapshot and any extra notes. */
+export function hasPetStayPolicy(hotel: HotelDataset, language: GuideLanguage): boolean {
+  return hotelParagraphs(hotel.translations[language].roomUsage).length >= 12 &&
+    hotelParagraphs(hotel.translations[language].notes).length >= 8
+}
+export function petStayParagraphs(hotel: HotelDataset, language: GuideLanguage): string[] {
+  if (!hasPetStayPolicy(hotel, language)) return []
+  const notes = hotelParagraphs(hotel.translations[language].notes)
+  return [...PET_STAY_NOTICES.map(item => item.copy[language][1]), ...PET_NOTE_INDEXES.map(index => notes[index]!)]
+}
+export function generalHotelNotes(hotel: HotelDataset, language: GuideLanguage): string[] {
+  const notes = hotelParagraphs(hotel.translations[language].notes)
+  return hasPetStayPolicy(hotel, language) ? notes.filter((_, index) => !(PET_NOTE_INDEXES as readonly number[]).includes(index)) : notes
 }
