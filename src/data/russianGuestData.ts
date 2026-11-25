@@ -342,3 +342,216 @@ export function withRussianFacilities(dataset: FacilityDataset): FacilityDataset
     return { ...facility, translations: { ...facility.translations, ru }, keywords: { ...facility.keywords, ru: copy?.keywords ?? [] }, closedDays: { ...facility.closedDays, ru: copy?.closed ?? '' } }
   }) }
 }
+
+// Source checksums make later edits visible rather than silently publishing an
+// outdated Russian price or opening time. Refresh the translation and checksum together.
+const HOTEL_SOURCE_CHECKSUMS = {"checkIn":"75f6b694","checkOut":"31289250","breakfast":"0e01c019","parking":"9bbaa6d2","roomUsage":"da7f9077","notes":"e8cd2183"}
+const FACILITY_SOURCE_CHECKSUMS: Record<string, Record<string, string>> = {
+  "cu-songdo-senseuri": {
+    "description": "30b8443d",
+    "openingHours": "3062c3e6",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "blue-ocean-sauna-songdo": {
+    "description": "e4eee281",
+    "openingHours": "7d20b5b6",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "f30750df"
+  },
+  "malt-house-incheon-songdo": {
+    "description": "abd9e612",
+    "openingHours": "01f506c0",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "compose-coffee-incheon-songdo-central-park": {
+    "description": "3d03412d",
+    "openingHours": "4068c78f",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "chaeum-pharmacy-songdo": {
+    "description": "a00854fc",
+    "openingHours": "0d36401b",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "hanyang-songdo-hanok-village": {
+    "description": "91597f9b",
+    "openingHours": "25f312f2",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "gyeongbokgung-hanok-village": {
+    "description": "2d02b28b",
+    "openingHours": "09b682dc",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "paljinhyang-hanok-village": {
+    "description": "3297a651",
+    "openingHours": "ddae5643",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "hollys-incheon-hanok-village": {
+    "description": "aea237dd",
+    "openingHours": "0e177010",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "songhaeon-songdo": {
+    "description": "e4eee281",
+    "openingHours": "c1a4cba8",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "songjjujip-main": {
+    "description": "7b8fdd4a",
+    "openingHours": "b2afaf26",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "otto-gimbap-songdo": {
+    "description": "69c61541",
+    "openingHours": "24f7ec82",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "burgeroom181-songdo": {
+    "description": "88f9cfb9",
+    "openingHours": "b2e4c9d5",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "moms-touch-songdo-central-park": {
+    "description": "b9d6b07a",
+    "openingHours": "73247ad8",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "burger-king-incheon-songdo-central-park": {
+    "description": "f370b5c7",
+    "openingHours": "3078e1ec",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "incheon-port-hangdong-7ga": {
+    "description": "0394e90e",
+    "openingHours": "ffcaaa85",
+    "directions": "b5337801",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "starbucks-songdo-central-park": {
+    "description": "abca515c",
+    "openingHours": "50e1b7a8",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "playground-brewery-taproom-songdo": {
+    "description": "4cd79f70",
+    "openingHours": "f6613822",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "geumbyeol-beer-songdo-lotte-mall": {
+    "description": "93d7f9cd",
+    "openingHours": "5808c556",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "central-park-station-exit-3": {
+    "description": "c281a508",
+    "openingHours": "a0305adb",
+    "directions": "062cf51f",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "lotte-mart-songdo": {
+    "description": "70f311c9",
+    "openingHours": "3078e1ec",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "songdo-central-park": {
+    "description": "fda9c458",
+    "openingHours": "be635cdc",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "byeol-onnuri-pharmacy-songdo": {
+    "description": "fb3c9bc3",
+    "openingHours": "59147fe1",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "hyundai-premium-outlet-songdo": {
+    "description": "65d2d950",
+    "openingHours": "49654121",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "g-tower-ifez-observatory": {
+    "description": "dd8891ef",
+    "openingHours": "681cea2c",
+    "directions": "ffcaaa85",
+    "notes": "e4f2be19",
+    "closedDays": "2935e037"
+  },
+  "songdo-central-park-water-taxi": {
+    "description": "cf9f5fa8",
+    "openingHours": "75fd0176",
+    "directions": "ffcaaa85",
+    "notes": "ffcaaa85",
+    "closedDays": "ffcaaa85"
+  },
+  "songdo-timespace-complex": {
+    "description": "cd82d778",
+    "openingHours": "3d34ab6d",
+    "directions": "54fa8a2c",
+    "notes": "8634eab7",
+    "closedDays": "c69071c4"
+  }
+}
+function sourceChecksum(value: string): string {
+  let hash = 2166136261
+  for (const character of JSON.stringify(value)) hash = Math.imul(hash ^ character.charCodeAt(0), 16777619) >>> 0
+  return hash.toString(16).padStart(8, '0')
+}
+export function russianTranslationIssues(hotel: HotelDataset, facilities: FacilityDataset): string[] {
+  const issues: string[] = []
+  for (const field of Object.keys(HOTEL_SOURCE_CHECKSUMS) as (keyof typeof HOTEL_SOURCE_CHECKSUMS)[]) {
+    if (sourceChecksum(hotel.translations.en[field]) !== HOTEL_SOURCE_CHECKSUMS[field]) issues.push('hotel.' + field)
+  }
+  for (const facility of facilities.facilities.filter(item => item.isPublished)) {
+    const checks = FACILITY_SOURCE_CHECKSUMS[facility.id]
+    if (!checks) { issues.push(facility.id); continue }
+    for (const field of ['description','openingHours','directions','notes'] as const) if (sourceChecksum(facility.translations.en[field]) !== checks[field]) issues.push(facility.id + '.' + field)
+    if (sourceChecksum(facility.closedDays.en) !== checks.closedDays) issues.push(facility.id + '.closedDays')
+  }
+  return issues
+}

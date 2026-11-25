@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { hotelDataset } from '../src/data/hotelDataset.ts'
 import { facilityDataset } from '../src/data/facilityDataset.ts'
-import { withRussianHotel, withRussianFacilities, RUSSIAN_VENUES } from '../src/data/russianGuestData.ts'
+import { withRussianHotel, withRussianFacilities, RUSSIAN_VENUES, russianTranslationIssues } from '../src/data/russianGuestData.ts'
 import { GUEST_LANGUAGES } from '../src/types/guide.ts'
 import { MESSAGES } from '../src/i18n/messages.ts'
 import { UI_MESSAGE_KEYS } from '../src/i18n/types.ts'
@@ -14,6 +14,7 @@ import { HOTEL_OPERATIONAL_NOTICES } from '../src/data/hotelOperationalNotices.t
 import { guestFacilityPresentation } from '../src/services/guestFacilityPresentation.ts'
 test('Russian guest localization covers UI, all 27 venues, hotel notices and 15 tenants', () => {
   assert.ok(GUEST_LANGUAGES.includes('ru'))
+  assert.deepEqual(russianTranslationIssues(hotelDataset, facilityDataset), [], 'Update Russian copy whenever the approved English source changes')
   assert.deepEqual(Object.keys(MESSAGES.ru.ui), [...UI_MESSAGE_KEYS])
   for (const key of UI_MESSAGE_KEYS) assert.deepEqual(MESSAGES.ru.ui[key].match(/\{\w+\}/g), MESSAGES.en.ui[key].match(/\{\w+\}/g))
   const h = withRussianHotel(hotelDataset), d = withRussianFacilities(facilityDataset)
