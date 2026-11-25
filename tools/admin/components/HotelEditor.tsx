@@ -1,4 +1,4 @@
-import type { GuideLanguage, DatasetStatus } from '../../../src/types/guide'
+import type { SourceGuideLanguage, DatasetStatus } from '../../../src/types/guide'
 import type { HotelDataset, HotelTranslation } from '../../../src/types/hotel'
 import { Button } from '../../../src/components/ui/Button'
 import { LANGUAGE_NAMES } from '../services/workspace'
@@ -10,7 +10,7 @@ const fields: { code: keyof HotelTranslation; label: string }[] = [
   { code: 'parking', label: '주차 안내' }, { code: 'roomUsage', label: '객실 이용 안내' }, { code: 'notes', label: '호텔 참고 사항' },
 ]
 
-export function HotelEditor({ draft, language, onLanguage, onChange, onStatus, onSave, onCancel }: { draft: HotelDataset; language: GuideLanguage; onLanguage: (language: GuideLanguage) => void; onChange: (draft: HotelDataset) => void; onStatus: (status: DatasetStatus) => void; onSave: () => void; onCancel: () => void }) {
+export function HotelEditor({ draft, language, onLanguage, onChange, onStatus, onSave, onCancel }: { draft: HotelDataset; language: SourceGuideLanguage; onLanguage: (language: SourceGuideLanguage) => void; onChange: (draft: HotelDataset) => void; onStatus: (status: DatasetStatus) => void; onSave: () => void; onCancel: () => void }) {
   return <form className="admin-editor" noValidate onSubmit={event => { event.preventDefault(); onSave() }}>
     <h2>호텔 기본 정보 편집</h2><fieldset><legend>공통 호텔 정보</legend><div className="admin-field-grid">
       <div className="admin-field"><label htmlFor="hotel-status">호텔 데이터 상태</label><select id="hotel-status" value={draft.dataStatus} onChange={event => onStatus(event.target.value as DatasetStatus)}><option value="demo">DEMO</option><option value="production">PRODUCTION</option></select></div>

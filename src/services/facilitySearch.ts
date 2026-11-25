@@ -1,4 +1,4 @@
-import { GUIDE_LANGUAGES } from '../types/guide.ts'
+import { GUEST_LANGUAGES } from '../types/guide.ts'
 import type { Facility, FacilityCategory } from '../types/facility.ts'
 import { timespaceSearchTerms } from './timespaceDirectory.ts'
 import { FACILITY_SEARCH_ALIASES } from '../data/searchKeywordDictionary.ts'
@@ -44,9 +44,10 @@ function compactSearchTerm(value: string): string {
 
 export function facilitySearchFields(facility: Facility): string[] {
   const additional = facility.id === FEATURED_DINING_FACILITY_ID ? timespaceSearchTerms() : []
-  return [...GUIDE_LANGUAGES.flatMap(lang => {
+  return [...GUEST_LANGUAGES.flatMap(lang => {
     const t = facility.translations[lang]
-    return [t.name, t.description, t.address, t.openingHours, t.directions, t.notes, facility.closedDays[lang], ...facility.keywords[lang]]
+    if (!t) return []
+    return [t.name, t.description, t.address, t.openingHours, t.directions, t.notes, facility.closedDays[lang] ?? '', ...(facility.keywords[lang] ?? [])]
   }), ...additional]
 }
 
@@ -66,7 +67,7 @@ export function matchesFacility(facility: Facility, query = '', category: StaffC
   // Each query word must match; synonyms are OR alternatives only for that word.
   return tokens.every(token => {
     // These very short aliases otherwise match unrelated walking times, words or addresses.
-    if (['약','배','타임','타스','cu','편점'].includes(token)) return aliases.some(alias => keywordEqual(alias, token)) || GUIDE_LANGUAGES.some(lang => facility.keywords[lang].some(word => keywordEqual(word, token)))
+    if (['약','배','타임','타스','cu','편점'].includes(token)) return aliases.some(alias => keywordEqual(alias, token)) || GUEST_LANGUAGES.some(lang => (facility.keywords[lang] ?? []).some(word => keywordEqual(word, token)))
     const variants = [token, ...(QUERY_SYNONYMS[token] ?? [])]
     return variants.some(variant => {
       if (haystack.includes(variant)) return true
@@ -81,7 +82,7 @@ export function searchFacilities(facilities: readonly Facility[], query = '', ca
   const matched = facilities.filter(facility => matchesFacility(facility, query, category))
   if (!normalizeSearchTerm(query)) return orderFacilitiesForCategory(matched, category)
   const ranked = matched.map(facility => ({ facility, score: keywordScore(query,
-    GUIDE_LANGUAGES.map(lang => facility.translations[lang].name), GUIDE_LANGUAGES.flatMap(lang => facility.keywords[lang]),
+    GUEST_LANGUAGES.map(lang => facility.translations[lang]?.name ?? ''), GUEST_LANGUAGES.flatMap(lang => facility.keywords[lang] ?? []),
     FACILITY_SEARCH_ALIASES[facility.id] ?? [], facilitySearchFields(facility))
   })).sort((a,b) => b.score - a.score).map(item => item.facility)
   // Retain the existing hotel-selected dining-area recommendation policy.

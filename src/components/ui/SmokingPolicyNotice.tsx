@@ -8,6 +8,7 @@ const titles: Record<GuideLanguage, string> = {
   ko: '객실·실내 금연 안내',
   en: 'No smoking in rooms or indoor areas',
   'zh-CN': '客房及室内禁止吸烟',
+  ru: 'Курение запрещено',
   ja: '客室・館内禁煙のお知らせ',
 }
 

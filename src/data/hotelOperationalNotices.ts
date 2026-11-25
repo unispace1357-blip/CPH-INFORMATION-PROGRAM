@@ -18,9 +18,10 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
   {
     id: 'hotel-gym',
     guestCategory: 'roomUsage', staffCategory: 'hotel-facilities',
-    keywords: ['헬스장', '헬스', '운동', '피트니스', 'gym', 'fitness', '健身房', '健身', 'ジム', 'フィットネス'],
+    keywords: ["спортзал", "фитнес", "тренажерный зал", '헬스장', '헬스', '운동', '피트니스', 'gym', 'fitness', '健身房', '健身', 'ジム', 'フィットネス'],
     question: { en: 'Where is the gym, and what are its opening hours?', ko: '헬스장은 어디에 있고 몇 시까지 운영하나요?' },
     copy: {
+      ru: {"title":"Тренажёрный зал","text":"Тренажёрный зал находится на 4-м этаже и открыт с 06:00 до 23:00."},
       ko: { title: '헬스장 이용 안내', text: '헬스장은 호텔 4층에 있으며, 운영시간은 06:00~23:00입니다.' },
       en: { title: 'Gym', text: 'The gym is on the 4th floor and is open from 6:00 AM to 11:00 PM.' },
       'zh-CN': { title: '健身房', text: '健身房位于酒店4楼，开放时间为06:00至23:00。' },
@@ -30,9 +31,10 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
   {
     id: 'ev-charging-stations',
     guestCategory: 'parking', staffCategory: 'parking',
-    keywords: ['전기충전소', '전기차', '전기차 충전소', '전기차충전', '충전소', '완속충전', 'ev charging', 'electric vehicle', '7kw', 'b-23', '充电桩', '電気自動車', '充電器'],
+    keywords: ["электромобиль", "зарядная станция", "зарядка", '전기충전소', '전기차', '전기차 충전소', '전기차충전', '충전소', '완속충전', 'ev charging', 'electric vehicle', '7kw', 'b-23', '充电桩', '電気自動車', '充電器'],
     question: { en: 'Where can I charge my electric vehicle?', ko: '전기차 충전소는 어디에 있나요?' },
     copy: {
+      ru: {"title":"Зарядка электромобилей","text":"На подземном этаже B1 в зоне B-23 установлены три зарядные станции мощностью 7 кВт для медленной зарядки."},
       ko: { title: '전기차 충전소', text: '지하 1층 B-23 구역에 7kW 완속 충전기 3기가 설치되어 있습니다.' },
       en: { title: 'EV charging stations', text: 'Three 7 kW slow EV chargers are located in zone B-23 on basement level B1.' },
       'zh-CN': { title: '电动汽车充电站', text: '地下1层B-23区域设有3台7 kW慢速充电桩。' },
@@ -42,9 +44,10 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
   {
     id: 'room-blanket-rental',
     guestCategory: 'roomUsage', staffCategory: 'room-usage',
-    keywords: ['담요', '담요 대여', '담요대여', '세탁비', 'blanket', '毛毯', '毛布'],
+    keywords: ["плед", "одеяло", '담요', '담요 대여', '담요대여', '세탁비', 'blanket', '毛毯', '毛布'],
     question: { en: 'Can I borrow a blanket?', ko: '담요를 대여할 수 있나요?' },
     copy: {
+      ru: {"title":"Прокат пледа","text":"При выдаче пледа взимается плата за стирку — 5 000 вон за номер."},
       ko: { title: '담요 대여', text: '담요 대여 시 객실당 5,000원의 세탁비가 부과됩니다.' },
       en: { title: 'Blanket rental', text: 'Blankets are available for rental with a KRW 5,000 laundry fee per room.' },
       'zh-CN': { title: '毛毯租借', text: '租借毛毯时，每间客房收取5,000韩元的洗涤费。' },
@@ -54,9 +57,10 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
   {
     id: 'bathtub-drain-controls',
     guestCategory: 'roomUsage', staffCategory: 'room-usage',
-    keywords: ['욕조', '배수구', '욕조 배수구', '욕조배수구', '다이얼', 'bathtub', 'drain', '浴缸', '排水口', '浴槽', '排水栓'],
+    keywords: ["ванна", "слив", "пробка", '욕조', '배수구', '욕조 배수구', '욕조배수구', '다이얼', 'bathtub', 'drain', '浴缸', '排水口', '浴槽', '排水栓'],
     question: { en: 'How do I close the bathtub drain?', ko: '욕조 배수구를 어떻게 닫나요?' },
     copy: {
+      ru: {"title":"Как закрыть слив ванны","text":"Поверните серебристую ручку внутри ванны, чтобы закрыть слив."},
       ko: { title: '욕조 배수구 닫는 방법', text: '욕조 안쪽에 있는 은색 다이얼을 돌리면 배수구가 닫힙니다.' },
       en: { title: 'Closing the bathtub drain', text: 'Turn the silver dial inside the bathtub to close the drain.' },
       'zh-CN': { title: '关闭浴缸排水口', text: '转动浴缸内侧的银色旋钮即可关闭排水口。' },
@@ -66,9 +70,10 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
   {
     id: 'phone-charger-rental',
     guestCategory: 'roomUsage', staffCategory: 'room-usage',
-    keywords: ['충전기', '휴대폰충전기', '충전기대여', 'c타입', '8핀', 'usb-c', 'type-c', 'lightning', 'charger', '手机充电器', '充電器'],
+    keywords: ["зарядка", "зарядное устройство", "телефон", '충전기', '휴대폰충전기', '충전기대여', 'c타입', '8핀', 'usb-c', 'type-c', 'lightning', 'charger', '手机充电器', '充電器'],
     question: { en: 'Can I borrow a phone charger?', ko: '휴대폰 충전기를 대여할 수 있나요?' },
     copy: {
+      ru: {"title":"Прокат зарядного устройства","text":"На стойке регистрации можно взять зарядное устройство USB-C или 8-pin (Lightning) под залог 10 000 вон наличными."},
       ko: { title: '휴대폰 충전기 대여', text: 'C타입 및 8핀 충전기는 프론트에서 현금 보증금 10,000원을 맡기고 대여하실 수 있습니다.' },
       en: { title: 'Phone charger rental', text: 'USB-C and 8-pin (Lightning) chargers are available to borrow at the front desk with a KRW 10,000 cash deposit.' },
       'zh-CN': { title: '手机充电器租借', text: '可在前台支付10,000韩元现金押金，租借USB-C或8针（Lightning）充电器。' },
@@ -80,7 +85,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
     "id": "room-water",
     "guestCategory": "roomUsage",
     "staffCategory": "room-usage",
-    "keywords": [
+    "keywords": ["вода", "бутылка", "холодильник", 
       "생수",
       "물",
       "물병",
@@ -101,6 +106,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
       "ko": "생수를 추가로 받을 수 있나요?"
     },
     "copy": {
+      ru: {"title":"Питьевая вода","text":"В холодильнике номера предусмотрены 3 бутылки воды. Дополнительно можно получить до 2 бутылок на номер на стойке регистрации."},
       "ko": {
         "title": "생수 제공 안내",
         "text": "객실 냉장고에 생수 3병이 기본으로 비치되어 있습니다. 추가 생수는 객실당 2병까지 프론트에서 수령하실 수 있습니다."
@@ -123,7 +129,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
     "id": "room-towels",
     "guestCategory": "roomUsage",
     "staffCategory": "room-usage",
-    "keywords": [
+    "keywords": ["полотенце", "полотенца", 
       "수건",
       "타월",
       "타올",
@@ -142,6 +148,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
       "ko": "수건은 어디에 있나요?"
     },
     "copy": {
+      ru: {"title":"Где находятся полотенца","text":"Полотенца находятся в ящиках под раковиной в ванной комнате."},
       "ko": {
         "title": "수건 위치",
         "text": "수건은 화장실 세면대 서랍장에 비치되어 있습니다."
@@ -164,7 +171,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
     "id": "luggage-storage",
     "guestCategory": "checkIn",
     "staffCategory": "check-in-out",
-    "keywords": [
+    "keywords": ["багаж", "чемодан", "хранение багажа", 
       "짐",
       "짐보관",
       "짐 보관",
@@ -185,6 +192,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
       "ko": "체크인 전이나 체크아웃 후에 짐을 맡길 수 있나요?"
     },
     "copy": {
+      ru: {"title":"Хранение багажа","text":"До заезда и после выезда вы можете оставить багаж на стойке регистрации."},
       "ko": {
         "title": "짐 보관",
         "text": "체크인 전과 체크아웃 후에는 프론트에서 짐을 보관하실 수 있습니다."
@@ -207,7 +215,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
     "id": "stayover-housekeeping",
     "guestCategory": "roomUsage",
     "staffCategory": "room-usage",
-    "keywords": [
+    "keywords": ["уборка", "клининг", 
       "연박",
       "재실정비",
       "재실정비 청소",
@@ -229,6 +237,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
       "ko": "연박 중 객실 청소는 어떻게 요청하나요?"
     },
     "copy": {
+      ru: {"title":"Уборка номера при длительном проживании","text":"Если вы хотите, чтобы номер убрали во время проживания, повесьте табличку с просьбой об уборке на наружную ручку двери."},
       "ko": {
         "title": "연박 객실 청소",
         "text": "연박 중 객실 청소를 원하시면 객실 내 재실정비 안내판을 객실 문 바깥쪽 문고리에 걸어 주세요."
@@ -251,7 +260,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
     "id": "frontdesk-extension",
     "guestCategory": "roomUsage",
     "staffCategory": "room-usage",
-    "keywords": [
+    "keywords": ["ресепшен", "телефон", "стойка регистрации", 
       "프론트",
       "내선",
       "내선번호",
@@ -272,6 +281,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
       "ko": "객실에서 프론트로 어떻게 전화하나요?"
     },
     "copy": {
+      ru: {"title":"Связь со стойкой регистрации","text":"Наберите 0 на телефоне в номере, чтобы связаться со стойкой регистрации."},
       "ko": {
         "title": "프론트 내선번호",
         "text": "객실 전화기에서 0번을 누르시면 프론트로 연결됩니다."
@@ -294,7 +304,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
     "id": "room-power-keycard",
     "guestCategory": "roomUsage",
     "staffCategory": "room-usage",
-    "keywords": [
+    "keywords": ["электричество", "свет", "ключ-карта", 
       "카드키",
       "카드키함",
       "전기",
@@ -318,6 +328,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
       "ko": "카드키를 꽂아도 전원이 들어오지 않으면 어떻게 하나요?"
     },
     "copy": {
+      ru: {"title":"Если в номере нет электричества","text":"Приложите ключ-карту к дверному замку, затем вставьте ту же карту в держатель ключ-карты внутри номера."},
       "ko": {
         "title": "객실 전원이 들어오지 않을 때",
         "text": "객실 도어락에 카드키를 스캔한 뒤, 스캔한 동일한 카드키를 객실 내부 카드키함에 꽂아 주세요."
@@ -340,7 +351,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
     "id": "taxi-assistance",
     "guestCategory": "roomUsage",
     "staffCategory": "hotel-facilities",
-    "keywords": [
+    "keywords": ["такси", "аэропорт", "заказ такси", 
       "택시",
       "택시호출",
       "택시예약",
@@ -361,6 +372,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
       "ko": "프론트에서 택시를 불러주실 수 있나요?"
     },
     "copy": {
+      ru: {"title":"Вызов и заказ такси","text":"Для дальних поездок, например в аэропорт Инчхон, стойка регистрации поможет забронировать такси. Для обычных поездок сотрудники вызовут такси через Kakao T."},
       "ko": {
         "title": "택시 호출 및 예약",
         "text": "인천공항 등 장거리 이동은 프론트에서 택시 예약을 도와드립니다. 그 외 일반 이동은 프론트에서 카카오택시를 호출해 드립니다."
@@ -383,7 +395,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
     "id": "extra-bedding",
     "guestCategory": "roomUsage",
     "staffCategory": "room-usage",
-    "keywords": [
+    "keywords": ["подушка", "одеяло", "постель", 
       "베개",
       "배게",
       "이불",
@@ -406,6 +418,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
       "ko": "베개나 이불을 추가로 받을 수 있나요?"
     },
     "copy": {
+      ru: {"title":"Дополнительные подушки и одеяла","text":"За дополнительные подушки или одеяла взимается плата 10 000 вон. При высокой загрузке отеля услуга может быть недоступна."},
       "ko": {
         "title": "베개·이불 추가",
         "text": "베개 및 이불 추가 시 10,000원의 추가 요금이 부과됩니다. 객실 점유율이 높은 날에는 제공이 어려울 수 있습니다."
@@ -428,7 +441,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
     "id": "umbrella-rental",
     "guestCategory": "roomUsage",
     "staffCategory": "hotel-facilities",
-    "keywords": [
+    "keywords": ["зонт", "дождь", 
       "우산",
       "우산대여",
       "우산 대여",
@@ -446,6 +459,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
       "ko": "우산을 빌릴 수 있나요?"
     },
     "copy": {
+      ru: {"title":"Прокат зонтов","text":"Зонт можно взять на стойке регистрации."},
       "ko": {
         "title": "우산 대여",
         "text": "우산은 프론트에서 대여하실 수 있습니다."
@@ -468,7 +482,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
     "id": "laundry-service",
     "guestCategory": "roomUsage",
     "staffCategory": "hotel-facilities",
-    "keywords": [
+    "keywords": ["стирка", "прачечная", "бельё", 
       "세탁",
       "빨래",
       "런더리",
@@ -490,6 +504,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
       "ko": "세탁 서비스는 어떻게 이용하나요?"
     },
     "copy": {
+      ru: {"title":"Прачечная","text":"В ящике под телевизором находятся прейскурант и пакет для белья. Положите вещи в пакет и повесьте его на дверную ручку номера до 12:00 следующего дня, чтобы воспользоваться платной стиркой. Услуга недоступна, если вы выезжаете на следующий день."},
       "ko": {
         "title": "세탁 서비스",
         "text": "TV 아래 서랍장에 세탁 요금표와 런더리백이 비치되어 있습니다. 세탁물을 런더리백에 담아 다음 날 정오(12:00) 전에 객실 문고리에 걸어 두시면 유료 세탁 서비스를 이용하실 수 있습니다. 다음 날 체크아웃 예정인 경우에는 이용하실 수 없습니다."
@@ -512,7 +527,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
     "id": "lounge-room-service",
     "guestCategory": "roomUsage",
     "staffCategory": "hotel-facilities",
-    "keywords": [
+    "keywords": ["ресторан", "обед", "ужин", "рум сервис", "меню", "лаунж", 
       "라운지",
       "룸서비스",
       "룸 서비스",
@@ -538,6 +553,7 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
       "ko": "라운지와 룸서비스는 언제 이용할 수 있나요?"
     },
     "copy": {
+      ru: {"title":"Лаунж и обслуживание в номере","text":"После завтрака с 12:00 до 21:30 доступны питание в лаунже и обслуживание в номере. Меню обслуживания в номере находится в конце информационного буклета на столе в номере."},
       "ko": {
         "title": "라운지 및 룸서비스",
         "text": "조식 운영 종료 후 12:00~21:30에는 라운지에서 식사 및 룸서비스를 이용하실 수 있습니다. 룸서비스 메뉴는 객실 책상 위 안내 책자의 맨 뒷부분에서 확인하실 수 있습니다."

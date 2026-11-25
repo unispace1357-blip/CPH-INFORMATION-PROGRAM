@@ -408,8 +408,15 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
       const facts = rect('#hotel-information .concierge-essentials');
       const topics = rect('#hotel-information .hotel-category-grid');
       const featured = rect('.guest-page > .concierge-featured');
+      // The original 1100px budget predates the approved climate notices,
+      // editorial tiles and fifth quick-fact card. Account for their actual
+      // height while retaining an upper bound and all order/overflow checks.
+      const extraSections = ['.room-climate-cards', '.boutique-entry'].map(q => rect('#hotel-information ' + q).height);
+      const amenities = rect('.concierge-fact--amenities');
+      const additionalFactRow = amenities.height + 6;
       return { hero: [hero.top, hero.bottom], search: [search.top, search.bottom],
-        smoke: smoke.top, facts: facts.top, topics: topics.top, featured: featured.top };
+        smoke: smoke.top, facts: facts.top, topics: topics.top, featured: featured.top,
+        addedHeight: extraSections.reduce((a,b)=>a+b,0) + additionalFactRow + 36 };
     });
     assert.ok(mobileLayout.search[0] >= mobileLayout.hero[0] &&
       mobileLayout.search[0] < mobileLayout.hero[1] &&
@@ -419,7 +426,8 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
       mobileLayout.topics > mobileLayout.facts &&
       mobileLayout.featured > mobileLayout.topics,
       'Mobile order: hero/search > smoking > facts > topic cards > Timespace: ' + JSON.stringify(mobileLayout));
-    assert.ok(mobileLayout.featured < 1100, 'Feature card should not be buried under a long duplicated mobile header');
+    assert.ok(mobileLayout.addedHeight < 700, 'Added climate/quick-fact cards must remain compact: ' + JSON.stringify(mobileLayout));
+    assert.ok(mobileLayout.featured < 1100 + mobileLayout.addedHeight, 'Feature card must follow the existing header plus the approved extra notices: ' + JSON.stringify(mobileLayout));
     await noOverflow(guest);
     await guest.evaluate(() => window.scrollTo(0, 0));
     await guest.screenshot({ path: path.join(output, 'guest-stage3-first-fold-390.png'), fullPage: false });
@@ -459,6 +467,23 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await guest.setViewportSize({ width: 390, height: 844 });
     await noOverflow(guest);
     await guest.locator('#nearby-facilities').screenshot({ path: path.join(output, 'nearby-boutique-mobile.png') });
+    // Russian is a guest-only overlay; registered venue names remain unchanged.
+    await guest.setViewportSize({ width: 1280, height: 900 });
+    await guest.locator('.language-options').getByRole('button', { name: 'Русский', exact: true }).click();
+    assert.equal(await guest.locator('html').getAttribute('lang'), 'ru');
+    await waitCards(guest, 27);
+    await guestSearch.fill('аптека');
+    await waitCards(guest, 2);
+    await guestSearch.fill('');
+    await waitCards(guest, 27);
+    await guest.locator('#hotel-information input[type="search"]').fill('микроволновка');
+    assert.match(await guest.locator('.hotel-search-list').innerText(), /Микроволнов/);
+    await guest.locator('#hotel-information input[type="search"]').fill('');
+    await guest.setViewportSize({ width: 390, height: 844 });
+    await noOverflow(guest);
+    await guest.screenshot({ path: path.join(output, 'guest-language-ru.png'), fullPage: false });
+    await guest.locator('.guest-mobile-language select').selectOption('en');
+    assert.equal(await guest.locator('html').getAttribute('lang'), 'en');
     for (const [language, label] of Object.entries(languages)) {
       await guest.setViewportSize({ width: 1280, height: 900 });
       await guest.locator('.language-options').getByRole('button', { name: label, exact: true }).click();

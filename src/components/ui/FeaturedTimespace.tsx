@@ -10,6 +10,7 @@ const labels: Record<GuideLanguage, { heading: string; featured: string; notice:
   ko: { heading: '추천 장소', featured: '★ 추천', notice: '길찾기 도착지 안내' },
   en: { heading: 'Featured nearby', featured: '★ Featured', notice: 'Directions destination notice' },
   'zh-CN': { heading: '周边推荐', featured: '★ 推荐', notice: '路线终点提示' },
+  ru: {"heading":"Рекомендуем поблизости","featured":"★ Рекомендуем","notice":"Примечание о маршруте"},
   ja: { heading: 'おすすめスポット', featured: '★ おすすめ', notice: '経路の到着地について' },
 }
 

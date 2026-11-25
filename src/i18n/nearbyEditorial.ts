@@ -36,6 +36,7 @@ export const NEARBY_EDITORIAL: Record<GuideLanguage, NearbyEditorialCopy> = {
       transportation: '公交·地铁·机场交通', sauna_spa: '桑拿·水疗', atm: '自动取款机',
     },
   },
+  ru: {"kicker":"HOTEL CONCIERGE · EXPLORE SONGDO","intro":"Рестораны, магазины, услуги и достопримечательности рядом с отелем.","descriptions":{"hotel":"Услуги отеля","dining":"Блюда, мясо и пиво","cafe":"Кофе и десерты","convenience":"Продукты и необходимые товары","pharmacy":"Лекарства и здоровье","shopping":"Аутлеты и торговые центры","attraction":"Местные достопримечательности","transportation":"Автобусы, метро, аэропорт","sauna_spa":"Сауны и спа","atm":"Банкоматы"}},
   ja: {
     kicker: 'HOTEL CONCIERGE · EXPLORE SONGDO',
     intro: 'ホテル周辺の飲食店、便利な施設、ショッピング、観光スポットをご案内します。',

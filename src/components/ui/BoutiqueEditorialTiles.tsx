@@ -4,6 +4,7 @@ const TILE_COPY: Record<GuideLanguage, { hotel:string; hotelEn:string; nearby:st
   ko: {hotel:'호텔 안내',hotelEn:'Hotel Information',nearby:'주변 시설',nearbyEn:'Nearby Places',label:'호텔과 주변 시설 바로가기'},
   en: {hotel:'Hotel Information',hotelEn:'Your Stay',nearby:'Nearby Places',nearbyEn:'Explore Songdo',label:'Browse hotel and nearby places'},
   'zh-CN': {hotel:'酒店指南',hotelEn:'Hotel Information',nearby:'周边设施',nearbyEn:'Nearby Places',label:'酒店及周边设施快捷导航'},
+  ru: {"hotel":"Информация об отеле","hotelEn":"Ваше пребывание","nearby":"Места поблизости","nearbyEn":"Откройте Сонгдо","label":"Информация об отеле и местах поблизости"},
   ja: {hotel:'ホテル案内',hotelEn:'Hotel Information',nearby:'周辺施設',nearbyEn:'Nearby Places',label:'ホテルと周辺施設へのショートカット'},
 }
 

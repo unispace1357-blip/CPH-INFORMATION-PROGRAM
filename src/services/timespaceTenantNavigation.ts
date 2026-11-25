@@ -1,5 +1,5 @@
 import { TIMESPACE_TENANTS, timespaceCategoryLabel } from './timespaceDirectory.ts'
-import { GUIDE_LANGUAGES } from '../types/guide.ts'
+import { GUEST_LANGUAGES } from '../types/guide.ts'
 import type { TimespaceTenant } from './timespaceDirectory.ts'
 
 /** Navigation is an explicit event, so searching for the same shop twice refocuses it. */
@@ -50,7 +50,7 @@ export function findTimespaceTenantCandidates(query: string): TimespaceTenant[] 
     const labels = [
       tenant.name, ...(TENANT_ALIASES[tenant.id] ?? []),
       ...Object.values(tenant.menu),
-      ...GUIDE_LANGUAGES.map(language => timespaceCategoryLabel(tenant.category, language)),
+      ...GUEST_LANGUAGES.map(language => timespaceCategoryLabel(tenant.category, language)),
     ]
     return labels.some(label => exactNameKey(label).includes(term)) ||
       Object.values(tenant.menu).some(text => text.split(/[·,，、]/u).some(part => exactNameKey(part).includes(term)))

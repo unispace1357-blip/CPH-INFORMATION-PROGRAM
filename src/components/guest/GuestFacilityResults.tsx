@@ -18,7 +18,7 @@ import { EmptyState } from '../ui/EmptyState'
 import { GUEST_FACILITY_COPY, TIMESPACE_FACILITY_ID, guestFacilityCardTeaser } from '../../services/guestFacilityPresentation'
 
 const FEATURED_TEXT: Record<GuideLanguage, string> = {
-  ko: '추천', en: 'Featured', 'zh-CN': '推荐', ja: 'おすすめ',
+  ko: '추천', en: 'Featured', 'zh-CN': '推荐', ja: 'おすすめ', ru: 'Рекомендуем',
 }
 
 export function GuestFacilityResults({ results, publicCount, language, category, selectedId, onSelect }: { results: readonly Facility[]; publicCount: number; language: GuideLanguage; category: StaffCategoryFilter; selectedId: string | null; onSelect: (id: string) => void }) {

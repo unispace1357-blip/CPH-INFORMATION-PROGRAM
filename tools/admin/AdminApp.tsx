@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { revokeDemoAdminSession } from '../../src/services/demoAdminGate'
-import type { DatasetStatus, GuideLanguage } from '../../src/types/guide'
+import type { DatasetStatus, SourceGuideLanguage } from '../../src/types/guide'
 import type { Facility, FacilityCategory, FacilityDataset } from '../../src/types/facility'
 import type { HotelDataset } from '../../src/types/hotel'
 import rawFacilities from '../../src/data/facilities.json' with { type: 'json' }
@@ -43,7 +43,7 @@ export function AdminApp() {
   const [requestedHotel, setRequestedHotel] = useState<string | null>(null)
   const [menu, setMenu] = useState<Menu>('facilities')
   const [editor, setEditor] = useState<Editor | null>(null)
-  const [language, setLanguage] = useState<GuideLanguage>('ko')
+  const [language, setLanguage] = useState<SourceGuideLanguage>('ko')
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState<FacilityCategory | 'all'>('all')
   const [published, setPublished] = useState<'all' | 'public' | 'private'>('all')

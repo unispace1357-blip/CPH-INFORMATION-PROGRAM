@@ -1,4 +1,4 @@
-import type { DatasetStatus, GuideLanguage, LocalizedText } from './guide.ts'
+import type { DatasetStatus, GuideLanguage, LocalizedText, LocalizedRecord } from './guide.ts'
 
 export type { GuideLanguage } from './guide.ts'
 
@@ -33,7 +33,7 @@ export interface Facility {
   /** Map route distance to its registered destination, potentially a nearby landmark. */
   walkingDistanceMeters?: number | null
   closedDays: LocalizedText
-  keywords: Record<GuideLanguage, string[]>
+  keywords: LocalizedRecord<string[]>
   englishPhrases: string[]
   /** Staff-only Korean meanings aligned by index; omitted for legacy English-only records. */
   englishPhraseMeanings?: string[]

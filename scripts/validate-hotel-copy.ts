@@ -6,7 +6,7 @@ import reference from '../docs/reference/step07a-approved-copy.json' with { type
 import amendments from '../docs/reference/step2-operational-amendments.json' with { type: 'json' }
 import updates from '../docs/reference/step1-info-accuracy-20261025.json' with { type: 'json' }
 import { GUIDE_LANGUAGES } from '../src/types/guide.ts'
-import type { GuideLanguage } from '../src/types/guide.ts'
+import type { SourceGuideLanguage } from '../src/types/guide.ts'
 import { parseHotelDataset } from '../src/data/validateHotelDataset.ts'
 
 /** Final user instruction takes precedence over the workbook's older notes-field order. */
@@ -17,13 +17,13 @@ export const APPROVED_MAPPING = {
   notes: ['H03', 'H23', 'H26', 'H27', 'H28', 'H29', 'H34', 'H35'],
 } as const
 
-export interface CopyMismatch { id: string; language?: GuideLanguage; field: string; expected: unknown; actual: unknown; reason: string }
+export interface CopyMismatch { id: string; language?: SourceGuideLanguage; field: string; expected: unknown; actual: unknown; reason: string }
 
 /** Read-only comparison with the separately extracted workbook cells. No translation or repair. */
 export function verifyApprovedHotel(input: unknown): CopyMismatch[] {
   const hotel = parseHotelDataset(input)
   const errors: CopyMismatch[] = []
-  function compare(id: string, field: string, expected: unknown, actual: unknown, reason: string, language?: GuideLanguage) {
+  function compare(id: string, field: string, expected: unknown, actual: unknown, reason: string, language?: SourceGuideLanguage) {
     if (JSON.stringify(actual) !== JSON.stringify(expected)) errors.push({ id, field, expected, actual, reason, ...(language ? { language } : {}) })
   }
   const ids = Array.from({ length: 35 }, (_, i) => `H${String(i + 1).padStart(2, '0')}`)
@@ -70,8 +70,8 @@ export function verifyApprovedHotel(input: unknown): CopyMismatch[] {
       const actual = hotel.translations[language][field as keyof typeof APPROVED_MAPPING]
       const paragraphs = actual.split('\n\n')
       const expected = fieldIds.filter(id => !updates.removedIds.includes(id as 'H05')).map(id => {
-        const updated = (updates.replacements as Record<string, Record<GuideLanguage, string>>)[id]
-        const delivery = (amendments.replacements as Record<string, Record<GuideLanguage, string>>)[id]
+        const updated = (updates.replacements as Record<string, Record<SourceGuideLanguage, string>>)[id]
+        const delivery = (amendments.replacements as Record<string, Record<SourceGuideLanguage, string>>)[id]
         return { id: id as string, text: updated?.[language] ?? delivery?.[language] ?? reference.records.find(record => record.id === id)?.translations[language] }
       })
       if (field === 'roomUsage') expected.push({ id: 'bedside-light-switch', text: updates.additions.roomUsage[language] })

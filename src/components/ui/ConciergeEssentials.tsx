@@ -7,6 +7,7 @@ const labels: Record<GuideLanguage, { title: string; checkIn: string; checkOut: 
   ko: { title: '주요 이용정보', checkIn: '체크인', checkOut: '체크아웃', breakfast: '성인 조식', frontDesk: '프론트', currency: '원' },
   en: { title: 'At a glance', checkIn: 'Check-in', checkOut: 'Check-out', breakfast: 'Adult breakfast', frontDesk: 'Front desk', currency: 'KRW' },
   'zh-CN': { title: '主要入住信息', checkIn: '入住', checkOut: '退房', breakfast: '成人早餐', frontDesk: '前台', currency: '韩元' },
+  ru: {"title":"Основная информация","checkIn":"Заезд","checkOut":"Выезд","breakfast":"Завтрак для взрослых","frontDesk":"Ресепшен","currency":" вон"},
   ja: { title: 'ご利用案内', checkIn: 'チェックイン', checkOut: 'チェックアウト', breakfast: '大人の朝食', frontDesk: 'フロント', currency: 'ウォン' },
 }
 

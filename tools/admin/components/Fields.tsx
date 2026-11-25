@@ -1,16 +1,16 @@
 import { useId } from 'react'
-import type { GuideLanguage } from '../../../src/types/guide'
+import type { SourceGuideLanguage } from '../../../src/types/guide'
 import { GUIDE_LANGUAGES } from '../../../src/types/guide'
 import { Button } from '../../../src/components/ui/Button'
 import { LANGUAGE_NAMES, moveListItem } from '../services/workspace'
 
-export function TextField({ label, value, onChange, multiline = false, readOnly = false, hint, language, inputMode }: { label: string; value: string; onChange: (value: string) => void; multiline?: boolean; readOnly?: boolean; hint?: string; language?: GuideLanguage; inputMode?: 'decimal' }) {
+export function TextField({ label, value, onChange, multiline = false, readOnly = false, hint, language, inputMode }: { label: string; value: string; onChange: (value: string) => void; multiline?: boolean; readOnly?: boolean; hint?: string; language?: SourceGuideLanguage; inputMode?: 'decimal' }) {
   const id = useId()
   const props = { id, value, readOnly, lang: language, 'aria-describedby': hint ? `${id}-hint` : undefined, onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => onChange(event.target.value) }
   return <div className="admin-field"><label htmlFor={id}>{label}</label>{multiline ? <textarea {...props} rows={3} /> : <input {...props} inputMode={inputMode} />}{hint && <p id={`${id}-hint`} className="field-hint">{hint}</p>}</div>
 }
 
-export function LanguageTabs({ language, onChange }: { language: GuideLanguage; onChange: (language: GuideLanguage) => void }) {
+export function LanguageTabs({ language, onChange }: { language: SourceGuideLanguage; onChange: (language: SourceGuideLanguage) => void }) {
   return <div className="admin-language-tabs" role="group" aria-label="편집 언어">{GUIDE_LANGUAGES.map(item => <Button key={item} variant={language === item ? 'primary' : 'secondary'} aria-pressed={language === item} onClick={() => onChange(item)}>{LANGUAGE_NAMES[item]}</Button>)}</div>
 }
 
