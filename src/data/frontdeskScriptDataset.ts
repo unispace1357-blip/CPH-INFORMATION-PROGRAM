@@ -37,7 +37,7 @@ export function applyRoomClimateScripts(dataset: FrontdeskScriptDataset, winter 
   return parseFrontdeskScriptDataset({ ...dataset, scripts })
 }
 
-/** Append five user-provided scripts from the same copy shown on the guest page. */
+/** Append user-provided scripts from the same copy shown on the guest page. */
 export function applyOperationalScripts(dataset: FrontdeskScriptDataset): FrontdeskScriptDataset {
   const additions: FrontdeskScript[] = HOTEL_OPERATIONAL_NOTICES.map(item => ({
     id: item.id, category: item.staffCategory, title: item.copy.ko.title,
