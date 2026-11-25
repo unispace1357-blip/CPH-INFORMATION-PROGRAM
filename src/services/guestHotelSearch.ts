@@ -15,6 +15,7 @@ export const ROOM_USAGE_LABELS: Record<GuideLanguage, readonly string[]> = {
   ko: ['Wi-Fi', '전자레인지·공용 식기', '가까운 편의점', '냉방 조절', '일회용 어메니티', '음식 배달 수령', '배달 시 유의사항', '소방시설 점검', '실내 금연', '객실 소음', '슬리퍼·객실 비품', '침대 옆 조명'],
   en: ['Wi-Fi', 'Microwaves & utensils', 'Nearby convenience store', 'Air conditioning', 'Disposable amenities', 'Food delivery pickup', 'Delivery policy', 'Fire safety checks', 'No smoking', 'Room noise', 'Slippers & room items', 'Bedside light switch'],
   'zh-CN': ['Wi-Fi 无线网络', '微波炉及餐具', '附近便利店', '空调控制', '一次性用品', '外卖领取', '外卖注意事项', '消防设施检查', '室内禁烟', '客房噪音', '拖鞋及客房用品', '床边灯光开关'],
+  ru: ['Wi-Fi','Микроволновая печь и посуда','Ближайший магазин','Кондиционер','Одноразовые принадлежности','Получение доставки еды','Правила доставки','Пожарная безопасность','Запрет курения','Шум в номере','Тапочки и принадлежности','Выключатель у кровати'],
   ja: ['Wi-Fi', '電子レンジ・食器類', '近くのコンビニ', 'エアコン操作', '使い捨てアメニティ', 'デリバリー受け取り', '配達時の注意', '消防設備点検', '館内禁煙', '客室の騒音', 'スリッパ・客室備品', 'ベッド横の照明'],
 }
 
@@ -34,7 +35,7 @@ export interface HotelSearchHit {
   title: string
 }
 
-const languages = ['ko', 'en', 'zh-CN', 'ja'] as const
+const languages = ['ko', 'en', 'zh-CN', 'ja', 'ru'] as const
 const aliasGroups = [
   ['wifi', '와이파이', '무선인터넷', '无线网络', '無線lan'],
   ['조식', '아침식사', 'breakfast', '早餐', '朝食'],
@@ -74,7 +75,7 @@ export function searchHotelInformation(hotel: HotelDataset, language: GuideLangu
       const paragraphs = field === 'roomUsage' || field === 'parking' || field === 'checkIn' || field === 'checkOut' ? hotelDisplayParagraphs(hotel, field, language) : hotelParagraphs(hotel.translations[language][field])
       for (let index = 0; index < paragraphs.length; index++) {
         const title = field === 'roomUsage' ? roomUsageDisplayLabels(language)[index] ?? '' : field === 'parking' ? parkingDisplayLabels(language)[index] ?? '' : MESSAGES[language].hotelCategories[category]
-        const allLanguages = languages.map(lang =>
+        const allLanguages = languages.filter(lang => hotel.translations[lang]).map(lang =>
           [(field === 'roomUsage' || field === 'parking' || field === 'checkIn' || field === 'checkOut' ? hotelDisplayParagraphs(hotel, field, lang) : hotelParagraphs(hotel.translations[lang][field]))[index] ?? '',
             field === 'roomUsage' ? roomUsageDisplayLabels(lang)[index] ?? '' : field === 'parking' ? parkingDisplayLabels(lang)[index] ?? '' : ''].join(' ')).join(' ')
         const operational = field === 'roomUsage' ? operationalNoticesFor(field)[index - 13] : field === 'parking' ? operationalNoticesFor(field)[index - 1] : field === 'checkIn' || field === 'checkOut' ? operationalNoticesFor(field)[index - hotelParagraphs(hotel.translations[language][field]).length] : undefined

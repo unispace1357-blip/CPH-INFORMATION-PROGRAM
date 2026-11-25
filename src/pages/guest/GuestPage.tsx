@@ -6,6 +6,7 @@ import { MESSAGES } from '../../i18n/messages'
 import { message } from '../../i18n/formatters'
 import { useGuestLanguage } from '../../i18n/guestLanguageContext'
 import { loadGuestFacilities, loadGuestHotel } from '../../services/loadGuestData'
+import { withRussianFacilities, withRussianHotel } from '../../data/russianGuestData'
 import type { GuestDataState } from '../../services/loadGuestData'
 import { searchGuestFacilities } from '../../services/guestFacilitySearch'
 import { resolveSelectedFacility } from '../../services/facilitySearch'
@@ -47,8 +48,8 @@ export function GuestPage() {
   useEffect(() => () => { if (searchTimer.current) clearTimeout(searchTimer.current) }, [])
   useEffect(() => {
     let active = true
-    void loadGuestFacilities().then(dataset => { if (active) setFacilities({ status: 'ready', dataset }) }).catch(() => { if (active) setFacilities({ status: 'error' }) })
-    void loadGuestHotel().then(dataset => { if (active) setHotel({ status: 'ready', dataset }) }).catch(() => { if (active) setHotel({ status: 'error' }) })
+    void loadGuestFacilities().then(dataset => { if (active) setFacilities({ status: 'ready', dataset: withRussianFacilities(dataset) }) }).catch(() => { if (active) setFacilities({ status: 'error' }) })
+    void loadGuestHotel().then(dataset => { if (active) setHotel({ status: 'ready', dataset: withRussianHotel(dataset) }) }).catch(() => { if (active) setHotel({ status: 'error' }) })
     return () => { active = false }
   }, [])
   const dataset = facilities.status === 'ready' ? facilities.dataset : null
@@ -56,8 +57,8 @@ export function GuestPage() {
   const selected = resolveSelectedFacility(results, selectedId)
   const featuredTimespace = dataset?.facilities.find(item => item.id === 'songdo-timespace-complex')
   const isDemo = dataset?.dataStatus === 'demo' || (hotel.status === 'ready' && hotel.dataset.dataStatus === 'demo')
-  const showAirportGuide = category === 'transportation' || (category === 'all' && /6777|공항|리무진|airport|limousine|机场|空港/i.test(query))
-  const showTourismGuide = category === 'attraction' || (category === 'all' && /관광|송도지도|여행|구경|볼거리|명소|tourism|sightseeing|旅游|観光/i.test(query))
+  const showAirportGuide = category === 'transportation' || (category === 'all' && /6777|공항|리무진|airport|limousine|机场|空港|аэропорт|автобус/i.test(query))
+  const showTourismGuide = category === 'attraction' || (category === 'all' && /관광|송도지도|여행|구경|볼거리|명소|tourism|sightseeing|旅游|観光|достопримечательност|туризм|экскурси/i.test(query))
 
   function resetTenantNavigation() {
     if (searchTimer.current !== null) clearTimeout(searchTimer.current)
