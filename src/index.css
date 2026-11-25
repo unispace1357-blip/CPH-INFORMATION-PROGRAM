@@ -39,3 +39,6 @@
 
 /* Placeholder for future staff operations manuals. */
 @import './styles/staff-work.css';
+
+/* Guest-only Boutique Concierge nearby facilities refresh. */
+@import './styles/guest-nearby-editorial.css';
