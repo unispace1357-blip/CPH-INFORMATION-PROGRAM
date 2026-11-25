@@ -241,7 +241,7 @@ test('2026-11-25 operational amendment adds heating and sensor, with a single wi
 })
 
 test('five operational replies are categorized, searchable and keep charges distinct', () => {
-  assert.equal(frontdeskScriptDataset.scripts.length, 50)
+  assert.equal(frontdeskScriptDataset.scripts.length, 52)
   const cases = [
     ['헬스장', 'hotel-gym', 'hotel-facilities'],
     ['헬스', 'hotel-gym', 'hotel-facilities'],
@@ -281,4 +281,11 @@ test('eleven service notices are searchable and preserve user-provided restricti
   assert.match(get('room-power-keycard'), /도어락.*동일한 카드키/)
   assert.match(get('laundry-service'), /다음 날 정오.*다음 날 체크아웃.*이용하실 수 없습니다/)
   assert.match(get('lounge-room-service'), /12:00~21:30/)
+})
+
+test('guest amenities and printing are searchable in staff responses; room-assignment procedures stay in the work manual', () => {
+  const scripts = frontdeskScriptDataset.scripts
+  for (const [q,id] of [['드라이기','room-complimentary-amenities'],['프린트','guest-printing-service'],['인쇄','guest-printing-service']]) assert.ok(searchFrontdeskScripts(scripts,q!).some(x=>x.id===id))
+  assert.match(scripts.find(x=>x.id==='guest-printing-service')!.quickAnswer.ko,/프론트 왼쪽.*1장당 100원/)
+  assert.ok(!scripts.some(x=>['room-type-change','elevator-room-assignment'].includes(x.id)))
 })

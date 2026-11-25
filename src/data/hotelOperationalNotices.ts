@@ -106,22 +106,22 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
       "ko": "생수를 추가로 받을 수 있나요?"
     },
     "copy": {
-      ru: {"title":"Питьевая вода","text":"В холодильнике номера предусмотрены 3 бутылки воды. Дополнительно можно получить до 2 бутылок на номер на стойке регистрации."},
+      ru: {"title":"Питьевая вода","text":"В холодильнике номера бесплатно предоставляются 3 бутылки воды. Дополнительно можно получить до 2 бутылок на номер на стойке регистрации."},
       "ko": {
         "title": "생수 제공 안내",
-        "text": "객실 냉장고에 생수 3병이 기본으로 비치되어 있습니다. 추가 생수는 객실당 2병까지 프론트에서 수령하실 수 있습니다."
+        "text": "객실 냉장고에 생수 3병이 기본으로 무료 비치되어 있습니다. 추가 생수는 객실당 2병까지 프론트에서 수령하실 수 있습니다."
       },
       "en": {
         "title": "Bottled water",
-        "text": "Three bottles of water are provided in the room refrigerator. Up to two additional bottles per room can be collected at the front desk."
+        "text": "Three complimentary bottles of water are provided in the room refrigerator. Up to two additional bottles per room can be collected at the front desk."
       },
       "zh-CN": {
         "title": "瓶装饮用水",
-        "text": "客房冰箱内备有3瓶饮用水。每间客房可在前台额外领取最多2瓶。"
+        "text": "客房冰箱内免费提供3瓶饮用水。每间客房可在前台额外领取最多2瓶。"
       },
       "ja": {
         "title": "ミネラルウォーター",
-        "text": "客室の冷蔵庫に水を3本ご用意しています。追加のお水は1室につき2本までフロントでお受け取りいただけます。"
+        "text": "客室の冷蔵庫に無料のお水を3本ご用意しています。追加のお水は1室につき2本までフロントでお受け取りいただけます。"
       }
     }
   },
@@ -148,22 +148,22 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
       "ko": "수건은 어디에 있나요?"
     },
     "copy": {
-      ru: {"title":"Где находятся полотенца","text":"Полотенца находятся в ящиках под раковиной в ванной комнате."},
+      ru: {"title":"Где находятся полотенца","text":"Бесплатные полотенца находятся в ящиках под раковиной в ванной комнате."},
       "ko": {
         "title": "수건 위치",
-        "text": "수건은 화장실 세면대 서랍장에 비치되어 있습니다."
+        "text": "수건은 무료 제공되며, 화장실 세면대 서랍장에 비치되어 있습니다."
       },
       "en": {
         "title": "Towel location",
-        "text": "Towels are provided in the drawer unit beneath the bathroom washbasin."
+        "text": "Complimentary towels are provided in the drawer unit beneath the bathroom washbasin."
       },
       "zh-CN": {
         "title": "毛巾位置",
-        "text": "毛巾放在浴室洗手台的抽屉柜内。"
+        "text": "免费毛巾放在浴室洗手台的抽屉柜内。"
       },
       "ja": {
         "title": "タオルの場所",
-        "text": "タオルは浴室の洗面台の引き出しにご用意しています。"
+        "text": "無料のタオルは浴室の洗面台の引き出しにご用意しています。"
       }
     }
   },
@@ -569,6 +569,148 @@ export const HOTEL_OPERATIONAL_NOTICES: readonly OperationalNotice[] = [
       "ja": {
         "title": "ラウンジ・ルームサービス",
         "text": "朝食営業終了後、12:00～21:30はラウンジでのお食事およびルームサービスをご利用いただけます。ルームサービスのメニューは客室のデスク上にある案内冊子の末尾をご覧ください。"
+      }
+    }
+  },
+  {
+    "id": "room-complimentary-amenities",
+    "guestCategory": "roomUsage",
+    "staffCategory": "room-usage",
+    "keywords": [
+      "무료비품",
+      "객실비품",
+      "비품",
+      "어메니티",
+      "어뮤니티",
+      "무료 어메니티",
+      "빗",
+      "커피",
+      "녹차",
+      "로션",
+      "스킨",
+      "버블",
+      "샤워캡",
+      "가운",
+      "샴푸",
+      "린스",
+      "바디클렌저",
+      "바디클렌져",
+      "바디워시",
+      "비누",
+      "드라이기",
+      "드라이어",
+      "헤어드라이어",
+      "amenities",
+      "complimentary amenities",
+      "comb",
+      "coffee",
+      "green tea",
+      "lotion",
+      "toner",
+      "bubble bath",
+      "shower cap",
+      "bathrobe",
+      "shampoo",
+      "conditioner",
+      "body wash",
+      "soap",
+      "hair dryer",
+      "hairdryer",
+      "免费用品",
+      "吹风机",
+      "洗发水",
+      "浴袍",
+      "アメニティ",
+      "ドライヤー",
+      "シャンプー",
+      "バスローブ",
+      "бесплатные принадлежности",
+      "фен",
+      "шампунь",
+      "халат",
+      "мыло"
+    ],
+    "question": {
+      "ko": "객실에서 무료로 제공되는 비품은 무엇인가요?",
+      "en": "What complimentary amenities are provided in the room?"
+    },
+    "copy": {
+      "ko": {
+        "title": "객실 기본 무료 비품",
+        "text": "다음 객실 기본 비품은 무료로 제공됩니다.\n객실: 빗, 커피, 녹차, 로션, 스킨, 버블, 샤워캡\n옷장: 가운\n욕실: 샴푸, 린스, 바디클렌저, 비누, 드라이기\n생수와 수건은 각각의 이용 안내를 확인해 주세요."
+      },
+      "en": {
+        "title": "Complimentary room amenities",
+        "text": "The following in-room amenities are complimentary.\nRoom: comb, coffee, green tea, lotion, toner, bubble bath, shower cap\nCloset: bathrobe\nBathroom: shampoo, conditioner, body wash, soap, hair dryer\nFor bottled water and towels, see their separate information."
+      },
+      "zh-CN": {
+        "title": "客房免费用品",
+        "text": "以下客房基本用品免费提供。\n客房：梳子、咖啡、绿茶、乳液、爽肤水、泡泡浴用品、浴帽\n衣柜：浴袍\n浴室：洗发水、护发素、沐浴露、香皂、吹风机\n瓶装饮用水和毛巾请参阅各自的使用说明。"
+      },
+      "ja": {
+        "title": "客室の無料備品",
+        "text": "以下の客室備品は無料でご利用いただけます。\n客室：くし、コーヒー、緑茶、乳液、化粧水、泡風呂用入浴剤、シャワーキャップ\nクローゼット：バスローブ\n浴室：シャンプー、コンディショナー、ボディソープ、石けん、ドライヤー\nお水とタオルはそれぞれのご案内をご確認ください。"
+      },
+      "ru": {
+        "title": "Бесплатные принадлежности в номере",
+        "text": "Следующие принадлежности предоставляются бесплатно.\nНомер: расчёска, кофе, зелёный чай, лосьон, тоник, пена для ванны, шапочка для душа.\nШкаф: халат.\nВанная комната: шампунь, кондиционер для волос, гель для душа, мыло, фен.\nИнформация о питьевой воде и полотенцах приведена в отдельных разделах."
+      }
+    }
+  },
+  {
+    "id": "guest-printing-service",
+    "guestCategory": "roomUsage",
+    "staffCategory": "hotel-facilities",
+    "keywords": [
+      "프린트",
+      "프린터",
+      "출력",
+      "인쇄",
+      "문서출력",
+      "문서인쇄",
+      "노트북",
+      "프린팅",
+      "100원",
+      "print",
+      "printer",
+      "printing",
+      "laptop",
+      "document printing",
+      "打印",
+      "打印机",
+      "打印文件",
+      "プリント",
+      "印刷",
+      "プリンター",
+      "печать",
+      "принтер",
+      "распечатать",
+      "ноутбук"
+    ],
+    "question": {
+      "ko": "프린트는 어디에서 할 수 있나요?",
+      "en": "Where can I print a document?"
+    },
+    "copy": {
+      "ko": {
+        "title": "프린트 이용 안내",
+        "text": "프론트 왼쪽에 있는 노트북에서 프린트하실 수 있습니다. 이용 요금은 1장당 100원입니다."
+      },
+      "en": {
+        "title": "Printing service",
+        "text": "You can print using the laptop to the left of the front desk. Printing costs KRW 100 per page."
+      },
+      "zh-CN": {
+        "title": "打印服务",
+        "text": "您可使用前台左侧的笔记本电脑进行打印。打印费用为每张100韩元。"
+      },
+      "ja": {
+        "title": "プリントサービス",
+        "text": "フロント左側にあるノートパソコンで印刷できます。料金は1枚につき100ウォンです。"
+      },
+      "ru": {
+        "title": "Печать документов",
+        "text": "Документы можно распечатать с ноутбука слева от стойки регистрации. Стоимость печати — 100 вон за страницу."
       }
     }
   }
