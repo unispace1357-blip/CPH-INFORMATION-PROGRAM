@@ -11,7 +11,7 @@ for (const language of GUIDE_LANGUAGES) {
   test(`complete nonempty UI/category/hotel translations: ${language}`, () => {
     assert.deepEqual(Object.keys(MESSAGES[language].ui), [...UI_MESSAGE_KEYS])
     assert.deepEqual(Object.keys(MESSAGES[language].categories), [...FACILITY_CATEGORIES])
-    assert.deepEqual(Object.keys(MESSAGES[language].hotelCategories), ['checkIn', 'checkOut', 'breakfast', 'parking', 'roomUsage'])
+    assert.deepEqual(Object.keys(MESSAGES[language].hotelCategories), ['checkIn', 'checkOut', 'breakfast', 'parking', 'roomUsage', 'petStay'])
     for (const group of Object.values(MESSAGES[language])) assert.ok(Object.values(group).every(value => value.trim()))
     for (const key of UI_MESSAGE_KEYS) assert.deepEqual(MESSAGES[language].ui[key].match(/\{\w+\}/g), MESSAGES.en.ui[key].match(/\{\w+\}/g))
   })

@@ -85,7 +85,7 @@ export const UI_MESSAGE_KEYS = [
   "pendingDetails"
 ] as const
 export type UiMessageKey = (typeof UI_MESSAGE_KEYS)[number]
-export type HotelCategory = 'checkIn' | 'checkOut' | 'breakfast' | 'parking' | 'roomUsage'
+export type HotelCategory = 'checkIn' | 'checkOut' | 'breakfast' | 'parking' | 'roomUsage' | 'petStay'
 export interface GuestMessages {
   ui: Record<UiMessageKey, string>
   categories: Record<FacilityCategory, string>

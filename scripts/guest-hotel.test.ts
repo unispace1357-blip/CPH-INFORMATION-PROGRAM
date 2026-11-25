@@ -88,7 +88,7 @@ test('guest hotel keyword search finds localized breakfast, Wi-Fi, microwave and
     const breakfastPrice = searchHotelInformation(hotel, language, '35,000')
     assert.ok(breakfastPrice.some(hit => hit.category === 'breakfast'), language)
     assert.deepEqual(searchHotelInformation(hotel, language, 'zz-unknown-guest-phrase'), [])
-    assert.ok(wifi.every(hit => hit.text === hotelParagraphs(hotel.translations[language][hit.source === 'notes' ? 'notes' : hit.category])[hit.index]), language)
+    assert.ok(wifi.every(hit => hit.category !== 'petStay' && hit.text === hotelParagraphs(hotel.translations[language][hit.source === 'notes' ? 'notes' : hit.category])[hit.index]), language)
   }
   assert.deepEqual(hotel, before)
 })
@@ -181,4 +181,25 @@ test('complimentary amenities and printing are indexed once in every source lang
       assert.ok(searchHotelInformation(hotel,language,query).some(h=>h.category==='roomUsage'&&h.index===index),language+query)
     }
   }
+})
+
+test('pet stay has its own searchable category and moves the five original pet notes without modifying the source', async () => {
+  const { generalHotelNotes, petStayParagraphs } = await import('../src/services/guestHotelPresentation.ts')
+  const { petStayDisplayLabels } = await import('../src/services/guestHotelSearch.ts')
+  const hotel = await loadGuestHotel()
+  const before = structuredClone(hotel)
+  for (const language of GUIDE_LANGUAGES) {
+    const pet = petStayParagraphs(hotel, language)
+    assert.equal(pet.length,9)
+    assert.equal(petStayDisplayLabels(language).length,9)
+    assert.equal(generalHotelNotes(hotel,language).length,3)
+    assert.match(pet[1]!, /33,000/)
+    assert.match(pet[1]!, /55,000/)
+    assert.equal(pet[4],hotelParagraphs(hotel.translations[language].notes)[6])
+    for (const [q,index] of [['펫캉스',0],['10kg',0],['성수기',1],['매너벨트',2],['배변패드',3],['미신고',6]] as const) assert.ok(searchHotelInformation(hotel,language,q).some(h=>h.category==='petStay'&&h.source==='topic'&&h.index===index),language+q)
+    assert.ok(!searchHotelInformation(hotel,language,'반려동물청소').some(h=>h.category==='roomUsage'&&h.source==='notes'))
+    assert.equal(hotelParagraphs(hotelTopicText(hotel,'roomUsage',language)).length,29)
+  }
+  assert.deepEqual(hotel,before)
+  assert.equal(petStayParagraphs(emptyGuestHotel(),'ko').length,0)
 })
