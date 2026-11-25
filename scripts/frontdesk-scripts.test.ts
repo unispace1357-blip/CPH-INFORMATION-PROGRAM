@@ -241,7 +241,7 @@ test('2026-11-25 operational amendment adds heating and sensor, with a single wi
 })
 
 test('five operational replies are categorized, searchable and keep charges distinct', () => {
-  assert.equal(frontdeskScriptDataset.scripts.length, 39)
+  assert.equal(frontdeskScriptDataset.scripts.length, 50)
   const cases = [
     ['헬스장', 'hotel-gym', 'hotel-facilities'],
     ['헬스', 'hotel-gym', 'hotel-facilities'],
@@ -269,4 +269,16 @@ test('staff check-in response includes early fees and preserves availability che
   assert.match(script.quickAnswer.ko, /오후 3시.*시간당 11,000원.*오전 9시 이전.*1박/)
   assert.ok(script.staffChecks.some(s => s.includes('가능 여부')))
   for (const query of ['얼리','얼리체크인','조기입실','early check-in']) assert.ok(searchFrontdeskScripts(frontdeskScriptDataset.scripts, query).some(s => s.id === script.id))
+})
+
+test('eleven service notices are searchable and preserve user-provided restrictions', () => {
+  const scripts = frontdeskScriptDataset.scripts
+  const cases = [["room-water","생수","room-usage"],["room-towels","수건","room-usage"],["luggage-storage","짐","check-in-out"],["stayover-housekeeping","연박","room-usage"],["frontdesk-extension","프론트","room-usage"],["room-power-keycard","카드키","room-usage"],["taxi-assistance","택시","hotel-facilities"],["extra-bedding","베개","room-usage"],["umbrella-rental","우산","hotel-facilities"],["laundry-service","세탁","hotel-facilities"],["lounge-room-service","라운지","hotel-facilities"]]
+  for (const [id, query, category] of cases) assert.ok(searchFrontdeskScripts(scripts, query!).some(s => s.id === id && s.category === category), query)
+  const get = (id: string) => scripts.find(s => s.id === id)!.quickAnswer.ko
+  assert.match(get('room-water'), /3병.*객실당 2병/)
+  assert.doesNotMatch(get('room-towels'), /추가/)
+  assert.match(get('room-power-keycard'), /도어락.*동일한 카드키/)
+  assert.match(get('laundry-service'), /다음 날 정오.*다음 날 체크아웃.*이용하실 수 없습니다/)
+  assert.match(get('lounge-room-service'), /12:00~21:30/)
 })

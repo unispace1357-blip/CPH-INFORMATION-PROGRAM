@@ -114,7 +114,7 @@ test('2026-11-25 room notices are localized and searchable without altering hist
     assert.ok(searchHotelInformation(hotel, language, '히터').some(hit => hit.index === 12), language)
     assert.ok(searchHotelInformation(hotel, language, '냉방').some(hit => hit.index === 3), language)
     assert.ok(searchHotelInformation(hotel, language, '흡연센서').some(hit => hit.index === 8), language)
-    assert.equal(hotelParagraphs(hotelTopicText(hotel, 'roomUsage', language)).length, 17)
+    assert.equal(hotelParagraphs(hotelTopicText(hotel, 'roomUsage', language)).length, 27)
   }
   assert.deepEqual(hotel, before)
 })
@@ -125,7 +125,7 @@ test('five operational notices appear under room usage or parking and search in 
   for (const language of GUIDE_LANGUAGES) {
     const room = hotelParagraphs(hotelTopicText(hotel, 'roomUsage', language))
     const parking = hotelParagraphs(hotelTopicText(hotel, 'parking', language))
-    assert.equal(room.length, 17)
+    assert.equal(room.length, 27)
     assert.equal(parking.length, 2)
     for (const query of ['헬스장','헬스','운동','피트니스','gym']) assert.ok(searchHotelInformation(hotel, language, query).some(hit => hit.category === 'roomUsage' && hit.index === 13), language + query)
     for (const [query, index] of [['blanket',14],['배수구',15],['8핀',16]] as const) assert.ok(searchHotelInformation(hotel, language, query).some(hit => hit.category === 'roomUsage' && hit.index === index), language + query)
@@ -158,4 +158,15 @@ test('early check-in prices are localized and searchable without changing the ap
   }
   assert.equal(hotel.checkInTime, '15:00')
   assert.deepEqual(hotel, before)
+})
+
+test('eleven services appear in all four guest languages with stable prior indexes', async () => {
+  const hotel = await loadGuestHotel()
+  for (const language of GUIDE_LANGUAGES) {
+    const room = hotelParagraphs(hotelTopicText(hotel, 'roomUsage', language))
+    assert.equal(room.length, 27)
+    const cases = [["생수",17],["수건",18],["연박",19],["프론트",20],["카드키",21],["택시",22],["베개",23],["우산",24],["세탁",25],["라운지",26]] as const
+    for (const [query,index] of cases) assert.ok(searchHotelInformation(hotel, language, query).some(h => h.category === 'roomUsage' && h.index === index && h.text === room[index]), language + query)
+    for (const category of ['checkIn','checkOut'] as const) assert.ok(searchHotelInformation(hotel, language, '짐보관').some(h => h.category === category), language + category)
+  }
 })

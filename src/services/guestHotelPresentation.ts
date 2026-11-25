@@ -11,7 +11,7 @@ export function hotelHasInformation(hotel: HotelDataset, language: GuideLanguage
 }
 
 export function hotelTopicText(hotel: HotelDataset, category: HotelCategory, language: GuideLanguage): string {
-  if (category === 'roomUsage' || category === 'parking' || category === 'checkIn') return localizedValue(hotelDisplayParagraphs(hotel, category, language).join('\n\n'), language)
+  if (category === 'roomUsage' || category === 'parking' || category === 'checkIn' || category === 'checkOut') return localizedValue(hotelDisplayParagraphs(hotel, category, language).join('\n\n'), language)
   return localizedValue(hotel.translations[language][category], language)
 }
 
@@ -37,12 +37,13 @@ export function roomUsageDisplayParagraphs(hotel: HotelDataset, language: GuideL
 /** The current hotel data is the approved workbook snapshot. Keep synthetic/empty
  * datasets free of operational additions, as with the existing climate overlay.
  */
-export function hotelDisplayParagraphs(hotel: HotelDataset, category: 'roomUsage' | 'parking' | 'checkIn', language: GuideLanguage): string[] {
-  if (category === 'checkIn') {
-    const paragraphs = hotelParagraphs(hotel.translations[language].checkIn)
-    if (hotel.checkInTime === '15:00' && paragraphs.length && hotelParagraphs(hotel.translations[language].roomUsage).length >= 12) {
+export function hotelDisplayParagraphs(hotel: HotelDataset, category: 'roomUsage' | 'parking' | 'checkIn' | 'checkOut', language: GuideLanguage): string[] {
+  if (category === 'checkIn' || category === 'checkOut') {
+    const paragraphs = hotelParagraphs(hotel.translations[language][category])
+    if (category === 'checkIn' && hotel.checkInTime === '15:00' && paragraphs.length && hotelParagraphs(hotel.translations[language].roomUsage).length >= 12) {
       paragraphs[0] += ' ' + EARLY_CHECK_IN_COPY[language]
     }
+    if (paragraphs.length && hotelParagraphs(hotel.translations[language].roomUsage).length >= 12) return [...paragraphs, ...operationalNoticesFor(category).map(item => item.copy[language].text)]
     return paragraphs
   }
   const paragraphs = category === 'roomUsage' ? roomUsageDisplayParagraphs(hotel, language) : hotelParagraphs(hotel.translations[language].parking)
