@@ -358,5 +358,5 @@
 
 /* Russian labels can be longer; keep the guest layout readable. */
 html[lang=ru] .guest-page :is(button, h2, h3, .concierge-fact-label, .concierge-fact-button strong) { overflow-wrap:anywhere; }
-html[lang=ru] .guest-page .language-options { flex-wrap:wrap; }
+html[lang=ru] .guest-page .language-options button { overflow-wrap:anywhere; }
 html[lang=ru] .guest-page .concierge-fact-button strong { white-space:normal; }

@@ -459,6 +459,23 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     await guest.setViewportSize({ width: 390, height: 844 });
     await noOverflow(guest);
     await guest.locator('#nearby-facilities').screenshot({ path: path.join(output, 'nearby-boutique-mobile.png') });
+    // Russian is a guest-only overlay; registered venue names remain unchanged.
+    await guest.setViewportSize({ width: 1280, height: 900 });
+    await guest.locator('.language-options').getByRole('button', { name: 'Русский', exact: true }).click();
+    assert.equal(await guest.locator('html').getAttribute('lang'), 'ru');
+    await waitCards(guest, 27);
+    await guestSearch.fill('аптека');
+    await waitCards(guest, 2);
+    await guestSearch.fill('');
+    await waitCards(guest, 27);
+    await guest.locator('#hotel-information input[type="search"]').fill('микроволновка');
+    assert.match(await guest.locator('.hotel-search-list').innerText(), /Микроволнов/);
+    await guest.locator('#hotel-information input[type="search"]').fill('');
+    await guest.setViewportSize({ width: 390, height: 844 });
+    await noOverflow(guest);
+    await guest.screenshot({ path: path.join(output, 'guest-language-ru.png'), fullPage: false });
+    await guest.locator('.guest-mobile-language select').selectOption('en');
+    assert.equal(await guest.locator('html').getAttribute('lang'), 'en');
     for (const [language, label] of Object.entries(languages)) {
       await guest.setViewportSize({ width: 1280, height: 900 });
       await guest.locator('.language-options').getByRole('button', { name: label, exact: true }).click();

@@ -29,7 +29,6 @@ test('Russian guest localization covers UI, all 27 venues, hotel notices and 15 
   assert.equal(room.length, roomUsageDisplayLabels('ru').length)
   for (const notice of HOTEL_OPERATIONAL_NOTICES) assert.ok(notice.copy.ru.text)
   for (const q of ['полотенце','прачечная','такси','холодильник','микроволновка']) {
-    if(q === 'микроволновка') continue
     assert.ok(searchHotelInformation(h, 'ru', q).length, q)
   }
   assert.match(hotelTopicText(h, 'checkIn', 'ru'), /11,000/)
