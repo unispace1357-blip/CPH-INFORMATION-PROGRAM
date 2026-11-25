@@ -2,7 +2,6 @@ import { useState } from 'react'
 import type { ReactNode } from 'react'
 import type { OperationArticle } from '../../data/staffOperations'
 import { hasVisualGuide } from '../../data/staffVisualGuideIds'
-import { Icon } from '../ui/Icon'
 
 const glyphs = {
   tv: 'M3 4h18v13H3z M8 21h8 M12 17v4',
@@ -96,7 +95,7 @@ function Content({article}:{article:OperationArticle}) {
     case 'room-type-change': return <RoomChange article={article}/>
     case 'elevator-room-assignment': return <Elevator/>
     case 'smart-tv-pricing': return <SmartTvTable/>
-    case 'room-views': return <><Cards items={[{title:'파크뷰',detail:'더블 02~15호 · 파크스위트 1602~1608호',icon:'window'},{title:'시티뷰',detail:'트윈 16~27호 · 스카이 디럭스 1601호·1616~1628호',icon:'window'},{title:'파크앤시티',detail:'각 층 01호·28호',icon:'window'}]}/><small>객실번호 분류 도식 · 실제 평면도 아님</small></>
+    case 'room-views': return <><div className="visual-room-line"><strong>파크뷰 · 디럭스 더블 파크</strong><div><span>02호</span><span>…</span><span>15호</span></div></div><div className="visual-room-line"><strong>시티뷰 · 패밀리 트윈</strong><div><span>16호</span><span>…</span><span>27호</span></div></div><Cards items={[{title:'파크스위트 · 파크뷰',detail:'1602~1608호',icon:'window'},{title:'스카이 디럭스 · 시티뷰',detail:'1601호 · 1616~1628호',icon:'window'},{title:'파크앤시티',detail:'각 층 01호·28호',icon:'window'}]}/><small>객실번호 분류 도식 · 실제 평면도 아님</small></>
     case 'request-amenities': return <Cards items={s.map((line,i)=>({title:line.split(':')[0]!,detail:line.split(':').slice(1).join(':').trim(),icon:(['coffee','shirt','fridge','bath'] as const)[i]}))}/>
     case 'voucher-steps': return <><Flow steps={s.map(title=>({title,icon:'ticket'}))}/><Cards items={[{title:'판매 숙박권',detail:'거래처·객단가 입력',icon:'document'},{title:'무료 숙박권',detail:'객실 타입 COMP · 객단가 0원 · 사용 제한일 확인',icon:'ticket',warn:true}]}/><Node title="예약 DETAIL: COMP / COMP"/></>
     case 'pet-policy': return <><Node title="반려견 동반 객실 · 9층 배정" icon="pet"/><Cards items={[{title:'이용 가능',detail:'디럭스 더블 센트럴파크뷰 · 디럭스 패밀리 트윈',icon:'check'},{title:'이용 불가',detail:'스카이 디럭스 · 파크스위트',warn:true,icon:'alert'},{title:'10kg 초과 불가',detail:'여러 마리 동반 시 사전 확인',warn:true,icon:'pet'},{title:'예약 확인',detail:'견종·몸무게·중성화 여부 확인 → 리마크',icon:'document'}]}/><Node title="호텔 내 이동" detail="캐리어 또는 강아지가방 사용" icon="pet"/></>
