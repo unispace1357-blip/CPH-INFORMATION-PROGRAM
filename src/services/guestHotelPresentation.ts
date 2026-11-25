@@ -3,13 +3,14 @@ import type { GuideLanguage } from '../types/guide.ts'
 import type { HotelCategory } from '../i18n/types.ts'
 import { localizedValue } from '../i18n/formatters.ts'
 import { ROOM_CLIMATE_COPY, coolingNotice } from '../data/roomClimateNotices.ts'
+import { operationalNoticesFor } from '../data/hotelOperationalNotices.ts'
 
 export function hotelHasInformation(hotel: HotelDataset, language: GuideLanguage): boolean {
   return hotel.checkInTime !== null || hotel.checkOutTime !== null || Object.values(hotel.translations[language]).some(value => value.trim())
 }
 
 export function hotelTopicText(hotel: HotelDataset, category: HotelCategory, language: GuideLanguage): string {
-  if (category === 'roomUsage') return localizedValue(roomUsageDisplayParagraphs(hotel, language).join('\n\n'), language)
+  if (category === 'roomUsage' || category === 'parking') return localizedValue(hotelDisplayParagraphs(hotel, category, language).join('\n\n'), language)
   return localizedValue(hotel.translations[language][category], language)
 }
 
@@ -30,6 +31,15 @@ export function roomUsageDisplayParagraphs(hotel: HotelDataset, language: GuideL
   paragraphs[8] += '\n' + copy.smokingSensor
   paragraphs.push(copy.heating)
   return paragraphs
+}
+
+/** The current hotel data is the approved workbook snapshot. Keep synthetic/empty
+ * datasets free of operational additions, as with the existing climate overlay.
+ */
+export function hotelDisplayParagraphs(hotel: HotelDataset, category: 'roomUsage' | 'parking', language: GuideLanguage): string[] {
+  const paragraphs = category === 'roomUsage' ? roomUsageDisplayParagraphs(hotel, language) : hotelParagraphs(hotel.translations[language].parking)
+  if (hotelParagraphs(hotel.translations[language].roomUsage).length < 12 || !paragraphs.length) return paragraphs
+  return [...paragraphs, ...operationalNoticesFor(category).map(item => item.copy[language].text)]
 }
 
 /** Show the existing no-smoking policy and fee first, without duplicating a separate policy source.

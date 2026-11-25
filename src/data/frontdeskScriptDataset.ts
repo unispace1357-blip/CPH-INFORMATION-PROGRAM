@@ -2,6 +2,7 @@ import rawScripts from './frontdesk-scripts.json' with { type: 'json' }
 import { parseFrontdeskScriptDataset } from './validateFrontdeskScriptDataset.ts'
 import type { FrontdeskScript, FrontdeskScriptDataset } from '../types/frontdeskScript.ts'
 import { coolingNotice, ROOM_CLIMATE_COPY, WINTER_COOLING_UNAVAILABLE } from './roomClimateNotices.ts'
+import { HOTEL_OPERATIONAL_NOTICES } from './hotelOperationalNotices.ts'
 
 /** Apply the current operational amendment without rewriting the historical script snapshot. */
 export function applyRoomClimateScripts(dataset: FrontdeskScriptDataset, winter = WINTER_COOLING_UNAVAILABLE): FrontdeskScriptDataset {
@@ -35,5 +36,17 @@ export function applyRoomClimateScripts(dataset: FrontdeskScriptDataset, winter 
   return parseFrontdeskScriptDataset({ ...dataset, scripts })
 }
 
+/** Append five user-provided scripts from the same copy shown on the guest page. */
+export function applyOperationalScripts(dataset: FrontdeskScriptDataset): FrontdeskScriptDataset {
+  const additions: FrontdeskScript[] = HOTEL_OPERATIONAL_NOTICES.map(item => ({
+    id: item.id, category: item.staffCategory, title: item.copy.ko.title,
+    keywords: [...item.keywords], question: item.question,
+    quickAnswer: { en: item.copy.en.text, ko: item.copy.ko.text },
+    staffChecks: [], sourceType: 'user-provided', sourceSection: null,
+    reviewStatus: 'draft', lastVerifiedAt: null,
+  }))
+  return parseFrontdeskScriptDataset({ ...dataset, scripts: [...dataset.scripts, ...additions] })
+}
+
 /** Staff-only lazy dataset; validation still rejects unreviewed production scripts. */
-export const frontdeskScriptDataset = applyRoomClimateScripts(parseFrontdeskScriptDataset(rawScripts))
+export const frontdeskScriptDataset = applyOperationalScripts(applyRoomClimateScripts(parseFrontdeskScriptDataset(rawScripts)))

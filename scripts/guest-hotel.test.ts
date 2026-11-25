@@ -114,7 +114,22 @@ test('2026-11-25 room notices are localized and searchable without altering hist
     assert.ok(searchHotelInformation(hotel, language, '히터').some(hit => hit.index === 12), language)
     assert.ok(searchHotelInformation(hotel, language, '냉방').some(hit => hit.index === 3), language)
     assert.ok(searchHotelInformation(hotel, language, '흡연센서').some(hit => hit.index === 8), language)
-    assert.equal(hotelParagraphs(hotelTopicText(hotel, 'roomUsage', language)).length, 13)
+    assert.equal(hotelParagraphs(hotelTopicText(hotel, 'roomUsage', language)).length, 17)
+  }
+  assert.deepEqual(hotel, before)
+})
+
+test('five operational notices appear under room usage or parking and search in all languages', async () => {
+  const hotel = await loadGuestHotel()
+  const before = structuredClone(hotel)
+  for (const language of GUIDE_LANGUAGES) {
+    const room = hotelParagraphs(hotelTopicText(hotel, 'roomUsage', language))
+    const parking = hotelParagraphs(hotelTopicText(hotel, 'parking', language))
+    assert.equal(room.length, 17)
+    assert.equal(parking.length, 2)
+    for (const query of ['헬스장','헬스','운동','피트니스','gym']) assert.ok(searchHotelInformation(hotel, language, query).some(hit => hit.category === 'roomUsage' && hit.index === 13), language + query)
+    for (const [query, index] of [['blanket',14],['배수구',15],['8핀',16]] as const) assert.ok(searchHotelInformation(hotel, language, query).some(hit => hit.category === 'roomUsage' && hit.index === index), language + query)
+    assert.ok(searchHotelInformation(hotel, language, '전기충전소').some(hit => hit.category === 'parking' && hit.index === 1), language)
   }
   assert.deepEqual(hotel, before)
 })

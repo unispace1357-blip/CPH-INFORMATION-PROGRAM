@@ -2,7 +2,8 @@ import type { HotelDataset } from '../types/hotel.ts'
 import type { GuideLanguage } from '../types/guide.ts'
 import type { HotelCategory } from '../i18n/types.ts'
 import { MESSAGES } from '../i18n/messages.ts'
-import { hotelParagraphs, roomUsageDisplayParagraphs } from './guestHotelPresentation.ts'
+import { hotelParagraphs, hotelDisplayParagraphs } from './guestHotelPresentation.ts'
+import { operationalNoticesFor } from '../data/hotelOperationalNotices.ts'
 import { ROOM_CLIMATE_COPY } from '../data/roomClimateNotices.ts'
 
 export const HOTEL_TOPICS = ['checkIn', 'checkOut', 'breakfast', 'parking', 'roomUsage'] as const satisfies readonly HotelCategory[]
@@ -16,7 +17,11 @@ export const ROOM_USAGE_LABELS: Record<GuideLanguage, readonly string[]> = {
 }
 
 export function roomUsageDisplayLabels(language: GuideLanguage): readonly string[] {
-  return [...ROOM_USAGE_LABELS[language], ROOM_CLIMATE_COPY[language].heatingTitle]
+  return [...ROOM_USAGE_LABELS[language], ROOM_CLIMATE_COPY[language].heatingTitle, ...operationalNoticesFor('roomUsage').map(item => item.copy[language].title)]
+}
+
+export function parkingDisplayLabels(language: GuideLanguage): readonly string[] {
+  return [MESSAGES[language].hotelCategories.parking, ...operationalNoticesFor('parking').map(item => item.copy[language].title)]
 }
 
 export interface HotelSearchHit {
@@ -64,13 +69,14 @@ export function searchHotelInformation(hotel: HotelDataset, language: GuideLangu
     const categoryMatch = tokens.every(token => tokenMatches(categoryNames, token))
     const sources = category === 'roomUsage' ? (['roomUsage', 'notes'] as const) : ([category] as const)
     for (const field of sources) {
-      const paragraphs = field === 'roomUsage' ? roomUsageDisplayParagraphs(hotel, language) : hotelParagraphs(hotel.translations[language][field])
+      const paragraphs = field === 'roomUsage' || field === 'parking' ? hotelDisplayParagraphs(hotel, field, language) : hotelParagraphs(hotel.translations[language][field])
       for (let index = 0; index < paragraphs.length; index++) {
-        const title = field === 'roomUsage' ? roomUsageDisplayLabels(language)[index] ?? '' : MESSAGES[language].hotelCategories[category]
+        const title = field === 'roomUsage' ? roomUsageDisplayLabels(language)[index] ?? '' : field === 'parking' ? parkingDisplayLabels(language)[index] ?? '' : MESSAGES[language].hotelCategories[category]
         const allLanguages = languages.map(lang =>
-          [(field === 'roomUsage' ? roomUsageDisplayParagraphs(hotel, lang) : hotelParagraphs(hotel.translations[lang][field]))[index] ?? '',
-            field === 'roomUsage' ? roomUsageDisplayLabels(lang)[index] ?? '' : ''].join(' ')).join(' ')
-        const searchable = normalizeHotelKeyword(allLanguages)
+          [(field === 'roomUsage' || field === 'parking' ? hotelDisplayParagraphs(hotel, field, lang) : hotelParagraphs(hotel.translations[lang][field]))[index] ?? '',
+            field === 'roomUsage' ? roomUsageDisplayLabels(lang)[index] ?? '' : field === 'parking' ? parkingDisplayLabels(lang)[index] ?? '' : ''].join(' ')).join(' ')
+        const operational = field === 'roomUsage' ? operationalNoticesFor(field)[index - 13] : field === 'parking' ? operationalNoticesFor(field)[index - 1] : undefined
+        const searchable = normalizeHotelKeyword([allLanguages, ...(operational?.keywords ?? [])].join(' '))
         if (tokens.every(token => tokenMatches(searchable, token)) || (categoryMatch && index === 0 && field !== 'notes')) {
           results.push({ category, source: field === 'notes' ? 'notes' : 'topic', index, title, text: paragraphs[index]! })
         }
