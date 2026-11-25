@@ -57,7 +57,7 @@ export function GuestPage() {
   const featuredTimespace = dataset?.facilities.find(item => item.id === 'songdo-timespace-complex')
   const isDemo = dataset?.dataStatus === 'demo' || (hotel.status === 'ready' && hotel.dataset.dataStatus === 'demo')
   const showAirportGuide = category === 'transportation' || (category === 'all' && /6777|공항|리무진|airport|limousine|机场|空港/i.test(query))
-  const showTourismGuide = category === 'attraction' || (category === 'all' && /관광|송도지도|tourism|sightseeing|旅游|観光/i.test(query))
+  const showTourismGuide = category === 'attraction' || (category === 'all' && /관광|송도지도|여행|구경|볼거리|명소|tourism|sightseeing|旅游|観光/i.test(query))
 
   function resetTenantNavigation() {
     if (searchTimer.current !== null) clearTimeout(searchTimer.current)

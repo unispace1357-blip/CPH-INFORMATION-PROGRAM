@@ -1,6 +1,8 @@
 import { GUIDE_LANGUAGES } from '../types/guide.ts'
 import type { Facility, FacilityCategory } from '../types/facility.ts'
 import { timespaceSearchTerms } from './timespaceDirectory.ts'
+import { FACILITY_SEARCH_ALIASES } from '../data/searchKeywordDictionary.ts'
+import { keywordScore, keywordEqual } from './keywordRanking.ts'
 
 export type StaffCategoryFilter = FacilityCategory | 'all'
 
@@ -27,6 +29,7 @@ const QUERY_SYNONYMS: Readonly<Record<string, readonly string[]>> = {
   '아울렛몰': ['아울렛'], '아울렛매장': ['아울렛'],
   'water-taxi': ['water taxi'], 'coffeeshop': ['coffee'], 'coffee-shop': ['coffee'],
   'bbq': ['barbecue', '갈비'], 'pub': ['beer', '맥주'],
+  '패푸': ['패스트푸드'], 'fastfood': ['fast food'],
 }
 
 export function normalizeSearchTerm(value: string): string {
@@ -56,11 +59,14 @@ export function matchesFacility(facility: Facility, query = '', category: StaffC
   const tokens = normalizeSearchTerm(query).split(' ').filter(Boolean)
   if (!tokens.length) return true
 
-  const fields = facilitySearchFields(facility)
+  const aliases = FACILITY_SEARCH_ALIASES[facility.id] ?? []
+  const fields = [...facilitySearchFields(facility), ...aliases]
   const haystack = normalizeSearchTerm(fields.join(' '))
   const compactFields = fields.map(compactSearchTerm)
   // Each query word must match; synonyms are OR alternatives only for that word.
   return tokens.every(token => {
+    // These very short aliases otherwise match unrelated walking times, words or addresses.
+    if (['약','배','타임','타스','cu','편점'].includes(token)) return aliases.some(alias => keywordEqual(alias, token)) || GUIDE_LANGUAGES.some(lang => facility.keywords[lang].some(word => keywordEqual(word, token)))
     const variants = [token, ...(QUERY_SYNONYMS[token] ?? [])]
     return variants.some(variant => {
       if (haystack.includes(variant)) return true
@@ -72,7 +78,14 @@ export function matchesFacility(facility: Facility, query = '', category: StaffC
 
 /** Stable source order, all matching venues (not just the first), independent of UI language. */
 export function searchFacilities(facilities: readonly Facility[], query = '', category: StaffCategoryFilter = 'all'): Facility[] {
-  return orderFacilitiesForCategory(facilities.filter(facility => matchesFacility(facility, query, category)), category)
+  const matched = facilities.filter(facility => matchesFacility(facility, query, category))
+  if (!normalizeSearchTerm(query)) return orderFacilitiesForCategory(matched, category)
+  const ranked = matched.map(facility => ({ facility, score: keywordScore(query,
+    GUIDE_LANGUAGES.map(lang => facility.translations[lang].name), GUIDE_LANGUAGES.flatMap(lang => facility.keywords[lang]),
+    FACILITY_SEARCH_ALIASES[facility.id] ?? [], facilitySearchFields(facility))
+  })).sort((a,b) => b.score - a.score).map(item => item.facility)
+  // Retain the existing hotel-selected dining-area recommendation policy.
+  return orderFacilitiesForCategory(ranked, category)
 }
 
 export function resolveSelectedFacility(results: readonly Facility[], selectedId: string | null): Facility | null {
