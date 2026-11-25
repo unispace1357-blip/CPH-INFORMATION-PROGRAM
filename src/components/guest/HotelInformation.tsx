@@ -6,7 +6,7 @@ import type { GuestDataState } from '../../services/loadGuestData'
 import { MESSAGES } from '../../i18n/messages'
 import { guestVerificationDate, localizedValue } from '../../i18n/formatters'
 import { hotelHasInformation, hotelTopicText } from '../../services/guestHotelPresentation'
-import { searchHotelInformation, roomUsageDisplayLabels } from '../../services/guestHotelSearch'
+import { searchHotelInformation, roomUsageDisplayLabels, parkingDisplayLabels } from '../../services/guestHotelSearch'
 import type { HotelSearchHit } from '../../services/guestHotelSearch'
 import { CategoryCard } from '../ui/CategoryCard'
 import { InformationNotice } from '../ui/InformationNotice'
@@ -79,7 +79,7 @@ export function HotelInformation({ state, language, selected, onSelect, onClose 
           <li key={`${hit.category}-${hit.source}-${hit.index}`}>
             <button type="button" onClick={() => selectHit(hit)}>
               <strong>{m.hotelCategories[hit.category]}{hit.source === 'notes' ? ` · ${m.ui.notes}` : ''}</strong>
-              {hit.category === 'roomUsage' && hit.source === 'topic' && <span className="hotel-search-topic">{hit.title}</span>}
+              {(hit.category === 'roomUsage' || hit.category === 'parking') && hit.source === 'topic' && <span className="hotel-search-topic">{hit.title}</span>}
               <span className="hotel-search-preview">{hit.text}</span>
             </button>
           </li>
@@ -91,7 +91,7 @@ export function HotelInformation({ state, language, selected, onSelect, onClose 
       <div id="guest-hotel-detail">{hotel && selected ? <div className="panel guest-topic-detail">
         <div className="section-heading"><h3 ref={heading} tabIndex={-1}>{m.hotelCategories[selected]}</h3><Button variant="secondary" onClick={() => { setActiveHit(null); onClose() }}>{m.ui.closeDetails}</Button></div>
         <div className="hotel-topic-text"><HotelParagraphs text={hotelTopicText(hotel, selected, language)}
-          labels={selected === 'roomUsage' ? roomUsageDisplayLabels(language) : undefined} idPrefix="guest-hotel-topic-item" /></div>
+          labels={selected === 'roomUsage' ? roomUsageDisplayLabels(language) : selected === 'parking' ? parkingDisplayLabels(language) : undefined} idPrefix="guest-hotel-topic-item" /></div>
         <dl className="detail-facts">
           {(selected === 'checkIn' || selected === 'checkOut') && <div><dt>{selected === 'checkIn' ? m.ui.checkInTimeLabel : m.ui.checkOutTimeLabel}</dt><dd>{localizedValue(selected === 'checkIn' ? hotel.checkInTime : hotel.checkOutTime, language, 'timeUnavailable')}</dd></div>}
           <div><dt>{m.ui.hotelName}</dt><dd>{localizedValue(hotel.translations[language].name, language)}</dd></div>

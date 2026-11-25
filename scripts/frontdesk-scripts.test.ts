@@ -6,7 +6,7 @@ import originalHotel from '../src/data/hotel.json' with { type: 'json' }
 import amendments from '../docs/reference/step2-operational-amendments.json' with { type: 'json' }
 import originalFacilities from '../src/data/facilities.json' with { type: 'json' }
 import { parseFrontdeskScriptDataset } from '../src/data/validateFrontdeskScriptDataset.ts'
-import { applyRoomClimateScripts, frontdeskScriptDataset } from '../src/data/frontdeskScriptDataset.ts'
+import { applyOperationalScripts, applyRoomClimateScripts, frontdeskScriptDataset } from '../src/data/frontdeskScriptDataset.ts'
 import { FRONTDESK_SCRIPT_CATEGORIES, FRONTDESK_SOURCE_SECTIONS } from '../src/types/frontdeskScript.ts'
 import { searchFrontdeskScripts } from '../src/services/frontdeskScriptSearch.ts'
 import { loadFrontdeskScripts } from '../src/services/loadFrontdeskScripts.ts'
@@ -19,7 +19,7 @@ test('front desk V1.1 contains 33 ordered bilingual scripts and no unreviewed ap
   assert.equal(data.schemaVersion, 1)
   assert.equal(data.dataStatus, 'demo')
   assert.equal(data.scripts.length, 33)
-  assert.deepEqual(applyRoomClimateScripts(data), frontdeskScriptDataset)
+  assert.deepEqual(applyOperationalScripts(applyRoomClimateScripts(data)), frontdeskScriptDataset)
   assert.deepEqual(
     FRONTDESK_SCRIPT_CATEGORIES.map(category => data.scripts.filter(script => script.category === category).length),
     expectedCounts,
@@ -237,4 +237,27 @@ test('2026-11-25 operational amendment adds heating and sensor, with a single wi
   assert.match(get(winter, 'indoor-smoking-policy').details!.en, /200,000/)
   for (const query of ['난방', '히터', '전화기']) assert.ok(searchFrontdeskScripts(winter.scripts, query).some(item => item.id === 'room-heating-controls'))
   assert.equal(data.scripts.length, 33)
+})
+
+test('five operational replies are categorized, searchable and keep charges distinct', () => {
+  assert.equal(frontdeskScriptDataset.scripts.length, 39)
+  const cases = [
+    ['헬스장', 'hotel-gym', 'hotel-facilities'],
+    ['헬스', 'hotel-gym', 'hotel-facilities'],
+    ['운동', 'hotel-gym', 'hotel-facilities'],
+    ['피트니스', 'hotel-gym', 'hotel-facilities'],
+    ['gym', 'hotel-gym', 'hotel-facilities'],
+    ['전기충전소', 'ev-charging-stations', 'parking'],
+    ['blanket', 'room-blanket-rental', 'room-usage'],
+    ['배수구', 'bathtub-drain-controls', 'room-usage'],
+    ['8핀', 'phone-charger-rental', 'room-usage'],
+  ]
+  for (const [query, id, category] of cases) {
+    assert.ok(searchFrontdeskScripts(frontdeskScriptDataset.scripts, query).some(s => s.id === id && s.category === category), query)
+  }
+  const get = (id: string) => frontdeskScriptDataset.scripts.find(s => s.id === id)!
+  assert.match(get('hotel-gym').quickAnswer.ko, /4층.*06:00~23:00/)
+  assert.match(get('ev-charging-stations').quickAnswer.ko, /지하 1층 B-23.*7kW.*3기/)
+  assert.match(get('room-blanket-rental').quickAnswer.en, /5,000 laundry fee per room/)
+  assert.match(get('phone-charger-rental').quickAnswer.en, /10,000 cash deposit/)
 })
