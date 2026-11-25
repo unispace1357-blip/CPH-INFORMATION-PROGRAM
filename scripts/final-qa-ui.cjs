@@ -441,6 +441,18 @@ const names = (items, lang = 'ko') => items.map(x => x.translations[lang].name);
     log('Design C guest: two loaded photographic tiles navigate to actual hotel/nearby content without losing HashRouter');
     log('Guest stage 3: compact header, working language switch, single overlapping search, safety and featured sequence');
     const guestSearch = guest.locator('#guest-search input[type="search"]');
+    assert.equal(await guest.locator('#nearby-facilities .nearby-editorial-header').count(), 1);
+    assert.equal(await guest.locator('#nearby-facilities .category-card-description').count(), 8);
+    assert.equal(await guest.locator('#guest-facility-results .facility-card--editorial').count(), 27);
+    assert.equal(await guest.locator('#guest-facility-results .facility-editorial-visual img').count(), 2);
+    assert.equal(await guest.locator('#guest-facility-results .facility-photo-credit').count(), 2);
+    assert.equal(await guest.locator('#guest-facility-results .facility-editorial-symbol').count(), 25);
+    await guest.setViewportSize({ width: 1280, height: 900 });
+    await guest.locator('#nearby-facilities').screenshot({ path: path.join(output, 'nearby-boutique-desktop.png') });
+    await guest.locator('#guest-facility-results .facility-card').first().screenshot({ path: path.join(output, 'nearby-boutique-result.png') });
+    await guest.setViewportSize({ width: 390, height: 844 });
+    await noOverflow(guest);
+    await guest.locator('#nearby-facilities').screenshot({ path: path.join(output, 'nearby-boutique-mobile.png') });
     for (const [language, label] of Object.entries(languages)) {
       await guest.setViewportSize({ width: 1280, height: 900 });
       await guest.locator('.language-options').getByRole('button', { name: label, exact: true }).click();

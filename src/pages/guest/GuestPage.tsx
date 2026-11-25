@@ -12,7 +12,9 @@ import { resolveSelectedFacility } from '../../services/facilitySearch'
 import { resolveExactTimespaceTenant } from '../../services/timespaceTenantNavigation'
 import type { TenantFocusRequest } from '../../services/timespaceTenantNavigation'
 import type { StaffCategoryFilter } from '../../services/facilitySearch'
-import { ConciergeHero } from '../../components/ui/ConciergeHero'
+import { ConciergeHero, CONCIERGE_IMAGES } from '../../components/ui/ConciergeHero'
+import { Icon } from '../../components/ui/Icon'
+import { NEARBY_EDITORIAL } from '../../i18n/nearbyEditorial'
 import { FeaturedTimespace } from '../../components/ui/FeaturedTimespace'
 import { SearchInput } from '../../components/ui/SearchInput'
 import { CategoryCard } from '../../components/ui/CategoryCard'
@@ -32,6 +34,7 @@ import { UI_CATEGORIES, visibleFacilityCategories } from '../../config/uiCategor
 export function GuestPage() {
   const { language, setLanguage } = useGuestLanguage()
   const m = MESSAGES[language]
+  const nearby = NEARBY_EDITORIAL[language]
   const [facilities, setFacilities] = useState<GuestDataState<FacilityDataset>>({ status: 'loading' })
   const [hotel, setHotel] = useState<GuestDataState<HotelDataset>>({ status: 'loading' })
   const [hotelTopic, setHotelTopic] = useState<HotelCategory | null>(null)
@@ -118,16 +121,24 @@ export function GuestPage() {
       <HotelInformation state={hotel} language={language} selected={hotelTopic} onSelect={setHotelTopic} onClose={closeHotel} />
       <FeaturedTimespace facility={featuredTimespace} language={language} onDetails={openFeaturedFacility} />
       <section className="guest-section" id="nearby-facilities" aria-labelledby="nearby-facilities-title">
-        <div className="section-heading"><h2 id="nearby-facilities-title">{m.ui.nearbyTitle}</h2><Button variant={category === 'all' ? 'primary' : 'secondary'} aria-pressed={category === 'all'} disabled={!dataset} onClick={() => updateFilters(query, 'all')}>{m.ui.allFacilities}</Button></div>
-        <div className="guest-category-grid" role="group" aria-label={m.ui.facilityCategoriesLabel}>{(dataset ? visibleFacilityCategories(dataset.facilities) : UI_CATEGORIES).map(item => <CategoryCard key={item.code} label={m.categories[item.code]} icon={item.icon} selected={category === item.code} disabled={!dataset} onClick={() => updateFilters(query, category === item.code ? 'all' : item.code)} aria-controls="guest-facility-results" />)}</div>
+        <div className="section-heading nearby-editorial-header">
+          <img className="nearby-editorial-image" src={CONCIERGE_IMAGES.frontdesk} alt="" loading="lazy" decoding="async" />
+          <div className="nearby-editorial-copy">
+            <p className="nearby-editorial-kicker"><Icon name="pin" size={17} />{nearby.kicker}</p>
+            <h2 id="nearby-facilities-title">{m.ui.nearbyTitle}</h2>
+            <p className="nearby-editorial-intro">{nearby.intro}</p>
+          </div>
+          <Button className="nearby-all-button" icon={<Icon name="grid" size={19} />} variant={category === 'all' ? 'primary' : 'secondary'} aria-pressed={category === 'all'} disabled={!dataset} onClick={() => updateFilters(query, 'all')}>{m.ui.allFacilities}<Icon name="chevronRight" size={16} /></Button>
+        </div>
+        <div className="guest-category-grid" role="group" aria-label={m.ui.facilityCategoriesLabel}>{(dataset ? visibleFacilityCategories(dataset.facilities) : UI_CATEGORIES).map(item => <CategoryCard key={item.code} label={m.categories[item.code]} aria-label={m.categories[item.code]} description={nearby.descriptions[item.code]} icon={item.icon} selected={category === item.code} disabled={!dataset} onClick={() => updateFilters(query, category === item.code ? 'all' : item.code)} aria-controls="guest-facility-results" />)}</div>
       </section>
       <section className="panel guest-search-panel" id="guest-search" aria-labelledby="guest-search-title">
-        <div className="section-heading"><h2 id="guest-search-title">{m.ui.searchTitle}</h2><Button variant="quiet" disabled={!query} onClick={() => updateFilters('', category)}>{m.ui.clearSearch}</Button></div>
+        <div className="section-heading"><h2 id="guest-search-title"><Icon name="search" size={25} />{m.ui.searchTitle}</h2><Button variant="quiet" disabled={!query} onClick={() => updateFilters('', category)}>{m.ui.clearSearch}</Button></div>
         <SearchInput label={m.ui.searchLabel} placeholder={m.ui.searchPlaceholder} value={query} onChange={event => onSearchChange(event.target.value)} onKeyDown={event => { if (event.key === 'Enter') { event.preventDefault(); repeatExactTenantSearch() } }} disabled={!dataset} hint={m.ui.searchHint} />
         {dataset && <TimespaceTenantCandidates query={query} language={language} onSelect={chooseTenantCandidate} />}
       </section>
       <section className="guest-section" id="guest-facility-results" aria-labelledby="guest-results-title">
-        <div className="section-heading"><h2 id="guest-results-title">{m.ui.resultsTitle}</h2><p className="status-label" role="status" aria-live="polite">{dataset ? message(language, 'resultCount', { count: results.length }) : facilities.status === 'error' ? m.ui.informationUnavailable : m.ui.loadingFacilities}</p></div>
+        <div className="section-heading"><h2 id="guest-results-title"><Icon name="hotel" size={24} />{m.ui.resultsTitle}</h2><p className="status-label" role="status" aria-live="polite">{dataset ? message(language, 'resultCount', { count: results.length }) : facilities.status === 'error' ? m.ui.informationUnavailable : m.ui.loadingFacilities}</p></div>
         {showAirportGuide && <AirportBusGuide language={language} />}
         {showTourismGuide && <SongdoTourismGuide language={language} />}
         {facilities.status === 'loading' ? <LoadingState label={m.ui.loadingFacilities} /> : facilities.status === 'error' ? <div role="alert"><InformationNotice title={m.ui.facilityDataErrorTitle} tone="warning"><p>{m.ui.dataErrorDescription}</p><Button variant="secondary" onClick={() => window.location.reload()}>{m.ui.refresh}</Button></InformationNotice></div> : (results.length === 0 && (showAirportGuide || showTourismGuide)) ? <p className="field-hint">{LOCAL_GUIDE_COPY[language].guideOnlyResult}</p> : <GuestFacilityResults category={category} results={results} publicCount={facilities.dataset.facilities.filter(item => item.isPublished).length} language={language} selectedId={selected?.id ?? null} onSelect={selectFacility} />}
