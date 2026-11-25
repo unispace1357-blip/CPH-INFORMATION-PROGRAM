@@ -7,6 +7,7 @@ const LABELS: Record<GuideLanguage, { title:string; hint:string; select:string }
   ko:{title:'타임스페이스 입점 매장',hint:'원하는 매장을 선택하면 위치와 메뉴를 바로 안내합니다.',select:'이 매장 보기'},
   en:{title:'Restaurants at Songdo Timespace',hint:'Select a restaurant to see its location and menu.',select:'View restaurant'},
   'zh-CN':{title:'松岛 Timespace 入驻餐厅',hint:'请选择餐厅，查看位置及菜品。',select:'查看餐厅'},
+  ru: {"title":"Рестораны Songdo Timespace","hint":"Выберите ресторан, чтобы узнать расположение и меню.","select":"Посмотреть ресторан"},
   ja:{title:'松島タイムスペースの飲食店',hint:'店舗を選ぶと場所とメニューが表示されます。',select:'店舗を見る'},
 }
 

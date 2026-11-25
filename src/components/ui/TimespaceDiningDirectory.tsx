@@ -15,6 +15,7 @@ const MATCHED_LABEL: Record<GuideLanguage, string> = {
   ko: '검색한 매장',
   en: 'Matching restaurant',
   'zh-CN': '搜索到的餐厅',
+  ru: "Найденный ресторан",
   ja: '検索した店舗',
 }
 

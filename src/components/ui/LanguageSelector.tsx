@@ -5,6 +5,7 @@ const languageOptions: { value: GuideLanguage; label: string; lang: GuideLanguag
   { value: 'en', label: 'English', lang: 'en' },
   { value: 'zh-CN', label: '简体中文', lang: 'zh-CN' },
   { value: 'ja', label: '日本語', lang: 'ja' },
+  { value: 'ru', label: 'Русский', lang: 'ru' },
   { value: 'ko', label: '한국어', lang: 'ko' },
 ]
 

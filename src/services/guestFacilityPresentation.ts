@@ -39,6 +39,7 @@ export const GUEST_FACILITY_COPY: Record<GuideLanguage, {
     travelDetails: '查看详细交通信息',
     mapUnavailable: '路线导航准备中',
   },
+  ru: {"timespaceSummary":"Торгово-ресторанный комплекс с разнообразными заведениями.","menuTitle":"Популярные блюда и меню","nearbyLandmark":"Пешком до ближайшего ориентира","timespaceRouteNotice":"Текущий маршрут Naver заканчивается у соседнего Starbucks Songdo Castle Park. Продолжайте путь до Songdo Timespace по адресу 158 Harmony-ro.","travelDetails":"Подробнее о маршруте","mapUnavailable":"Маршрут на карте пока недоступен"},
   ja: {
     timespaceSummary: '飲食店やショッピング施設が集まる複合商業施設です。',
     menuTitle: 'おすすめの料理・メニュー',
@@ -51,7 +52,7 @@ export const GUEST_FACILITY_COPY: Record<GuideLanguage, {
 
 export const TIMESPACE_FACILITY_ID = 'songdo-timespace-complex'
 
-const MENU_EXAMPLES = /^(.*?) · (?:주요 메뉴 예시|Menu examples|菜品示例|メニュー例)[:：]\s*(.+)$/u
+const MENU_EXAMPLES = /^(.*?) · (?:주요 메뉴 예시|Menu examples|菜品示例|メニュー例|Примеры меню)[:：]\s*(.+)$/u
 
 export function guestFacilityPresentation(facility: Facility, language: GuideLanguage): {
   summary: string

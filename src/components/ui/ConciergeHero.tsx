@@ -6,6 +6,7 @@ const BOUTIQUE_SUBTITLES: Record<GuideLanguage,string> = {
   ko:'특별한 순간이 머무는 곳, 송도센트럴파크호텔',
   en:'Thoughtful details for your stay in Songdo.',
   'zh-CN':'于松岛中央公园酒店，开启一段特别的旅程。',
+  ru: "Продуманные детали вашего пребывания в Сонгдо.",
   ja:'松島セントラルパークホテルで、特別なひとときを。',
 }
 export const CONCIERGE_IMAGES = {
