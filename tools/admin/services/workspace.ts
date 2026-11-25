@@ -1,5 +1,5 @@
 import { GUIDE_LANGUAGES } from '../../../src/types/guide.ts'
-import type { DatasetStatus, GuideLanguage } from '../../../src/types/guide.ts'
+import type { DatasetStatus, SourceGuideLanguage } from '../../../src/types/guide.ts'
 import type { Facility, FacilityDataset, FacilityCategory } from '../../../src/types/facility.ts'
 import type { HotelDataset } from '../../../src/types/hotel.ts'
 import { parseFacilityDataset } from '../../../src/data/validateFacilityDataset.ts'
@@ -9,7 +9,7 @@ import { createPublicDataset } from '../../../src/data/createPublicDataset.ts'
 import { normalizeSearchTerm } from '../../../src/services/facilitySearch.ts'
 
 export const MAX_JSON_BYTES = 2 * 1024 * 1024
-export const LANGUAGE_NAMES: Record<GuideLanguage, string> = { ko: '한국어', en: 'English', 'zh-CN': '简体中文', ja: '日本語' }
+export const LANGUAGE_NAMES: Record<SourceGuideLanguage, string> = { ko: '한국어', en: 'English', 'zh-CN': '简体中文', ja: '日本語' }
 export type FacilityDraft = Omit<Facility, 'walkingMinutes' | 'naverMapUrl'> & { walkingMinutes: string; naverMapUrl: string }
 
 /** Blank local editor only. It cannot be exported as a valid facility until the schema passes. */
@@ -111,7 +111,7 @@ export function explainError(error: unknown, facilities?: FacilityDataset | null
     if (part.includes('dataStatus must be production')) return `${part.startsWith('Facilities') ? '시설' : '호텔'} 데이터가 DEMO입니다. 운영 전환은 별도로 선택해야 합니다.`
     const index = part.match(/data\/facilities\/(\d+)/)?.[1]
     const target = index ? `시설 ${facilities?.facilities[Number(index)]?.id ?? `목록 ${Number(index) + 1}`}` : part.startsWith('hotel.') ? '호텔' : part.match(/^([a-z0-9-]+)\.(?:translations|closedDays|lastVerifiedAt)/)?.[1] ?? ''
-    const language = part.match(/(?:translations[/.]|closedDays[/.]|keywords[/.])(ko|en|zh-CN|ja)/)?.[1] as GuideLanguage | undefined
+    const language = part.match(/(?:translations[/.]|closedDays[/.]|keywords[/.])(ko|en|zh-CN|ja)/)?.[1] as SourceGuideLanguage | undefined
     const fields = part.split(/[/.\s]/).filter(token => token in fieldNames)
     const field = fieldNames[fields.at(-1) ?? ''] ?? ''
     let reason = part.includes('cannot be in the future') ? '미래 날짜를 입력할 수 없습니다.'

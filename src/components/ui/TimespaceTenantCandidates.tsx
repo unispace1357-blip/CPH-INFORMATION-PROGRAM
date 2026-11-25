@@ -32,7 +32,7 @@ export function TimespaceTenantCandidates({ query, language, onSelect }: {
           aria-label={tenant.name + ' · ' + labels.select}>
           <strong>{tenant.name}</strong>
           <span>{timespaceCategoryLabel(tenant.category,language)} · {timespaceLocation(tenant,language)}</span>
-          <small>{tenant.menu[language]}</small>
+          <small>{(tenant.menu[language] ?? (language === 'ru' ? 'Меню уточняйте в ресторане.' : ''))}</small>
         </button>
       </li>)}
     </ul>

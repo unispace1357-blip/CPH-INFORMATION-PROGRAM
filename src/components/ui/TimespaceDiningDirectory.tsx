@@ -88,7 +88,7 @@ export function TimespaceDiningDirectory({ language, staff = false, focusRequest
           {focusedId === tenant.id && <span className="timespace-match-label">{MATCHED_LABEL[language]}</span>}
           <span className="timespace-tenant-category">{timespaceCategoryLabel(tenant.category, language)}</span>
         </div>
-        <p className="timespace-tenant-menu"><span>{copy.menuLabel}</span>{tenant.menu[language]}</p>
+        <p className="timespace-tenant-menu"><span>{copy.menuLabel}</span>{(tenant.menu[language] ?? (language === 'ru' ? 'Меню уточняйте в ресторане.' : ''))}</p>
         <p className="timespace-tenant-location"><span>{copy.locationLabel}</span><strong>{timespaceLocation(tenant, language)}</strong></p>
       </li>)}
     </ul>

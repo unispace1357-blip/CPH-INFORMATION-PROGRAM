@@ -1,5 +1,5 @@
 import raw from '../data/timespaceTenants.json' with { type: 'json' }
-import type { GuideLanguage } from '../types/guide.ts'
+import type { GuideLanguage, LocalizedText } from '../types/guide.ts'
 
 export const TIMESPACE_CATEGORY_ORDER = [
   'all', 'grill', 'western', 'pizza', 'curry', 'korean', 'japanese', 'snack', 'healthy',
@@ -15,7 +15,7 @@ export interface TimespaceTenant {
   rooms: string
   /** Archived shops stay in the admin file but are not public. */
   status?: 'closed'
-  menu: Record<GuideLanguage, string>
+  menu: LocalizedText
 }
 export function activeTimespaceTenants(tenants: readonly TimespaceTenant[]): TimespaceTenant[] {
   return tenants.filter(tenant => tenant.status !== 'closed')

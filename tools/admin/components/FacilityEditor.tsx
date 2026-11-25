@@ -1,4 +1,4 @@
-import type { GuideLanguage } from '../../../src/types/guide'
+import type { SourceGuideLanguage } from '../../../src/types/guide'
 import type { FacilityCategory, FacilityTranslation } from '../../../src/types/facility'
 import { FACILITY_CATEGORY_OPTIONS } from '../../../src/config/uiCategories'
 import { NaverDirectionsLink } from '../../../src/components/ui/NaverDirectionsLink'
@@ -13,7 +13,7 @@ const translatedFields: { code: keyof FacilityTranslation; label: string }[] = [
   { code: 'openingHours', label: '영업시간' }, { code: 'directions', label: '이동 안내' }, { code: 'notes', label: '참고 사항' },
 ]
 
-export function FacilityEditor({ draft, originalId, language, onLanguage, onChange, onSave, onCancel }: { draft: FacilityDraft; originalId: string | null; language: GuideLanguage; onLanguage: (language: GuideLanguage) => void; onChange: (draft: FacilityDraft) => void; onSave: () => void; onCancel: () => void }) {
+export function FacilityEditor({ draft, originalId, language, onLanguage, onChange, onSave, onCancel }: { draft: FacilityDraft; originalId: string | null; language: SourceGuideLanguage; onLanguage: (language: SourceGuideLanguage) => void; onChange: (draft: FacilityDraft) => void; onSave: () => void; onCancel: () => void }) {
   return <form className="admin-editor" noValidate onSubmit={event => { event.preventDefault(); onSave() }}>
     <div className="section-heading"><h2>{originalId === null ? '신규 시설 등록' : '시설 정보 편집'}</h2><span className="status-label">{originalId ?? '비공개 기본값'}</span></div>
     <fieldset><legend>공통 정보</legend><div className="admin-field-grid">
