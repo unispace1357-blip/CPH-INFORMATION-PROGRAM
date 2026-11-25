@@ -154,7 +154,7 @@ test('early check-in prices are localized and searchable without changing the ap
     assert.match(copy, /11,000/)
     assert.match(copy, /9시|9:00 AM|9点|9時/)
     assert.match(copy, /1박|one night|一晚|1泊/)
-    for (const query of ['얼리체크인','조기입실','일찍입실','early check-in']) assert.ok(searchHotelInformation(hotel, language, query).some(h => h.category === 'checkIn' && h.text === copy), language + ': ' + query)
+    for (const query of ['얼리체크인','조기입실','일찍입실','early check-in']) assert.ok(searchHotelInformation(hotel, language, query).some(h => h.category === 'checkIn' && h.text === hotelParagraphs(copy)[0]), language + ': ' + query)
   }
   assert.equal(hotel.checkInTime, '15:00')
   assert.deepEqual(hotel, before)
