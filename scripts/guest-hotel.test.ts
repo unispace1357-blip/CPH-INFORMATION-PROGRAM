@@ -104,3 +104,17 @@ test('empty hotel facility categories are suppressed without hiding separate tou
   const unpublished = [{category: 'hotel' as const, isPublished: false}]
   assert.ok(!visibleFacilityCategories(unpublished).some(item => item.code === 'hotel'))
 })
+
+test('2026-11-25 room notices are localized and searchable without altering historical copy', async () => {
+  const hotel = await loadGuestHotel()
+  const before = structuredClone(hotel)
+  for (const language of GUIDE_LANGUAGES) {
+    const heating = searchHotelInformation(hotel, language, '난방')
+    assert.ok(heating.some(hit => hit.category === 'roomUsage' && hit.index === 12), language)
+    assert.ok(searchHotelInformation(hotel, language, '히터').some(hit => hit.index === 12), language)
+    assert.ok(searchHotelInformation(hotel, language, '냉방').some(hit => hit.index === 3), language)
+    assert.ok(searchHotelInformation(hotel, language, '흡연센서').some(hit => hit.index === 8), language)
+    assert.equal(hotelParagraphs(hotelTopicText(hotel, 'roomUsage', language)).length, 13)
+  }
+  assert.deepEqual(hotel, before)
+})

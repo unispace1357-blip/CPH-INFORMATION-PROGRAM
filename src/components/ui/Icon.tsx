@@ -26,6 +26,8 @@ const iconPaths = {
   checkOut: 'M10 3H3v18h7 M10 12h11 m-4-4 4 4-4 4',
   globe: 'M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0 M3 12h18 M12 3q8 9 0 18 M12 3q-8 9 0 18',
   empty: 'M4 5h16v16H4V5 M9 5V3h6v2 M8 10h8 M8 14h5',
+  heating: 'M5 20q-4-5 0-9t0-7 M12 20q-4-5 0-9t0-7 M19 20q-4-5 0-9t0-7',
+  cooling: 'M12 2v20 M3.34 7l17.32 10 M3.34 17 20.66 7 M9 4l3 3 3-3 M9 20l3-3 3 3 M3 11l4-1-1-4 M18 18l-1-4 4-1 M3 13l4 1-1 4 M18 6l-1 4 4 1',
   loading: 'M21 12a9 9 0 1 1-9-9',
 } as const
 

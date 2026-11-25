@@ -11,6 +11,8 @@ const quickTerms: { term: string; scope: SearchScope }[] = [
   { term: '조식', scope: 'hotel' },
   { term: '주차', scope: 'hotel' },
   { term: 'Wi-Fi', scope: 'hotel' },
+  { term: '난방', scope: 'hotel' },
+  { term: '냉방', scope: 'hotel' },
   { term: '타임스페이스', scope: 'facilities' },
   { term: '공항버스', scope: 'facilities' },
 ]
