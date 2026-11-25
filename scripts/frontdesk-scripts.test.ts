@@ -229,7 +229,8 @@ test('2026-11-25 operational amendment adds heating and sensor, with a single wi
   const summer = applyRoomClimateScripts(data, false)
   assert.equal(winter.scripts.length, 34)
   const get = (d: typeof winter, id: string) => d.scripts.find(item => item.id === id)!
-  assert.match(get(winter, 'room-heating-controls').quickAnswer.ko, /객실 전화기 위/)
+  assert.match(get(winter, 'room-heating-controls').quickAnswer.ko, /객실 전화기 위.*최대 26°C.*온돌.*시간이 소요/)
+  assert.match(get(winter, 'room-heating-controls').quickAnswer.en, /maximum temperature setting is 26°C.*underfloor heating.*time to warm up/)
   assert.match(get(winter, 'air-conditioning-controls').quickAnswer.ko, /동절기.*이용하실 수 없습니다/)
   assert.match(get(winter, 'air-conditioning-controls').details!.ko, /화장실 입구 왼쪽/)
   assert.doesNotMatch(get(summer, 'air-conditioning-controls').quickAnswer.ko, /동절기/)
